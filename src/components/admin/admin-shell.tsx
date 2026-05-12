@@ -67,15 +67,6 @@ export function AdminShell({
                 </div>
               </div>
 
-              <div className="admin-side-card">
-                <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
-                  operator
-                </div>
-                <div className="mt-2 text-sm font-medium">{session.username}</div>
-                <div className="mt-1 text-[12px] leading-5 text-muted-foreground">
-                  当前是最小可用后台，后续可平滑切到数据库和更细权限。
-                </div>
-              </div>
             </div>
           </div>
         </aside>
@@ -116,6 +107,9 @@ export function AdminShell({
                 <Badge variant="secondary" className="hidden sm:inline-flex">
                   <ActivityIcon className="size-3.5" />
                   本地模式
+                </Badge>
+                <Badge variant="outline" className="hidden lg:inline-flex">
+                  {session.username}
                 </Badge>
                 <Link
                   href="/"

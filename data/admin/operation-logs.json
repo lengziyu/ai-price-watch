@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "id": "b2dd00ec-4d97-43b8-b9e0-7ca7cf7952b4",
+    "createdAt": "2026-05-12T09:38:05.684Z",
+    "actor": "admin",
+    "type": "login_success",
+    "status": "success",
+    "message": "后台登录成功",
+    "detail": "已创建新的管理后台会话。"
+  }
+]
