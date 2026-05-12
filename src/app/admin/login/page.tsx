@@ -6,7 +6,7 @@ import { BrandLogo } from "@/components/layout/brand-logo";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrambleText } from "@/components/shared/scramble-text";
-import { getAdminSession, isUsingDefaultAdminCredentials } from "@/lib/admin-auth";
+import { getAdminSession } from "@/lib/admin-auth";
 
 export default async function AdminLoginPage() {
   const session = await getAdminSession();
@@ -14,8 +14,6 @@ export default async function AdminLoginPage() {
   if (session) {
     redirect("/admin");
   }
-
-  const usesFallbackCredentials = isUsingDefaultAdminCredentials();
 
   return (
     <div className="admin-shell relative flex min-h-screen items-center overflow-hidden bg-background px-4 py-6 text-foreground sm:py-8">
