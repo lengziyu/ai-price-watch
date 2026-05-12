@@ -1,0 +1,452 @@
+{
+  "generatedAt": "2026-05-12T07:45:05.681Z",
+  "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
+  "targets": 5,
+  "results": [
+    {
+      "id": "openai-chatgpt-pricing",
+      "vendor": "OpenAI",
+      "category": "subscription",
+      "url": "https://openai.com/chatgpt/pricing/",
+      "ok": false,
+      "fetchedAt": "2026-05-12T07:45:00.588Z",
+      "error": "HTTP 403 Forbidden"
+    },
+    {
+      "id": "openai-codex-pricing",
+      "vendor": "OpenAI",
+      "category": "membership-rate",
+      "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
+      "ok": true,
+      "fetchedAt": "2026-05-12T07:45:00.625Z",
+      "title": "Pricing – Codex | OpenAI Developers",
+      "description": "Codex is included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
+      "status": 200,
+      "byteLength": 300403,
+      "extraction": {
+        "confidence": "review",
+        "priceSignals": [
+          {
+            "value": "$0",
+            "context": "terprise Free Explore Codex capabilities on quick coding tasks. $0 /month Get Free Go Use Codex for lightweight coding tasks. $8 /"
+          },
+          {
+            "value": "$8",
+            "context": ". $0 /month Get Free Go Use Codex for lightweight coding tasks. $8 /month Get Go Plus Power a few focused coding sessions each wee"
+          },
+          {
+            "value": "$20",
+            "context": "onth Get Go Plus Power a few focused coding sessions each week. $20 /month Get Plus Codex on the web, in the CLI, in the IDE extens"
+          },
+          {
+            "value": "$100",
+            "context": "us plan Pro Choose 5x or 20x higher rate limits than Plus. From $100 /month Get Pro Everything in Plus and: Double your normal Codex"
+          },
+          {
+            "value": "$200",
+            "context": "re a five-hour window . Additional weekly limits may apply. Pro $200 gets a boost on the usage shown above until May 31, 2026. Learn"
+          },
+          {
+            "value": "10x usage",
+            "context": "ch, you’ll get 2x Codex usage through May 31, 2026 . That means 10x usage instead of the standard 5x. For Pro $200 , as a thank you to ou"
+          },
+          {
+            "value": "125 credits",
+            "context": "M tokens Input Tokens Cached input tokens Output Tokens GPT-5.5 125 credits 12.50 credits 750 credits GPT-5.4 62.50 credits 6.250 credits 3"
+          },
+          {
+            "value": "12.50 credits",
+            "context": "ut Tokens Cached input tokens Output Tokens GPT-5.5 125 credits 12.50 credits 750 credits GPT-5.4 62.50 credits 6.250 credits 375 credits GPT"
+          },
+          {
+            "value": "750 credits",
+            "context": "ed input tokens Output Tokens GPT-5.5 125 credits 12.50 credits 750 credits GPT-5.4 62.50 credits 6.250 credits 375 credits GPT-5.4-mini 18"
+          },
+          {
+            "value": "62.50 credits",
+            "context": "ut Tokens GPT-5.5 125 credits 12.50 credits 750 credits GPT-5.4 62.50 credits 6.250 credits 375 credits GPT-5.4-mini 18.75 credits 1.875 cred"
+          },
+          {
+            "value": "6.250 credits",
+            "context": "5.5 125 credits 12.50 credits 750 credits GPT-5.4 62.50 credits 6.250 credits 375 credits GPT-5.4-mini 18.75 credits 1.875 credits 113 credit"
+          },
+          {
+            "value": "375 credits",
+            "context": "s 12.50 credits 750 credits GPT-5.4 62.50 credits 6.250 credits 375 credits GPT-5.4-mini 18.75 credits 1.875 credits 113 credits GPT-5.3-Co"
+          },
+          {
+            "value": "18.75 credits",
+            "context": "ts GPT-5.4 62.50 credits 6.250 credits 375 credits GPT-5.4-mini 18.75 credits 1.875 credits 113 credits GPT-5.3-Codex 43.75 credits 4.375 cre"
+          },
+          {
+            "value": "1.875 credits",
+            "context": "50 credits 6.250 credits 375 credits GPT-5.4-mini 18.75 credits 1.875 credits 113 credits GPT-5.3-Codex 43.75 credits 4.375 credits 350 credi"
+          },
+          {
+            "value": "113 credits",
+            "context": "50 credits 375 credits GPT-5.4-mini 18.75 credits 1.875 credits 113 credits GPT-5.3-Codex 43.75 credits 4.375 credits 350 credits GPT-5.2 4"
+          },
+          {
+            "value": "43.75 credits",
+            "context": "-5.4-mini 18.75 credits 1.875 credits 113 credits GPT-5.3-Codex 43.75 credits 4.375 credits 350 credits GPT-5.2 43.75 credits 4.375 credits 3"
+          },
+          {
+            "value": "4.375 credits",
+            "context": "5 credits 1.875 credits 113 credits GPT-5.3-Codex 43.75 credits 4.375 credits 350 credits GPT-5.2 43.75 credits 4.375 credits 350 credits GPT"
+          },
+          {
+            "value": "350 credits",
+            "context": "5 credits 113 credits GPT-5.3-Codex 43.75 credits 4.375 credits 350 credits GPT-5.2 43.75 credits 4.375 credits 350 credits GPT-5.3-Codex-S"
+          },
+          {
+            "value": "200 credits",
+            "context": "redits GPT-5.3-Codex-Spark research preview GPT-Image-2 (image) 200 credits 50 credits 750 credits GPT-Image-2 (text) 125 credits 31.25 cre"
+          },
+          {
+            "value": "50 credits",
+            "context": ".3-Codex-Spark research preview GPT-Image-2 (image) 200 credits 50 credits 750 credits GPT-Image-2 (text) 125 credits 31.25 credits 250 cr"
+          },
+          {
+            "value": "31.25 credits",
+            "context": "0 credits 50 credits 750 credits GPT-Image-2 (text) 125 credits 31.25 credits 250 credits Fast mode consumes credits at a higher rate for sup"
+          },
+          {
+            "value": "250 credits",
+            "context": "redits 750 credits GPT-Image-2 (text) 125 credits 31.25 credits 250 credits Fast mode consumes credits at a higher rate for supported model"
+          },
+          {
+            "value": "1 message",
+            "context": "Edu Unit GPT-5.5 GPT-5.4 GPT-5.3-Codex GPT-5.4-mini Local Tasks 1 message ~14 credits ~7 credits ~5 credits ~2 credits Cloud Tasks 1 mess"
+          },
+          {
+            "value": "14 credits",
+            "context": "T-5.5 GPT-5.4 GPT-5.3-Codex GPT-5.4-mini Local Tasks 1 message ~14 credits ~7 credits ~5 credits ~2 credits Cloud Tasks 1 message Not avai"
+          },
+          {
+            "value": "7 credits",
+            "context": "4 GPT-5.3-Codex GPT-5.4-mini Local Tasks 1 message ~14 credits ~7 credits ~5 credits ~2 credits Cloud Tasks 1 message Not available Not a"
+          },
+          {
+            "value": "5 credits",
+            "context": "odex GPT-5.4-mini Local Tasks 1 message ~14 credits ~7 credits ~5 credits ~2 credits Cloud Tasks 1 message Not available Not available ~2"
+          },
+          {
+            "value": "2 credits",
+            "context": "4-mini Local Tasks 1 message ~14 credits ~7 credits ~5 credits ~2 credits Cloud Tasks 1 message Not available Not available ~25 credits N"
+          },
+          {
+            "value": "25 credits",
+            "context": "s ~2 credits Cloud Tasks 1 message Not available Not available ~25 credits Not available Code Review 1 pull request Not available Not avai"
+          }
+        ],
+        "planSignals": [
+          {
+            "value": "Codex",
+            "context": "Pricing – Codex | OpenAI Developers Home API Docs Guides and concepts for the O"
+          },
+          {
+            "value": "Agent",
+            "context": "alling Responses API Using tools Agents SDK Overview Quickstart Agent definitions Models and providers Running agents Sandbox agents"
+          },
+          {
+            "value": "Enterprise",
+            "context": "on Authentication Agent approvals & security Remote connections Enterprise Admin Setup Governance Managed configuration Windows Automation"
+          },
+          {
+            "value": "Free",
+            "context": "t-3\"> Copy Page Codex Pricing Codex is included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan Copy Page Pri"
+          },
+          {
+            "value": "Plus",
+            "context": "Page Codex Pricing Codex is included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan Copy Page Pricing optio"
+          },
+          {
+            "value": "Pro",
+            "context": "Codex Pricing Codex is included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan Copy Page Pricing options In"
+          },
+          {
+            "value": "Business",
+            "context": "Pricing Codex is included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan Copy Page Pricing options Individual B"
+          },
+          {
+            "value": "team",
+            "context": "s and: Assign standard or usage-based Codex seats based on your team’s needs. Learn more Larger virtual machines to run cloud tasks"
+          }
+        ]
+      }
+    },
+    {
+      "id": "anthropic-pricing",
+      "vendor": "Anthropic",
+      "category": "subscription",
+      "url": "https://www.anthropic.com/pricing#subscriptions",
+      "ok": true,
+      "fetchedAt": "2026-05-12T07:45:00.625Z",
+      "title": "Plans & Pricing | Claude by Anthropic",
+      "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
+      "status": 200,
+      "byteLength": 1327396,
+      "extraction": {
+        "confidence": "review",
+        "priceSignals": [
+          {
+            "value": "$0",
+            "context": "Pricing Individual Team & Enterprise API Active Free Try Claude $0 Free for everyone Try Claude Try Claude Try Claude Chat on web,"
+          },
+          {
+            "value": "$17",
+            "context": "xtended thinking for complex work Pro For everyday productivity $17 Per month with annual subscription discount ($200 billed up fro"
+          },
+          {
+            "value": "$200",
+            "context": "y productivity $17 Per month with annual subscription discount ($200 billed up front). $20 if billed monthly. Try Claude Try Claude"
+          },
+          {
+            "value": "$20",
+            "context": "month with annual subscription discount ($200 billed up front). $20 if billed monthly. Try Claude Try Claude Try Claude Everything"
+          },
+          {
+            "value": "$100",
+            "context": "laude for Microsoft Outlook Max Get the most out of Claude From $100 Per month Try Claude Try Claude Try Claude Everything in Pro, p"
+          },
+          {
+            "value": "$25",
+            "context": "s more usage than Pro* $20 Per seat / month if billed annually. $25 if billed monthly. Premium seat 5x more usage than standard sea"
+          },
+          {
+            "value": "$125",
+            "context": "than standard seats* $100 Per seat / month if billed annually. $125 if billed monthly. Includes Claude Code and Claude Cowork Conne"
+          },
+          {
+            "value": "$ 5",
+            "context": "ing Opus 4.7 Most intelligent model for agents and coding Input $ 5 / MTok Output $ 25 / MTok Prompt caching Write $ 6.25 / MTok Re"
+          },
+          {
+            "value": "$ 25",
+            "context": "intelligent model for agents and coding Input $ 5 / MTok Output $ 25 / MTok Prompt caching Write $ 6.25 / MTok Read $ 0.50 / MTok So"
+          },
+          {
+            "value": "$ 6.25",
+            "context": "coding Input $ 5 / MTok Output $ 25 / MTok Prompt caching Write $ 6.25 / MTok Read $ 0.50 / MTok Sonnet 4.6 Optimal balance of intelli"
+          },
+          {
+            "value": "$ 0.50",
+            "context": "MTok Output $ 25 / MTok Prompt caching Write $ 6.25 / MTok Read $ 0.50 / MTok Sonnet 4.6 Optimal balance of intelligence, cost, and sp"
+          },
+          {
+            "value": "$ 3",
+            "context": "nnet 4.6 Optimal balance of intelligence, cost, and speed Input $ 3 / MTok Output $ 15 / MTok Prompt caching Write $ 3.75 / MTok Re"
+          },
+          {
+            "value": "$ 15",
+            "context": "alance of intelligence, cost, and speed Input $ 3 / MTok Output $ 15 / MTok Prompt caching Write $ 3.75 / MTok Read $ 0.30 / MTok Ha"
+          },
+          {
+            "value": "$ 3.75",
+            "context": "speed Input $ 3 / MTok Output $ 15 / MTok Prompt caching Write $ 3.75 / MTok Read $ 0.30 / MTok Haiku 4.5 Fastest, most cost-efficien"
+          },
+          {
+            "value": "$ 0.30",
+            "context": "MTok Output $ 15 / MTok Prompt caching Write $ 3.75 / MTok Read $ 0.30 / MTok Haiku 4.5 Fastest, most cost-efficient model Input $ 1 /"
+          },
+          {
+            "value": "$ 1",
+            "context": "0.30 / MTok Haiku 4.5 Fastest, most cost-efficient model Input $ 1 / MTok Output $ 5 / MTok Prompt caching Write $ 1.25 / MTok Rea"
+          },
+          {
+            "value": "$ 1.25",
+            "context": "t model Input $ 1 / MTok Output $ 5 / MTok Prompt caching Write $ 1.25 / MTok Read $ 0.10 / MTok Country For workloads that need to ru"
+          },
+          {
+            "value": "$ 0.10",
+            "context": "MTok Output $ 5 / MTok Prompt caching Write $ 1.25 / MTok Read $ 0.10 / MTok Country For workloads that need to run in the US, US-onl"
+          },
+          {
+            "value": "$0.08",
+            "context": "th a suite of composable APIs. Standard token rates apply. Cost $0.08 per session-hour for active runtime Web search Give Claude acce"
+          },
+          {
+            "value": "$10",
+            "context": "lude input and output tokens required to process requests. Cost $10 / 1K searches ‍ Code execution Run Python code in a sandboxed e"
+          },
+          {
+            "value": "$0.05",
+            "context": "50 free hours of usage daily per organization. Additional hours $0.05 per hour per container ‍ Service tiers Balance availability, pe"
+          },
+          {
+            "value": "$ 75",
+            "context": ".25 / MTok Read $ 0.50 / MTok Opus 4.1 Input $ 15 / MTok Output $ 75 / MTok Prompt caching Write $ 18.75 / MTok Read $ 1.50 / MTok S"
+          },
+          {
+            "value": "$ 18.75",
+            "context": "s 4.1 Input $ 15 / MTok Output $ 75 / MTok Prompt caching Write $ 18.75 / MTok Read $ 1.50 / MTok Sonnet 4 Input $ 3 / MTok Output $ 15"
+          },
+          {
+            "value": "$ 1.50",
+            "context": "Tok Output $ 75 / MTok Prompt caching Write $ 18.75 / MTok Read $ 1.50 / MTok Sonnet 4 Input $ 3 / MTok Output $ 15 / MTok Prompt cach"
+          }
+        ],
+        "planSignals": [
+          {
+            "value": "Education",
+            "context": "agents Coding Departments Security Industries Customer support Education Financial services Government Healthcare Life sciences Nonprofi"
+          },
+          {
+            "value": "Pro",
+            "context": "Healthcare Life sciences Nonprofits Pricing Overview API Plans Pro Max Team Enterprise Resources Insights Blog Customer stories An"
+          },
+          {
+            "value": "Max",
+            "context": "lthcare Life sciences Nonprofits Pricing Overview API Plans Pro Max Team Enterprise Resources Insights Blog Customer stories Anthro"
+          },
+          {
+            "value": "Team",
+            "context": "are Life sciences Nonprofits Pricing Overview API Plans Pro Max Team Enterprise Resources Insights Blog Customer stories Anthropic n"
+          },
+          {
+            "value": "Enterprise",
+            "context": "ife sciences Nonprofits Pricing Overview API Plans Pro Max Team Enterprise Resources Insights Blog Customer stories Anthropic news Learn A"
+          },
+          {
+            "value": "business",
+            "context": "01 / 05 How big is your team? Under 50 people Startup or small business 50–500 people Growing company with several teams 500+ people La"
+          },
+          {
+            "value": "Free",
+            "context": "tting the form. Pricing Individual Team & Enterprise API Active Free Try Claude $0 Free for everyone Try Claude Try Claude Try Claud"
+          },
+          {
+            "value": "plus",
+            "context": "d monthly. Try Claude Try Claude Try Claude Everything in Free, plus: More usage* Includes Claude Code Includes Claude Cowork Access"
+          },
+          {
+            "value": "Student",
+            "context": "students, faculty, and staff. Learn more Learn more Learn more Student and faculty access Comprehensive access for all university memb"
+          }
+        ]
+      }
+    },
+    {
+      "id": "google-ai-plans",
+      "vendor": "Google",
+      "category": "subscription",
+      "url": "https://one.google.com/about/google-ai-plans/",
+      "ok": true,
+      "fetchedAt": "2026-05-12T07:45:00.626Z",
+      "title": "Google AI Plans with Cloud Storage - Google One",
+      "description": "Explore Google AI Plans. Access our most advanced AI, generate videos from text, and secure cloud storage.",
+      "status": 200,
+      "byteLength": 299178,
+      "extraction": {
+        "confidence": "review",
+        "priceSignals": [
+          {
+            "value": "$10",
+            "context": "s in Gemini CLI and the Gemini Code Assist IDE extensions, plus $10 in monthly Google Cloud credits from Google Developer Program."
+          },
+          {
+            "value": "$100",
+            "context": "s in Gemini CLI and the Gemini Code Assist IDE extensions, plus $100 in monthly Google Cloud credits from Google Developer Program."
+          },
+          {
+            "value": "$20",
+            "context": "e others. Get the Google Home Premium Advanced plan at no cost ($20/mo value), with 24/7 event history, Gemini features, and event"
+          },
+          {
+            "value": "$7.99",
+            "context": "Google AI plans deliver more value Google AI Plans Starting at $7.99/mo Other AI Plans* Starting at $8/mo More access to the latest"
+          },
+          {
+            "value": "$8",
+            "context": "oogle AI Plans Starting at $7.99/mo Other AI Plans* Starting at $8/mo More access to the latest AI models and features AI directly"
+          }
+        ],
+        "planSignals": [
+          {
+            "value": "Plus",
+            "context": "ay with a Google AI plan Sign up for a Google AI plan Google AI Plus 1 Get more done with more access to Google AI and expanded stor"
+          },
+          {
+            "value": "Pro",
+            "context": "vity Study smarter Boost productivity More access to Gemini 3.1 Pro and Deep Research in Gemini. More access to Gemini 3 Pro in AI"
+          },
+          {
+            "value": "Ultra",
+            "context": "oogle products. View plan features Hide plan features Google AI Ultra 1 Push what’s possible with the highest access to Google AI and"
+          },
+          {
+            "value": "Agent",
+            "context": "ity The highest access to Gemini 3.1 Pro, Deep Research, Gemini Agent (US only, English only), and the Deep Think reasoning mode in G"
+          },
+          {
+            "value": "free",
+            "context": "ry, Gemini features, and event descriptions. 6 Enjoy YouTube ad-free with the YouTube Premium individual plan 7 (availability varies"
+          },
+          {
+            "value": "team",
+            "context": "family group. Compare plans Bring the best of Google AI to your team or organization with the Gemini Enterprise app. Contact sales D"
+          },
+          {
+            "value": "Enterprise",
+            "context": "best of Google AI to your team or organization with the Gemini Enterprise app. Contact sales Discover a universe of possibilities Next-ge"
+          },
+          {
+            "value": "business",
+            "context": "on. Learn more about which offering works best for you and your business. What countries are Google AI plans available in? Google AI Pro"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cursor-pricing",
+      "vendor": "Cursor",
+      "category": "subscription",
+      "url": "https://cursor.com/pricing",
+      "ok": true,
+      "fetchedAt": "2026-05-12T07:45:00.627Z",
+      "title": "Cursor · 定价",
+      "description": "选择适合您的规划",
+      "status": 200,
+      "byteLength": 281335,
+      "extraction": {
+        "confidence": "review",
+        "priceSignals": [
+          {
+            "value": "$20",
+            "context": "按年 个人规划 Hobby 免费 包含： ✓ 无需信用卡 ✓ 有限的智能体请求次数 ✓ 有限的 Tab 补全次数 下载 Pro $20 / mo. 包含 Hobby 的所有功能，另加： ✓ 智能体扩展限额 ✓ 访问前沿模型 ✓ MCP、技能和钩子 ✓ 云端智能体"
+          },
+          {
+            "value": "$60",
+            "context": "展限额 ✓ 访问前沿模型 ✓ MCP、技能和钩子 ✓ 云端智能体 ✓ 按用量计费的 Bugbot 获取 Pro Pro+ 推荐 $60 / mo. 包含 Pro 的所有功能，另加： ✓ 所有 OpenAI、Claude 和 Gemini 模型 3 倍用量 ✓ 按"
+          },
+          {
+            "value": "$200",
+            "context": "有 OpenAI、Claude 和 Gemini 模型 3 倍用量 ✓ 按用量计费的 Bugbot 获取 Pro+ Ultra $200 / mo. 包含 Pro 的所有功能，另加： ✓ 所有 OpenAI、Claude 和 Gemini 模型 20 倍用量 ✓"
+          },
+          {
+            "value": "$40",
+            "context": "ni 模型 20 倍用量 ✓ 优先使用新功能 ✓ 按用量计费的 Bugbot 获取 Ultra Business 规划 团队版 $40 / user / mo. 包含 Pro 的所有功能，另加： ✓ 具备团队共享上下文的云端智能体 ✓ 团队范围的规则、技能和自动"
+          }
+        ],
+        "planSignals": [
+          {
+            "value": "Hobby",
+            "context": "社区 帮助 ↗ 工作坊 论坛 ↗ 招聘 产品 → 企业 定价 资源 → 登录 联系 联系销售 下载 定价 按月 按年 个人规划 Hobby 免费 包含： ✓ 无需信用卡 ✓ 有限的智能体请求次数 ✓ 有限的 Tab 补全次数 下载 Pro $20 / mo. 包含"
+          },
+          {
+            "value": "Pro",
+            "context": "按月 按年 个人规划 Hobby 免费 包含： ✓ 无需信用卡 ✓ 有限的智能体请求次数 ✓ 有限的 Tab 补全次数 下载 Pro $20 / mo. 包含 Hobby 的所有功能，另加： ✓ 智能体扩展限额 ✓ 访问前沿模型 ✓ MCP、技能和钩子 ✓ 云"
+          },
+          {
+            "value": "Ultra",
+            "context": "加： ✓ 所有 OpenAI、Claude 和 Gemini 模型 3 倍用量 ✓ 按用量计费的 Bugbot 获取 Pro+ Ultra $200 / mo. 包含 Pro 的所有功能，另加： ✓ 所有 OpenAI、Claude 和 Gemini 模型 20 倍"
+          },
+          {
+            "value": "Business",
+            "context": "AI、Claude 和 Gemini 模型 20 倍用量 ✓ 优先使用新功能 ✓ 按用量计费的 Bugbot 获取 Ultra Business 规划 团队版 $40 / user / mo. 包含 Pro 的所有功能，另加： ✓ 具备团队共享上下文的云端智能体 ✓ 团队"
+          }
+        ]
+      }
+    }
+  ]
+}

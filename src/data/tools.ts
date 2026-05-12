@@ -1,0 +1,58 @@
+import type { ToolDirectoryItem } from "@/types";
+
+export const toolsDirectory: ToolDirectoryItem[] = [
+  {
+    id: "chatgpt",
+    name: "ChatGPT",
+    category: "General AI",
+    summary: "综合能力强，适合问答、写作、分析与轻工作流。",
+    pricing: "Free / Plus / Pro",
+    url: "https://chatgpt.com/",
+    tags: ["general", "writing", "reasoning"],
+  },
+  {
+    id: "claude",
+    name: "Claude",
+    category: "Writing & Analysis",
+    summary: "长文整理、写作润色和文档问答体验突出。",
+    pricing: "Free / Pro / Max",
+    url: "https://claude.ai/",
+    tags: ["writing", "long-context", "analysis"],
+  },
+  {
+    id: "cursor",
+    name: "Cursor",
+    category: "Coding",
+    summary: "面向开发者的 AI IDE，适合重度代码生成和上下文编辑。",
+    pricing: "Hobby / Pro / Pro+",
+    url: "https://cursor.com/",
+    tags: ["coding", "ide", "agent"],
+  },
+  {
+    id: "windsurf",
+    name: "Windsurf",
+    category: "Coding",
+    summary: "AI coding editor，强调 agent 流程和团队协作能力。",
+    pricing: "Free / Pro / Max",
+    url: "https://windsurf.com/",
+    tags: ["coding", "ide", "team"],
+  },
+  {
+    id: "gemini",
+    name: "Gemini",
+    category: "Workspace",
+    summary: "与 Gmail、Docs、Drive 等 Google 生态结合紧密。",
+    pricing: "Free / Google AI Pro",
+    url: "https://gemini.google.com/",
+    tags: ["workspace", "google", "multimodal"],
+  },
+  {
+    id: "notebooklm",
+    name: "NotebookLM",
+    category: "Research",
+    summary: "适合资料归纳、知识整理、播客式摘要和学习场景。",
+    pricing: "Free / bundled in Google AI plans",
+    url: "https://notebooklm.google.com/",
+    tags: ["study", "research", "knowledge"],
+  },
+];

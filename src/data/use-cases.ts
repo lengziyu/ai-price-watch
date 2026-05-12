@@ -1,0 +1,58 @@
+import type { UseCase } from "@/types";
+
+export const useCases: UseCase[] = [
+  {
+    id: "coding",
+    title: "写代码",
+    description: "适合需要代码补全、重构、解释报错和 agent 工作流的用户。",
+    recommendedTools: ["Cursor", "Windsurf", "ChatGPT"],
+    recommendedModels: ["GPT-5.4", "Claude Sonnet 4", "Gemini 2.5 Pro"],
+    difficulty: "medium",
+    estimatedCost: "medium",
+  },
+  {
+    id: "writing",
+    title: "写作与润色",
+    description: "面向博客、邮件、方案、脚本和长文编辑的组合。",
+    recommendedTools: ["Claude", "ChatGPT", "Gemini"],
+    recommendedModels: ["Claude Sonnet 4", "GPT-5.4 mini"],
+    difficulty: "easy",
+    estimatedCost: "low",
+  },
+  {
+    id: "ppt",
+    title: "做 PPT",
+    description: "先让模型生成结构，再交给演示工具或模板系统完善。",
+    recommendedTools: ["ChatGPT", "Gemini", "NotebookLM"],
+    recommendedModels: ["GPT-5.4", "Gemini 2.5 Pro"],
+    difficulty: "medium",
+    estimatedCost: "low",
+  },
+  {
+    id: "study",
+    title: "学习与研究",
+    description: "适合做资料理解、术语解释、面试准备和知识总结。",
+    recommendedTools: ["NotebookLM", "Claude", "Gemini"],
+    recommendedModels: ["Claude Sonnet 4", "Gemini 2.5 Flash"],
+    difficulty: "easy",
+    estimatedCost: "free",
+  },
+  {
+    id: "automation",
+    title: "办公自动化",
+    description: "适合批量文本处理、表格辅助、脚本生成与 SOP 生成。",
+    recommendedTools: ["ChatGPT", "Gemini", "Cursor"],
+    recommendedModels: ["GPT-5.4 mini", "Gemini 2.5 Flash-Lite"],
+    difficulty: "advanced",
+    estimatedCost: "medium",
+  },
+  {
+    id: "image-video",
+    title: "图片与视频生成",
+    description: "如果你要做创意内容，优先关注额度、生成时长和附加积分。",
+    recommendedTools: ["Gemini", "Poe", "ChatGPT"],
+    recommendedModels: ["Gemini app", "GPT image / video workflows"],
+    difficulty: "medium",
+    estimatedCost: "high",
+  },
+];
