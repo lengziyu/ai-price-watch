@@ -2,7 +2,12 @@
 
 import Link from "next/link";
 import { useDeferredValue, useState } from "react";
-import { ArrowUpRightIcon, SearchIcon, SlidersHorizontalIcon } from "lucide-react";
+import {
+  ArrowUpRightIcon,
+  SearchIcon,
+  SearchXIcon,
+  SlidersHorizontalIcon,
+} from "lucide-react";
 
 import { formatDate, formatMoney } from "@/lib/format";
 import { cn } from "@/lib/utils";
@@ -85,23 +90,34 @@ export function TokenPriceExplorer({ prices }: Props) {
       return left.inputPricePer1M - right.inputPricePer1M;
     });
 
+  const searchInput = (
+    <div className="relative w-full md:max-w-[320px]">
+      <SearchIcon className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
+      <Input
+        value={query}
+        onChange={(event) => setQuery(event.target.value)}
+        placeholder="搜索模型或平台"
+        className="w-full pl-9"
+      />
+    </div>
+  );
+
   const filters = (
     <div className="flex flex-col gap-4">
-      <div className="relative">
-        <SearchIcon className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
-        <Input
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          placeholder="搜索模型或平台"
-          className="w-full pl-9"
-        />
-      </div>
+      <div className="md:hidden">{searchInput}</div>
 
       <Tabs value={category} onValueChange={setCategory}>
-        <TabsList variant="line" className="w-full justify-start overflow-x-auto">
+        <TabsList
+          variant="default"
+          className="w-full justify-start gap-1 overflow-x-auto rounded-full border border-border bg-background/62 p-1 backdrop-blur-md [&::-webkit-scrollbar]:hidden"
+        >
           {["all", "reasoning", "text", "vision", "embedding", "audio"].map(
             (item) => (
-              <TabsTrigger key={item} value={item}>
+              <TabsTrigger
+                key={item}
+                value={item}
+                className="h-9 flex-none rounded-full px-4 text-[13px] font-medium data-active:bg-primary data-active:text-primary-foreground data-active:shadow-[0_10px_26px_rgba(0,188,125,0.24)]"
+              >
                 {renderCategoryLabel(item)}
               </TabsTrigger>
             ),
@@ -115,18 +131,21 @@ export function TokenPriceExplorer({ prices }: Props) {
           value={provider}
           onValueChange={setProvider}
           items={["all", ...providers]}
+          renderLabel={renderProviderLabel}
         />
         <TokenFilterSelect
           label="平台"
           value={platform}
           onValueChange={setPlatform}
           items={["all", ...platforms]}
+          renderLabel={renderPlatformLabel}
         />
         <TokenFilterSelect
           label="排序"
           value={sortBy}
           onValueChange={setSortBy}
           items={["input", "output", "updated"]}
+          renderLabel={renderSortLabel}
         />
       </div>
     </div>
@@ -136,7 +155,7 @@ export function TokenPriceExplorer({ prices }: Props) {
     <section className="app-shell flex flex-col gap-5 rounded-[12px] border border-border bg-background px-4 py-6 sm:px-5 sm:py-6 lg:px-6">
       <Card className="rounded-xl border-border bg-card/90">
         <CardHeader className="gap-4 px-5 py-5 sm:px-6">
-          <div className="flex items-end justify-between gap-4">
+          <div className="flex items-start justify-between gap-4">
             <div className="flex flex-col gap-2">
               <div className="mono-kicker text-[12px] uppercase text-muted-foreground">
                 token pricing
@@ -146,6 +165,8 @@ export function TokenPriceExplorer({ prices }: Props) {
                 当前数据优先取官方价格页，适合先做成本感知与模型初筛。
               </CardDescription>
             </div>
+
+            <div className="hidden md:block">{searchInput}</div>
 
             <Sheet>
               <SheetTrigger className={cn(buttonVariants({ variant: "outline", size: "sm" }), "md:hidden")}>
@@ -198,88 +219,117 @@ export function TokenPriceExplorer({ prices }: Props) {
         />
       </div>
 
-      <div className="hidden overflow-hidden rounded-[12px] border border-border bg-card md:block">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>模型</TableHead>
-              <TableHead>平台</TableHead>
-              <TableHead>输入 / 1M</TableHead>
-              <TableHead>输出 / 1M</TableHead>
-              <TableHead>上下文</TableHead>
-              <TableHead>分类</TableHead>
-              <TableHead>更新时间</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {filteredPrices.map((item) => (
-              <TableRow key={item.id} className="hover:bg-accent/60">
-                <TableCell className="whitespace-normal">
-                  <div className="flex flex-col gap-1">
-                    <div className="font-semibold">{item.modelName}</div>
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                      <span>{item.provider}</span>
-                      {item.sourceUrl ? (
-                        <Link
-                          href={item.sourceUrl}
-                          target="_blank"
-                          className="inline-flex items-center gap-1 text-foreground hover:underline"
-                        >
-                          来源
-                          <ArrowUpRightIcon className="size-3.5" />
-                        </Link>
-                      ) : null}
-                    </div>
-                  </div>
-                </TableCell>
-                <TableCell>{item.platform}</TableCell>
-                <TableCell>{formatMoney(item.inputPricePer1M, item.currency)}</TableCell>
-                <TableCell>{formatMoney(item.outputPricePer1M, item.currency)}</TableCell>
-                <TableCell>{item.contextWindow ?? "-"}</TableCell>
-                <TableCell>
-                  <Badge variant="outline">{renderCategoryLabel(item.category)}</Badge>
-                </TableCell>
-                <TableCell>{formatDate(item.updatedAt)}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
+      {filteredPrices.length === 0 ? (
+        <Card className="surface-card rounded-[12px] border-border">
+          <CardContent className="flex flex-col items-center gap-3 px-6 py-12 text-center">
+            <div className="flex size-14 items-center justify-center rounded-full border border-primary/20 bg-primary/8">
+              <SearchXIcon className="size-6 text-primary" />
+            </div>
+            <div className="text-lg font-semibold">没找到匹配结果</div>
+            <p className="max-w-[36rem] text-sm leading-6 text-muted-foreground">
+              当前筛选条件下没有可显示的模型。你可以放宽分类、切换供应商平台，或者清空关键词后再看一遍。
+            </p>
+            <button
+              type="button"
+              className={buttonVariants({ variant: "secondary", size: "sm" })}
+              onClick={() => {
+                setProvider("all");
+                setPlatform("all");
+                setCategory("all");
+                setSortBy("input");
+                setQuery("");
+              }}
+            >
+              重置筛选
+            </button>
+          </CardContent>
+        </Card>
+      ) : (
+        <>
+          <div className="hidden overflow-hidden rounded-[12px] border border-border bg-card md:block">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>模型</TableHead>
+                  <TableHead>平台</TableHead>
+                  <TableHead>输入 / 1M</TableHead>
+                  <TableHead>输出 / 1M</TableHead>
+                  <TableHead>上下文</TableHead>
+                  <TableHead>分类</TableHead>
+                  <TableHead>更新时间</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredPrices.map((item) => (
+                  <TableRow key={item.id} className="hover:bg-accent/60">
+                    <TableCell className="whitespace-normal">
+                      <div className="flex flex-col gap-1">
+                        <div className="font-semibold">{item.modelName}</div>
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                          <span>{item.provider}</span>
+                          {item.sourceUrl ? (
+                            <Link
+                              href={item.sourceUrl}
+                              target="_blank"
+                              className="inline-flex items-center gap-1 text-foreground hover:underline"
+                            >
+                              来源
+                              <ArrowUpRightIcon className="size-3.5" />
+                            </Link>
+                          ) : null}
+                        </div>
+                      </div>
+                    </TableCell>
+                    <TableCell>{item.platform}</TableCell>
+                    <TableCell>{formatMoney(item.inputPricePer1M, item.currency)}</TableCell>
+                    <TableCell>{formatMoney(item.outputPricePer1M, item.currency)}</TableCell>
+                    <TableCell>{item.contextWindow ?? "-"}</TableCell>
+                    <TableCell>
+                      <Badge variant="outline">{renderCategoryLabel(item.category)}</Badge>
+                    </TableCell>
+                    <TableCell>{formatDate(item.updatedAt)}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
 
-      <div className="grid gap-4 md:hidden">
-        {filteredPrices.map((item) => (
-          <Card key={item.id} className="surface-card rounded-xl">
-            <CardHeader className="gap-3 px-5 py-5">
-              <div className="flex flex-col gap-1">
-                <CardTitle className="text-base">{item.modelName}</CardTitle>
-                <CardDescription>{item.provider}</CardDescription>
-              </div>
-            </CardHeader>
-            <CardContent className="flex flex-col gap-4 px-5 pb-5">
-              <div className="grid grid-cols-2 gap-3 text-sm">
-                <InfoPill label="输入" value={formatMoney(item.inputPricePer1M, item.currency)} />
-                <InfoPill label="输出" value={formatMoney(item.outputPricePer1M, item.currency)} />
-                <InfoPill label="分类" value={renderCategoryLabel(item.category)} />
-                <InfoPill label="上下文" value={item.contextWindow ?? "-"} />
-              </div>
-              <p className="text-sm leading-6 text-muted-foreground">{item.note}</p>
-              <div className="flex items-center justify-between gap-3 text-sm">
-                <span className="text-muted-foreground">{formatDate(item.updatedAt)}</span>
-                {item.sourceUrl ? (
-                  <Link
-                    href={item.sourceUrl}
-                    target="_blank"
-                    className="inline-flex items-center gap-1 font-medium text-foreground"
-                  >
-                    查看来源
-                    <ArrowUpRightIcon className="size-3.5" />
-                  </Link>
-                ) : null}
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+          <div className="grid gap-4 md:hidden">
+            {filteredPrices.map((item) => (
+              <Card key={item.id} className="surface-card rounded-xl">
+                <CardHeader className="gap-3 px-5 py-5">
+                  <div className="flex flex-col gap-1">
+                    <CardTitle className="text-base">{item.modelName}</CardTitle>
+                    <CardDescription>{item.provider}</CardDescription>
+                  </div>
+                </CardHeader>
+                <CardContent className="flex flex-col gap-4 px-5 pb-5">
+                  <div className="grid grid-cols-2 gap-3 text-sm">
+                    <InfoPill label="输入" value={formatMoney(item.inputPricePer1M, item.currency)} />
+                    <InfoPill label="输出" value={formatMoney(item.outputPricePer1M, item.currency)} />
+                    <InfoPill label="分类" value={renderCategoryLabel(item.category)} />
+                    <InfoPill label="上下文" value={item.contextWindow ?? "-"} />
+                  </div>
+                  <p className="text-sm leading-6 text-muted-foreground">{item.note}</p>
+                  <div className="flex items-center justify-between gap-3 text-sm">
+                    <span className="text-muted-foreground">{formatDate(item.updatedAt)}</span>
+                    {item.sourceUrl ? (
+                      <Link
+                        href={item.sourceUrl}
+                        target="_blank"
+                        className="inline-flex items-center gap-1 font-medium text-foreground"
+                      >
+                        查看来源
+                        <ArrowUpRightIcon className="size-3.5" />
+                      </Link>
+                    ) : null}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </>
+      )}
     </section>
   );
 }
@@ -309,11 +359,13 @@ function TokenFilterSelect({
   value,
   onValueChange,
   items,
+  renderLabel,
 }: {
   label: string;
   value: string;
   onValueChange: (value: string) => void;
   items: string[];
+  renderLabel: (value: string) => string;
 }) {
   return (
     <div className="flex flex-col gap-2">
@@ -329,13 +381,13 @@ function TokenFilterSelect({
         }}
       >
         <SelectTrigger className="w-full">
-          <SelectValue />
+          <SelectValue>{renderLabel(value)}</SelectValue>
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
             {items.map((item) => (
               <SelectItem key={item} value={item}>
-                {renderSelectLabel(item)}
+                {renderLabel(item)}
               </SelectItem>
             ))}
           </SelectGroup>
@@ -354,13 +406,22 @@ function InfoPill({ label, value }: { label: string; value: string }) {
   );
 }
 
-function renderSelectLabel(value: string) {
-  if (value === "all") return "全部";
+function renderProviderLabel(value: string) {
+  if (value === "all") return "全部供应商";
+  return value;
+}
+
+function renderPlatformLabel(value: string) {
+  if (value === "all") return "全部平台";
+  return value;
+}
+
+function renderSortLabel(value: string) {
   if (value === "input") return "按输入价";
   if (value === "output") return "按输出价";
   if (value === "updated") return "按最近更新时间";
 
-  return value;
+  return value === "all" ? "默认排序" : value;
 }
 
 function renderCategoryLabel(value: string) {

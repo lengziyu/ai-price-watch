@@ -1,5 +1,14 @@
 [
   {
+    "id": "798a1e7c-5efe-4034-bb8e-5035f326fcbe",
+    "createdAt": "2026-05-12T10:48:17.936Z",
+    "actor": "admin",
+    "type": "logout",
+    "status": "info",
+    "message": "后台退出登录",
+    "detail": "会话已清除。"
+  },
+  {
     "id": "b2dd00ec-4d97-43b8-b9e0-7ca7cf7952b4",
     "createdAt": "2026-05-12T09:38:05.684Z",
     "actor": "admin",

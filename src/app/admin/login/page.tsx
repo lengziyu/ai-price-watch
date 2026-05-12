@@ -5,6 +5,7 @@ import { AdminLoginForm } from "@/components/admin/admin-login-form";
 import { BrandLogo } from "@/components/layout/brand-logo";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { ScrambleText } from "@/components/shared/scramble-text";
 import { getAdminSession, isUsingDefaultAdminCredentials } from "@/lib/admin-auth";
 
 export default async function AdminLoginPage() {
@@ -17,10 +18,10 @@ export default async function AdminLoginPage() {
   const usesFallbackCredentials = isUsingDefaultAdminCredentials();
 
   return (
-    <div className="admin-shell relative min-h-screen overflow-hidden bg-background px-4 py-6 text-foreground sm:py-8">
+    <div className="admin-shell relative flex min-h-screen items-center overflow-hidden bg-background px-4 py-6 text-foreground sm:py-8">
       <div className="hero-grid hero-grid-fade pointer-events-none absolute inset-x-0 top-0 h-[38vh] min-h-[18rem] opacity-70 lg:h-[46vh]" />
       <div className="admin-login-grid">
-        <div className="space-y-4">
+        <div className="space-y-3.5">
           <BrandLogo />
           <div className="inline-flex items-center gap-2 rounded-full border border-border bg-background/72 px-3 py-1.5 text-[11px] text-muted-foreground">
             <span className="size-2 rounded-full bg-primary" />
@@ -34,13 +35,16 @@ export default async function AdminLoginPage() {
             <div className="mono-kicker text-[12px] uppercase text-muted-foreground">
               admin access
             </div>
-            <h1 className="mt-2 text-[2rem] font-semibold leading-[0.95] tracking-[-0.06em] sm:text-[2.8rem]">
-              登录后台后，
-              <br />
-              <span className="gradient-title">再进入采集、复核与录入工作流</span>
+            <h1 className="mt-2 max-w-[28rem] text-[1.72rem] font-semibold leading-[1.02] tracking-[-0.05em] sm:text-[2.25rem]">
+              <span className="block">
+                <ScrambleText text="登录后台后" />
+              </span>
+              <span className="block gradient-title">
+                <ScrambleText text="再进入采集、复核与录入工作流" />
+              </span>
             </h1>
           </div>
-          <p className="max-w-[34rem] text-[13px] leading-6 text-muted-foreground">
+          <p className="max-w-[30rem] text-[12px] leading-6 text-muted-foreground sm:text-[13px]">
             这版后台已经接入最基础的访问保护和操作留痕。后续即使换成数据库或多账号权限，也可以沿着这套结构继续扩展。
           </p>
           <div className="flex flex-wrap gap-2">
@@ -63,13 +67,6 @@ export default async function AdminLoginPage() {
                 请输入后台账号后继续。
               </div>
             </div>
-
-            {usesFallbackCredentials ? (
-              <div className="mb-5 rounded-[12px] border border-amber-500/25 bg-amber-500/10 px-3 py-2 text-sm text-amber-700 dark:text-amber-300">
-                当前仍在使用默认后台账号。部署前请配置 `ADMIN_USERNAME`、`ADMIN_PASSWORD` 和
-                `ADMIN_SESSION_SECRET`。
-              </div>
-            ) : null}
 
             <AdminLoginForm />
           </CardContent>

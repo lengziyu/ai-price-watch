@@ -684,6 +684,9 @@ function flagFor(countryCode: string) {
     {
       CN: "🇨🇳",
       US: "🇺🇸",
+      HK: "🇭🇰",
+      TW: "🇹🇼",
+      SG: "🇸🇬",
       TR: "🇹🇷",
       PH: "🇵🇭",
       PK: "🇵🇰",
@@ -707,6 +710,9 @@ function symbolFor(currencyCode: string) {
     {
       CNY: "¥",
       USD: "$",
+      HKD: "HK$",
+      TWD: "NT$",
+      SGD: "S$",
       TRY: "₺",
       PHP: "₱",
       PKR: "₨",

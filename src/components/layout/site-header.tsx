@@ -31,7 +31,7 @@ export function SiteHeader() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-transparent bg-transparent">
+    <header className="sticky top-0 z-[80] border-b border-transparent bg-transparent">
       <div className="app-shell py-4">
         <div className="nav-glass flex items-center justify-between rounded-full px-4 py-2.5">
           <Link href="/" className="min-w-0">
