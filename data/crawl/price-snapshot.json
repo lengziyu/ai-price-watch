@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-12T07:45:05.681Z",
+  "generatedAt": "2026-05-12T15:10:12.874Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 5,
   "results": [
@@ -9,7 +9,7 @@
       "category": "subscription",
       "url": "https://openai.com/chatgpt/pricing/",
       "ok": false,
-      "fetchedAt": "2026-05-12T07:45:00.588Z",
+      "fetchedAt": "2026-05-12T15:10:12.404Z",
       "error": "HTTP 403 Forbidden"
     },
     {
@@ -18,7 +18,7 @@
       "category": "membership-rate",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-05-12T07:45:00.625Z",
+      "fetchedAt": "2026-05-12T15:10:12.440Z",
       "title": "Pricing – Codex | OpenAI Developers",
       "description": "Codex is included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
@@ -181,7 +181,7 @@
       "category": "subscription",
       "url": "https://www.anthropic.com/pricing#subscriptions",
       "ok": true,
-      "fetchedAt": "2026-05-12T07:45:00.625Z",
+      "fetchedAt": "2026-05-12T15:10:12.441Z",
       "title": "Plans & Pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
@@ -332,7 +332,7 @@
       "category": "subscription",
       "url": "https://one.google.com/about/google-ai-plans/",
       "ok": true,
-      "fetchedAt": "2026-05-12T07:45:00.626Z",
+      "fetchedAt": "2026-05-12T15:10:12.442Z",
       "title": "Google AI Plans with Cloud Storage - Google One",
       "description": "Explore Google AI Plans. Access our most advanced AI, generate videos from text, and secure cloud storage.",
       "status": 200,
@@ -403,7 +403,7 @@
       "category": "subscription",
       "url": "https://cursor.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-05-12T07:45:00.627Z",
+      "fetchedAt": "2026-05-12T15:10:12.443Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
