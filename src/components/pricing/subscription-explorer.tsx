@@ -1164,7 +1164,6 @@ function PriceRow({
           <CountryFlag countryCode={region.countryCode} className="h-[22px] w-[30px] sm:h-[24px] sm:w-8" />
           <div>
             <div className="text-[13px] font-semibold sm:text-sm">{region.country}</div>
-            <div className="text-[11px] text-muted-foreground">{region.sourceLabel}</div>
           </div>
         </div>
 
@@ -1191,7 +1190,7 @@ function PriceRow({
           </div>
         </div>
         <div className="flex items-center justify-end">
-          {highlighted && !(desktopOpen || mobileOpen) ? (
+          {highlighted ? (
             <span className="rounded-full bg-primary px-2.5 py-1 text-[11px] font-semibold text-white">
               推荐
             </span>
@@ -1618,6 +1617,20 @@ function formatCycleEnglish(value: "monthly" | "yearly") {
 }
 
 function CountryFlag({ countryCode, className }: { countryCode: string; className?: string }) {
+  if (countryCode === "TW") {
+    return (
+      <span
+        aria-label="region"
+        className={cn(
+          "inline-flex shrink-0 items-center justify-center rounded-[3px] border border-black/5 bg-muted text-[9px] font-semibold uppercase leading-none text-muted-foreground shadow-[0_1px_2px_rgba(15,23,42,0.08)]",
+          className,
+        )}
+      >
+        --
+      </span>
+    );
+  }
+
   const assetCode = countryCode.toLowerCase();
 
   return (
