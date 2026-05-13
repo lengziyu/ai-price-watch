@@ -1,32 +1,72 @@
 "use client";
 
-import { useEffect, useReducer } from "react";
+import { useEffect, useState } from "react";
 import { MoonStarIcon, SunIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
+const themeStorageKey = "ai-price-watch-theme";
+const themeEvent = "ai-price-watch-theme-change";
+
+type ThemeMode = "light" | "dark";
+
+function resolveTheme() {
+  if (typeof window === "undefined") {
+    return "light" as ThemeMode;
+  }
+
+  const stored = window.localStorage.getItem(themeStorageKey);
+
+  if (stored === "light" || stored === "dark") {
+    return stored;
+  }
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+function applyTheme(nextTheme: ThemeMode) {
+  const root = document.documentElement;
+  root.classList.toggle("dark", nextTheme === "dark");
+  root.dataset.theme = nextTheme;
+  window.localStorage.setItem(themeStorageKey, nextTheme);
+  window.dispatchEvent(new CustomEvent(themeEvent, { detail: nextTheme }));
+}
+
 export function ThemeToggle({ compact = false }: { compact?: boolean }) {
-  const [, forceUpdate] = useReducer((value: number) => value + 1, 0);
+  const [theme, setTheme] = useState<ThemeMode>("light");
 
   useEffect(() => {
-    const root = document.documentElement;
-    const stored = window.localStorage.getItem("ai-price-watch-theme");
-    root.classList.toggle("dark", stored === "dark");
+    const syncTheme = () => {
+      setTheme(resolveTheme());
+    };
+
+    syncTheme();
+
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key === themeStorageKey) {
+        syncTheme();
+      }
+    };
+
+    const handleThemeEvent = () => {
+      syncTheme();
+    };
+
+    window.addEventListener("storage", handleStorage);
+    window.addEventListener(themeEvent, handleThemeEvent);
+
+    return () => {
+      window.removeEventListener("storage", handleStorage);
+      window.removeEventListener(themeEvent, handleThemeEvent);
+    };
   }, []);
 
   const toggleTheme = () => {
-    const isDark = document.documentElement.classList.contains("dark");
-    const nextTheme = isDark ? "light" : "dark";
-    const root = document.documentElement;
-
-    root.classList.toggle("dark", nextTheme === "dark");
-    window.localStorage.setItem("ai-price-watch-theme", nextTheme);
-    forceUpdate();
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    applyTheme(nextTheme);
+    setTheme(nextTheme);
   };
-
-  const isDark =
-    typeof document !== "undefined" &&
-    document.documentElement.classList.contains("dark");
+  const isDark = theme === "dark";
 
   return (
     <button

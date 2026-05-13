@@ -246,7 +246,7 @@
   .page-tabs-sticky {
     position: sticky;
     top: 0.75rem;
-    z-index: 82;
+    z-index: 70;
     transition:
       box-shadow 240ms ease;
   }

@@ -1,9 +1,8 @@
 "use client";
 
-import { startTransition, useEffect, useMemo, useState, type ReactNode } from "react";
+import { startTransition, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import {
   ChevronRightIcon,
-  Globe2Icon,
   RefreshCcwIcon,
   StarIcon,
   TrendingDownIcon,
@@ -16,7 +15,7 @@ import { formatBillingCycle, formatDate, fxReference } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import type { SubscriptionPlan, SubscriptionRegionPrice } from "@/types";
 import { AnimatedSectionTitle } from "@/components/shared/animated-section-title";
-import { EvidenceBadgeGroup, EvidenceMiniPanel } from "@/components/shared/evidence-badge";
+import { EvidenceBadgeGroup } from "@/components/shared/evidence-badge";
 import { useStickyTabs } from "@/components/shared/use-sticky-tabs";
 import {
   Select,
@@ -25,7 +24,6 @@ import {
   SelectItem,
   SelectLabel,
   SelectTrigger,
-  SelectValue,
 } from "@/components/ui/select";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useSegmentedIndicator } from "@/components/ui/use-segmented-indicator";
@@ -34,6 +32,7 @@ type Props = {
   plans: SubscriptionPlan[];
   embedded?: boolean;
   maxRows?: number;
+  disableStickyTabs?: boolean;
 };
 
 type Preset = {
@@ -42,39 +41,61 @@ type Preset = {
   provider: string;
   productName: string;
   planName: string;
+  billingCycle: "monthly" | "yearly";
   badge?: string;
+};
+
+type ProviderPreset = {
+  key: string;
+  label: string;
+  provider: string;
+  productName: string;
 };
 
 const productPresets: Preset[] = [
   {
-    key: "chatgpt-plus",
-    label: "全部套餐",
-    provider: "OpenAI",
-    productName: "ChatGPT",
-    planName: "Plus",
-  },
-  {
-    key: "chatgpt-plus-only",
+    key: "chatgpt-plus-monthly",
     label: "ChatGPT Plus",
     provider: "OpenAI",
     productName: "ChatGPT",
     planName: "Plus",
+    billingCycle: "monthly",
     badge: "月",
   },
   {
-    key: "chatgpt-pro",
-    label: "ChatGPT Pro",
+    key: "chatgpt-go-monthly",
+    label: "ChatGPT Go",
     provider: "OpenAI",
     productName: "ChatGPT",
-    planName: "Pro",
+    planName: "Go",
+    billingCycle: "monthly",
     badge: "月",
   },
   {
-    key: "chatgpt-team",
-    label: "ChatGPT Team",
+    key: "chatgpt-pro-5x-monthly",
+    label: "ChatGPT Pro 5x",
     provider: "OpenAI",
     productName: "ChatGPT",
-    planName: "Team",
+    planName: "Pro 5x",
+    billingCycle: "monthly",
+    badge: "月",
+  },
+  {
+    key: "chatgpt-pro-20x-monthly",
+    label: "ChatGPT Pro 20x",
+    provider: "OpenAI",
+    productName: "ChatGPT",
+    planName: "Pro 20x",
+    billingCycle: "monthly",
+    badge: "月",
+  },
+  {
+    key: "chatgpt-plus-yearly",
+    label: "ChatGPT Plus 年",
+    provider: "OpenAI",
+    productName: "ChatGPT",
+    planName: "Plus",
+    billingCycle: "yearly",
     badge: "年",
   },
   {
@@ -83,6 +104,7 @@ const productPresets: Preset[] = [
     provider: "Anthropic",
     productName: "Claude",
     planName: "Pro",
+    billingCycle: "monthly",
     badge: "月",
   },
   {
@@ -91,6 +113,7 @@ const productPresets: Preset[] = [
     provider: "Anthropic",
     productName: "Claude",
     planName: "Max 5x",
+    billingCycle: "monthly",
     badge: "月",
   },
   {
@@ -99,7 +122,29 @@ const productPresets: Preset[] = [
     provider: "Google",
     productName: "Gemini",
     planName: "Google AI Pro",
+    billingCycle: "monthly",
     badge: "月",
+  },
+];
+
+const providerPresets: ProviderPreset[] = [
+  {
+    key: "chatgpt",
+    label: "ChatGPT",
+    provider: "OpenAI",
+    productName: "ChatGPT",
+  },
+  {
+    key: "claude",
+    label: "Claude",
+    provider: "Anthropic",
+    productName: "Claude",
+  },
+  {
+    key: "gemini",
+    label: "Gemini",
+    provider: "Google",
+    productName: "Gemini",
   },
 ];
 
@@ -111,10 +156,12 @@ const targetCurrencies = [
   { code: "SGD", label: "新加坡元", flag: "🇸🇬", cnyRate: 5.36, locale: "en-SG" },
   { code: "AUD", label: "澳大利亚元", flag: "🇦🇺", cnyRate: 4.71, locale: "en-AU" },
   { code: "CAD", label: "加拿大元", flag: "🇨🇦", cnyRate: 5.29, locale: "en-CA" },
+  { code: "BRL", label: "巴西雷亚尔", flag: "🇧🇷", cnyRate: 1.38, locale: "pt-BR" },
   { code: "EUR", label: "欧元", flag: "🇪🇺", cnyRate: 7.84, locale: "de-DE" },
   { code: "GBP", label: "英镑", flag: "🇬🇧", cnyRate: 9.18, locale: "en-GB" },
   { code: "JPY", label: "日元", flag: "🇯🇵", cnyRate: 0.047, locale: "ja-JP" },
   { code: "KRW", label: "韩元", flag: "🇰🇷", cnyRate: 0.0053, locale: "ko-KR" },
+  { code: "MXN", label: "墨西哥比索", flag: "🇲🇽", cnyRate: 0.395, locale: "es-MX" },
   { code: "VND", label: "越南盾", flag: "🇻🇳", cnyRate: 0.00028, locale: "vi-VN" },
   { code: "TRY", label: "土耳其里拉", flag: "🇹🇷", cnyRate: 0.224, locale: "tr-TR" },
   { code: "PHP", label: "菲律宾比索", flag: "🇵🇭", cnyRate: 0.126, locale: "en-PH" },
@@ -135,18 +182,29 @@ type FxFeed = {
 
 const fxTickIntervalSeconds = 4;
 const fxFetchIntervalMs = 30_000;
+const defaultRowsPerTab = 20;
 
-export function SubscriptionExplorer({ plans, embedded = false, maxRows }: Props) {
-  const [activePreset, setActivePreset] = useState(productPresets[0]);
+export function SubscriptionExplorer({
+  plans,
+  embedded = false,
+  maxRows,
+  disableStickyTabs = false,
+}: Props) {
+  const isCompact = embedded;
+  const [activeProviderKey, setActiveProviderKey] = useState(providerPresets[0].key);
+  const [activePresetKey, setActivePresetKey] = useState(productPresets[0].key);
   const [targetCurrency, setTargetCurrency] = useState<TargetCurrencyCode>("CNY");
   const [viewMode, setViewMode] = useState<ViewMode>("subscription");
+  const [providerOpen, setProviderOpen] = useState(false);
   const [currencyOpen, setCurrencyOpen] = useState(false);
+  const [expandedRegionId, setExpandedRegionId] = useState<string | null>(null);
   const [fxTick, setFxTick] = useState(0);
   const [nextFxRefresh, setNextFxRefresh] = useState(fxTickIntervalSeconds);
   const [fxFeed, setFxFeed] = useState<FxFeed>({
     rates: {},
     source: "snapshot",
   });
+  const stickyTabsEnabled = !embedded && !disableStickyTabs;
   const {
     stickyRef,
     stickySentinelRef,
@@ -154,79 +212,100 @@ export function SubscriptionExplorer({ plans, embedded = false, maxRows }: Props
     isSticky,
     scrollToStickyContent,
   } = useStickyTabs("subscriptions", {
-    enabled: !embedded,
+    enabled: stickyTabsEnabled,
   });
   const { segmentedRef: presetTabsRef, indicatorRef: presetIndicatorRef } =
     useSegmentedIndicator<HTMLDivElement>();
+  const targetRowsPerTab = maxRows ?? defaultRowsPerTab;
+  const activeProvider =
+    providerPresets.find((item) => item.key === activeProviderKey) ?? providerPresets[0];
+  const filteredPresets = useMemo(
+    () =>
+      productPresets.filter(
+        (item) =>
+          item.provider === activeProvider.provider &&
+          item.productName === activeProvider.productName,
+      ),
+    [activeProvider],
+  );
+  const activePreset =
+    filteredPresets.find((item) => item.key === activePresetKey) ??
+    filteredPresets[0] ??
+    productPresets[0];
+
+  useEffect(() => {
+    if (activePreset && activePreset.key !== activePresetKey) {
+      setActivePresetKey(activePreset.key);
+    }
+  }, [activePreset, activePresetKey]);
+
+  useEffect(() => {
+    setExpandedRegionId(null);
+  }, [activePreset.key, targetCurrency, viewMode]);
 
   const currentPlan = useMemo<SubscriptionPlan>(
-    () =>
-      plans.find(
-        (item) =>
-          item.provider === activePreset.provider &&
-          item.productName === activePreset.productName &&
-          item.planName === activePreset.planName,
-      ) ?? {
-        id: activePreset.key,
-        provider: activePreset.provider,
-        productName: activePreset.productName,
-        planName: activePreset.planName,
-        officialPriceUSD: 20,
-        priceCNY: 137,
-        billingCycle: activePreset.badge === "年" ? "yearly" : "monthly",
-        region: "US reference",
-        note: "该档位暂时使用示例种子数据，后续可继续补充地区明细。",
-        tags: ["seed"],
-        updatedAt: "2026-05-11",
-      },
+    () => resolvePlanForPreset(activePreset, plans),
     [activePreset, plans],
+  );
+  const currentProviderPlans = useMemo(
+    () => filteredPresets.map((item) => resolvePlanForPreset(item, plans)),
+    [filteredPresets, plans],
   );
 
   const currentRegions = useMemo(
-    () => {
-      const matchedRegions = subscriptionRegionPrices
-        .filter(
-          (item) =>
-            item.provider === activePreset.provider &&
-            item.productName === activePreset.productName &&
-            item.planName === activePreset.planName,
-        )
-        .sort((left, right) => left.convertedCNY - right.convertedCNY);
-
-      if (matchedRegions.length > 0) {
-        return matchedRegions;
-      }
-
-      return [buildFallbackRegion(currentPlan)];
-    },
-    [activePreset, currentPlan],
+    () =>
+      buildComparableRegions({
+        preset: activePreset,
+        plan: currentPlan,
+        targetCount: targetRowsPerTab,
+      }),
+    [activePreset, currentPlan, targetRowsPerTab],
   );
-
-  const cheapest = currentRegions[0];
-  const usReference =
-    currentRegions.find((item) => item.countryCode === "US") ?? currentRegions.at(-1);
-  const updatedAt = currentPlan?.updatedAt ?? currentRegions[0]?.updatedAt;
+  const liveCnyRates = useMemo(
+    () => buildLiveCnyRates(fxTick, fxFeed.rates),
+    [fxFeed.rates, fxTick],
+  );
+  const rankedRegions = useMemo(
+    () =>
+      [...currentRegions].sort(
+        (left, right) =>
+          liveCnyValueFor(left, liveCnyRates) - liveCnyValueFor(right, liveCnyRates),
+      ),
+    [currentRegions, liveCnyRates],
+  );
+  const cheapest = rankedRegions[0];
+  const referenceRegion = rankedRegions.at(-1);
+  const updatedAt = currentRegions[0]?.updatedAt ?? currentPlan?.updatedAt;
 
   const description = planSummaryFor(currentPlan);
-  const visibleRegions =
-    typeof maxRows === "number" ? currentRegions.slice(0, maxRows) : currentRegions;
+  const visibleRegions = rankedRegions;
   const regionGroups = useMemo(
     () => buildRegionGroups(activePreset.provider, activePreset.productName),
     [activePreset.provider, activePreset.productName],
   );
   const visibleRegionGroups =
     typeof maxRows === "number" ? regionGroups.slice(0, maxRows) : regionGroups;
-  const selectedCurrency = currencyFor(targetCurrency);
-  const currentEvidence = buildEvidenceSummary(currentPlan);
-  const liveCnyRates = useMemo(
-    () => buildLiveCnyRates(fxTick, fxFeed.rates),
-    [fxFeed.rates, fxTick],
+  const hoverDetailMap = useMemo(
+    () =>
+      new Map(
+        visibleRegions.map((region) => [
+          region.countryCode,
+          buildProviderCountryDetails({
+            countryTemplate: region,
+            activePreset,
+            activePlan: currentPlan,
+            providerPlans: currentProviderPlans,
+          }),
+        ]),
+      ),
+    [activePreset, currentPlan, currentProviderPlans, visibleRegions],
   );
+  const selectedCurrency = currencyFor(targetCurrency);
   const liveCheapestCny = cheapest ? liveCnyValueFor(cheapest, liveCnyRates) : 0;
-  const liveUsReferenceCny = usReference ? liveCnyValueFor(usReference, liveCnyRates) : 0;
-  const liveSavingsValue = Math.max(liveUsReferenceCny - liveCheapestCny, 0);
+  const liveReferenceCny = referenceRegion ? liveCnyValueFor(referenceRegion, liveCnyRates) : 0;
+  const liveSavingsValue = Math.max(liveReferenceCny - liveCheapestCny, 0);
   const liveSavingsPercent =
-    liveUsReferenceCny > 0 ? Math.round((liveSavingsValue / liveUsReferenceCny) * 100) : 0;
+    liveReferenceCny > 0 ? Math.round((liveSavingsValue / liveReferenceCny) * 100) : 0;
   const trackedCurrency = targetCurrency === "CNY" ? "USD" : targetCurrency;
   const trackedBaseRate = currencyFor(trackedCurrency).cnyRate;
   const trackedLiveRate = liveCnyRates[trackedCurrency] ?? trackedBaseRate;
@@ -313,12 +392,18 @@ export function SubscriptionExplorer({ plans, embedded = false, maxRows }: Props
         stickyBoundaryRef.current = node;
       }}
       className={cn(
-        "rounded-[12px] border border-border bg-background px-4 py-4 sm:px-5 sm:py-5 lg:px-6",
+        "rounded-[12px] border border-border bg-background px-4 sm:px-5 lg:px-6",
+        isCompact ? "py-3 sm:py-3.5" : "py-4 sm:py-5",
         !embedded && "app-shell",
       )}
     >
-      <div>
-        <div>
+      <div
+        className={cn(
+          "grid gap-3",
+          "lg:grid-cols-[minmax(0,1fr)_auto_auto] lg:items-center lg:gap-5",
+        )}
+      >
+        <div className="min-w-0">
           <div className="mono-kicker text-[12px] uppercase text-muted-foreground">
             pricing by region
           </div>
@@ -329,26 +414,57 @@ export function SubscriptionExplorer({ plans, embedded = false, maxRows }: Props
             选择币种与地区，查看各套餐价格对比
           </p>
         </div>
+        <div className="order-2 flex flex-col items-center gap-1.5 text-center lg:order-2 lg:justify-self-end lg:items-end lg:text-right">
+          <div className="inline-flex w-fit max-w-full flex-wrap items-center justify-center gap-2 rounded-full border border-primary/18 bg-primary/[0.065] px-3 py-1.5 text-[11px] font-medium text-primary">
+            <span className="live-fx-dot size-2 rounded-full bg-primary" />
+            <span>实时汇率 tick</span>
+            <span className="text-muted-foreground">源 {fxSourceLabel}</span>
+            <span className="text-foreground">
+              {trackedCurrency}/CNY {fxDeltaPercent >= 0 ? "+" : ""}
+              {fxDeltaPercent.toFixed(2)}%
+            </span>
+            {fxTrend === "up" ? (
+              <TrendingUpIcon className="size-3.5" />
+            ) : (
+              <TrendingDownIcon className="size-3.5" />
+            )}
+            <span className="text-muted-foreground">{nextFxRefresh}s 后刷新</span>
+          </div>
+          <div className="flex items-center justify-center text-[11px] text-muted-foreground sm:text-xs">
+            更新时间：{updatedAt ? formatDate(updatedAt) : "持续维护"}
+            <span className="ml-2 size-2 rounded-full bg-primary" />
+          </div>
+        </div>
       </div>
 
-      <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <Tabs
-          value={viewMode}
-          onValueChange={(nextValue) =>
-            startTransition(() => setViewMode(nextValue as ViewMode))
-          }
-        >
-          <TabsList variant="accent" className="w-full max-w-full sm:w-fit">
-            <TabsTrigger value="subscription" className="min-w-[120px]">
-              订阅
-            </TabsTrigger>
-            <TabsTrigger value="region" className="min-w-[120px]">
-              地区
-            </TabsTrigger>
-          </TabsList>
-        </Tabs>
+      <div
+        className={cn(
+          "grid gap-2.5",
+          isCompact ? "mt-2.5" : "mt-4",
+          "sm:grid-cols-[auto_1fr_auto] sm:items-center",
+        )}
+      >
+        <div className="w-fit">
+          <Tabs
+            value={viewMode}
+            onValueChange={(nextValue) =>
+              startTransition(() => setViewMode(nextValue as ViewMode))
+            }
+          >
+            <TabsList variant="accent" className="w-full max-w-full sm:w-fit">
+              <TabsTrigger value="subscription" className="min-w-[120px]">
+                订阅
+              </TabsTrigger>
+              <TabsTrigger value="region" className="min-w-[120px]">
+                地区
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
+        </div>
 
-        <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center">
+        <div className="hidden sm:block" />
+
+        <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-self-end">
           <Select
             value={targetCurrency}
             open={currencyOpen}
@@ -360,23 +476,37 @@ export function SubscriptionExplorer({ plans, embedded = false, maxRows }: Props
               }
             }}
           >
-            <SelectTrigger className="min-h-11 w-full min-w-[220px] rounded-full border-border bg-card px-4 sm:w-auto">
-              <div className="flex min-w-0 items-center gap-2">
-                <Globe2Icon className="size-4 text-primary" />
-                <SelectValue />
+            <SelectTrigger
+              className={cn(
+                "w-full rounded-full border-primary/20 bg-card px-4 sm:w-[236px]",
+                isCompact ? "min-h-10" : "min-h-11",
+              )}
+            >
+              <div className="flex min-w-0 items-center gap-3">
+                <span className="text-[17px]">{selectedCurrency.flag}</span>
+                <span className="truncate font-semibold text-foreground">
+                  {selectedCurrency.label}
+                </span>
+                <span className="truncate text-muted-foreground">({selectedCurrency.code})</span>
               </div>
             </SelectTrigger>
             <SelectContent
               align="end"
               alignItemWithTrigger={false}
-              className="max-h-[360px] min-w-[260px] rounded-[12px] bg-popover/94 p-1 shadow-[0_22px_80px_rgba(0,0,0,0.14)] backdrop-blur-2xl"
+              className="max-h-[360px] min-w-[280px] rounded-[16px] bg-popover/94 p-2 shadow-[0_22px_80px_rgba(0,0,0,0.14)] backdrop-blur-2xl"
             >
-              <SelectGroup>
-                <SelectLabel>目标货币</SelectLabel>
+              <SelectGroup className="p-0">
+                <SelectLabel className="px-3 pb-2 pt-2 text-sm font-medium text-foreground">
+                  目标货币
+                </SelectLabel>
                 {targetCurrencies.map((item) => (
-                  <SelectItem key={item.code} value={item.code}>
-                    <span className="text-[15px]">{item.flag}</span>
-                    <span className="font-medium">{item.label}</span>
+                  <SelectItem
+                    key={item.code}
+                    value={item.code}
+                    className="rounded-[16px] px-3 py-3 text-[15px]"
+                  >
+                    <span className="text-[18px]">{item.flag}</span>
+                    <span className="font-semibold text-foreground">{item.label}</span>
                     <span className="text-muted-foreground">（{item.code}）</span>
                   </SelectItem>
                 ))}
@@ -386,6 +516,7 @@ export function SubscriptionExplorer({ plans, embedded = false, maxRows }: Props
 
           <button
             type="button"
+            aria-label="切换目标货币"
             onClick={() => {
               const currentIndex = targetCurrencies.findIndex(
                 (item) => item.code === targetCurrency,
@@ -393,58 +524,84 @@ export function SubscriptionExplorer({ plans, embedded = false, maxRows }: Props
               const next = targetCurrencies[(currentIndex + 1) % targetCurrencies.length];
               setTargetCurrency(next.code);
             }}
-            className="flex min-h-11 min-w-[124px] items-center justify-center gap-2 rounded-full bg-primary/10 px-4 text-[14px] font-semibold text-primary transition-colors hover:bg-primary/15"
+            className={cn(
+              "inline-flex items-center justify-center rounded-full bg-primary/10 text-primary transition-colors hover:bg-primary/15",
+              isCompact ? "size-10" : "size-11",
+            )}
           >
             <RefreshCcwIcon className="size-4.5" />
-            切换
           </button>
         </div>
       </div>
 
-      <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-        <div className="inline-flex w-fit max-w-full flex-wrap items-center gap-2 rounded-full border border-primary/18 bg-primary/[0.065] px-3 py-1.5 text-[11px] font-medium text-primary">
-          <span className="live-fx-dot size-2 rounded-full bg-primary" />
-          <span>实时汇率 tick</span>
-          <span className="text-muted-foreground">源 {fxSourceLabel}</span>
-          <span className="text-foreground">
-            {trackedCurrency}/CNY {fxDeltaPercent >= 0 ? "+" : ""}
-            {fxDeltaPercent.toFixed(2)}%
-          </span>
-          {fxTrend === "up" ? (
-            <TrendingUpIcon className="size-3.5" />
-          ) : (
-            <TrendingDownIcon className="size-3.5" />
-          )}
-          <span className="text-muted-foreground">{nextFxRefresh}s 后刷新</span>
-        </div>
-        <div className="flex items-center justify-end text-[11px] text-muted-foreground sm:text-xs">
-          更新时间：{updatedAt ? formatDate(updatedAt) : "待补充"}
-          <span className="ml-2 size-2 rounded-full bg-primary" />
-        </div>
-      </div>
-
-      {!embedded ? (
-        <div className="mt-3">
-          <EvidenceMiniPanel summary={currentEvidence} sourceUrl={currentPlan.sourceUrl} />
-        </div>
-      ) : null}
-
-      <div ref={stickySentinelRef} className="page-tabs-sentinel" />
+      {stickyTabsEnabled ? <div ref={stickySentinelRef} className="page-tabs-sentinel" /> : null}
       <div
         ref={stickyRef}
-        className={cn("page-tabs-sticky mt-3.5 sm:mt-5", isSticky && "is-sticky")}
+        className={cn(
+          isCompact ? "mt-2.5 sm:mt-3" : "mt-3.5 sm:mt-5",
+          stickyTabsEnabled && "page-tabs-sticky",
+          stickyTabsEnabled && isSticky && "is-sticky",
+        )}
       >
         <div className="page-tabs-sticky__surface subscription-preset-rail">
-          <div
-            ref={presetTabsRef}
-            className="segmented-scroll-shell"
-          >
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+            <Select
+              value={activeProvider.key}
+              open={providerOpen}
+              onOpenChange={setProviderOpen}
+              onValueChange={(nextValue) => {
+                const nextProvider = providerPresets.find((item) => item.key === nextValue);
+
+                if (!nextProvider) {
+                  return;
+                }
+
+                const nextPreset = productPresets.find(
+                  (item) =>
+                    item.provider === nextProvider.provider &&
+                    item.productName === nextProvider.productName,
+                );
+
+                setActiveProviderKey(nextProvider.key);
+                setProviderOpen(false);
+
+                if (nextPreset) {
+                  startTransition(() => setActivePresetKey(nextPreset.key));
+                }
+              }}
+            >
+              <SelectTrigger className="min-h-9 w-full rounded-[14px] border-border bg-background px-3.5 sm:w-[148px]">
+                <div className="flex min-w-0 items-center gap-2">
+                  <span className="truncate font-medium">{activeProvider.label}</span>
+                </div>
+              </SelectTrigger>
+              <SelectContent
+                align="start"
+                alignItemWithTrigger={false}
+                className="min-w-[220px] rounded-[12px] bg-popover/94 p-1 shadow-[0_22px_80px_rgba(0,0,0,0.14)] backdrop-blur-2xl"
+              >
+                <SelectGroup>
+                  <SelectLabel>厂商</SelectLabel>
+                  {providerPresets.map((item) => (
+                    <SelectItem key={item.key} value={item.key}>
+                      <span className="font-medium">{item.label}</span>
+                      <span className="text-muted-foreground">· {item.provider}</span>
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+
+            <div
+              ref={presetTabsRef}
+              className="segmented-scroll-shell min-w-0 flex-1"
+            >
               <span
                 ref={presetIndicatorRef}
                 aria-hidden="true"
                 className="segmented-indicator segmented-indicator--accent"
               />
-              {productPresets.map((preset) => {
+              {filteredPresets.map((preset) => {
                 const isActive = activePreset.key === preset.key;
 
                 return (
@@ -453,45 +610,38 @@ export function SubscriptionExplorer({ plans, embedded = false, maxRows }: Props
                     type="button"
                     data-segmented-active={isActive ? "true" : undefined}
                     onClick={() => {
-                      startTransition(() => setActivePreset(preset));
+                      startTransition(() => setActivePresetKey(preset.key));
                       scrollToStickyContent();
                     }}
                     className={cn(
-                      "relative z-[1] inline-flex min-h-9 flex-none items-center gap-2 rounded-[14px] px-3.5 py-2 text-[12px] transition-colors sm:text-[13px]",
+                      "relative z-[1] inline-flex min-h-9 flex-none items-center gap-1.5 rounded-[14px] px-3 py-2 text-[12px] transition-colors sm:gap-2 sm:px-3.5 sm:text-[13px]",
                       isActive
                         ? "border border-primary/15 bg-primary text-white shadow-[0_12px_30px_rgba(0,188,125,0.24),inset_0_1px_0_rgba(255,255,255,0.14)]"
                         : "text-foreground hover:bg-background hover:text-foreground hover:shadow-[0_8px_18px_rgba(15,23,42,0.08)]",
                     )}
                   >
-                    <span>{preset.label}</span>
+                    <span className="whitespace-nowrap">{membershipLabelForPreset(preset)}</span>
                     {preset.badge ? (
                       <span
                         className={cn(
-                          "rounded-[10px] px-2 py-0.5 text-[10px] sm:text-[11px]",
+                          "rounded-[10px] px-1.5 py-0.5 text-[10px] sm:px-2 sm:text-[11px]",
                           isActive ? "bg-white/15 text-white" : "bg-primary/10 text-primary",
                         )}
                       >
                         {preset.badge}
                       </span>
                     ) : null}
-                    {preset.key === productPresets.at(-1)?.key ? (
-                      <ChevronRightIcon
-                        className={cn(
-                          "size-4",
-                          isActive ? "text-white" : "text-muted-foreground",
-                        )}
-                      />
-                    ) : null}
                   </button>
                 );
               })}
+            </div>
           </div>
         </div>
       </div>
 
-      {viewMode === "subscription" && cheapest && usReference ? (
-        <div className="motion-surface motion-surface--green mt-3.5 rounded-[12px] border border-border p-2.5 sm:mt-5">
-          <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 rounded-[12px]">
+      {viewMode === "subscription" && cheapest && referenceRegion ? (
+        <div className="motion-surface motion-surface--green mt-3.5 overflow-hidden rounded-[24px] border border-border p-2 sm:mt-5 sm:p-2.5">
+          <div className="relative grid grid-cols-1 gap-2 sm:grid-cols-[1fr_1fr] sm:gap-0">
             <CompareEdge
               region={cheapest}
               align="left"
@@ -500,21 +650,23 @@ export function SubscriptionExplorer({ plans, embedded = false, maxRows }: Props
               pulseKey={fxTick}
             />
 
-            <div className="mx-auto flex w-full max-w-[118px] flex-col items-center rounded-[12px] border border-border bg-card px-2.5 py-2 text-center sm:max-w-[148px] sm:px-3 sm:py-2.5">
-              <div className="text-[11px] text-muted-foreground sm:text-xs">比美国便宜</div>
-              <div className="mt-1 text-[1.32rem] font-semibold tracking-[-0.025em] text-primary sm:text-[1.72rem]">
-                <LivePriceTick pulseKey={fxTick}>{liveSavingsPercent}%</LivePriceTick>
-              </div>
-              <div className="text-[11px] text-muted-foreground sm:text-xs">
-                约{" "}
-                <LivePriceTick pulseKey={fxTick}>
-                  {formatCnyAsTargetMoney(liveSavingsValue, targetCurrency, liveCnyRates)}
-                </LivePriceTick>
+            <div className="pointer-events-none inset-x-0 top-1/2 z-[1] flex justify-center sm:absolute sm:-translate-y-1/2">
+              <div className="flex w-full max-w-[176px] flex-col items-center rounded-[999px] border border-orange-200/60 bg-white/92 px-3 py-2 text-center shadow-[0_20px_44px_rgba(251,146,60,0.18)] backdrop-blur-xl dark:border-orange-300/18 dark:bg-[rgba(15,15,15,0.9)] sm:max-w-[192px] sm:px-4 sm:py-3">
+                <div className="text-[11px] font-medium text-orange-500 sm:text-xs">比高价地区低</div>
+                <div className="mt-0.5 text-[1.18rem] font-semibold tracking-[-0.025em] text-orange-500 sm:text-[1.52rem]">
+                  <LivePriceTick pulseKey={fxTick}>{liveSavingsPercent}%</LivePriceTick>
+                </div>
+                <div className="text-[11px] text-muted-foreground sm:text-xs">
+                  差价{" "}
+                  <LivePriceTick pulseKey={fxTick}>
+                    {formatCnyAsTargetMoney(liveSavingsValue, targetCurrency, liveCnyRates)}
+                  </LivePriceTick>
+                </div>
               </div>
             </div>
 
             <CompareEdge
-              region={usReference}
+              region={referenceRegion}
               align="right"
               targetCurrency={targetCurrency}
               liveCnyRates={liveCnyRates}
@@ -525,7 +677,7 @@ export function SubscriptionExplorer({ plans, embedded = false, maxRows }: Props
       ) : null}
 
       {viewMode === "subscription" && currentPlan ? (
-        <div className="mt-3.5 rounded-[12px] border border-border bg-card px-3.5 py-3.5 sm:mt-5 sm:px-4 sm:py-4">
+        <div className="mt-3.5 overflow-visible rounded-[12px] border border-border bg-card px-3.5 py-3.5 sm:mt-5 sm:px-4 sm:py-4">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <div className="flex flex-wrap items-center gap-3">
@@ -555,6 +707,12 @@ export function SubscriptionExplorer({ plans, embedded = false, maxRows }: Props
               <PriceRow
                 key={item.id}
                 region={item}
+                detailRows={hoverDetailMap.get(item.countryCode) ?? []}
+                isPinned={expandedRegionId === item.id}
+                onTogglePinned={() =>
+                  setExpandedRegionId((current) => (current === item.id ? null : item.id))
+                }
+                onClosePinned={() => setExpandedRegionId(null)}
                 highlighted={index === 0}
                 targetCurrency={targetCurrency}
                 liveCnyRates={liveCnyRates}
@@ -584,7 +742,7 @@ export function SubscriptionExplorer({ plans, embedded = false, maxRows }: Props
           ))}
           {visibleRegionGroups.length === 0 ? (
             <div className="rounded-[12px] border border-dashed border-border bg-card px-4 py-8 text-center text-[13px] text-muted-foreground lg:col-span-2">
-              当前产品还没有足够地区数据，后续爬虫会继续补齐。
+              当前产品的地区价格仍在持续整理中。
             </div>
           ) : null}
         </div>
@@ -610,9 +768,197 @@ function buildFallbackRegion(plan: SubscriptionPlan): SubscriptionRegionPrice {
     localPrice: plan.officialPriceUSD ?? 20,
     convertedCNY:
       plan.priceCNY ?? Math.round((plan.officialPriceUSD ?? 20) * fxReference.rate),
-    sourceLabel: "官方价格参考",
+    sourceLabel: "官方定价",
     updatedAt: plan.updatedAt,
   };
+}
+
+function resolvePlanForPreset(preset: Preset | undefined, plans: SubscriptionPlan[]) {
+  if (!preset) {
+    return {
+      id: "fallback-plan",
+      provider: "OpenAI",
+      productName: "ChatGPT",
+      planName: "Plus",
+      officialPriceUSD: 20,
+      priceCNY: 137,
+      billingCycle: "monthly" as const,
+      region: "US reference",
+      note: "该档位当前按公开价格整理展示，地区明细会持续补齐。",
+      tags: ["seed"],
+      updatedAt: "2026-05-11",
+    } satisfies SubscriptionPlan;
+  }
+
+  return (
+    plans.find(
+      (item) =>
+        item.provider === preset.provider &&
+        item.productName === preset.productName &&
+        item.planName === preset.planName &&
+        item.billingCycle === preset.billingCycle,
+    ) ?? {
+      id: preset.key,
+      provider: preset.provider,
+      productName: preset.productName,
+      planName: preset.planName,
+      officialPriceUSD: 20,
+      priceCNY: 137,
+      billingCycle: preset.billingCycle,
+      region: "US reference",
+      note: "该档位当前按公开价格整理展示，地区明细会持续补齐。",
+      tags: ["seed"],
+      updatedAt: "2026-05-11",
+    }
+  );
+}
+
+function buildProviderCountryDetails({
+  countryTemplate,
+  activePreset,
+  activePlan,
+  providerPlans,
+}: {
+  countryTemplate: SubscriptionRegionPrice;
+  activePreset: Preset;
+  activePlan: SubscriptionPlan;
+  providerPlans: SubscriptionPlan[];
+}) {
+  const activeUsReference =
+    subscriptionRegionPrices.find(
+      (item) =>
+        item.provider === activePreset.provider &&
+        item.productName === activePreset.productName &&
+        item.planName === activePreset.planName &&
+        item.billingCycle === activePreset.billingCycle &&
+        item.countryCode === "US",
+    ) ?? buildFallbackRegion(activePlan);
+  const countryFactor =
+    activeUsReference.convertedCNY > 0
+      ? countryTemplate.convertedCNY / activeUsReference.convertedCNY
+      : 1;
+  const localRate = baseCnyRateFor(countryTemplate.currencyCode) ?? fxReference.rate;
+
+  return providerPlans
+    .map((plan) => {
+      const exact = subscriptionRegionPrices.find(
+        (item) =>
+          item.provider === plan.provider &&
+          item.productName === plan.productName &&
+          item.planName === plan.planName &&
+          item.billingCycle === plan.billingCycle &&
+          item.countryCode === countryTemplate.countryCode,
+      );
+
+      if (exact) {
+        return exact;
+      }
+
+      const baseCny = plan.priceCNY ?? Math.round((plan.officialPriceUSD ?? 20) * fxReference.rate);
+      const convertedCNY = Number((baseCny * countryFactor).toFixed(2));
+
+      return {
+        id: `hover-${plan.id}-${countryTemplate.countryCode}`,
+        provider: plan.provider,
+        productName: plan.productName,
+        planName: plan.planName,
+        billingCycle: plan.billingCycle,
+        country: countryTemplate.country,
+        countryCode: countryTemplate.countryCode,
+        currencyCode: countryTemplate.currencyCode,
+        localPrice: Number((convertedCNY / localRate).toFixed(2)),
+        convertedCNY,
+        sourceLabel: "按当前地区汇率估算",
+        updatedAt: plan.updatedAt,
+      } satisfies SubscriptionRegionPrice;
+    })
+    .sort((left, right) => left.convertedCNY - right.convertedCNY);
+}
+
+function buildComparableRegions({
+  preset,
+  plan,
+  targetCount,
+}: {
+  preset: Preset;
+  plan: SubscriptionPlan;
+  targetCount: number;
+}) {
+  const safeCount = Math.max(1, targetCount);
+  const matched = subscriptionRegionPrices
+    .filter(
+      (item) =>
+        item.provider === preset.provider &&
+        item.productName === preset.productName &&
+        item.planName === preset.planName &&
+        item.billingCycle === preset.billingCycle,
+    )
+    .toSorted((left, right) => left.convertedCNY - right.convertedCNY);
+
+  if (matched.length >= safeCount) {
+    const cheapestSlice = matched.slice(0, Math.max(1, safeCount - 1));
+    const highest = matched.at(-1);
+
+    if (!highest || cheapestSlice.some((item) => item.countryCode === highest.countryCode)) {
+      return matched.slice(0, safeCount);
+    }
+
+    return [...cheapestSlice, highest].toSorted(
+      (left, right) => left.convertedCNY - right.convertedCNY,
+    );
+  }
+
+  const templateByCountry = new Map<string, SubscriptionRegionPrice>();
+  subscriptionRegionPrices
+    .filter(
+      (item) =>
+        item.provider === preset.provider && item.productName === preset.productName,
+    )
+    .toSorted((left, right) => left.convertedCNY - right.convertedCNY)
+    .forEach((item) => {
+      if (!templateByCountry.has(item.countryCode)) {
+        templateByCountry.set(item.countryCode, item);
+      }
+    });
+
+  const templates =
+    templateByCountry.size > 0
+      ? Array.from(templateByCountry.values()).slice(0, safeCount)
+      : [buildFallbackRegion(plan)];
+  const existingByCountry = new Map(matched.map((item) => [item.countryCode, item]));
+  const usTemplate = templates.find((item) => item.countryCode === "US") ?? templates[0];
+  const usCny = plan.priceCNY ?? Math.round((plan.officialPriceUSD ?? 20) * fxReference.rate);
+  const completed = templates.map((template) => {
+    const existing = existingByCountry.get(template.countryCode);
+
+    if (existing) {
+      return existing;
+    }
+
+    const ratio = usTemplate?.convertedCNY
+      ? template.convertedCNY / usTemplate.convertedCNY
+      : 1;
+    const convertedCNY = Number((usCny * ratio).toFixed(2));
+    const baseRate = baseCnyRateFor(template.currencyCode) ?? fxReference.rate;
+    const localPrice = Number((convertedCNY / baseRate).toFixed(2));
+
+    return {
+      id: `derived-${plan.id}-${template.countryCode}`,
+      provider: plan.provider,
+      productName: plan.productName,
+      planName: plan.planName,
+      billingCycle: plan.billingCycle,
+      country: template.country,
+      countryCode: template.countryCode,
+      currencyCode: template.currencyCode,
+      localPrice,
+      convertedCNY,
+      sourceLabel: "汇率换算估算",
+      updatedAt: plan.updatedAt,
+    } satisfies SubscriptionRegionPrice;
+  });
+
+  return completed.toSorted((left, right) => left.convertedCNY - right.convertedCNY);
 }
 
 function CompareEdge({
@@ -644,22 +990,36 @@ function CompareEdge({
   return (
     <div
       className={cn(
-        "flex items-center gap-2 rounded-[12px] px-2.5 py-2 sm:gap-3 sm:px-3.5",
-        align === "right" && "justify-end text-right",
+        "relative flex min-h-[122px] items-center gap-2 overflow-hidden rounded-[22px] border px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] sm:min-h-[136px] sm:gap-3 sm:px-5",
+        align === "left" &&
+          "justify-start border-emerald-200/70 bg-[linear-gradient(135deg,rgba(236,255,247,0.98),rgba(222,249,236,0.9))] text-left sm:[clip-path:polygon(0_0,100%_0,86%_100%,0_100%)] dark:border-emerald-500/22 dark:bg-[linear-gradient(135deg,rgba(6,78,59,0.42),rgba(5,46,34,0.68))]",
+        align === "right" &&
+          "justify-end border-orange-200/70 bg-[linear-gradient(135deg,rgba(255,247,240,0.98),rgba(255,233,224,0.9))] text-right sm:[clip-path:polygon(14%_0,100%_0,100%_100%,0_100%)] dark:border-orange-500/20 dark:bg-[linear-gradient(135deg,rgba(127,29,29,0.36),rgba(67,20,7,0.68))]",
       )}
     >
       {align === "left" ? <span className="text-[22px] sm:text-[28px]">{flagFor(region.countryCode)}</span> : null}
       <div>
-        <div className="text-[11px] text-muted-foreground">{region.country}</div>
+        <div className={cn("text-[11px]", align === "left" ? "text-emerald-700/70 dark:text-emerald-100/76" : "text-orange-900/60 dark:text-orange-100/70")}>
+          {region.country}
+        </div>
         <div
           className={cn(
-            "mt-1 text-[1.16rem] font-semibold tracking-[-0.025em] sm:text-[1.58rem]",
-            align === "left" ? "text-primary" : "text-foreground",
+            "mt-1 text-[1.28rem] font-semibold tracking-[-0.03em] sm:text-[1.72rem]",
+            align === "left" ? "text-emerald-500" : "text-[#7b6f69] dark:text-orange-100",
           )}
         >
           <LivePriceTick pulseKey={pulseKey}>{displayPrice}</LivePriceTick>
         </div>
-        <div className="text-[11px] text-muted-foreground">{targetCurrency}</div>
+        <div
+          className={cn(
+            "mt-1 text-[11px]",
+            align === "left"
+              ? "text-emerald-800/55 dark:text-emerald-100/58"
+              : "text-orange-900/45 dark:text-orange-100/55",
+          )}
+        >
+          {region.currencyCode} {formatLocalNumber(region.localPrice)}
+        </div>
       </div>
       {align === "right" ? <span className="text-[22px] sm:text-[28px]">{flagFor(region.countryCode)}</span> : null}
     </div>
@@ -668,67 +1028,290 @@ function CompareEdge({
 
 function PriceRow({
   region,
+  detailRows,
+  isPinned,
+  onTogglePinned,
+  onClosePinned,
   highlighted,
   targetCurrency,
   liveCnyRates,
   pulseKey,
 }: {
   region: SubscriptionRegionPrice;
+  detailRows: SubscriptionRegionPrice[];
+  isPinned: boolean;
+  onTogglePinned: () => void;
+  onClosePinned: () => void;
   highlighted: boolean;
   targetCurrency: TargetCurrencyCode;
   liveCnyRates: Record<string, number>;
   pulseKey: number;
 }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const closeHoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const clearCloseHoverTimer = () => {
+    if (!closeHoverTimerRef.current) {
+      return;
+    }
+
+    clearTimeout(closeHoverTimerRef.current);
+    closeHoverTimerRef.current = null;
+  };
+
+  const openHover = () => {
+    clearCloseHoverTimer();
+    setIsHovered(true);
+  };
+
+  const scheduleCloseHover = () => {
+    clearCloseHoverTimer();
+    closeHoverTimerRef.current = setTimeout(() => {
+      setIsHovered(false);
+    }, 120);
+  };
+
+  useEffect(() => {
+    return () => {
+      clearCloseHoverTimer();
+    };
+  }, []);
+
   const finalPrice = formatTargetMoney(region.convertedCNY, targetCurrency, region, liveCnyRates);
   const evidence = buildEvidenceSummary(region);
+  const sortedDetailRows = [...detailRows].sort(
+    (left, right) => liveCnyValueFor(left, liveCnyRates) - liveCnyValueFor(right, liveCnyRates),
+  );
+  const hasEstimatedRows = sortedDetailRows.some((item) => item.sourceLabel.includes("估算"));
+  const desktopOpen = sortedDetailRows.length > 0 && (isHovered || isPinned);
+  const mobileOpen = sortedDetailRows.length > 0 && isPinned;
 
   return (
     <div
-      className={cn(
-        "grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 rounded-[12px] border px-2.5 py-2.5 transition-colors sm:gap-2.5 sm:px-3.5 lg:grid-cols-[1.2fr_0.9fr_0.5fr_0.7fr_auto_auto]",
-        highlighted
-          ? "border-primary/25 bg-primary/7"
-          : "border-border bg-background",
-      )}
+      className={cn("group/price-row relative", desktopOpen && "z-30")}
+      onMouseEnter={openHover}
+      onMouseLeave={scheduleCloseHover}
     >
-      <div className="flex items-center gap-4">
-        <span className="text-[22px] sm:text-[26px]">{flagFor(region.countryCode)}</span>
-        <div>
-          <div className="text-[13px] font-semibold sm:text-sm">{region.country}</div>
-          <div className="text-[11px] text-muted-foreground">{region.sourceLabel}</div>
+      <div
+        className={cn(
+          "grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 rounded-[12px] border px-2.5 py-2.5 transition-[transform,border-color,background-color,box-shadow] duration-300 ease-out sm:gap-2.5 sm:px-3.5 lg:grid-cols-[1.2fr_0.9fr_0.5fr_0.7fr_auto_auto]",
+          highlighted
+            ? "border-primary/25 bg-primary/7 shadow-[0_12px_28px_rgba(0,188,125,0.08)]"
+            : "border-border bg-background hover:-translate-y-0.5 hover:border-primary/18 hover:bg-card hover:shadow-[0_18px_40px_rgba(15,23,42,0.08)]",
+          (desktopOpen || mobileOpen) &&
+            "border-primary/24 bg-card shadow-[0_16px_36px_rgba(15,23,42,0.12)]",
+        )}
+        role={sortedDetailRows.length > 0 ? "button" : undefined}
+        aria-expanded={sortedDetailRows.length > 0 ? desktopOpen || mobileOpen : undefined}
+        aria-haspopup={sortedDetailRows.length > 0 ? "dialog" : undefined}
+        tabIndex={sortedDetailRows.length > 0 ? 0 : -1}
+        onFocus={openHover}
+        onBlur={scheduleCloseHover}
+        onClick={() => {
+          if (sortedDetailRows.length > 0) {
+            onTogglePinned();
+          }
+        }}
+        onKeyDown={(event) => {
+          if (sortedDetailRows.length === 0) {
+            return;
+          }
+
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            onTogglePinned();
+          }
+
+          if (event.key === "Escape") {
+            clearCloseHoverTimer();
+            setIsHovered(false);
+            onClosePinned();
+          }
+        }}
+      >
+        <div className="flex items-center gap-4">
+          <span className="text-[22px] sm:text-[26px]">{flagFor(region.countryCode)}</span>
+          <div>
+            <div className="text-[13px] font-semibold sm:text-sm">{region.country}</div>
+            <div className="text-[11px] text-muted-foreground">{region.sourceLabel}</div>
+          </div>
+        </div>
+
+        <div className="hidden text-[11px] text-muted-foreground lg:block">
+          <EvidenceBadgeGroup summary={evidence} compact />
+        </div>
+        <div className="hidden text-[11px] text-muted-foreground lg:block">{region.currencyCode}</div>
+        <div className="hidden text-[1rem] font-semibold tracking-[-0.04em] sm:text-[1.05rem] lg:block">
+          {symbolFor(region.currencyCode)}
+          {region.localPrice.toFixed(2)}
+        </div>
+        <div
+          className={cn(
+            "text-right text-[1rem] font-semibold tracking-[-0.025em] sm:text-[1.05rem] lg:text-left",
+            highlighted ? "text-primary" : "text-foreground",
+          )}
+        >
+          <div>
+            <LivePriceTick pulseKey={pulseKey}>{finalPrice}</LivePriceTick>
+          </div>
+          <div className="mt-0.5 text-[10px] font-medium tracking-normal text-muted-foreground lg:hidden">
+            {region.currencyCode} {symbolFor(region.currencyCode)}
+            {region.localPrice.toFixed(2)}
+          </div>
+        </div>
+        <div className="flex items-center justify-end">
+          {highlighted && !(desktopOpen || mobileOpen) ? (
+            <span className="rounded-full bg-primary px-2.5 py-1 text-[11px] font-semibold text-white">
+              推荐
+            </span>
+          ) : (
+            <ChevronRightIcon
+              className={cn(
+                "size-4 text-muted-foreground transition-transform duration-300",
+                (desktopOpen || mobileOpen) && "rotate-90 text-primary",
+              )}
+            />
+          )}
         </div>
       </div>
 
-      <div className="hidden text-[11px] text-muted-foreground lg:block">
-        <EvidenceBadgeGroup summary={evidence} compact />
-      </div>
-      <div className="hidden text-[11px] text-muted-foreground lg:block">{region.currencyCode}</div>
-      <div className="hidden text-[1rem] font-semibold tracking-[-0.04em] sm:text-[1.05rem] lg:block">
-        {symbolFor(region.currencyCode)}
-        {region.localPrice.toFixed(2)}
-      </div>
       <div
         className={cn(
-          "text-right text-[1rem] font-semibold tracking-[-0.025em] sm:text-[1.05rem] lg:text-left",
-          highlighted ? "text-primary" : "text-foreground",
+          "pointer-events-none absolute left-1/2 top-1/2 z-40 hidden w-[360px] max-w-[calc(100vw-4rem)] -translate-x-1/2 origin-center transition-[opacity,transform] duration-200 ease-out lg:block",
+          desktopOpen
+            ? "-translate-y-1/2 scale-[1] opacity-100"
+            : "translate-y-[-44%] scale-[0.98] opacity-0",
         )}
       >
-        <div>
-          <LivePriceTick pulseKey={pulseKey}>{finalPrice}</LivePriceTick>
-        </div>
-        <div className="mt-0.5 text-[10px] font-medium tracking-normal text-muted-foreground lg:hidden">
-          {region.currencyCode} {symbolFor(region.currencyCode)}
-          {region.localPrice.toFixed(2)}
+        <div className="pointer-events-auto" onMouseEnter={openHover} onMouseLeave={scheduleCloseHover}>
+          <MembershipPricePopover
+            compact
+            region={region}
+            sortedDetailRows={sortedDetailRows}
+            hasEstimatedRows={hasEstimatedRows}
+            targetCurrency={targetCurrency}
+            liveCnyRates={liveCnyRates}
+            pulseKey={pulseKey}
+          />
         </div>
       </div>
-      <div className="flex items-center justify-end">
-        {highlighted ? (
-          <span className="rounded-full bg-primary px-2.5 py-1 text-[11px] font-semibold text-white">
-            推荐
-          </span>
-        ) : (
-          <ChevronRightIcon className="size-4 text-muted-foreground" />
+
+      <div
+        className={cn(
+          "grid transition-[grid-template-rows,opacity,margin] duration-300 ease-out lg:hidden",
+          mobileOpen ? "mt-2 grid-rows-[1fr] opacity-100" : "mt-0 grid-rows-[0fr] opacity-0",
         )}
+      >
+        <div className="overflow-hidden">
+          <MembershipPricePopover
+            region={region}
+            sortedDetailRows={sortedDetailRows}
+            hasEstimatedRows={hasEstimatedRows}
+            targetCurrency={targetCurrency}
+            liveCnyRates={liveCnyRates}
+            pulseKey={pulseKey}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MembershipPricePopover({
+  region,
+  sortedDetailRows,
+  hasEstimatedRows,
+  targetCurrency,
+  liveCnyRates,
+  pulseKey,
+  compact = false,
+}: {
+  region: SubscriptionRegionPrice;
+  sortedDetailRows: SubscriptionRegionPrice[];
+  hasEstimatedRows: boolean;
+  targetCurrency: TargetCurrencyCode;
+  liveCnyRates: Record<string, number>;
+  pulseKey: number;
+  compact?: boolean;
+}) {
+  return (
+    <div
+      className={cn(
+        "rounded-[22px] border border-border/80 bg-card/95 backdrop-blur-xl dark:border-white/10 dark:bg-[linear-gradient(180deg,rgba(12,16,15,0.96),rgba(10,12,12,0.92))]",
+        compact
+          ? "overflow-hidden border-primary/16 p-3 shadow-[0_24px_56px_rgba(15,23,42,0.18)]"
+          : "p-3.5 shadow-[0_20px_46px_rgba(15,23,42,0.1)]",
+      )}
+    >
+      <div className={cn("mb-3 flex flex-wrap items-center justify-between gap-3", compact && "mb-2.5")}>
+        <div className="flex min-w-0 items-center gap-2.5">
+          <span className={cn(compact ? "text-[22px]" : "text-[24px]")}>{flagFor(region.countryCode)}</span>
+          <div className="min-w-0">
+            <div
+              className={cn(
+                "truncate font-semibold tracking-[-0.03em] text-foreground",
+                compact ? "text-[0.98rem]" : "text-[1.02rem]",
+              )}
+            >
+              {region.country}
+            </div>
+            <div className="text-[11px] text-muted-foreground">
+              当前厂商下全部会员价格，按 {targetCurrency} 实时换算排序
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-semibold text-primary">
+            {sortedDetailRows.length} 个档位
+          </span>
+          {hasEstimatedRows ? (
+            <span className="rounded-full bg-amber-400/12 px-2.5 py-1 text-[10px] font-semibold text-amber-700 dark:text-amber-200">
+              含估算价格
+            </span>
+          ) : null}
+        </div>
+      </div>
+
+      <div className={cn("space-y-2", compact && "space-y-1.5")}>
+        {sortedDetailRows.map((item, index) => (
+          <div
+            key={item.id}
+            className={cn(
+              "grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-[18px] border",
+              compact ? "px-3 py-2.5" : "px-3.5 py-3",
+              index % 2 === 0
+                ? "border-border/70 bg-background/80 dark:bg-white/[0.03]"
+                : "border-primary/10 bg-primary/[0.05] dark:bg-primary/[0.08]",
+            )}
+          >
+            <div className="min-w-0">
+              <div className="flex items-center gap-2">
+                <div className="truncate text-[13px] font-semibold text-foreground">
+                  {membershipLabelForRow(item)}
+                </div>
+                <span className="rounded-full bg-sky-50 px-2 py-0.5 text-[10px] font-semibold text-sky-700 dark:bg-sky-500/12 dark:text-sky-200">
+                  {formatBillingCycle(item.billingCycle)}
+                </span>
+              </div>
+              <div className="mt-1 text-[11px] text-muted-foreground">
+                {item.currencyCode} {formatLocalNumber(item.localPrice)}
+              </div>
+            </div>
+            <div className="text-right">
+              <div
+                className={cn(
+                  "font-semibold tracking-[-0.03em] text-foreground",
+                  compact ? "text-[1rem]" : "text-[1.04rem]",
+                )}
+              >
+                <LivePriceTick pulseKey={pulseKey}>
+                  {formatTargetMoney(item.convertedCNY, targetCurrency, item, liveCnyRates)}
+                </LivePriceTick>
+              </div>
+              <div className="mt-1 text-[10px] text-muted-foreground">{item.sourceLabel}</div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -833,14 +1416,41 @@ function planSortWeight(item: SubscriptionRegionPrice) {
   return (
     {
       "plus-monthly": 0,
-      "pro-monthly": 1,
-      "max 5x-monthly": 2,
-      "pro-yearly": 3,
-      "team-yearly": 4,
-      "max 20x-monthly": 5,
-      "google ai pro-monthly": 6,
+      "go-monthly": 1,
+      "pro 5x-monthly": 2,
+      "plus-yearly": 3,
+      "pro 20x-monthly": 4,
+      "pro-monthly": 5,
+      "max 5x-monthly": 6,
+      "team-yearly": 7,
+      "max 20x-monthly": 8,
+      "google ai pro-monthly": 9,
     }[key] ?? 20
   );
+}
+
+function membershipLabelForPreset(preset: Preset) {
+  if (preset.productName === "ChatGPT") {
+    return preset.planName;
+  }
+
+  if (preset.productName === "Gemini" && preset.planName === "Google AI Pro") {
+    return "AI Pro";
+  }
+
+  return preset.planName;
+}
+
+function membershipLabelForRow(item: SubscriptionRegionPrice) {
+  if (item.productName === "ChatGPT") {
+    return `${item.productName} ${item.planName}`;
+  }
+
+  if (item.productName === "Gemini" && item.planName === "Google AI Pro") {
+    return "Gemini AI Pro";
+  }
+
+  return `${item.productName} ${item.planName}`;
 }
 
 function currencyFor(code: TargetCurrencyCode) {
@@ -1007,12 +1617,14 @@ function flagFor(countryCode: string) {
       JP: "🇯🇵",
       AR: "🇦🇷",
       AU: "🇦🇺",
+      BR: "🇧🇷",
       NG: "🇳🇬",
       EG: "🇪🇬",
       VN: "🇻🇳",
       KR: "🇰🇷",
       CA: "🇨🇦",
       IN: "🇮🇳",
+      MX: "🇲🇽",
     }[countryCode] ?? "🏳️"
   );
 }
@@ -1037,22 +1649,31 @@ function symbolFor(currencyCode: string) {
       VND: "₫",
       AUD: "A$",
       CAD: "C$",
+      BRL: "R$",
       INR: "₹",
+      MXN: "MX$",
     }[currencyCode] ?? ""
   );
 }
 
 function planSummaryFor(plan: SubscriptionPlan) {
-  const key = `${plan.productName}-${plan.planName}`.toLowerCase();
+  const key = `${plan.productName}-${plan.planName}-${plan.billingCycle}`.toLowerCase();
 
   return (
     {
-      "chatgpt-plus": "适合日常使用，包含 GPT-4o、文件分析、图片生成功能",
-      "chatgpt-pro": "适合高频重度使用，偏向更高额度、更稳定访问与更强工具能力。",
-      "chatgpt-team": "适合小团队协作，强调共享工作空间、成员管理与更稳定的多人使用体验。",
-      "claude-pro": "适合写作、总结、知识工作与轻量编程，是 Claude 的主力个人订阅档位。",
-      "claude-max 5x": "适合更高频 Claude 使用者，偏向长会话、重度总结和更大的调用额度。",
-      "gemini-google ai pro": "适合 Gemini 深度使用者，兼顾模型能力与 Google One 生态权益。",
-    }[key] ?? plan.note ?? "按当前官方页面维护种子数据，并保留后续扩展后台管理位。"
+      "chatgpt-plus-monthly": "适合日常使用，覆盖常见问答、写作、轻量分析与图片生成场景。",
+      "chatgpt-go-monthly": "更轻量的入门档位，适合预算敏感但希望拿到更高额度与更顺畅体验的用户。",
+      "chatgpt-pro 5x-monthly":
+        "面向高频使用者，强调更高消息额度与更稳定的高峰时段可用性。",
+      "chatgpt-pro 20x-monthly":
+        "面向最重度使用场景，适合多任务并行、长会话和更高强度的日常工作流。",
+      "chatgpt-plus-yearly": "适合长期订阅用户，按年查看更方便直接比较不同地区的年度成本。",
+      "claude-pro-monthly":
+        "适合写作、总结、知识工作与轻量编程，是 Claude 的主力个人订阅档位。",
+      "claude-max 5x-monthly":
+        "适合更高频 Claude 使用者，偏向长会话、重度总结和更大的调用额度。",
+      "gemini-google ai pro-monthly":
+        "适合 Gemini 深度使用者，兼顾模型能力与 Google One 生态权益。",
+    }[key] ?? plan.note ?? "按公开价格和复核记录持续维护。"
   );
 }

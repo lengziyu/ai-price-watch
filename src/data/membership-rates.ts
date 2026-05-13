@@ -448,7 +448,7 @@ export const membershipVendorBoards = [
     priceLabel: "$20 / $200 / Enterprise",
     collectionMode: "manual_review",
     maintenanceTip:
-      "Perplexity 的帮助中心公开访问不稳定，建议人工复核为主，后续再补浏览器辅助采集。",
+      "Perplexity 的帮助中心公开访问不稳定，当前以人工复核为主，并结合浏览器辅助采集。",
     officialRate: "官方更强调深度搜索、引用、连接器和 Enterprise 能力，而不是固定聊天次数。",
     communityRate: "社区最看重的是搜索深度、引用可靠性和做研究报告时能不能省时间。",
     officialSource: membershipRateSources.perplexityConnector,

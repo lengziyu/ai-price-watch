@@ -28,7 +28,7 @@ const confidenceLabels: Record<DataConfidence, string> = {
   review: "待确认",
   needs_update: "需更新",
   blocked: "受限",
-  seed: "种子数据",
+  seed: "整理录入",
 };
 
 const sourceTypeLabels: Record<DataSourceType, string> = {
@@ -39,7 +39,7 @@ const sourceTypeLabels: Record<DataSourceType, string> = {
   browser_assisted: "浏览器辅助",
   manual_review: "人工复核",
   community: "社区样本",
-  seed: "静态种子",
+  seed: "价格整理",
 };
 
 export function renderConfidenceLabel(value: DataConfidence) {
@@ -141,7 +141,7 @@ function buildFallbackNote(
 ) {
   if (input.note) return input.note;
   if (confidence === "verified") return "已记录来源和更新时间，可作为前台展示基准。";
-  if (sourceType === "seed") return "当前为种子数据，建议补充官方来源后再长期展示。";
+  if (sourceType === "seed") return "当前为整理录入数据，展示时请结合公开来源一起参考。";
   if (confidence === "blocked") return "公开抓取受限，需要后台人工复核。";
   return "已纳入复核队列，等待人工确认价格口径。";
 }

@@ -20,14 +20,14 @@ import {
 
 export const metadata: Metadata = {
   title: "关于本站",
-  description: "了解雷价通的定位、数据原则与后续规划。",
+  description: "了解雷价通的定位、数据原则与维护方式。",
 };
 
 export default function AboutPage() {
   return (
     <div className="pb-8 sm:pb-16">
       <PageHero
-        note="定位说明 · 数据原则 · 后续规划"
+        note="定位说明 · 数据原则 · 维护方式"
         title={
           <>
             <div>
@@ -61,12 +61,10 @@ export default function AboutPage() {
             </CardHeader>
             <CardContent className="flex flex-col gap-4 px-5 pb-5 text-sm leading-7 text-muted-foreground sm:px-6 sm:pb-6">
               <p>
-                第一版先做成可上线的静态 MVP：用结构清晰的页面、mock
-                数据和来源位，解决“先比一眼”的问题。
+                雷价通聚焦 AI 订阅、Token 成本、会员速率和优惠活动，把真正影响决策的信息收敛到同一套页面里。
               </p>
               <p>
-                后续可以继续接入 Supabase、后台管理、自动采集、变价追踪和 AI
-                摘要能力。
+                站内会持续维护公开价格、来源链接和复核时间，帮助你更快判断不同方案的成本差异。
               </p>
             </CardContent>
           </Card>
@@ -90,9 +88,9 @@ export default function AboutPage() {
           <CardContent className="px-5 pb-5 sm:px-6 sm:pb-6">
             <Accordion>
               <AccordionItem value="static-data">
-                <AccordionTrigger>为什么首版先用静态数据？</AccordionTrigger>
+                <AccordionTrigger>站内数据是怎么维护的？</AccordionTrigger>
                 <AccordionContent>
-                  因为结构先跑通更重要。先把展示、筛选、SEO 和移动端体验做好，后续接数据库与自动更新会更顺。
+                  目前以公开价格页、帮助中心和人工复核整理为主，优先保证页面可读性、来源清晰度和更新节奏。
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="accuracy">

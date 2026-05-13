@@ -58,12 +58,30 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const themeInitScript = `
+    (() => {
+      try {
+        const storageKey = "ai-price-watch-theme";
+        const stored = window.localStorage.getItem(storageKey);
+        const theme =
+          stored === "light" || stored === "dark"
+            ? stored
+            : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.classList.toggle("dark", theme === "dark");
+        document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  `;
+
   return (
     <html
       lang="zh-CN"
       className={`${inter.variable} ${interTight.variable} h-full antialiased`}
       suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="min-h-full bg-background text-foreground">
         <div className="relative flex min-h-full flex-col">
           <AppChrome>{children}</AppChrome>

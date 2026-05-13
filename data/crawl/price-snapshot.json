@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
   "generatedAt": "2026-05-12T15:10:12.874Z",
-=======
-  "generatedAt": "2026-05-12T12:43:30.773Z",
->>>>>>> 3e4af6b (大版本优化)
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 12,
   "results": [
@@ -16,11 +12,7 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://openai.com/chatgpt/pricing/",
       "ok": false,
-<<<<<<< HEAD
       "fetchedAt": "2026-05-12T15:10:12.404Z",
-=======
-      "fetchedAt": "2026-05-12T12:43:28.926Z",
->>>>>>> 3e4af6b (大版本优化)
       "error": "HTTP 403 Forbidden"
     },
     {
@@ -32,11 +24,7 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-<<<<<<< HEAD
       "fetchedAt": "2026-05-12T15:10:12.440Z",
-=======
-      "fetchedAt": "2026-05-12T12:43:28.947Z",
->>>>>>> 3e4af6b (大版本优化)
       "title": "Pricing – Codex | OpenAI Developers",
       "description": "Codex is included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
@@ -202,11 +190,7 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://www.anthropic.com/pricing#subscriptions",
       "ok": true,
-<<<<<<< HEAD
       "fetchedAt": "2026-05-12T15:10:12.441Z",
-=======
-      "fetchedAt": "2026-05-12T12:43:28.948Z",
->>>>>>> 3e4af6b (大版本优化)
       "title": "Plans & Pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
@@ -364,11 +348,7 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://one.google.com/about/google-ai-plans/",
       "ok": true,
-<<<<<<< HEAD
       "fetchedAt": "2026-05-12T15:10:12.442Z",
-=======
-      "fetchedAt": "2026-05-12T12:43:28.949Z",
->>>>>>> 3e4af6b (大版本优化)
       "title": "Google AI Plans with Cloud Storage - Google One",
       "description": "Explore Google AI Plans. Access our most advanced AI, generate videos from text, and secure cloud storage.",
       "status": 200,
@@ -446,11 +426,7 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/pricing",
       "ok": true,
-<<<<<<< HEAD
       "fetchedAt": "2026-05-12T15:10:12.443Z",
-=======
-      "fetchedAt": "2026-05-12T12:43:28.949Z",
->>>>>>> 3e4af6b (大版本优化)
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,

@@ -146,7 +146,7 @@ export function AdminManualDealForm() {
             id="suitableFor"
             name="suitableFor"
             className="min-h-24"
-            placeholder="普通用户、学生、原型验证、低预算 API 测试"
+            placeholder="普通用户、学生、原型验证、低预算 API 验证"
           />
           <FieldMessage message={state.fieldErrors?.suitableFor} />
         </div>

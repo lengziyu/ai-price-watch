@@ -127,6 +127,7 @@ export default function HomePage() {
         <SubscriptionExplorer
           plans={subscriptionPlans}
           embedded
+          disableStickyTabs
           maxRows={4}
         />
       </section>

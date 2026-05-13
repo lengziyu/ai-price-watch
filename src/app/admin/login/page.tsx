@@ -43,7 +43,7 @@ export default async function AdminLoginPage() {
             </h1>
           </div>
           <p className="max-w-[30rem] text-[12px] leading-6 text-muted-foreground sm:text-[13px]">
-            这版后台已经接入最基础的访问保护和操作留痕。后续即使换成数据库或多账号权限，也可以沿着这套结构继续扩展。
+            后台已接入基础访问保护、操作留痕和手动维护入口，方便持续管理价格与活动信息。
           </p>
           <div className="flex flex-wrap gap-2">
             <Badge variant="secondary">

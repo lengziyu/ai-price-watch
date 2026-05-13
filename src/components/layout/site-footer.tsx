@@ -35,9 +35,9 @@ export function SiteFooter() {
                 <DatabaseZapIcon className="size-4" />
               </div>
               <div>
-                <div className="text-sm font-semibold">自动采集准备中</div>
+                <div className="text-sm font-semibold">公开价格持续维护</div>
                 <p className="mt-1 max-w-2xl text-[12px] leading-6 text-muted-foreground sm:text-[13px]">
-                  首版先保留官方来源和静态快照，下一步会把公开价格页面接入定时爬取、差异记录和复核时间。
+                  当前以公开来源、价格整理和复核时间为基础，帮助你快速判断不同方案的成本差异。
                 </p>
               </div>
             </div>
@@ -59,7 +59,7 @@ export function SiteFooter() {
           <div className="flex flex-col gap-3">
             <BrandLogo />
             <p className="max-w-md text-sm leading-6 text-muted-foreground">
-              {siteConfig.description} 第一版以可上线的静态 MVP 为主，逐步接入自动采集与后台管理。
+              {siteConfig.description} 当前以公开来源和复核记录为基础，持续维护关键价格与活动信息。
             </p>
             <div className="text-[11px] text-muted-foreground">
               {siteConfig.englishName} · {siteConfig.domain}
