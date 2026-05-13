@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-12T15:10:12.874Z",
+  "generatedAt": "2026-05-13T15:16:11.727Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 12,
   "results": [
@@ -12,7 +12,7 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://openai.com/chatgpt/pricing/",
       "ok": false,
-      "fetchedAt": "2026-05-12T15:10:12.404Z",
+      "fetchedAt": "2026-05-13T15:16:11.190Z",
       "error": "HTTP 403 Forbidden"
     },
     {
@@ -24,7 +24,7 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-05-12T15:10:12.440Z",
+      "fetchedAt": "2026-05-13T15:16:11.226Z",
       "title": "Pricing – Codex | OpenAI Developers",
       "description": "Codex is included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
@@ -190,11 +190,11 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://www.anthropic.com/pricing#subscriptions",
       "ok": true,
-      "fetchedAt": "2026-05-12T15:10:12.441Z",
+      "fetchedAt": "2026-05-13T15:16:11.228Z",
       "title": "Plans & Pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
-      "byteLength": 1327396,
+      "byteLength": 1328521,
       "extraction": {
         "confidence": "review",
         "priceSignals": [
@@ -298,7 +298,7 @@
         "planSignals": [
           {
             "value": "Education",
-            "context": "agents Coding Departments Security Industries Customer support Education Financial services Government Healthcare Life sciences Nonprofi"
+            "context": "s Coding Departments Legal Security Industries Customer support Education Financial services Government Healthcare Life sciences Nonprofi"
           },
           {
             "value": "Pro",
@@ -348,7 +348,7 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://one.google.com/about/google-ai-plans/",
       "ok": true,
-      "fetchedAt": "2026-05-12T15:10:12.442Z",
+      "fetchedAt": "2026-05-13T15:16:11.229Z",
       "title": "Google AI Plans with Cloud Storage - Google One",
       "description": "Explore Google AI Plans. Access our most advanced AI, generate videos from text, and secure cloud storage.",
       "status": 200,
@@ -426,47 +426,35 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-05-12T15:10:12.443Z",
+      "fetchedAt": "2026-05-13T15:16:11.230Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
-      "byteLength": 281335,
+      "byteLength": 279342,
       "extraction": {
         "confidence": "review",
         "priceSignals": [
           {
             "value": "$20",
-            "context": "按年 个人规划 Hobby 免费 包含： ✓ 无需信用卡 ✓ 有限的智能体请求次数 ✓ 有限的 Tab 补全次数 下载 Pro $20 / mo. 包含 Hobby 的所有功能，另加： ✓ 智能体扩展限额 ✓ 访问前沿模型 ✓ MCP、技能和钩子 ✓ 云端智能体"
-          },
-          {
-            "value": "$60",
-            "context": "展限额 ✓ 访问前沿模型 ✓ MCP、技能和钩子 ✓ 云端智能体 ✓ 按用量计费的 Bugbot 获取 Pro Pro+ 推荐 $60 / mo. 包含 Pro 的所有功能，另加： ✓ 所有 OpenAI、Claude 和 Gemini 模型 3 倍用量 ✓ 按"
-          },
-          {
-            "value": "$200",
-            "context": "有 OpenAI、Claude 和 Gemini 模型 3 倍用量 ✓ 按用量计费的 Bugbot 获取 Pro+ Ultra $200 / mo. 包含 Pro 的所有功能，另加： ✓ 所有 OpenAI、Claude 和 Gemini 模型 20 倍用量 ✓"
+            "context": "定价 按月 按年 Hobby 免费 包含： ✓ 无需信用卡 ✓ 有限的智能体请求次数 ✓ 有限的 Tab 补全次数 下载 个人 $20 / mo. Pro Pro+ Ultra 包含 Hobby 的全部内容，另加： ✓ 智能体扩展限额 ✓ 访问前沿模型 ✓ MC"
           },
           {
             "value": "$40",
-            "context": "ni 模型 20 倍用量 ✓ 优先使用新功能 ✓ 按用量计费的 Bugbot 获取 Ultra Business 规划 团队版 $40 / user / mo. 包含 Pro 的所有功能，另加： ✓ 具备团队共享上下文的云端智能体 ✓ 团队范围的规则、技能和自动"
+            "context": "智能体扩展限额 ✓ 访问前沿模型 ✓ MCP、技能和钩子 ✓ 云端智能体 ✓ 按用量计费的 Bugbot 获取 Pro 团队版 $40 / user / mo. 包含个人的全部内容，另加： ✓ 支持团队共享上下文的云端智能体 ✓ 团队级规则、技能和自动化 ✓ 安"
           }
         ],
         "planSignals": [
           {
             "value": "Hobby",
-            "context": "社区 帮助 ↗ 工作坊 论坛 ↗ 招聘 产品 → 企业 定价 资源 → 登录 联系 联系销售 下载 定价 按月 按年 个人规划 Hobby 免费 包含： ✓ 无需信用卡 ✓ 有限的智能体请求次数 ✓ 有限的 Tab 补全次数 下载 Pro $20 / mo. 包含"
+            "context": "g 文档 社区 帮助 ↗ 工作坊 论坛 ↗ 招聘 产品 → 企业 定价 资源 → 登录 联系 联系销售 下载 定价 按月 按年 Hobby 免费 包含： ✓ 无需信用卡 ✓ 有限的智能体请求次数 ✓ 有限的 Tab 补全次数 下载 个人 $20 / mo. Pro"
           },
           {
             "value": "Pro",
-            "context": "按月 按年 个人规划 Hobby 免费 包含： ✓ 无需信用卡 ✓ 有限的智能体请求次数 ✓ 有限的 Tab 补全次数 下载 Pro $20 / mo. 包含 Hobby 的所有功能，另加： ✓ 智能体扩展限额 ✓ 访问前沿模型 ✓ MCP、技能和钩子 ✓ 云"
+            "context": "obby 免费 包含： ✓ 无需信用卡 ✓ 有限的智能体请求次数 ✓ 有限的 Tab 补全次数 下载 个人 $20 / mo. Pro Pro+ Ultra 包含 Hobby 的全部内容，另加： ✓ 智能体扩展限额 ✓ 访问前沿模型 ✓ MCP、技能和钩子 ✓"
           },
           {
             "value": "Ultra",
-            "context": "加： ✓ 所有 OpenAI、Claude 和 Gemini 模型 3 倍用量 ✓ 按用量计费的 Bugbot 获取 Pro+ Ultra $200 / mo. 包含 Pro 的所有功能，另加： ✓ 所有 OpenAI、Claude 和 Gemini 模型 20 倍"
-          },
-          {
-            "value": "Business",
-            "context": "AI、Claude 和 Gemini 模型 20 倍用量 ✓ 优先使用新功能 ✓ 按用量计费的 Bugbot 获取 Ultra Business 规划 团队版 $40 / user / mo. 包含 Pro 的所有功能，另加： ✓ 具备团队共享上下文的云端智能体 ✓ 团队"
+            "context": "含： ✓ 无需信用卡 ✓ 有限的智能体请求次数 ✓ 有限的 Tab 补全次数 下载 个人 $20 / mo. Pro Pro+ Ultra 包含 Hobby 的全部内容，另加： ✓ 智能体扩展限额 ✓ 访问前沿模型 ✓ MCP、技能和钩子 ✓ 云端智能体 ✓ 按用量"
           }
         ]
       }
@@ -480,11 +468,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-05-12T12:43:28.950Z",
+      "fetchedAt": "2026-05-13T15:16:11.232Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "GitHub Copilot works alongside you directly in your editor, suggesting whole lines or entire functions for you.",
       "status": 200,
-      "byteLength": 1138119,
+      "byteLength": 1138303,
       "extraction": {
         "confidence": "review",
         "priceSignals": [
@@ -574,11 +562,11 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-05-12T12:43:28.950Z",
+      "fetchedAt": "2026-05-13T15:16:11.233Z",
       "title": "Models and pricing for GitHub Copilot - GitHub Docs",
       "description": "See per-token pricing for the models available in GitHub Copilot and reference rates for additional usage across plans.",
       "status": 200,
-      "byteLength": 510685,
+      "byteLength": 510927,
       "extraction": {
         "confidence": "review",
         "priceSignals": [
@@ -744,7 +732,7 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": false,
-      "fetchedAt": "2026-05-12T12:43:28.951Z",
+      "fetchedAt": "2026-05-13T15:16:11.233Z",
       "error": "HTTP 403 Forbidden"
     },
     {
@@ -756,7 +744,7 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": false,
-      "fetchedAt": "2026-05-12T12:43:28.951Z",
+      "fetchedAt": "2026-05-13T15:16:11.234Z",
       "error": "HTTP 403 Forbidden"
     },
     {
@@ -768,7 +756,7 @@
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
       "ok": false,
-      "fetchedAt": "2026-05-12T12:43:28.952Z",
+      "fetchedAt": "2026-05-13T15:16:11.236Z",
       "error": "HTTP 403 Forbidden"
     },
     {
@@ -780,7 +768,7 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": false,
-      "fetchedAt": "2026-05-12T12:43:28.952Z",
+      "fetchedAt": "2026-05-13T15:16:11.237Z",
       "error": "HTTP 403 Forbidden"
     },
     {
@@ -792,7 +780,7 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": false,
-      "fetchedAt": "2026-05-12T12:43:28.953Z",
+      "fetchedAt": "2026-05-13T15:16:11.238Z",
       "error": "HTTP 403 Forbidden"
     }
   ]
