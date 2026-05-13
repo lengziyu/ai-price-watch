@@ -12,7 +12,7 @@ export function AdminPageHeader({
   actions,
 }: AdminPageHeaderProps) {
   return (
-    <section className="admin-hero">
+    <section className="admin-hero motion-surface motion-surface--green animate-fade-up">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div className="max-w-[760px]">
           <div className="mono-kicker text-[12px] uppercase text-muted-foreground">{kicker}</div>

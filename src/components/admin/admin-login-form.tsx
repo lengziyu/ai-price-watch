@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 
 import { loginAction, type LoginActionState } from "@/app/admin/actions";
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,7 @@ const initialState: LoginActionState = {};
 
 export function AdminLoginForm() {
   const [state, formAction, pending] = useActionState(loginAction, initialState);
+  const [username, setUsername] = useState("admin");
 
   return (
     <form action={formAction} className="grid gap-4">
@@ -17,7 +18,14 @@ export function AdminLoginForm() {
         <label htmlFor="username" className="text-sm font-medium text-foreground">
           用户名
         </label>
-        <Input id="username" name="username" placeholder="admin" autoComplete="username" />
+        <Input
+          id="username"
+          name="username"
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
+          placeholder="admin"
+          autoComplete="username"
+        />
       </div>
 
       <div className="grid gap-2">

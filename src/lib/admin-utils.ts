@@ -1,6 +1,6 @@
 import type { AIDeal } from "@/types";
 
-import type { AdminOperationLog, CrawlSnapshot } from "@/lib/admin-store";
+import type { AdminOperationLog, CrawlSnapshot, SourceReview } from "@/lib/admin-store";
 
 export function summarizeCrawlSnapshot(snapshot: CrawlSnapshot) {
   const succeeded = snapshot.results.filter((item) => item.ok).length;
@@ -16,9 +16,26 @@ export function summarizeCrawlSnapshot(snapshot: CrawlSnapshot) {
   };
 }
 
-export function getReviewQueue(snapshot: CrawlSnapshot) {
+export function getReviewQueue(snapshot: CrawlSnapshot, sourceReviews: SourceReview[] = []) {
+  const latestReviewBySource = new Map<string, SourceReview>();
+
+  sourceReviews.forEach((review) => {
+    if (!latestReviewBySource.has(review.sourceId)) {
+      latestReviewBySource.set(review.sourceId, review);
+    }
+  });
+
   return snapshot.results
     .filter((item) => !item.ok || item.extraction?.confidence === "review")
+    .filter((item) => {
+      const latestReview = latestReviewBySource.get(item.id);
+
+      if (!latestReview) {
+        return true;
+      }
+
+      return latestReview.reviewStatus === "needs_update";
+    })
     .map((item) => ({
       id: item.id,
       type: item.category,
@@ -29,6 +46,8 @@ export function getReviewQueue(snapshot: CrawlSnapshot) {
       updatedAt: item.fetchedAt,
       sourceUrl: item.url,
       status: item.ok ? "待确认" : "失败",
+      vendor: item.vendor,
+      ok: item.ok,
     }));
 }
 
@@ -81,6 +100,10 @@ export function renderOperationTypeLabel(value: AdminOperationLog["type"]) {
       return "退出登录";
     case "manual_deal_create":
       return "手动录入";
+    case "membership_rate_review_create":
+      return "会员速率复核";
+    case "source_review_create":
+      return "来源复核";
     case "crawl_trigger":
       return "触发抓取";
   }
@@ -94,5 +117,46 @@ export function renderOperationStatusLabel(value: AdminOperationLog["status"]) {
       return "失败";
     case "info":
       return "信息";
+  }
+}
+
+export function renderMembershipCaptureMethodLabel(
+  value: "public_html" | "browser_assisted" | "manual_review",
+) {
+  switch (value) {
+    case "public_html":
+      return "公开页抓取";
+    case "browser_assisted":
+      return "浏览器辅助";
+    case "manual_review":
+      return "人工复核";
+  }
+}
+
+export function renderMembershipReviewStatusLabel(
+  value: "verified" | "blocked" | "needs_update",
+) {
+  switch (value) {
+    case "verified":
+      return "已确认";
+    case "blocked":
+      return "受限";
+    case "needs_update":
+      return "待更新";
+  }
+}
+
+export function renderSourceReviewStatusLabel(
+  value: "verified" | "needs_update" | "blocked" | "ignored",
+) {
+  switch (value) {
+    case "verified":
+      return "已确认";
+    case "needs_update":
+      return "仍需更新";
+    case "blocked":
+      return "受限归档";
+    case "ignored":
+      return "已忽略";
   }
 }

@@ -7,9 +7,28 @@ import { primaryNav, siteConfig, trustBullets } from "@/lib/site";
 
 export function SiteFooter() {
   return (
-    <footer className="mt-12 border-t border-border bg-background/96">
-      <div className="app-shell py-8 sm:py-10">
-        <div className="motion-surface motion-surface--green mb-6 overflow-hidden rounded-[12px] border border-border px-4 py-4 sm:px-5">
+    <footer className="mt-8 border-t border-border bg-background/96 sm:mt-12">
+      <div className="app-shell py-5 sm:py-10">
+        <div className="flex items-center justify-between gap-3 rounded-[12px] border border-border bg-background/82 px-4 py-3 sm:hidden">
+          <div className="min-w-0">
+            <BrandLogo />
+            <div className="mt-1 text-[11px] text-muted-foreground">
+              {siteConfig.englishName} · {siteConfig.domain}
+            </div>
+          </div>
+          <Link
+            href="/about"
+            className={buttonVariants({
+              variant: "outline",
+              size: "sm",
+              className: "h-8 shrink-0 px-3 text-[12px]",
+            })}
+          >
+            数据原则
+          </Link>
+        </div>
+
+        <div className="motion-surface motion-surface--green mb-6 hidden overflow-hidden rounded-[12px] border border-border px-4 py-4 sm:block sm:px-5">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-start gap-3">
               <div className="flex size-9 items-center justify-center rounded-[12px] bg-primary/10 text-primary">
@@ -36,7 +55,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="grid gap-7 lg:grid-cols-[1.12fr_0.9fr_1fr]">
+        <div className="hidden gap-7 sm:grid lg:grid-cols-[1.12fr_0.9fr_1fr]">
           <div className="flex flex-col gap-3">
             <BrandLogo />
             <p className="max-w-md text-sm leading-6 text-muted-foreground">

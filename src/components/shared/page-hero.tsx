@@ -29,10 +29,10 @@ export function PageHero({
   rightSlot,
 }: PageHeroProps) {
   return (
-    <section className="hero-stage hero-grid hero-aura -mt-[88px] w-full bg-background pt-[96px] sm:-mt-[104px] sm:pt-[116px]">
-      <div className="app-shell py-3 sm:py-4 lg:py-6">
-        <div className="grid items-center gap-4 lg:grid-cols-[1fr_0.92fr] lg:gap-5">
-          <div className="flex flex-col gap-3.5 sm:gap-4">
+    <section className="hero-stage hero-grid hero-aura -mt-[80px] w-full bg-background pt-[86px] sm:-mt-[104px] sm:pt-[116px]">
+      <div className="app-shell py-2.5 sm:py-4 lg:py-6">
+        <div className="grid items-center gap-3.5 sm:gap-4 lg:grid-cols-[1fr_0.92fr] lg:gap-5">
+          <div className="flex flex-col gap-3 sm:gap-4">
             {note ? (
               <div className="inline-flex w-fit items-center gap-2.5 rounded-full border border-border bg-background/75 px-3 py-1.5 text-[11px] text-muted-foreground backdrop-blur-sm">
                 <span className="size-2 rounded-full bg-primary" />
@@ -40,11 +40,11 @@ export function PageHero({
               </div>
             ) : null}
 
-            <div className="max-w-[700px] text-[1.34rem] font-semibold leading-[1.03] tracking-[-0.03em] text-foreground sm:text-[2rem] lg:text-[2.56rem]">
+            <div className="max-w-[700px] text-[1.24rem] font-semibold leading-[1.03] tracking-[-0.03em] text-foreground sm:text-[2rem] lg:text-[2.56rem]">
               {title}
             </div>
 
-            <div className="max-w-[600px] text-[12.5px] leading-5 text-muted-foreground sm:text-[13.5px] sm:leading-[1.58]">
+            <div className="max-w-[600px] text-[12px] leading-5 text-muted-foreground sm:text-[13.5px] sm:leading-[1.58]">
               {description}
             </div>
 

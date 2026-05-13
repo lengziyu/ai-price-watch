@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function DealsPage() {
   return (
-    <div className="pb-16">
+    <div className="pb-8 sm:pb-16">
       <PageHero
         note="官方活动 · 免费额度 · 学生权益"
         title={
@@ -46,7 +46,7 @@ export default function DealsPage() {
         rightSlot={<PageShowcase variant="deals" />}
       />
 
-      <div id="deals-board" className="mt-8">
+      <div id="deals-board" className="mt-4 sm:mt-8">
         <DealsExplorer deals={aiDeals} />
       </div>
     </div>

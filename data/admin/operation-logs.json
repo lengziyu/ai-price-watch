@@ -1,5 +1,41 @@
 [
   {
+    "id": "5bbb6740-7e70-4ca3-a2c6-995db9e62557",
+    "createdAt": "2026-05-12T22:12:14.659Z",
+    "actor": "admin",
+    "type": "login_success",
+    "status": "success",
+    "message": "后台登录成功",
+    "detail": "已创建新的管理后台会话。"
+  },
+  {
+    "id": "eebab2c1-643d-47dd-adc2-f159469f7cf8",
+    "createdAt": "2026-05-12T22:11:19.363Z",
+    "actor": "admin",
+    "type": "login_success",
+    "status": "success",
+    "message": "后台登录成功",
+    "detail": "已创建新的管理后台会话。"
+  },
+  {
+    "id": "d6ac68e1-627d-4e7a-a924-1421e2d1c93b",
+    "createdAt": "2026-05-12T14:30:31.446Z",
+    "actor": "admin",
+    "type": "login_success",
+    "status": "success",
+    "message": "后台登录成功",
+    "detail": "已创建新的管理后台会话。"
+  },
+  {
+    "id": "e8eb548e-8f5b-42ab-ab98-c38adf874f13",
+    "createdAt": "2026-05-12T12:58:20.761Z",
+    "actor": "admin",
+    "type": "login_success",
+    "status": "success",
+    "message": "后台登录成功",
+    "detail": "已创建新的管理后台会话。"
+  },
+  {
     "id": "798a1e7c-5efe-4034-bb8e-5035f326fcbe",
     "createdAt": "2026-05-12T10:48:17.936Z",
     "actor": "admin",

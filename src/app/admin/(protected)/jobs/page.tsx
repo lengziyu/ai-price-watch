@@ -81,7 +81,7 @@ export default async function AdminJobsPage() {
       </div>
 
       <div className="grid gap-4 xl:grid-cols-[0.9fr_1.1fr]">
-        <Card className="surface-card rounded-[14px] border-border">
+        <Card className="surface-card motion-surface motion-surface--green rounded-[10px] border-border">
           <CardHeader className="px-5 py-4">
             <CardTitle>任务面板</CardTitle>
             <CardDescription>先把定时策略、目标源和下次运行时点明确写死。</CardDescription>
@@ -109,40 +109,42 @@ export default async function AdminJobsPage() {
           </CardContent>
         </Card>
 
-        <Card className="surface-card rounded-[14px] border-border">
+        <Card className="surface-card motion-surface motion-surface--cyan rounded-[10px] border-border">
           <CardHeader className="px-5 py-4">
             <CardTitle>最近一次抓取结果</CardTitle>
             <CardDescription>直接看每个源抓取是否成功、抓到多少信号以及是否需要复核。</CardDescription>
           </CardHeader>
           <CardContent className="px-5 pb-5">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>厂商</TableHead>
-                  <TableHead>分类</TableHead>
-                  <TableHead>状态</TableHead>
-                  <TableHead>价格信号</TableHead>
-                  <TableHead>来源</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {snapshot.results.map((item) => (
-                  <TableRow key={item.id}>
-                    <TableCell className="font-medium text-foreground">{item.vendor}</TableCell>
-                    <TableCell>{item.category}</TableCell>
-                    <TableCell>
-                      <Badge variant={item.ok ? "secondary" : "outline"}>
-                        {item.ok ? "成功" : "失败"}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>{item.extraction?.priceSignals?.length ?? 0}</TableCell>
-                    <TableCell className="max-w-[20rem] whitespace-normal text-muted-foreground">
-                      {item.title || item.url}
-                    </TableCell>
+            <div className="overflow-hidden rounded-[10px] border border-border bg-background/68">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>厂商</TableHead>
+                    <TableHead>分类</TableHead>
+                    <TableHead>状态</TableHead>
+                    <TableHead>价格信号</TableHead>
+                    <TableHead>来源</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {snapshot.results.map((item) => (
+                    <TableRow key={item.id} className="hover:bg-primary/[0.045]">
+                      <TableCell className="font-medium text-foreground">{item.vendor}</TableCell>
+                      <TableCell>{item.category}</TableCell>
+                      <TableCell>
+                        <Badge variant={item.ok ? "secondary" : "outline"}>
+                          {item.ok ? "成功" : "失败"}
+                        </Badge>
+                      </TableCell>
+                      <TableCell>{item.extraction?.priceSignals?.length ?? 0}</TableCell>
+                      <TableCell className="max-w-[20rem] whitespace-normal text-muted-foreground">
+                        {item.title || item.url}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
           </CardContent>
         </Card>
       </div>

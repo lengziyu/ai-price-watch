@@ -43,6 +43,7 @@ export default async function AdminOverviewPage() {
   ];
   const signalRows = snapshot.results
     .map((item) => ({
+      id: item.id,
       label: item.vendor,
       value: item.extraction?.priceSignals?.length ?? 0,
       ok: item.ok,
@@ -115,7 +116,7 @@ export default async function AdminOverviewPage() {
       </div>
 
       <div className="grid gap-3 xl:grid-cols-[1fr_1fr]">
-        <Card className="surface-card rounded-[10px] border-border">
+        <Card className="surface-card motion-surface motion-surface--green rounded-[10px] border-border">
           <CardHeader className="px-4 py-3">
             <CardTitle className="flex items-center gap-2">
               <BarChart3Icon className="size-4 text-primary" />
@@ -179,7 +180,7 @@ export default async function AdminOverviewPage() {
           </CardContent>
         </Card>
 
-        <Card className="surface-card rounded-[10px] border-border">
+        <Card className="surface-card motion-surface motion-surface--blue rounded-[10px] border-border">
           <CardHeader className="px-4 py-3">
             <CardTitle>价格信号排行</CardTitle>
             <CardDescription className="text-[12px] leading-5">
@@ -188,7 +189,7 @@ export default async function AdminOverviewPage() {
           </CardHeader>
           <CardContent className="grid gap-3 px-4 pb-4">
             {signalRows.map((item) => (
-              <div key={item.label} className="grid grid-cols-[7rem_1fr_auto] items-center gap-3 text-[12px]">
+              <div key={item.id} className="grid grid-cols-[7rem_1fr_auto] items-center gap-3 text-[12px]">
                 <div className="truncate font-medium">{item.label}</div>
                 <div className="h-8 overflow-hidden rounded-[10px] bg-primary/8">
                   <div
@@ -206,7 +207,7 @@ export default async function AdminOverviewPage() {
       </div>
 
       <div className="grid items-start gap-3 xl:grid-cols-[0.85fr_0.95fr_1.2fr]">
-        <Card className="surface-card rounded-[10px] border-border">
+        <Card className="surface-card motion-surface motion-surface--cyan rounded-[10px] border-border">
           <CardHeader className="px-4 py-3">
             <CardTitle className="flex items-center gap-2">
               <WorkflowIcon className="size-4 text-primary" />
@@ -243,7 +244,7 @@ export default async function AdminOverviewPage() {
           </CardContent>
         </Card>
 
-        <Card className="surface-card rounded-[10px] border-border">
+        <Card className="surface-card motion-surface motion-surface--amber rounded-[10px] border-border">
           <CardHeader className="px-4 py-3">
             <CardTitle>最近操作</CardTitle>
             <CardDescription className="text-[12px] leading-5">保留最近 4 条后台行为。</CardDescription>

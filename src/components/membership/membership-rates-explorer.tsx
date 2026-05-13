@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { startTransition, useRef, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import {
   ArrowUpRightIcon,
   ChevronLeftIcon,
@@ -34,6 +35,9 @@ import {
   membershipRateSources,
   membershipVendorBoards,
 } from "@/data/membership-rates";
+import { useStickyTabs } from "@/components/shared/use-sticky-tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useSegmentedIndicator } from "@/components/ui/use-segmented-indicator";
 import { cn } from "@/lib/utils";
 import { AnimatedSectionTitle } from "@/components/shared/animated-section-title";
 
@@ -48,6 +52,8 @@ export function MembershipRatesExplorer({
   defaultVendor = "openai",
   defaultOpenAITab = "consumer",
 }: MembershipRatesExplorerProps) {
+  const router = useRouter();
+  const pathname = usePathname();
   const initialVendor = membershipVendorBoards.some(
     (item) => item.id === defaultVendor,
   )
@@ -55,6 +61,15 @@ export function MembershipRatesExplorer({
     : "openai";
   const [activeVendor, setActiveVendor] = useState(initialVendor);
   const vendorTabsRef = useRef<HTMLDivElement>(null);
+  const {
+    stickyRef,
+    stickySentinelRef,
+    stickyBoundaryRef,
+    isSticky,
+    scrollToStickyContent,
+  } = useStickyTabs("membership-rates");
+  const { segmentedRef: vendorRailRef, indicatorRef: vendorIndicatorRef } =
+    useSegmentedIndicator<HTMLDivElement>();
 
   const scrollVendorTabs = (distance: number) => {
     vendorTabsRef.current?.scrollBy({
@@ -64,7 +79,12 @@ export function MembershipRatesExplorer({
   };
 
   return (
-    <section className="app-shell mt-6 sm:mt-8">
+    <section
+      ref={(node) => {
+        stickyBoundaryRef.current = node;
+      }}
+      className="app-shell mt-4 sm:mt-8"
+    >
       <div className="rounded-[12px] border border-border bg-background px-3.5 py-4 sm:px-5 sm:py-5 lg:px-6">
         <div className="flex flex-col gap-4 sm:gap-5">
           <div className="max-w-3xl">
@@ -79,53 +99,79 @@ export function MembershipRatesExplorer({
             </p>
           </div>
 
-          <div className="rate-tabs-shell">
-            <button
-              type="button"
-              aria-label="向左滚动厂商"
-              onClick={() => scrollVendorTabs(-260)}
-              className="rate-tabs-arrow"
-            >
-              <ChevronLeftIcon className="size-4" />
-            </button>
-            <div ref={vendorTabsRef} className="rate-tabs-scroll">
-              {membershipVendorBoards.map((vendor) => {
-                const active = activeVendor === vendor.id;
+          <div ref={stickySentinelRef} className="page-tabs-sentinel" />
+          <div
+            ref={stickyRef}
+            className={cn("page-tabs-sticky", isSticky && "is-sticky")}
+          >
+            <div className="page-tabs-sticky__surface p-1.5">
+              <div className="rate-tabs-shell">
+              <button
+                type="button"
+                aria-label="向左滚动厂商"
+                onClick={() => scrollVendorTabs(-260)}
+                className="rate-tabs-arrow"
+              >
+                <ChevronLeftIcon className="size-4" />
+              </button>
+              <div
+                ref={(node) => {
+                  vendorTabsRef.current = node;
+                  vendorRailRef.current = node;
+                }}
+                className="rate-tabs-scroll"
+              >
+                <span
+                  ref={vendorIndicatorRef}
+                  aria-hidden="true"
+                  className="segmented-indicator segmented-indicator--accent"
+                />
+                {membershipVendorBoards.map((vendor) => {
+                  const active = activeVendor === vendor.id;
 
-                return (
-                  <button
-                    key={vendor.id}
-                    type="button"
-                    data-testid={`vendor-tab-${vendor.id}`}
-                    onClick={() => setActiveVendor(vendor.id)}
-                    className={cn(
-                      "rate-tab-button",
-                      active
-                        ? "is-active"
-                        : "text-foreground/70 hover:bg-primary/7 hover:text-foreground",
-                    )}
-                  >
-                    <VendorLogo id={vendor.id} active={active} />
-                    <div className="flex min-w-0 flex-col gap-0.5">
-                      <span className="truncate text-[12px] font-semibold">
-                        {vendor.label}
-                      </span>
-                      <span className="truncate text-[10px] opacity-75">
-                        {vendor.priceLabel}
-                      </span>
-                    </div>
-                  </button>
-                );
-              })}
+                  return (
+                    <button
+                      key={vendor.id}
+                      type="button"
+                      data-testid={`vendor-tab-${vendor.id}`}
+                      data-segmented-active={active ? "true" : undefined}
+                      onClick={() => {
+                        setActiveVendor(vendor.id);
+                        scrollToStickyContent();
+                        startTransition(() => {
+                          router.replace(`${pathname}?vendor=${vendor.id}`, {
+                            scroll: false,
+                          });
+                        });
+                      }}
+                      className={cn(
+                        "rate-tab-button",
+                        active ? "is-active" : "is-idle",
+                      )}
+                    >
+                      <VendorLogo id={vendor.id} active={active} />
+                      <div className="flex min-w-0 flex-col gap-0.5">
+                        <span className="truncate text-[12px] font-semibold">
+                          {vendor.label}
+                        </span>
+                        <span className="truncate text-[10px] opacity-75">
+                          {vendor.priceLabel}
+                        </span>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+              <button
+                type="button"
+                aria-label="向右滚动厂商"
+                onClick={() => scrollVendorTabs(260)}
+                className="rate-tabs-arrow"
+              >
+                <ChevronRightIcon className="size-4" />
+              </button>
             </div>
-            <button
-              type="button"
-              aria-label="向右滚动厂商"
-              onClick={() => scrollVendorTabs(260)}
-              className="rate-tabs-arrow"
-            >
-              <ChevronRightIcon className="size-4" />
-            </button>
+            </div>
           </div>
 
           {activeVendor === "openai" ? (
@@ -159,13 +205,34 @@ function VendorLogo({ id, active }: { id: string; active: boolean }) {
       ) : null}
       {id === "anthropic" ? (
         <svg viewBox="0 0 24 24">
-          <path d="m12 3 2.4 6.5L21 12l-6.6 2.5L12 21l-2.4-6.5L3 12l6.6-2.5L12 3Z" />
+          <path d="M12 3.6 19.3 20h-3.1l-1.5-3.4H9.3L7.8 20H4.7L12 3.6Zm1.6 10.2L12 9.7l-1.6 4.1h3.2Z" />
         </svg>
       ) : null}
-      {id === "google" ? <span className="vendor-logo__letter">G</span> : null}
+      {id === "google" ? (
+        <svg viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M12 2.5c.4 3.7 1.3 5.4 3.3 7.4 2 2 3.7 2.9 6.2 3.3-2.5.4-4.2 1.3-6.2 3.3-2 2-2.9 3.7-3.3 6.2-.4-2.5-1.3-4.2-3.3-6.2-2-2-3.7-2.9-6.2-3.3 2.5-.4 4.2-1.3 6.2-3.3 2-2 2.9-3.7 3.3-6.2Z" />
+        </svg>
+      ) : null}
       {id === "cursor" ? (
         <svg viewBox="0 0 24 24">
           <path d="M5 3.8 19.6 11 13 13l-2 6.8L5 3.8Z" />
+        </svg>
+      ) : null}
+      {id === "github" ? (
+        <svg viewBox="0 0 24 24">
+          <path d="M12 3.8a8.2 8.2 0 0 0-2.6 15.9c.4.1.5-.2.5-.4v-1.6c-2.3.5-2.8-1-2.9-1.4-.2-.5-.5-1-.9-1.4-.3-.2-.7-.6 0-.6.6 0 1 .6 1.2.8.7 1.1 1.8.8 2.3.6.1-.5.3-.8.5-1-1.9-.2-3.9-.9-3.9-4.2 0-.9.3-1.6.8-2.2-.1-.2-.3-1 .1-2.2 0 0 .7-.2 2.3.8a8 8 0 0 1 4.2 0c1.6-1 2.3-.8 2.3-.8.5 1.2.2 2 .1 2.2.5.6.8 1.3.8 2.2 0 3.3-2 4-3.9 4.2.3.3.5.8.5 1.5v2.3c0 .2.1.5.5.4A8.2 8.2 0 0 0 12 3.8Z" />
+        </svg>
+      ) : null}
+      {id === "grok" ? (
+        <svg viewBox="0 0 24 24">
+          <path d="M5.2 5h3.4l3.5 4.7L15.8 5h3l-4.9 6.4 5.1 7.6h-3.4l-3.8-5.6L8 19H5l5.1-6.7L5.2 5Z" />
+        </svg>
+      ) : null}
+      {id === "perplexity" ? (
+        <svg viewBox="0 0 24 24">
+          <path d="M8 4.5h8v2.3h-5.7v3H16v2.2h-5.7v5.2H8V4.5Z" />
+          <path d="M11.8 10.2h4.2v2.2h-4.2z" />
+          <path d="M14.8 12.4 19 16.6l-1.6 1.6-4.2-4.2z" />
         </svg>
       ) : null}
     </span>
@@ -233,32 +300,16 @@ function OpenAIBoard({ defaultTab }: { defaultTab: string }) {
       </div>
 
       <div className="flex flex-col gap-4">
-        <div className="flex w-fit items-center gap-1 rounded-[12px] border border-border bg-background/75 p-1">
-          <button
-            type="button"
-            data-testid="openai-rate-tab-consumer"
-            onClick={() => setActiveTab("consumer")}
-            className={
-              activeTab === "consumer"
-                ? "min-w-[120px] rounded-[10px] bg-primary px-4 py-2 text-[13px] font-medium text-white"
-                : "min-w-[120px] rounded-[10px] px-4 py-2 text-[13px] font-medium text-muted-foreground hover:bg-primary/7 hover:text-foreground"
-            }
-          >
-            个人会员
-          </button>
-          <button
-            type="button"
-            data-testid="openai-rate-tab-business"
-            onClick={() => setActiveTab("business")}
-            className={
-              activeTab === "business"
-                ? "min-w-[120px] rounded-[10px] bg-primary px-4 py-2 text-[13px] font-medium text-white"
-                : "min-w-[120px] rounded-[10px] px-4 py-2 text-[13px] font-medium text-muted-foreground hover:bg-primary/7 hover:text-foreground"
-            }
-          >
-            Business / 企业
-          </button>
-        </div>
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
+          <TabsList variant="accent" className="w-full max-w-full sm:w-fit">
+            <TabsTrigger value="consumer" className="min-w-[116px]">
+              个人会员
+            </TabsTrigger>
+            <TabsTrigger value="business" className="min-w-[116px]">
+              Business / 企业
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
 
         {activeTab === "consumer" ? (
           <>

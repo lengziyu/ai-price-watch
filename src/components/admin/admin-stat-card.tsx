@@ -22,7 +22,7 @@ export function AdminStatCard({
         : null;
 
   return (
-    <Card className="surface-card rounded-[10px] border-border">
+    <Card className="surface-card motion-surface motion-surface--green rounded-[10px] border-border">
       <CardContent className="flex min-h-[8.25rem] items-start justify-between gap-3 px-4 py-4">
         <div>
           <div className="text-[12px] text-muted-foreground">{label}</div>
@@ -31,7 +31,11 @@ export function AdminStatCard({
           </div>
           <div className="mt-1 text-[12px] leading-5 text-muted-foreground">{detail}</div>
         </div>
-        {icon ? <div className="mt-1">{icon}</div> : null}
+        {icon ? (
+          <div className="mt-1 flex size-9 items-center justify-center rounded-[12px] border border-primary/12 bg-background/82 shadow-[inset_0_1px_0_rgba(255,255,255,0.68)]">
+            {icon}
+          </div>
+        ) : null}
       </CardContent>
     </Card>
   );

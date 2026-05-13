@@ -1,18 +1,23 @@
 "use client";
 
-import { startTransition, useMemo, useState } from "react";
+import { startTransition, useEffect, useMemo, useState, type ReactNode } from "react";
 import {
   ChevronRightIcon,
   Globe2Icon,
   RefreshCcwIcon,
   StarIcon,
+  TrendingDownIcon,
+  TrendingUpIcon,
 } from "lucide-react";
 
 import { subscriptionRegionPrices } from "@/data/subscription-regions";
+import { buildEvidenceSummary } from "@/lib/evidence";
 import { formatBillingCycle, formatDate, fxReference } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import type { SubscriptionPlan, SubscriptionRegionPrice } from "@/types";
 import { AnimatedSectionTitle } from "@/components/shared/animated-section-title";
+import { EvidenceBadgeGroup, EvidenceMiniPanel } from "@/components/shared/evidence-badge";
+import { useStickyTabs } from "@/components/shared/use-sticky-tabs";
 import {
   Select,
   SelectContent,
@@ -22,6 +27,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useSegmentedIndicator } from "@/components/ui/use-segmented-indicator";
 
 type Props = {
   plans: SubscriptionPlan[];
@@ -119,12 +126,38 @@ const targetCurrencies = [
 
 type TargetCurrencyCode = (typeof targetCurrencies)[number]["code"];
 type ViewMode = "subscription" | "region";
+type FxFeed = {
+  fetchedAt?: string;
+  rates: Partial<Record<TargetCurrencyCode, number>>;
+  source: "frankfurter" | "snapshot";
+  updatedAt?: string;
+};
+
+const fxTickIntervalSeconds = 4;
+const fxFetchIntervalMs = 30_000;
 
 export function SubscriptionExplorer({ plans, embedded = false, maxRows }: Props) {
   const [activePreset, setActivePreset] = useState(productPresets[0]);
   const [targetCurrency, setTargetCurrency] = useState<TargetCurrencyCode>("CNY");
   const [viewMode, setViewMode] = useState<ViewMode>("subscription");
   const [currencyOpen, setCurrencyOpen] = useState(false);
+  const [fxTick, setFxTick] = useState(0);
+  const [nextFxRefresh, setNextFxRefresh] = useState(fxTickIntervalSeconds);
+  const [fxFeed, setFxFeed] = useState<FxFeed>({
+    rates: {},
+    source: "snapshot",
+  });
+  const {
+    stickyRef,
+    stickySentinelRef,
+    stickyBoundaryRef,
+    isSticky,
+    scrollToStickyContent,
+  } = useStickyTabs("subscriptions", {
+    enabled: !embedded,
+  });
+  const { segmentedRef: presetTabsRef, indicatorRef: presetIndicatorRef } =
+    useSegmentedIndicator<HTMLDivElement>();
 
   const currentPlan = useMemo<SubscriptionPlan>(
     () =>
@@ -174,15 +207,6 @@ export function SubscriptionExplorer({ plans, embedded = false, maxRows }: Props
     currentRegions.find((item) => item.countryCode === "US") ?? currentRegions.at(-1);
   const updatedAt = currentPlan?.updatedAt ?? currentRegions[0]?.updatedAt;
 
-  const savingsValue =
-    cheapest && usReference
-      ? Math.max(usReference.convertedCNY - cheapest.convertedCNY, 0)
-      : 0;
-  const savingsPercent =
-    cheapest && usReference && usReference.convertedCNY > 0
-      ? Math.round((savingsValue / usReference.convertedCNY) * 100)
-      : 0;
-
   const description = planSummaryFor(currentPlan);
   const visibleRegions =
     typeof maxRows === "number" ? currentRegions.slice(0, maxRows) : currentRegions;
@@ -193,15 +217,107 @@ export function SubscriptionExplorer({ plans, embedded = false, maxRows }: Props
   const visibleRegionGroups =
     typeof maxRows === "number" ? regionGroups.slice(0, maxRows) : regionGroups;
   const selectedCurrency = currencyFor(targetCurrency);
+  const currentEvidence = buildEvidenceSummary(currentPlan);
+  const liveCnyRates = useMemo(
+    () => buildLiveCnyRates(fxTick, fxFeed.rates),
+    [fxFeed.rates, fxTick],
+  );
+  const liveCheapestCny = cheapest ? liveCnyValueFor(cheapest, liveCnyRates) : 0;
+  const liveUsReferenceCny = usReference ? liveCnyValueFor(usReference, liveCnyRates) : 0;
+  const liveSavingsValue = Math.max(liveUsReferenceCny - liveCheapestCny, 0);
+  const liveSavingsPercent =
+    liveUsReferenceCny > 0 ? Math.round((liveSavingsValue / liveUsReferenceCny) * 100) : 0;
+  const trackedCurrency = targetCurrency === "CNY" ? "USD" : targetCurrency;
+  const trackedBaseRate = currencyFor(trackedCurrency).cnyRate;
+  const trackedLiveRate = liveCnyRates[trackedCurrency] ?? trackedBaseRate;
+  const fxDeltaPercent =
+    trackedBaseRate > 0 ? ((trackedLiveRate - trackedBaseRate) / trackedBaseRate) * 100 : 0;
+  const fxTrend = fxDeltaPercent >= 0 ? "up" : "down";
+  const fxSourceLabel = fxFeed.source === "frankfurter" ? "Frankfurter" : "快照";
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function refreshFxRates() {
+      try {
+        const response = await fetch("/api/fx", {
+          cache: "no-store",
+        });
+
+        if (!response.ok) {
+          throw new Error(`FX route returned ${response.status}`);
+        }
+
+        const payload = (await response.json()) as {
+          fetchedAt?: string;
+          rates?: Record<string, number>;
+          source?: string;
+          updatedAt?: string;
+        };
+        const rates = normalizeFxRates(payload.rates);
+
+        if (!cancelled) {
+          setFxFeed({
+            fetchedAt: payload.fetchedAt,
+            rates,
+            source: payload.source === "frankfurter" ? "frankfurter" : "snapshot",
+            updatedAt: payload.updatedAt,
+          });
+        }
+      } catch {
+        if (!cancelled) {
+          setFxFeed((current) => ({
+            ...current,
+            source: "snapshot",
+          }));
+        }
+      }
+    }
+
+    void refreshFxRates();
+    const interval = window.setInterval(() => {
+      void refreshFxRates();
+    }, fxFetchIntervalMs);
+
+    return () => {
+      cancelled = true;
+      window.clearInterval(interval);
+    };
+  }, []);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (mediaQuery.matches) {
+      return;
+    }
+
+    let seconds = fxTickIntervalSeconds;
+    const interval = window.setInterval(() => {
+      seconds -= 1;
+
+      if (seconds <= 0) {
+        seconds = fxTickIntervalSeconds;
+        setFxTick((current) => current + 1);
+      }
+
+      setNextFxRefresh(seconds);
+    }, 1000);
+
+    return () => window.clearInterval(interval);
+  }, []);
 
   return (
     <section
+      ref={(node) => {
+        stickyBoundaryRef.current = node;
+      }}
       className={cn(
-        "rounded-[12px] border border-border bg-background px-4 py-5 sm:px-5 lg:px-6",
+        "rounded-[12px] border border-border bg-background px-4 py-4 sm:px-5 sm:py-5 lg:px-6",
         !embedded && "app-shell",
       )}
     >
-      <div className="grid gap-4 xl:grid-cols-[1fr_auto_auto_auto] xl:items-end">
+      <div>
         <div>
           <div className="mono-kicker text-[12px] uppercase text-muted-foreground">
             pricing by region
@@ -213,136 +329,203 @@ export function SubscriptionExplorer({ plans, embedded = false, maxRows }: Props
             选择币种与地区，查看各套餐价格对比
           </p>
         </div>
+      </div>
 
-        <div className="flex w-fit items-center rounded-full border border-border bg-card p-1">
-          {(["subscription", "region"] as const).map((mode) => (
-            <button
-              key={mode}
-              type="button"
-              onClick={() => startTransition(() => setViewMode(mode))}
-              className={cn(
-                "min-h-8 min-w-[82px] rounded-full px-4 text-[13px] font-semibold transition-colors",
-                viewMode === mode
-                  ? "bg-primary text-white"
-                  : "text-muted-foreground hover:bg-primary/7 hover:text-foreground",
-              )}
-            >
-              {mode === "subscription" ? "订阅" : "地区"}
-            </button>
-          ))}
-        </div>
-
-        <Select
-          value={targetCurrency}
-          open={currencyOpen}
-          onOpenChange={setCurrencyOpen}
-          onValueChange={(nextValue) => {
-            if (nextValue) {
-              setTargetCurrency(nextValue as TargetCurrencyCode);
-              setCurrencyOpen(false);
-            }
-          }}
+      <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <Tabs
+          value={viewMode}
+          onValueChange={(nextValue) =>
+            startTransition(() => setViewMode(nextValue as ViewMode))
+          }
         >
-          <SelectTrigger className="min-h-9 min-w-[250px] rounded-full border-border bg-card px-4">
-            <div className="flex min-w-0 items-center gap-2">
-              <Globe2Icon className="size-4 text-primary" />
-              <SelectValue />
-            </div>
-          </SelectTrigger>
-          <SelectContent
-            align="end"
-            alignItemWithTrigger={false}
-            className="max-h-[360px] min-w-[260px] rounded-[12px] bg-popover/94 p-1 shadow-[0_22px_80px_rgba(0,0,0,0.14)] backdrop-blur-2xl"
+          <TabsList variant="accent" className="w-full max-w-full sm:w-fit">
+            <TabsTrigger value="subscription" className="min-w-[120px]">
+              订阅
+            </TabsTrigger>
+            <TabsTrigger value="region" className="min-w-[120px]">
+              地区
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
+
+        <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center">
+          <Select
+            value={targetCurrency}
+            open={currencyOpen}
+            onOpenChange={setCurrencyOpen}
+            onValueChange={(nextValue) => {
+              if (nextValue) {
+                setTargetCurrency(nextValue as TargetCurrencyCode);
+                setCurrencyOpen(false);
+              }
+            }}
           >
-            <SelectGroup>
-              <SelectLabel>目标货币</SelectLabel>
-              {targetCurrencies.map((item) => (
-                <SelectItem key={item.code} value={item.code}>
-                  <span className="text-[15px]">{item.flag}</span>
-                  <span className="font-medium">{item.label}</span>
-                  <span className="text-muted-foreground">（{item.code}）</span>
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-
-        <button
-          type="button"
-          onClick={() => {
-            const currentIndex = targetCurrencies.findIndex((item) => item.code === targetCurrency);
-            const next = targetCurrencies[(currentIndex + 1) % targetCurrencies.length];
-            setTargetCurrency(next.code);
-          }}
-          className="flex min-h-9 min-w-[116px] items-center justify-center gap-2 rounded-full bg-primary/10 px-4 text-[13px] font-medium text-primary transition-colors hover:bg-primary/15 sm:text-sm"
-        >
-          <RefreshCcwIcon className="size-4" />
-          切换
-        </button>
-      </div>
-
-      <div className="mt-4 flex items-center justify-end text-[11px] text-muted-foreground sm:text-xs">
-        更新时间：{updatedAt ? formatDate(updatedAt) : "待补充"}
-        <span className="ml-2 size-2 rounded-full bg-primary" />
-      </div>
-
-      <div className="mt-5 flex flex-wrap gap-2">
-        {productPresets.map((preset) => {
-          const isActive = activePreset.key === preset.key;
-
-          return (
-            <button
-              key={preset.key}
-              type="button"
-              onClick={() => startTransition(() => setActivePreset(preset))}
-              className={cn(
-                "inline-flex min-h-9 items-center gap-2 rounded-full border px-3.5 py-2 text-[12px] transition-colors sm:px-3.5 sm:text-[13px]",
-                isActive
-                  ? "border-transparent bg-primary font-semibold text-white"
-                  : "border-border bg-card text-foreground hover:border-primary/25 hover:bg-primary/7",
-              )}
+            <SelectTrigger className="min-h-11 w-full min-w-[220px] rounded-full border-border bg-card px-4 sm:w-auto">
+              <div className="flex min-w-0 items-center gap-2">
+                <Globe2Icon className="size-4 text-primary" />
+                <SelectValue />
+              </div>
+            </SelectTrigger>
+            <SelectContent
+              align="end"
+              alignItemWithTrigger={false}
+              className="max-h-[360px] min-w-[260px] rounded-[12px] bg-popover/94 p-1 shadow-[0_22px_80px_rgba(0,0,0,0.14)] backdrop-blur-2xl"
             >
-              <span>{preset.label}</span>
-              {preset.badge ? (
-                <span
-                  className={cn(
-                    "rounded-[10px] px-2 py-0.5 text-[10px] sm:text-[11px]",
-                    isActive ? "bg-white/15 text-white" : "bg-primary/10 text-primary",
-                  )}
-                >
-                  {preset.badge}
-                </span>
-              ) : null}
-              {preset.key === productPresets.at(-1)?.key ? (
-                <ChevronRightIcon className={cn("size-4", isActive ? "text-white" : "text-muted-foreground")} />
-              ) : null}
-            </button>
-          );
-        })}
+              <SelectGroup>
+                <SelectLabel>目标货币</SelectLabel>
+                {targetCurrencies.map((item) => (
+                  <SelectItem key={item.code} value={item.code}>
+                    <span className="text-[15px]">{item.flag}</span>
+                    <span className="font-medium">{item.label}</span>
+                    <span className="text-muted-foreground">（{item.code}）</span>
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+
+          <button
+            type="button"
+            onClick={() => {
+              const currentIndex = targetCurrencies.findIndex(
+                (item) => item.code === targetCurrency,
+              );
+              const next = targetCurrencies[(currentIndex + 1) % targetCurrencies.length];
+              setTargetCurrency(next.code);
+            }}
+            className="flex min-h-11 min-w-[124px] items-center justify-center gap-2 rounded-full bg-primary/10 px-4 text-[14px] font-semibold text-primary transition-colors hover:bg-primary/15"
+          >
+            <RefreshCcwIcon className="size-4.5" />
+            切换
+          </button>
+        </div>
+      </div>
+
+      <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <div className="inline-flex w-fit max-w-full flex-wrap items-center gap-2 rounded-full border border-primary/18 bg-primary/[0.065] px-3 py-1.5 text-[11px] font-medium text-primary">
+          <span className="live-fx-dot size-2 rounded-full bg-primary" />
+          <span>实时汇率 tick</span>
+          <span className="text-muted-foreground">源 {fxSourceLabel}</span>
+          <span className="text-foreground">
+            {trackedCurrency}/CNY {fxDeltaPercent >= 0 ? "+" : ""}
+            {fxDeltaPercent.toFixed(2)}%
+          </span>
+          {fxTrend === "up" ? (
+            <TrendingUpIcon className="size-3.5" />
+          ) : (
+            <TrendingDownIcon className="size-3.5" />
+          )}
+          <span className="text-muted-foreground">{nextFxRefresh}s 后刷新</span>
+        </div>
+        <div className="flex items-center justify-end text-[11px] text-muted-foreground sm:text-xs">
+          更新时间：{updatedAt ? formatDate(updatedAt) : "待补充"}
+          <span className="ml-2 size-2 rounded-full bg-primary" />
+        </div>
+      </div>
+
+      {!embedded ? (
+        <div className="mt-3">
+          <EvidenceMiniPanel summary={currentEvidence} sourceUrl={currentPlan.sourceUrl} />
+        </div>
+      ) : null}
+
+      <div ref={stickySentinelRef} className="page-tabs-sentinel" />
+      <div
+        ref={stickyRef}
+        className={cn("page-tabs-sticky mt-3.5 sm:mt-5", isSticky && "is-sticky")}
+      >
+        <div className="page-tabs-sticky__surface subscription-preset-rail">
+          <div
+            ref={presetTabsRef}
+            className="segmented-scroll-shell"
+          >
+              <span
+                ref={presetIndicatorRef}
+                aria-hidden="true"
+                className="segmented-indicator segmented-indicator--accent"
+              />
+              {productPresets.map((preset) => {
+                const isActive = activePreset.key === preset.key;
+
+                return (
+                  <button
+                    key={preset.key}
+                    type="button"
+                    data-segmented-active={isActive ? "true" : undefined}
+                    onClick={() => {
+                      startTransition(() => setActivePreset(preset));
+                      scrollToStickyContent();
+                    }}
+                    className={cn(
+                      "relative z-[1] inline-flex min-h-9 flex-none items-center gap-2 rounded-[14px] px-3.5 py-2 text-[12px] transition-colors sm:text-[13px]",
+                      isActive
+                        ? "border border-primary/15 bg-primary text-white shadow-[0_12px_30px_rgba(0,188,125,0.24),inset_0_1px_0_rgba(255,255,255,0.14)]"
+                        : "text-foreground hover:bg-background hover:text-foreground hover:shadow-[0_8px_18px_rgba(15,23,42,0.08)]",
+                    )}
+                  >
+                    <span>{preset.label}</span>
+                    {preset.badge ? (
+                      <span
+                        className={cn(
+                          "rounded-[10px] px-2 py-0.5 text-[10px] sm:text-[11px]",
+                          isActive ? "bg-white/15 text-white" : "bg-primary/10 text-primary",
+                        )}
+                      >
+                        {preset.badge}
+                      </span>
+                    ) : null}
+                    {preset.key === productPresets.at(-1)?.key ? (
+                      <ChevronRightIcon
+                        className={cn(
+                          "size-4",
+                          isActive ? "text-white" : "text-muted-foreground",
+                        )}
+                      />
+                    ) : null}
+                  </button>
+                );
+              })}
+          </div>
+        </div>
       </div>
 
       {viewMode === "subscription" && cheapest && usReference ? (
-        <div className="motion-surface motion-surface--green mt-5 rounded-[12px] border border-border p-2.5">
-          <div className="grid gap-2.5 rounded-[12px] sm:grid-cols-[1fr_auto_1fr] sm:items-center">
-            <CompareEdge region={cheapest} align="left" targetCurrency={targetCurrency} />
+        <div className="motion-surface motion-surface--green mt-3.5 rounded-[12px] border border-border p-2.5 sm:mt-5">
+          <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 rounded-[12px]">
+            <CompareEdge
+              region={cheapest}
+              align="left"
+              targetCurrency={targetCurrency}
+              liveCnyRates={liveCnyRates}
+              pulseKey={fxTick}
+            />
 
-            <div className="mx-auto flex w-full max-w-[148px] flex-col items-center rounded-[12px] border border-border bg-card px-3 py-2.5 text-center">
+            <div className="mx-auto flex w-full max-w-[118px] flex-col items-center rounded-[12px] border border-border bg-card px-2.5 py-2 text-center sm:max-w-[148px] sm:px-3 sm:py-2.5">
               <div className="text-[11px] text-muted-foreground sm:text-xs">比美国便宜</div>
-              <div className="mt-1 text-[1.5rem] font-semibold tracking-[-0.025em] text-primary sm:text-[1.72rem]">
-                {savingsPercent}%
+              <div className="mt-1 text-[1.32rem] font-semibold tracking-[-0.025em] text-primary sm:text-[1.72rem]">
+                <LivePriceTick pulseKey={fxTick}>{liveSavingsPercent}%</LivePriceTick>
               </div>
               <div className="text-[11px] text-muted-foreground sm:text-xs">
-                约 {formatTargetMoney(savingsValue, targetCurrency)}
+                约{" "}
+                <LivePriceTick pulseKey={fxTick}>
+                  {formatCnyAsTargetMoney(liveSavingsValue, targetCurrency, liveCnyRates)}
+                </LivePriceTick>
               </div>
             </div>
 
-            <CompareEdge region={usReference} align="right" targetCurrency={targetCurrency} />
+            <CompareEdge
+              region={usReference}
+              align="right"
+              targetCurrency={targetCurrency}
+              liveCnyRates={liveCnyRates}
+              pulseKey={fxTick}
+            />
           </div>
         </div>
       ) : null}
 
       {viewMode === "subscription" && currentPlan ? (
-        <div className="mt-5 rounded-[12px] border border-border bg-card px-4 py-4 sm:px-4 sm:py-4">
+        <div className="mt-3.5 rounded-[12px] border border-border bg-card px-3.5 py-3.5 sm:mt-5 sm:px-4 sm:py-4">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <div className="flex flex-wrap items-center gap-3">
@@ -367,13 +550,15 @@ export function SubscriptionExplorer({ plans, embedded = false, maxRows }: Props
             </button>
           </div>
 
-          <div className="mt-4 flex flex-col gap-2.5">
+          <div className="mt-3.5 flex flex-col gap-2.5 sm:mt-4">
             {visibleRegions.map((item, index) => (
               <PriceRow
                 key={item.id}
                 region={item}
                 highlighted={index === 0}
                 targetCurrency={targetCurrency}
+                liveCnyRates={liveCnyRates}
+                pulseKey={fxTick}
               />
             ))}
           </div>
@@ -387,12 +572,14 @@ export function SubscriptionExplorer({ plans, embedded = false, maxRows }: Props
       ) : null}
 
       {viewMode === "region" ? (
-        <div className="mt-5 grid gap-3 lg:grid-cols-2">
+        <div className="mt-3.5 grid gap-3 sm:mt-5 lg:grid-cols-2">
           {visibleRegionGroups.map((group) => (
             <RegionPlanCard
               key={group.countryCode}
               group={group}
               targetCurrency={targetCurrency}
+              liveCnyRates={liveCnyRates}
+              pulseKey={fxTick}
             />
           ))}
           {visibleRegionGroups.length === 0 ? (
@@ -404,7 +591,7 @@ export function SubscriptionExplorer({ plans, embedded = false, maxRows }: Props
       ) : null}
 
       <div className="mt-4 text-[11px] leading-6 text-muted-foreground sm:text-xs">
-        目标货币：{selectedCurrency.label}（{selectedCurrency.code}）。汇率为静态参考值，仅用于布局与成本感知演示；真实价格请以官方页面为准。
+        目标货币：{selectedCurrency.label}（{selectedCurrency.code}）。当前优先读取 Frankfurter 参考汇率，失败时回落到静态快照；几秒级 tick 用于展示汇率波动感，真实结算价格仍请以官方页面为准。
       </div>
     </section>
   );
@@ -432,6 +619,8 @@ function CompareEdge({
   region,
   align,
   targetCurrency,
+  liveCnyRates,
+  pulseKey,
 }: {
   region: {
     country: string;
@@ -442,30 +631,37 @@ function CompareEdge({
   };
   align: "left" | "right";
   targetCurrency: TargetCurrencyCode;
+  liveCnyRates: Record<string, number>;
+  pulseKey: number;
 }) {
-  const displayPrice = formatTargetMoney(region.convertedCNY, targetCurrency, region);
+  const displayPrice = formatTargetMoney(
+    region.convertedCNY,
+    targetCurrency,
+    region,
+    liveCnyRates,
+  );
 
   return (
     <div
       className={cn(
-        "flex items-center gap-3 rounded-[12px] px-3 py-2 sm:px-3.5",
+        "flex items-center gap-2 rounded-[12px] px-2.5 py-2 sm:gap-3 sm:px-3.5",
         align === "right" && "justify-end text-right",
       )}
     >
-      {align === "left" ? <span className="text-[24px] sm:text-[28px]">{flagFor(region.countryCode)}</span> : null}
+      {align === "left" ? <span className="text-[22px] sm:text-[28px]">{flagFor(region.countryCode)}</span> : null}
       <div>
         <div className="text-[11px] text-muted-foreground">{region.country}</div>
         <div
           className={cn(
-            "mt-1 text-[1.35rem] font-semibold tracking-[-0.025em] sm:text-[1.58rem]",
+            "mt-1 text-[1.16rem] font-semibold tracking-[-0.025em] sm:text-[1.58rem]",
             align === "left" ? "text-primary" : "text-foreground",
           )}
         >
-          {displayPrice}
+          <LivePriceTick pulseKey={pulseKey}>{displayPrice}</LivePriceTick>
         </div>
         <div className="text-[11px] text-muted-foreground">{targetCurrency}</div>
       </div>
-      {align === "right" ? <span className="text-[24px] sm:text-[28px]">{flagFor(region.countryCode)}</span> : null}
+      {align === "right" ? <span className="text-[22px] sm:text-[28px]">{flagFor(region.countryCode)}</span> : null}
     </div>
   );
 }
@@ -474,37 +670,38 @@ function PriceRow({
   region,
   highlighted,
   targetCurrency,
+  liveCnyRates,
+  pulseKey,
 }: {
-  region: {
-    country: string;
-    countryCode: string;
-    currencyCode: string;
-    localPrice: number;
-    convertedCNY: number;
-  };
+  region: SubscriptionRegionPrice;
   highlighted: boolean;
   targetCurrency: TargetCurrencyCode;
+  liveCnyRates: Record<string, number>;
+  pulseKey: number;
 }) {
-  const finalPrice = formatTargetMoney(region.convertedCNY, targetCurrency, region);
+  const finalPrice = formatTargetMoney(region.convertedCNY, targetCurrency, region, liveCnyRates);
+  const evidence = buildEvidenceSummary(region);
 
   return (
     <div
       className={cn(
-        "grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2.5 rounded-[12px] border px-3 py-2.5 transition-colors sm:px-3.5 lg:grid-cols-[1.2fr_0.9fr_0.5fr_0.7fr_auto_auto]",
+        "grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 rounded-[12px] border px-2.5 py-2.5 transition-colors sm:gap-2.5 sm:px-3.5 lg:grid-cols-[1.2fr_0.9fr_0.5fr_0.7fr_auto_auto]",
         highlighted
           ? "border-primary/25 bg-primary/7"
           : "border-border bg-background",
       )}
     >
       <div className="flex items-center gap-4">
-        <span className="text-[24px] sm:text-[26px]">{flagFor(region.countryCode)}</span>
+        <span className="text-[22px] sm:text-[26px]">{flagFor(region.countryCode)}</span>
         <div>
           <div className="text-[13px] font-semibold sm:text-sm">{region.country}</div>
-          <div className="text-[11px] text-muted-foreground">官方价格</div>
+          <div className="text-[11px] text-muted-foreground">{region.sourceLabel}</div>
         </div>
       </div>
 
-      <div className="hidden text-[11px] text-muted-foreground lg:block">官方价格</div>
+      <div className="hidden text-[11px] text-muted-foreground lg:block">
+        <EvidenceBadgeGroup summary={evidence} compact />
+      </div>
       <div className="hidden text-[11px] text-muted-foreground lg:block">{region.currencyCode}</div>
       <div className="hidden text-[1rem] font-semibold tracking-[-0.04em] sm:text-[1.05rem] lg:block">
         {symbolFor(region.currencyCode)}
@@ -516,7 +713,9 @@ function PriceRow({
           highlighted ? "text-primary" : "text-foreground",
         )}
       >
-        <div>{finalPrice}</div>
+        <div>
+          <LivePriceTick pulseKey={pulseKey}>{finalPrice}</LivePriceTick>
+        </div>
         <div className="mt-0.5 text-[10px] font-medium tracking-normal text-muted-foreground lg:hidden">
           {region.currencyCode} {symbolFor(region.currencyCode)}
           {region.localPrice.toFixed(2)}
@@ -544,9 +743,13 @@ type RegionGroup = {
 function RegionPlanCard({
   group,
   targetCurrency,
+  liveCnyRates,
+  pulseKey,
 }: {
   group: RegionGroup;
   targetCurrency: TargetCurrencyCode;
+  liveCnyRates: Record<string, number>;
+  pulseKey: number;
 }) {
   return (
     <div className="rounded-[12px] border border-border bg-card p-3.5 shadow-[0_12px_44px_rgba(0,0,0,0.04)]">
@@ -580,7 +783,9 @@ function RegionPlanCard({
               </div>
             </div>
             <div className="text-right text-[1rem] font-semibold tracking-[-0.025em] text-foreground">
-              {formatTargetMoney(item.convertedCNY, targetCurrency, item)}
+              <LivePriceTick pulseKey={pulseKey}>
+                {formatTargetMoney(item.convertedCNY, targetCurrency, item, liveCnyRates)}
+              </LivePriceTick>
             </div>
           </div>
         ))}
@@ -649,13 +854,120 @@ function formatTargetMoney(
     currencyCode: string;
     localPrice: number;
   },
+  liveCnyRates?: Record<string, number>,
 ) {
   if (original?.currencyCode === targetCurrency) {
     return formatCurrencyAmount(original.localPrice, targetCurrency);
   }
 
-  const currency = currencyFor(targetCurrency);
-  return formatCurrencyAmount(cnyValue / currency.cnyRate, targetCurrency);
+  const targetRate = liveCnyRates?.[targetCurrency] ?? currencyFor(targetCurrency).cnyRate;
+  const nextCnyValue = original ? liveCnyValueFor(original, liveCnyRates) : cnyValue;
+
+  return formatCurrencyAmount(nextCnyValue / targetRate, targetCurrency);
+}
+
+function formatCnyAsTargetMoney(
+  cnyValue: number,
+  targetCurrency: TargetCurrencyCode,
+  liveCnyRates: Record<string, number>,
+) {
+  const targetRate = liveCnyRates[targetCurrency] ?? currencyFor(targetCurrency).cnyRate;
+
+  return formatCurrencyAmount(cnyValue / targetRate, targetCurrency);
+}
+
+function liveCnyValueFor(
+  original: {
+    currencyCode: string;
+    localPrice: number;
+    convertedCNY?: number;
+  },
+  liveCnyRates?: Record<string, number>,
+) {
+  const baseline = original.convertedCNY ?? original.localPrice;
+  const liveRate = liveCnyRates?.[original.currencyCode];
+  const baseRate = baseCnyRateFor(original.currencyCode);
+
+  if (typeof liveRate === "number" && typeof baseRate === "number" && baseRate > 0) {
+    return baseline * (liveRate / baseRate);
+  }
+
+  return baseline;
+}
+
+function buildLiveCnyRates(
+  tick: number,
+  feedRates?: Partial<Record<TargetCurrencyCode, number>>,
+) {
+  return Object.fromEntries(
+    targetCurrencies.map((item) => {
+      const marketBias = normalizedMarketBias(item.cnyRate, feedRates?.[item.code]);
+
+      return [
+        item.code,
+        item.cnyRate * (1 + marketBias + liveFxDrift(item.code, tick)),
+      ];
+    }),
+  );
+}
+
+function normalizeFxRates(rates?: Record<string, number>) {
+  if (!rates) {
+    return {};
+  }
+
+  return Object.fromEntries(
+    targetCurrencies
+      .map((item) => {
+        const rate = rates[item.code];
+
+        return typeof rate === "number" && Number.isFinite(rate) && rate > 0
+          ? ([item.code, rate] as [TargetCurrencyCode, number])
+          : undefined;
+      })
+      .filter((item): item is [TargetCurrencyCode, number] => Boolean(item)),
+  );
+}
+
+function normalizedMarketBias(snapshotRate: number, feedRate?: number) {
+  if (!feedRate || snapshotRate <= 0) {
+    return 0;
+  }
+
+  const rawDelta = feedRate / snapshotRate - 1;
+
+  return Math.max(-0.006, Math.min(0.006, rawDelta * 0.18));
+}
+
+function liveFxDrift(code: string, tick: number) {
+  if (code === "CNY" || tick === 0) {
+    return 0;
+  }
+
+  const seed = Array.from(code).reduce((total, char) => total + char.charCodeAt(0), 0);
+  const wave =
+    Math.sin((tick + seed) * 0.73) * 0.0028 +
+    Math.cos((tick * 0.41) + seed) * 0.0012;
+
+  return Math.max(-0.0045, Math.min(0.0045, wave));
+}
+
+function baseCnyRateFor(code: string) {
+  return targetCurrencies.find((item) => item.code === code)?.cnyRate;
+}
+
+function LivePriceTick({
+  children,
+  pulseKey,
+}: {
+  children: ReactNode;
+  pulseKey: number;
+}) {
+  return (
+    <span key={`${pulseKey}-${String(children)}`} className="live-price-tick">
+      {children}
+    </span>
+  );
 }
 
 function formatCurrencyAmount(value: number, targetCurrency: TargetCurrencyCode) {

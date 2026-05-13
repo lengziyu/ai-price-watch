@@ -9,12 +9,17 @@ import type { AIDeal } from "@/types";
 const adminDataDir = path.join(process.cwd(), "data", "admin");
 const crawlDataFile = path.join(process.cwd(), "data", "crawl", "price-snapshot.json");
 const manualDealsFile = path.join(adminDataDir, "manual-deals.json");
+const membershipRateReviewsFile = path.join(adminDataDir, "membership-rate-reviews.json");
+const sourceReviewsFile = path.join(adminDataDir, "source-reviews.json");
 const operationLogsFile = path.join(adminDataDir, "operation-logs.json");
 
 export type CrawlSnapshotResult = {
   id: string;
   vendor: string;
+  vendorId?: string;
   category: string;
+  surface?: string;
+  sourceLabel?: string;
   url: string;
   ok: boolean;
   fetchedAt: string;
@@ -44,6 +49,8 @@ export type AdminOperationLog = {
     | "login_failure"
     | "logout"
     | "manual_deal_create"
+    | "membership_rate_review_create"
+    | "source_review_create"
     | "crawl_trigger";
   actor: string;
   status: "success" | "failure" | "info";
@@ -65,6 +72,45 @@ export type ManualDealInput = {
   riskLevel: AIDeal["riskLevel"];
   status: AIDeal["status"];
 };
+
+export type MembershipRateReview = {
+  id: string;
+  vendorId: string;
+  vendorLabel: string;
+  planName: string;
+  priceSummary: string;
+  regionScope?: string;
+  sourceUrl: string;
+  evidenceUrl?: string;
+  captureMethod: "public_html" | "browser_assisted" | "manual_review";
+  reviewStatus: "verified" | "blocked" | "needs_update";
+  note: string;
+  actor: string;
+  reviewedAt: string;
+};
+
+export type MembershipRateReviewInput = Omit<
+  MembershipRateReview,
+  "id" | "vendorLabel" | "actor" | "reviewedAt"
+> & {
+  vendorLabel: string;
+};
+
+export type SourceReview = {
+  id: string;
+  sourceId: string;
+  vendor: string;
+  category: string;
+  title: string;
+  sourceUrl: string;
+  resultStatus: "ok" | "failed";
+  reviewStatus: "verified" | "needs_update" | "blocked" | "ignored";
+  note: string;
+  actor: string;
+  reviewedAt: string;
+};
+
+export type SourceReviewInput = Omit<SourceReview, "id" | "actor" | "reviewedAt">;
 
 async function ensureAdminDataDir() {
   await mkdir(adminDataDir, { recursive: true });
@@ -91,6 +137,16 @@ async function writeJsonFile<T>(filePath: string, value: T) {
 export async function getManualDeals() {
   const deals = await readJsonFile<AIDeal[]>(manualDealsFile, []);
   return deals.toSorted((left, right) => right.updatedAt.localeCompare(left.updatedAt));
+}
+
+export async function getMembershipRateReviews() {
+  const reviews = await readJsonFile<MembershipRateReview[]>(membershipRateReviewsFile, []);
+  return reviews.toSorted((left, right) => right.reviewedAt.localeCompare(left.reviewedAt));
+}
+
+export async function getSourceReviews() {
+  const reviews = await readJsonFile<SourceReview[]>(sourceReviewsFile, []);
+  return reviews.toSorted((left, right) => right.reviewedAt.localeCompare(left.reviewedAt));
 }
 
 export async function getOperationLogs() {
@@ -149,4 +205,49 @@ export async function createManualDeal(input: ManualDealInput, actor: string) {
   });
 
   return nextDeal;
+}
+
+export async function createMembershipRateReview(
+  input: MembershipRateReviewInput,
+  actor: string,
+) {
+  const reviews = await getMembershipRateReviews();
+  const nextReview: MembershipRateReview = {
+    id: `membership-review-${randomUUID()}`,
+    reviewedAt: new Date().toISOString(),
+    actor,
+    ...input,
+  };
+
+  await writeJsonFile(membershipRateReviewsFile, [nextReview, ...reviews].slice(0, 500));
+  await appendOperationLog({
+    actor,
+    type: "membership_rate_review_create",
+    status: "success",
+    message: `补录会员速率：${nextReview.vendorLabel} · ${nextReview.planName}`,
+    detail: `${nextReview.priceSummary} · ${nextReview.captureMethod}`,
+  });
+
+  return nextReview;
+}
+
+export async function createSourceReview(input: SourceReviewInput, actor: string) {
+  const reviews = await getSourceReviews();
+  const nextReview: SourceReview = {
+    id: `source-review-${randomUUID()}`,
+    reviewedAt: new Date().toISOString(),
+    actor,
+    ...input,
+  };
+
+  await writeJsonFile(sourceReviewsFile, [nextReview, ...reviews].slice(0, 700));
+  await appendOperationLog({
+    actor,
+    type: "source_review_create",
+    status: "success",
+    message: `处理复核源：${nextReview.vendor}`,
+    detail: `${nextReview.reviewStatus} · ${nextReview.title}`,
+  });
+
+  return nextReview;
 }

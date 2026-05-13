@@ -1,20 +1,21 @@
 "use client";
 
-import Link from "next/link";
 import { useDeferredValue, useState } from "react";
 import {
-  ArrowUpRightIcon,
   SearchIcon,
   SearchXIcon,
   SlidersHorizontalIcon,
 } from "lucide-react";
 
+import { buildEvidenceSummary } from "@/lib/evidence";
 import { formatDate, formatMoney } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import type { TokenPrice } from "@/types";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { AnimatedSectionTitle } from "@/components/shared/animated-section-title";
+import { EvidenceBadgeGroup } from "@/components/shared/evidence-badge";
+import { useStickyTabs } from "@/components/shared/use-sticky-tabs";
 import {
   Card,
   CardContent,
@@ -60,6 +61,13 @@ export function TokenPriceExplorer({ prices }: Props) {
   const [sortBy, setSortBy] = useState("input");
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
+  const {
+    stickyRef,
+    stickySentinelRef,
+    stickyBoundaryRef,
+    isSticky,
+    scrollToStickyContent,
+  } = useStickyTabs("token-pricing");
 
   const providers = [...new Set(prices.map((item) => item.provider))];
   const platforms = [...new Set(prices.map((item) => item.platform))];
@@ -89,6 +97,15 @@ export function TokenPriceExplorer({ prices }: Props) {
 
       return left.inputPricePer1M - right.inputPricePer1M;
     });
+  const cheapestInput = filteredPrices.length
+    ? Math.min(...filteredPrices.map((item) => item.inputPricePer1M))
+    : null;
+  const cheapestOutput = filteredPrices.length
+    ? Math.min(...filteredPrices.map((item) => item.outputPricePer1M))
+    : null;
+  const trustedCount = filteredPrices.filter(
+    (item) => buildEvidenceSummary(item).confidence === "verified",
+  ).length;
 
   const searchInput = (
     <div className="relative w-full md:max-w-[320px]">
@@ -102,57 +119,73 @@ export function TokenPriceExplorer({ prices }: Props) {
     </div>
   );
 
-  const filters = (
+  const handleCategoryChange = (nextCategory: string) => {
+    setCategory(nextCategory);
+    scrollToStickyContent();
+  };
+
+  const categoryTabs = (
+    <Tabs value={category} onValueChange={handleCategoryChange}>
+      <TabsList
+        variant="accent"
+        className="w-full max-w-full justify-start overflow-x-auto sm:w-fit [&::-webkit-scrollbar]:hidden"
+      >
+        {["all", "reasoning", "text", "vision", "embedding", "audio"].map(
+          (item) => (
+            <TabsTrigger
+              key={item}
+              value={item}
+              className="h-9 flex-none min-w-[4.4rem] px-4"
+            >
+              {renderCategoryLabel(item)}
+            </TabsTrigger>
+          ),
+        )}
+      </TabsList>
+    </Tabs>
+  );
+
+  const filterControls = (
+    <div className="grid gap-3 sm:grid-cols-3">
+      <TokenFilterSelect
+        label="供应商"
+        value={provider}
+        onValueChange={setProvider}
+        items={["all", ...providers]}
+        renderLabel={renderProviderLabel}
+      />
+      <TokenFilterSelect
+        label="平台"
+        value={platform}
+        onValueChange={setPlatform}
+        items={["all", ...platforms]}
+        renderLabel={renderPlatformLabel}
+      />
+      <TokenFilterSelect
+        label="排序"
+        value={sortBy}
+        onValueChange={setSortBy}
+        items={["input", "output", "updated"]}
+        renderLabel={renderSortLabel}
+      />
+    </div>
+  );
+
+  const mobileFilters = (
     <div className="flex flex-col gap-4">
       <div className="md:hidden">{searchInput}</div>
-
-      <Tabs value={category} onValueChange={setCategory}>
-        <TabsList
-          variant="default"
-          className="w-full justify-start gap-1 overflow-x-auto rounded-full border border-border bg-background/62 p-1 backdrop-blur-md [&::-webkit-scrollbar]:hidden"
-        >
-          {["all", "reasoning", "text", "vision", "embedding", "audio"].map(
-            (item) => (
-              <TabsTrigger
-                key={item}
-                value={item}
-                className="h-9 flex-none rounded-full px-4 text-[13px] font-medium data-active:bg-primary data-active:text-primary-foreground data-active:shadow-[0_10px_26px_rgba(0,188,125,0.24)]"
-              >
-                {renderCategoryLabel(item)}
-              </TabsTrigger>
-            ),
-          )}
-        </TabsList>
-      </Tabs>
-
-      <div className="grid gap-3 sm:grid-cols-3">
-        <TokenFilterSelect
-          label="供应商"
-          value={provider}
-          onValueChange={setProvider}
-          items={["all", ...providers]}
-          renderLabel={renderProviderLabel}
-        />
-        <TokenFilterSelect
-          label="平台"
-          value={platform}
-          onValueChange={setPlatform}
-          items={["all", ...platforms]}
-          renderLabel={renderPlatformLabel}
-        />
-        <TokenFilterSelect
-          label="排序"
-          value={sortBy}
-          onValueChange={setSortBy}
-          items={["input", "output", "updated"]}
-          renderLabel={renderSortLabel}
-        />
-      </div>
+      {categoryTabs}
+      {filterControls}
     </div>
   );
 
   return (
-    <section className="app-shell flex flex-col gap-5 rounded-[12px] border border-border bg-background px-4 py-6 sm:px-5 sm:py-6 lg:px-6">
+    <section
+      ref={(node) => {
+        stickyBoundaryRef.current = node;
+      }}
+      className="app-shell flex flex-col gap-5 rounded-[12px] border border-border bg-background px-4 py-6 sm:px-5 sm:py-6 lg:px-6"
+    >
       <Card className="rounded-xl border-border bg-card/90">
         <CardHeader className="gap-4 px-5 py-5 sm:px-6">
           <div className="flex items-start justify-between gap-4">
@@ -178,20 +211,38 @@ export function TokenPriceExplorer({ prices }: Props) {
                   <SheetTitle>Token 筛选</SheetTitle>
                   <SheetDescription>按供应商、平台、分类和价格排序。</SheetDescription>
                 </SheetHeader>
-                <div className="px-4 pb-6">{filters}</div>
+                <div className="px-4 pb-6">{mobileFilters}</div>
               </SheetContent>
             </Sheet>
           </div>
-
-          <div className="hidden md:block">{filters}</div>
         </CardHeader>
+
       </Card>
 
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div ref={stickySentinelRef} className="page-tabs-sentinel" />
+      <div
+        ref={stickyRef}
+        className={cn("page-tabs-sticky", isSticky && "is-sticky")}
+      >
+        <div className="page-tabs-sticky__surface p-1.5">
+          {categoryTabs}
+        </div>
+      </div>
+
+      <div className="hidden rounded-[12px] border border-border bg-card/82 p-4 md:block">
+        {filterControls}
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <MetricCard
           label="当前模型数"
           value={String(filteredPrices.length)}
           detail="已按筛选条件收敛结果"
+        />
+        <MetricCard
+          label="已复核来源"
+          value={`${trustedCount}/${filteredPrices.length}`}
+          detail="同时具备来源、更新时间和可信度标签"
         />
         <MetricCard
           label="最低输入价格"
@@ -256,77 +307,90 @@ export function TokenPriceExplorer({ prices }: Props) {
                   <TableHead>输出 / 1M</TableHead>
                   <TableHead>上下文</TableHead>
                   <TableHead>分类</TableHead>
+                  <TableHead>可信度</TableHead>
                   <TableHead>更新时间</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {filteredPrices.map((item) => (
-                  <TableRow key={item.id} className="hover:bg-accent/60">
-                    <TableCell className="whitespace-normal">
-                      <div className="flex flex-col gap-1">
-                        <div className="font-semibold">{item.modelName}</div>
-                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                          <span>{item.provider}</span>
-                          {item.sourceUrl ? (
-                            <Link
-                              href={item.sourceUrl}
-                              target="_blank"
-                              className="inline-flex items-center gap-1 text-foreground hover:underline"
-                            >
-                              来源
-                              <ArrowUpRightIcon className="size-3.5" />
-                            </Link>
-                          ) : null}
+                {filteredPrices.map((item) => {
+                  const evidence = buildEvidenceSummary(item);
+
+                  return (
+                    <TableRow key={item.id} className="hover:bg-accent/60">
+                      <TableCell className="whitespace-normal">
+                        <div className="flex flex-col gap-1">
+                          <div className="font-semibold">{item.modelName}</div>
+                          <div className="text-xs text-muted-foreground">{item.provider}</div>
                         </div>
-                      </div>
-                    </TableCell>
-                    <TableCell>{item.platform}</TableCell>
-                    <TableCell>{formatMoney(item.inputPricePer1M, item.currency)}</TableCell>
-                    <TableCell>{formatMoney(item.outputPricePer1M, item.currency)}</TableCell>
-                    <TableCell>{item.contextWindow ?? "-"}</TableCell>
-                    <TableCell>
-                      <Badge variant="outline">{renderCategoryLabel(item.category)}</Badge>
-                    </TableCell>
-                    <TableCell>{formatDate(item.updatedAt)}</TableCell>
-                  </TableRow>
-                ))}
+                      </TableCell>
+                      <TableCell>{item.platform}</TableCell>
+                      <TableCell>{formatMoney(item.inputPricePer1M, item.currency)}</TableCell>
+                      <TableCell>{formatMoney(item.outputPricePer1M, item.currency)}</TableCell>
+                      <TableCell>{item.contextWindow ?? "-"}</TableCell>
+                      <TableCell>
+                        <Badge variant="outline">{renderCategoryLabel(item.category)}</Badge>
+                      </TableCell>
+                      <TableCell className="min-w-[14rem]">
+                        <EvidenceBadgeGroup
+                          summary={evidence}
+                          sourceUrl={item.sourceUrl}
+                          compact
+                        />
+                      </TableCell>
+                      <TableCell>{formatDate(item.updatedAt)}</TableCell>
+                    </TableRow>
+                  );
+                })}
               </TableBody>
             </Table>
           </div>
 
-          <div className="grid gap-4 md:hidden">
-            {filteredPrices.map((item) => (
-              <Card key={item.id} className="surface-card rounded-xl">
-                <CardHeader className="gap-3 px-5 py-5">
-                  <div className="flex flex-col gap-1">
-                    <CardTitle className="text-base">{item.modelName}</CardTitle>
-                    <CardDescription>{item.provider}</CardDescription>
-                  </div>
-                </CardHeader>
-                <CardContent className="flex flex-col gap-4 px-5 pb-5">
-                  <div className="grid grid-cols-2 gap-3 text-sm">
-                    <InfoPill label="输入" value={formatMoney(item.inputPricePer1M, item.currency)} />
-                    <InfoPill label="输出" value={formatMoney(item.outputPricePer1M, item.currency)} />
-                    <InfoPill label="分类" value={renderCategoryLabel(item.category)} />
-                    <InfoPill label="上下文" value={item.contextWindow ?? "-"} />
-                  </div>
-                  <p className="text-sm leading-6 text-muted-foreground">{item.note}</p>
-                  <div className="flex items-center justify-between gap-3 text-sm">
-                    <span className="text-muted-foreground">{formatDate(item.updatedAt)}</span>
-                    {item.sourceUrl ? (
-                      <Link
-                        href={item.sourceUrl}
-                        target="_blank"
-                        className="inline-flex items-center gap-1 font-medium text-foreground"
-                      >
-                        查看来源
-                        <ArrowUpRightIcon className="size-3.5" />
-                      </Link>
-                    ) : null}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="grid gap-3 md:hidden">
+            {filteredPrices.map((item) => {
+              const evidence = buildEvidenceSummary(item);
+
+              return (
+                <Card key={item.id} className="motion-surface motion-surface--green rounded-[12px] border-border">
+                  <CardHeader className="gap-3 px-4 py-4">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <CardTitle className="truncate text-[0.98rem]">{item.modelName}</CardTitle>
+                        <CardDescription className="mt-1 text-[12px]">
+                          {item.provider} · {item.platform}
+                        </CardDescription>
+                      </div>
+                      <Badge variant="outline" className="shrink-0">
+                        {renderCategoryLabel(item.category)}
+                      </Badge>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="flex flex-col gap-3 px-4 pb-4">
+                    <div className="grid grid-cols-2 gap-2.5 text-sm">
+                      <InfoPill
+                        label="输入 / 1M"
+                        value={formatMoney(item.inputPricePer1M, item.currency)}
+                        active={cheapestInput === item.inputPricePer1M}
+                      />
+                      <InfoPill
+                        label="输出 / 1M"
+                        value={formatMoney(item.outputPricePer1M, item.currency)}
+                        active={cheapestOutput === item.outputPricePer1M}
+                      />
+                      <InfoPill label="上下文" value={item.contextWindow ?? "-"} />
+                      <InfoPill label="更新" value={formatDate(item.updatedAt)} />
+                    </div>
+                    <p className="rounded-[10px] border border-border bg-background/70 px-3 py-2 text-[12px] leading-5 text-muted-foreground">
+                      {item.note}
+                    </p>
+                    <EvidenceBadgeGroup
+                      summary={evidence}
+                      sourceUrl={item.sourceUrl}
+                      compact
+                    />
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </>
       )}
@@ -344,12 +408,12 @@ function MetricCard({
   detail: string;
 }) {
   return (
-    <div className="surface-card rounded-[12px] px-5 py-4">
-      <div className="text-sm text-muted-foreground">{label}</div>
-      <div className="mt-2 text-2xl font-semibold tracking-[-0.025em] text-foreground sm:text-3xl">
+    <div className="surface-card motion-surface motion-surface--cyan rounded-[12px] px-4 py-3.5 sm:px-5 sm:py-4">
+      <div className="text-[12px] text-muted-foreground sm:text-sm">{label}</div>
+      <div className="mt-1.5 text-xl font-semibold tracking-[-0.025em] text-foreground sm:mt-2 sm:text-3xl">
         {value}
       </div>
-      <div className="mt-1 text-sm text-muted-foreground">{detail}</div>
+      <div className="mt-1 text-[12px] leading-5 text-muted-foreground sm:text-sm">{detail}</div>
     </div>
   );
 }
@@ -397,11 +461,24 @@ function TokenFilterSelect({
   );
 }
 
-function InfoPill({ label, value }: { label: string; value: string }) {
+function InfoPill({
+  label,
+  value,
+  active,
+}: {
+  label: string;
+  value: string;
+  active?: boolean;
+}) {
   return (
-    <div className="flex flex-col gap-1 rounded-[10px] border border-border bg-background/70 p-3">
+    <div
+      className={cn(
+        "flex min-h-[4.1rem] flex-col justify-between gap-1 rounded-[10px] border bg-background/70 p-3",
+        active ? "border-primary/25 bg-primary/7" : "border-border",
+      )}
+    >
       <span className="text-xs text-muted-foreground">{label}</span>
-      <span className="font-medium">{value}</span>
+      <span className={cn("font-medium", active && "text-primary")}>{value}</span>
     </div>
   );
 }

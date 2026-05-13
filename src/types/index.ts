@@ -1,5 +1,30 @@
 export type BillingCycle = "monthly" | "yearly";
 
+export type DataSourceType =
+  | "official"
+  | "official_docs"
+  | "help_center"
+  | "public_html"
+  | "browser_assisted"
+  | "manual_review"
+  | "community"
+  | "seed";
+
+export type DataConfidence =
+  | "verified"
+  | "review"
+  | "needs_update"
+  | "blocked"
+  | "seed";
+
+export type EvidenceMeta = {
+  sourceType?: DataSourceType;
+  confidence?: DataConfidence;
+  sourceLabel?: string;
+  reviewedAt?: string;
+  note?: string;
+};
+
 export type SubscriptionPlan = {
   id: string;
   productName: string;
@@ -11,6 +36,7 @@ export type SubscriptionPlan = {
   region?: string;
   sourceUrl?: string;
   note?: string;
+  evidence?: EvidenceMeta;
   tags: string[];
   updatedAt: string;
 };
@@ -28,6 +54,7 @@ export type SubscriptionRegionPrice = {
   convertedCNY: number;
   sourceLabel: string;
   note?: string;
+  evidence?: EvidenceMeta;
   updatedAt: string;
 };
 
@@ -50,6 +77,7 @@ export type TokenPrice = {
   category: TokenPriceCategory;
   sourceUrl?: string;
   note?: string;
+  evidence?: EvidenceMeta;
   updatedAt: string;
 };
 
@@ -79,8 +107,14 @@ export type UseCase = {
   id: string;
   title: string;
   description: string;
+  group: "dev" | "work" | "research" | "automation" | "creative";
   recommendedTools: string[];
   recommendedModels: string[];
+  bestFor: string[];
+  workflow: string;
+  budgetTip: string;
+  ctaHref: string;
+  ctaLabel: string;
   difficulty: "easy" | "medium" | "advanced";
   estimatedCost: "free" | "low" | "medium" | "high";
 };

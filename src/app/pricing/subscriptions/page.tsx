@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function SubscriptionPricingPage() {
   return (
-    <div className="pb-16">
+    <div className="pb-8 sm:pb-16">
       <PageHero
         note="实时更新 · 官方价格 · 人民币比价"
         title={
@@ -48,7 +48,7 @@ export default function SubscriptionPricingPage() {
         rightSlot={<PageShowcase variant="subscriptions" />}
       />
 
-      <div id="subscriptions-board" className="mt-8">
+      <div id="subscriptions-board" className="mt-4 sm:mt-8">
         <SubscriptionExplorer plans={subscriptionPlans} />
       </div>
     </div>

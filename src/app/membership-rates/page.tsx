@@ -25,7 +25,7 @@ export default async function MembershipRatesPage({
   const defaultTab = params.tab === "business" ? "business" : "consumer";
 
   return (
-    <div className="pb-16">
+    <div className="pb-8 sm:pb-16">
       <PageHero
         note="会员价格 · 官方速率 · 社区体感"
         title={
@@ -53,6 +53,7 @@ export default async function MembershipRatesPage({
 
       <div id="rates-board">
         <MembershipRatesExplorer
+          key={`${params.vendor ?? "openai"}-${defaultTab}`}
           defaultVendor={params.vendor}
           defaultOpenAITab={defaultTab}
         />

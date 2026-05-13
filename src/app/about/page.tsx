@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="pb-16">
+    <div className="pb-8 sm:pb-16">
       <PageHero
         note="定位说明 · 数据原则 · 后续规划"
         title={
@@ -51,7 +51,7 @@ export default function AboutPage() {
         rightSlot={<PageShowcase variant="about" />}
       />
 
-      <section className="app-shell mt-8">
+      <section className="app-shell mt-4 sm:mt-8">
         <div className="flex flex-col gap-6 rounded-[12px] border border-border bg-background px-4 py-6 sm:px-5 lg:px-6">
         <div className="grid gap-4 lg:grid-cols-3">
           <Card className="surface-card rounded-xl lg:col-span-2">

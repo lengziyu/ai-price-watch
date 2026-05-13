@@ -13,11 +13,11 @@ import {
 
 export default function HomePage() {
   return (
-    <div className="pb-16">
-      <section className="hero-stage hero-grid hero-aura -mt-[104px] w-full bg-background pt-[120px]">
-        <div className="app-shell py-6 lg:py-9">
-          <div className="grid items-center gap-6 lg:grid-cols-[1fr_0.95fr]">
-            <div className="flex flex-col gap-4">
+    <div className="pb-8 sm:pb-16">
+      <section className="hero-stage hero-grid hero-aura -mt-[84px] w-full bg-background pt-[96px] sm:-mt-[104px] sm:pt-[120px]">
+        <div className="app-shell py-4 sm:py-6 lg:py-9">
+          <div className="grid items-center gap-4 sm:gap-6 lg:grid-cols-[1fr_0.95fr]">
+            <div className="flex flex-col gap-3.5 sm:gap-4">
               <div className="inline-flex w-fit items-center gap-2.5 rounded-full border border-border bg-background/75 px-3 py-1.5 text-[11px] text-muted-foreground backdrop-blur-sm">
                 <span className="size-2 rounded-full bg-primary" />
                 <span>实时更新</span>
@@ -27,7 +27,7 @@ export default function HomePage() {
                 <span>人民币比价</span>
               </div>
 
-              <div className="max-w-[680px] text-[1.74rem] font-semibold leading-[0.97] tracking-[-0.034em] text-foreground sm:text-[2.58rem] lg:text-[3.28rem]">
+              <div className="max-w-[680px] text-[1.42rem] font-semibold leading-[0.99] tracking-[-0.034em] text-foreground sm:text-[2.58rem] lg:text-[3.28rem]">
                 <div>
                   <ScrambleText text="AI 订阅会员" />
                 </div>
@@ -40,7 +40,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <p className="max-w-[580px] text-[13px] leading-6 text-muted-foreground sm:text-[14px] sm:leading-[1.58]">
+              <p className="max-w-[580px] text-[12px] leading-[1.55] text-muted-foreground sm:text-[14px] sm:leading-[1.58]">
                 聚合 ChatGPT、Claude、Gemini、Cursor 等主流 AI 产品订阅价格，
                 <br />
                 支持多币种与地区对比，帮你找到最优方案，降低 AI 使用成本。
@@ -78,7 +78,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="app-shell mt-8">
+      <section className="app-shell mt-4 sm:mt-8">
         <div className="mb-4">
           <div className="mono-kicker text-[12px] uppercase text-muted-foreground">
             product map
@@ -123,7 +123,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="app-shell mt-8">
+      <section className="app-shell mt-4 sm:mt-8">
         <SubscriptionExplorer
           plans={subscriptionPlans}
           embedded

@@ -1,24 +1,42 @@
 {
+<<<<<<< HEAD
   "generatedAt": "2026-05-12T15:10:12.874Z",
+=======
+  "generatedAt": "2026-05-12T12:43:30.773Z",
+>>>>>>> 3e4af6b (大版本优化)
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
-  "targets": 5,
+  "targets": 12,
   "results": [
     {
       "id": "openai-chatgpt-pricing",
       "vendor": "OpenAI",
-      "category": "subscription",
+      "vendorId": "openai",
+      "category": "membership-rate",
+      "surface": "membership-rates",
+      "sourceLabel": "ChatGPT Pricing",
       "url": "https://openai.com/chatgpt/pricing/",
       "ok": false,
+<<<<<<< HEAD
       "fetchedAt": "2026-05-12T15:10:12.404Z",
+=======
+      "fetchedAt": "2026-05-12T12:43:28.926Z",
+>>>>>>> 3e4af6b (大版本优化)
       "error": "HTTP 403 Forbidden"
     },
     {
       "id": "openai-codex-pricing",
       "vendor": "OpenAI",
+      "vendorId": "openai",
       "category": "membership-rate",
+      "surface": "membership-rates",
+      "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
+<<<<<<< HEAD
       "fetchedAt": "2026-05-12T15:10:12.440Z",
+=======
+      "fetchedAt": "2026-05-12T12:43:28.947Z",
+>>>>>>> 3e4af6b (大版本优化)
       "title": "Pricing – Codex | OpenAI Developers",
       "description": "Codex is included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
@@ -178,10 +196,17 @@
     {
       "id": "anthropic-pricing",
       "vendor": "Anthropic",
-      "category": "subscription",
+      "vendorId": "anthropic",
+      "category": "membership-rate",
+      "surface": "membership-rates",
+      "sourceLabel": "Claude Pricing",
       "url": "https://www.anthropic.com/pricing#subscriptions",
       "ok": true,
+<<<<<<< HEAD
       "fetchedAt": "2026-05-12T15:10:12.441Z",
+=======
+      "fetchedAt": "2026-05-12T12:43:28.948Z",
+>>>>>>> 3e4af6b (大版本优化)
       "title": "Plans & Pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
@@ -320,6 +345,10 @@
             "context": "d monthly. Try Claude Try Claude Try Claude Everything in Free, plus: More usage* Includes Claude Code Includes Claude Cowork Access"
           },
           {
+            "value": "Premium",
+            "context": "$20 Per seat / month if billed annually. $25 if billed monthly. Premium seat 5x more usage than standard seats* $100 Per seat / month i"
+          },
+          {
             "value": "Student",
             "context": "students, faculty, and staff. Learn more Learn more Learn more Student and faculty access Comprehensive access for all university memb"
           }
@@ -329,10 +358,17 @@
     {
       "id": "google-ai-plans",
       "vendor": "Google",
-      "category": "subscription",
+      "vendorId": "google",
+      "category": "membership-rate",
+      "surface": "membership-rates",
+      "sourceLabel": "Google AI Plans",
       "url": "https://one.google.com/about/google-ai-plans/",
       "ok": true,
+<<<<<<< HEAD
       "fetchedAt": "2026-05-12T15:10:12.442Z",
+=======
+      "fetchedAt": "2026-05-12T12:43:28.949Z",
+>>>>>>> 3e4af6b (大版本优化)
       "title": "Google AI Plans with Cloud Storage - Google One",
       "description": "Explore Google AI Plans. Access our most advanced AI, generate videos from text, and secure cloud storage.",
       "status": 200,
@@ -362,6 +398,10 @@
           }
         ],
         "planSignals": [
+          {
+            "value": "Premium",
+            "context": "le AI Plans with Cloud Storage - Google One Save 50% on YouTube Premium for 12 months with purchase of a Google One Premium plan or hig"
+          },
           {
             "value": "Plus",
             "context": "ay with a Google AI plan Sign up for a Google AI plan Google AI Plus 1 Get more done with more access to Google AI and expanded stor"
@@ -400,10 +440,17 @@
     {
       "id": "cursor-pricing",
       "vendor": "Cursor",
-      "category": "subscription",
+      "vendorId": "cursor",
+      "category": "membership-rate",
+      "surface": "membership-rates",
+      "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/pricing",
       "ok": true,
+<<<<<<< HEAD
       "fetchedAt": "2026-05-12T15:10:12.443Z",
+=======
+      "fetchedAt": "2026-05-12T12:43:28.949Z",
+>>>>>>> 3e4af6b (大版本优化)
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
@@ -447,6 +494,330 @@
           }
         ]
       }
+    },
+    {
+      "id": "github-copilot-plans",
+      "vendor": "GitHub",
+      "vendorId": "github",
+      "category": "membership-rate",
+      "surface": "membership-rates",
+      "sourceLabel": "Copilot Plans",
+      "url": "https://github.com/features/copilot/plans",
+      "ok": true,
+      "fetchedAt": "2026-05-12T12:43:28.950Z",
+      "title": "GitHub Copilot · Plans & pricing · GitHub",
+      "description": "GitHub Copilot works alongside you directly in your editor, suggesting whole lines or entire functions for you.",
+      "status": 200,
+      "byteLength": 1138119,
+      "extraction": {
+        "confidence": "review",
+        "priceSignals": [
+          {
+            "value": "$ 0",
+            "context": "businesses Free A fast way to get started with GitHub Copilot. $ 0 USD Get started Open in VS Code What&#x27;s included: 50 agent"
+          },
+          {
+            "value": "$ 10",
+            "context": "plan. Learn more Pro Accelerate workflows with GitHub Copilot. $ 10 USD per user / month Upgrades are paused as we roll out a flexi"
+          },
+          {
+            "value": "$ 39",
+            "context": "oogle, OpenAI, and more Pro+ Scale with agents and more models. $ 39 USD per user / month Upgrades are paused as we roll out a flexi"
+          },
+          {
+            "value": "$0",
+            "context": "r Management Studio Zed Zed Compare features Pricing plans Free $0 Get started Pro $10 per month Unavailable - Read more Pro+ $39"
+          },
+          {
+            "value": "$10",
+            "context": "Zed Zed Compare features Pricing plans Free $0 Get started Pro $10 per month Unavailable - Read more Pro+ $39 per month Unavailabl"
+          },
+          {
+            "value": "$39",
+            "context": "e $0 Get started Pro $10 per month Unavailable - Read more Pro+ $39 per month Unavailable - Read more Premium requests Premium requ"
+          },
+          {
+            "value": "$0.04",
+            "context": "o+ plan 1,500 per month Purchase additional premium requests at $0.04/request Free plan Not included Pro plan Included Pro+ plan Incl"
+          }
+        ],
+        "planSignals": [
+          {
+            "value": "Copilot",
+            "context": "GitHub Copilot · Plans & pricing · GitHub Skip to content Pricing update comin"
+          },
+          {
+            "value": "Business",
+            "context": "ORE BY TYPE Customer stories Events & webinars Ebooks & reports Business insights GitHub Skills SUPPORT & SERVICES Documentation Custome"
+          },
+          {
+            "value": "Enterprise",
+            "context": "Stars Archive Program REPOSITORIES Topics Trending Collections Enterprise ENTERPRISE SOLUTIONS Enterprise platform AI-powered developer p"
+          },
+          {
+            "value": "Premium",
+            "context": "rity features Copilot for Business Enterprise-grade AI features Premium Support Enterprise-grade 24/7 support Pricing Search or jump to"
+          },
+          {
+            "value": "Free",
+            "context": "ith GitHub Copilot Pricing plans For individuals For businesses Free A fast way to get started with GitHub Copilot. $ 0 USD Get star"
+          },
+          {
+            "value": "agent",
+            "context": "t. $ 0 USD Get started Open in VS Code What&#x27;s included: 50 agent mode or chat requests per month 2,000 completions per month Acc"
+          },
+          {
+            "value": "Student",
+            "context": "d required. Verified students have access to the GitHub Copilot Student plan. Learn more Pro Accelerate workflows with GitHub Copilot."
+          },
+          {
+            "value": "Pro",
+            "context": "ents have access to the GitHub Copilot Student plan. Learn more Pro Accelerate workflows with GitHub Copilot. $ 10 USD per user / m"
+          },
+          {
+            "value": "Codex",
+            "context": "in Free and: Copilot cloud agent Copilot code review Claude and Codex on GitHub and VS Code 300 premium requests, with the option to"
+          },
+          {
+            "value": "team",
+            "context": "Studio Zed Zed Need human help? Let’s define how to propel your team into a new era. Contact sales Frequently asked questions Genera"
+          },
+          {
+            "value": "Education",
+            "context": "sources Roadmap Compare GitHub Ecosystem Developer API Partners Education GitHub CLI GitHub Desktop GitHub Mobile GitHub Marketplace MCP"
+          }
+        ]
+      }
+    },
+    {
+      "id": "github-copilot-billing",
+      "vendor": "GitHub",
+      "vendorId": "github",
+      "category": "membership-rate",
+      "surface": "membership-rates",
+      "sourceLabel": "Copilot Billing",
+      "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
+      "ok": true,
+      "fetchedAt": "2026-05-12T12:43:28.950Z",
+      "title": "Models and pricing for GitHub Copilot - GitHub Docs",
+      "description": "See per-token pricing for the models available in GitHub Copilot and reference rates for additional usage across plans.",
+      "status": 200,
+      "byteLength": 510685,
+      "extraction": {
+        "confidence": "review",
+        "priceSignals": [
+          {
+            "value": "$0.01",
+            "context": "and the total is converted into AI credits, where 1 AI credit = $0.01 USD. The cost of an interaction depends on two things: the mode"
+          },
+          {
+            "value": "$2.00",
+            "context": "tatus Category Input Cached input Output GPT-4.1 1 GA Versatile $2.00 $0.50 $8.00 GPT-5 mini 1 GA Lightweight $0.25 $0.025 $2.00 GPT-"
+          },
+          {
+            "value": "$0.50",
+            "context": "Category Input Cached input Output GPT-4.1 1 GA Versatile $2.00 $0.50 $8.00 GPT-5 mini 1 GA Lightweight $0.25 $0.025 $2.00 GPT-5.2 GA"
+          },
+          {
+            "value": "$8.00",
+            "context": "ry Input Cached input Output GPT-4.1 1 GA Versatile $2.00 $0.50 $8.00 GPT-5 mini 1 GA Lightweight $0.25 $0.025 $2.00 GPT-5.2 GA Versa"
+          },
+          {
+            "value": "$0.25",
+            "context": ".1 1 GA Versatile $2.00 $0.50 $8.00 GPT-5 mini 1 GA Lightweight $0.25 $0.025 $2.00 GPT-5.2 GA Versatile $1.75 $0.175 $14.00 GPT-5.2-C"
+          },
+          {
+            "value": "$0.025",
+            "context": "A Versatile $2.00 $0.50 $8.00 GPT-5 mini 1 GA Lightweight $0.25 $0.025 $2.00 GPT-5.2 GA Versatile $1.75 $0.175 $14.00 GPT-5.2-Codex GA"
+          },
+          {
+            "value": "$1.75",
+            "context": "5 mini 1 GA Lightweight $0.25 $0.025 $2.00 GPT-5.2 GA Versatile $1.75 $0.175 $14.00 GPT-5.2-Codex GA Powerful $1.75 $0.175 $14.00 GPT"
+          },
+          {
+            "value": "$0.175",
+            "context": "1 GA Lightweight $0.25 $0.025 $2.00 GPT-5.2 GA Versatile $1.75 $0.175 $14.00 GPT-5.2-Codex GA Powerful $1.75 $0.175 $14.00 GPT-5.3-Co"
+          },
+          {
+            "value": "$14.00",
+            "context": "ightweight $0.25 $0.025 $2.00 GPT-5.2 GA Versatile $1.75 $0.175 $14.00 GPT-5.2-Codex GA Powerful $1.75 $0.175 $14.00 GPT-5.3-Codex GA"
+          },
+          {
+            "value": "$2.50",
+            "context": ".3-Codex GA Powerful $1.75 $0.175 $14.00 GPT-5.4 2 GA Versatile $2.50 $0.25 $15.00 GPT-5.4 mini GA Lightweight $0.75 $0.075 $4.50 GPT"
+          },
+          {
+            "value": "$15.00",
+            "context": "Powerful $1.75 $0.175 $14.00 GPT-5.4 2 GA Versatile $2.50 $0.25 $15.00 GPT-5.4 mini GA Lightweight $0.75 $0.075 $4.50 GPT-5.4 nano GA"
+          },
+          {
+            "value": "$0.75",
+            "context": "4 2 GA Versatile $2.50 $0.25 $15.00 GPT-5.4 mini GA Lightweight $0.75 $0.075 $4.50 GPT-5.4 nano GA Lightweight $0.20 $0.02 $1.25 GPT-"
+          },
+          {
+            "value": "$0.075",
+            "context": "Versatile $2.50 $0.25 $15.00 GPT-5.4 mini GA Lightweight $0.75 $0.075 $4.50 GPT-5.4 nano GA Lightweight $0.20 $0.02 $1.25 GPT-5.5 GA"
+          },
+          {
+            "value": "$4.50",
+            "context": "ile $2.50 $0.25 $15.00 GPT-5.4 mini GA Lightweight $0.75 $0.075 $4.50 GPT-5.4 nano GA Lightweight $0.20 $0.02 $1.25 GPT-5.5 GA Powerf"
+          },
+          {
+            "value": "$0.20",
+            "context": "i GA Lightweight $0.75 $0.075 $4.50 GPT-5.4 nano GA Lightweight $0.20 $0.02 $1.25 GPT-5.5 GA Powerful $5.00 $0.50 $30.00 Anthropic An"
+          },
+          {
+            "value": "$0.02",
+            "context": "ightweight $0.75 $0.075 $4.50 GPT-5.4 nano GA Lightweight $0.20 $0.02 $1.25 GPT-5.5 GA Powerful $5.00 $0.50 $30.00 Anthropic Anthropi"
+          },
+          {
+            "value": "$1.25",
+            "context": "ight $0.75 $0.075 $4.50 GPT-5.4 nano GA Lightweight $0.20 $0.02 $1.25 GPT-5.5 GA Powerful $5.00 $0.50 $30.00 Anthropic Anthropic mode"
+          },
+          {
+            "value": "$5.00",
+            "context": "T-5.4 nano GA Lightweight $0.20 $0.02 $1.25 GPT-5.5 GA Powerful $5.00 $0.50 $30.00 Anthropic Anthropic models include a cache write c"
+          },
+          {
+            "value": "$30.00",
+            "context": "A Lightweight $0.20 $0.02 $1.25 GPT-5.5 GA Powerful $5.00 $0.50 $30.00 Anthropic Anthropic models include a cache write cost in additi"
+          },
+          {
+            "value": "$1.00",
+            "context": "t Cached input Cache write Output Claude Haiku 4.5 GA Versatile $1.00 $0.10 $1.25 $5.00 Claude Sonnet 4 GA Versatile $3.00 $0.30 $3.7"
+          },
+          {
+            "value": "$0.10",
+            "context": "ed input Cache write Output Claude Haiku 4.5 GA Versatile $1.00 $0.10 $1.25 $5.00 Claude Sonnet 4 GA Versatile $3.00 $0.30 $3.75 $15."
+          },
+          {
+            "value": "$3.00",
+            "context": "Versatile $1.00 $0.10 $1.25 $5.00 Claude Sonnet 4 GA Versatile $3.00 $0.30 $3.75 $15.00 Claude Sonnet 4.5 GA Versatile $3.00 $0.30 $"
+          },
+          {
+            "value": "$0.30",
+            "context": "tile $1.00 $0.10 $1.25 $5.00 Claude Sonnet 4 GA Versatile $3.00 $0.30 $3.75 $15.00 Claude Sonnet 4.5 GA Versatile $3.00 $0.30 $3.75 $"
+          },
+          {
+            "value": "$3.75",
+            "context": "1.00 $0.10 $1.25 $5.00 Claude Sonnet 4 GA Versatile $3.00 $0.30 $3.75 $15.00 Claude Sonnet 4.5 GA Versatile $3.00 $0.30 $3.75 $15.00"
+          },
+          {
+            "value": "$6.25",
+            "context": "3.00 $0.30 $3.75 $15.00 Claude Opus 4.5 GA Powerful $5.00 $0.50 $6.25 $25.00 Claude Opus 4.6 GA Powerful $5.00 $0.50 $6.25 $25.00 Cla"
+          },
+          {
+            "value": "$25.00",
+            "context": "0.30 $3.75 $15.00 Claude Opus 4.5 GA Powerful $5.00 $0.50 $6.25 $25.00 Claude Opus 4.6 GA Powerful $5.00 $0.50 $6.25 $25.00 Claude Opu"
+          },
+          {
+            "value": "$0.125",
+            "context": "ry Input Cached input Output Gemini 2.5 Pro 3 GA Powerful $1.25 $0.125 $10.00 Gemini 3 Flash 4 Public preview Lightweight $0.50 $0.05"
+          },
+          {
+            "value": "$10.00",
+            "context": "t Cached input Output Gemini 2.5 Pro 3 GA Powerful $1.25 $0.125 $10.00 Gemini 3 Flash 4 Public preview Lightweight $0.50 $0.05 $3.00 G"
+          }
+        ],
+        "planSignals": [
+          {
+            "value": "Copilot",
+            "context": "Models and pricing for GitHub Copilot - GitHub Docs Skip to main content GitHub Docs Version: Free, P"
+          },
+          {
+            "value": "Free",
+            "context": "Copilot - GitHub Docs Skip to main content GitHub Docs Version: Free, Pro, & Team Search or ask Copilot Search or ask Copilot Select"
+          },
+          {
+            "value": "Pro",
+            "context": "t - GitHub Docs Skip to main content GitHub Docs Version: Free, Pro, & Team Search or ask Copilot Search or ask Copilot Select lang"
+          },
+          {
+            "value": "Team",
+            "context": "Hub Docs Skip to main content GitHub Docs Version: Free, Pro, & Team Search or ask Copilot Search or ask Copilot Select language: cu"
+          },
+          {
+            "value": "enterprise",
+            "context": "rt What is GitHub Copilot? Plans Features Best practices Choose enterprise plan Achieve company goals Resources for approval Concepts Comp"
+          },
+          {
+            "value": "agent",
+            "context": "Completions Code suggestions Code referencing Chat Agents Cloud agent About cloud agent Agent management Custom agents Access managem"
+          },
+          {
+            "value": "Codex",
+            "context": "ment Code review Copilot Memory Hooks Third-party agents OpenAI Codex Anthropic Claude Agent skills Enterprise management Spark Copil"
+          },
+          {
+            "value": "Premium",
+            "context": "ual plans Billing for individuals Organizations and enterprises Premium request management Copilot-only enterprises Policies MCP manage"
+          },
+          {
+            "value": "business",
+            "context": "y Refactor design patterns Refactor data access layers Decouple business logic Handle cross-cutting Simplify inheritance hierarchies Fix"
+          }
+        ]
+      }
+    },
+    {
+      "id": "x-premium",
+      "vendor": "Grok",
+      "vendorId": "grok",
+      "category": "membership-rate",
+      "surface": "membership-rates",
+      "sourceLabel": "X Premium Help",
+      "url": "https://help.x.com/en/using-x/x-premium",
+      "ok": false,
+      "fetchedAt": "2026-05-12T12:43:28.951Z",
+      "error": "HTTP 403 Forbidden"
+    },
+    {
+      "id": "x-premium-plus-pricing",
+      "vendor": "Grok",
+      "vendorId": "grok",
+      "category": "membership-rate",
+      "surface": "membership-rates",
+      "sourceLabel": "Premium+ Pricing",
+      "url": "https://help.x.com/en/premium-plus-price-update",
+      "ok": false,
+      "fetchedAt": "2026-05-12T12:43:28.951Z",
+      "error": "HTTP 403 Forbidden"
+    },
+    {
+      "id": "perplexity-pro-perks",
+      "vendor": "Perplexity",
+      "vendorId": "perplexity",
+      "category": "membership-rate",
+      "surface": "membership-rates",
+      "sourceLabel": "Pro Perks",
+      "url": "https://www.perplexity.ai/properks/",
+      "ok": false,
+      "fetchedAt": "2026-05-12T12:43:28.952Z",
+      "error": "HTTP 403 Forbidden"
+    },
+    {
+      "id": "perplexity-enterprise-pricing",
+      "vendor": "Perplexity",
+      "vendorId": "perplexity",
+      "category": "membership-rate",
+      "surface": "membership-rates",
+      "sourceLabel": "Enterprise Pricing FAQ",
+      "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
+      "ok": false,
+      "fetchedAt": "2026-05-12T12:43:28.952Z",
+      "error": "HTTP 403 Forbidden"
+    },
+    {
+      "id": "perplexity-connectors",
+      "vendor": "Perplexity",
+      "vendorId": "perplexity",
+      "category": "membership-rate",
+      "surface": "membership-rates",
+      "sourceLabel": "Connectors Pricing",
+      "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
+      "ok": false,
+      "fetchedAt": "2026-05-12T12:43:28.953Z",
+      "error": "HTTP 403 Forbidden"
     }
   ]
 }

@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function ToolsPage() {
   return (
-    <div className="pb-16">
+    <div className="pb-8 sm:pb-16">
       <PageHero
         note="场景分类 · 轻导航 · 快速选型"
         title={
@@ -48,7 +48,7 @@ export default function ToolsPage() {
         rightSlot={<PageShowcase variant="tools" />}
       />
 
-      <section className="app-shell mt-8">
+      <section className="app-shell mt-4 sm:mt-8">
         <div className="grid gap-4 rounded-[12px] border border-border bg-background px-4 py-6 md:grid-cols-2 sm:px-5 lg:px-6 xl:grid-cols-3">
           {toolsDirectory.map((tool) => (
             <Card key={tool.id} className="surface-card rounded-xl">

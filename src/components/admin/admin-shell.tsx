@@ -55,7 +55,7 @@ export function AdminShell({
                   <div>
                     <div className="text-sm font-semibold">更新策略</div>
                     <div className="mt-1 text-[12px] leading-5 text-muted-foreground">
-                      每 6 小时跑公开价格页；异常结果转人工复核；高时效优惠允许手动补录。
+                      每 6 小时跑公开价格页；异常结果转人工复核；强反爬会员页走浏览器辅助或手动补录。
                     </div>
                   </div>
                   <BotIcon className="size-4 text-primary" />
@@ -88,7 +88,7 @@ export function AdminShell({
                       <div className="admin-side-card">
                         <div className="text-sm font-semibold">更新策略</div>
                         <div className="mt-1 text-[12px] leading-5 text-muted-foreground">
-                          定时抓公开页，异常转人工，优惠允许手动录入。
+                          定时抓公开页，异常转人工，会员速率支持浏览器辅助补录。
                         </div>
                       </div>
                     </div>

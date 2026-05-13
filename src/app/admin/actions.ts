@@ -15,8 +15,14 @@ import {
 import {
   appendOperationLog,
   createManualDeal,
+  createMembershipRateReview,
+  createSourceReview,
+  getCrawlSnapshot,
   type ManualDealInput,
+  type MembershipRateReviewInput,
+  type SourceReviewInput,
 } from "@/lib/admin-store";
+import { membershipVendorBoards } from "@/data/membership-rates";
 
 const execFileAsync = promisify(execFile);
 
@@ -183,4 +189,102 @@ export async function triggerCrawlAction(): Promise<AdminMutationState> {
       detail,
     };
   }
+}
+
+export async function createMembershipRateReviewAction(
+  _prevState: AdminMutationState,
+  formData: FormData,
+): Promise<AdminMutationState> {
+  const session = await requireAdminAuth();
+  const vendorId = String(formData.get("vendorId") ?? "").trim();
+  const vendor = membershipVendorBoards.find((item) => item.id === vendorId);
+
+  const input: MembershipRateReviewInput = {
+    vendorId,
+    vendorLabel: vendor?.label ?? "",
+    planName: String(formData.get("planName") ?? "").trim(),
+    priceSummary: String(formData.get("priceSummary") ?? "").trim(),
+    regionScope: String(formData.get("regionScope") ?? "").trim() || undefined,
+    sourceUrl: String(formData.get("sourceUrl") ?? "").trim(),
+    evidenceUrl: String(formData.get("evidenceUrl") ?? "").trim() || undefined,
+    captureMethod: String(formData.get("captureMethod") ?? "manual_review") as MembershipRateReviewInput["captureMethod"],
+    reviewStatus: String(formData.get("reviewStatus") ?? "verified") as MembershipRateReviewInput["reviewStatus"],
+    note: String(formData.get("note") ?? "").trim(),
+  };
+
+  const fieldErrors: Record<string, string> = {};
+  if (!vendor) fieldErrors.vendorId = "请选择要维护的会员厂商";
+  if (!input.planName) fieldErrors.planName = "请输入套餐名称";
+  if (!input.priceSummary) fieldErrors.priceSummary = "请输入价格摘要";
+  if (!input.sourceUrl) fieldErrors.sourceUrl = "请输入官方来源链接";
+  if (!input.note) fieldErrors.note = "请补一段复核备注";
+
+  if (Object.keys(fieldErrors).length > 0) {
+    return {
+      status: "error",
+      message: "会员速率信息还不完整。",
+      fieldErrors,
+    };
+  }
+
+  const created = await createMembershipRateReview(input, session.username);
+  revalidatePath("/admin");
+  revalidatePath("/admin/manual");
+  revalidatePath("/admin/content");
+  revalidatePath("/admin/logs");
+
+  return {
+    status: "success",
+    message: `已补录「${created.vendorLabel} · ${created.planName}」`,
+    detail: "这条会员速率复核已写入本地 JSON，可继续补录下一条。",
+  };
+}
+
+export async function createSourceReviewAction(
+  _prevState: AdminMutationState,
+  formData: FormData,
+): Promise<AdminMutationState> {
+  const session = await requireAdminAuth();
+  const sourceId = String(formData.get("sourceId") ?? "").trim();
+  const reviewStatus = String(formData.get("reviewStatus") ?? "verified") as SourceReviewInput["reviewStatus"];
+  const note = String(formData.get("note") ?? "").trim();
+  const snapshot = await getCrawlSnapshot();
+  const source = snapshot.results.find((item) => item.id === sourceId);
+
+  const fieldErrors: Record<string, string> = {};
+  if (!source) fieldErrors.sourceId = "请选择要处理的复核源";
+  if (!note) fieldErrors.note = "请写清楚处理结论，方便后续追踪";
+
+  if (Object.keys(fieldErrors).length > 0 || !source) {
+    return {
+      status: "error",
+      message: "复核处理信息还不完整。",
+      fieldErrors,
+    };
+  }
+
+  const created = await createSourceReview(
+    {
+      sourceId: source.id,
+      vendor: source.vendor,
+      category: source.category,
+      title: source.title || source.sourceLabel || source.vendor,
+      sourceUrl: source.url,
+      resultStatus: source.ok ? "ok" : "failed",
+      reviewStatus,
+      note,
+    },
+    session.username,
+  );
+
+  revalidatePath("/admin");
+  revalidatePath("/admin/review");
+  revalidatePath("/admin/content");
+  revalidatePath("/admin/logs");
+
+  return {
+    status: "success",
+    message: `已处理「${created.vendor}」`,
+    detail: "复核结论已写入来源复核记录，队列会按最新状态重新收敛。",
+  };
 }
