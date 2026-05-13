@@ -149,26 +149,26 @@ const providerPresets: ProviderPreset[] = [
 ];
 
 const targetCurrencies = [
-  { code: "CNY", label: "人民币", flag: "🇨🇳", cnyRate: 1, locale: "zh-CN" },
-  { code: "USD", label: "美元", flag: "🇺🇸", cnyRate: 7.25, locale: "en-US" },
-  { code: "HKD", label: "港元", flag: "🇭🇰", cnyRate: 0.93, locale: "zh-HK" },
-  { code: "TWD", label: "新台币", flag: "🇹🇼", cnyRate: 0.22, locale: "zh-TW" },
-  { code: "SGD", label: "新加坡元", flag: "🇸🇬", cnyRate: 5.36, locale: "en-SG" },
-  { code: "AUD", label: "澳大利亚元", flag: "🇦🇺", cnyRate: 4.71, locale: "en-AU" },
-  { code: "CAD", label: "加拿大元", flag: "🇨🇦", cnyRate: 5.29, locale: "en-CA" },
-  { code: "BRL", label: "巴西雷亚尔", flag: "🇧🇷", cnyRate: 1.38, locale: "pt-BR" },
-  { code: "EUR", label: "欧元", flag: "🇪🇺", cnyRate: 7.84, locale: "de-DE" },
-  { code: "GBP", label: "英镑", flag: "🇬🇧", cnyRate: 9.18, locale: "en-GB" },
-  { code: "JPY", label: "日元", flag: "🇯🇵", cnyRate: 0.047, locale: "ja-JP" },
-  { code: "KRW", label: "韩元", flag: "🇰🇷", cnyRate: 0.0053, locale: "ko-KR" },
-  { code: "MXN", label: "墨西哥比索", flag: "🇲🇽", cnyRate: 0.395, locale: "es-MX" },
-  { code: "VND", label: "越南盾", flag: "🇻🇳", cnyRate: 0.00028, locale: "vi-VN" },
-  { code: "TRY", label: "土耳其里拉", flag: "🇹🇷", cnyRate: 0.224, locale: "tr-TR" },
-  { code: "PHP", label: "菲律宾比索", flag: "🇵🇭", cnyRate: 0.126, locale: "en-PH" },
-  { code: "PKR", label: "巴基斯坦卢比", flag: "🇵🇰", cnyRate: 0.026, locale: "en-PK" },
-  { code: "NGN", label: "尼日利亚奈拉", flag: "🇳🇬", cnyRate: 0.0049, locale: "en-NG" },
-  { code: "EGP", label: "埃及镑", flag: "🇪🇬", cnyRate: 0.145, locale: "ar-EG" },
-  { code: "INR", label: "印度卢比", flag: "🇮🇳", cnyRate: 0.087, locale: "en-IN" },
+  { code: "CNY", label: "人民币", flagCode: "CN", cnyRate: 1, locale: "zh-CN" },
+  { code: "USD", label: "美元", flagCode: "US", cnyRate: 7.25, locale: "en-US" },
+  { code: "HKD", label: "港元", flagCode: "HK", cnyRate: 0.93, locale: "zh-HK" },
+  { code: "TWD", label: "新台币", flagCode: "TW", cnyRate: 0.22, locale: "zh-TW" },
+  { code: "SGD", label: "新加坡元", flagCode: "SG", cnyRate: 5.36, locale: "en-SG" },
+  { code: "AUD", label: "澳大利亚元", flagCode: "AU", cnyRate: 4.71, locale: "en-AU" },
+  { code: "CAD", label: "加拿大元", flagCode: "CA", cnyRate: 5.29, locale: "en-CA" },
+  { code: "BRL", label: "巴西雷亚尔", flagCode: "BR", cnyRate: 1.38, locale: "pt-BR" },
+  { code: "EUR", label: "欧元", flagCode: "EU", cnyRate: 7.84, locale: "de-DE" },
+  { code: "GBP", label: "英镑", flagCode: "GB", cnyRate: 9.18, locale: "en-GB" },
+  { code: "JPY", label: "日元", flagCode: "JP", cnyRate: 0.047, locale: "ja-JP" },
+  { code: "KRW", label: "韩元", flagCode: "KR", cnyRate: 0.0053, locale: "ko-KR" },
+  { code: "MXN", label: "墨西哥比索", flagCode: "MX", cnyRate: 0.395, locale: "es-MX" },
+  { code: "VND", label: "越南盾", flagCode: "VN", cnyRate: 0.00028, locale: "vi-VN" },
+  { code: "TRY", label: "土耳其里拉", flagCode: "TR", cnyRate: 0.224, locale: "tr-TR" },
+  { code: "PHP", label: "菲律宾比索", flagCode: "PH", cnyRate: 0.126, locale: "en-PH" },
+  { code: "PKR", label: "巴基斯坦卢比", flagCode: "PK", cnyRate: 0.026, locale: "en-PK" },
+  { code: "NGN", label: "尼日利亚奈拉", flagCode: "NG", cnyRate: 0.0049, locale: "en-NG" },
+  { code: "EGP", label: "埃及镑", flagCode: "EG", cnyRate: 0.145, locale: "ar-EG" },
+  { code: "INR", label: "印度卢比", flagCode: "IN", cnyRate: 0.087, locale: "en-IN" },
 ] as const;
 
 type TargetCurrencyCode = (typeof targetCurrencies)[number]["code"];
@@ -262,8 +262,8 @@ export function SubscriptionExplorer({
     [activePreset, currentPlan, targetRowsPerTab],
   );
   const liveCnyRates = useMemo(
-    () => buildLiveCnyRates(fxTick, fxFeed.rates),
-    [fxFeed.rates, fxTick],
+    () => buildLiveCnyRates(fxFeed.rates),
+    [fxFeed.rates],
   );
   const rankedRegions = useMemo(
     () =>
@@ -483,7 +483,7 @@ export function SubscriptionExplorer({
               )}
             >
               <div className="flex min-w-0 items-center gap-3">
-                <span className="text-[17px]">{selectedCurrency.flag}</span>
+                <CountryFlag countryCode={selectedCurrency.flagCode} className="h-4 w-5" />
                 <span className="truncate font-semibold text-foreground">
                   {selectedCurrency.label}
                 </span>
@@ -505,7 +505,7 @@ export function SubscriptionExplorer({
                     value={item.code}
                     className="rounded-[16px] px-3 py-3 text-[15px]"
                   >
-                    <span className="text-[18px]">{item.flag}</span>
+                    <CountryFlag countryCode={item.flagCode} className="h-4 w-5" />
                     <span className="font-semibold text-foreground">{item.label}</span>
                     <span className="text-muted-foreground">（{item.code}）</span>
                   </SelectItem>
@@ -997,7 +997,9 @@ function CompareEdge({
           "justify-end border-orange-200/70 bg-[linear-gradient(135deg,rgba(255,247,240,0.98),rgba(255,233,224,0.9))] text-right sm:[clip-path:polygon(14%_0,100%_0,100%_100%,0_100%)] dark:border-orange-500/20 dark:bg-[linear-gradient(135deg,rgba(127,29,29,0.36),rgba(67,20,7,0.68))]",
       )}
     >
-      {align === "left" ? <span className="text-[22px] sm:text-[28px]">{flagFor(region.countryCode)}</span> : null}
+      {align === "left" ? (
+        <CountryFlag countryCode={region.countryCode} className="h-[22px] w-[30px] sm:h-7 sm:w-9" />
+      ) : null}
       <div>
         <div className={cn("text-[11px]", align === "left" ? "text-emerald-700/70 dark:text-emerald-100/76" : "text-orange-900/60 dark:text-orange-100/70")}>
           {region.country}
@@ -1021,7 +1023,9 @@ function CompareEdge({
           {region.currencyCode} {formatLocalNumber(region.localPrice)}
         </div>
       </div>
-      {align === "right" ? <span className="text-[22px] sm:text-[28px]">{flagFor(region.countryCode)}</span> : null}
+      {align === "right" ? (
+        <CountryFlag countryCode={region.countryCode} className="h-[22px] w-[30px] sm:h-7 sm:w-9" />
+      ) : null}
     </div>
   );
 }
@@ -1048,7 +1052,22 @@ function PriceRow({
   pulseKey: number;
 }) {
   const [isHovered, setIsHovered] = useState(false);
+  const openHoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeHoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isPinnedRef = useRef(isPinned);
+
+  useEffect(() => {
+    isPinnedRef.current = isPinned;
+  }, [isPinned]);
+
+  const clearOpenHoverTimer = () => {
+    if (!openHoverTimerRef.current) {
+      return;
+    }
+
+    clearTimeout(openHoverTimerRef.current);
+    openHoverTimerRef.current = null;
+  };
 
   const clearCloseHoverTimer = () => {
     if (!closeHoverTimerRef.current) {
@@ -1060,19 +1079,30 @@ function PriceRow({
   };
 
   const openHover = () => {
+    clearOpenHoverTimer();
     clearCloseHoverTimer();
-    setIsHovered(true);
+    openHoverTimerRef.current = setTimeout(() => {
+      setIsHovered(true);
+      openHoverTimerRef.current = null;
+    }, 70);
   };
 
   const scheduleCloseHover = () => {
+    clearOpenHoverTimer();
     clearCloseHoverTimer();
     closeHoverTimerRef.current = setTimeout(() => {
+      if (isPinnedRef.current) {
+        closeHoverTimerRef.current = null;
+        return;
+      }
       setIsHovered(false);
-    }, 120);
+      closeHoverTimerRef.current = null;
+    }, 260);
   };
 
   useEffect(() => {
     return () => {
+      clearOpenHoverTimer();
       clearCloseHoverTimer();
     };
   }, []);
@@ -1089,17 +1119,17 @@ function PriceRow({
   return (
     <div
       className={cn("group/price-row relative", desktopOpen && "z-30")}
-      onMouseEnter={openHover}
-      onMouseLeave={scheduleCloseHover}
+      onPointerEnter={openHover}
+      onPointerLeave={scheduleCloseHover}
     >
       <div
         className={cn(
-          "grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 rounded-[12px] border px-2.5 py-2.5 transition-[transform,border-color,background-color,box-shadow] duration-300 ease-out sm:gap-2.5 sm:px-3.5 lg:grid-cols-[1.2fr_0.9fr_0.5fr_0.7fr_auto_auto]",
+          "relative grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 overflow-hidden rounded-[12px] border px-2.5 py-2.5 transition-[border-color,box-shadow] duration-200 ease-out before:absolute before:inset-y-2 before:left-0 before:w-1 before:rounded-r-full before:bg-primary before:opacity-0 before:transition-opacity before:duration-200 sm:gap-2.5 sm:px-3.5 lg:grid-cols-[1.2fr_0.9fr_0.5fr_0.7fr_auto_auto]",
           highlighted
             ? "border-primary/25 bg-primary/7 shadow-[0_12px_28px_rgba(0,188,125,0.08)]"
-            : "border-border bg-background hover:-translate-y-0.5 hover:border-primary/18 hover:bg-card hover:shadow-[0_18px_40px_rgba(15,23,42,0.08)]",
+            : "border-border bg-background hover:border-primary/16 hover:before:opacity-100",
           (desktopOpen || mobileOpen) &&
-            "border-primary/24 bg-card shadow-[0_16px_36px_rgba(15,23,42,0.12)]",
+            "border-primary/20 before:opacity-100",
         )}
         role={sortedDetailRows.length > 0 ? "button" : undefined}
         aria-expanded={sortedDetailRows.length > 0 ? desktopOpen || mobileOpen : undefined}
@@ -1123,6 +1153,7 @@ function PriceRow({
           }
 
           if (event.key === "Escape") {
+            clearOpenHoverTimer();
             clearCloseHoverTimer();
             setIsHovered(false);
             onClosePinned();
@@ -1130,7 +1161,7 @@ function PriceRow({
         }}
       >
         <div className="flex items-center gap-4">
-          <span className="text-[22px] sm:text-[26px]">{flagFor(region.countryCode)}</span>
+          <CountryFlag countryCode={region.countryCode} className="h-[22px] w-[30px] sm:h-[24px] sm:w-8" />
           <div>
             <div className="text-[13px] font-semibold sm:text-sm">{region.country}</div>
             <div className="text-[11px] text-muted-foreground">{region.sourceLabel}</div>
@@ -1177,13 +1208,11 @@ function PriceRow({
 
       <div
         className={cn(
-          "pointer-events-none absolute left-1/2 top-1/2 z-40 hidden w-[360px] max-w-[calc(100vw-4rem)] -translate-x-1/2 origin-center transition-[opacity,transform] duration-200 ease-out lg:block",
-          desktopOpen
-            ? "-translate-y-1/2 scale-[1] opacity-100"
-            : "translate-y-[-44%] scale-[0.98] opacity-0",
+          "pointer-events-none absolute left-4 top-1/2 z-40 hidden w-[340px] max-w-[calc(100%-10rem)] -translate-y-1/2 origin-left transition-[opacity,filter] duration-200 ease-out lg:block",
+          desktopOpen ? "opacity-100 blur-0" : "opacity-0 blur-[1px]",
         )}
       >
-        <div className="pointer-events-auto" onMouseEnter={openHover} onMouseLeave={scheduleCloseHover}>
+        <div>
           <MembershipPricePopover
             compact
             region={region}
@@ -1245,7 +1274,10 @@ function MembershipPricePopover({
     >
       <div className={cn("mb-3 flex flex-wrap items-center justify-between gap-3", compact && "mb-2.5")}>
         <div className="flex min-w-0 items-center gap-2.5">
-          <span className={cn(compact ? "text-[22px]" : "text-[24px]")}>{flagFor(region.countryCode)}</span>
+          <CountryFlag
+            countryCode={region.countryCode}
+            className={cn(compact ? "h-[22px] w-[30px]" : "h-6 w-8")}
+          />
           <div className="min-w-0">
             <div
               className={cn(
@@ -1338,7 +1370,7 @@ function RegionPlanCard({
     <div className="rounded-[12px] border border-border bg-card p-3.5 shadow-[0_12px_44px_rgba(0,0,0,0.04)]">
       <div className="mb-3 flex items-center justify-between gap-3">
         <div className="flex min-w-0 items-center gap-3">
-          <span className="text-[24px]">{flagFor(group.countryCode)}</span>
+          <CountryFlag countryCode={group.countryCode} className="h-6 w-8" />
           <h3 className="truncate text-[1.05rem] font-semibold tracking-[-0.025em]">
             {group.country}
           </h3>
@@ -1505,17 +1537,14 @@ function liveCnyValueFor(
   return baseline;
 }
 
-function buildLiveCnyRates(
-  tick: number,
-  feedRates?: Partial<Record<TargetCurrencyCode, number>>,
-) {
+function buildLiveCnyRates(feedRates?: Partial<Record<TargetCurrencyCode, number>>) {
   return Object.fromEntries(
     targetCurrencies.map((item) => {
       const marketBias = normalizedMarketBias(item.cnyRate, feedRates?.[item.code]);
 
       return [
         item.code,
-        item.cnyRate * (1 + marketBias + liveFxDrift(item.code, tick)),
+        item.cnyRate * (1 + marketBias),
       ];
     }),
   );
@@ -1547,19 +1576,6 @@ function normalizedMarketBias(snapshotRate: number, feedRate?: number) {
   const rawDelta = feedRate / snapshotRate - 1;
 
   return Math.max(-0.006, Math.min(0.006, rawDelta * 0.18));
-}
-
-function liveFxDrift(code: string, tick: number) {
-  if (code === "CNY" || tick === 0) {
-    return 0;
-  }
-
-  const seed = Array.from(code).reduce((total, char) => total + char.charCodeAt(0), 0);
-  const wave =
-    Math.sin((tick + seed) * 0.73) * 0.0028 +
-    Math.cos((tick * 0.41) + seed) * 0.0012;
-
-  return Math.max(-0.0045, Math.min(0.0045, wave));
 }
 
 function baseCnyRateFor(code: string) {
@@ -1601,31 +1617,27 @@ function formatCycleEnglish(value: "monthly" | "yearly") {
   return value === "monthly" ? "Monthly" : "Annual";
 }
 
-function flagFor(countryCode: string) {
+function CountryFlag({ countryCode, className }: { countryCode: string; className?: string }) {
+  const assetCode = countryCode.toLowerCase();
+
   return (
-    {
-      CN: "🇨🇳",
-      US: "🇺🇸",
-      HK: "🇭🇰",
-      TW: "🇹🇼",
-      SG: "🇸🇬",
-      TR: "🇹🇷",
-      PH: "🇵🇭",
-      PK: "🇵🇰",
-      FR: "🇫🇷",
-      GB: "🇬🇧",
-      JP: "🇯🇵",
-      AR: "🇦🇷",
-      AU: "🇦🇺",
-      BR: "🇧🇷",
-      NG: "🇳🇬",
-      EG: "🇪🇬",
-      VN: "🇻🇳",
-      KR: "🇰🇷",
-      CA: "🇨🇦",
-      IN: "🇮🇳",
-      MX: "🇲🇽",
-    }[countryCode] ?? "🏳️"
+    <span
+      className={cn(
+        "relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-[3px] border border-black/5 bg-muted text-[9px] font-semibold uppercase leading-none text-muted-foreground shadow-[0_1px_2px_rgba(15,23,42,0.08)]",
+        className,
+      )}
+    >
+      <span aria-hidden>{countryCode}</span>
+      <img
+        src={`https://flagcdn.com/${assetCode}.svg`}
+        alt={`${countryCode} flag`}
+        loading="lazy"
+        className="absolute inset-0 h-full w-full object-cover"
+        onError={(event) => {
+          event.currentTarget.style.display = "none";
+        }}
+      />
+    </span>
   );
 }
 

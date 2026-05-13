@@ -2038,7 +2038,7 @@
   .live-price-tick {
     display: inline-block;
     animation: live-price-tick 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
-    will-change: transform, opacity, filter;
+    will-change: opacity;
   }
 
   .live-fx-dot {
@@ -2287,19 +2287,13 @@
 
 @keyframes live-price-tick {
   0% {
-    opacity: 0.48;
-    transform: translateY(0.35rem) scale(0.985);
-    filter: blur(2px);
+    opacity: 0.62;
   }
   58% {
     opacity: 1;
-    transform: translateY(-0.06rem) scale(1.015);
-    filter: blur(0);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
   }
 }
 
