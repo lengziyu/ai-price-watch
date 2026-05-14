@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-13T15:16:11.727Z",
+  "generatedAt": "2026-05-14T14:44:56.041Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 12,
   "results": [
@@ -12,7 +12,7 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://openai.com/chatgpt/pricing/",
       "ok": false,
-      "fetchedAt": "2026-05-13T15:16:11.190Z",
+      "fetchedAt": "2026-05-14T14:44:55.315Z",
       "error": "HTTP 403 Forbidden"
     },
     {
@@ -24,7 +24,7 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-05-13T15:16:11.226Z",
+      "fetchedAt": "2026-05-14T14:44:55.352Z",
       "title": "Pricing – Codex | OpenAI Developers",
       "description": "Codex is included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
@@ -190,11 +190,11 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://www.anthropic.com/pricing#subscriptions",
       "ok": true,
-      "fetchedAt": "2026-05-13T15:16:11.228Z",
+      "fetchedAt": "2026-05-14T14:44:55.353Z",
       "title": "Plans & Pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
-      "byteLength": 1328521,
+      "byteLength": 1329023,
       "extraction": {
         "confidence": "review",
         "priceSignals": [
@@ -348,11 +348,11 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://one.google.com/about/google-ai-plans/",
       "ok": true,
-      "fetchedAt": "2026-05-13T15:16:11.229Z",
+      "fetchedAt": "2026-05-14T14:44:55.355Z",
       "title": "Google AI Plans with Cloud Storage - Google One",
       "description": "Explore Google AI Plans. Access our most advanced AI, generate videos from text, and secure cloud storage.",
       "status": 200,
-      "byteLength": 299178,
+      "byteLength": 297860,
       "extraction": {
         "confidence": "review",
         "priceSignals": [
@@ -379,16 +379,16 @@
         ],
         "planSignals": [
           {
-            "value": "Premium",
-            "context": "le AI Plans with Cloud Storage - Google One Save 50% on YouTube Premium for 12 months with purchase of a Google One Premium plan or hig"
-          },
-          {
             "value": "Plus",
             "context": "ay with a Google AI plan Sign up for a Google AI plan Google AI Plus 1 Get more done with more access to Google AI and expanded stor"
           },
           {
             "value": "Pro",
             "context": "vity Study smarter Boost productivity More access to Gemini 3.1 Pro and Deep Research in Gemini. More access to Gemini 3 Pro in AI"
+          },
+          {
+            "value": "Premium",
+            "context": "tos. Family sharing with up to five others. Get the Google Home Premium Standard plan at no cost ($10/mo value), with 30 days of event"
           },
           {
             "value": "Ultra",
@@ -426,11 +426,11 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-05-13T15:16:11.230Z",
+      "fetchedAt": "2026-05-14T14:44:55.356Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
-      "byteLength": 279342,
+      "byteLength": 282982,
       "extraction": {
         "confidence": "review",
         "priceSignals": [
@@ -468,11 +468,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-05-13T15:16:11.232Z",
+      "fetchedAt": "2026-05-14T14:44:55.357Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "GitHub Copilot works alongside you directly in your editor, suggesting whole lines or entire functions for you.",
       "status": 200,
-      "byteLength": 1138303,
+      "byteLength": 1139177,
       "extraction": {
         "confidence": "review",
         "priceSignals": [
@@ -562,7 +562,7 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-05-13T15:16:11.233Z",
+      "fetchedAt": "2026-05-14T14:44:55.358Z",
       "title": "Models and pricing for GitHub Copilot - GitHub Docs",
       "description": "See per-token pricing for the models available in GitHub Copilot and reference rates for additional usage across plans.",
       "status": 200,
@@ -732,7 +732,7 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": false,
-      "fetchedAt": "2026-05-13T15:16:11.233Z",
+      "fetchedAt": "2026-05-14T14:44:55.359Z",
       "error": "HTTP 403 Forbidden"
     },
     {
@@ -744,7 +744,7 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": false,
-      "fetchedAt": "2026-05-13T15:16:11.234Z",
+      "fetchedAt": "2026-05-14T14:44:55.360Z",
       "error": "HTTP 403 Forbidden"
     },
     {
@@ -756,7 +756,7 @@
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
       "ok": false,
-      "fetchedAt": "2026-05-13T15:16:11.236Z",
+      "fetchedAt": "2026-05-14T14:44:55.362Z",
       "error": "HTTP 403 Forbidden"
     },
     {
@@ -768,7 +768,7 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": false,
-      "fetchedAt": "2026-05-13T15:16:11.237Z",
+      "fetchedAt": "2026-05-14T14:44:55.363Z",
       "error": "HTTP 403 Forbidden"
     },
     {
@@ -780,7 +780,7 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": false,
-      "fetchedAt": "2026-05-13T15:16:11.238Z",
+      "fetchedAt": "2026-05-14T14:44:55.363Z",
       "error": "HTTP 403 Forbidden"
     }
   ]
