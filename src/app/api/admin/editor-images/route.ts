@@ -5,7 +5,9 @@ import { NextResponse } from "next/server";
 
 import { getAdminSession } from "@/lib/admin-auth";
 
-const uploadDir = path.join(process.cwd(), "public", "uploads", "deal-article-body");
+export const runtime = "nodejs";
+
+const uploadDir = path.join(process.cwd(), "data", "uploads", "deal-article-body");
 
 export async function POST(request: Request) {
   const session = await getAdminSession();

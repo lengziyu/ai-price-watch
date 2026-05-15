@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import { useActionState, useMemo, useRef, useState } from "react";
+import { createPortal, flushSync } from "react-dom";
 import {
   BoldIcon,
+  FileTextIcon,
   Heading2Icon,
   ImageIcon,
   ItalicIcon,
@@ -26,6 +28,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
+  defaultDealArticleCoverImageUrl,
   detectDealArticleSourcePlatform,
   formatDealArticleSourcePlatform,
 } from "@/lib/deal-articles";
@@ -67,6 +70,18 @@ type EditorImageUploadResponse = {
 };
 
 type CoverImageUploadResponse = EditorImageUploadResponse;
+
+type XHtmlImportResponse = {
+  sourcePlatform: DealArticleSourcePlatform;
+  title?: string;
+  summary?: string;
+  rawContent: string;
+  suggestedCoverImageUrl?: string;
+  imageCount?: number;
+  skippedImageCount?: number;
+  notice?: string;
+  error?: string;
+};
 
 const editorTextColors = [
   { label: "默认", value: "" },
@@ -120,6 +135,18 @@ function normalizeEditorHtml(value: string) {
     .trim();
 }
 
+function getImportedCoverNotice(imageCount: number, skippedImageCount: number) {
+  if (imageCount <= 0) {
+    return "正文已导入。";
+  }
+
+  if (skippedImageCount > 0) {
+    return `正文已导入，成功同步 ${imageCount} 张图片，另有 ${skippedImageCount} 张图片未能转存。`;
+  }
+
+  return `正文已导入，并同步了 ${imageCount} 张图片。`;
+}
+
 export function AdminDealArticleForm({
   action,
   article,
@@ -128,6 +155,7 @@ export function AdminDealArticleForm({
   pendingLabel,
 }: AdminDealArticleFormProps) {
   const [state, formAction, pending] = useActionState(action, initialState);
+  const formRef = useRef<HTMLFormElement>(null);
   const editorRef = useRef<HTMLDivElement>(null);
   const [sourceUrl, setSourceUrl] = useState(article?.sourceUrl ?? "");
   const [sourcePlatform, setSourcePlatform] = useState<DealArticleSourcePlatform>(article?.sourcePlatform ?? detectDealArticleSourcePlatform(article?.sourceUrl));
@@ -148,15 +176,20 @@ export function AdminDealArticleForm({
   const [tagInput, setTagInput] = useState("");
   const [isFetchingSource, setIsFetchingSource] = useState(false);
   const [sourceFetchMessage, setSourceFetchMessage] = useState<string | null>(null);
+  const [isImportSheetOpen, setIsImportSheetOpen] = useState(false);
+  const [xHtmlInput, setXHtmlInput] = useState("");
+  const [xHtmlImportMessage, setXHtmlImportMessage] = useState<string | null>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
   const coverInputRef = useRef<HTMLInputElement>(null);
   const savedSelectionRef = useRef<Range | null>(null);
   const [isUploadingEditorImage, setIsUploadingEditorImage] = useState(false);
+  const [isImportingXHtml, setIsImportingXHtml] = useState(false);
   const [editorMessage, setEditorMessage] = useState<string | null>(null);
   const [coverImageUrl, setCoverImageUrl] = useState(article?.coverImageUrl ?? "/default-deal-article-cover.svg");
   const [uploadedCoverImageUrl, setUploadedCoverImageUrl] = useState("");
   const [isUploadingCoverImage, setIsUploadingCoverImage] = useState(false);
   const [coverUploadMessage, setCoverUploadMessage] = useState<string | null>(null);
+  const isCreateMode = !article;
 
   const addTag = (value: string) => {
     const normalized = value.trim();
@@ -385,13 +418,189 @@ export function AdminDealArticleForm({
     }
   };
 
+  const submitImportedArticle = () => {
+    requestAnimationFrame(() => {
+      formRef.current?.requestSubmit();
+    });
+  };
+
+  async function handleImportXHtml(publishAfterImport = false) {
+    const trimmedHtml = xHtmlInput.trim();
+    if (!trimmedHtml || isImportingXHtml) {
+      return;
+    }
+
+    setIsImportingXHtml(true);
+    setXHtmlImportMessage(null);
+
+    try {
+      const response = await fetch("/api/admin/x-html-import", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ html: trimmedHtml }),
+      });
+      const payload = (await response.json()) as XHtmlImportResponse;
+
+      if (!response.ok || !payload.rawContent) {
+        throw new Error(payload.error || "X HTML 解析失败，请稍后重试。");
+      }
+
+      const importedImageCount = payload.imageCount ?? 0;
+      const skippedImageCount = payload.skippedImageCount ?? 0;
+      const shouldAutoApplyCover =
+        isCreateMode &&
+        !!payload.suggestedCoverImageUrl &&
+        (coverImageUrl === defaultDealArticleCoverImageUrl || !uploadedCoverImageUrl);
+
+      flushSync(() => {
+        setSourcePlatform(payload.sourcePlatform);
+        setTitle(payload.title ?? "");
+        setSummary(payload.summary ?? "");
+        setRawContent(payload.rawContent);
+        setEditorMessage(
+          payload.notice ?? getImportedCoverNotice(importedImageCount, skippedImageCount),
+        );
+        setSourceFetchMessage("已根据你粘贴的 X HTML 自动回填标题、摘要和正文。");
+        if (shouldAutoApplyCover && payload.suggestedCoverImageUrl) {
+          setCoverImageUrl(payload.suggestedCoverImageUrl);
+          setUploadedCoverImageUrl(payload.suggestedCoverImageUrl);
+          setCoverUploadMessage("已自动提取正文首图作为封面，你也可以继续手动替换。");
+        }
+        setIsImportSheetOpen(false);
+        setXHtmlInput("");
+      });
+
+      if (publishAfterImport) {
+        submitImportedArticle();
+      }
+    } catch (error) {
+      setXHtmlImportMessage(
+        error instanceof Error ? error.message : "X HTML 解析失败，请稍后重试。",
+      );
+    } finally {
+      setIsImportingXHtml(false);
+    }
+  }
+
+  const importXHtmlModal =
+    isImportSheetOpen && typeof document !== "undefined"
+      ? createPortal(
+          <div className="fixed inset-0 z-[140] flex justify-end bg-black/35 p-3 supports-backdrop-filter:backdrop-blur-xs sm:p-5">
+            <button
+              type="button"
+              aria-label="关闭导入 X HTML 弹框"
+              className="absolute inset-0 cursor-default"
+              onClick={() => {
+                if (!isImportingXHtml) {
+                  setIsImportSheetOpen(false);
+                  setXHtmlImportMessage(null);
+                }
+              }}
+            />
+            <div
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="import-x-html-title"
+              className="relative z-[141] flex h-full w-full max-w-2xl flex-col overflow-hidden rounded-[18px] border border-border/70 bg-popover text-popover-foreground shadow-[0_28px_120px_rgba(0,0,0,0.24)]"
+            >
+              <div className="border-b border-border/70 px-5 py-4">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="grid gap-1">
+                    <h2 id="import-x-html-title" className="font-heading text-base font-medium text-foreground">
+                      导入 X HTML
+                    </h2>
+                    <p className="text-sm text-muted-foreground">
+                      把你从 X 长文详情里复制下来的整段 HTML 粘进来。系统会自动识别正文结构、保留加粗小标题，并把正文图片转存到本站。
+                    </p>
+                  </div>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon-sm"
+                    className="shrink-0"
+                    onClick={() => {
+                      if (!isImportingXHtml) {
+                        setIsImportSheetOpen(false);
+                        setXHtmlImportMessage(null);
+                      }
+                    }}
+                    disabled={isImportingXHtml}
+                  >
+                    <XIcon className="size-4" />
+                  </Button>
+                </div>
+              </div>
+
+              <div className="grid gap-3 overflow-y-auto px-5 py-4">
+                <Textarea
+                  value={xHtmlInput}
+                  onChange={(event) => setXHtmlInput(event.target.value)}
+                  className="min-h-[360px] rounded-[12px] font-mono text-[12px] leading-6"
+                  placeholder='把从 X 复制下来的 HTML 粘贴到这里，例如包含 "public-DraftEditor-content" 的整段源码。'
+                  disabled={isImportingXHtml}
+                />
+                <div className="rounded-[10px] border border-border bg-background/72 px-3 py-2 text-xs leading-6 text-muted-foreground">
+                  导入后会自动覆盖当前标题、摘要和正文。
+                  {isCreateMode ? " 新建文章时还会默认提取正文第一张图作为封面。" : " 封面图仍然保持当前设置。"}
+                </div>
+                {xHtmlImportMessage ? (
+                  <div className="rounded-[10px] border border-destructive/25 bg-destructive/8 px-3 py-2 text-xs leading-6 text-destructive">
+                    {xHtmlImportMessage}
+                  </div>
+                ) : null}
+              </div>
+
+              <div className="mt-auto flex flex-col gap-2 border-t border-border/70 px-5 py-4 sm:flex-row sm:justify-end">
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={() => {
+                    if (!isImportingXHtml) {
+                      setIsImportSheetOpen(false);
+                      setXHtmlImportMessage(null);
+                    }
+                  }}
+                  disabled={isImportingXHtml}
+                  className="rounded-[10px]"
+                >
+                  取消
+                </Button>
+                <Button
+                  type="button"
+                  onClick={() => handleImportXHtml(false)}
+                  disabled={!xHtmlInput.trim() || isImportingXHtml}
+                  className="rounded-[10px]"
+                >
+                  {isImportingXHtml ? <LoaderCircleIcon className="animate-spin" /> : <SparklesIcon />}
+                  {isImportingXHtml ? "解析并回填中..." : "确认导入并回填"}
+                </Button>
+                {isCreateMode ? (
+                  <Button
+                    type="button"
+                    onClick={() => handleImportXHtml(true)}
+                    disabled={!xHtmlInput.trim() || isImportingXHtml || pending}
+                    className="rounded-[10px]"
+                  >
+                    {isImportingXHtml || pending ? <LoaderCircleIcon className="animate-spin" /> : <SparklesIcon />}
+                    {isImportingXHtml || pending ? "导入并发布中..." : "导入并直接发布"}
+                  </Button>
+                ) : null}
+              </div>
+            </div>
+          </div>,
+          document.body,
+        )
+      : null;
+
   return (
-    <form action={formAction} encType="multipart/form-data" className="grid gap-5">
+    <form ref={formRef} action={formAction} encType="multipart/form-data" className="grid gap-5">
       <div className="grid gap-2">
         <label htmlFor="sourceUrl" className="text-sm font-medium text-foreground">
           来源链接
         </label>
-        <div className="grid gap-2 md:grid-cols-[minmax(0,1fr)_auto]">
+        <div className="grid gap-2 md:grid-cols-[minmax(0,1fr)_auto_auto]">
           <Input
             id="sourceUrl"
             name="sourceUrl"
@@ -404,6 +613,15 @@ export function AdminDealArticleForm({
             {isFetchingSource ? <LoaderCircleIcon className="animate-spin" /> : <SparklesIcon />}
             {isFetchingSource ? "抓取中..." : "抓取内容"}
           </Button>
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() => setIsImportSheetOpen(true)}
+            className="rounded-[8px] px-4"
+          >
+            <FileTextIcon />
+            导入 X HTML
+          </Button>
         </div>
         {sourceFetchMessage ? (
           <div className="rounded-[8px] border border-border bg-background/72 px-3 py-2 text-xs leading-6 text-muted-foreground">
@@ -411,6 +629,8 @@ export function AdminDealArticleForm({
           </div>
         ) : null}
       </div>
+
+      {importXHtmlModal}
 
       <div className="grid items-start gap-5 xl:grid-cols-[minmax(0,1fr)_500px]">
         <div className="grid gap-4">

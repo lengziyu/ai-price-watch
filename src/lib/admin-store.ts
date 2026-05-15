@@ -512,7 +512,10 @@ async function resolveUpdatedDealArticleCoverImageUrl(
 function sanitizeUploadedDealArticleCoverUrl(url: string) {
   const normalized = url.trim();
 
-  if (/^\/uploads\/deal-articles\/[A-Za-z0-9._-]+\.(?:jpg|jpeg|png|webp|avif|svg)$/i.test(normalized)) {
+  if (
+    /^\/uploads\/deal-articles\/[A-Za-z0-9._-]+\.(?:jpg|jpeg|png|webp|avif|svg)$/i.test(normalized) ||
+    /^\/uploads\/deal-article-body\/[A-Za-z0-9._-]+\.(?:jpg|jpeg|png|webp|avif|svg)$/i.test(normalized)
+  ) {
     return normalized;
   }
 
