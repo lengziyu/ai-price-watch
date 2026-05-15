@@ -196,6 +196,7 @@ export async function createDealArticleAction(
   revalidatePath("/admin/articles");
   revalidatePath("/admin/content");
   revalidatePath("/admin/logs");
+  revalidatePath("/");
   revalidatePath("/deals");
   revalidatePath(`/deals/articles/${created.slug}`);
   redirect("/admin/articles");
@@ -261,6 +262,7 @@ export async function updateDealArticleAction(
   revalidatePath(`/admin/articles/${articleId}/edit`);
   revalidatePath("/admin/content");
   revalidatePath("/admin/logs");
+  revalidatePath("/");
   revalidatePath("/deals");
   revalidatePath(`/deals/articles/${currentArticle.slug}`);
   revalidatePath(`/deals/articles/${updated.slug}`);
@@ -276,6 +278,7 @@ export async function deleteDealArticleAction(articleId: string) {
   revalidatePath("/admin/articles");
   revalidatePath("/admin/content");
   revalidatePath("/admin/logs");
+  revalidatePath("/");
   revalidatePath("/deals");
   if (currentArticle) {
     revalidatePath(`/deals/articles/${currentArticle.slug}`);

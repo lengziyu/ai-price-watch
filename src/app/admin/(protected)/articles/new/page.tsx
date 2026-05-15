@@ -27,7 +27,7 @@ export default async function AdminNewArticlePage() {
         }
       />
 
-      <Card className="surface-card motion-surface motion-surface--green rounded-[10px] border-border">
+      <Card className="admin-article-form-card surface-card motion-surface motion-surface--green rounded-[10px] border-border">
         <CardHeader className="px-5 py-4">
           <CardTitle>文章表单</CardTitle>
           <CardDescription>支持默认封面，也支持直接上传自定义封面图。</CardDescription>

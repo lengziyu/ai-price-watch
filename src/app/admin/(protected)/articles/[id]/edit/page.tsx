@@ -58,7 +58,7 @@ export default async function AdminEditArticlePage({ params }: PageProps) {
         }
       />
 
-      <Card className="surface-card motion-surface motion-surface--amber rounded-[10px] border-border">
+      <Card className="admin-article-form-card surface-card motion-surface motion-surface--amber rounded-[10px] border-border">
         <CardHeader className="px-5 py-4">
           <CardTitle>{article.title}</CardTitle>
           <CardDescription>当前文章已经发布到前台，保存后列表页和详情页会一起刷新。</CardDescription>
