@@ -5,14 +5,18 @@ import { useActionState, useMemo, useRef, useState } from "react";
 import {
   BoldIcon,
   Heading2Icon,
+  ImageIcon,
   ItalicIcon,
   LinkIcon,
   ListIcon,
+  ListOrderedIcon,
   LoaderCircleIcon,
   PencilIcon,
   PilcrowIcon,
   PlusIcon,
+  QuoteIcon,
   SparklesIcon,
+  UnderlineIcon,
   XIcon,
 } from "lucide-react";
 
@@ -56,6 +60,20 @@ type SourceExtractResponse = {
   summary?: string;
   rawContent: string;
 };
+
+type EditorImageUploadResponse = {
+  url?: string;
+  error?: string;
+};
+
+const editorTextColors = [
+  { label: "默认", value: "" },
+  { label: "墨绿", value: "#063f33" },
+  { label: "强调绿", value: "#059669" },
+  { label: "橙色", value: "#ea580c" },
+  { label: "红色", value: "#dc2626" },
+  { label: "蓝色", value: "#2563eb" },
+];
 
 function escapeHtml(value: string) {
   return value
@@ -128,6 +146,10 @@ export function AdminDealArticleForm({
   const [tagInput, setTagInput] = useState("");
   const [isFetchingSource, setIsFetchingSource] = useState(false);
   const [sourceFetchMessage, setSourceFetchMessage] = useState<string | null>(null);
+  const imageInputRef = useRef<HTMLInputElement>(null);
+  const savedSelectionRef = useRef<Range | null>(null);
+  const [isUploadingEditorImage, setIsUploadingEditorImage] = useState(false);
+  const [editorMessage, setEditorMessage] = useState<string | null>(null);
 
   const addTag = (value: string) => {
     const normalized = value.trim();
@@ -200,24 +222,71 @@ export function AdminDealArticleForm({
     }
   };
 
-  const applyEditorCommand = (command: "bold" | "italic" | "insertUnorderedList" | "formatBlock") => {
+  const syncEditorContent = () => {
+    setRawContent(normalizeEditorHtml(editorRef.current?.innerHTML ?? ""));
+  };
+
+  const saveEditorSelection = () => {
+    const selection = window.getSelection();
+    if (!selection?.rangeCount || !editorRef.current) {
+      return;
+    }
+
+    const range = selection.getRangeAt(0);
+    if (editorRef.current.contains(range.commonAncestorContainer)) {
+      savedSelectionRef.current = range.cloneRange();
+    }
+  };
+
+  const restoreEditorSelection = () => {
+    const selection = window.getSelection();
+    const range = savedSelectionRef.current;
+
+    editorRef.current?.focus();
+    if (!selection || !range) {
+      return;
+    }
+
+    selection.removeAllRanges();
+    selection.addRange(range);
+  };
+
+  const applyEditorCommand = (command: "bold" | "italic" | "underline" | "insertUnorderedList" | "insertOrderedList" | "formatBlock") => {
+    restoreEditorSelection();
     editorRef.current?.focus();
     if (command === "formatBlock") {
       document.execCommand("formatBlock", false, "p");
+      syncEditorContent();
       return;
     }
     document.execCommand(command, false);
-    setRawContent(normalizeEditorHtml(editorRef.current?.innerHTML ?? ""));
+    syncEditorContent();
   };
 
   const applyHeading = () => {
-    editorRef.current?.focus();
+    restoreEditorSelection();
     document.execCommand("formatBlock", false, "h2");
-    setRawContent(normalizeEditorHtml(editorRef.current?.innerHTML ?? ""));
+    syncEditorContent();
+  };
+
+  const applyBlockquote = () => {
+    restoreEditorSelection();
+    document.execCommand("formatBlock", false, "blockquote");
+    syncEditorContent();
+  };
+
+  const applyTextColor = (color: string) => {
+    restoreEditorSelection();
+    if (color) {
+      document.execCommand("foreColor", false, color);
+    } else {
+      document.execCommand("removeFormat", false);
+    }
+    syncEditorContent();
   };
 
   const insertLink = () => {
-    editorRef.current?.focus();
+    restoreEditorSelection();
     const link = window.prompt("请输入链接（https://...）");
     if (!link) {
       return;
@@ -229,7 +298,48 @@ export function AdminDealArticleForm({
     }
 
     document.execCommand("createLink", false, normalized);
-    setRawContent(normalizeEditorHtml(editorRef.current?.innerHTML ?? ""));
+    syncEditorContent();
+  };
+
+  const openEditorImagePicker = () => {
+    saveEditorSelection();
+    imageInputRef.current?.click();
+  };
+
+  const handleEditorImageUpload = async (file?: File) => {
+    if (!file || isUploadingEditorImage) {
+      return;
+    }
+
+    setIsUploadingEditorImage(true);
+    setEditorMessage(null);
+
+    try {
+      const uploadFormData = new FormData();
+      uploadFormData.set("image", file);
+
+      const response = await fetch("/api/admin/editor-images", {
+        method: "POST",
+        body: uploadFormData,
+      });
+      const payload = (await response.json()) as EditorImageUploadResponse;
+
+      if (!response.ok || !payload.url) {
+        throw new Error(payload.error || "图片上传失败，请稍后重试。");
+      }
+
+      restoreEditorSelection();
+      document.execCommand("insertImage", false, payload.url);
+      syncEditorContent();
+      setEditorMessage("图片已插入正文。");
+    } catch (error) {
+      setEditorMessage(error instanceof Error ? error.message : "图片上传失败，请稍后重试。");
+    } finally {
+      setIsUploadingEditorImage(false);
+      if (imageInputRef.current) {
+        imageInputRef.current.value = "";
+      }
+    }
   };
 
   return (
@@ -428,24 +538,58 @@ export function AdminDealArticleForm({
         </label>
         <div className="admin-rich-editor">
           <div className="admin-rich-editor__toolbar">
-            <button type="button" className="admin-rich-editor__tool" onClick={() => applyEditorCommand("formatBlock")} title="正文段落">
+            <button type="button" className="admin-rich-editor__tool" onMouseDown={saveEditorSelection} onClick={() => applyEditorCommand("formatBlock")} title="正文段落">
               <PilcrowIcon className="size-4" />
             </button>
-            <button type="button" className="admin-rich-editor__tool" onClick={applyHeading} title="二级标题">
+            <button type="button" className="admin-rich-editor__tool" onMouseDown={saveEditorSelection} onClick={applyHeading} title="二级标题">
               <Heading2Icon className="size-4" />
             </button>
-            <button type="button" className="admin-rich-editor__tool" onClick={() => applyEditorCommand("bold")} title="加粗">
+            <button type="button" className="admin-rich-editor__tool" onMouseDown={saveEditorSelection} onClick={() => applyEditorCommand("bold")} title="加粗">
               <BoldIcon className="size-4" />
             </button>
-            <button type="button" className="admin-rich-editor__tool" onClick={() => applyEditorCommand("italic")} title="斜体">
+            <button type="button" className="admin-rich-editor__tool" onMouseDown={saveEditorSelection} onClick={() => applyEditorCommand("italic")} title="斜体">
               <ItalicIcon className="size-4" />
             </button>
-            <button type="button" className="admin-rich-editor__tool" onClick={() => applyEditorCommand("insertUnorderedList")} title="无序列表">
+            <button type="button" className="admin-rich-editor__tool" onMouseDown={saveEditorSelection} onClick={() => applyEditorCommand("underline")} title="下划线">
+              <UnderlineIcon className="size-4" />
+            </button>
+            <button type="button" className="admin-rich-editor__tool" onMouseDown={saveEditorSelection} onClick={() => applyEditorCommand("insertUnorderedList")} title="无序列表">
               <ListIcon className="size-4" />
             </button>
-            <button type="button" className="admin-rich-editor__tool" onClick={insertLink} title="插入链接">
+            <button type="button" className="admin-rich-editor__tool" onMouseDown={saveEditorSelection} onClick={() => applyEditorCommand("insertOrderedList")} title="有序列表">
+              <ListOrderedIcon className="size-4" />
+            </button>
+            <button type="button" className="admin-rich-editor__tool" onMouseDown={saveEditorSelection} onClick={applyBlockquote} title="引用">
+              <QuoteIcon className="size-4" />
+            </button>
+            <button type="button" className="admin-rich-editor__tool" onMouseDown={saveEditorSelection} onClick={insertLink} title="插入链接">
               <LinkIcon className="size-4" />
             </button>
+            <button type="button" className="admin-rich-editor__tool" onMouseDown={saveEditorSelection} onClick={openEditorImagePicker} title="上传并插入图片" disabled={isUploadingEditorImage}>
+              {isUploadingEditorImage ? <LoaderCircleIcon className="size-4 animate-spin" /> : <ImageIcon className="size-4" />}
+            </button>
+            <div className="admin-rich-editor__colors" aria-label="文字颜色">
+              {editorTextColors.map((color) => (
+                <button
+                  key={color.label}
+                  type="button"
+                  className="admin-rich-editor__color"
+                  title={`文字颜色：${color.label}`}
+                  onMouseDown={saveEditorSelection}
+                  onClick={() => applyTextColor(color.value)}
+                  style={{ ["--editor-color" as string]: color.value || "var(--foreground)" }}
+                >
+                  <span />
+                </button>
+              ))}
+            </div>
+            <input
+              ref={imageInputRef}
+              type="file"
+              accept="image/png,image/jpeg,image/webp,image/avif,image/svg+xml"
+              className="hidden"
+              onChange={(event) => handleEditorImageUpload(event.currentTarget.files?.[0])}
+            />
           </div>
           <div
             ref={editorRef}
@@ -454,6 +598,8 @@ export function AdminDealArticleForm({
             suppressContentEditableWarning
             role="textbox"
             aria-label="文章详情富文本编辑器"
+            onMouseUp={saveEditorSelection}
+            onKeyUp={saveEditorSelection}
             onInput={(event) => {
               const content = normalizeEditorHtml(event.currentTarget.innerHTML);
               setRawContent(content);
@@ -464,6 +610,11 @@ export function AdminDealArticleForm({
           />
           <input type="hidden" id="rawContent" name="rawContent" value={rawContent} />
         </div>
+        {editorMessage ? (
+          <div className="rounded-[8px] border border-border bg-background/72 px-3 py-2 text-xs leading-5 text-muted-foreground">
+            {editorMessage}
+          </div>
+        ) : null}
         <FieldMessage message={state.fieldErrors?.rawContent} />
       </div>
 

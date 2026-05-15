@@ -11,11 +11,13 @@ const blockedTagPattern = /<(script|style|iframe|object|embed|form|input|button|
 const blockedSelfClosingTagPattern = /<(script|style|iframe|object|embed|form|input|button|textarea|select|option|link|meta|base|svg|math)\b[^>]*\/?>/gi;
 const allowedHtmlTags = new Set([
   "p",
+  "span",
   "br",
   "strong",
   "em",
   "b",
   "i",
+  "font",
   "u",
   "s",
   "blockquote",
@@ -29,6 +31,7 @@ const allowedHtmlTags = new Set([
   "pre",
   "code",
   "a",
+  "img",
 ]);
 
 export type DealArticleBlock =
@@ -100,8 +103,27 @@ export function sanitizeDealArticleHtml(html: string) {
       return "";
     }
 
+    if (tagName === "font") {
+      if (slash) {
+        return "</span>";
+      }
+
+      const colorMatch = String(rawAttrs ?? "").match(/\bcolor\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>"']+))/i);
+      const color = sanitizeColor(colorMatch?.[1] ?? colorMatch?.[2] ?? colorMatch?.[3] ?? "");
+      return color ? `<span style="color: ${escapeHtmlAttribute(color)}">` : "<span>";
+    }
+
     if (slash) {
+      if (tagName === "br" || tagName === "img") {
+        return "";
+      }
+
       return `</${tagName}>`;
+    }
+
+    if (tagName === "span") {
+      const color = sanitizeInlineColorStyle(String(rawAttrs ?? ""));
+      return color ? `<span style="color: ${escapeHtmlAttribute(color)}">` : "<span>";
     }
 
     if (tagName === "a") {
@@ -118,6 +140,19 @@ export function sanitizeDealArticleHtml(html: string) {
 
     if (tagName === "br") {
       return "<br>";
+    }
+
+    if (tagName === "img") {
+      const srcMatch = String(rawAttrs ?? "").match(/\bsrc\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>"']+))/i);
+      const altMatch = String(rawAttrs ?? "").match(/\balt\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>"']+))/i);
+      const src = sanitizeImageSrc(srcMatch?.[1] ?? srcMatch?.[2] ?? srcMatch?.[3] ?? "");
+
+      if (!src) {
+        return "";
+      }
+
+      const alt = String(altMatch?.[1] ?? altMatch?.[2] ?? altMatch?.[3] ?? "").slice(0, 120);
+      return `<img src="${escapeHtmlAttribute(src)}" alt="${escapeHtmlAttribute(alt)}" loading="lazy">`;
     }
 
     return `<${tagName}>`;
@@ -385,6 +420,44 @@ function sanitizeHref(rawHref: string) {
 
   if (/^(?:https?:\/\/|mailto:|tel:|\/|#)/i.test(normalized)) {
     return normalized;
+  }
+
+  return null;
+}
+
+function sanitizeImageSrc(src: string) {
+  const normalized = decodeHtmlEntities(src).trim();
+
+  if (/^\/uploads\/deal-article-body\/[A-Za-z0-9._/-]+\.(?:jpg|jpeg|png|webp|avif|svg)$/i.test(normalized)) {
+    return normalized;
+  }
+
+  return null;
+}
+
+function sanitizeInlineColorStyle(attrs: string) {
+  const styleMatch = attrs.match(/\bstyle\s*=\s*(?:"([^"]*)"|'([^']*)'|([^>]+))/i);
+  const style = styleMatch?.[1] ?? styleMatch?.[2] ?? styleMatch?.[3] ?? "";
+  const colorMatch = style.match(/(?:^|;)\s*color\s*:\s*([^;]+)/i);
+
+  return sanitizeColor(colorMatch?.[1] ?? "");
+}
+
+function sanitizeColor(value: string) {
+  const color = decodeHtmlEntities(value).trim();
+
+  if (/^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/i.test(color)) {
+    return color;
+  }
+
+  const rgbMatch = color.match(/^rgba?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})(?:\s*,\s*(0|1|0?\.\d+))?\s*\)$/i);
+  if (!rgbMatch) {
+    return null;
+  }
+
+  const channels = rgbMatch.slice(1, 4).map((item) => Number(item));
+  if (channels.every((channel) => Number.isInteger(channel) && channel >= 0 && channel <= 255)) {
+    return color;
   }
 
   return null;
