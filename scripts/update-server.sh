@@ -5,7 +5,7 @@ APP_DIR="${APP_DIR:-/opt/apps/ai-price-watch}"
 APP_NAME="${APP_NAME:-ai-price-watch}"
 APP_PORT="${APP_PORT:-3014}"
 APP_BRANCH="${APP_BRANCH:-main}"
-RUNTIME_MUTABLE_FILES="${RUNTIME_MUTABLE_FILES:-data/admin/operation-logs.json}"
+RUNTIME_MUTABLE_FILES="${RUNTIME_MUTABLE_FILES:-data/admin/operation-logs.json data/admin/deal-articles.json}"
 
 echo "[1/8] Enter app dir: ${APP_DIR}"
 cd "${APP_DIR}"
