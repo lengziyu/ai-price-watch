@@ -11,7 +11,7 @@ const crawlTargets = [
     category: "membership-rate",
     surface: "membership-rates",
     sourceLabel: "ChatGPT Pricing",
-    url: "https://openai.com/chatgpt/pricing/",
+    url: "https://chatgpt.com/zh-Hans-CN/pricing/",
   },
   {
     id: "openai-codex-pricing",
@@ -29,7 +29,7 @@ const crawlTargets = [
     category: "membership-rate",
     surface: "membership-rates",
     sourceLabel: "Claude Pricing",
-    url: "https://www.anthropic.com/pricing#subscriptions",
+    url: "https://claude.com/pricing",
   },
   {
     id: "google-ai-plans",
@@ -38,7 +38,7 @@ const crawlTargets = [
     category: "membership-rate",
     surface: "membership-rates",
     sourceLabel: "Google AI Plans",
-    url: "https://one.google.com/about/google-ai-plans/",
+    url: "https://gemini.google/us/subscriptions/?hl=en",
   },
   {
     id: "cursor-pricing",
@@ -47,7 +47,16 @@ const crawlTargets = [
     category: "membership-rate",
     surface: "membership-rates",
     sourceLabel: "Cursor Pricing",
-    url: "https://cursor.com/pricing",
+    url: "https://cursor.com/cn/pricing",
+  },
+  {
+    id: "deepseek-api-pricing",
+    vendor: "DeepSeek",
+    vendorId: "deepseek",
+    category: "membership-rate",
+    surface: "membership-rates",
+    sourceLabel: "DeepSeek API Pricing",
+    url: "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
   },
   {
     id: "github-copilot-plans",
@@ -115,9 +124,9 @@ const crawlTargets = [
 ];
 
 const pricePattern =
-  /(?:[$€£¥]\s?\d+(?:,\d{3})*(?:\.\d{1,3})?|\d+(?:\.\d{1,3})?\s?(?:USD|EUR|GBP|CNY|credits?|requests?|messages?|tokens?|x usage))/gi;
+  /(?:[$€£¥]\s?\d+(?:,\d{3})*(?:\.\d{1,3})?|\d+(?:,\d{3})*(?:\.\d{1,3})?\s?(?:USD|EUR|GBP|CNY|元|credits?|requests?|messages?|tokens?|MTok|次|x usage))/gi;
 const planPattern =
-  /(?:\b(?:plus|pro|team|business|enterprise|max|ultra|hobby|free|starter|student|education|codex|agent|copilot|premium)\b|premium\+|pro\+|fast requests?)/gi;
+  /(?:\b(?:plus|pro|team|business|enterprise|max|ultra|hobby|free|starter|student|education|codex|agent|copilot|premium|deepseek|flash|reasoner)\b|premium\+|pro\+|fast requests?)/gi;
 
 async function main() {
   const startedAt = new Date().toISOString();
@@ -147,10 +156,14 @@ async function crawlTarget(target) {
   const fetchedAt = new Date().toISOString();
 
   try {
-    const html = await fetchHtml(target.url);
-    const text = normalizeText(html);
-    const title = extractTitle(html);
-    const description = extractMetaDescription(html);
+    const page = await fetchPage(target.url);
+    const text = normalizeText(page.body);
+    const title =
+      page.mode === "jina_markdown"
+        ? extractMarkdownTitle(page.body) || extractTitle(page.body)
+        : extractTitle(page.body);
+    const description =
+      page.mode === "jina_markdown" ? "" : extractMetaDescription(page.body);
     const priceSignals = extractSignals(text, pricePattern, 28);
     const planSignals = extractSignals(text, planPattern, 18);
 
@@ -160,8 +173,9 @@ async function crawlTarget(target) {
       fetchedAt,
       title,
       description,
-      status: 200,
-      byteLength: html.length,
+      status: page.status,
+      byteLength: page.body.length,
+      fetchMode: page.mode,
       extraction: {
         confidence: priceSignals.length > 0 || planSignals.length > 0 ? "review" : "low",
         priceSignals,
@@ -178,7 +192,32 @@ async function crawlTarget(target) {
   }
 }
 
-async function fetchHtml(url) {
+async function fetchPage(url) {
+  try {
+    const direct = await fetchRaw(url);
+
+    return {
+      body: direct.body,
+      mode: "direct_html",
+      status: direct.status,
+    };
+  } catch (error) {
+    if (!shouldFallbackToJina(error)) {
+      throw error;
+    }
+
+    const fallbackUrl = toJinaProxyUrl(url);
+    const fallback = await fetchRaw(fallbackUrl, true);
+
+    return {
+      body: fallback.body,
+      mode: "jina_markdown",
+      status: fallback.status,
+    };
+  }
+}
+
+async function fetchRaw(url, allowPlainText = false) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 18_000);
 
@@ -199,19 +238,47 @@ async function fetchHtml(url) {
     }
 
     const contentType = response.headers.get("content-type") ?? "";
-    if (!contentType.includes("text/html")) {
+    const htmlLike = contentType.includes("text/html");
+    const textLike = contentType.includes("text/plain") || contentType.includes("text/markdown");
+
+    if (!htmlLike && !(allowPlainText && textLike)) {
       throw new Error(`Unsupported content type: ${contentType || "unknown"}`);
     }
 
-    return await response.text();
+    return {
+      body: await response.text(),
+      status: response.status,
+      contentType,
+    };
   } finally {
     clearTimeout(timeout);
   }
 }
 
+function shouldFallbackToJina(error) {
+  const message = error instanceof Error ? error.message.toLowerCase() : String(error).toLowerCase();
+
+  return (
+    message.includes("http 403") ||
+    message.includes("http 429") ||
+    message.includes("forbidden") ||
+    message.includes("just a moment")
+  );
+}
+
+function toJinaProxyUrl(url) {
+  const parsed = new URL(url);
+  return `https://r.jina.ai/http://${parsed.host}${parsed.pathname}${parsed.search}`;
+}
+
 function extractTitle(html) {
   const match = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
   return match ? decodeHtml(match[1]).trim() : "";
+}
+
+function extractMarkdownTitle(text) {
+  const match = text.match(/^Title:\s*(.+)$/m);
+  return match ? match[1].trim() : "";
 }
 
 function extractMetaDescription(html) {

@@ -1,10 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { startTransition, useRef, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { useRef, useState } from "react";
 import {
   ArrowUpRightIcon,
+  CheckIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   QuoteIcon,
@@ -47,13 +48,23 @@ type MembershipRatesExplorerProps = {
 };
 
 type MembershipVendorBoard = (typeof membershipVendorBoards)[number];
+type PricePlan = {
+  name: string;
+  price?: string;
+  priceLabel?: string;
+  cnyEstimate?: number | null;
+  audience?: string;
+  summary?: string;
+  detail?: string;
+  note?: string;
+  updatedAt?: string;
+  features?: readonly string[];
+};
 
 export function MembershipRatesExplorer({
   defaultVendor = "openai",
   defaultOpenAITab = "consumer",
 }: MembershipRatesExplorerProps) {
-  const router = useRouter();
-  const pathname = usePathname();
   const initialVendor = membershipVendorBoards.some(
     (item) => item.id === defaultVendor,
   )
@@ -78,6 +89,20 @@ export function MembershipRatesExplorer({
     });
   };
 
+  const syncVendorQuery = (vendorId: string) => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const url = new URL(window.location.href);
+    if (url.searchParams.get("vendor") === vendorId) {
+      return;
+    }
+
+    url.searchParams.set("vendor", vendorId);
+    window.history.replaceState(window.history.state, "", url.toString());
+  };
+
   return (
     <section
       ref={(node) => {
@@ -85,7 +110,7 @@ export function MembershipRatesExplorer({
       }}
       className="app-shell mt-4 sm:mt-8"
     >
-      <div className="rounded-[12px] border border-border bg-background px-3.5 py-4 sm:px-5 sm:py-5 lg:px-6">
+      <div className="rounded-[10px] border border-border bg-background px-3.5 py-4 sm:px-5 sm:py-5 lg:px-6">
         <div className="flex flex-col gap-4 sm:gap-5">
           <div className="max-w-3xl">
             <div className="mono-kicker text-[12px] uppercase text-muted-foreground">
@@ -95,7 +120,7 @@ export function MembershipRatesExplorer({
               会员速率总览
             </AnimatedSectionTitle>
             <p className="mt-1.5 text-[13px] leading-6 text-muted-foreground sm:text-sm">
-              先按厂商切换，再看官方公开的速率口径与社区常见体感。OpenAI 这一页保留最完整的细表，其它厂商先做摘要型面板。
+              按官方页面整理价格、权益和额度口径；社区观察只作为使用体感参考。
             </p>
           </div>
 
@@ -106,71 +131,67 @@ export function MembershipRatesExplorer({
           >
             <div className="page-tabs-sticky__surface p-1.5">
               <div className="rate-tabs-shell">
-              <button
-                type="button"
-                aria-label="向左滚动厂商"
-                onClick={() => scrollVendorTabs(-260)}
-                className="rate-tabs-arrow"
-              >
-                <ChevronLeftIcon className="size-4" />
-              </button>
-              <div
-                ref={(node) => {
-                  vendorTabsRef.current = node;
-                  vendorRailRef.current = node;
-                }}
-                className="rate-tabs-scroll"
-              >
-                <span
-                  ref={vendorIndicatorRef}
-                  aria-hidden="true"
-                  className="segmented-indicator segmented-indicator--accent"
-                />
-                {membershipVendorBoards.map((vendor) => {
-                  const active = activeVendor === vendor.id;
+                <button
+                  type="button"
+                  aria-label="向左滚动厂商"
+                  onClick={() => scrollVendorTabs(-260)}
+                  className="rate-tabs-arrow"
+                >
+                  <ChevronLeftIcon className="size-4" />
+                </button>
+                <div
+                  ref={(node) => {
+                    vendorTabsRef.current = node;
+                    vendorRailRef.current = node;
+                  }}
+                  className="rate-tabs-scroll"
+                >
+                  <span
+                    ref={vendorIndicatorRef}
+                    aria-hidden="true"
+                    className="segmented-indicator segmented-indicator--accent"
+                  />
+                  {membershipVendorBoards.map((vendor) => {
+                    const active = activeVendor === vendor.id;
 
-                  return (
-                    <button
-                      key={vendor.id}
-                      type="button"
-                      data-testid={`vendor-tab-${vendor.id}`}
-                      data-segmented-active={active ? "true" : undefined}
-                      onClick={() => {
-                        setActiveVendor(vendor.id);
-                        scrollToStickyContent();
-                        startTransition(() => {
-                          router.replace(`${pathname}?vendor=${vendor.id}`, {
-                            scroll: false,
-                          });
-                        });
-                      }}
-                      className={cn(
-                        "rate-tab-button",
-                        active ? "is-active" : "is-idle",
-                      )}
-                    >
-                      <VendorLogo id={vendor.id} active={active} />
-                      <div className="flex min-w-0 flex-col gap-0.5">
-                        <span className="truncate text-[12px] font-semibold">
-                          {vendor.label}
-                        </span>
-                        <span className="truncate text-[10px] opacity-75">
-                          {vendor.priceLabel}
-                        </span>
-                      </div>
-                    </button>
-                  );
-                })}
+                    return (
+                      <button
+                        key={vendor.id}
+                        type="button"
+                        data-testid={`vendor-tab-${vendor.id}`}
+                        data-segmented-active={active ? "true" : undefined}
+                        onClick={() => {
+                          setActiveVendor(vendor.id);
+                          scrollToStickyContent();
+                          syncVendorQuery(vendor.id);
+                        }}
+                        className={cn(
+                          "rate-tab-button",
+                          active ? "is-active" : "is-idle",
+                        )}
+                      >
+                        <VendorLogo id={vendor.id} active={active} />
+                        <div className="flex min-w-0 flex-col gap-0.5">
+                          <span className="truncate text-[12px] font-semibold">
+                            {vendor.label}
+                          </span>
+                          <span className="truncate text-[10px] opacity-75">
+                            {vendor.priceLabel}
+                          </span>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+                <button
+                  type="button"
+                  aria-label="向右滚动厂商"
+                  onClick={() => scrollVendorTabs(260)}
+                  className="rate-tabs-arrow"
+                >
+                  <ChevronRightIcon className="size-4" />
+                </button>
               </div>
-              <button
-                type="button"
-                aria-label="向右滚动厂商"
-                onClick={() => scrollVendorTabs(260)}
-                className="rate-tabs-arrow"
-              >
-                <ChevronRightIcon className="size-4" />
-              </button>
-            </div>
             </div>
           </div>
 
@@ -188,6 +209,19 @@ export function MembershipRatesExplorer({
 }
 
 function VendorLogo({ id, active }: { id: string; active: boolean }) {
+  const logoMap: Record<string, string> = {
+    openai: "/vendor-logos/openai.png",
+    anthropic: "/vendor-logos/anthropic.png",
+    google: "/vendor-logos/google.png",
+    cursor: "/vendor-logos/cursor.png",
+    github: "/vendor-logos/github.png",
+    deepseek: "/vendor-logos/deepseek.png",
+    grok: "/vendor-logos/grok.png",
+    perplexity: "/vendor-logos/perplexity.png",
+  };
+
+  const src = logoMap[id];
+
   return (
     <span
       className={cn(
@@ -197,45 +231,88 @@ function VendorLogo({ id, active }: { id: string; active: boolean }) {
       )}
       aria-hidden="true"
     >
-      {id === "openai" ? (
-        <svg viewBox="0 0 24 24">
-          <path d="M12 4.2c2.1 0 3.8 1.1 4.6 2.8 1.9.2 3.3 1.7 3.3 3.7 0 1.5-.8 2.8-2.1 3.4.1 1.9-1.2 3.7-3.1 4.3-1.4.5-2.9.1-4-.9-1.6.9-3.8.6-5-.9-1-1.2-1.2-2.8-.6-4.2-1.2-1.1-1.6-2.9-.8-4.4.7-1.3 2-2 3.4-2 1-1.1 2.5-1.8 4.3-1.8Z" />
-          <path d="M8.1 8.6 12 6.3l3.9 2.3v4.8L12 15.7l-3.9-2.3V8.6Z" />
-        </svg>
-      ) : null}
-      {id === "anthropic" ? (
-        <svg viewBox="0 0 24 24">
-          <path d="M12 3.6 19.3 20h-3.1l-1.5-3.4H9.3L7.8 20H4.7L12 3.6Zm1.6 10.2L12 9.7l-1.6 4.1h3.2Z" />
-        </svg>
-      ) : null}
-      {id === "google" ? (
-        <svg viewBox="0 0 24 24">
-          <path fill="#4285F4" d="M12 2.5c.4 3.7 1.3 5.4 3.3 7.4 2 2 3.7 2.9 6.2 3.3-2.5.4-4.2 1.3-6.2 3.3-2 2-2.9 3.7-3.3 6.2-.4-2.5-1.3-4.2-3.3-6.2-2-2-3.7-2.9-6.2-3.3 2.5-.4 4.2-1.3 6.2-3.3 2-2 2.9-3.7 3.3-6.2Z" />
-        </svg>
-      ) : null}
-      {id === "cursor" ? (
-        <svg viewBox="0 0 24 24">
-          <path d="M5 3.8 19.6 11 13 13l-2 6.8L5 3.8Z" />
-        </svg>
-      ) : null}
-      {id === "github" ? (
-        <svg viewBox="0 0 24 24">
-          <path d="M12 3.8a8.2 8.2 0 0 0-2.6 15.9c.4.1.5-.2.5-.4v-1.6c-2.3.5-2.8-1-2.9-1.4-.2-.5-.5-1-.9-1.4-.3-.2-.7-.6 0-.6.6 0 1 .6 1.2.8.7 1.1 1.8.8 2.3.6.1-.5.3-.8.5-1-1.9-.2-3.9-.9-3.9-4.2 0-.9.3-1.6.8-2.2-.1-.2-.3-1 .1-2.2 0 0 .7-.2 2.3.8a8 8 0 0 1 4.2 0c1.6-1 2.3-.8 2.3-.8.5 1.2.2 2 .1 2.2.5.6.8 1.3.8 2.2 0 3.3-2 4-3.9 4.2.3.3.5.8.5 1.5v2.3c0 .2.1.5.5.4A8.2 8.2 0 0 0 12 3.8Z" />
-        </svg>
-      ) : null}
-      {id === "grok" ? (
-        <svg viewBox="0 0 24 24">
-          <path d="M5.2 5h3.4l3.5 4.7L15.8 5h3l-4.9 6.4 5.1 7.6h-3.4l-3.8-5.6L8 19H5l5.1-6.7L5.2 5Z" />
-        </svg>
-      ) : null}
-      {id === "perplexity" ? (
-        <svg viewBox="0 0 24 24">
-          <path d="M8 4.5h8v2.3h-5.7v3H16v2.2h-5.7v5.2H8V4.5Z" />
-          <path d="M11.8 10.2h4.2v2.2h-4.2z" />
-          <path d="M14.8 12.4 19 16.6l-1.6 1.6-4.2-4.2z" />
-        </svg>
-      ) : null}
+      {src ? (
+        <Image
+          src={src}
+          alt=""
+          width={26}
+          height={26}
+          className="rounded-[8px] object-contain"
+        />
+      ) : (
+        <span className="vendor-logo__letter">{id.slice(0, 1).toUpperCase()}</span>
+      )}
     </span>
+  );
+}
+
+function PricePlanCard({ plan, badge }: { plan: PricePlan; badge?: string }) {
+  const description = plan.summary ?? plan.detail;
+  const price = plan.priceLabel ?? plan.price ?? "";
+  const cnyEstimate =
+    typeof plan.cnyEstimate === "number" ? `约 ¥${plan.cnyEstimate} / 月` : null;
+
+  return (
+    <Card
+      size="sm"
+      className="membership-price-card rounded-[10px] border border-border bg-card shadow-none"
+    >
+      <CardHeader className="gap-3 px-4 py-4">
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0 space-y-2">
+            <CardTitle className="truncate text-[1rem]">{plan.name}</CardTitle>
+            {badge ? (
+              <Badge variant="secondary" className="w-fit rounded-[8px]">
+                {badge}
+              </Badge>
+            ) : null}
+          </div>
+          <div className="membership-price-value-wrap shrink-0 text-right">
+            <div className="membership-price-value text-[1.22rem] font-semibold tracking-[-0.03em] text-foreground">
+              {price}
+            </div>
+            <div className="membership-price-sub text-[10px] text-muted-foreground">
+              {cnyEstimate ?? "以官方页面为准"}
+            </div>
+          </div>
+        </div>
+        {description ? (
+          <CardDescription className="membership-price-desc text-[12px] leading-5">
+            {description}
+          </CardDescription>
+        ) : null}
+      </CardHeader>
+      <CardContent className="flex flex-col gap-3 px-4 pb-4">
+        <PlanFeatureList features={plan.features} />
+        {plan.note ? (
+          <div className="membership-price-note rounded-[10px] border border-border bg-muted/35 px-3 py-2 text-[12px] leading-5 text-muted-foreground">
+            {plan.note}
+          </div>
+        ) : null}
+        {plan.updatedAt ? (
+          <div className="text-[10px] text-muted-foreground">
+            复核时间：{plan.updatedAt}
+          </div>
+        ) : null}
+      </CardContent>
+    </Card>
+  );
+}
+
+function PlanFeatureList({ features }: { features?: readonly string[] }) {
+  if (!features?.length) {
+    return null;
+  }
+
+  return (
+    <ul className="membership-feature-list flex flex-col gap-2 text-[12px] leading-5 text-foreground/82">
+      {features.slice(0, 7).map((feature) => (
+        <li key={feature} className="flex gap-2">
+          <CheckIcon className="mt-0.5 size-3.5 shrink-0 text-primary" />
+          <span>{feature}</span>
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -246,49 +323,19 @@ function OpenAIBoard({ defaultTab }: { defaultTab: string }) {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="grid gap-3 lg:grid-cols-4">
+      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         {membershipPlans.map((plan) => (
-          <Card key={plan.id} size="sm" className="surface-card rounded-[12px]">
-            <CardHeader className="gap-2 px-4 py-4">
-              <div className="flex items-start justify-between gap-3">
-                <div className="flex flex-col gap-2">
-                  <CardTitle className="text-[0.98rem]">{plan.name}</CardTitle>
-                  <Badge variant="secondary" className="w-fit">
-                    {plan.audience}
-                  </Badge>
-                </div>
-                <div className="text-right">
-                  <div className="text-[1.08rem] font-semibold tracking-[-0.03em] text-foreground">
-                    {plan.priceLabel}
-                  </div>
-                  <div className="text-[10px] text-muted-foreground">
-                    约 ¥{plan.cnyEstimate} / 月
-                  </div>
-                </div>
-              </div>
-              <CardDescription className="text-[12px] leading-6">
-                {plan.summary}
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="flex flex-col gap-2 px-4 pb-4">
-              <div className="rounded-[10px] border border-border bg-background/70 px-3 py-2.5 text-[12px] leading-6 text-muted-foreground">
-                {plan.note}
-              </div>
-              <div className="text-[10px] text-muted-foreground">
-                复核时间：{plan.updatedAt}
-              </div>
-            </CardContent>
-          </Card>
+          <PricePlanCard key={plan.id} plan={plan} badge={plan.audience} />
         ))}
 
-        <Card size="sm" className="rounded-[12px] border border-border bg-card">
+        <Card size="sm" className="rounded-[10px] border border-border bg-card shadow-none">
           <CardHeader className="gap-2 px-4 py-4">
             <Badge variant="outline" className="w-fit">
               官方来源
             </Badge>
             <CardTitle className="text-[0.98rem]">OpenAI 公开口径</CardTitle>
             <CardDescription className="text-[12px] leading-6">
-              目前能同时看到会员价格、Codex 帮助说明和 Business credits 三层文档。
+              价格页负责套餐权益，Codex 文档负责额度和 Business credits。
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col gap-2 px-4 pb-4 text-[12px]">
@@ -313,7 +360,7 @@ function OpenAIBoard({ defaultTab }: { defaultTab: string }) {
 
         {activeTab === "consumer" ? (
           <>
-            <div className="overflow-hidden rounded-[12px] border border-border bg-card">
+            <div className="overflow-hidden rounded-[10px] border border-border bg-card">
               <div className="flex flex-col gap-2 border-b border-border px-4 py-4 sm:px-5">
                 <div className="flex flex-wrap items-center gap-2">
                   <h3 className="text-[1rem] font-semibold">个人会员额度</h3>
@@ -356,7 +403,11 @@ function OpenAIBoard({ defaultTab }: { defaultTab: string }) {
 
             <div className="grid gap-3 lg:grid-cols-3">
               {communityObservations.map((item) => (
-                <Card key={item.title} size="sm" className="surface-card rounded-[12px]">
+                <Card
+                  key={item.title}
+                  size="sm"
+                  className="rounded-[10px] border border-border bg-card shadow-none"
+                >
                   <CardHeader className="gap-2 px-4 py-4">
                     <Badge variant="outline" className="w-fit">
                       社区观察
@@ -372,7 +423,11 @@ function OpenAIBoard({ defaultTab }: { defaultTab: string }) {
 
             <div className="grid gap-3 lg:grid-cols-3">
               {communitySnapshots.map((item) => (
-                <Card key={item.source} size="sm" className="motion-surface motion-surface--cyan rounded-[12px] border border-border">
+                <Card
+                  key={item.source}
+                  size="sm"
+                  className="rounded-[10px] border border-border bg-card shadow-none"
+                >
                   <CardHeader className="gap-3 px-4 py-4">
                     <div className="flex items-start gap-3">
                       <div className="mt-0.5 flex size-8 items-center justify-center rounded-full bg-primary/10 text-primary">
@@ -407,7 +462,7 @@ function OpenAIBoard({ defaultTab }: { defaultTab: string }) {
 
         {activeTab === "business" ? (
           <div className="grid gap-4 lg:grid-cols-[0.92fr_1.08fr]">
-            <Card className="surface-card rounded-[12px]">
+            <Card className="rounded-[10px] border border-border bg-card shadow-none">
               <CardHeader className="gap-3 px-5 py-5">
                 <CardTitle>Business / Enterprise 口径</CardTitle>
                 <CardDescription className="text-[13px] leading-6">
@@ -423,7 +478,7 @@ function OpenAIBoard({ defaultTab }: { defaultTab: string }) {
               </CardContent>
             </Card>
 
-            <div className="overflow-hidden rounded-[12px] border border-border bg-card">
+            <div className="overflow-hidden rounded-[10px] border border-border bg-card">
               <div className="border-b border-border px-4 py-4 sm:px-5">
                 <h3 className="text-[1rem] font-semibold">Business credits per 1M tokens</h3>
               </div>
@@ -456,146 +511,96 @@ function OpenAIBoard({ defaultTab }: { defaultTab: string }) {
 }
 
 function VendorBoard({ vendor }: { vendor: MembershipVendorBoard }) {
+  const quotaRows = "quotaRows" in vendor ? vendor.quotaRows : undefined;
+
   return (
     <div className="flex flex-col gap-4">
-      <div className="grid gap-3 xl:grid-cols-[1.1fr_0.9fr_0.9fr]">
-        <VendorMetricCard
-          label="价格带"
-          value={vendor.priceLabel}
-          detail={vendor.officialRate}
-          accent
-        />
-        <VendorMetricCard
-          label="官方口径"
-          value="公开说明"
-          detail={vendor.officialRate}
-        />
-        <VendorMetricCard
-          label="社区体感"
-          value="真实使用"
-          detail={vendor.communityRate}
-        />
-      </div>
+      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+        {vendor.plans.map((plan) => (
+          <PricePlanCard
+            key={`${vendor.id}-${plan.name}`}
+            plan={plan}
+            badge={vendor.label}
+          />
+        ))}
 
-      <div className="grid gap-4 xl:grid-cols-[0.96fr_1.04fr]">
-        <Card className="surface-card rounded-[12px]">
-          <CardHeader className="gap-3 px-5 py-5">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <div className="flex flex-col gap-2">
-                <Badge variant="outline" className="w-fit">
-                  {vendor.label}
-                </Badge>
-                <CardTitle>{vendor.title}</CardTitle>
-              </div>
-              <Link
-                href={vendor.officialSource}
-                target="_blank"
-                className="inline-flex items-center gap-1 text-[12px] font-medium text-foreground hover:text-primary"
-              >
-                官方页面
-                <ArrowUpRightIcon className="size-3.5" />
-              </Link>
-            </div>
-            <CardDescription className="text-[13px] leading-6">
+        <Card size="sm" className="rounded-[10px] border border-border bg-card shadow-none">
+          <CardHeader className="gap-2 px-4 py-4">
+            <Badge variant="outline" className="w-fit">
+              官方来源
+            </Badge>
+            <CardTitle className="text-[0.98rem]">{vendor.title}</CardTitle>
+            <CardDescription className="text-[12px] leading-6">
               {vendor.officialRate}
             </CardDescription>
           </CardHeader>
-          <CardContent className="grid gap-3 px-5 pb-5">
-            {vendor.plans.map((plan) => (
-              <div
-                key={plan.name}
-                className="rounded-[12px] border border-border bg-background/78 px-3.5 py-3"
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <div className="text-[13px] font-semibold text-foreground">
-                    {plan.name}
-                  </div>
-                  <div className="text-[12px] font-medium text-primary">
-                    {plan.price}
-                  </div>
-                </div>
-                <p className="mt-1.5 text-[12px] leading-6 text-muted-foreground sm:text-[13px]">
-                  {plan.detail}
-                </p>
-              </div>
-            ))}
+          <CardContent className="flex flex-col gap-2 px-4 pb-4 text-[12px]">
+            <SourceLink href={vendor.officialSource} label={`${vendor.label} 官方页面`} />
           </CardContent>
         </Card>
+      </div>
 
-        <div className="grid gap-4">
-          <Card className="rounded-[12px] border border-border bg-card">
-            <CardHeader className="gap-2 px-5 py-5">
-              <Badge variant="secondary" className="w-fit">
-                官方说明
-              </Badge>
-              <CardTitle className="text-[1rem]">官方速率口径怎么写</CardTitle>
-            </CardHeader>
-            <CardContent className="grid gap-2 px-5 pb-5">
-              {vendor.officialNotes.map((note) => (
-                <div
-                  key={note}
-                  className="rounded-[10px] border border-border bg-background/72 px-3 py-2.5 text-[12px] leading-6 text-muted-foreground sm:text-[13px]"
-                >
-                  {note}
-                </div>
+      {quotaRows?.length ? (
+        <div className="overflow-hidden rounded-[10px] border border-border bg-card">
+          <div className="flex flex-col gap-2 border-b border-border px-4 py-4 sm:px-5">
+            <div className="flex flex-wrap items-center gap-2">
+              <h3 className="text-[1rem] font-semibold">{vendor.label} 额度矩阵</h3>
+              <Badge variant="outline">官方口径 + 社区体感</Badge>
+            </div>
+            <p className="text-[12px] leading-6 text-muted-foreground sm:text-[13px]">
+              按公开文档整理关键口径；无法公开精确次数的厂商用等级和社区体感补充。
+            </p>
+          </div>
+          <Table>
+            <TableHeader>
+              <TableRow className="hover:bg-transparent">
+                <TableHead className="pl-4 sm:pl-5">任务类型</TableHead>
+                <TableHead>周期</TableHead>
+                <TableHead>入门档</TableHead>
+                <TableHead>中档</TableHead>
+                <TableHead>高档</TableHead>
+                <TableHead className="pr-4 text-left sm:pr-5">社区体感</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {quotaRows.map((row) => (
+                <TableRow key={`${vendor.id}-${row.scope}`}>
+                  <TableCell className="pl-4 font-medium whitespace-normal sm:pl-5">
+                    {row.scope}
+                  </TableCell>
+                  <TableCell>{row.period}</TableCell>
+                  <TableCell>{row.low}</TableCell>
+                  <TableCell>{row.mid}</TableCell>
+                  <TableCell>{row.high}</TableCell>
+                  <TableCell className="pr-4 whitespace-normal text-muted-foreground sm:pr-5">
+                    {row.community}
+                  </TableCell>
+                </TableRow>
               ))}
-            </CardContent>
-          </Card>
-
-          <Card className="rounded-[12px] border border-border bg-card">
-            <CardHeader className="gap-2 px-5 py-5">
-              <Badge variant="outline" className="w-fit">
-                社区体感
-              </Badge>
-              <CardTitle className="text-[1rem]">网友实际怎么感受</CardTitle>
-            </CardHeader>
-            <CardContent className="grid gap-2 px-5 pb-5">
-              {vendor.communityNotes.map((note) => (
-                <div
-                  key={note}
-                  className="rounded-[10px] border border-border bg-background/72 px-3 py-2.5 text-[12px] leading-6 text-muted-foreground sm:text-[13px]"
-                >
-                  {note}
-                </div>
-              ))}
-            </CardContent>
-          </Card>
+            </TableBody>
+          </Table>
         </div>
+      ) : null}
+
+      <div className="grid gap-3 lg:grid-cols-3">
+        {vendor.communityNotes.map((item) => (
+          <Card
+            key={`${vendor.id}-community-${item}`}
+            size="sm"
+            className="rounded-[10px] border border-border bg-card shadow-none"
+          >
+            <CardHeader className="gap-2 px-4 py-4">
+              <Badge variant="outline" className="w-fit">
+                社区观察
+              </Badge>
+              <CardDescription className="text-[12px] leading-6 sm:text-[13px]">
+                {item}
+              </CardDescription>
+            </CardHeader>
+          </Card>
+        ))}
       </div>
     </div>
-  );
-}
-
-function VendorMetricCard({
-  label,
-  value,
-  detail,
-  accent = false,
-}: {
-  label: string;
-  value: string;
-  detail: string;
-  accent?: boolean;
-}) {
-  return (
-    <Card
-      size="sm"
-      className={
-        accent
-          ? "motion-surface motion-surface--green rounded-[12px] border-border"
-          : "surface-card rounded-[12px]"
-      }
-    >
-      <CardHeader className="gap-1.5 px-4 py-4">
-        <CardDescription className="text-[11px] uppercase tracking-[0.12em]">
-          {label}
-        </CardDescription>
-        <CardTitle className="text-[1rem]">{value}</CardTitle>
-      </CardHeader>
-      <CardContent className="px-4 pb-4 text-[12px] leading-6 text-muted-foreground sm:text-[13px]">
-        {detail}
-      </CardContent>
-    </Card>
   );
 }
 

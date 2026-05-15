@@ -19,6 +19,23 @@ export function formatDate(value: string) {
   }).format(new Date(value));
 }
 
+export function formatDateTime(value: string) {
+  const parts = new Intl.DateTimeFormat("zh-CN", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  }).formatToParts(new Date(value));
+
+  const get = (type: Intl.DateTimeFormatPartTypes) =>
+    parts.find((part) => part.type === type)?.value ?? "";
+
+  return `${get("year")}/${get("month")}/${get("day")} ${get("hour")}:${get("minute")}:${get("second")}`;
+}
+
 export function estimateCnyFromUsd(value?: number) {
   if (!value) {
     return undefined;
@@ -48,6 +65,14 @@ export function formatDealStatus(value: "active" | "expired" | "unknown") {
     active: "进行中",
     expired: "已结束",
     unknown: "待确认",
+  }[value];
+}
+
+export function formatDealArticleStatus(value: "not_started" | "in_progress" | "ended") {
+  return {
+    not_started: "未开始",
+    in_progress: "进行中",
+    ended: "已结束",
   }[value];
 }
 

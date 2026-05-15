@@ -25,6 +25,7 @@ const adminNav: AdminNavItem[] = [
   { label: "采集任务", icon: "refresh", href: "/admin/jobs" },
   { label: "人工复核", icon: "shield", href: "/admin/review" },
   { label: "手动录入", icon: "pen", href: "/admin/manual" },
+  { label: "文章管理", icon: "article", href: "/admin/articles" },
   { label: "内容数据", icon: "database", href: "/admin/content" },
   { label: "操作日志", icon: "logs", href: "/admin/logs" },
 ];

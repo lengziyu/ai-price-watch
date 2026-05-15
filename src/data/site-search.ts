@@ -105,6 +105,14 @@ export const siteSearchEntries: SiteSearchEntry[] = [
     keywords: ["github", "copilot", "code review", "premium requests"],
   },
   {
+    id: "vendor-deepseek",
+    title: "DeepSeek",
+    description: "看 DeepSeek API 模型价格、上下文和扣费规则。",
+    href: "/membership-rates?vendor=deepseek",
+    section: "厂商",
+    keywords: ["deepseek", "api", "tokens", "v4", "flash", "pro"],
+  },
+  {
     id: "vendor-grok",
     title: "Grok",
     description: "看 X Premium / Premium+ 下的 Grok 访问层级。",

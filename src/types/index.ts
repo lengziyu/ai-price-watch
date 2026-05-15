@@ -103,6 +103,28 @@ export type AIDeal = {
   updatedAt: string;
 };
 
+export type DealArticleStatus = "not_started" | "in_progress" | "ended";
+
+export type DealArticleSourcePlatform = "x" | "linux_do" | "other";
+
+export type DealArticle = {
+  id: string;
+  slug: string;
+  title: string;
+  summary: string;
+  body: string;
+  rawContent: string;
+  coverImageUrl: string;
+  viewCount: number;
+  likeCount: number;
+  sourcePlatform: DealArticleSourcePlatform;
+  sourceUrl?: string;
+  status: DealArticleStatus;
+  tags: string[];
+  publishedAt: string;
+  updatedAt: string;
+};
+
 export type UseCase = {
   id: string;
   title: string;

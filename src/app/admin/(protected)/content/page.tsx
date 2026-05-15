@@ -297,6 +297,7 @@ export default async function AdminContentPage() {
           </CardContent>
         </Card>
       </section>
+
     </>
   );
 }

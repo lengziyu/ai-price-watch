@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import {
   DatabaseIcon,
   FileClockIcon,
+  FileTextIcon,
   FilePenLineIcon,
   RadarIcon,
   RefreshCcwIcon,
@@ -14,7 +15,7 @@ import {
 export type AdminNavItem = {
   href: string;
   label: string;
-  icon: "radar" | "refresh" | "shield" | "pen" | "database" | "logs";
+  icon: "radar" | "refresh" | "shield" | "pen" | "database" | "logs" | "article";
 };
 
 const iconMap = {
@@ -24,6 +25,7 @@ const iconMap = {
   pen: FilePenLineIcon,
   database: DatabaseIcon,
   logs: FileClockIcon,
+  article: FileTextIcon,
 } as const;
 
 export function AdminSidebarNav({
@@ -39,7 +41,9 @@ export function AdminSidebarNav({
     <div className="flex flex-col gap-1.5">
       {items.map((item) => {
         const Icon = iconMap[item.icon];
-        const isActive = pathname === item.href;
+        const isActive =
+          pathname === item.href ||
+          (item.href !== "/admin" && pathname.startsWith(`${item.href}/`));
 
         return (
           <Link

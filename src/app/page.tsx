@@ -1,17 +1,17 @@
 import Link from "next/link";
 import { ArrowRightIcon, GiftIcon } from "lucide-react";
 
+import { HomeContentOverview } from "@/components/home/home-content-overview";
 import { subscriptionPlans } from "@/data/subscriptions";
 import { buttonVariants } from "@/components/ui/button";
 import { SubscriptionExplorer } from "@/components/pricing/subscription-explorer";
-import { AnimatedSectionTitle } from "@/components/shared/animated-section-title";
 import { ScrambleText } from "@/components/shared/scramble-text";
-import {
-  HeroShowcase,
-  homeFeatureCards,
-} from "@/components/shared/hero-showcase";
+import { HeroShowcase } from "@/components/shared/hero-showcase";
+import { getDealArticles } from "@/lib/admin-store";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const articles = await getDealArticles();
+
   return (
     <div className="pb-8 sm:pb-16">
       <section className="hero-stage hero-grid hero-aura -mt-[84px] w-full bg-background pt-[96px] sm:-mt-[104px] sm:pt-[120px]">
@@ -22,28 +22,30 @@ export default function HomePage() {
                 <span className="size-2 rounded-full bg-primary" />
                 <span>实时更新</span>
                 <span>·</span>
-                <span>官方价格</span>
+                <span>会员速率</span>
                 <span>·</span>
-                <span>人民币比价</span>
+                <span>场景推荐</span>
+                <span>·</span>
+                <span>优惠文章</span>
               </div>
 
               <div className="max-w-[680px] text-[1.42rem] font-semibold leading-[0.99] tracking-[-0.034em] text-foreground sm:text-[2.58rem] lg:text-[3.28rem]">
                 <div>
-                  <ScrambleText text="AI 订阅会员" />
+                  <ScrambleText text="AI 会员价格" />
                 </div>
                 <div className="inline-flex items-baseline gap-2">
-                  <ScrambleText text="全球价格" />
+                  <ScrambleText text="额度场景优惠" />
                   <ScrambleText
-                    text="一站对比"
+                    text="首页先看"
                     className="gradient-title"
                   />
                 </div>
               </div>
 
               <p className="max-w-[580px] text-[12px] leading-[1.55] text-muted-foreground sm:text-[14px] sm:leading-[1.58]">
-                聚合 ChatGPT、Claude、Gemini、Cursor 等主流 AI 产品订阅价格，
+                不只是订阅比价，现在还把会员速率、使用场景、工具导航和优惠文章一起汇总到首页。
                 <br />
-                支持多币种与地区对比，帮你找到最优方案，降低 AI 使用成本。
+                先看重点，再决定去哪个厂商、哪个套餐、哪个页面继续深挖。
               </p>
 
               <div className="flex flex-col gap-3 sm:flex-row">
@@ -78,58 +80,29 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="app-shell mt-4 sm:mt-8">
-        <div className="mb-4">
-          <div className="mono-kicker text-[12px] uppercase text-muted-foreground">
-            product map
-          </div>
-          <AnimatedSectionTitle className="mt-2">
-            主要页面入口
-          </AnimatedSectionTitle>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
-            首页先给出站内核心能力：订阅比价、Token 成本、会员速率、优惠活动和使用场景。
-          </p>
-        </div>
-
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-6">
-          {homeFeatureCards.map((item, index) => {
-            const Icon = item.icon;
-
-            return (
-              <Link
-                key={item.title}
-                href={item.href}
-                className={[
-                  item.active ? "rspress-feature-card is-active" : "rspress-feature-card",
-                  index > 2 ? "lg:col-span-3" : "lg:col-span-2",
-                ].join(" ")}
-              >
-                <span className="rspress-feature-card__icon">
-                  <Icon className="size-5" />
-                </span>
-                <span className="rspress-feature-card__title">
-                  {item.title}
-                </span>
-                <span className="rspress-feature-card__detail">
-                  {item.description}
-                </span>
-                <span className="rspress-feature-card__action">
-                  进入页面
-                  <ArrowRightIcon className="size-4" />
-                </span>
-              </Link>
-            );
-          })}
-        </div>
-      </section>
+      <HomeContentOverview articles={articles} />
 
       <section className="app-shell mt-4 sm:mt-8">
         <SubscriptionExplorer
           plans={subscriptionPlans}
           embedded
           disableStickyTabs
-          maxRows={4}
+          maxRows={10}
         />
+        <div className="mt-4 flex justify-center sm:mt-5">
+          <Link
+            href="/pricing/subscriptions"
+            className={buttonVariants({
+              variant: "outline",
+              size: "lg",
+              className:
+                "min-w-[220px] rounded-[12px] border-primary/18 bg-primary/[0.04] px-6 text-primary hover:bg-primary/[0.08]",
+            })}
+          >
+            查看完整会员订阅比价
+            <ArrowRightIcon data-icon="inline-end" />
+          </Link>
+        </div>
       </section>
     </div>
   );

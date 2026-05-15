@@ -1,4 +1,4 @@
-import type { AIDeal } from "@/types";
+import type { AIDeal, DealArticleStatus } from "@/types";
 
 import type { AdminOperationLog, CrawlSnapshot, SourceReview } from "@/lib/admin-store";
 
@@ -90,6 +90,17 @@ export function renderDealStatusLabel(value: AIDeal["status"]) {
   }
 }
 
+export function renderDealArticleStatusLabel(value: DealArticleStatus) {
+  switch (value) {
+    case "not_started":
+      return "未开始";
+    case "in_progress":
+      return "进行中";
+    case "ended":
+      return "已结束";
+  }
+}
+
 export function renderOperationTypeLabel(value: AdminOperationLog["type"]) {
   switch (value) {
     case "login_success":
@@ -100,6 +111,12 @@ export function renderOperationTypeLabel(value: AdminOperationLog["type"]) {
       return "退出登录";
     case "manual_deal_create":
       return "手动录入";
+    case "deal_article_publish":
+      return "发布文章";
+    case "deal_article_update":
+      return "更新文章";
+    case "deal_article_delete":
+      return "删除文章";
     case "membership_rate_review_create":
       return "会员速率复核";
     case "source_review_create":

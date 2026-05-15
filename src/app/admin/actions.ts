@@ -14,13 +14,18 @@ import {
 } from "@/lib/admin-auth";
 import {
   appendOperationLog,
+  createDealArticle,
+  deleteDealArticle,
   createManualDeal,
   createMembershipRateReview,
   createSourceReview,
   getCrawlSnapshot,
+  getDealArticleById,
+  type DealArticleInput,
   type ManualDealInput,
   type MembershipRateReviewInput,
   type SourceReviewInput,
+  updateDealArticle,
 } from "@/lib/admin-store";
 import { membershipVendorBoards } from "@/data/membership-rates";
 
@@ -139,6 +144,140 @@ export async function createManualDealAction(
     message: `已录入「${created.title}」`,
     detail: "这条数据已写入本地 JSON，可继续补录下一条。",
   };
+}
+
+export async function createDealArticleAction(
+  _prevState: AdminMutationState,
+  formData: FormData,
+): Promise<AdminMutationState> {
+  const session = await requireAdminAuth();
+  const rawTags = String(formData.get("tags") ?? "");
+
+  const input: DealArticleInput = {
+    title: String(formData.get("title") ?? "").trim(),
+    summary: String(formData.get("summary") ?? "").trim(),
+    rawContent: String(formData.get("rawContent") ?? "").trim(),
+    coverImage: formData.get("coverImage") instanceof File ? (formData.get("coverImage") as File) : undefined,
+    resetCoverImage: String(formData.get("resetCoverImage") ?? "") === "true",
+    sourcePlatform: String(formData.get("sourcePlatform") ?? "other") as DealArticleInput["sourcePlatform"],
+    sourceUrl: String(formData.get("sourceUrl") ?? "").trim() || undefined,
+    status: String(formData.get("status") ?? "not_started") as DealArticleInput["status"],
+    tags: rawTags
+      .split(/[,\n/、，]/)
+      .map((item) => item.trim())
+      .filter(Boolean),
+  };
+
+  const fieldErrors: Record<string, string> = {};
+  if (!input.rawContent) fieldErrors.rawContent = "请粘贴要整理发布的原文";
+
+  if (Object.keys(fieldErrors).length > 0) {
+    return {
+      status: "error",
+      message: "文章内容还不完整。",
+      fieldErrors,
+    };
+  }
+
+  let created: Awaited<ReturnType<typeof createDealArticle>>;
+
+  try {
+    created = await createDealArticle(input, session.username);
+  } catch (error) {
+    return {
+      status: "error",
+      message: "文章发布失败。",
+      detail: error instanceof Error ? error.message : "请检查封面图和原文后重试。",
+    };
+  }
+
+  revalidatePath("/admin");
+  revalidatePath("/admin/articles");
+  revalidatePath("/admin/content");
+  revalidatePath("/admin/logs");
+  revalidatePath("/deals");
+  revalidatePath(`/deals/articles/${created.slug}`);
+  redirect("/admin/articles");
+}
+
+export async function updateDealArticleAction(
+  articleId: string,
+  _prevState: AdminMutationState,
+  formData: FormData,
+): Promise<AdminMutationState> {
+  const session = await requireAdminAuth();
+  const rawTags = String(formData.get("tags") ?? "");
+  const currentArticle = await getDealArticleById(articleId);
+
+  if (!currentArticle) {
+    return {
+      status: "error",
+      message: "文章不存在或已被删除。",
+    };
+  }
+
+  const input: DealArticleInput = {
+    title: String(formData.get("title") ?? "").trim(),
+    summary: String(formData.get("summary") ?? "").trim(),
+    rawContent: String(formData.get("rawContent") ?? "").trim(),
+    coverImage: formData.get("coverImage") instanceof File ? (formData.get("coverImage") as File) : undefined,
+    resetCoverImage: String(formData.get("resetCoverImage") ?? "") === "true",
+    sourcePlatform: String(formData.get("sourcePlatform") ?? "other") as DealArticleInput["sourcePlatform"],
+    sourceUrl: String(formData.get("sourceUrl") ?? "").trim() || undefined,
+    status: String(formData.get("status") ?? "not_started") as DealArticleInput["status"],
+    tags: rawTags
+      .split(/[,\n/、，]/)
+      .map((item) => item.trim())
+      .filter(Boolean),
+  };
+
+  const fieldErrors: Record<string, string> = {};
+  if (!input.rawContent) fieldErrors.rawContent = "请粘贴要整理发布的原文";
+
+  if (Object.keys(fieldErrors).length > 0) {
+    return {
+      status: "error",
+      message: "文章内容还不完整。",
+      fieldErrors,
+    };
+  }
+
+  let updated: Awaited<ReturnType<typeof updateDealArticle>>;
+
+  try {
+    updated = await updateDealArticle(articleId, input, session.username);
+  } catch (error) {
+    return {
+      status: "error",
+      message: "文章更新失败。",
+      detail: error instanceof Error ? error.message : "请检查表单内容后重试。",
+    };
+  }
+
+  revalidatePath("/admin");
+  revalidatePath("/admin/articles");
+  revalidatePath(`/admin/articles/${articleId}/edit`);
+  revalidatePath("/admin/content");
+  revalidatePath("/admin/logs");
+  revalidatePath("/deals");
+  revalidatePath(`/deals/articles/${currentArticle.slug}`);
+  revalidatePath(`/deals/articles/${updated.slug}`);
+  redirect("/admin/articles");
+}
+
+export async function deleteDealArticleAction(articleId: string) {
+  const session = await requireAdminAuth();
+  const currentArticle = await getDealArticleById(articleId);
+
+  await deleteDealArticle(articleId, session.username);
+  revalidatePath("/admin");
+  revalidatePath("/admin/articles");
+  revalidatePath("/admin/content");
+  revalidatePath("/admin/logs");
+  revalidatePath("/deals");
+  if (currentArticle) {
+    revalidatePath(`/deals/articles/${currentArticle.slug}`);
+  }
 }
 
 export async function triggerCrawlAction(): Promise<AdminMutationState> {

@@ -1,5 +1,68 @@
 [
   {
+    "id": "a3be22e0-8acd-4248-a357-8674ebc6adc4",
+    "createdAt": "2026-05-14T14:55:26.417Z",
+    "actor": "admin",
+    "type": "deal_article_update",
+    "status": "success",
+    "message": "更新优惠文章：免费领取价值 $20 的 Kiro Pro 会员",
+    "detail": "x · in_progress"
+  },
+  {
+    "id": "14fd93ed-19cd-4546-a50c-df6b92f9df6f",
+    "createdAt": "2026-05-14T14:32:28.631Z",
+    "actor": "admin",
+    "type": "deal_article_update",
+    "status": "success",
+    "message": "更新优惠文章：免费领取价值 $20 的 Kiro Pro 会员",
+    "detail": "x · in_progress"
+  },
+  {
+    "id": "5b926620-8475-46c7-995f-8060992dea0a",
+    "createdAt": "2026-05-14T14:31:19.554Z",
+    "actor": "admin",
+    "type": "deal_article_publish",
+    "status": "success",
+    "message": "发布优惠文章：免费领取价值 $20 的 Kiro Pro 会员",
+    "detail": "x · in_progress"
+  },
+  {
+    "id": "a36c5f72-654f-4ef9-8636-079aa3e18f25",
+    "createdAt": "2026-05-14T10:18:41.082Z",
+    "actor": "admin",
+    "type": "deal_article_update",
+    "status": "success",
+    "message": "更新优惠文章：🔥 ChatGPT Business 限时福利来了！",
+    "detail": "x · in_progress"
+  },
+  {
+    "id": "c7fa60e9-916a-4b70-9030-3a4586ce4a3d",
+    "createdAt": "2026-05-14T10:16:21.967Z",
+    "actor": "admin",
+    "type": "deal_article_publish",
+    "status": "success",
+    "message": "发布优惠文章：🔥 ChatGPT Business 限时福利来了！",
+    "detail": "x · not_started"
+  },
+  {
+    "id": "f06d97eb-4b95-4e59-a364-ef36dc448164",
+    "createdAt": "2026-05-14T08:15:29.605Z",
+    "actor": "admin",
+    "type": "deal_article_update",
+    "status": "success",
+    "message": "更新优惠文章：半价订阅ChatGPT Plus已跑通，Codex已敲起来",
+    "detail": "x · in_progress"
+  },
+  {
+    "id": "3cc155f9-6795-44e9-b9f3-e52ce20d2317",
+    "createdAt": "2026-05-14T07:38:34.989Z",
+    "actor": "admin",
+    "type": "deal_article_publish",
+    "status": "success",
+    "message": "发布优惠文章：半价订阅ChatGPT Plus已跑通，Codex已敲起来",
+    "detail": "x · not_started"
+  },
+  {
     "id": "5bbb6740-7e70-4ca3-a2c6-995db9e62557",
     "createdAt": "2026-05-12T22:12:14.659Z",
     "actor": "admin",

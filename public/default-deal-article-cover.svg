@@ -1,0 +1,50 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" rx="36" fill="url(#bg)"/>
+  <rect width="1600" height="900" rx="36" fill="url(#accentBlend)"/>
+  <g filter="url(#blurA)">
+    <circle cx="300" cy="180" r="240" fill="#7EDDBB" fill-opacity="0.46"/>
+  </g>
+  <g filter="url(#blurB)">
+    <circle cx="1210" cy="300" r="300" fill="#9ED8FF" fill-opacity="0.32"/>
+  </g>
+  <g filter="url(#blurC)">
+    <circle cx="980" cy="700" r="320" fill="#AFA5FF" fill-opacity="0.26"/>
+  </g>
+  <g filter="url(#blurD)">
+    <circle cx="1460" cy="770" r="210" fill="#FFD38F" fill-opacity="0.18"/>
+  </g>
+  <image href="/leijiatong-logo.svg" x="146" y="208" width="236" height="236" preserveAspectRatio="xMidYMid meet"/>
+  <defs>
+    <linearGradient id="bg" x1="118" y1="64" x2="1494" y2="852" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D6F2E7"/>
+      <stop offset=".46" stop-color="#C6E8DE"/>
+      <stop offset="1" stop-color="#B6DDD2"/>
+    </linearGradient>
+    <linearGradient id="accentBlend" x1="120" y1="74" x2="1510" y2="846" gradientUnits="userSpaceOnUse">
+      <stop stop-color="rgba(14,88,63,0.16)"/>
+      <stop offset=".36" stop-color="rgba(18,64,98,0.1)"/>
+      <stop offset=".72" stop-color="rgba(92,64,154,0.1)"/>
+      <stop offset="1" stop-color="rgba(160,96,42,0.12)"/>
+    </linearGradient>
+    <filter id="blurA" x="-120" y="-280" width="920" height="920" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="120" result="effect1_foregroundBlur_0_1"/>
+    </filter>
+    <filter id="blurB" x="580" y="-340" width="1280" height="1280" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="180" result="effect1_foregroundBlur_0_1"/>
+    </filter>
+    <filter id="blurC" x="320" y="40" width="1320" height="1320" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="180" result="effect1_foregroundBlur_0_1"/>
+    </filter>
+    <filter id="blurD" x="930" y="240" width="1060" height="1060" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="160" result="effect1_foregroundBlur_0_1"/>
+    </filter>
+  </defs>
+</svg>

@@ -3,8 +3,12 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/shared/page-hero";
 import { PageShowcase } from "@/components/shared/page-showcase";
 import { ScrambleText } from "@/components/shared/scramble-text";
+import { DealArticlesSection } from "@/components/deals/deal-articles-section";
 import { DealsExplorer } from "@/components/deals/deals-explorer";
+import { cn } from "@/lib/utils";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { aiDeals } from "@/data/deals";
+import { getDealArticles } from "@/lib/admin-store";
 
 export const metadata: Metadata = {
   title: "AI 优惠活动",
@@ -12,7 +16,9 @@ export const metadata: Metadata = {
     "收录 AI 工具的免费额度、学生权益、试用入口与正规优惠活动。",
 };
 
-export default function DealsPage() {
+export default async function DealsPage() {
+  const articles = await getDealArticles();
+
   return (
     <div className="pb-8 sm:pb-16">
       <PageHero
@@ -36,8 +42,8 @@ export default function DealsPage() {
           </>
         }
         primaryAction={{
-          href: "#deals-board",
-          label: "查看活动",
+          href: "#content-switcher",
+          label: "查看文章",
         }}
         secondaryAction={{
           href: "/tools",
@@ -46,9 +52,30 @@ export default function DealsPage() {
         rightSlot={<PageShowcase variant="deals" />}
       />
 
-      <div id="deals-board" className="mt-4 sm:mt-8">
-        <DealsExplorer deals={aiDeals} />
-      </div>
+      <Tabs defaultValue="articles" className="mt-4 gap-3 sm:mt-6">
+        <div id="content-switcher" className="app-shell">
+          <div className={cn("page-tabs-sticky__surface p-1.5")}>
+            <TabsList variant="accent" className="w-full max-w-full sm:w-fit">
+              <TabsTrigger value="articles" className="min-w-[116px]">
+                优惠文章
+              </TabsTrigger>
+              <TabsTrigger value="deals" className="min-w-[116px]">
+                免费优惠
+              </TabsTrigger>
+            </TabsList>
+          </div>
+        </div>
+
+        <TabsContent value="articles">
+          <DealArticlesSection articles={articles} />
+        </TabsContent>
+
+        <TabsContent value="deals">
+          <div id="deals-board">
+            <DealsExplorer deals={aiDeals} />
+          </div>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }

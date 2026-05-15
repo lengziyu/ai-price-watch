@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { startTransition, useMemo, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
@@ -12,19 +13,13 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useCaseGroups, useCases } from "@/data/use-cases";
 import { formatCostBand, formatDifficulty } from "@/lib/format";
 import { cn } from "@/lib/utils";
+import { AnimatedSectionTitle } from "@/components/shared/animated-section-title";
 
 type UseCasesBoardProps = {
   defaultGroup?: string;
 };
 
-const cardTones = [
-  "motion-surface--green",
-  "motion-surface--blue",
-  "motion-surface--cyan",
-  "motion-surface--amber",
-  "motion-surface--green",
-  "motion-surface--cyan",
-];
+const cardTones = ["tone-green", "tone-blue", "tone-cyan", "tone-amber"];
 
 export function UseCasesBoard({ defaultGroup }: UseCasesBoardProps) {
   const router = useRouter();
@@ -83,9 +78,9 @@ export function UseCasesBoard({ defaultGroup }: UseCasesBoardProps) {
               <div className="mono-kicker text-[12px] uppercase text-muted-foreground">
                 use case tabs
               </div>
-              <h2 className="mt-2 text-[1.52rem] font-semibold tracking-[-0.04em] text-foreground sm:text-[1.9rem]">
+              <AnimatedSectionTitle className="mt-2.5">
                 场景分类总览
-              </h2>
+              </AnimatedSectionTitle>
               <p className="mt-1.5 max-w-3xl text-[13px] leading-6 text-muted-foreground sm:text-sm">
                 {currentGroup.summary}
               </p>
@@ -125,37 +120,52 @@ export function UseCasesBoard({ defaultGroup }: UseCasesBoardProps) {
               <Card
                 key={item.id}
                 className={cn(
-                  "motion-surface rounded-[12px] border-border",
+                  "use-case-card rounded-[12px] border-border",
                   cardTones[index % cardTones.length],
                 )}
               >
-                <CardHeader className="gap-3 px-4 py-4 sm:px-5">
-                  <div className="flex flex-wrap items-start justify-between gap-3">
-                    <div className="max-w-2xl">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <CardTitle className="text-[1rem]">{item.title}</CardTitle>
-                        <Badge variant="outline">{formatDifficulty(item.difficulty)}</Badge>
-                        <Badge variant="secondary">{formatCostBand(item.estimatedCost)}</Badge>
+                <CardHeader className="use-case-card__header gap-3 px-4 py-4 sm:px-5">
+                  <div className="grid gap-2.5">
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                      <div className="min-w-0">
+                        <div className="flex flex-wrap items-center gap-2">
+                        <CardTitle className="use-case-card__title text-[1rem]">
+                          {item.title}
+                        </CardTitle>
+                        <Badge
+                          variant="outline"
+                          className="use-case-meta-badge use-case-meta-badge--difficulty"
+                        >
+                          {formatDifficulty(item.difficulty)}
+                        </Badge>
+                        <Badge
+                          variant="outline"
+                          className="use-case-meta-badge use-case-meta-badge--cost"
+                        >
+                          {formatCostBand(item.estimatedCost)}
+                        </Badge>
+                        </div>
                       </div>
-                      <CardDescription className="mt-2 text-[12px] leading-6 sm:text-[13px]">
-                        {item.description}
-                      </CardDescription>
+
+                      <Link
+                        href={item.ctaHref}
+                        className="use-case-cta inline-flex w-fit items-center gap-1 rounded-full px-3 py-1.5 text-[12px] font-medium"
+                      >
+                        {item.ctaLabel}
+                        <ArrowRightIcon className="size-3.5" />
+                      </Link>
                     </div>
 
-                    <Link
-                      href={item.ctaHref}
-                      className="inline-flex items-center gap-1 rounded-full border border-border bg-background/80 px-3 py-1.5 text-[12px] font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
-                    >
-                      {item.ctaLabel}
-                      <ArrowRightIcon className="size-3.5" />
-                    </Link>
+                    <CardDescription className="use-case-card__desc text-[12px] leading-6 sm:text-[13px]">
+                      {item.description}
+                    </CardDescription>
                   </div>
                 </CardHeader>
 
                 <CardContent className="grid gap-3 px-4 pb-4 sm:px-5 sm:pb-5">
-                  <InfoBlock label="适合任务" items={item.bestFor} variant="secondary" />
-                  <InfoBlock label="推荐工具" items={item.recommendedTools} variant="outline" />
-                  <InfoBlock label="优先模型" items={item.recommendedModels} variant="outline" />
+                  <InfoBlock label="适合任务" items={item.bestFor} tone="task" />
+                  <InfoBlock label="推荐工具" items={item.recommendedTools} tone="tool" />
+                  <InfoBlock label="优先模型" items={item.recommendedModels} tone="model" />
                   <div className="grid gap-3 md:grid-cols-2">
                     <InfoCard title="推荐工作流" detail={item.workflow} />
                     <InfoCard title="预算提醒" detail={item.budgetTip} />
@@ -173,23 +183,31 @@ export function UseCasesBoard({ defaultGroup }: UseCasesBoardProps) {
 function InfoBlock({
   label,
   items,
-  variant,
+  tone,
 }: {
   label: string;
   items: string[];
-  variant: "outline" | "secondary";
+  tone: "task" | "tool" | "model";
 }) {
   return (
-    <div className="rounded-[10px] border border-border bg-background/75 px-3 py-2.5">
-      <div className="text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
+    <div className={cn("use-case-info-block rounded-[10px] border px-3 py-2.5", `is-${tone}`)}>
+      <div className="use-case-info-block__label text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
         {label}
       </div>
       <div className="mt-2 flex flex-wrap gap-2">
-        {items.map((item) => (
-          <Badge key={item} variant={variant}>
-            {item}
-          </Badge>
-        ))}
+        {items.map((item) =>
+          tone === "tool" ? (
+            <ToolTag key={item} name={item} />
+          ) : (
+            <Badge
+              key={item}
+              variant="outline"
+              className={cn("use-case-tag h-auto rounded-full px-3 py-1 text-[11px]", tagStyleClass(item, tone))}
+            >
+              {item}
+            </Badge>
+          ),
+        )}
       </div>
     </div>
   );
@@ -197,11 +215,89 @@ function InfoBlock({
 
 function InfoCard({ title, detail }: { title: string; detail: string }) {
   return (
-    <div className="rounded-[10px] border border-border bg-background/78 px-3 py-3">
+    <div className="use-case-info-card rounded-[10px] border border-border px-3 py-3">
       <div className="text-[11px] font-semibold text-foreground">{title}</div>
       <p className="mt-1.5 text-[12px] leading-6 text-muted-foreground sm:text-[13px]">
         {detail}
       </p>
     </div>
   );
+}
+
+function tagStyleClass(value: string, tone: "task" | "tool" | "model") {
+  const palettes = {
+    task: [
+      "tag-pill--mint",
+      "tag-pill--teal",
+      "tag-pill--sky",
+      "tag-pill--violet",
+    ],
+    tool: [
+      "tag-pill--amber",
+      "tag-pill--orange",
+      "tag-pill--rose",
+      "tag-pill--cyan",
+    ],
+    model: [
+      "tag-pill--slate",
+      "tag-pill--lime",
+      "tag-pill--indigo",
+      "tag-pill--emerald",
+    ],
+  } as const;
+
+  const key = `${tone}-${value}`;
+  let hash = 0;
+  for (let i = 0; i < key.length; i += 1) {
+    hash = (hash << 5) - hash + key.charCodeAt(i);
+    hash |= 0;
+  }
+
+  const bucket = Math.abs(hash) % palettes[tone].length;
+  return palettes[tone][bucket];
+}
+
+function ToolTag({ name }: { name: string }) {
+  const logo = getToolLogo(name);
+  const iconSize = getToolLogoSize(name);
+
+  return (
+    <Badge
+      variant="outline"
+      className="use-case-tag use-case-tag--tool h-auto rounded-full px-3 py-1 text-[11px]"
+    >
+      {logo ? (
+        <Image
+          src={logo}
+          alt=""
+          width={iconSize}
+          height={iconSize}
+          className="rounded-[6px] object-contain"
+        />
+      ) : (
+        <span className="use-case-tool-fallback">{name.slice(0, 1)}</span>
+      )}
+      <span>{name}</span>
+    </Badge>
+  );
+}
+
+function getToolLogo(name: string) {
+  const key = name.toLowerCase();
+  if (key.includes("chatgpt")) return "/vendor-logos/openai.png";
+  if (key.includes("claude")) return "/vendor-logos/anthropic.png";
+  if (key.includes("gemini") || key.includes("notebooklm")) return "/vendor-logos/google.png";
+  if (key.includes("cursor")) return "/vendor-logos/cursor.png";
+  if (key.includes("copilot") || key.includes("github")) return "/vendor-logos/github.png";
+  if (key.includes("perplexity")) return "/vendor-logos/perplexity.png";
+  if (key.includes("grok")) return "/vendor-logos/grok.png";
+  return null;
+}
+
+function getToolLogoSize(name: string) {
+  const key = name.toLowerCase();
+  if (key.includes("perplexity")) return 20;
+  if (key.includes("copilot") || key.includes("github")) return 20;
+  if (key.includes("cursor")) return 20;
+  return 24;
 }
