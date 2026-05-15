@@ -1,6 +1,7 @@
 import { estimateCnyFromUsd, formatMoney } from "@/lib/format";
 
 const updatedAt = "2026-05-14";
+export const membershipRatesUpdatedAt = updatedAt;
 
 export const membershipRateSources = {
   officialCodexPricing:

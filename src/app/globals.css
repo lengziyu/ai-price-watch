@@ -2570,6 +2570,14 @@
   }
 }
 
+@media (min-width: 1800px) {
+  .app-shell {
+    max-width: 1400px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
 @media (max-width: 640px) {
   .app-shell {
     padding-inline: 0.7rem;

@@ -18,6 +18,7 @@ type PageHeroProps = {
   primaryAction?: Action;
   secondaryAction?: Action;
   rightSlot?: ReactNode;
+  compact?: boolean;
 };
 
 export function PageHero({
@@ -27,11 +28,24 @@ export function PageHero({
   primaryAction,
   secondaryAction,
   rightSlot,
+  compact = false,
 }: PageHeroProps) {
   return (
-    <section className="hero-stage hero-grid hero-aura -mt-[80px] w-full bg-background pt-[86px] sm:-mt-[104px] sm:pt-[116px]">
-      <div className="app-shell py-2.5 sm:py-4 lg:py-6">
-        <div className="grid items-center gap-3.5 sm:gap-4 lg:grid-cols-[1fr_0.92fr] lg:gap-5">
+    <section
+      className={[
+        "hero-stage hero-grid hero-aura w-full bg-background",
+        compact
+          ? "-mt-[72px] pt-[78px] sm:-mt-[94px] sm:pt-[102px]"
+          : "-mt-[80px] pt-[86px] sm:-mt-[104px] sm:pt-[116px]",
+      ].join(" ")}
+    >
+      <div className={["app-shell", compact ? "py-1 sm:py-2.5 lg:py-3.5" : "py-2.5 sm:py-4 lg:py-6"].join(" ")}>
+        <div
+          className={[
+            "grid items-center lg:grid-cols-[1fr_0.92fr]",
+            compact ? "gap-2.5 sm:gap-3.5 lg:gap-4" : "gap-3.5 sm:gap-4 lg:gap-5",
+          ].join(" ")}
+        >
           <div className="flex flex-col gap-3 sm:gap-4">
             {note ? (
               <div className="inline-flex w-fit items-center gap-2.5 rounded-full border border-border bg-background/75 px-3 py-1.5 text-[11px] text-muted-foreground backdrop-blur-sm">

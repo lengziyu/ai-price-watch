@@ -184,17 +184,17 @@ export function TokenPriceExplorer({ prices }: Props) {
       ref={(node) => {
         stickyBoundaryRef.current = node;
       }}
-      className="app-shell flex flex-col gap-5 rounded-[12px] border border-border bg-background px-4 py-6 sm:px-5 sm:py-6 lg:px-6"
+      className="app-shell flex flex-col gap-3.5 rounded-[12px] border border-border bg-background px-4 py-4 sm:px-5 sm:py-4.5 lg:px-6"
     >
       <Card className="rounded-xl border-border bg-card/90">
-        <CardHeader className="gap-4 px-5 py-5 sm:px-6">
-          <div className="flex items-start justify-between gap-4">
-            <div className="flex flex-col gap-2">
+        <CardHeader className="gap-2.5 px-4 py-3.5 sm:px-5 sm:py-4">
+          <div className="flex items-start justify-between gap-3">
+            <div className="flex flex-col gap-1.5">
               <div className="mono-kicker text-[12px] uppercase text-muted-foreground">
                 token pricing
               </div>
               <AnimatedSectionTitle>API Token 比价</AnimatedSectionTitle>
-              <CardDescription>
+              <CardDescription className="text-[12px] leading-5 sm:text-[13px]">
                 当前数据优先取官方价格页，适合先做成本感知与模型初筛。
               </CardDescription>
             </div>

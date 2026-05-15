@@ -14,11 +14,12 @@ import {
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
-import { membershipVendorBoards } from "@/data/membership-rates";
+import { membershipRatesUpdatedAt, membershipVendorBoards } from "@/data/membership-rates";
 import { toolsDirectory } from "@/data/tools";
 import { useCases } from "@/data/use-cases";
 import {
   formatCostBand,
+  formatDate,
   formatDateTime,
   formatDealArticleStatus,
   formatDifficulty,
@@ -32,9 +33,7 @@ type HomeContentOverviewProps = {
 const featuredVendorIds = ["openai", "anthropic", "google", "cursor"] as const;
 const featuredUseCaseIds = [
   "coding",
-  "code-review",
   "writing",
-  "sales-outreach",
   "deep-research",
   "office-automation",
 ] as const;
@@ -147,9 +146,11 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
                   <p className="mt-3 line-clamp-2 text-[12px] leading-5 text-muted-foreground">
                     {vendor.plans[0]?.detail ?? vendor.officialRate}
                   </p>
-                  <div className="mt-3 rounded-[12px] border border-border/70 bg-background/88 px-3 py-2 text-[11px] leading-5 text-foreground/78 line-clamp-2">
-                    {vendor.plans[1]?.name ?? "次级层级"} ·{" "}
-                    {vendor.plans[1]?.detail ?? vendor.communityRate}
+                  <div className="mt-3 rounded-[12px] border border-border/70 bg-background/88 px-3 py-2 text-[11px] text-foreground/78">
+                    <p className="line-clamp-2 leading-5">
+                      {vendor.plans[1]?.name ?? "次级层级"} ·{" "}
+                      {vendor.plans[1]?.detail ?? vendor.communityRate}
+                    </p>
                   </div>
                 </Link>
               ))}
@@ -163,28 +164,28 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
             hrefLabel="全部场景"
             className="xl:h-full xl:self-auto"
           >
-            <div className="grid h-full auto-rows-fr gap-3 sm:grid-cols-2 2xl:grid-cols-3">
+            <div className="grid h-full auto-rows-fr gap-3 sm:grid-cols-2">
               {featuredUseCases.map((item) => (
                 <Link
                   key={item.id}
                   href={item.ctaHref}
                   className="group flex h-full flex-col rounded-[16px] border border-border/75 bg-background/84 px-4 py-4 transition hover:-translate-y-[2px] hover:border-primary/28 hover:shadow-[0_18px_34px_color-mix(in_srgb,var(--primary)_12%,transparent)]"
                 >
-                  <div className="flex items-center gap-2 whitespace-nowrap">
-                    <div className="truncate text-[15px] font-semibold tracking-[-0.03em] text-foreground">
-                      {item.title}
-                    </div>
-                    <Badge variant="outline" className="shrink-0 rounded-full border-primary/16 bg-primary/8 px-2.5 py-0.5 text-[11px] text-primary">
+                  <div className="text-[15px] font-semibold tracking-[-0.03em] text-foreground">
+                    {item.title}
+                  </div>
+                  <div className="mt-1.5 flex flex-wrap gap-2">
+                    <Badge variant="outline" className="rounded-full border-primary/16 bg-primary/8 px-2.5 py-0.5 text-[11px] text-primary">
                       {formatDifficulty(item.difficulty)}
                     </Badge>
-                    <Badge variant="outline" className="shrink-0 rounded-full border-sky-200/80 bg-sky-50/90 px-2.5 py-0.5 text-[11px] text-sky-700 dark:border-sky-400/20 dark:bg-sky-500/10 dark:text-sky-200">
+                    <Badge variant="outline" className="rounded-full border-sky-200/80 bg-sky-50/90 px-2.5 py-0.5 text-[11px] text-sky-700 dark:border-sky-400/20 dark:bg-sky-500/10 dark:text-sky-200">
                       {formatCostBand(item.estimatedCost)}
                     </Badge>
                   </div>
-                  <p className="mt-2 line-clamp-1 text-[12px] leading-5 text-muted-foreground">
+                  <p className="mt-1.5 line-clamp-2 text-[12px] leading-5 text-muted-foreground">
                     {item.description}
                   </p>
-                  <div className="mt-auto pt-3 flex flex-wrap gap-2">
+                  <div className="mt-2 flex flex-wrap gap-2">
                     {item.recommendedTools.slice(0, 2).map((tool) => (
                       <span
                         key={tool}
@@ -194,6 +195,9 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
                         {tool}
                       </span>
                     ))}
+                  </div>
+                  <div className="mt-auto pt-2 text-[11px] text-muted-foreground/85">
+                    更新：{formatDate(membershipRatesUpdatedAt)}
                   </div>
                 </Link>
               ))}

@@ -16,6 +16,7 @@ export default function TokenPricingPage() {
   return (
     <div className="pb-8 sm:pb-16">
       <PageHero
+        compact
         note="输入 / 输出单价 · 官方来源位 · 成本感知"
         title={
           <>
@@ -46,7 +47,7 @@ export default function TokenPricingPage() {
         rightSlot={<PageShowcase variant="tokens" />}
       />
 
-      <div id="token-board" className="mt-4 sm:mt-8">
+      <div id="token-board" className="mt-3 sm:mt-5">
         <TokenPriceExplorer prices={tokenPrices} />
       </div>
     </div>
