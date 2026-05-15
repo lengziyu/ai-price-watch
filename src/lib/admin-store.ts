@@ -16,7 +16,8 @@ import type { AIDeal, DealArticle } from "@/types";
 
 const adminDataDir = path.join(process.cwd(), "data", "admin");
 const publicDir = path.join(process.cwd(), "public");
-const uploadedDealArticleCoverDir = path.join(publicDir, "uploads", "deal-articles");
+const uploadedDealArticleCoverDir = path.join(process.cwd(), "data", "uploads", "deal-articles");
+const legacyPublicDealArticleCoverDir = path.join(publicDir, "uploads", "deal-articles");
 const crawlDataFile = path.join(process.cwd(), "data", "crawl", "price-snapshot.json");
 const manualDealsFile = path.join(adminDataDir, "manual-deals.json");
 const dealArticlesFile = path.join(adminDataDir, "deal-articles.json");
@@ -511,7 +512,7 @@ async function resolveUpdatedDealArticleCoverImageUrl(
 function sanitizeUploadedDealArticleCoverUrl(url: string) {
   const normalized = url.trim();
 
-  if (/^\/uploads\/deal-articles\/[A-Za-z0-9._/-]+\.(?:jpg|jpeg|png|webp|avif|svg)$/i.test(normalized)) {
+  if (/^\/uploads\/deal-articles\/[A-Za-z0-9._-]+\.(?:jpg|jpeg|png|webp|avif|svg)$/i.test(normalized)) {
     return normalized;
   }
 
@@ -523,9 +524,16 @@ async function deleteUploadedDealArticleCoverIfNeeded(coverImageUrl?: string) {
     return;
   }
 
-  const relativePath = coverImageUrl.replace(/^\/+/, "");
-  const filePath = path.join(publicDir, relativePath);
+  const fileName = coverImageUrl.replace(/^\/uploads\/deal-articles\//, "");
+  if (!/^[A-Za-z0-9._-]+\.(?:jpg|jpeg|png|webp|avif|svg)$/i.test(fileName)) {
+    return;
+  }
 
+  await deleteFileIfExists(path.join(uploadedDealArticleCoverDir, fileName));
+  await deleteFileIfExists(path.join(legacyPublicDealArticleCoverDir, fileName));
+}
+
+async function deleteFileIfExists(filePath: string) {
   try {
     await unlink(filePath);
   } catch (error) {
