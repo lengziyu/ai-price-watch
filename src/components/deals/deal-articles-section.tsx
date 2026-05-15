@@ -8,7 +8,6 @@ import { DealArticleEngagement } from "@/components/deals/deal-article-engagemen
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import {
-  defaultDealArticleCoverImageUrl,
   formatDealArticleSourcePlatform,
   formatDealArticleStatus,
   getDealArticleStatusCounts,
@@ -84,8 +83,6 @@ export function DealArticlesSection({ articles }: DealArticlesSectionProps) {
       {filteredArticles.length ? (
         <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
           {filteredArticles.map((article) => {
-            const usesDefaultCover = article.coverImageUrl === defaultDealArticleCoverImageUrl;
-
             return (
               <Card
                 key={article.id}
@@ -120,25 +117,16 @@ export function DealArticlesSection({ articles }: DealArticlesSectionProps) {
                       {formatDealArticleSourcePlatform(article.sourcePlatform)}
                     </Badge>
                   </div>
-                  {usesDefaultCover ? (
-                    <div className="absolute left-4 right-4 bottom-4">
-                      <div className="line-clamp-2 max-w-[84%] text-[1.58rem] font-semibold leading-[1.05] tracking-[-0.05em] text-white drop-shadow-[0_10px_20px_rgba(0,0,0,0.18)] sm:text-[1.8rem]">
-                        {article.title}
-                      </div>
-                    </div>
-                  ) : null}
                 </div>
                 <CardHeader className="gap-1 px-4 pb-1 pt-2">
-                  <div className="transition-transform duration-200 group-hover/card:-translate-y-1">
-                    {!usesDefaultCover ? (
-                      <div className="line-clamp-1 text-[1.06rem] font-semibold leading-tight tracking-[-0.03em] text-foreground sm:text-[1.14rem]">
-                        {article.title}
-                      </div>
-                    ) : null}
+                  <div className="min-w-0 w-full transition-transform duration-200 group-hover/card:-translate-y-1">
+                    <div className="block w-full truncate overflow-hidden whitespace-nowrap py-[10px] text-[20px] font-semibold leading-tight tracking-[-0.03em] text-foreground">
+                      {article.title}
+                    </div>
                     <CardDescription
                       className={cn(
                         "line-clamp-2 h-[3rem] overflow-hidden text-[12px] leading-6 text-foreground/72 sm:text-[13px]",
-                        !usesDefaultCover ? "mt-1" : "",
+                        "mt-1",
                       )}
                     >
                       {buildCompactSummary(article.summary)}
