@@ -128,19 +128,26 @@ function DealCard({
   featured?: boolean;
 }) {
   const toneClass = dealToneClass(deal);
+  const actionLabel = deal.status === "expired" ? "查看历史活动" : "立即查看活动";
 
   return (
     <Card
       size="sm"
       className={cn(
-        "rounded-[12px] border-border",
+        "rounded-[14px] border-border",
         "motion-surface",
+        "shadow-[0_6px_22px_rgba(2,44,34,0.06)]",
         toneClass,
       )}
     >
-      <CardHeader className="gap-2 px-4 py-3">
+      <CardHeader className="gap-3 px-4 py-3.5">
         <div className="flex items-start justify-between gap-3">
-          <CardTitle className={cn("text-[0.98rem] leading-6", featured && "text-[1.02rem]")}>
+          <CardTitle
+            className={cn(
+              "text-[1.12rem] leading-7 tracking-[-0.03em] text-foreground",
+              featured && "text-[1.24rem]",
+            )}
+          >
             {deal.title}
           </CardTitle>
           <Badge variant="secondary" className="shrink-0">
@@ -162,31 +169,53 @@ function DealCard({
         </div>
       </CardHeader>
 
-      <CardContent className="grid gap-2.5 px-4 pb-3">
-        <p className="line-clamp-2 text-[12px] leading-6 text-muted-foreground sm:text-[13px]">
+      <CardContent className="grid gap-3 px-4 pb-3">
+        <p className="line-clamp-3 text-[13px] leading-6 text-muted-foreground">
           {deal.summary}
         </p>
 
-        <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border/70 pt-2 text-[12px] leading-5">
-          <div className="min-w-0 flex-1">
-            <span className="text-muted-foreground">领取 </span>
-            <span className="font-medium text-foreground">
-              {deal.howToGet ?? "查看来源页"}
-            </span>
+        <div className="rounded-[11px] border border-border/70 bg-background/65 p-2.5">
+          <div className="mb-1 text-[11px] uppercase tracking-[0.08em] text-muted-foreground">
+            领取方式
           </div>
+          <p className="line-clamp-2 text-[12px] leading-5 text-foreground/88">
+            {deal.howToGet ?? "查看来源页"}
+          </p>
+        </div>
+
+        {deal.sourceUrl ? (
+          <Link
+            href={deal.sourceUrl}
+            target="_blank"
+            className={cn(
+              "inline-flex h-10 w-full items-center justify-center gap-1.5 rounded-[11px]",
+              "border border-transparent bg-primary text-[13px] font-semibold text-primary-foreground",
+              "shadow-[0_10px_24px_color-mix(in_oklch,var(--primary)_28%,transparent)]",
+              "transition hover:-translate-y-0.5 hover:brightness-[1.03]",
+            )}
+          >
+            {actionLabel}
+            <ArrowUpRightIcon className="size-3.5" />
+          </Link>
+        ) : (
+          <div className="rounded-[11px] border border-dashed border-border px-3 py-2 text-center text-[12px] text-muted-foreground">
+            暂无官方链接，待补充
+          </div>
+        )}
+
+        <div className="flex items-center justify-between gap-2 border-t border-border/70 pt-2 text-[12px] leading-5">
+          <span className="text-muted-foreground">{formatDate(deal.updatedAt)}</span>
 
           {deal.sourceUrl ? (
             <Link
               href={deal.sourceUrl}
               target="_blank"
-              className="inline-flex items-center gap-1 text-[12px] font-medium text-foreground hover:text-primary"
+              className="inline-flex items-center gap-1 rounded-md px-1 py-0.5 text-[12px] font-medium text-primary/90 transition hover:text-primary"
             >
               查看官方来源
               <ArrowUpRightIcon className="size-3.5" />
             </Link>
           ) : null}
-
-          <span className="text-muted-foreground">{formatDate(deal.updatedAt)}</span>
         </div>
       </CardContent>
     </Card>

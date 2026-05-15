@@ -111,7 +111,7 @@ export function MembershipRatesExplorer({
       className="app-shell mt-4 sm:mt-8"
     >
       <div className="rounded-[10px] border border-border bg-background px-3.5 py-4 sm:px-5 sm:py-5 lg:px-6">
-        <div className="flex flex-col gap-4 sm:gap-5">
+        <div className="flex flex-col gap-4 sm:gap-2">
           <div className="max-w-3xl">
             <div className="mono-kicker text-[12px] uppercase text-muted-foreground">
               vendor rate board
@@ -255,25 +255,23 @@ function PricePlanCard({ plan, badge }: { plan: PricePlan; badge?: string }) {
   return (
     <Card
       size="sm"
-      className="membership-price-card rounded-[10px] border border-border bg-card shadow-none"
+      className="membership-price-card rounded-[10px] border border-border bg-card shadow-none gap-2 data-[size=sm]:gap-2.5"
     >
-      <CardHeader className="gap-3 px-4 py-4">
+      <CardHeader className="gap-2 px-4 py-4">
         <div className="flex items-start justify-between gap-3">
-          <div className="min-w-0 space-y-2">
-            <CardTitle className="truncate text-[1rem]">{plan.name}</CardTitle>
-            {badge ? (
-              <Badge variant="secondary" className="w-fit rounded-[8px]">
-                {badge}
-              </Badge>
-            ) : null}
+          <CardTitle className="truncate text-[1rem]">{plan.name}</CardTitle>
+          {badge ? (
+            <Badge variant="secondary" className="shrink-0 rounded-[8px]">
+              {badge}
+            </Badge>
+          ) : <span />}
+        </div>
+        <div className="membership-price-value-wrap px-0 py-0 text-left">
+          <div className="membership-price-value text-[1.22rem] font-semibold tracking-[-0.03em] text-foreground">
+            {price}
           </div>
-          <div className="membership-price-value-wrap shrink-0 text-right">
-            <div className="membership-price-value text-[1.22rem] font-semibold tracking-[-0.03em] text-foreground">
-              {price}
-            </div>
-            <div className="membership-price-sub text-[10px] text-muted-foreground">
-              {cnyEstimate ?? "以官方页面为准"}
-            </div>
+          <div className="membership-price-sub text-[10px] text-muted-foreground">
+            {cnyEstimate ?? "以官方页面为准"}
           </div>
         </div>
         {description ? (
@@ -282,7 +280,7 @@ function PricePlanCard({ plan, badge }: { plan: PricePlan; badge?: string }) {
           </CardDescription>
         ) : null}
       </CardHeader>
-      <CardContent className="flex flex-col gap-3 px-4 pb-4">
+      <CardContent className="flex flex-col gap-2 px-4 pb-1">
         <PlanFeatureList features={plan.features} />
         {plan.note ? (
           <div className="membership-price-note rounded-[10px] border border-border bg-muted/35 px-3 py-2 text-[12px] leading-5 text-muted-foreground">
@@ -327,23 +325,15 @@ function OpenAIBoard({ defaultTab }: { defaultTab: string }) {
         {membershipPlans.map((plan) => (
           <PricePlanCard key={plan.id} plan={plan} badge={plan.audience} />
         ))}
+      </div>
 
-        <Card size="sm" className="rounded-[10px] border border-border bg-card shadow-none">
-          <CardHeader className="gap-2 px-4 py-4">
-            <Badge variant="outline" className="w-fit">
-              官方来源
-            </Badge>
-            <CardTitle className="text-[0.98rem]">OpenAI 公开口径</CardTitle>
-            <CardDescription className="text-[12px] leading-6">
-              价格页负责套餐权益，Codex 文档负责额度和 Business credits。
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="flex flex-col gap-2 px-4 pb-4 text-[12px]">
-            <SourceLink href={membershipRateSources.officialCodexPricing} label="Codex Pricing" />
-            <SourceLink href={membershipRateSources.chatgptPricing} label="ChatGPT Pricing" />
-            <SourceLink href={membershipRateSources.helpArticle} label="Codex 帮助中心" />
-          </CardContent>
-        </Card>
+      <div className="flex flex-wrap items-center gap-2 px-1 text-[12px] text-primary">
+        <span className="font-semibold text-primary">官方来源：</span>
+        <SourceLink href={membershipRateSources.officialCodexPricing} label="Codex Pricing" />
+        <span className="text-primary/70">|</span>
+        <SourceLink href={membershipRateSources.chatgptPricing} label="ChatGPT Pricing" />
+        <span className="text-primary/70">|</span>
+        <SourceLink href={membershipRateSources.helpArticle} label="Codex 帮助中心" />
       </div>
 
       <div className="flex flex-col gap-4">
@@ -523,21 +513,11 @@ function VendorBoard({ vendor }: { vendor: MembershipVendorBoard }) {
             badge={vendor.label}
           />
         ))}
+      </div>
 
-        <Card size="sm" className="rounded-[10px] border border-border bg-card shadow-none">
-          <CardHeader className="gap-2 px-4 py-4">
-            <Badge variant="outline" className="w-fit">
-              官方来源
-            </Badge>
-            <CardTitle className="text-[0.98rem]">{vendor.title}</CardTitle>
-            <CardDescription className="text-[12px] leading-6">
-              {vendor.officialRate}
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="flex flex-col gap-2 px-4 pb-4 text-[12px]">
-            <SourceLink href={vendor.officialSource} label={`${vendor.label} 官方页面`} />
-          </CardContent>
-        </Card>
+      <div className="flex flex-wrap items-center gap-2 px-1 text-[12px] text-primary">
+        <span className="font-semibold text-primary">官方来源：</span>
+        <SourceLink href={vendor.officialSource} label={`${vendor.label} 官方页面`} />
       </div>
 
       {quotaRows?.length ? (
@@ -604,12 +584,15 @@ function VendorBoard({ vendor }: { vendor: MembershipVendorBoard }) {
   );
 }
 
-function SourceLink({ href, label }: { href: string; label: string }) {
+function SourceLink({ href, label, className }: { href: string; label: string; className?: string }) {
   return (
     <Link
       href={href}
       target="_blank"
-      className="inline-flex items-center gap-1 text-[12px] font-medium text-foreground hover:text-primary"
+      className={cn(
+        "inline-flex items-center gap-1 text-[12px] font-medium text-primary hover:text-primary/80",
+        className,
+      )}
     >
       {label}
       <ArrowUpRightIcon className="size-3.5" />

@@ -6,14 +6,12 @@ import {
   ArrowUpRightIcon,
   CompassIcon,
   CrownIcon,
-  FileTextIcon,
   GiftIcon,
   Layers3Icon,
-  LibraryBigIcon,
-  SparklesIcon,
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
+import { InteractiveSummaryCard } from "@/components/home/interactive-summary-card";
 import { membershipRatesUpdatedAt, membershipVendorBoards } from "@/data/membership-rates";
 import { toolsDirectory } from "@/data/tools";
 import { useCases } from "@/data/use-cases";
@@ -65,25 +63,25 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
       label: "会员厂商",
       value: String(membershipVendorBoards.length),
       detail: "价格、额度、社区观察",
-      icon: <CrownIcon className="size-4" />,
+      iconKey: "vendors" as const,
     },
     {
       label: "使用场景",
       value: String(useCases.length),
       detail: "开发、办公、研究、自动化",
-      icon: <SparklesIcon className="size-4" />,
+      iconKey: "useCases" as const,
     },
     {
       label: "优惠文章",
       value: String(articles.length),
       detail: latestArticle ? `最近更新 ${formatDateTime(latestArticle.publishedAt)}` : "后台可持续补录",
-      icon: <FileTextIcon className="size-4" />,
+      iconKey: "articles" as const,
     },
     {
       label: "工具导航",
       value: String(toolsDirectory.length),
       detail: `${totalTagCount} 个标签关键词`,
-      icon: <LibraryBigIcon className="size-4" />,
+      iconKey: "tools" as const,
     },
   ];
 
@@ -92,23 +90,13 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
       <section className="app-shell mt-4 sm:mt-8">
         <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
           {summaryCards.map((item) => (
-            <div
+            <InteractiveSummaryCard
               key={item.label}
-              className="rounded-[16px] border border-border/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(247,252,250,0.96))] px-4 py-4 shadow-[0_14px_32px_rgba(15,23,42,0.05)] dark:bg-[linear-gradient(180deg,rgba(8,14,18,0.96),rgba(10,20,24,0.92))]"
-            >
-              <div className="text-[12px] font-medium text-muted-foreground">{item.label}</div>
-              <div className="mt-2 flex items-center justify-between gap-3">
-                <div className="text-[1.72rem] font-semibold tracking-[-0.05em] text-foreground">
-                  {item.value}
-                </div>
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-[12px] border border-border/75 bg-background/88 text-primary shadow-[inset_0_1px_0_rgba(255,255,255,0.6)]">
-                  {item.icon}
-                </span>
-              </div>
-              <div className="mt-1.5 text-[12px] leading-5 text-muted-foreground">
-                {item.detail}
-              </div>
-            </div>
+              label={item.label}
+              value={item.value}
+              detail={item.detail}
+              iconKey={item.iconKey}
+            />
           ))}
         </div>
       </section>

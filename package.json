@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "crawl:data": "node scripts/crawl-data.mjs"
+    "crawl:data": "node scripts/crawl-data.mjs",
+    "validate:appstoreprice": "node scripts/validate-appstoreprice.mjs",
+    "sync:appstoreprice": "node scripts/sync-subscription-regions-from-appstoreprice.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",

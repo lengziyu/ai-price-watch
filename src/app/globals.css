@@ -463,12 +463,11 @@
 
   .membership-price-desc {
     color: color-mix(in oklch, var(--foreground) 72%, transparent);
-    min-height: 2.5rem;
   }
 
   .membership-feature-list {
     border-top: 1px solid color-mix(in oklch, var(--border) 78%, transparent);
-    padding-top: 0.72rem;
+    padding-top: 0.45rem;
   }
 
   .membership-price-note {
@@ -2255,6 +2254,125 @@
     --motion-tint: rgba(6, 182, 212, 0.04);
   }
 
+  .home-summary-card-tilt {
+    --summary-perspective: 920px;
+    position: relative;
+    width: 100%;
+    transform: perspective(var(--summary-perspective));
+    transform-style: preserve-3d;
+    transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .home-summary-card-tilt__inner {
+    --summary-rotate-x: 0deg;
+    --summary-rotate-y: 0deg;
+    --summary-shine-x: 0px;
+    --summary-shine-y: 0px;
+    --summary-shine-angle: 118deg;
+    --summary-shine-alpha: 0;
+    --summary-glow-x: 50%;
+    --summary-glow-y: 34%;
+    --summary-glow-alpha: 0;
+    position: relative;
+    border-radius: 16px;
+    transform-style: preserve-3d;
+    transform: rotateX(var(--summary-rotate-x)) rotateY(var(--summary-rotate-y));
+    transition:
+      transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 220ms ease;
+    will-change: transform;
+    isolation: isolate;
+  }
+
+  .home-summary-card-tilt[data-active="true"] .home-summary-card-tilt__inner {
+    filter: saturate(1.04);
+  }
+
+  .home-summary-card-tilt__inner > *:not(.home-summary-card-tilt__shine):not(.home-summary-card-tilt__theme-glow) {
+    transform: translateZ(1px);
+  }
+
+  .home-summary-card-tilt__theme-glow {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    user-select: none;
+    border-radius: 16px;
+    opacity: 0;
+    background:
+      radial-gradient(
+        320px circle at var(--summary-glow-x) var(--summary-glow-y),
+        color-mix(in oklch, var(--primary) calc(var(--summary-glow-alpha) * 100%), transparent) 0%,
+        color-mix(in oklch, var(--primary) 1%, transparent) 40%,
+        transparent 72%
+      ),
+      radial-gradient(
+        180px circle at var(--summary-glow-x) var(--summary-glow-y),
+        color-mix(in oklch, var(--primary) 1%, transparent) 0%,
+        transparent 66%
+      );
+    transition:
+      opacity 170ms ease,
+      background 180ms linear;
+  }
+
+  html:not(.dark) .home-summary-card-tilt[data-active="true"] .home-summary-card-tilt__inner {
+    border-color: color-mix(in oklch, var(--primary) 42%, var(--border));
+    box-shadow:
+      0 24px 52px color-mix(in oklch, var(--primary) 28%, transparent),
+      0 10px 26px rgba(15, 23, 42, 0.1),
+      inset 0 0 0 1px color-mix(in oklch, var(--primary) 28%, transparent);
+  }
+
+  html:not(.dark) .home-summary-card-tilt[data-active="true"] .home-summary-card-tilt__theme-glow {
+    opacity: 1;
+  }
+
+  .home-summary-card-tilt__shine {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    user-select: none;
+    border-radius: 16px;
+    transform: translateX(var(--summary-shine-x)) translateY(var(--summary-shine-y));
+    background: linear-gradient(
+      var(--summary-shine-angle),
+      rgb(255 255 255 / var(--summary-shine-alpha)) 0%,
+      rgb(255 255 255 / 0) 52%
+    );
+    opacity: 0;
+    transition:
+      opacity 200ms ease,
+      transform 160ms linear,
+      background 160ms linear;
+  }
+
+  .home-summary-card-tilt[data-active="true"] .home-summary-card-tilt__shine {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-summary-card-tilt,
+    .home-summary-card-tilt__inner,
+    .home-summary-card-tilt__shine {
+      transition: none;
+      animation: none;
+      transform: none;
+    }
+
+    .home-summary-card-tilt__shine {
+      opacity: 0;
+      background: transparent;
+    }
+
+    .home-summary-card-tilt__theme-glow {
+      opacity: 0;
+      background: transparent;
+    }
+  }
+
   .dark .motion-surface {
     background:
       radial-gradient(circle at var(--motion-x, 18%) var(--motion-y, 8%), var(--motion-glow, rgba(0, 188, 125, 0.12)), transparent 36%),
@@ -2633,6 +2751,19 @@
     animation: live-fx-ping 1.8s ease-out infinite;
   }
 
+  .subscription-popover-shell {
+    transform-origin: left center;
+    will-change: transform, opacity, filter;
+  }
+
+  .subscription-popover-open {
+    animation: subscription-popover-open 380ms cubic-bezier(0.2, 0.9, 0.25, 1) both;
+  }
+
+  .subscription-popover-closed {
+    animation: subscription-popover-close 220ms cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+
   .stagger-1 {
     animation-delay: 80ms;
   }
@@ -2895,12 +3026,45 @@
   }
 }
 
+@keyframes subscription-popover-open {
+  0% {
+    opacity: 0;
+    filter: blur(3px);
+    transform: translate3d(12px, -50%, 0) scale(0.82);
+  }
+  62% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, -50%, 0) scale(1.035);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, -50%, 0) scale(1);
+  }
+}
+
+@keyframes subscription-popover-close {
+  0% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, -50%, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(2px);
+    transform: translate3d(10px, -50%, 0) scale(0.92);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-up,
   .animate-fade-in,
   .animate-soft-pulse,
   .live-price-tick,
   .live-fx-dot::after,
+  .subscription-popover-open,
+  .subscription-popover-closed,
   .rspress-hero-visual::before,
   .rspress-hero-visual::after,
   .rspress-code-panel,

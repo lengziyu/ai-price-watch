@@ -1,6 +1,15 @@
 "use client";
 
-import { startTransition, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import {
+  startTransition,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type PointerEvent,
+  type ReactNode,
+} from "react";
+import Image from "next/image";
 import {
   ChevronRightIcon,
   RefreshCcwIcon,
@@ -10,12 +19,10 @@ import {
 } from "lucide-react";
 
 import { subscriptionRegionPrices } from "@/data/subscription-regions";
-import { buildEvidenceSummary } from "@/lib/evidence";
 import { formatBillingCycle, formatDate, fxReference } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import type { SubscriptionPlan, SubscriptionRegionPrice } from "@/types";
 import { AnimatedSectionTitle } from "@/components/shared/animated-section-title";
-import { EvidenceBadgeGroup } from "@/components/shared/evidence-badge";
 import { useStickyTabs } from "@/components/shared/use-sticky-tabs";
 import {
   Select,
@@ -117,11 +124,92 @@ const productPresets: Preset[] = [
     badge: "月",
   },
   {
-    key: "gemini-advanced",
-    label: "Gemini Advanced",
+    key: "claude-max-20x",
+    label: "Claude Max 20x",
+    provider: "Anthropic",
+    productName: "Claude",
+    planName: "Max 20x",
+    billingCycle: "monthly",
+    badge: "月",
+  },
+  {
+    key: "claude-pro-yearly",
+    label: "Claude Pro 年",
+    provider: "Anthropic",
+    productName: "Claude",
+    planName: "Pro",
+    billingCycle: "yearly",
+    badge: "年",
+  },
+  {
+    key: "gemini-ai-pro-monthly",
+    label: "Google AI Pro (5 TB)",
     provider: "Google",
     productName: "Gemini",
-    planName: "Google AI Pro",
+    planName: "Google AI Pro (5 TB)",
+    billingCycle: "monthly",
+    badge: "月",
+  },
+  {
+    key: "gemini-ai-plus-monthly",
+    label: "Google AI Plus (200GB)",
+    provider: "Google",
+    productName: "Gemini",
+    planName: "Google AI Plus (200GB)",
+    billingCycle: "monthly",
+    badge: "月",
+  },
+  {
+    key: "gemini-ai-plus-yearly",
+    label: "Google AI Plus (200GB)",
+    provider: "Google",
+    productName: "Gemini",
+    planName: "Google AI Plus (200GB)",
+    billingCycle: "yearly",
+    badge: "年",
+  },
+  {
+    key: "gemini-ai-pro-yearly",
+    label: "Google AI Pro (5 TB)",
+    provider: "Google",
+    productName: "Gemini",
+    planName: "Google AI Pro (5 TB)",
+    billingCycle: "yearly",
+    badge: "年",
+  },
+  {
+    key: "github-pro-monthly",
+    label: "GitHub Pro",
+    provider: "GitHub",
+    productName: "GitHub",
+    planName: "GitHub Pro",
+    billingCycle: "monthly",
+    badge: "月",
+  },
+  {
+    key: "github-copilot-pro-monthly",
+    label: "Copilot Pro",
+    provider: "GitHub",
+    productName: "GitHub",
+    planName: "Copilot Pro",
+    billingCycle: "monthly",
+    badge: "月",
+  },
+  {
+    key: "github-copilot-pro-plus-monthly",
+    label: "Copilot Pro+",
+    provider: "GitHub",
+    productName: "GitHub",
+    planName: "Copilot Pro+",
+    billingCycle: "monthly",
+    badge: "月",
+  },
+  {
+    key: "github-copilot-max-monthly",
+    label: "Copilot Max",
+    provider: "GitHub",
+    productName: "GitHub",
+    planName: "Copilot Max",
     billingCycle: "monthly",
     badge: "月",
   },
@@ -146,7 +234,20 @@ const providerPresets: ProviderPreset[] = [
     provider: "Google",
     productName: "Gemini",
   },
+  {
+    key: "github",
+    label: "GitHub",
+    provider: "GitHub",
+    productName: "GitHub",
+  },
 ];
+
+const providerLogoMap = {
+  OpenAI: "/vendor-logos/openai.png",
+  Anthropic: "/vendor-logos/anthropic.png",
+  Google: "/vendor-logos/google.png",
+  GitHub: "/vendor-logos/github.png",
+} as const;
 
 const targetCurrencies = [
   { code: "CNY", label: "人民币", flagCode: "CN", cnyRate: 1, locale: "zh-CN" },
@@ -183,6 +284,8 @@ type FxFeed = {
 const fxTickIntervalSeconds = 4;
 const fxFetchIntervalMs = 30_000;
 const defaultRowsPerTab = 20;
+const rowHoverLockMs = 520;
+const rowHoverUnlockDistancePx = 24;
 
 export function SubscriptionExplorer({
   plans,
@@ -198,6 +301,10 @@ export function SubscriptionExplorer({
   const [providerOpen, setProviderOpen] = useState(false);
   const [currencyOpen, setCurrencyOpen] = useState(false);
   const [expandedRegionId, setExpandedRegionId] = useState<string | null>(null);
+  const [hoveredRegionId, setHoveredRegionId] = useState<string | null>(null);
+  const [suppressRowHover, setSuppressRowHover] = useState(false);
+  const rowHoverLockedUntilRef = useRef(0);
+  const rowHoverUnlockStartRef = useRef<{ x: number; y: number } | null>(null);
   const [fxTick, setFxTick] = useState(0);
   const [nextFxRefresh, setNextFxRefresh] = useState(fxTickIntervalSeconds);
   const [fxFeed, setFxFeed] = useState<FxFeed>({
@@ -233,15 +340,36 @@ export function SubscriptionExplorer({
     filteredPresets[0] ??
     productPresets[0];
 
-  useEffect(() => {
-    if (activePreset && activePreset.key !== activePresetKey) {
-      setActivePresetKey(activePreset.key);
-    }
-  }, [activePreset, activePresetKey]);
-
-  useEffect(() => {
+  const resetRowHoverState = () => {
+    rowHoverLockedUntilRef.current = Date.now() + rowHoverLockMs;
+    rowHoverUnlockStartRef.current = null;
     setExpandedRegionId(null);
-  }, [activePreset.key, targetCurrency, viewMode]);
+    setHoveredRegionId(null);
+    setSuppressRowHover(true);
+  };
+
+  const unlockRowHoverAfterRealMove = (event: PointerEvent<HTMLDivElement>) => {
+    if (!suppressRowHover || Date.now() < rowHoverLockedUntilRef.current) {
+      return;
+    }
+
+    const start = rowHoverUnlockStartRef.current;
+
+    if (!start) {
+      rowHoverUnlockStartRef.current = {
+        x: event.clientX,
+        y: event.clientY,
+      };
+      return;
+    }
+
+    const distance = Math.hypot(event.clientX - start.x, event.clientY - start.y);
+
+    if (distance >= rowHoverUnlockDistancePx) {
+      rowHoverUnlockStartRef.current = null;
+      setSuppressRowHover(false);
+    }
+  };
 
   const currentPlan = useMemo<SubscriptionPlan>(
     () => resolvePlanForPreset(activePreset, plans),
@@ -306,6 +434,7 @@ export function SubscriptionExplorer({
   const liveSavingsValue = Math.max(liveReferenceCny - liveCheapestCny, 0);
   const liveSavingsPercent =
     liveReferenceCny > 0 ? Math.round((liveSavingsValue / liveReferenceCny) * 100) : 0;
+  const notRecommendedThresholdCny = liveReferenceCny * 0.97;
   const trackedCurrency = targetCurrency === "CNY" ? "USD" : targetCurrency;
   const trackedBaseRate = currencyFor(trackedCurrency).cnyRate;
   const trackedLiveRate = liveCnyRates[trackedCurrency] ?? trackedBaseRate;
@@ -313,6 +442,32 @@ export function SubscriptionExplorer({
     trackedBaseRate > 0 ? ((trackedLiveRate - trackedBaseRate) / trackedBaseRate) * 100 : 0;
   const fxTrend = fxDeltaPercent >= 0 ? "up" : "down";
   const fxSourceLabel = fxFeed.source === "frankfurter" ? "Frankfurter" : "快照";
+  const activeProviderLogo = logoForProvider(activeProvider.provider);
+  const currentPlanProviderLogo = logoForProvider(currentPlan.provider);
+  const handleProviderChange = (nextValue: string | null) => {
+    if (!nextValue) {
+      return;
+    }
+
+    resetRowHoverState();
+    const nextProvider = providerPresets.find((item) => item.key === nextValue);
+
+    if (!nextProvider) {
+      return;
+    }
+
+    const nextPreset = productPresets.find(
+      (item) =>
+        item.provider === nextProvider.provider && item.productName === nextProvider.productName,
+    );
+
+    setActiveProviderKey(nextProvider.key);
+    setProviderOpen(false);
+
+    if (nextPreset) {
+      startTransition(() => setActivePresetKey(nextPreset.key));
+    }
+  };
 
   useEffect(() => {
     let cancelled = false;
@@ -447,9 +602,10 @@ export function SubscriptionExplorer({
         <div className="w-fit">
           <Tabs
             value={viewMode}
-            onValueChange={(nextValue) =>
-              startTransition(() => setViewMode(nextValue as ViewMode))
-            }
+            onValueChange={(nextValue) => {
+              resetRowHoverState();
+              startTransition(() => setViewMode(nextValue as ViewMode));
+            }}
           >
             <TabsList variant="accent" className="w-full max-w-full sm:w-fit">
               <TabsTrigger value="subscription" className="min-w-[120px]">
@@ -466,11 +622,77 @@ export function SubscriptionExplorer({
 
         <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-self-end">
           <Select
+            value={activeProvider.key}
+            open={providerOpen}
+            onOpenChange={(nextOpen) => {
+              if (nextOpen) {
+                resetRowHoverState();
+              }
+              setProviderOpen(nextOpen);
+            }}
+            onValueChange={handleProviderChange}
+          >
+            <SelectTrigger
+              className={cn(
+                "w-full rounded-full border-primary/20 bg-card px-4 sm:w-[172px]",
+                isCompact ? "min-h-10" : "min-h-11",
+              )}
+            >
+              <div className="flex min-w-0 items-center gap-2">
+                {activeProviderLogo ? (
+                  <Image
+                    src={activeProviderLogo}
+                    alt={`${activeProvider.label} logo`}
+                    width={18}
+                    height={18}
+                    className="rounded-[4px] object-contain"
+                  />
+                ) : null}
+                <span className="truncate font-semibold text-foreground">{activeProvider.label}</span>
+              </div>
+            </SelectTrigger>
+            <SelectContent
+              align="end"
+              alignItemWithTrigger={false}
+              className="min-w-[220px] rounded-[12px] bg-popover/94 p-1 shadow-[0_22px_80px_rgba(0,0,0,0.14)] backdrop-blur-2xl"
+            >
+              <SelectGroup>
+                <SelectLabel>厂商</SelectLabel>
+                {providerPresets.map((item) => {
+                  const logoPath = logoForProvider(item.provider);
+
+                  return (
+                    <SelectItem key={item.key} value={item.key}>
+                      {logoPath ? (
+                        <Image
+                          src={logoPath}
+                          alt={`${item.label} logo`}
+                          width={18}
+                          height={18}
+                          className="rounded-[4px] object-contain"
+                        />
+                      ) : null}
+                      <span className="font-medium">{item.label}</span>
+                      <span className="text-muted-foreground">· {item.provider}</span>
+                    </SelectItem>
+                  );
+                })}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+
+          <Select
             value={targetCurrency}
             open={currencyOpen}
-            onOpenChange={setCurrencyOpen}
+            onOpenChange={(nextOpen) => {
+              if (nextOpen) {
+                resetRowHoverState();
+              }
+              setCurrencyOpen(nextOpen);
+            }}
             onValueChange={(nextValue) => {
               if (nextValue) {
+                resetRowHoverState();
                 setTargetCurrency(nextValue as TargetCurrencyCode);
                 setCurrencyOpen(false);
               }
@@ -518,6 +740,7 @@ export function SubscriptionExplorer({
             type="button"
             aria-label="切换目标货币"
             onClick={() => {
+              resetRowHoverState();
               const currentIndex = targetCurrencies.findIndex(
                 (item) => item.code === targetCurrency,
               );
@@ -534,110 +757,63 @@ export function SubscriptionExplorer({
         </div>
       </div>
 
-      {stickyTabsEnabled ? <div ref={stickySentinelRef} className="page-tabs-sentinel" /> : null}
-      <div
-        ref={stickyRef}
-        className={cn(
-          isCompact ? "mt-2.5 sm:mt-3" : "mt-3.5 sm:mt-5",
-          stickyTabsEnabled && "page-tabs-sticky",
-          stickyTabsEnabled && isSticky && "is-sticky",
-        )}
-      >
-        <div className="page-tabs-sticky__surface subscription-preset-rail">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-            <Select
-              value={activeProvider.key}
-              open={providerOpen}
-              onOpenChange={setProviderOpen}
-              onValueChange={(nextValue) => {
-                const nextProvider = providerPresets.find((item) => item.key === nextValue);
+      {viewMode === "subscription" ? (
+        <>
+          {stickyTabsEnabled ? <div ref={stickySentinelRef} className="page-tabs-sentinel" /> : null}
+          <div
+            ref={stickyRef}
+            className={cn(
+              isCompact ? "mt-2.5 sm:mt-3" : "mt-3.5 sm:mt-5",
+              stickyTabsEnabled && "page-tabs-sticky",
+              stickyTabsEnabled && isSticky && "is-sticky",
+            )}
+          >
+            <div className="page-tabs-sticky__surface subscription-preset-rail">
+              <div ref={presetTabsRef} className="segmented-scroll-shell min-w-0 flex-1">
+                <span
+                  ref={presetIndicatorRef}
+                  aria-hidden="true"
+                  className="segmented-indicator segmented-indicator--accent"
+                />
+                {filteredPresets.map((preset) => {
+                  const isActive = activePreset.key === preset.key;
 
-                if (!nextProvider) {
-                  return;
-                }
-
-                const nextPreset = productPresets.find(
-                  (item) =>
-                    item.provider === nextProvider.provider &&
-                    item.productName === nextProvider.productName,
-                );
-
-                setActiveProviderKey(nextProvider.key);
-                setProviderOpen(false);
-
-                if (nextPreset) {
-                  startTransition(() => setActivePresetKey(nextPreset.key));
-                }
-              }}
-            >
-              <SelectTrigger className="min-h-9 w-full rounded-[14px] border-border bg-background px-3.5 sm:w-[148px]">
-                <div className="flex min-w-0 items-center gap-2">
-                  <span className="truncate font-medium">{activeProvider.label}</span>
-                </div>
-              </SelectTrigger>
-              <SelectContent
-                align="start"
-                alignItemWithTrigger={false}
-                className="min-w-[220px] rounded-[12px] bg-popover/94 p-1 shadow-[0_22px_80px_rgba(0,0,0,0.14)] backdrop-blur-2xl"
-              >
-                <SelectGroup>
-                  <SelectLabel>厂商</SelectLabel>
-                  {providerPresets.map((item) => (
-                    <SelectItem key={item.key} value={item.key}>
-                      <span className="font-medium">{item.label}</span>
-                      <span className="text-muted-foreground">· {item.provider}</span>
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-
-            <div
-              ref={presetTabsRef}
-              className="segmented-scroll-shell min-w-0 flex-1"
-            >
-              <span
-                ref={presetIndicatorRef}
-                aria-hidden="true"
-                className="segmented-indicator segmented-indicator--accent"
-              />
-              {filteredPresets.map((preset) => {
-                const isActive = activePreset.key === preset.key;
-
-                return (
-                  <button
-                    key={preset.key}
-                    type="button"
-                    data-segmented-active={isActive ? "true" : undefined}
-                    onClick={() => {
-                      startTransition(() => setActivePresetKey(preset.key));
-                      scrollToStickyContent();
-                    }}
-                    className={cn(
-                      "relative z-[1] inline-flex min-h-9 flex-none items-center gap-1.5 rounded-[14px] px-3 py-2 text-[12px] transition-colors sm:gap-2 sm:px-3.5 sm:text-[13px]",
-                      isActive
-                        ? "border border-primary/15 bg-primary text-white shadow-[0_12px_30px_rgba(0,188,125,0.24),inset_0_1px_0_rgba(255,255,255,0.14)]"
-                        : "text-foreground hover:bg-background hover:text-foreground hover:shadow-[0_8px_18px_rgba(15,23,42,0.08)]",
-                    )}
-                  >
-                    <span className="whitespace-nowrap">{membershipLabelForPreset(preset)}</span>
-                    {preset.badge ? (
-                      <span
-                        className={cn(
-                          "rounded-[10px] px-1.5 py-0.5 text-[10px] sm:px-2 sm:text-[11px]",
-                          isActive ? "bg-white/15 text-white" : "bg-primary/10 text-primary",
-                        )}
-                      >
-                        {preset.badge}
-                      </span>
-                    ) : null}
-                  </button>
-                );
-              })}
+                  return (
+                    <button
+                      key={preset.key}
+                      type="button"
+                      data-segmented-active={isActive ? "true" : undefined}
+                      onClick={() => {
+                        resetRowHoverState();
+                        startTransition(() => setActivePresetKey(preset.key));
+                        scrollToStickyContent();
+                      }}
+                      className={cn(
+                        "relative z-[1] inline-flex min-h-9 flex-none items-center gap-1.5 rounded-[14px] px-3 py-2 text-[12px] transition-colors sm:gap-2 sm:px-3.5 sm:text-[13px]",
+                        isActive
+                          ? "border border-primary/15 bg-primary text-white shadow-[0_12px_30px_rgba(0,188,125,0.24),inset_0_1px_0_rgba(255,255,255,0.14)]"
+                          : "text-foreground hover:bg-background hover:text-foreground hover:shadow-[0_8px_18px_rgba(15,23,42,0.08)]",
+                      )}
+                    >
+                      <span className="whitespace-nowrap">{membershipLabelForPreset(preset)}</span>
+                      {preset.badge ? (
+                        <span
+                          className={cn(
+                            "rounded-[10px] px-1.5 py-0.5 text-[10px] sm:px-2 sm:text-[11px]",
+                            isActive ? "bg-white/15 text-white" : "bg-primary/10 text-primary",
+                          )}
+                        >
+                          {preset.badge}
+                        </span>
+                      ) : null}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </>
+      ) : null}
 
       {viewMode === "subscription" && cheapest && referenceRegion ? (
         <div className="motion-surface motion-surface--green mt-3.5 overflow-hidden rounded-[24px] border border-border p-2 sm:mt-5 sm:p-2.5">
@@ -681,11 +857,27 @@ export function SubscriptionExplorer({
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <div className="flex flex-wrap items-center gap-3">
+                {currentPlanProviderLogo ? (
+                  <Image
+                    src={currentPlanProviderLogo}
+                    alt={`${currentPlan.provider} logo`}
+                    width={26}
+                    height={26}
+                    className="rounded-[6px] object-contain"
+                  />
+                ) : null}
                 <h3 className="text-[1.15rem] font-semibold tracking-[-0.025em] sm:text-[1.28rem]">
                   {currentPlan.productName} {currentPlan.planName}
                 </h3>
                 <span className="rounded-[10px] bg-primary/10 px-2.5 py-1 text-[10px] font-semibold text-primary">
                   {formatBillingCycle(currentPlan.billingCycle)}
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/[0.07] px-2.5 py-1 text-[10px] font-semibold text-primary">
+                  <span className="live-fx-dot size-1.5 rounded-full bg-primary" />
+                  实时校验
+                  <span className="text-muted-foreground">
+                    {updatedAt ? formatDate(updatedAt) : "持续更新"}
+                  </span>
                 </span>
               </div>
               <p className="mt-1.5 max-w-4xl text-[12.5px] leading-6 text-muted-foreground sm:text-[13px]">
@@ -702,23 +894,48 @@ export function SubscriptionExplorer({
             </button>
           </div>
 
-          <div className="mt-3.5 flex flex-col gap-2.5 sm:mt-4">
-            {visibleRegions.map((item, index) => (
-              <PriceRow
-                key={item.id}
-                region={item}
-                detailRows={hoverDetailMap.get(item.countryCode) ?? []}
-                isPinned={expandedRegionId === item.id}
-                onTogglePinned={() =>
-                  setExpandedRegionId((current) => (current === item.id ? null : item.id))
-                }
-                onClosePinned={() => setExpandedRegionId(null)}
-                highlighted={index === 0}
-                targetCurrency={targetCurrency}
-                liveCnyRates={liveCnyRates}
-                pulseKey={fxTick}
-              />
-            ))}
+          <div className="mt-3.5 hidden items-center rounded-[10px] border border-border/50 bg-muted/22 px-3 py-2 text-[12px] font-semibold text-muted-foreground sm:grid sm:grid-cols-[72px_minmax(0,1fr)_136px_72px_132px_106px] sm:gap-3 sm:mt-4">
+            <span className="text-center">排名</span>
+            <span>地区</span>
+            <span className="text-right">原价</span>
+            <span className="text-center">单位</span>
+            <span className="text-right">CNY</span>
+            <span className="text-right">状态</span>
+          </div>
+
+          <div className="mt-2.5 flex flex-col gap-2.5">
+            <div
+              onPointerMove={unlockRowHoverAfterRealMove}
+            >
+              {visibleRegions.map((item, index) => (
+                <PriceRow
+                  key={item.id}
+                  rank={index + 1}
+                  region={item}
+                  detailRows={hoverDetailMap.get(item.countryCode) ?? []}
+                  isPinned={expandedRegionId === item.id}
+                  isHovered={hoveredRegionId === item.id}
+                  hoverEnabled={!suppressRowHover && !providerOpen && !currencyOpen}
+                  onHoverStart={() => setHoveredRegionId(item.id)}
+                  onHoverEnd={() =>
+                    setHoveredRegionId((current) => (current === item.id ? null : current))
+                  }
+                  onTogglePinned={() =>
+                    setExpandedRegionId((current) => (current === item.id ? null : item.id))
+                  }
+                  onClosePinned={() => setExpandedRegionId(null)}
+                  highlighted={index === 0}
+                  notRecommended={
+                    index !== 0 &&
+                    liveReferenceCny > 0 &&
+                    liveCnyValueFor(item, liveCnyRates) >= notRecommendedThresholdCny
+                  }
+                  targetCurrency={targetCurrency}
+                  liveCnyRates={liveCnyRates}
+                  pulseKey={fxTick}
+                />
+              ))}
+            </div>
           </div>
 
           {visibleRegions.length < currentRegions.length ? (
@@ -730,7 +947,7 @@ export function SubscriptionExplorer({
       ) : null}
 
       {viewMode === "region" ? (
-        <div className="mt-3.5 grid gap-3 sm:mt-5 lg:grid-cols-2">
+        <div className="mt-3.5 grid gap-3 sm:mt-5 lg:grid-cols-3">
           {visibleRegionGroups.map((group) => (
             <RegionPlanCard
               key={group.countryCode}
@@ -741,8 +958,8 @@ export function SubscriptionExplorer({
             />
           ))}
           {visibleRegionGroups.length === 0 ? (
-            <div className="rounded-[12px] border border-dashed border-border bg-card px-4 py-8 text-center text-[13px] text-muted-foreground lg:col-span-2">
-              当前产品的地区价格仍在持续整理中。
+            <div className="rounded-[12px] border border-dashed border-border bg-card px-4 py-8 text-center text-[13px] text-muted-foreground lg:col-span-3">
+              当前产品地区价格暂未收录。
             </div>
           ) : null}
         </div>
@@ -1031,84 +1248,39 @@ function CompareEdge({
 }
 
 function PriceRow({
+  rank,
   region,
   detailRows,
   isPinned,
+  isHovered,
+  hoverEnabled,
+  onHoverStart,
+  onHoverEnd,
   onTogglePinned,
   onClosePinned,
   highlighted,
+  notRecommended,
   targetCurrency,
   liveCnyRates,
   pulseKey,
 }: {
+  rank: number;
   region: SubscriptionRegionPrice;
   detailRows: SubscriptionRegionPrice[];
   isPinned: boolean;
+  isHovered: boolean;
+  hoverEnabled: boolean;
+  onHoverStart: () => void;
+  onHoverEnd: () => void;
   onTogglePinned: () => void;
   onClosePinned: () => void;
   highlighted: boolean;
+  notRecommended: boolean;
   targetCurrency: TargetCurrencyCode;
   liveCnyRates: Record<string, number>;
   pulseKey: number;
 }) {
-  const [isHovered, setIsHovered] = useState(false);
-  const openHoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const closeHoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const isPinnedRef = useRef(isPinned);
-
-  useEffect(() => {
-    isPinnedRef.current = isPinned;
-  }, [isPinned]);
-
-  const clearOpenHoverTimer = () => {
-    if (!openHoverTimerRef.current) {
-      return;
-    }
-
-    clearTimeout(openHoverTimerRef.current);
-    openHoverTimerRef.current = null;
-  };
-
-  const clearCloseHoverTimer = () => {
-    if (!closeHoverTimerRef.current) {
-      return;
-    }
-
-    clearTimeout(closeHoverTimerRef.current);
-    closeHoverTimerRef.current = null;
-  };
-
-  const openHover = () => {
-    clearOpenHoverTimer();
-    clearCloseHoverTimer();
-    openHoverTimerRef.current = setTimeout(() => {
-      setIsHovered(true);
-      openHoverTimerRef.current = null;
-    }, 70);
-  };
-
-  const scheduleCloseHover = () => {
-    clearOpenHoverTimer();
-    clearCloseHoverTimer();
-    closeHoverTimerRef.current = setTimeout(() => {
-      if (isPinnedRef.current) {
-        closeHoverTimerRef.current = null;
-        return;
-      }
-      setIsHovered(false);
-      closeHoverTimerRef.current = null;
-    }, 260);
-  };
-
-  useEffect(() => {
-    return () => {
-      clearOpenHoverTimer();
-      clearCloseHoverTimer();
-    };
-  }, []);
-
   const finalPrice = formatTargetMoney(region.convertedCNY, targetCurrency, region, liveCnyRates);
-  const evidence = buildEvidenceSummary(region);
   const sortedDetailRows = [...detailRows].sort(
     (left, right) => liveCnyValueFor(left, liveCnyRates) - liveCnyValueFor(right, liveCnyRates),
   );
@@ -1119,24 +1291,32 @@ function PriceRow({
   return (
     <div
       className={cn("group/price-row relative", desktopOpen && "z-30")}
-      onPointerEnter={openHover}
-      onPointerLeave={scheduleCloseHover}
+      onPointerMove={() => {
+        if (hoverEnabled && !isHovered && !isPinned) {
+          onHoverStart();
+        }
+      }}
+      onPointerLeave={onHoverEnd}
     >
       <div
         className={cn(
-          "relative grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 overflow-hidden rounded-[12px] border px-2.5 py-2.5 transition-[border-color,box-shadow] duration-200 ease-out before:absolute before:inset-y-2 before:left-0 before:w-1 before:rounded-r-full before:bg-primary before:opacity-0 before:transition-opacity before:duration-200 sm:gap-2.5 sm:px-3.5 lg:grid-cols-[1.2fr_0.9fr_0.5fr_0.7fr_auto_auto]",
+          "relative grid grid-cols-[40px_minmax(0,1fr)_auto_auto] items-center gap-2 overflow-hidden rounded-none border px-2.5 py-2.5 transition-[border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] before:absolute before:inset-y-2 before:left-0 before:w-1 before:rounded-r-full before:bg-primary before:opacity-0 before:transition-opacity before:duration-300 sm:grid-cols-[72px_minmax(0,1fr)_136px_72px_132px_106px] sm:gap-3 sm:px-3.5",
           highlighted
-            ? "border-primary/25 bg-primary/7 shadow-[0_12px_28px_rgba(0,188,125,0.08)]"
-            : "border-border bg-background hover:border-primary/16 hover:before:opacity-100",
+            ? "border-primary/16 bg-primary/5 shadow-[0_8px_18px_rgba(0,188,125,0.05)]"
+            : "border-border/55 bg-background hover:border-primary/12 hover:before:opacity-100",
           (desktopOpen || mobileOpen) &&
-            "border-primary/20 before:opacity-100",
+            "border-primary/14 before:opacity-100",
         )}
         role={sortedDetailRows.length > 0 ? "button" : undefined}
         aria-expanded={sortedDetailRows.length > 0 ? desktopOpen || mobileOpen : undefined}
         aria-haspopup={sortedDetailRows.length > 0 ? "dialog" : undefined}
         tabIndex={sortedDetailRows.length > 0 ? 0 : -1}
-        onFocus={openHover}
-        onBlur={scheduleCloseHover}
+        onFocus={() => {
+          if (hoverEnabled) {
+            onHoverStart();
+          }
+        }}
+        onBlur={onHoverEnd}
         onClick={() => {
           if (sortedDetailRows.length > 0) {
             onTogglePinned();
@@ -1153,13 +1333,15 @@ function PriceRow({
           }
 
           if (event.key === "Escape") {
-            clearOpenHoverTimer();
-            clearCloseHoverTimer();
-            setIsHovered(false);
+            onHoverEnd();
             onClosePinned();
           }
         }}
       >
+        <div className="text-center text-[1.06rem] font-semibold tabular-nums tracking-[-0.02em] text-muted-foreground sm:text-[1.14rem]">
+          {rank}
+        </div>
+
         <div className="flex items-center gap-4">
           <CountryFlag countryCode={region.countryCode} className="h-[22px] w-[30px] sm:h-[24px] sm:w-8" />
           <div>
@@ -1167,48 +1349,53 @@ function PriceRow({
           </div>
         </div>
 
-        <div className="hidden text-[11px] text-muted-foreground lg:block">
-          <EvidenceBadgeGroup summary={evidence} compact />
-        </div>
-        <div className="hidden text-[11px] text-muted-foreground lg:block">{region.currencyCode}</div>
-        <div className="hidden text-[1rem] font-semibold tracking-[-0.04em] sm:text-[1.05rem] lg:block">
+        <div className="hidden text-right text-[0.98rem] font-semibold tracking-[-0.03em] text-foreground sm:block">
           {symbolFor(region.currencyCode)}
           {region.localPrice.toFixed(2)}
         </div>
+
+        <div className="hidden text-center text-[11px] font-medium tracking-normal text-muted-foreground sm:block">
+          {region.currencyCode}
+        </div>
+
         <div
           className={cn(
-            "text-right text-[1rem] font-semibold tracking-[-0.025em] sm:text-[1.05rem] lg:text-left",
+            "text-right text-[1rem] font-semibold tracking-[-0.025em] sm:text-[1.05rem]",
             highlighted ? "text-primary" : "text-foreground",
           )}
         >
           <div>
             <LivePriceTick pulseKey={pulseKey}>{finalPrice}</LivePriceTick>
           </div>
-          <div className="mt-0.5 text-[10px] font-medium tracking-normal text-muted-foreground lg:hidden">
+          <div className="mt-0.5 text-[10px] font-medium tracking-normal text-muted-foreground sm:hidden">
             {region.currencyCode} {symbolFor(region.currencyCode)}
             {region.localPrice.toFixed(2)}
           </div>
         </div>
-        <div className="flex items-center justify-end">
+
+        <div className="flex items-center justify-end gap-1.5">
           {highlighted ? (
             <span className="rounded-full bg-primary px-2.5 py-1 text-[11px] font-semibold text-white">
               推荐
             </span>
-          ) : (
-            <ChevronRightIcon
-              className={cn(
-                "size-4 text-muted-foreground transition-transform duration-300",
-                (desktopOpen || mobileOpen) && "rotate-90 text-primary",
-              )}
-            />
-          )}
+          ) : notRecommended ? (
+            <span className="rounded-full border border-rose-300/70 bg-rose-50/80 px-2.5 py-1 text-[11px] font-semibold text-rose-600 dark:border-rose-400/30 dark:bg-rose-500/10 dark:text-rose-200">
+              不推荐
+            </span>
+          ) : null}
+          <ChevronRightIcon
+            className={cn(
+              "size-4 text-muted-foreground transition-transform duration-300",
+              (desktopOpen || mobileOpen) && "rotate-90 text-primary",
+            )}
+          />
         </div>
       </div>
 
       <div
         className={cn(
-          "pointer-events-none absolute left-4 top-1/2 z-40 hidden w-[340px] max-w-[calc(100%-10rem)] -translate-y-1/2 origin-left transition-[opacity,filter] duration-200 ease-out lg:block",
-          desktopOpen ? "opacity-100 blur-0" : "opacity-0 blur-[1px]",
+          "subscription-popover-shell pointer-events-none absolute left-4 top-1/2 z-40 hidden w-[340px] max-w-[calc(100%-10rem)] lg:block",
+          desktopOpen ? "subscription-popover-open" : "subscription-popover-closed",
         )}
       >
         <div>
@@ -1339,7 +1526,9 @@ function MembershipPricePopover({
                   {formatTargetMoney(item.convertedCNY, targetCurrency, item, liveCnyRates)}
                 </LivePriceTick>
               </div>
-              <div className="mt-1 text-[10px] text-muted-foreground">{item.sourceLabel}</div>
+              <div className="mt-1 text-[10px] text-muted-foreground">
+                {formatDate(item.updatedAt)}
+              </div>
             </div>
           </div>
         ))}
@@ -1390,7 +1579,7 @@ function RegionPlanCard({
           >
             <div className="min-w-0">
               <div className="truncate text-[13px] font-medium text-foreground sm:text-sm">
-                {item.productName} {item.planName} - {formatCycleEnglish(item.billingCycle)}
+                {item.productName} {item.planName} - {formatBillingCycle(item.billingCycle)}
               </div>
               <div className="mt-0.5 text-[11px] text-muted-foreground">
                 {item.currencyCode} {formatLocalNumber(item.localPrice)}
@@ -1455,7 +1644,16 @@ function planSortWeight(item: SubscriptionRegionPrice) {
       "max 5x-monthly": 6,
       "team-yearly": 7,
       "max 20x-monthly": 8,
-      "google ai pro-monthly": 9,
+      "google ai plus (200gb)-monthly": 9,
+      "google ai pro (5 tb)-monthly": 10,
+      "google ai plus (200gb)-yearly": 11,
+      "google ai pro (5 tb)-yearly": 12,
+      "github pro-monthly": 13,
+      "copilot pro-monthly": 14,
+      "copilot pro+-monthly": 15,
+      "copilot max-monthly": 16,
+      "individual-monthly": 17,
+      "teams-monthly": 18,
     }[key] ?? 20
   );
 }
@@ -1463,10 +1661,6 @@ function planSortWeight(item: SubscriptionRegionPrice) {
 function membershipLabelForPreset(preset: Preset) {
   if (preset.productName === "ChatGPT") {
     return preset.planName;
-  }
-
-  if (preset.productName === "Gemini" && preset.planName === "Google AI Pro") {
-    return "AI Pro";
   }
 
   return preset.planName;
@@ -1477,11 +1671,11 @@ function membershipLabelForRow(item: SubscriptionRegionPrice) {
     return `${item.productName} ${item.planName}`;
   }
 
-  if (item.productName === "Gemini" && item.planName === "Google AI Pro") {
-    return "Gemini AI Pro";
-  }
-
   return `${item.productName} ${item.planName}`;
+}
+
+function logoForProvider(provider: string) {
+  return providerLogoMap[provider as keyof typeof providerLogoMap];
 }
 
 function currencyFor(code: TargetCurrencyCode) {
@@ -1612,10 +1806,6 @@ function formatLocalNumber(value: number) {
   }).format(value);
 }
 
-function formatCycleEnglish(value: "monthly" | "yearly") {
-  return value === "monthly" ? "Monthly" : "Annual";
-}
-
 function CountryFlag({ countryCode, className }: { countryCode: string; className?: string }) {
   if (countryCode === "TW") {
     return (
@@ -1697,8 +1887,26 @@ function planSummaryFor(plan: SubscriptionPlan) {
         "适合写作、总结、知识工作与轻量编程，是 Claude 的主力个人订阅档位。",
       "claude-max 5x-monthly":
         "适合更高频 Claude 使用者，偏向长会话、重度总结和更大的调用额度。",
-      "gemini-google ai pro-monthly":
+      "claude-max 20x-monthly":
+        "面向最重度的 Claude 使用场景，适合并行任务、超长上下文和高频深度推理。",
+      "claude-pro-yearly":
+        "适合长期稳定使用 Claude 的用户，年付常用于降低整体订阅成本并减少续费管理频次。",
+      "gemini-google ai plus (200gb)-monthly":
+        "适合入门体验 Gemini 与 Google One 生态，适配轻量日常使用场景。",
+      "gemini-google ai plus (200gb)-yearly":
+        "适合长期低预算订阅场景，按年计费常用于降低总成本。",
+      "gemini-google ai pro (5 tb)-monthly":
         "适合 Gemini 深度使用者，兼顾模型能力与 Google One 生态权益。",
+      "gemini-google ai pro (5 tb)-yearly":
+        "适合长期重度使用 Gemini 的用户，年付更便于年度预算管理。",
+      "github-github pro-monthly":
+        "偏向开发者账号权益升级，适合需要更高平台能力和账号级扩展权益的用户。",
+      "github-copilot pro-monthly":
+        "适合日常编码辅助与中等强度 AI 编程场景，是 Copilot 的主力个人档位。",
+      "github-copilot pro+-monthly":
+        "适合高频使用高级模型与智能体流程的个人用户，面向更高额度的持续工作流。",
+      "github-copilot max-monthly":
+        "面向最高强度的 Copilot 使用场景，适合多仓并行、长会话与重度代码审查。",
     }[key] ?? plan.note ?? "按公开价格和复核记录持续维护。"
   );
 }

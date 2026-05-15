@@ -19,12 +19,20 @@ chmod +x scripts/update-server.sh scripts/setup-https.sh
 cd /opt/apps/ai-price-watch && ./scripts/update-server.sh
 ```
 
-默认会在拉取前自动处理 `data/admin/operation-logs.json` 和 `data/admin/deal-articles.json` 的本地改动（先备份再重置），避免 `git pull` 因运行时数据文件冲突中断。
+默认会在拉取前处理 `data/admin/operation-logs.json` 和 `data/admin/deal-articles.json` 的本地改动：
+- 先备份并临时重置，避免 `git pull` 因运行时数据文件冲突中断。
+- 拉取成功后自动恢复备份内容，避免文章内容被覆盖还原。
 
-如果你还希望把其他运行时文件一起自动重置，可传环境变量：
+如果你还希望把其他运行时文件一起处理，可传环境变量：
 
 ```bash
 cd /opt/apps/ai-price-watch && RUNTIME_MUTABLE_FILES="data/admin/operation-logs.json data/admin/source-reviews.json" ./scripts/update-server.sh
+```
+
+如果你想临时关闭“拉取后恢复”（默认开启）：
+
+```bash
+cd /opt/apps/ai-price-watch && RUNTIME_RESTORE_AFTER_PULL=0 ./scripts/update-server.sh
 ```
 
 如果你不是 `main` 分支，例如 `master`：
