@@ -108,6 +108,7 @@ export type DealArticleInput = {
   summary: string;
   rawContent: string;
   coverImage?: File;
+  uploadedCoverImageUrl?: string;
   resetCoverImage?: boolean;
   sourcePlatform: DealArticle["sourcePlatform"];
   sourceUrl?: string;
@@ -290,7 +291,7 @@ export async function createDealArticle(input: DealArticleInput, actor: string) 
 
   const now = new Date().toISOString();
   const id = `deal-article-${randomUUID()}`;
-  const coverImageUrl = await saveDealArticleCoverImage(input.coverImage);
+  const coverImageUrl = await saveDealArticleCoverImage(input.coverImage, input.uploadedCoverImageUrl);
   const engagement = createInitialDealArticleEngagement(
     `${id}:${title}:${input.sourceUrl ?? ""}:${now}`,
   );
@@ -353,6 +354,7 @@ export async function updateDealArticle(id: string, input: DealArticleInput, act
   const coverImageUrl = await resolveUpdatedDealArticleCoverImageUrl(
     currentArticle.coverImageUrl,
     input.coverImage,
+    input.uploadedCoverImageUrl,
     input.resetCoverImage,
   );
 
@@ -442,7 +444,11 @@ export async function deleteDealArticle(id: string, actor: string) {
   return currentArticle;
 }
 
-async function saveDealArticleCoverImage(file?: File) {
+async function saveDealArticleCoverImage(file?: File, uploadedCoverImageUrl?: string) {
+  if (uploadedCoverImageUrl) {
+    return sanitizeUploadedDealArticleCoverUrl(uploadedCoverImageUrl);
+  }
+
   if (!file || file.size === 0) {
     return defaultDealArticleCoverImageUrl;
   }
@@ -477,8 +483,17 @@ async function saveDealArticleCoverImage(file?: File) {
 async function resolveUpdatedDealArticleCoverImageUrl(
   currentCoverImageUrl: string,
   file?: File,
+  uploadedCoverImageUrl?: string,
   resetCoverImage?: boolean,
 ) {
+  if (uploadedCoverImageUrl) {
+    const nextCoverImageUrl = sanitizeUploadedDealArticleCoverUrl(uploadedCoverImageUrl);
+    if (nextCoverImageUrl !== currentCoverImageUrl) {
+      await deleteUploadedDealArticleCoverIfNeeded(currentCoverImageUrl);
+    }
+    return nextCoverImageUrl;
+  }
+
   if (file && file.size > 0) {
     const nextCoverImageUrl = await saveDealArticleCoverImage(file);
     await deleteUploadedDealArticleCoverIfNeeded(currentCoverImageUrl);
@@ -491,6 +506,16 @@ async function resolveUpdatedDealArticleCoverImageUrl(
   }
 
   return currentCoverImageUrl || defaultDealArticleCoverImageUrl;
+}
+
+function sanitizeUploadedDealArticleCoverUrl(url: string) {
+  const normalized = url.trim();
+
+  if (/^\/uploads\/deal-articles\/[A-Za-z0-9._/-]+\.(?:jpg|jpeg|png|webp|avif|svg)$/i.test(normalized)) {
+    return normalized;
+  }
+
+  throw new Error("封面图地址无效，请重新上传。");
 }
 
 async function deleteUploadedDealArticleCoverIfNeeded(coverImageUrl?: string) {

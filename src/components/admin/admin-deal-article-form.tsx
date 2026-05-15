@@ -66,6 +66,8 @@ type EditorImageUploadResponse = {
   error?: string;
 };
 
+type CoverImageUploadResponse = EditorImageUploadResponse;
+
 const editorTextColors = [
   { label: "默认", value: "" },
   { label: "墨绿", value: "#063f33" },
@@ -147,9 +149,14 @@ export function AdminDealArticleForm({
   const [isFetchingSource, setIsFetchingSource] = useState(false);
   const [sourceFetchMessage, setSourceFetchMessage] = useState<string | null>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
+  const coverInputRef = useRef<HTMLInputElement>(null);
   const savedSelectionRef = useRef<Range | null>(null);
   const [isUploadingEditorImage, setIsUploadingEditorImage] = useState(false);
   const [editorMessage, setEditorMessage] = useState<string | null>(null);
+  const [coverImageUrl, setCoverImageUrl] = useState(article?.coverImageUrl ?? "/default-deal-article-cover.svg");
+  const [uploadedCoverImageUrl, setUploadedCoverImageUrl] = useState("");
+  const [isUploadingCoverImage, setIsUploadingCoverImage] = useState(false);
+  const [coverUploadMessage, setCoverUploadMessage] = useState<string | null>(null);
 
   const addTag = (value: string) => {
     const normalized = value.trim();
@@ -342,6 +349,42 @@ export function AdminDealArticleForm({
     }
   };
 
+  const handleCoverImageUpload = async (file?: File) => {
+    if (!file || isUploadingCoverImage) {
+      return;
+    }
+
+    setIsUploadingCoverImage(true);
+    setCoverUploadMessage("封面图上传中...");
+
+    try {
+      const uploadFormData = new FormData();
+      uploadFormData.set("coverImage", file);
+
+      const response = await fetch("/api/admin/cover-images", {
+        method: "POST",
+        body: uploadFormData,
+      });
+      const payload = (await response.json()) as CoverImageUploadResponse;
+
+      if (!response.ok || !payload.url) {
+        throw new Error(payload.error || "封面图上传失败，请稍后重试。");
+      }
+
+      setCoverImageUrl(payload.url);
+      setUploadedCoverImageUrl(payload.url);
+      setCoverUploadMessage("封面图已上传，保存文章后生效。");
+    } catch (error) {
+      setUploadedCoverImageUrl("");
+      setCoverUploadMessage(error instanceof Error ? error.message : "封面图上传失败，请稍后重试。");
+    } finally {
+      setIsUploadingCoverImage(false);
+      if (coverInputRef.current) {
+        coverInputRef.current.value = "";
+      }
+    }
+  };
+
   return (
     <form action={formAction} encType="multipart/form-data" className="grid gap-5">
       <div className="grid gap-2">
@@ -500,7 +543,7 @@ export function AdminDealArticleForm({
             <div className="text-sm font-medium text-foreground">当前封面</div>
             <div className="relative aspect-[16/9] overflow-hidden rounded-[8px] border border-border bg-background/72">
               <Image
-                src={article?.coverImageUrl ?? "/default-deal-article-cover.svg"}
+                src={coverImageUrl}
                 alt={article?.title ? `${article.title} 当前封面` : "默认封面"}
                 fill
                 className="object-cover"
@@ -513,10 +556,25 @@ export function AdminDealArticleForm({
             <label htmlFor="coverImage" className="text-sm font-medium text-foreground">
               上传封面图
             </label>
-            <Input id="coverImage" name="coverImage" type="file" accept="image/png,image/jpeg,image/webp,image/avif,image/svg+xml" className="rounded-[8px]" />
+            <Input
+              id="coverImage"
+              ref={coverInputRef}
+              name="coverImage"
+              type="file"
+              accept="image/png,image/jpeg,image/webp,image/avif,image/svg+xml"
+              className="rounded-[8px]"
+              disabled={isUploadingCoverImage}
+              onChange={(event) => handleCoverImageUpload(event.currentTarget.files?.[0])}
+            />
+            <input type="hidden" name="uploadedCoverImageUrl" value={uploadedCoverImageUrl} />
             <div className="text-xs leading-6 text-muted-foreground">
               建议使用简洁、信息量低的封面。不上传时会使用默认封面。支持 JPG、PNG、WebP、AVIF、SVG，文件大小不超过 6MB。
             </div>
+            {coverUploadMessage ? (
+              <div className="rounded-[8px] border border-border bg-background/72 px-3 py-2 text-xs leading-5 text-muted-foreground">
+                {isUploadingCoverImage ? "封面图上传中..." : coverUploadMessage}
+              </div>
+            ) : null}
           </div>
 
           {article ? (
@@ -636,8 +694,8 @@ export function AdminDealArticleForm({
       </div>
 
       <div className="flex flex-wrap gap-2">
-        <Button type="submit" disabled={pending} className="rounded-[8px]">
-          {pending ? pendingLabel : submitLabel}
+        <Button type="submit" disabled={pending || isUploadingCoverImage} className="rounded-[8px]">
+          {pending || isUploadingCoverImage ? pendingLabel : submitLabel}
         </Button>
       </div>
     </form>
