@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRightIcon, DatabaseZapIcon } from "lucide-react";
 
 import { BrandLogo } from "@/components/layout/brand-logo";
+import { AnimeReveal } from "@/components/shared/anime-reveal";
 import { buttonVariants } from "@/components/ui/button";
 import { primaryNav, siteConfig, trustBullets } from "@/lib/site";
 
@@ -28,7 +29,7 @@ export function SiteFooter() {
           </Link>
         </div>
 
-        <div className="motion-surface motion-surface--green mb-6 hidden overflow-hidden rounded-[12px] border border-border px-4 py-4 sm:block sm:px-5">
+        <AnimeReveal className="motion-surface motion-surface--green mb-6 hidden overflow-hidden rounded-[12px] border border-border px-4 py-4 sm:block sm:px-5">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-start gap-3">
               <div className="flex size-9 items-center justify-center rounded-[12px] bg-primary/10 text-primary">
@@ -53,9 +54,13 @@ export function SiteFooter() {
               <ArrowRightIcon data-icon="inline-end" />
             </Link>
           </div>
-        </div>
+        </AnimeReveal>
 
-        <div className="hidden gap-7 sm:grid lg:grid-cols-[1.12fr_0.9fr_1fr]">
+        <AnimeReveal
+          selector=":scope > *"
+          stagger={90}
+          className="hidden gap-7 sm:grid lg:grid-cols-[1.12fr_0.9fr_1fr]"
+        >
           <div className="flex flex-col gap-3">
             <BrandLogo />
             <p className="max-w-md text-sm leading-6 text-muted-foreground">
@@ -95,7 +100,7 @@ export function SiteFooter() {
               ))}
             </div>
           </div>
-        </div>
+        </AnimeReveal>
       </div>
     </footer>
   );

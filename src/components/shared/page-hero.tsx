@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
 
+import { AnimeReveal } from "@/components/shared/anime-reveal";
 import { buttonVariants } from "@/components/ui/button";
 
 type Action = {
@@ -46,7 +47,11 @@ export function PageHero({
             compact ? "gap-2.5 sm:gap-3.5 lg:gap-4" : "gap-3.5 sm:gap-4 lg:gap-5",
           ].join(" ")}
         >
-          <div className="flex flex-col gap-3 sm:gap-4">
+          <AnimeReveal
+            selector=":scope > *"
+            stagger={90}
+            className="flex flex-col gap-3 sm:gap-4"
+          >
             {note ? (
               <div className="inline-flex w-fit items-center gap-2.5 rounded-full border border-border bg-background/75 px-3 py-1.5 text-[11px] text-muted-foreground backdrop-blur-sm">
                 <span className="size-2 rounded-full bg-primary" />
@@ -92,9 +97,13 @@ export function PageHero({
                 ) : null}
               </div>
             ) : null}
-          </div>
+          </AnimeReveal>
 
-          {rightSlot ? <div className="hidden lg:block">{rightSlot}</div> : null}
+          {rightSlot ? (
+            <AnimeReveal className="hidden lg:block" distance={28} delay={140}>
+              {rightSlot}
+            </AnimeReveal>
+          ) : null}
         </div>
       </div>
     </section>

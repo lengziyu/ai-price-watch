@@ -36,6 +36,8 @@ import {
   membershipRateSources,
   membershipVendorBoards,
 } from "@/data/membership-rates";
+import { AnimeHoverCard } from "@/components/shared/anime-hover-card";
+import { AnimeReveal } from "@/components/shared/anime-reveal";
 import { useStickyTabs } from "@/components/shared/use-sticky-tabs";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useSegmentedIndicator } from "@/components/ui/use-segmented-indicator";
@@ -111,7 +113,11 @@ export function MembershipRatesExplorer({
       className="app-shell mt-4 sm:mt-8"
     >
       <div className="rounded-[10px] border border-border bg-background px-3.5 py-4 sm:px-5 sm:py-5 lg:px-6">
-        <div className="flex flex-col gap-4 sm:gap-2">
+        <AnimeReveal
+          selector=":scope > *"
+          stagger={80}
+          className="flex flex-col gap-4 sm:gap-2"
+        >
           <div className="max-w-3xl">
             <div className="mono-kicker text-[12px] uppercase text-muted-foreground">
               vendor rate board
@@ -195,14 +201,22 @@ export function MembershipRatesExplorer({
             </div>
           </div>
 
-          {activeVendor === "openai" ? (
-            <OpenAIBoard defaultTab={defaultOpenAITab} />
-          ) : (
-            <VendorBoard
-              vendor={membershipVendorBoards.find((item) => item.id === activeVendor)!}
-            />
-          )}
-        </div>
+          <AnimeReveal
+            key={activeVendor}
+            trigger="mount"
+            selector=":scope > *"
+            stagger={70}
+            className="flex flex-col gap-4"
+          >
+            {activeVendor === "openai" ? (
+              <OpenAIBoard defaultTab={defaultOpenAITab} />
+            ) : (
+              <VendorBoard
+                vendor={membershipVendorBoards.find((item) => item.id === activeVendor)!}
+              />
+            )}
+          </AnimeReveal>
+        </AnimeReveal>
       </div>
     </section>
   );
@@ -253,47 +267,49 @@ function PricePlanCard({ plan, badge }: { plan: PricePlan; badge?: string }) {
     typeof plan.cnyEstimate === "number" ? `约 ¥${plan.cnyEstimate} / 月` : null;
 
   return (
-    <Card
-      size="sm"
-      className="membership-price-card rounded-[10px] border border-border bg-card shadow-none gap-2 data-[size=sm]:gap-2.5"
-    >
-      <CardHeader className="gap-2 px-4 py-4">
-        <div className="flex items-start justify-between gap-3">
-          <CardTitle className="truncate text-[1rem]">{plan.name}</CardTitle>
-          {badge ? (
-            <Badge variant="secondary" className="shrink-0 rounded-[8px]">
-              {badge}
-            </Badge>
-          ) : <span />}
-        </div>
-        <div className="membership-price-value-wrap px-0 py-0 text-left">
-          <div className="membership-price-value text-[1.22rem] font-semibold tracking-[-0.03em] text-foreground">
-            {price}
+    <AnimeHoverCard className="h-full" lift={4} scale={1.008}>
+      <Card
+        size="sm"
+        className="membership-price-card h-full rounded-[10px] border border-border bg-card shadow-none gap-2 data-[size=sm]:gap-2.5"
+      >
+        <CardHeader className="gap-2 px-4 py-4">
+          <div className="flex items-start justify-between gap-3">
+            <CardTitle className="truncate text-[1rem]">{plan.name}</CardTitle>
+            {badge ? (
+              <Badge variant="secondary" className="shrink-0 rounded-[8px]">
+                {badge}
+              </Badge>
+            ) : <span />}
           </div>
-          <div className="membership-price-sub text-[10px] text-muted-foreground">
-            {cnyEstimate ?? "以官方页面为准"}
+          <div className="membership-price-value-wrap px-0 py-0 text-left">
+            <div className="membership-price-value text-[1.22rem] font-semibold tracking-[-0.03em] text-foreground">
+              {price}
+            </div>
+            <div className="membership-price-sub text-[10px] text-muted-foreground">
+              {cnyEstimate ?? "以官方页面为准"}
+            </div>
           </div>
-        </div>
-        {description ? (
-          <CardDescription className="membership-price-desc text-[12px] leading-5">
-            {description}
-          </CardDescription>
-        ) : null}
-      </CardHeader>
-      <CardContent className="flex flex-col gap-2 px-4 pb-1">
-        <PlanFeatureList features={plan.features} />
-        {plan.note ? (
-          <div className="membership-price-note rounded-[10px] border border-border bg-muted/35 px-3 py-2 text-[12px] leading-5 text-muted-foreground">
-            {plan.note}
-          </div>
-        ) : null}
-        {plan.updatedAt ? (
-          <div className="text-[10px] text-muted-foreground">
-            复核时间：{plan.updatedAt}
-          </div>
-        ) : null}
-      </CardContent>
-    </Card>
+          {description ? (
+            <CardDescription className="membership-price-desc text-[12px] leading-5">
+              {description}
+            </CardDescription>
+          ) : null}
+        </CardHeader>
+        <CardContent className="flex flex-col gap-2 px-4 pb-1">
+          <PlanFeatureList features={plan.features} />
+          {plan.note ? (
+            <div className="membership-price-note rounded-[10px] border border-border bg-muted/35 px-3 py-2 text-[12px] leading-5 text-muted-foreground">
+              {plan.note}
+            </div>
+          ) : null}
+          {plan.updatedAt ? (
+            <div className="text-[10px] text-muted-foreground">
+              复核时间：{plan.updatedAt}
+            </div>
+          ) : null}
+        </CardContent>
+      </Card>
+    </AnimeHoverCard>
   );
 }
 
@@ -349,7 +365,13 @@ function OpenAIBoard({ defaultTab }: { defaultTab: string }) {
         </Tabs>
 
         {activeTab === "consumer" ? (
-          <>
+          <AnimeReveal
+            key="openai-consumer"
+            trigger="mount"
+            selector=":scope > *"
+            stagger={70}
+            className="contents"
+          >
             <div className="overflow-hidden rounded-[10px] border border-border bg-card">
               <div className="flex flex-col gap-2 border-b border-border px-4 py-4 sm:px-5">
                 <div className="flex flex-wrap items-center gap-2">
@@ -393,65 +415,73 @@ function OpenAIBoard({ defaultTab }: { defaultTab: string }) {
 
             <div className="grid gap-3 lg:grid-cols-3">
               {communityObservations.map((item) => (
-                <Card
-                  key={item.title}
-                  size="sm"
-                  className="rounded-[10px] border border-border bg-card shadow-none"
-                >
-                  <CardHeader className="gap-2 px-4 py-4">
-                    <Badge variant="outline" className="w-fit">
-                      社区观察
-                    </Badge>
-                    <CardTitle className="text-[0.96rem]">{item.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent className="px-4 pb-4 text-[12px] leading-6 text-muted-foreground sm:text-[13px]">
-                    {item.detail}
-                  </CardContent>
-                </Card>
+                <AnimeHoverCard key={item.title} className="h-full" lift={4} scale={1.006}>
+                  <Card
+                    size="sm"
+                    className="h-full rounded-[10px] border border-border bg-card shadow-none"
+                  >
+                    <CardHeader className="gap-2 px-4 py-4">
+                      <Badge variant="outline" className="w-fit">
+                        社区观察
+                      </Badge>
+                      <CardTitle className="text-[0.96rem]">{item.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="px-4 pb-4 text-[12px] leading-6 text-muted-foreground sm:text-[13px]">
+                      {item.detail}
+                    </CardContent>
+                  </Card>
+                </AnimeHoverCard>
               ))}
             </div>
 
             <div className="grid gap-3 lg:grid-cols-3">
               {communitySnapshots.map((item) => (
-                <Card
-                  key={item.source}
-                  size="sm"
-                  className="rounded-[10px] border border-border bg-card shadow-none"
-                >
-                  <CardHeader className="gap-3 px-4 py-4">
-                    <div className="flex items-start gap-3">
-                      <div className="mt-0.5 flex size-8 items-center justify-center rounded-full bg-primary/10 text-primary">
-                        <QuoteIcon className="size-4" />
+                <AnimeHoverCard key={item.source} className="h-full" lift={4} scale={1.006}>
+                  <Card
+                    size="sm"
+                    className="h-full rounded-[10px] border border-border bg-card shadow-none"
+                  >
+                    <CardHeader className="gap-3 px-4 py-4">
+                      <div className="flex items-start gap-3">
+                        <div className="mt-0.5 flex size-8 items-center justify-center rounded-full bg-primary/10 text-primary">
+                          <QuoteIcon className="size-4" />
+                        </div>
+                        <div className="space-y-1.5">
+                          <CardTitle className="text-[0.95rem] leading-6">{item.title}</CardTitle>
+                          <CardDescription className="text-[10px]">
+                            社区公开样本 · {item.date}
+                          </CardDescription>
+                        </div>
                       </div>
-                      <div className="space-y-1.5">
-                        <CardTitle className="text-[0.95rem] leading-6">{item.title}</CardTitle>
-                        <CardDescription className="text-[10px]">
-                          社区公开样本 · {item.date}
-                        </CardDescription>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="flex flex-col gap-3 px-4 pb-4">
-                    <p className="text-[12px] leading-6 text-muted-foreground sm:text-[13px]">
-                      {item.takeaway}
-                    </p>
-                    <Link
-                      href={item.source}
-                      target="_blank"
-                      className="inline-flex items-center gap-1 text-[12px] font-medium text-foreground hover:text-primary"
-                    >
-                      查看原始讨论
-                      <ArrowUpRightIcon className="size-3.5" />
-                    </Link>
-                  </CardContent>
-                </Card>
+                    </CardHeader>
+                    <CardContent className="flex flex-col gap-3 px-4 pb-4">
+                      <p className="text-[12px] leading-6 text-muted-foreground sm:text-[13px]">
+                        {item.takeaway}
+                      </p>
+                      <Link
+                        href={item.source}
+                        target="_blank"
+                        className="inline-flex items-center gap-1 text-[12px] font-medium text-foreground hover:text-primary"
+                      >
+                        查看原始讨论
+                        <ArrowUpRightIcon className="size-3.5" />
+                      </Link>
+                    </CardContent>
+                  </Card>
+                </AnimeHoverCard>
               ))}
             </div>
-          </>
+          </AnimeReveal>
         ) : null}
 
         {activeTab === "business" ? (
-          <div className="grid gap-4 lg:grid-cols-[0.92fr_1.08fr]">
+          <AnimeReveal
+            key="openai-business"
+            trigger="mount"
+            selector=":scope > *"
+            stagger={70}
+            className="grid gap-4 lg:grid-cols-[0.92fr_1.08fr]"
+          >
             <Card className="rounded-[10px] border border-border bg-card shadow-none">
               <CardHeader className="gap-3 px-5 py-5">
                 <CardTitle>Business / Enterprise 口径</CardTitle>
@@ -493,7 +523,7 @@ function OpenAIBoard({ defaultTab }: { defaultTab: string }) {
                 </TableBody>
               </Table>
             </div>
-          </div>
+          </AnimeReveal>
         ) : null}
       </div>
     </div>
@@ -564,20 +594,26 @@ function VendorBoard({ vendor }: { vendor: MembershipVendorBoard }) {
 
       <div className="grid gap-3 lg:grid-cols-3">
         {vendor.communityNotes.map((item) => (
-          <Card
+          <AnimeHoverCard
             key={`${vendor.id}-community-${item}`}
-            size="sm"
-            className="rounded-[10px] border border-border bg-card shadow-none"
+            className="h-full"
+            lift={4}
+            scale={1.006}
           >
-            <CardHeader className="gap-2 px-4 py-4">
-              <Badge variant="outline" className="w-fit">
-                社区观察
-              </Badge>
-              <CardDescription className="text-[12px] leading-6 sm:text-[13px]">
-                {item}
-              </CardDescription>
-            </CardHeader>
-          </Card>
+            <Card
+              size="sm"
+              className="h-full rounded-[10px] border border-border bg-card shadow-none"
+            >
+              <CardHeader className="gap-2 px-4 py-4">
+                <Badge variant="outline" className="w-fit">
+                  社区观察
+                </Badge>
+                <CardDescription className="text-[12px] leading-6 sm:text-[13px]">
+                  {item}
+                </CardDescription>
+              </CardHeader>
+            </Card>
+          </AnimeHoverCard>
         ))}
       </div>
     </div>

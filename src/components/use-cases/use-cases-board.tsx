@@ -7,6 +7,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { ArrowRightIcon } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
+import { AnimeHoverCard } from "@/components/shared/anime-hover-card";
+import { AnimeReveal } from "@/components/shared/anime-reveal";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useStickyTabs } from "@/components/shared/use-sticky-tabs";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -115,65 +117,71 @@ export function UseCasesBoard({ defaultGroup }: UseCasesBoardProps) {
             </div>
           </div>
 
-          <div className="grid gap-3 xl:grid-cols-2">
+          <AnimeReveal
+            key={activeGroup}
+            selector=":scope > *"
+            stagger={90}
+            className="grid gap-3 xl:grid-cols-2"
+          >
             {visibleCases.map((item, index) => (
-              <Card
-                key={item.id}
-                className={cn(
-                  "use-case-card rounded-[12px] border-border",
-                  cardTones[index % cardTones.length],
-                )}
-              >
-                <CardHeader className="use-case-card__header gap-3 px-4 py-4 sm:px-5">
-                  <div className="grid gap-2.5">
-                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                      <div className="min-w-0">
-                        <div className="flex flex-wrap items-center gap-2">
-                        <CardTitle className="use-case-card__title text-[1rem]">
-                          {item.title}
-                        </CardTitle>
-                        <Badge
-                          variant="outline"
-                          className="use-case-meta-badge use-case-meta-badge--difficulty"
-                        >
-                          {formatDifficulty(item.difficulty)}
-                        </Badge>
-                        <Badge
-                          variant="outline"
-                          className="use-case-meta-badge use-case-meta-badge--cost"
-                        >
-                          {formatCostBand(item.estimatedCost)}
-                        </Badge>
+              <AnimeHoverCard key={item.id} className="h-full" lift={4} scale={1.008}>
+                <Card
+                  className={cn(
+                    "use-case-card h-full rounded-[12px] border-border",
+                    cardTones[index % cardTones.length],
+                  )}
+                >
+                  <CardHeader className="use-case-card__header gap-3 px-4 py-4 sm:px-5">
+                    <div className="grid gap-2.5">
+                      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                        <div className="min-w-0">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <CardTitle className="use-case-card__title text-[1rem]">
+                              {item.title}
+                            </CardTitle>
+                            <Badge
+                              variant="outline"
+                              className="use-case-meta-badge use-case-meta-badge--difficulty"
+                            >
+                              {formatDifficulty(item.difficulty)}
+                            </Badge>
+                            <Badge
+                              variant="outline"
+                              className="use-case-meta-badge use-case-meta-badge--cost"
+                            >
+                              {formatCostBand(item.estimatedCost)}
+                            </Badge>
+                          </div>
                         </div>
+
+                        <Link
+                          href={item.ctaHref}
+                          className="use-case-cta inline-flex w-fit items-center gap-1 rounded-full px-3 py-1.5 text-[12px] font-medium"
+                        >
+                          {item.ctaLabel}
+                          <ArrowRightIcon className="size-3.5" />
+                        </Link>
                       </div>
 
-                      <Link
-                        href={item.ctaHref}
-                        className="use-case-cta inline-flex w-fit items-center gap-1 rounded-full px-3 py-1.5 text-[12px] font-medium"
-                      >
-                        {item.ctaLabel}
-                        <ArrowRightIcon className="size-3.5" />
-                      </Link>
+                      <CardDescription className="use-case-card__desc text-[12px] leading-6 sm:text-[13px]">
+                        {item.description}
+                      </CardDescription>
                     </div>
+                  </CardHeader>
 
-                    <CardDescription className="use-case-card__desc text-[12px] leading-6 sm:text-[13px]">
-                      {item.description}
-                    </CardDescription>
-                  </div>
-                </CardHeader>
-
-                <CardContent className="grid gap-3 px-4 pb-4 sm:px-5 sm:pb-5">
-                  <InfoBlock label="适合任务" items={item.bestFor} tone="task" />
-                  <InfoBlock label="推荐工具" items={item.recommendedTools} tone="tool" />
-                  <InfoBlock label="优先模型" items={item.recommendedModels} tone="model" />
-                  <div className="grid gap-3 md:grid-cols-2">
-                    <InfoCard title="推荐工作流" detail={item.workflow} />
-                    <InfoCard title="预算提醒" detail={item.budgetTip} />
-                  </div>
-                </CardContent>
-              </Card>
+                  <CardContent className="grid gap-3 px-4 pb-4 sm:px-5 sm:pb-5">
+                    <InfoBlock label="适合任务" items={item.bestFor} tone="task" />
+                    <InfoBlock label="推荐工具" items={item.recommendedTools} tone="tool" />
+                    <InfoBlock label="优先模型" items={item.recommendedModels} tone="model" />
+                    <div className="grid gap-3 md:grid-cols-2">
+                      <InfoCard title="推荐工作流" detail={item.workflow} />
+                      <InfoCard title="预算提醒" detail={item.budgetTip} />
+                    </div>
+                  </CardContent>
+                </Card>
+              </AnimeHoverCard>
             ))}
-          </div>
+          </AnimeReveal>
         </div>
       </div>
     </section>

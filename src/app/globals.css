@@ -130,6 +130,7 @@
   html {
     @apply font-sans;
     background-color: var(--background);
+    scroll-behavior: smooth;
   }
   h1,
   h2,
@@ -3058,6 +3059,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .animate-fade-up,
   .animate-fade-in,
   .animate-soft-pulse,

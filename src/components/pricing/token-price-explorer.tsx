@@ -14,6 +14,7 @@ import type { TokenPrice } from "@/types";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { AnimatedSectionTitle } from "@/components/shared/animated-section-title";
+import { AnimeReveal } from "@/components/shared/anime-reveal";
 import { EvidenceBadgeGroup } from "@/components/shared/evidence-badge";
 import { useStickyTabs } from "@/components/shared/use-sticky-tabs";
 import {
@@ -186,6 +187,7 @@ export function TokenPriceExplorer({ prices }: Props) {
       }}
       className="app-shell flex flex-col gap-3.5 rounded-[12px] border border-border bg-background px-4 py-4 sm:px-5 sm:py-4.5 lg:px-6"
     >
+      <AnimeReveal>
       <Card className="rounded-xl border-border bg-card/90">
         <CardHeader className="gap-2.5 px-4 py-3.5 sm:px-5 sm:py-4">
           <div className="flex items-start justify-between gap-3">
@@ -218,6 +220,7 @@ export function TokenPriceExplorer({ prices }: Props) {
         </CardHeader>
 
       </Card>
+      </AnimeReveal>
 
       <div ref={stickySentinelRef} className="page-tabs-sentinel" />
       <div

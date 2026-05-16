@@ -23,6 +23,7 @@ import { formatBillingCycle, formatDate, fxReference } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import type { SubscriptionPlan, SubscriptionRegionPrice } from "@/types";
 import { AnimatedSectionTitle } from "@/components/shared/animated-section-title";
+import { AnimeReveal } from "@/components/shared/anime-reveal";
 import { useStickyTabs } from "@/components/shared/use-sticky-tabs";
 import {
   Select,
@@ -554,7 +555,9 @@ export function SubscriptionExplorer({
         !embedded && "app-shell",
       )}
     >
-      <div
+      <AnimeReveal
+        selector=":scope > *"
+        stagger={90}
         className={cn(
           "grid gap-3",
           "lg:grid-cols-[minmax(0,1fr)_auto_auto] lg:items-center lg:gap-5",
@@ -592,7 +595,7 @@ export function SubscriptionExplorer({
             <span className="ml-2 size-2 rounded-full bg-primary" />
           </div>
         </div>
-      </div>
+      </AnimeReveal>
 
       <div
         className={cn(
@@ -791,7 +794,7 @@ export function SubscriptionExplorer({
                         scrollToStickyContent();
                       }}
                       className={cn(
-                        "relative z-[1] inline-flex min-h-9 flex-none items-center gap-1.5 rounded-[14px] px-3 py-2 text-[12px] transition-colors sm:gap-2 sm:px-3.5 sm:text-[13px]",
+                        "relative z-[1] inline-flex min-h-9 flex-none items-center gap-1.5 rounded-[14px] px-3 py-2 text-[12px] transition-[color,background-color,box-shadow,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px sm:gap-2 sm:px-3.5 sm:text-[13px]",
                         isActive
                           ? "border border-primary/15 bg-primary text-white shadow-[0_12px_30px_rgba(0,188,125,0.24),inset_0_1px_0_rgba(255,255,255,0.14)]"
                           : "text-foreground hover:bg-background hover:text-foreground hover:shadow-[0_8px_18px_rgba(15,23,42,0.08)]",
@@ -818,7 +821,11 @@ export function SubscriptionExplorer({
       ) : null}
 
       {viewMode === "subscription" && cheapest && referenceRegion ? (
-        <div className="motion-surface motion-surface--green mt-3.5 overflow-hidden rounded-[24px] border border-border p-2 sm:mt-5 sm:p-2.5">
+        <AnimeReveal
+          key={`subscription-compare-${activePreset.key}-${targetCurrency}`}
+          trigger="mount"
+          className="motion-surface motion-surface--green mt-3.5 overflow-hidden rounded-[24px] border border-border p-2 sm:mt-5 sm:p-2.5"
+        >
           <div className="relative grid grid-cols-1 gap-2 sm:grid-cols-[1fr_1fr] sm:gap-0">
             <CompareEdge
               region={cheapest}
@@ -851,11 +858,15 @@ export function SubscriptionExplorer({
               pulseKey={fxTick}
             />
           </div>
-        </div>
+        </AnimeReveal>
       ) : null}
 
       {viewMode === "subscription" && currentPlan ? (
-        <div className="mt-3.5 overflow-visible rounded-[12px] border border-border bg-card px-3.5 py-3.5 sm:mt-5 sm:px-4 sm:py-4">
+        <AnimeReveal
+          key={`subscription-plan-${activePreset.key}-${targetCurrency}`}
+          trigger="mount"
+          className="mt-3.5 overflow-visible rounded-[12px] border border-border bg-card px-3.5 py-3.5 sm:mt-5 sm:px-4 sm:py-4"
+        >
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <div className="flex flex-wrap items-center gap-3">
@@ -965,11 +976,17 @@ export function SubscriptionExplorer({
               首页仅预览前 {visibleRegions.length} 个地区，完整列表和更多套餐可以进入会员订阅页继续查看。
             </div>
           ) : null}
-        </div>
+        </AnimeReveal>
       ) : null}
 
       {viewMode === "region" ? (
-        <div className="mt-3.5 grid gap-3 sm:mt-5 lg:grid-cols-3">
+        <AnimeReveal
+          key={`region-view-${activeProvider.key}-${targetCurrency}`}
+          trigger="mount"
+          selector=":scope > *"
+          stagger={60}
+          className="mt-3.5 grid gap-3 sm:mt-5 lg:grid-cols-3"
+        >
           {visibleRegionGroups.map((group) => (
             <RegionPlanCard
               key={group.countryCode}
@@ -984,7 +1001,7 @@ export function SubscriptionExplorer({
               当前产品地区价格暂未收录。
             </div>
           ) : null}
-        </div>
+        </AnimeReveal>
       ) : null}
 
       <div className="mt-4 text-[11px] leading-6 text-muted-foreground sm:text-xs">

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { ScrollProgressBar } from "@/components/layout/scroll-progress-bar";
 
 export function AppChrome({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -16,6 +17,7 @@ export function AppChrome({ children }: { children: ReactNode }) {
 
   return (
     <>
+      <ScrollProgressBar />
       <SiteHeader />
       <main className="flex-1">{children}</main>
       <SiteFooter />

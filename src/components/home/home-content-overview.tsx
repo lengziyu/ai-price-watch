@@ -12,6 +12,8 @@ import {
 
 import { DealArticleEngagement } from "@/components/deals/deal-article-engagement";
 import { InteractiveSummaryCard } from "@/components/home/interactive-summary-card";
+import { AnimeHoverCard } from "@/components/shared/anime-hover-card";
+import { AnimeReveal } from "@/components/shared/anime-reveal";
 import { Badge } from "@/components/ui/badge";
 import { membershipVendorBoards } from "@/data/membership-rates";
 import { toolsDirectory } from "@/data/tools";
@@ -64,7 +66,11 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
   return (
     <>
       <section className="app-shell mt-4 sm:mt-8">
-        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        <AnimeReveal
+          selector=":scope > *"
+          stagger={80}
+          className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4"
+        >
           {summaryCards.map((item) => (
             <InteractiveSummaryCard
               key={item.label}
@@ -74,11 +80,11 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
               iconKey={item.iconKey}
             />
           ))}
-        </div>
+        </AnimeReveal>
       </section>
 
       <section className="app-shell mt-4 sm:mt-8">
-        <div className="rounded-[6px] border border-border/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.99),rgba(246,252,249,0.96))] p-5 shadow-[0_20px_54px_rgba(15,23,42,0.05)] dark:bg-[linear-gradient(180deg,rgba(8,14,18,0.98),rgba(9,17,20,0.95))] sm:p-6">
+        <AnimeReveal className="rounded-[6px] border border-border/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.99),rgba(246,252,249,0.96))] p-5 shadow-[0_20px_54px_rgba(15,23,42,0.05)] dark:bg-[linear-gradient(180deg,rgba(8,14,18,0.98),rgba(9,17,20,0.95))] sm:p-6">
           <div className="grid gap-4 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-center">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-primary/16 bg-primary/8 px-3 py-1 text-[11px] font-medium text-primary dark:border-primary/24 dark:bg-primary/14">
@@ -116,7 +122,7 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
               />
             </div>
           </div>
-        </div>
+        </AnimeReveal>
       </section>
 
       <section className="app-shell mt-4 sm:mt-8">
@@ -127,38 +133,43 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
           hrefLabel="全部厂商"
           description="首页先保留最常看的四个会员厂商，快速扫一眼月费、层级差异和体感说明。"
         >
-          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          <AnimeReveal
+            selector=":scope > *"
+            stagger={70}
+            className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4"
+          >
             {featuredVendors.map((vendor) => (
-              <Link
-                key={vendor.id}
-                href={`/membership-rates?vendor=${vendor.id}`}
-                className="group rounded-[6px] border border-border/75 bg-background/84 px-4 py-4 transition hover:-translate-y-[2px] hover:border-primary/28 hover:shadow-[0_18px_34px_color-mix(in_srgb,var(--primary)_12%,transparent)]"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex min-w-0 items-center gap-3">
-                    <BrandLogo name={vendor.id} />
-                    <div className="min-w-0">
-                      <div className="truncate text-[15px] font-semibold tracking-[-0.03em] text-foreground">
-                        {vendor.label}
-                      </div>
-                      <div className="truncate text-[12px] text-muted-foreground">
-                        {vendor.priceLabel}
+              <AnimeHoverCard key={vendor.id} className="group h-full">
+                <Link
+                  href={`/membership-rates?vendor=${vendor.id}`}
+                  className="block h-full rounded-[6px] border border-border/75 bg-background/84 px-4 py-4 transition-[border-color,box-shadow] group-hover:border-primary/28 group-hover:shadow-[0_18px_34px_color-mix(in_srgb,var(--primary)_12%,transparent)]"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex min-w-0 items-center gap-3">
+                      <BrandLogo name={vendor.id} />
+                      <div className="min-w-0">
+                        <div className="truncate text-[15px] font-semibold tracking-[-0.03em] text-foreground">
+                          {vendor.label}
+                        </div>
+                        <div className="truncate text-[12px] text-muted-foreground">
+                          {vendor.priceLabel}
+                        </div>
                       </div>
                     </div>
+                    <ArrowUpRightIcon className="size-4 shrink-0 text-muted-foreground transition group-hover:text-primary" />
                   </div>
-                  <ArrowUpRightIcon className="size-4 shrink-0 text-muted-foreground transition group-hover:text-primary" />
-                </div>
-                <p className="mt-3 line-clamp-2 text-[12px] leading-5 text-muted-foreground">
-                  {vendor.plans[0]?.detail ?? vendor.officialRate}
-                </p>
-                <div className="mt-3 rounded-[6px] border border-border/70 bg-background/88 px-3 py-2 text-[11px] text-foreground/78">
-                  <p className="line-clamp-2 leading-5">
-                    {vendor.plans[1]?.name ?? "次级层级"} · {vendor.plans[1]?.detail ?? vendor.communityRate}
+                  <p className="mt-3 line-clamp-2 text-[12px] leading-5 text-muted-foreground">
+                    {vendor.plans[0]?.detail ?? vendor.officialRate}
                   </p>
-                </div>
-              </Link>
+                  <div className="mt-3 rounded-[6px] border border-border/70 bg-background/88 px-3 py-2 text-[11px] text-foreground/78">
+                    <p className="line-clamp-2 leading-5">
+                      {vendor.plans[1]?.name ?? "次级层级"} · {vendor.plans[1]?.detail ?? vendor.communityRate}
+                    </p>
+                  </div>
+                </Link>
+              </AnimeHoverCard>
             ))}
-          </div>
+          </AnimeReveal>
         </Panel>
       </section>
 
@@ -171,70 +182,73 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
           description="这里展示最近更新的 3 篇 AI 优惠文章，方便快速浏览和进入详情。"
         >
           {latestArticles.length ? (
-            <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+            <AnimeReveal
+              selector=":scope > *"
+              stagger={90}
+              className="grid gap-3 md:grid-cols-2 xl:grid-cols-3"
+            >
               {latestArticles.map((article) => (
-                <article
-                  key={article.id}
-                  className="group relative overflow-hidden rounded-[6px] border border-border/85 bg-white/82 shadow-[0_8px_18px_rgba(25,42,74,0.08)] backdrop-blur-md transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-[3px] hover:border-primary/28 hover:shadow-[0_16px_26px_color-mix(in_srgb,var(--primary)_18%,transparent)] dark:border-white/12 dark:bg-[rgba(17,27,44,0.82)] dark:hover:border-primary/34"
-                >
-                  <Link
-                    href={`/deals/articles/${article.slug}`}
-                    aria-label={`查看文章：${article.title}`}
-                    className="absolute inset-0 z-10 rounded-[6px]"
-                  />
-                  <div className="relative z-20 pointer-events-none">
-                    <div className="relative aspect-[16/9] overflow-hidden rounded-t-[6px] border-b border-border/70">
-                      <Image
-                        src={article.coverImageUrl}
-                        alt={`${article.title} 封面图`}
-                        fill
-                        className="scale-[1.02] object-cover transition-transform duration-300 group-hover:scale-[1.06]"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                      />
-                      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(22,18,18,0.06),rgba(56,34,24,0.12)_42%,rgba(22,14,12,0.44)_100%)]" />
-                      <div className="absolute left-3 top-3 flex items-center gap-2">
-                        <Badge className={dealStatusClass(article.status)}>
-                          {formatDealArticleStatus(article.status)}
-                        </Badge>
-                      </div>
-                    </div>
-                    <div className="px-4 pb-2.5 pt-2">
-                      <div className="min-w-0 transition-transform duration-200 group-hover:-translate-y-1">
-                        <div className="truncate py-[10px] text-[20px] font-semibold leading-tight tracking-[-0.03em] text-foreground">
-                          {article.title}
-                        </div>
-                        <p className="mt-1 line-clamp-2 h-[3rem] overflow-hidden text-[12px] leading-6 text-foreground/72 sm:text-[13px]">
-                          {article.summary}
-                        </p>
-                      </div>
-                      <div className="mt-2.5 flex flex-wrap gap-2">
-                        {article.tags.slice(0, 3).map((tag, index) => (
-                          <Badge
-                            key={`${tag}-${index}`}
-                            className="h-auto rounded-full border-primary/28 bg-primary/10 px-3 py-1 text-[11px] font-medium text-primary shadow-sm dark:border-primary/32 dark:bg-primary/16 dark:text-primary"
-                          >
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-                      <div className="mt-3 flex items-center justify-between gap-2.5 border-t border-border/70 pt-3">
-                        <span className="inline-flex min-h-8 items-center text-[12px] text-muted-foreground">
-                          {formatDateTime(article.publishedAt)}
-                        </span>
-                        <DealArticleEngagement
-                          articleId={article.id}
-                          initialViewCount={article.viewCount}
-                          initialLikeCount={article.likeCount}
-                          recordView={false}
-                          variant="compact"
-                          className="pointer-events-auto relative z-30 justify-end"
+                <AnimeHoverCard key={article.id} className="group h-full" lift={5} scale={1.012}>
+                  <article className="relative h-full overflow-hidden rounded-[6px] border border-border/85 bg-white/82 shadow-[0_8px_18px_rgba(25,42,74,0.08)] backdrop-blur-md transition-[box-shadow,border-color] duration-200 group-hover:border-primary/28 group-hover:shadow-[0_16px_26px_color-mix(in_srgb,var(--primary)_18%,transparent)] dark:border-white/12 dark:bg-[rgba(17,27,44,0.82)] dark:group-hover:border-primary/34">
+                    <Link
+                      href={`/deals/articles/${article.slug}`}
+                      aria-label={`查看文章：${article.title}`}
+                      className="absolute inset-0 z-10 rounded-[6px]"
+                    />
+                    <div className="pointer-events-none relative z-20">
+                      <div className="relative aspect-[16/9] overflow-hidden rounded-t-[6px] border-b border-border/70">
+                        <Image
+                          src={article.coverImageUrl}
+                          alt={`${article.title} 封面图`}
+                          fill
+                          className="scale-[1.02] object-cover transition-transform duration-300 group-hover:scale-[1.06]"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                         />
+                        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(22,18,18,0.06),rgba(56,34,24,0.12)_42%,rgba(22,14,12,0.44)_100%)]" />
+                        <div className="absolute left-3 top-3 flex items-center gap-2">
+                          <Badge className={dealStatusClass(article.status)}>
+                            {formatDealArticleStatus(article.status)}
+                          </Badge>
+                        </div>
+                      </div>
+                      <div className="px-4 pb-2.5 pt-2">
+                        <div className="min-w-0 transition-transform duration-200 group-hover:-translate-y-1">
+                          <div className="truncate py-[10px] text-[20px] font-semibold leading-tight tracking-[-0.03em] text-foreground">
+                            {article.title}
+                          </div>
+                          <p className="mt-1 line-clamp-2 h-[3rem] overflow-hidden text-[12px] leading-6 text-foreground/72 sm:text-[13px]">
+                            {article.summary}
+                          </p>
+                        </div>
+                        <div className="mt-2.5 flex flex-wrap gap-2">
+                          {article.tags.slice(0, 3).map((tag, index) => (
+                            <Badge
+                              key={`${tag}-${index}`}
+                              className="h-auto rounded-full border-primary/28 bg-primary/10 px-3 py-1 text-[11px] font-medium text-primary shadow-sm dark:border-primary/32 dark:bg-primary/16 dark:text-primary"
+                            >
+                              {tag}
+                            </Badge>
+                          ))}
+                        </div>
+                        <div className="mt-3 flex items-center justify-between gap-2.5 border-t border-border/70 pt-3">
+                          <span className="inline-flex min-h-8 items-center text-[12px] text-muted-foreground">
+                            {formatDateTime(article.publishedAt)}
+                          </span>
+                          <DealArticleEngagement
+                            articleId={article.id}
+                            initialViewCount={article.viewCount}
+                            initialLikeCount={article.likeCount}
+                            recordView={false}
+                            variant="compact"
+                            className="pointer-events-auto relative z-30 justify-end"
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </article>
+                  </article>
+                </AnimeHoverCard>
               ))}
-            </div>
+            </AnimeReveal>
           ) : (
             <div className="rounded-[16px] border border-dashed border-border px-4 py-5 text-[13px] text-muted-foreground">
               当前还没有发布文章，有新内容时会自动显示在这里。
@@ -308,20 +322,22 @@ function FeatureIntroTile({
   hrefLabel: string;
 }) {
   return (
-    <div className="flex h-full flex-col rounded-[6px] border border-border/75 bg-background/82 p-4 shadow-[0_12px_28px_rgba(15,23,42,0.04)] dark:bg-background/60">
-      <div className="inline-flex h-9 w-9 items-center justify-center rounded-[6px] border border-primary/16 bg-primary/8 text-primary dark:border-primary/24 dark:bg-primary/14">
-        {icon}
+    <AnimeHoverCard className="group h-full" lift={4} scale={1.01}>
+      <div className="flex h-full flex-col rounded-[6px] border border-border/75 bg-background/82 p-4 shadow-[0_12px_28px_rgba(15,23,42,0.04)] transition-[border-color,box-shadow] group-hover:border-primary/24 group-hover:shadow-[0_18px_34px_color-mix(in_srgb,var(--primary)_12%,transparent)] dark:bg-background/60">
+        <div className="inline-flex h-9 w-9 items-center justify-center rounded-[6px] border border-primary/16 bg-primary/8 text-primary dark:border-primary/24 dark:bg-primary/14">
+          {icon}
+        </div>
+        <div className="mt-3 text-[14px] font-semibold tracking-[-0.03em] text-foreground">{title}</div>
+        <p className="mt-1.5 min-h-[3.75rem] text-[12px] leading-5 text-muted-foreground">{detail}</p>
+        <Link
+          href={href}
+          className="mt-auto inline-flex items-center gap-1 pt-3 text-[12px] font-medium text-primary transition hover:text-primary/80"
+        >
+          {hrefLabel}
+          <ArrowRightIcon className="size-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
+        </Link>
       </div>
-      <div className="mt-3 text-[14px] font-semibold tracking-[-0.03em] text-foreground">{title}</div>
-      <p className="mt-1.5 min-h-[3.75rem] text-[12px] leading-5 text-muted-foreground">{detail}</p>
-      <Link
-        href={href}
-        className="mt-auto pt-3 inline-flex items-center gap-1 text-[12px] font-medium text-primary transition hover:text-primary/80"
-      >
-        {hrefLabel}
-        <ArrowRightIcon className="size-3.5" />
-      </Link>
-    </div>
+    </AnimeHoverCard>
   );
 }
 

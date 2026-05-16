@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import type { AIDeal } from "@/types";
 import { Badge } from "@/components/ui/badge";
 import { AnimatedSectionTitle } from "@/components/shared/animated-section-title";
+import { AnimeReveal } from "@/components/shared/anime-reveal";
 import {
   Card,
   CardContent,
@@ -81,7 +82,11 @@ export function DealsExplorer({ deals }: Props) {
         </CardHeader>
       </Card>
 
-      <div className="grid gap-2.5 sm:grid-cols-3">
+      <AnimeReveal
+        selector=":scope > *"
+        stagger={70}
+        className="grid gap-2.5 sm:grid-cols-3"
+      >
         <MetaStat
           label="活动总数"
           value={String(filteredDeals.length)}
@@ -97,10 +102,15 @@ export function DealsExplorer({ deals }: Props) {
           value={String(filteredDeals.filter((deal) => deal.riskLevel === "low").length)}
           detail="更适合公开推荐"
         />
-      </div>
+      </AnimeReveal>
 
       {filteredDeals.length > 0 ? (
-        <div className="grid items-start gap-3 md:grid-cols-2 xl:grid-cols-3">
+        <AnimeReveal
+          key={`${status}-${dealType}-${riskLevel}`}
+          selector=":scope > *"
+          stagger={90}
+          className="grid items-start gap-3 md:grid-cols-2 xl:grid-cols-3"
+        >
           {filteredDeals.map((deal, index) => (
             <DealCard
               key={deal.id}
@@ -108,7 +118,7 @@ export function DealsExplorer({ deals }: Props) {
               featured={index === 0}
             />
           ))}
-        </div>
+        </AnimeReveal>
       ) : (
         <Card size="sm" className="rounded-[12px] border border-border bg-card">
           <CardContent className="px-4 py-4 text-[13px] text-muted-foreground">
