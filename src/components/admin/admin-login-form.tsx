@@ -36,7 +36,7 @@ export function AdminLoginForm() {
           id="password"
           name="password"
           type="password"
-          placeholder="请输入后台密码"
+          placeholder="请输入管理员密码"
           autoComplete="current-password"
         />
       </div>
@@ -48,7 +48,7 @@ export function AdminLoginForm() {
       ) : null}
 
       <Button type="submit" size="lg" disabled={pending}>
-        {pending ? "登录中..." : "登录后台"}
+        {pending ? "登录中..." : "登录管理中心"}
       </Button>
     </form>
   );

@@ -23,7 +23,7 @@ export default async function AdminLoginPage() {
           <BrandLogo />
           <div className="inline-flex items-center gap-2 rounded-full border border-border bg-background/72 px-3 py-1.5 text-[11px] text-muted-foreground">
             <span className="size-2 rounded-full bg-primary" />
-            <span>后台登录保护</span>
+            <span>登录保护</span>
             <span>·</span>
             <span>操作日志</span>
             <span>·</span>
@@ -35,7 +35,7 @@ export default async function AdminLoginPage() {
             </div>
             <h1 className="mt-2 max-w-[28rem] text-[1.72rem] font-semibold leading-[1.02] tracking-[-0.05em] sm:text-[2.25rem]">
               <span className="block">
-                <ScrambleText text="登录后台后" />
+                <ScrambleText text="登录后" />
               </span>
               <span className="block gradient-title">
                 <ScrambleText text="再进入采集、复核与录入工作流" />
@@ -43,7 +43,7 @@ export default async function AdminLoginPage() {
             </h1>
           </div>
           <p className="max-w-[30rem] text-[12px] leading-6 text-muted-foreground sm:text-[13px]">
-            后台已接入基础访问保护、操作留痕和手动维护入口，方便持续管理价格与活动信息。
+            这里用于维护价格、活动、文章和复核记录，方便持续更新站内内容。
           </p>
           <div className="flex flex-wrap gap-2">
             <Badge variant="secondary">
@@ -62,7 +62,7 @@ export default async function AdminLoginPage() {
             <div className="mb-5">
               <div className="text-lg font-semibold">管理员登录</div>
               <div className="mt-1 text-sm leading-6 text-muted-foreground">
-                请输入后台账号后继续。
+                请输入管理员账号后继续。
               </div>
             </div>
 

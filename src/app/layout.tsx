@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Inter_Tight } from "next/font/google";
 
 import { AppChrome } from "@/components/layout/app-chrome";
+import { ScrollToTopButton } from "@/components/shared/scroll-to-top-button";
 import { siteConfig } from "@/lib/site";
 
 import "./globals.css";
@@ -85,6 +86,7 @@ export default function RootLayout({
       <body className="min-h-full bg-background text-foreground">
         <div className="relative flex min-h-full flex-col">
           <AppChrome>{children}</AppChrome>
+          <ScrollToTopButton />
         </div>
       </body>
     </html>

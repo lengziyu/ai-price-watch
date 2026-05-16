@@ -23,13 +23,13 @@ export default async function AdminLogsPage() {
       <AdminPageHeader
         kicker="operation logs"
         title="操作日志"
-        description="先把登录、退出、手动录入和抓取触发这些核心后台动作留痕，避免后面接真实数据后无从追查。"
+        description="记录登录、退出、手动录入和抓取触发等关键操作，方便回溯内容变更。"
       />
 
       <Card className="surface-card motion-surface motion-surface--blue rounded-[10px] border-border">
         <CardHeader className="px-5 py-4">
           <CardTitle>最近日志</CardTitle>
-          <CardDescription>当前只保留最近 300 条，本地开发阶段已经足够。</CardDescription>
+          <CardDescription>当前保留最近 300 条记录，便于追踪近期维护动作。</CardDescription>
         </CardHeader>
         <CardContent className="px-5 pb-5">
           {logs.length ? (

@@ -9,7 +9,7 @@ export async function POST(request: Request) {
   const session = await getAdminSession();
 
   if (!session) {
-    return NextResponse.json({ error: "请先登录后台。" }, { status: 401 });
+    return NextResponse.json({ error: "请先登录管理中心。" }, { status: 401 });
   }
 
   try {

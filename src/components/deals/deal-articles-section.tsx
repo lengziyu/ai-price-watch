@@ -87,15 +87,15 @@ export function DealArticlesSection({ articles }: DealArticlesSectionProps) {
               <Card
                 key={article.id}
                 size="sm"
-                className="group/card relative !gap-0 rounded-[8px] border border-border/85 bg-white/82 !py-0 shadow-[0_8px_18px_rgba(25,42,74,0.08)] backdrop-blur-md transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-[3px] hover:border-primary/28 hover:shadow-[0_16px_26px_color-mix(in_srgb,var(--primary)_18%,transparent)] dark:border-white/12 dark:bg-[rgba(17,27,44,0.82)] dark:hover:border-primary/34"
+                className="group/card relative !gap-0 rounded-[6px] border border-border/85 bg-white/82 !py-0 shadow-[0_8px_18px_rgba(25,42,74,0.08)] backdrop-blur-md transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-[3px] hover:border-primary/28 hover:shadow-[0_16px_26px_color-mix(in_srgb,var(--primary)_18%,transparent)] dark:border-white/12 dark:bg-[rgba(17,27,44,0.82)] dark:hover:border-primary/34"
               >
                 <Link
                   href={`/deals/articles/${article.slug}`}
                   aria-label={`查看文章：${article.title}`}
-                  className="absolute inset-0 z-10 rounded-[8px]"
+                  className="absolute inset-0 z-10 rounded-[6px]"
                 />
                 <div className="relative z-20 pointer-events-none">
-                <div className="relative aspect-[16/9] overflow-hidden rounded-t-[8px] border-b border-border/70">
+                <div className="relative aspect-[16/9] overflow-hidden rounded-t-[6px] border-b border-border/70">
                   <Image
                     src={article.coverImageUrl}
                     alt={`${article.title} 封面图`}

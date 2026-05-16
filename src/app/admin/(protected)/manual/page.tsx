@@ -39,7 +39,7 @@ export default async function AdminManualPage() {
           <Card className="surface-card motion-surface motion-surface--green rounded-[10px] border-border">
             <CardHeader className="px-5 py-4">
               <CardTitle>新建录入</CardTitle>
-              <CardDescription>提交后写入本地 JSON，并自动写一条操作日志。</CardDescription>
+              <CardDescription>提交后会保存到数据文件，并自动写入一条操作日志。</CardDescription>
             </CardHeader>
             <CardContent className="px-5 pb-5">
               <AdminManualDealForm />

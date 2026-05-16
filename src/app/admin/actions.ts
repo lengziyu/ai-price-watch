@@ -60,7 +60,7 @@ export async function loginAction(
       actor: username || "anonymous",
       type: "login_failure",
       status: "failure",
-      message: "后台登录失败",
+      message: "管理中心登录失败",
       detail: "用户名或密码不正确。",
     });
 
@@ -74,8 +74,8 @@ export async function loginAction(
     actor: username,
     type: "login_success",
     status: "success",
-    message: "后台登录成功",
-    detail: "已创建新的管理后台会话。",
+    message: "管理中心登录成功",
+    detail: "已创建新的管理会话。",
   });
   redirect("/admin");
 }
@@ -87,7 +87,7 @@ export async function logoutAction() {
     actor: session?.username ?? "anonymous",
     type: "logout",
     status: "info",
-    message: "后台退出登录",
+    message: "退出管理中心",
     detail: "会话已清除。",
   });
   redirect("/admin/login");
@@ -142,7 +142,7 @@ export async function createManualDealAction(
   return {
     status: "success",
     message: `已录入「${created.title}」`,
-    detail: "这条数据已写入本地 JSON，可继续补录下一条。",
+    detail: "这条数据已保存到数据文件，可以继续录入下一条。",
   };
 }
 
@@ -380,7 +380,7 @@ export async function createMembershipRateReviewAction(
   return {
     status: "success",
     message: `已补录「${created.vendorLabel} · ${created.planName}」`,
-    detail: "这条会员速率复核已写入本地 JSON，可继续补录下一条。",
+    detail: "这条会员速率复核已保存到数据文件，可以继续录入下一条。",
   };
 }
 

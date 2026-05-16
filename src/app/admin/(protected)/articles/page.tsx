@@ -27,7 +27,7 @@ export default async function AdminArticlesPage() {
       <AdminPageHeader
         kicker="article management"
         title="文章管理"
-        description="文章发布独立成后台模块。先看列表，再决定新增、编辑、删除或跳到前台查看。"
+        description="文章内容在这里集中管理，可以直接查看、新增、编辑、删除或跳到前台预览。"
         actions={
           <div className="flex justify-start lg:justify-end">
             <Link

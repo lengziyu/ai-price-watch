@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "管理后台",
-  description: "雷价通内容采集、人工复核与手动录入后台。",
+  title: "管理中心",
+  description: "雷价通内容采集、人工复核与录入管理中心。",
 };
 
 export default function AdminLayout({

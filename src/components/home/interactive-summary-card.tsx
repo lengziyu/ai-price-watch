@@ -133,13 +133,13 @@ export function InteractiveSummaryCard({
       <div ref={frameRef} className="home-summary-card-tilt__inner">
         <div className="home-summary-card-tilt__theme-glow" aria-hidden />
         <div className="home-summary-card-tilt__shine" aria-hidden />
-        <div className="rounded-[16px] border border-border/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(247,252,250,0.96))] px-4 py-4 shadow-[0_14px_32px_rgba(15,23,42,0.05)] dark:bg-[linear-gradient(180deg,rgba(8,14,18,0.96),rgba(10,20,24,0.92))]">
+        <div className="rounded-[6px] border border-border/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(247,252,250,0.96))] px-4 py-4 shadow-[0_14px_32px_rgba(15,23,42,0.05)] dark:bg-[linear-gradient(180deg,rgba(8,14,18,0.96),rgba(10,20,24,0.92))]">
           <div className="text-[12px] font-medium text-muted-foreground">{label}</div>
           <div className="mt-2 flex items-center justify-between gap-3">
             <div className="text-[1.72rem] font-semibold tracking-[-0.05em] text-foreground">
               {value}
             </div>
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-[12px] border border-border/75 bg-background/88 text-primary shadow-[inset_0_1px_0_rgba(255,255,255,0.6)]">
+            <span className="inline-flex h-9 w-9 items-center justify-center rounded-[6px] border border-border/75 bg-background/88 text-primary shadow-[inset_0_1px_0_rgba(255,255,255,0.6)]">
               {icon}
             </span>
           </div>

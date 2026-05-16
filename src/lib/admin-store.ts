@@ -14,7 +14,9 @@ import {
 } from "@/lib/deal-articles";
 import type { AIDeal, DealArticle } from "@/types";
 
-const adminDataDir = path.join(process.cwd(), "data", "admin");
+const legacyAdminDataDir = path.join(process.cwd(), "data", "admin");
+const defaultRuntimeAdminDataDir = path.join(process.cwd(), ".runtime", "admin-data");
+const adminDataDir = resolveAdminDataDir();
 const publicDir = path.join(process.cwd(), "public");
 const uploadedDealArticleCoverDir = path.join(process.cwd(), "data", "uploads", "deal-articles");
 const legacyPublicDealArticleCoverDir = path.join(publicDir, "uploads", "deal-articles");
@@ -24,6 +26,14 @@ const dealArticlesFile = path.join(adminDataDir, "deal-articles.json");
 const membershipRateReviewsFile = path.join(adminDataDir, "membership-rate-reviews.json");
 const sourceReviewsFile = path.join(adminDataDir, "source-reviews.json");
 const operationLogsFile = path.join(adminDataDir, "operation-logs.json");
+const legacyManualDealsFile = path.join(legacyAdminDataDir, "manual-deals.json");
+const legacyDealArticlesFile = path.join(legacyAdminDataDir, "deal-articles.json");
+const legacyMembershipRateReviewsFile = path.join(
+  legacyAdminDataDir,
+  "membership-rate-reviews.json",
+);
+const legacySourceReviewsFile = path.join(legacyAdminDataDir, "source-reviews.json");
+const legacyOperationLogsFile = path.join(legacyAdminDataDir, "operation-logs.json");
 
 export type CrawlSnapshotResult = {
   id: string;
@@ -140,6 +150,17 @@ export type SourceReview = {
 
 export type SourceReviewInput = Omit<SourceReview, "id" | "actor" | "reviewedAt">;
 
+function resolveAdminDataDir() {
+  const configuredDir = process.env.ADMIN_DATA_DIR?.trim();
+  if (!configuredDir) {
+    return defaultRuntimeAdminDataDir;
+  }
+
+  return path.isAbsolute(configuredDir)
+    ? configuredDir
+    : path.join(process.cwd(), configuredDir);
+}
+
 async function ensureAdminDataDir() {
   await mkdir(adminDataDir, { recursive: true });
 }
@@ -161,18 +182,56 @@ async function readJsonFile<T>(filePath: string, fallback: T): Promise<T> {
   }
 }
 
+async function tryLoadJsonWithAutoMigration<T>(
+  filePath: string,
+  legacyFilePath: string,
+  fallback: T,
+): Promise<T> {
+  try {
+    const content = await readFile(filePath, "utf8");
+    return JSON.parse(content) as T;
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") {
+      throw error;
+    }
+
+    if (filePath !== legacyFilePath) {
+      try {
+        const legacyContent = await readFile(legacyFilePath, "utf8");
+        await ensureAdminDataDir();
+        await writeFile(filePath, legacyContent, "utf8");
+        return JSON.parse(legacyContent) as T;
+      } catch (legacyError) {
+        if ((legacyError as NodeJS.ErrnoException).code !== "ENOENT") {
+          throw legacyError;
+        }
+      }
+    }
+
+    return fallback;
+  }
+}
+
 async function writeJsonFile<T>(filePath: string, value: T) {
   await ensureAdminDataDir();
   await writeFile(filePath, `${JSON.stringify(value, null, 2)}\n`, "utf8");
 }
 
 export async function getManualDeals() {
-  const deals = await readJsonFile<AIDeal[]>(manualDealsFile, []);
+  const deals = await tryLoadJsonWithAutoMigration<AIDeal[]>(
+    manualDealsFile,
+    legacyManualDealsFile,
+    [],
+  );
   return deals.toSorted((left, right) => right.updatedAt.localeCompare(left.updatedAt));
 }
 
 export async function getDealArticles() {
-  const articles = await readJsonFile<DealArticle[]>(dealArticlesFile, []);
+  const articles = await tryLoadJsonWithAutoMigration<DealArticle[]>(
+    dealArticlesFile,
+    legacyDealArticlesFile,
+    [],
+  );
   return articles
     .map((article) => normalizeDealArticle(article))
     .toSorted((left, right) => right.publishedAt.localeCompare(left.publishedAt));
@@ -205,17 +264,29 @@ export async function getDealArticleById(id: string) {
 }
 
 export async function getMembershipRateReviews() {
-  const reviews = await readJsonFile<MembershipRateReview[]>(membershipRateReviewsFile, []);
+  const reviews = await tryLoadJsonWithAutoMigration<MembershipRateReview[]>(
+    membershipRateReviewsFile,
+    legacyMembershipRateReviewsFile,
+    [],
+  );
   return reviews.toSorted((left, right) => right.reviewedAt.localeCompare(left.reviewedAt));
 }
 
 export async function getSourceReviews() {
-  const reviews = await readJsonFile<SourceReview[]>(sourceReviewsFile, []);
+  const reviews = await tryLoadJsonWithAutoMigration<SourceReview[]>(
+    sourceReviewsFile,
+    legacySourceReviewsFile,
+    [],
+  );
   return reviews.toSorted((left, right) => right.reviewedAt.localeCompare(left.reviewedAt));
 }
 
 export async function getOperationLogs() {
-  const logs = await readJsonFile<AdminOperationLog[]>(operationLogsFile, []);
+  const logs = await tryLoadJsonWithAutoMigration<AdminOperationLog[]>(
+    operationLogsFile,
+    legacyOperationLogsFile,
+    [],
+  );
   return logs.toSorted((left, right) => right.createdAt.localeCompare(left.createdAt));
 }
 

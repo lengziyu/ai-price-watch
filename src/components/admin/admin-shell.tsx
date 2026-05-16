@@ -82,7 +82,7 @@ export function AdminShell({
                   </SheetTrigger>
                   <SheetContent side="left" className="w-[88vw] max-w-sm border-r border-border/70">
                     <SheetHeader>
-                      <SheetTitle>雷价通后台</SheetTitle>
+                      <SheetTitle>雷价通管理中心</SheetTitle>
                     </SheetHeader>
                     <div className="mt-5 flex flex-col gap-3 px-4">
                       <AdminSidebarNav items={adminNav} />
@@ -97,9 +97,9 @@ export function AdminShell({
                 </Sheet>
 
                 <div>
-                  <div className="text-[13px] font-semibold">内容管理后台</div>
+                  <div className="text-[13px] font-semibold">内容管理中心</div>
                   <div className="text-[12px] text-muted-foreground">
-                    登录保护、操作日志和本地数据层已接入
+                    已启用登录保护、操作日志和数据文件存储
                   </div>
                 </div>
               </div>
@@ -107,7 +107,7 @@ export function AdminShell({
               <div className="flex items-center gap-2">
                 <Badge variant="secondary" className="hidden sm:inline-flex">
                   <ActivityIcon className="size-3.5" />
-                  本地模式
+                  数据文件存储
                 </Badge>
                 <Badge variant="outline" className="hidden lg:inline-flex">
                   {session.username}

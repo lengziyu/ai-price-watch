@@ -43,9 +43,9 @@ export default async function HomePage() {
               </div>
 
               <p className="max-w-[580px] text-[12px] leading-[1.55] text-muted-foreground sm:text-[14px] sm:leading-[1.58]">
-                不只是订阅比价，现在还把会员速率、使用场景、工具导航和优惠文章一起汇总到首页。
+                首页集中看会员价格、额度、常用入口和最新活动，先完成第一轮筛选。
                 <br />
-                先看重点，再决定去哪个厂商、哪个套餐、哪个页面继续深挖。
+                再进入你关心的厂商、套餐、工具页面，继续看详细对比。
               </p>
 
               <div className="flex flex-col gap-3 sm:flex-row">

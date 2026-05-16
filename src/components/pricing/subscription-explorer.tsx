@@ -303,6 +303,7 @@ export function SubscriptionExplorer({
   const [expandedRegionId, setExpandedRegionId] = useState<string | null>(null);
   const [hoveredRegionId, setHoveredRegionId] = useState<string | null>(null);
   const [suppressRowHover, setSuppressRowHover] = useState(false);
+  const [requireRowHoverReentry, setRequireRowHoverReentry] = useState(false);
   const rowHoverLockedUntilRef = useRef(0);
   const rowHoverUnlockStartRef = useRef<{ x: number; y: number } | null>(null);
   const [fxTick, setFxTick] = useState(0);
@@ -346,10 +347,11 @@ export function SubscriptionExplorer({
     setExpandedRegionId(null);
     setHoveredRegionId(null);
     setSuppressRowHover(true);
+    setRequireRowHoverReentry(true);
   };
 
   const unlockRowHoverAfterRealMove = (event: PointerEvent<HTMLDivElement>) => {
-    if (!suppressRowHover || Date.now() < rowHoverLockedUntilRef.current) {
+    if (requireRowHoverReentry || !suppressRowHover || Date.now() < rowHoverLockedUntilRef.current) {
       return;
     }
 
@@ -905,6 +907,15 @@ export function SubscriptionExplorer({
 
           <div className="mt-2.5 flex flex-col gap-2.5">
             <div
+              onPointerEnter={(event) => {
+                if (requireRowHoverReentry) {
+                  rowHoverUnlockStartRef.current = {
+                    x: event.clientX,
+                    y: event.clientY,
+                  };
+                  setRequireRowHoverReentry(false);
+                }
+              }}
               onPointerMove={unlockRowHoverAfterRealMove}
             >
               {visibleRegions.map((item, index) => (
@@ -915,7 +926,18 @@ export function SubscriptionExplorer({
                   detailRows={hoverDetailMap.get(item.countryCode) ?? []}
                   isPinned={expandedRegionId === item.id}
                   isHovered={hoveredRegionId === item.id}
-                  hoverEnabled={!suppressRowHover && !providerOpen && !currencyOpen}
+                  hoverEnabled={
+                    !suppressRowHover &&
+                    !providerOpen &&
+                    !currencyOpen &&
+                    !requireRowHoverReentry
+                  }
+                  popoverEnabled={
+                    !suppressRowHover &&
+                    !providerOpen &&
+                    !currencyOpen &&
+                    !requireRowHoverReentry
+                  }
                   onHoverStart={() => setHoveredRegionId(item.id)}
                   onHoverEnd={() =>
                     setHoveredRegionId((current) => (current === item.id ? null : current))
@@ -1254,6 +1276,7 @@ function PriceRow({
   isPinned,
   isHovered,
   hoverEnabled,
+  popoverEnabled,
   onHoverStart,
   onHoverEnd,
   onTogglePinned,
@@ -1270,6 +1293,7 @@ function PriceRow({
   isPinned: boolean;
   isHovered: boolean;
   hoverEnabled: boolean;
+  popoverEnabled: boolean;
   onHoverStart: () => void;
   onHoverEnd: () => void;
   onTogglePinned: () => void;
@@ -1285,8 +1309,8 @@ function PriceRow({
     (left, right) => liveCnyValueFor(left, liveCnyRates) - liveCnyValueFor(right, liveCnyRates),
   );
   const hasEstimatedRows = sortedDetailRows.some((item) => item.sourceLabel.includes("估算"));
-  const desktopOpen = sortedDetailRows.length > 0 && (isHovered || isPinned);
-  const mobileOpen = sortedDetailRows.length > 0 && isPinned;
+  const desktopOpen = popoverEnabled && sortedDetailRows.length > 0 && (isHovered || isPinned);
+  const mobileOpen = popoverEnabled && sortedDetailRows.length > 0 && isPinned;
 
   return (
     <div
@@ -1392,24 +1416,26 @@ function PriceRow({
         </div>
       </div>
 
-      <div
-        className={cn(
-          "subscription-popover-shell pointer-events-none absolute left-4 top-1/2 z-40 hidden w-[340px] max-w-[calc(100%-10rem)] lg:block",
-          desktopOpen ? "subscription-popover-open" : "subscription-popover-closed",
-        )}
-      >
-        <div>
-          <MembershipPricePopover
-            compact
-            region={region}
-            sortedDetailRows={sortedDetailRows}
-            hasEstimatedRows={hasEstimatedRows}
-            targetCurrency={targetCurrency}
-            liveCnyRates={liveCnyRates}
-            pulseKey={pulseKey}
-          />
+      {popoverEnabled && desktopOpen ? (
+        <div
+          className={cn(
+            "subscription-popover-shell pointer-events-none absolute left-4 top-1/2 z-40 hidden w-[340px] max-w-[calc(100%-10rem)] lg:block",
+            "subscription-popover-open",
+          )}
+        >
+          <div>
+            <MembershipPricePopover
+              compact
+              region={region}
+              sortedDetailRows={sortedDetailRows}
+              hasEstimatedRows={hasEstimatedRows}
+              targetCurrency={targetCurrency}
+              liveCnyRates={liveCnyRates}
+              pulseKey={pulseKey}
+            />
+          </div>
         </div>
-      </div>
+      ) : null}
 
       <div
         className={cn(

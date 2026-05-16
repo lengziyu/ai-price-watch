@@ -68,8 +68,8 @@
     "actor": "admin",
     "type": "login_success",
     "status": "success",
-    "message": "后台登录成功",
-    "detail": "已创建新的管理后台会话。"
+    "message": "管理中心登录成功",
+    "detail": "已创建新的管理会话。"
   },
   {
     "id": "eebab2c1-643d-47dd-adc2-f159469f7cf8",
@@ -77,8 +77,8 @@
     "actor": "admin",
     "type": "login_success",
     "status": "success",
-    "message": "后台登录成功",
-    "detail": "已创建新的管理后台会话。"
+    "message": "管理中心登录成功",
+    "detail": "已创建新的管理会话。"
   },
   {
     "id": "d6ac68e1-627d-4e7a-a924-1421e2d1c93b",
@@ -86,8 +86,8 @@
     "actor": "admin",
     "type": "login_success",
     "status": "success",
-    "message": "后台登录成功",
-    "detail": "已创建新的管理后台会话。"
+    "message": "管理中心登录成功",
+    "detail": "已创建新的管理会话。"
   },
   {
     "id": "e8eb548e-8f5b-42ab-ab98-c38adf874f13",
@@ -95,8 +95,8 @@
     "actor": "admin",
     "type": "login_success",
     "status": "success",
-    "message": "后台登录成功",
-    "detail": "已创建新的管理后台会话。"
+    "message": "管理中心登录成功",
+    "detail": "已创建新的管理会话。"
   },
   {
     "id": "798a1e7c-5efe-4034-bb8e-5035f326fcbe",
@@ -104,7 +104,7 @@
     "actor": "admin",
     "type": "logout",
     "status": "info",
-    "message": "后台退出登录",
+    "message": "退出管理中心",
     "detail": "会话已清除。"
   },
   {
@@ -113,7 +113,7 @@
     "actor": "admin",
     "type": "login_success",
     "status": "success",
-    "message": "后台登录成功",
-    "detail": "已创建新的管理后台会话。"
+    "message": "管理中心登录成功",
+    "detail": "已创建新的管理会话。"
   }
 ]

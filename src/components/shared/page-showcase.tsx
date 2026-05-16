@@ -132,9 +132,9 @@ const showcaseMap: Record<ShowcaseVariant, ShowcaseConfig> = {
     eyebrow: "fit by workflow",
     title: "按任务选模型组合",
     rows: [
-      { label: "写代码", value: "Cursor + Claude" },
-      { label: "写作", value: "Claude + GPT-5.4 mini" },
-      { label: "学习", value: "NotebookLM + Gemini" },
+      { label: "写代码", value: "Cursor + GPT-5.5" },
+      { label: "写作", value: "Claude 4.6 + GPT-5.4 mini" },
+      { label: "学习", value: "NotebookLM + Gemini 3.1 Pro" },
     ],
     focusLabel: "场景优先",
     focusValue: "省预算",

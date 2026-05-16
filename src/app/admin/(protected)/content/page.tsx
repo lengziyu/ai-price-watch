@@ -75,7 +75,7 @@ export default async function AdminContentPage() {
         <Card className="surface-card motion-surface motion-surface--green rounded-[10px] border-border">
           <CardHeader className="px-5 py-4">
             <CardTitle>抓取快照</CardTitle>
-            <CardDescription>当前采用本地 JSON 存储，抓取侧已经拆到可按厂商聚合查看。</CardDescription>
+            <CardDescription>当前数据通过文件存储，抓取结果已支持按厂商聚合查看。</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4 px-5 pb-5">
             <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
@@ -98,7 +98,7 @@ export default async function AdminContentPage() {
               <MetricCard
                 label="来源复核"
                 value={String(sourceReviews.length)}
-                detail="后台已处理的抓取源结论"
+                detail="已处理的抓取源结论"
               />
             </div>
 
@@ -122,12 +122,12 @@ export default async function AdminContentPage() {
       <section className="space-y-4">
         <SectionHeader
           kicker="会员速率"
-          description="把前台会员速率页的厂商、后台抓取源和人工复核记录并排放在一起，方便判断下一步该自动抓还是人工补。"
+          description="把会员速率页的厂商、抓取源和人工复核记录放在一起，方便判断下一步该自动抓取还是手动补充。"
         />
         <Card className="surface-card motion-surface motion-surface--blue rounded-[10px] border-border">
           <CardHeader className="px-5 py-4">
             <CardTitle>会员速率维护面板</CardTitle>
-            <CardDescription>公开页可抓的继续自动化，强反爬或地区价先走后台人工复核。</CardDescription>
+            <CardDescription>公开页可抓的继续自动化，强反爬或地区价先走人工复核。</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4 px-5 pb-5">
             <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
@@ -271,7 +271,7 @@ export default async function AdminContentPage() {
         <Card className="surface-card motion-surface motion-surface--amber rounded-[10px] border-border">
           <CardHeader className="px-5 py-4">
             <CardTitle>手动优惠</CardTitle>
-            <CardDescription>当前还没有真正接入数据库，所以这里先保留本地 JSON 的内容视图。</CardDescription>
+            <CardDescription>当前内容仍通过数据文件维护，这里展示的是现有录入结果。</CardDescription>
           </CardHeader>
           <CardContent className="grid gap-3 px-5 pb-5 md:grid-cols-2">
             {manualDeals.length ? (

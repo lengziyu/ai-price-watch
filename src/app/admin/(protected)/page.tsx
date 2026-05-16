@@ -59,7 +59,7 @@ export default async function AdminOverviewPage() {
     <>
       <AdminPageHeader
         kicker="overview"
-        title="后台总览"
+        title="管理总览"
         description="把自动抓取、人工复核、手动录入和操作日志压到一屏里，快速判断今天的数据维护状态。"
         actions={
           <div className="grid gap-3 sm:grid-cols-2">
@@ -110,7 +110,7 @@ export default async function AdminOverviewPage() {
         <AdminStatCard
           label="手动优惠"
           value={manualDeals.length}
-          detail="已写入本地 JSON 的人工补录内容"
+          detail="已保存到数据文件的人工录入内容"
           icon={<FilePenLineIcon className="size-4 text-primary" />}
         />
       </div>
@@ -247,7 +247,7 @@ export default async function AdminOverviewPage() {
         <Card className="surface-card motion-surface motion-surface--amber rounded-[10px] border-border">
           <CardHeader className="px-4 py-3">
             <CardTitle>最近操作</CardTitle>
-            <CardDescription className="text-[12px] leading-5">保留最近 4 条后台行为。</CardDescription>
+            <CardDescription className="text-[12px] leading-5">显示最近 4 条管理操作。</CardDescription>
           </CardHeader>
           <CardContent className="grid gap-2 px-4 pb-4">
             {latestLogs.length ? (
