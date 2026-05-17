@@ -50,7 +50,7 @@ export function PageHero({
           <AnimeReveal
             selector=":scope > *"
             stagger={90}
-            className="flex flex-col gap-3 sm:gap-4"
+            className="flex flex-col gap-4 sm:gap-5"
           >
             {note ? (
               <div className="inline-flex w-fit items-center gap-2.5 rounded-full border border-border bg-background/75 px-3 py-1.5 text-[11px] text-muted-foreground backdrop-blur-sm">
@@ -59,22 +59,22 @@ export function PageHero({
               </div>
             ) : null}
 
-            <div className="max-w-[700px] text-[1.24rem] font-semibold leading-[1.03] tracking-[-0.03em] text-foreground sm:text-[2rem] lg:text-[2.56rem]">
+            <div className="max-w-[700px] text-[1.52rem] font-semibold leading-[1.02] tracking-[-0.035em] text-foreground sm:text-[2.12rem] lg:text-[2.56rem]">
               {title}
             </div>
 
-            <div className="max-w-[600px] text-[12px] leading-5 text-muted-foreground sm:text-[13.5px] sm:leading-[1.58]">
+            <div className="max-w-[600px] text-[12.5px] leading-6 text-muted-foreground sm:text-[13.5px] sm:leading-[1.58]">
               {description}
             </div>
 
             {primaryAction || secondaryAction ? (
-              <div className="flex flex-col gap-3 sm:flex-row">
+              <div className="grid grid-cols-2 gap-2.5 sm:flex sm:flex-row sm:gap-3">
                 {primaryAction ? (
                   <Link
                     href={primaryAction.href}
                     className={buttonVariants({
                       size: "lg",
-                      className: "px-6",
+                      className: "min-w-0 px-3 text-[13px] sm:px-6 sm:text-sm",
                     })}
                   >
                     {primaryAction.label}
@@ -88,7 +88,7 @@ export function PageHero({
                     className={buttonVariants({
                       variant: secondaryAction.variant ?? "outline",
                       size: "lg",
-                      className: "px-6",
+                      className: "min-w-0 px-3 text-[13px] sm:px-6 sm:text-sm",
                     })}
                   >
                     {secondaryAction.label}

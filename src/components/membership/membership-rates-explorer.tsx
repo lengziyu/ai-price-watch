@@ -112,7 +112,7 @@ export function MembershipRatesExplorer({
       }}
       className="app-shell mt-4 sm:mt-8"
     >
-      <div className="rounded-[10px] border border-border bg-background px-3.5 py-4 sm:px-5 sm:py-5 lg:px-6">
+      <div className="rounded-[10px] border border-transparent bg-transparent px-0 py-0 shadow-none sm:border-border sm:bg-background sm:px-5 sm:py-5 lg:px-6">
         <AnimeReveal
           selector=":scope > *"
           stagger={80}
@@ -135,7 +135,7 @@ export function MembershipRatesExplorer({
             ref={stickyRef}
             className={cn("page-tabs-sticky", isSticky && "is-sticky")}
           >
-            <div className="page-tabs-sticky__surface p-1.5">
+            <div className="page-tabs-sticky__surface p-0 sm:p-1.5">
               <div className="rate-tabs-shell">
                 <button
                   type="button"

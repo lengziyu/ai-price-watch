@@ -21,7 +21,7 @@ export default async function HomePage() {
             <AnimeReveal
               selector=":scope > *"
               stagger={90}
-              className="flex flex-col gap-3.5 sm:gap-4"
+              className="flex flex-col gap-4.5 sm:gap-5"
             >
               <div className="inline-flex w-fit items-center gap-2.5 rounded-full border border-border bg-background/75 px-3 py-1.5 text-[11px] text-muted-foreground backdrop-blur-sm">
                 <span className="size-2 rounded-full bg-primary" />
@@ -34,7 +34,7 @@ export default async function HomePage() {
                 <span>优惠文章</span>
               </div>
 
-              <div className="max-w-[680px] text-[1.42rem] font-semibold leading-[0.99] tracking-[-0.034em] text-foreground sm:text-[2.58rem] lg:text-[3.28rem]">
+              <div className="max-w-[680px] text-[1.74rem] font-semibold leading-[0.97] tracking-[-0.038em] text-foreground sm:text-[2.58rem] lg:text-[3.28rem]">
                 <div>
                   <ScrambleText text="AI 会员价格" />
                 </div>
@@ -47,18 +47,18 @@ export default async function HomePage() {
                 </div>
               </div>
 
-              <p className="max-w-[580px] text-[12px] leading-[1.55] text-muted-foreground sm:text-[14px] sm:leading-[1.58]">
+              <p className="max-w-[580px] text-[12.5px] leading-[1.7] text-muted-foreground sm:text-[14px] sm:leading-[1.58]">
                 首页集中看会员价格、额度、常用入口和最新活动，先完成第一轮筛选。
                 <br />
                 再进入你关心的厂商、套餐、工具页面，继续看详细对比。
               </p>
 
-              <div className="flex flex-col gap-3 sm:flex-row">
+              <div className="grid grid-cols-2 gap-2.5 sm:flex sm:flex-row sm:gap-3">
                 <Link
                   href="/pricing/subscriptions"
                   className={buttonVariants({
                     size: "lg",
-                    className: "px-6",
+                    className: "min-w-0 px-3 text-[13px] sm:px-6 sm:text-sm",
                   })}
                 >
                   开始对比
@@ -69,7 +69,7 @@ export default async function HomePage() {
                   className={buttonVariants({
                     variant: "outline",
                     size: "lg",
-                    className: "px-6",
+                    className: "min-w-0 px-3 text-[13px] sm:px-6 sm:text-sm",
                   })}
                 >
                   查看优惠活动

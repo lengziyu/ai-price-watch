@@ -44,9 +44,9 @@ export function DealsExplorer({ deals }: Props) {
   );
 
   return (
-    <section className="app-shell flex flex-col gap-4 rounded-[12px] border border-border bg-background px-4 py-5 sm:px-5 sm:py-5 lg:px-6">
-      <Card size="sm" className="rounded-[12px] border-border bg-card/90">
-        <CardHeader className="gap-4 px-4 py-4 sm:px-5">
+    <section className="app-shell flex flex-col gap-4 rounded-[12px] border border-transparent bg-transparent px-0 py-0 shadow-none sm:border-border sm:bg-background sm:px-5 sm:py-5 lg:px-6">
+      <Card size="sm" className="rounded-[12px] border-transparent bg-transparent shadow-none sm:border-border sm:bg-card/90">
+        <CardHeader className="gap-4 px-0 py-0 sm:px-5 sm:py-4">
           <div className="grid gap-4 xl:grid-cols-[0.84fr_1.16fr]">
             <div className="flex flex-col gap-2">
               <div className="mono-kicker text-[12px] text-muted-foreground">

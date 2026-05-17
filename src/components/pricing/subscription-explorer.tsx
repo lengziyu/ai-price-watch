@@ -550,8 +550,10 @@ export function SubscriptionExplorer({
         stickyBoundaryRef.current = node;
       }}
       className={cn(
-        "rounded-[12px] border border-border bg-background px-4 sm:px-5 lg:px-6",
-        isCompact ? "py-3 sm:py-3.5" : "py-4 sm:py-5",
+        embedded
+          ? "px-0 py-0"
+          : "rounded-[12px] border border-transparent bg-transparent px-0 py-0 shadow-none sm:border-border sm:bg-background sm:px-5 sm:py-5 lg:px-6",
+        isCompact && !embedded && "py-3 sm:py-3.5",
         !embedded && "app-shell",
       )}
     >
@@ -590,10 +592,6 @@ export function SubscriptionExplorer({
             )}
             <span className="text-muted-foreground">{nextFxRefresh}s 后刷新</span>
           </div>
-          <div className="flex items-center justify-center text-[11px] text-muted-foreground sm:text-xs">
-            更新时间：{updatedAt ? formatDate(updatedAt) : "持续维护"}
-            <span className="ml-2 size-2 rounded-full bg-primary" />
-          </div>
         </div>
       </AnimeReveal>
 
@@ -625,7 +623,7 @@ export function SubscriptionExplorer({
 
         <div className="hidden sm:block" />
 
-        <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-self-end">
+        <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] gap-2 sm:flex sm:flex-row sm:items-center sm:justify-self-end">
           <Select
             value={activeProvider.key}
             open={providerOpen}
@@ -639,7 +637,7 @@ export function SubscriptionExplorer({
           >
             <SelectTrigger
               className={cn(
-                "w-full rounded-full border-primary/20 bg-card px-4 sm:w-[172px]",
+                "w-full min-w-0 rounded-full border-primary/20 bg-card px-3 sm:w-[172px] sm:px-4",
                 isCompact ? "min-h-10" : "min-h-11",
               )}
             >
@@ -705,7 +703,7 @@ export function SubscriptionExplorer({
           >
             <SelectTrigger
               className={cn(
-                "w-full rounded-full border-primary/20 bg-card px-4 sm:w-[236px]",
+                "w-full min-w-0 rounded-full border-primary/20 bg-card px-3 sm:w-[236px] sm:px-4",
                 isCompact ? "min-h-10" : "min-h-11",
               )}
             >
@@ -714,7 +712,9 @@ export function SubscriptionExplorer({
                 <span className="truncate font-semibold text-foreground">
                   {selectedCurrency.label}
                 </span>
-                <span className="truncate text-muted-foreground">({selectedCurrency.code})</span>
+                <span className="hidden truncate text-muted-foreground sm:inline">
+                  ({selectedCurrency.code})
+                </span>
               </div>
             </SelectTrigger>
             <SelectContent
@@ -826,7 +826,7 @@ export function SubscriptionExplorer({
           trigger="mount"
           className="motion-surface motion-surface--green mt-3.5 overflow-hidden rounded-[24px] border border-border p-2 sm:mt-5 sm:p-2.5"
         >
-          <div className="relative grid grid-cols-1 gap-2 sm:grid-cols-[1fr_1fr] sm:gap-0">
+          <div className="relative grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 sm:grid-cols-[1fr_1fr] sm:gap-0">
             <CompareEdge
               region={cheapest}
               align="left"
@@ -835,13 +835,13 @@ export function SubscriptionExplorer({
               pulseKey={fxTick}
             />
 
-            <div className="pointer-events-none inset-x-0 top-1/2 z-[1] flex justify-center sm:absolute sm:-translate-y-1/2">
-              <div className="flex w-full max-w-[176px] flex-col items-center rounded-[999px] border border-orange-200/60 bg-white/92 px-3 py-2 text-center shadow-[0_20px_44px_rgba(251,146,60,0.18)] backdrop-blur-xl dark:border-orange-300/18 dark:bg-[rgba(15,15,15,0.9)] sm:max-w-[192px] sm:px-4 sm:py-3">
+            <div className="pointer-events-none z-[1] flex justify-center sm:absolute sm:inset-x-0 sm:top-1/2 sm:-translate-y-1/2">
+              <div className="flex w-full max-w-[108px] flex-col items-center rounded-[999px] border border-orange-200/60 bg-white/92 px-2 py-2 text-center shadow-[0_20px_44px_rgba(251,146,60,0.18)] backdrop-blur-xl dark:border-orange-300/18 dark:bg-[rgba(15,15,15,0.9)] sm:max-w-[192px] sm:px-4 sm:py-3">
                 <div className="text-[11px] font-medium text-orange-500 sm:text-xs">比高价地区低</div>
-                <div className="mt-0.5 text-[1.18rem] font-semibold tracking-[-0.025em] text-orange-500 sm:text-[1.52rem]">
+                <div className="mt-0.5 text-[1rem] font-semibold tracking-[-0.025em] text-orange-500 sm:text-[1.52rem]">
                   <LivePriceTick pulseKey={fxTick}>{liveSavingsPercent}%</LivePriceTick>
                 </div>
-                <div className="text-[11px] text-muted-foreground sm:text-xs">
+                <div className="text-[10px] text-muted-foreground sm:text-xs">
                   差价{" "}
                   <LivePriceTick pulseKey={fxTick}>
                     {formatCnyAsTargetMoney(liveSavingsValue, targetCurrency, liveCnyRates)}
@@ -865,7 +865,10 @@ export function SubscriptionExplorer({
         <AnimeReveal
           key={`subscription-plan-${activePreset.key}-${targetCurrency}`}
           trigger="mount"
-          className="mt-3.5 overflow-visible rounded-[12px] border border-border bg-card px-3.5 py-3.5 sm:mt-5 sm:px-4 sm:py-4"
+          className={cn(
+            "mt-3.5 overflow-visible rounded-[12px] border border-border bg-card px-3.5 py-3.5 sm:mt-5 sm:px-4 sm:py-4",
+            embedded && "border-none bg-transparent px-0 py-0 shadow-none",
+          )}
         >
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
@@ -885,13 +888,15 @@ export function SubscriptionExplorer({
                 <span className="rounded-[10px] bg-primary/10 px-2.5 py-1 text-[10px] font-semibold text-primary">
                   {formatBillingCycle(currentPlan.billingCycle)}
                 </span>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/[0.07] px-2.5 py-1 text-[10px] font-semibold text-primary">
-                  <span className="live-fx-dot size-1.5 rounded-full bg-primary" />
-                  实时校验
-                  <span className="text-muted-foreground">
-                    {updatedAt ? formatDate(updatedAt) : "持续更新"}
+                {!embedded ? (
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/[0.07] px-2.5 py-1 text-[10px] font-semibold text-primary">
+                    <span className="live-fx-dot size-1.5 rounded-full bg-primary" />
+                    实时校验
+                    <span className="text-muted-foreground">
+                      {updatedAt ? formatDate(updatedAt) : "持续更新"}
+                    </span>
                   </span>
-                </span>
+                ) : null}
               </div>
               <p className="mt-1.5 max-w-4xl text-[12.5px] leading-6 text-muted-foreground sm:text-[13px]">
                 {description}
@@ -1004,7 +1009,7 @@ export function SubscriptionExplorer({
         </AnimeReveal>
       ) : null}
 
-      <div className="mt-4 text-[11px] leading-6 text-muted-foreground sm:text-xs">
+      <div className={cn("mt-4 text-[11px] leading-6 text-muted-foreground sm:text-xs", embedded && "mt-3")}>
         目标货币：{selectedCurrency.label}（{selectedCurrency.code}）。当前优先读取 Frankfurter 参考汇率，失败时回落到静态快照；几秒级 tick 用于展示汇率波动感，真实结算价格仍请以官方页面为准。
       </div>
     </section>
@@ -1246,7 +1251,7 @@ function CompareEdge({
   return (
     <div
       className={cn(
-        "relative flex min-h-[122px] items-center gap-2 overflow-hidden rounded-[22px] border px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] sm:min-h-[136px] sm:gap-3 sm:px-5",
+        "relative flex min-w-0 min-h-[112px] items-center gap-2 overflow-hidden rounded-[22px] border px-3 py-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] sm:min-h-[136px] sm:gap-3 sm:px-5 sm:py-3",
         align === "left" &&
           "justify-start border-emerald-200/70 bg-[linear-gradient(135deg,rgba(236,255,247,0.98),rgba(222,249,236,0.9))] text-left sm:[clip-path:polygon(0_0,100%_0,86%_100%,0_100%)] dark:border-emerald-500/22 dark:bg-[linear-gradient(135deg,rgba(6,78,59,0.42),rgba(5,46,34,0.68))]",
         align === "right" &&
@@ -1254,15 +1259,22 @@ function CompareEdge({
       )}
     >
       {align === "left" ? (
-        <CountryFlag countryCode={region.countryCode} className="h-[22px] w-[30px] sm:h-7 sm:w-9" />
+        <CountryFlag countryCode={region.countryCode} className="h-4 w-5 sm:h-7 sm:w-9" />
       ) : null}
-      <div>
-        <div className={cn("text-[11px]", align === "left" ? "text-emerald-700/70 dark:text-emerald-100/76" : "text-orange-900/60 dark:text-orange-100/70")}>
+      <div className="min-w-0">
+        <div
+          className={cn(
+            "truncate text-[10px] sm:text-[11px]",
+            align === "left"
+              ? "text-emerald-700/70 dark:text-emerald-100/76"
+              : "text-orange-900/60 dark:text-orange-100/70",
+          )}
+        >
           {region.country}
         </div>
         <div
           className={cn(
-            "mt-1 text-[1.28rem] font-semibold tracking-[-0.03em] sm:text-[1.72rem]",
+            "mt-1 truncate text-[1rem] font-semibold tracking-[-0.03em] sm:text-[1.72rem]",
             align === "left" ? "text-emerald-500" : "text-[#7b6f69] dark:text-orange-100",
           )}
         >
@@ -1270,7 +1282,7 @@ function CompareEdge({
         </div>
         <div
           className={cn(
-            "mt-1 text-[11px]",
+            "mt-1 truncate text-[10px] sm:text-[11px]",
             align === "left"
               ? "text-emerald-800/55 dark:text-emerald-100/58"
               : "text-orange-900/45 dark:text-orange-100/55",
@@ -1280,7 +1292,7 @@ function CompareEdge({
         </div>
       </div>
       {align === "right" ? (
-        <CountryFlag countryCode={region.countryCode} className="h-[22px] w-[30px] sm:h-7 sm:w-9" />
+        <CountryFlag countryCode={region.countryCode} className="h-4 w-5 sm:h-7 sm:w-9" />
       ) : null}
     </div>
   );

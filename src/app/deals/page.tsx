@@ -54,7 +54,7 @@ export default async function DealsPage() {
 
       <Tabs defaultValue="articles" className="mt-4 gap-3 sm:mt-6">
         <div id="content-switcher" className="app-shell">
-          <div className={cn("page-tabs-sticky__surface p-1.5")}>
+          <div className={cn("page-tabs-sticky__surface p-0 sm:p-1.5")}>
             <TabsList variant="accent" className="w-full max-w-full sm:w-fit">
               <TabsTrigger value="articles" className="min-w-[116px]">
                 优惠文章

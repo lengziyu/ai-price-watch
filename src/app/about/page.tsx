@@ -52,14 +52,14 @@ export default function AboutPage() {
       />
 
       <section className="app-shell mt-4 sm:mt-8">
-        <div className="flex flex-col gap-6 rounded-[12px] border border-border bg-background px-4 py-6 sm:px-5 lg:px-6">
+        <div className="flex flex-col gap-6 rounded-[12px] border border-transparent bg-transparent px-0 py-0 shadow-none sm:border-border sm:bg-background sm:px-5 lg:px-6">
         <div className="grid gap-4 lg:grid-cols-3">
-          <Card className="surface-card rounded-xl lg:col-span-2">
-            <CardHeader className="px-5 py-5 sm:px-6">
+          <Card className="surface-card rounded-xl border-transparent bg-transparent shadow-none sm:border-border lg:col-span-2">
+            <CardHeader className="px-0 py-0 sm:px-6 sm:py-5">
               <CardTitle>{siteConfig.name}</CardTitle>
               <CardDescription>{siteConfig.description}</CardDescription>
             </CardHeader>
-            <CardContent className="flex flex-col gap-4 px-5 pb-5 text-sm leading-7 text-muted-foreground sm:px-6 sm:pb-6">
+            <CardContent className="flex flex-col gap-4 px-0 pb-0 text-sm leading-7 text-muted-foreground sm:px-6 sm:pb-6">
               <p>
                 雷价通聚焦 AI 订阅、Token 成本、会员速率和优惠活动，把真正影响决策的信息收敛到同一套页面里。
               </p>
@@ -69,11 +69,11 @@ export default function AboutPage() {
             </CardContent>
           </Card>
 
-          <Card className="surface-card rounded-xl">
-            <CardHeader className="px-5 py-5 sm:px-6">
+          <Card className="surface-card rounded-xl border-transparent bg-transparent shadow-none sm:border-border">
+            <CardHeader className="px-0 py-0 sm:px-6 sm:py-5">
               <CardTitle>数据原则</CardTitle>
             </CardHeader>
-            <CardContent className="flex flex-col gap-3 px-5 pb-5 text-sm leading-7 text-muted-foreground sm:px-6 sm:pb-6">
+            <CardContent className="flex flex-col gap-3 px-0 pb-0 text-sm leading-7 text-muted-foreground sm:px-6 sm:pb-6">
               {trustBullets.map((item) => (
                 <p key={item}>{item}</p>
               ))}
@@ -81,11 +81,11 @@ export default function AboutPage() {
           </Card>
         </div>
 
-        <Card className="surface-card rounded-xl">
-          <CardHeader className="px-5 py-5 sm:px-6">
+        <Card className="surface-card rounded-xl border-transparent bg-transparent shadow-none sm:border-border">
+          <CardHeader className="px-0 py-0 sm:px-6 sm:py-5">
             <CardTitle>常见问题</CardTitle>
           </CardHeader>
-          <CardContent className="px-5 pb-5 sm:px-6 sm:pb-6">
+          <CardContent className="px-0 pb-0 sm:px-6 sm:pb-6">
             <Accordion>
               <AccordionItem value="static-data">
                 <AccordionTrigger>站内数据是怎么维护的？</AccordionTrigger>

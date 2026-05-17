@@ -269,6 +269,21 @@
     overflow: hidden;
   }
 
+  .front-mobile-shell {
+    transition:
+      border-color 220ms ease,
+      background-color 220ms ease,
+      box-shadow 220ms ease,
+      padding 220ms ease;
+  }
+
+  .front-mobile-softcard {
+    transition:
+      border-color 220ms ease,
+      background-color 220ms ease,
+      box-shadow 220ms ease;
+  }
+
   .page-tabs-sticky.is-sticky .page-tabs-sticky__surface {
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.82),
@@ -2937,7 +2952,12 @@
   }
 
   .page-tabs-sticky__surface {
-    border-radius: 16px;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    overflow: visible;
   }
 
   .page-tabs-sticky__surface,
@@ -3011,6 +3031,37 @@
   .search-glow__shortcut {
     min-width: 2rem;
     font-size: 0.68rem;
+  }
+
+  .front-mobile-shell {
+    border-color: transparent !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .front-mobile-softcard {
+    border-color: transparent !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .front-mobile-softcard [data-slot="card-header"] {
+    padding-inline: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0.85rem !important;
+  }
+
+  .front-mobile-softcard [data-slot="card-content"] {
+    padding-inline: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .front-mobile-softcard [data-slot="card-footer"] {
+    padding-inline: 0 !important;
   }
 }
 

@@ -49,7 +49,7 @@ export default function ToolsPage() {
       />
 
       <section className="app-shell mt-4 sm:mt-8">
-        <div className="grid gap-4 rounded-[12px] border border-border bg-background px-4 py-6 md:grid-cols-2 sm:px-5 lg:px-6 xl:grid-cols-3">
+        <div className="grid gap-4 rounded-[12px] border border-transparent bg-transparent px-0 py-0 shadow-none md:grid-cols-2 sm:border-border sm:bg-background sm:px-5 lg:px-6 xl:grid-cols-3">
           {toolsDirectory.map((tool) => (
             <Card key={tool.id} className="surface-card rounded-xl">
               <CardHeader className="gap-3 px-5 py-5 sm:px-6">

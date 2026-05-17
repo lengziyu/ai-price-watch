@@ -185,11 +185,11 @@ export function TokenPriceExplorer({ prices }: Props) {
       ref={(node) => {
         stickyBoundaryRef.current = node;
       }}
-      className="app-shell flex flex-col gap-3.5 rounded-[12px] border border-border bg-background px-4 py-4 sm:px-5 sm:py-4.5 lg:px-6"
+      className="app-shell flex flex-col gap-3.5 rounded-[12px] border border-transparent bg-transparent px-0 py-0 shadow-none sm:border-border sm:bg-background sm:px-5 sm:py-4.5 lg:px-6"
     >
       <AnimeReveal>
-      <Card className="rounded-xl border-border bg-card/90">
-        <CardHeader className="gap-2.5 px-4 py-3.5 sm:px-5 sm:py-4">
+      <Card className="rounded-xl border-transparent bg-transparent shadow-none sm:border-border sm:bg-card/90">
+        <CardHeader className="gap-2.5 px-0 py-0 sm:px-5 sm:py-4">
           <div className="flex items-start justify-between gap-3">
             <div className="flex flex-col gap-1.5">
               <div className="mono-kicker text-[12px] uppercase text-muted-foreground">
@@ -227,7 +227,7 @@ export function TokenPriceExplorer({ prices }: Props) {
         ref={stickyRef}
         className={cn("page-tabs-sticky", isSticky && "is-sticky")}
       >
-        <div className="page-tabs-sticky__surface p-1.5">
+        <div className="page-tabs-sticky__surface p-0 sm:p-1.5">
           {categoryTabs}
         </div>
       </div>

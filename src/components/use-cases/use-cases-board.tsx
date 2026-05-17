@@ -73,7 +73,7 @@ export function UseCasesBoard({ defaultGroup }: UseCasesBoardProps) {
       }}
       className="app-shell mt-4 sm:mt-8"
     >
-      <div className="rounded-[12px] border border-border bg-background px-4 py-5 sm:px-5 lg:px-6">
+      <div className="rounded-[12px] border border-transparent bg-transparent px-0 py-0 shadow-none sm:border-border sm:bg-background sm:px-5 lg:px-6">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
             <div>
@@ -87,7 +87,7 @@ export function UseCasesBoard({ defaultGroup }: UseCasesBoardProps) {
                 {currentGroup.summary}
               </p>
             </div>
-            <div className="rounded-[12px] border border-border bg-background/76 px-3 py-2 text-[12px] leading-6 text-muted-foreground">
+            <div className="rounded-[12px] border border-transparent bg-transparent px-0 py-0 text-[12px] leading-6 text-muted-foreground sm:border-border sm:bg-background/76 sm:px-3 sm:py-2">
               当前分类共 {visibleCases.length} 个场景，覆盖工具选择、预算提醒和落地入口。
             </div>
           </div>
@@ -97,7 +97,7 @@ export function UseCasesBoard({ defaultGroup }: UseCasesBoardProps) {
             ref={stickyRef}
             className={cn("page-tabs-sticky", isSticky && "is-sticky")}
           >
-            <div className="page-tabs-sticky__surface p-1.5">
+            <div className="page-tabs-sticky__surface p-0 sm:p-1.5">
               <Tabs value={activeGroup} onValueChange={handleGroupChange}>
                 <TabsList
                   variant="accent"

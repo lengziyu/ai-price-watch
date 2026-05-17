@@ -18,7 +18,7 @@ import { Badge } from "@/components/ui/badge";
 import { membershipVendorBoards } from "@/data/membership-rates";
 import { toolsDirectory } from "@/data/tools";
 import { useCases } from "@/data/use-cases";
-import { formatDateTime, formatDealArticleStatus } from "@/lib/format";
+import { formatDate, formatDateTime, formatDealArticleStatus } from "@/lib/format";
 import type { DealArticle } from "@/types";
 
 type HomeContentOverviewProps = {
@@ -51,7 +51,7 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
       label: "优惠文章",
       value: String(articles.length),
       detail: latestArticle
-        ? `最近更新 ${formatDateTime(latestArticle.publishedAt)}`
+        ? `最近更新 ${formatDate(latestArticle.publishedAt)}`
         : "持续更新中",
       iconKey: "articles" as const,
     },
@@ -69,7 +69,7 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
         <AnimeReveal
           selector=":scope > *"
           stagger={80}
-          className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4"
+          className="grid grid-cols-2 gap-3 xl:grid-cols-4"
         >
           {summaryCards.map((item) => (
             <InteractiveSummaryCard
@@ -84,7 +84,7 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
       </section>
 
       <section className="app-shell mt-4 sm:mt-8">
-        <AnimeReveal className="rounded-[6px] border border-border/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.99),rgba(246,252,249,0.96))] p-5 shadow-[0_20px_54px_rgba(15,23,42,0.05)] dark:bg-[linear-gradient(180deg,rgba(8,14,18,0.98),rgba(9,17,20,0.95))] sm:p-6">
+        <AnimeReveal className="rounded-[6px] border border-transparent bg-transparent p-0 shadow-none sm:border-border/80 sm:bg-[linear-gradient(180deg,rgba(255,255,255,0.99),rgba(246,252,249,0.96))] sm:p-6 sm:shadow-[0_20px_54px_rgba(15,23,42,0.05)] dark:sm:bg-[linear-gradient(180deg,rgba(8,14,18,0.98),rgba(9,17,20,0.95))]">
           <div className="grid gap-4 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-center">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-primary/16 bg-primary/8 px-3 py-1 text-[11px] font-medium text-primary dark:border-primary/24 dark:bg-primary/14">
@@ -98,7 +98,7 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
               </p>
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-3">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
               <FeatureIntroTile
                 icon={<CrownIcon className="size-4" />}
                 title="会员速率"
@@ -119,6 +119,8 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
                 detail="整理常用 AI 工具的定位、定价方式和官方入口，方便快速判断先看哪一类。"
                 href="/tools"
                 hrefLabel="看工具"
+                className="col-span-2 sm:col-span-1"
+                hideOnMobile
               />
             </div>
           </div>
@@ -136,7 +138,7 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
           <AnimeReveal
             selector=":scope > *"
             stagger={70}
-            className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4"
+            className="grid grid-cols-2 gap-3 xl:grid-cols-4"
           >
             {featuredVendors.map((vendor) => (
               <AnimeHoverCard key={vendor.id} className="group h-full">
@@ -188,8 +190,13 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
               className="grid gap-3 md:grid-cols-2 xl:grid-cols-3"
             >
               {latestArticles.map((article) => (
-                <AnimeHoverCard key={article.id} className="group h-full" lift={5} scale={1.012}>
-                  <article className="relative h-full overflow-hidden rounded-[6px] border border-border/85 bg-white/82 shadow-[0_8px_18px_rgba(25,42,74,0.08)] backdrop-blur-md transition-[box-shadow,border-color] duration-200 group-hover:border-primary/28 group-hover:shadow-[0_16px_26px_color-mix(in_srgb,var(--primary)_18%,transparent)] dark:border-white/12 dark:bg-[rgba(17,27,44,0.82)] dark:group-hover:border-primary/34">
+                <AnimeHoverCard
+                  key={article.id}
+                  className="group h-full min-w-0 w-full"
+                  lift={5}
+                  scale={1.012}
+                >
+                  <article className="relative h-full w-full min-w-0 overflow-hidden rounded-[6px] border border-border/85 bg-white/82 shadow-[0_8px_18px_rgba(25,42,74,0.08)] backdrop-blur-md transition-[box-shadow,border-color] duration-200 group-hover:border-primary/28 group-hover:shadow-[0_16px_26px_color-mix(in_srgb,var(--primary)_18%,transparent)] dark:border-white/12 dark:bg-[rgba(17,27,44,0.82)] dark:group-hover:border-primary/34">
                     <Link
                       href={`/deals/articles/${article.slug}`}
                       aria-label={`查看文章：${article.title}`}
@@ -213,10 +220,10 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
                       </div>
                       <div className="px-4 pb-2.5 pt-2">
                         <div className="min-w-0 transition-transform duration-200 group-hover:-translate-y-1">
-                          <div className="truncate py-[10px] text-[20px] font-semibold leading-tight tracking-[-0.03em] text-foreground">
+                          <div className="truncate py-[10px] text-[18px] font-semibold leading-tight tracking-[-0.03em] text-foreground sm:text-[20px]">
                             {article.title}
                           </div>
-                          <p className="mt-1 line-clamp-2 h-[3rem] overflow-hidden text-[12px] leading-6 text-foreground/72 sm:text-[13px]">
+                          <p className="mt-1 line-clamp-2 h-[3rem] overflow-hidden break-words text-[12px] leading-6 text-foreground/72 sm:text-[13px]">
                             {article.summary}
                           </p>
                         </div>
@@ -230,7 +237,7 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
                             </Badge>
                           ))}
                         </div>
-                        <div className="mt-3 flex items-center justify-between gap-2.5 border-t border-border/70 pt-3">
+                        <div className="mt-3 flex flex-wrap items-center justify-between gap-2.5 border-t border-border/70 pt-3">
                           <span className="inline-flex min-h-8 items-center text-[12px] text-muted-foreground">
                             {formatDateTime(article.publishedAt)}
                           </span>
@@ -276,7 +283,7 @@ function Panel({
   children: ReactNode;
 }) {
   return (
-    <div className="flex flex-col rounded-[6px] border border-border/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.99),rgba(248,251,255,0.96))] p-5 shadow-[0_22px_60px_rgba(15,23,42,0.05)] dark:bg-[linear-gradient(180deg,rgba(8,14,18,0.98),rgba(12,18,28,0.94))]">
+    <div className="flex flex-col rounded-[6px] border border-transparent bg-transparent p-0 shadow-none sm:border-border/80 sm:bg-[linear-gradient(180deg,rgba(255,255,255,0.99),rgba(248,251,255,0.96))] sm:p-5 sm:shadow-[0_22px_60px_rgba(15,23,42,0.05)] dark:sm:bg-[linear-gradient(180deg,rgba(8,14,18,0.98),rgba(12,18,28,0.94))]">
       <div className="mb-4 flex items-start justify-between gap-3">
         <div className="min-w-0">
           <div className="flex items-center gap-2">
@@ -314,15 +321,29 @@ function FeatureIntroTile({
   detail,
   href,
   hrefLabel,
+  className,
+  hideOnMobile = false,
 }: {
   icon: ReactNode;
   title: string;
   detail: string;
   href: string;
   hrefLabel: string;
+  className?: string;
+  hideOnMobile?: boolean;
 }) {
   return (
-    <AnimeHoverCard className="group h-full" lift={4} scale={1.01}>
+    <AnimeHoverCard
+      className={[
+        "group h-full min-w-0",
+        hideOnMobile ? "hidden sm:block" : "",
+        className ?? "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+      lift={4}
+      scale={1.01}
+    >
       <div className="flex h-full flex-col rounded-[6px] border border-border/75 bg-background/82 p-4 shadow-[0_12px_28px_rgba(15,23,42,0.04)] transition-[border-color,box-shadow] group-hover:border-primary/24 group-hover:shadow-[0_18px_34px_color-mix(in_srgb,var(--primary)_12%,transparent)] dark:bg-background/60">
         <div className="inline-flex h-9 w-9 items-center justify-center rounded-[6px] border border-primary/16 bg-primary/8 text-primary dark:border-primary/24 dark:bg-primary/14">
           {icon}

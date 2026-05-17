@@ -119,7 +119,7 @@ export default async function DealArticleDetailPage({ params }: PageProps) {
       </section>
 
       <div className="app-shell mt-4 sm:mt-8">
-        <Card className="mx-auto max-w-4xl rounded-[16px] border-border bg-card/95">
+        <Card className="mx-auto max-w-4xl rounded-[16px] border-transparent bg-transparent shadow-none sm:border-border sm:bg-card/95">
           {!usesDefaultCover ? (
             <div className="relative aspect-[16/9] overflow-hidden rounded-t-[16px] border-b border-border/70">
               <Image
@@ -132,7 +132,7 @@ export default async function DealArticleDetailPage({ params }: PageProps) {
               />
             </div>
           ) : null}
-          <CardContent className="px-5 py-6 sm:px-8 sm:py-8">
+          <CardContent className="px-0 py-5 sm:px-8 sm:py-8">
             {hasRichBody ? (
               <article className="deal-article-rich" dangerouslySetInnerHTML={{ __html: richBodyHtml }} />
             ) : (
