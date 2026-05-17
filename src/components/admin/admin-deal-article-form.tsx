@@ -1,24 +1,15 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useActionState, useMemo, useRef, useState } from "react";
 import { createPortal, flushSync } from "react-dom";
 import {
-  BoldIcon,
   FileTextIcon,
-  Heading2Icon,
-  ImageIcon,
-  ItalicIcon,
-  LinkIcon,
-  ListIcon,
-  ListOrderedIcon,
   LoaderCircleIcon,
   PencilIcon,
-  PilcrowIcon,
   PlusIcon,
-  QuoteIcon,
   SparklesIcon,
-  UnderlineIcon,
   XIcon,
 } from "lucide-react";
 
@@ -30,13 +21,23 @@ import { Textarea } from "@/components/ui/textarea";
 import {
   defaultDealArticleCoverImageUrl,
   detectDealArticleSourcePlatform,
-  formatDealArticleSourcePlatform,
+  extractPlainTextFromHtml,
 } from "@/lib/deal-articles";
-import type { DealArticle, DealArticleSourcePlatform } from "@/types";
+import type { DealArticle, DealArticleSourcePlatform, DifficultyLevel } from "@/types";
 
 const initialState: AdminMutationState = {
   status: "idle",
 };
+
+const AdminDealArticleWangEditor = dynamic(
+  () =>
+    import("@/components/admin/admin-deal-article-wang-editor").then(
+      (module) => module.AdminDealArticleWangEditor,
+    ),
+  {
+    ssr: false,
+  },
+);
 
 function FieldMessage({ message }: { message?: string }) {
   if (!message) {
@@ -64,12 +65,10 @@ type SourceExtractResponse = {
   rawContent: string;
 };
 
-type EditorImageUploadResponse = {
+type CoverImageUploadResponse = {
   url?: string;
   error?: string;
 };
-
-type CoverImageUploadResponse = EditorImageUploadResponse;
 
 type XHtmlImportResponse = {
   sourcePlatform: DealArticleSourcePlatform;
@@ -82,15 +81,6 @@ type XHtmlImportResponse = {
   notice?: string;
   error?: string;
 };
-
-const editorTextColors = [
-  { label: "默认", value: "" },
-  { label: "墨绿", value: "#063f33" },
-  { label: "强调绿", value: "#059669" },
-  { label: "橙色", value: "#ea580c" },
-  { label: "红色", value: "#dc2626" },
-  { label: "蓝色", value: "#2563eb" },
-];
 
 function escapeHtml(value: string) {
   return value
@@ -127,8 +117,9 @@ function convertPlainTextToEditorHtml(value: string) {
   return blocks.join("");
 }
 
-function normalizeEditorHtml(value: string) {
+function normalizeEditorSubmissionHtml(value: string) {
   return value
+    .replace(/^<p><br><\/p>$/i, "")
     .replace(/<p><br><\/p>/gi, "")
     .replace(/<div><br><\/div>/gi, "")
     .replace(/\u00A0/g, " ")
@@ -156,9 +147,9 @@ export function AdminDealArticleForm({
 }: AdminDealArticleFormProps) {
   const [state, formAction, pending] = useActionState(action, initialState);
   const formRef = useRef<HTMLFormElement>(null);
-  const editorRef = useRef<HTMLDivElement>(null);
   const [sourceUrl, setSourceUrl] = useState(article?.sourceUrl ?? "");
   const [sourcePlatform, setSourcePlatform] = useState<DealArticleSourcePlatform>(article?.sourcePlatform ?? detectDealArticleSourcePlatform(article?.sourceUrl));
+  const [difficulty, setDifficulty] = useState<DifficultyLevel>(article?.difficulty ?? "medium");
   const [title, setTitle] = useState(article?.title ?? "");
   const [summary, setSummary] = useState(article?.summary ?? "");
   const initialRawContent = article?.rawContent ?? "";
@@ -171,7 +162,7 @@ export function AdminDealArticleForm({
       ? initialRawContent
       : convertPlainTextToEditorHtml(initialRawContent);
   }, [initialRawContent]);
-  const [rawContent, setRawContent] = useState(initialEditorValue);
+  const [editorHtml, setEditorHtml] = useState(initialEditorValue);
   const [tags, setTags] = useState<string[]>(article?.tags ?? []);
   const [tagInput, setTagInput] = useState("");
   const [isFetchingSource, setIsFetchingSource] = useState(false);
@@ -179,9 +170,7 @@ export function AdminDealArticleForm({
   const [isImportSheetOpen, setIsImportSheetOpen] = useState(false);
   const [xHtmlInput, setXHtmlInput] = useState("");
   const [xHtmlImportMessage, setXHtmlImportMessage] = useState<string | null>(null);
-  const imageInputRef = useRef<HTMLInputElement>(null);
   const coverInputRef = useRef<HTMLInputElement>(null);
-  const savedSelectionRef = useRef<Range | null>(null);
   const [isUploadingEditorImage, setIsUploadingEditorImage] = useState(false);
   const [isImportingXHtml, setIsImportingXHtml] = useState(false);
   const [editorMessage, setEditorMessage] = useState<string | null>(null);
@@ -190,6 +179,11 @@ export function AdminDealArticleForm({
   const [isUploadingCoverImage, setIsUploadingCoverImage] = useState(false);
   const [coverUploadMessage, setCoverUploadMessage] = useState<string | null>(null);
   const isCreateMode = !article;
+  const submittedRawContent = normalizeEditorSubmissionHtml(editorHtml);
+  const editorTextLength = extractPlainTextFromHtml(submittedRawContent).replace(/\s+/g, "").length;
+  const editorFooterMessage =
+    editorMessage ??
+    "支持直接编辑正文、插入图片，也可以先导入 HTML 再微调。";
 
   const addTag = (value: string) => {
     const normalized = value.trim();
@@ -247,7 +241,7 @@ export function AdminDealArticleForm({
       }
 
       setSourcePlatform(payload.sourcePlatform);
-      setRawContent(convertPlainTextToEditorHtml(payload.rawContent));
+      setEditorHtml(convertPlainTextToEditorHtml(payload.rawContent));
       if (payload.title && !title.trim()) {
         setTitle(payload.title);
       }
@@ -259,126 +253,6 @@ export function AdminDealArticleForm({
       setSourceFetchMessage(error instanceof Error ? error.message : "抓取失败，请手动粘贴正文。");
     } finally {
       setIsFetchingSource(false);
-    }
-  };
-
-  const syncEditorContent = () => {
-    setRawContent(normalizeEditorHtml(editorRef.current?.innerHTML ?? ""));
-  };
-
-  const saveEditorSelection = () => {
-    const selection = window.getSelection();
-    if (!selection?.rangeCount || !editorRef.current) {
-      return;
-    }
-
-    const range = selection.getRangeAt(0);
-    if (editorRef.current.contains(range.commonAncestorContainer)) {
-      savedSelectionRef.current = range.cloneRange();
-    }
-  };
-
-  const restoreEditorSelection = () => {
-    const selection = window.getSelection();
-    const range = savedSelectionRef.current;
-
-    editorRef.current?.focus();
-    if (!selection || !range) {
-      return;
-    }
-
-    selection.removeAllRanges();
-    selection.addRange(range);
-  };
-
-  const applyEditorCommand = (command: "bold" | "italic" | "underline" | "insertUnorderedList" | "insertOrderedList" | "formatBlock") => {
-    restoreEditorSelection();
-    editorRef.current?.focus();
-    if (command === "formatBlock") {
-      document.execCommand("formatBlock", false, "p");
-      syncEditorContent();
-      return;
-    }
-    document.execCommand(command, false);
-    syncEditorContent();
-  };
-
-  const applyHeading = () => {
-    restoreEditorSelection();
-    document.execCommand("formatBlock", false, "h2");
-    syncEditorContent();
-  };
-
-  const applyBlockquote = () => {
-    restoreEditorSelection();
-    document.execCommand("formatBlock", false, "blockquote");
-    syncEditorContent();
-  };
-
-  const applyTextColor = (color: string) => {
-    restoreEditorSelection();
-    if (color) {
-      document.execCommand("foreColor", false, color);
-    } else {
-      document.execCommand("removeFormat", false);
-    }
-    syncEditorContent();
-  };
-
-  const insertLink = () => {
-    restoreEditorSelection();
-    const link = window.prompt("请输入链接（https://...）");
-    if (!link) {
-      return;
-    }
-
-    const normalized = link.trim();
-    if (!/^https?:\/\//i.test(normalized) && !/^mailto:|^tel:/i.test(normalized)) {
-      return;
-    }
-
-    document.execCommand("createLink", false, normalized);
-    syncEditorContent();
-  };
-
-  const openEditorImagePicker = () => {
-    saveEditorSelection();
-    imageInputRef.current?.click();
-  };
-
-  const handleEditorImageUpload = async (file?: File) => {
-    if (!file || isUploadingEditorImage) {
-      return;
-    }
-
-    setIsUploadingEditorImage(true);
-    setEditorMessage(null);
-
-    try {
-      const uploadFormData = new FormData();
-      uploadFormData.set("image", file);
-
-      const response = await fetch("/api/admin/editor-images", {
-        method: "POST",
-        body: uploadFormData,
-      });
-      const payload = (await response.json()) as EditorImageUploadResponse;
-
-      if (!response.ok || !payload.url) {
-        throw new Error(payload.error || "图片上传失败，请稍后重试。");
-      }
-
-      restoreEditorSelection();
-      document.execCommand("insertImage", false, payload.url);
-      syncEditorContent();
-      setEditorMessage("图片已插入正文。");
-    } catch (error) {
-      setEditorMessage(error instanceof Error ? error.message : "图片上传失败，请稍后重试。");
-    } finally {
-      setIsUploadingEditorImage(false);
-      if (imageInputRef.current) {
-        imageInputRef.current.value = "";
-      }
     }
   };
 
@@ -444,7 +318,7 @@ export function AdminDealArticleForm({
       const payload = (await response.json()) as XHtmlImportResponse;
 
       if (!response.ok || !payload.rawContent) {
-        throw new Error(payload.error || "X HTML 解析失败，请稍后重试。");
+        throw new Error(payload.error || "HTML 解析失败，请稍后重试。");
       }
 
       const importedImageCount = payload.imageCount ?? 0;
@@ -458,11 +332,11 @@ export function AdminDealArticleForm({
         setSourcePlatform(payload.sourcePlatform);
         setTitle(payload.title ?? "");
         setSummary(payload.summary ?? "");
-        setRawContent(payload.rawContent);
+        setEditorHtml(payload.rawContent);
         setEditorMessage(
           payload.notice ?? getImportedCoverNotice(importedImageCount, skippedImageCount),
         );
-        setSourceFetchMessage("已根据你粘贴的 X HTML 自动回填标题、摘要和正文。");
+        setSourceFetchMessage("已根据你粘贴的 HTML 自动回填标题、摘要和正文。");
         if (shouldAutoApplyCover && payload.suggestedCoverImageUrl) {
           setCoverImageUrl(payload.suggestedCoverImageUrl);
           setUploadedCoverImageUrl(payload.suggestedCoverImageUrl);
@@ -477,7 +351,7 @@ export function AdminDealArticleForm({
       }
     } catch (error) {
       setXHtmlImportMessage(
-        error instanceof Error ? error.message : "X HTML 解析失败，请稍后重试。",
+        error instanceof Error ? error.message : "HTML 解析失败，请稍后重试。",
       );
     } finally {
       setIsImportingXHtml(false);
@@ -490,7 +364,7 @@ export function AdminDealArticleForm({
           <div className="fixed inset-0 z-[140] flex justify-end bg-black/35 p-3 supports-backdrop-filter:backdrop-blur-xs sm:p-5">
             <button
               type="button"
-              aria-label="关闭导入 X HTML 弹框"
+              aria-label="关闭导入 HTML 弹框"
               className="absolute inset-0 cursor-default"
               onClick={() => {
                 if (!isImportingXHtml) {
@@ -509,10 +383,10 @@ export function AdminDealArticleForm({
                 <div className="flex items-start justify-between gap-4">
                   <div className="grid gap-1">
                     <h2 id="import-x-html-title" className="font-heading text-base font-medium text-foreground">
-                      导入 X HTML
+                      导入 HTML
                     </h2>
                     <p className="text-sm text-muted-foreground">
-                      把你从 X 长文详情里复制下来的整段 HTML 粘进来。系统会自动识别正文结构、保留加粗小标题，并把正文图片转存到本站。
+                      把文章相关的 HTML 粘进来。系统会优先识别 X 长文结构；其他常见 HTML 也会按正文内容清洗导入，并尝试把图片转存到本站。
                     </p>
                   </div>
                   <Button
@@ -538,7 +412,7 @@ export function AdminDealArticleForm({
                   value={xHtmlInput}
                   onChange={(event) => setXHtmlInput(event.target.value)}
                   className="min-h-[360px] rounded-[12px] font-mono text-[12px] leading-6"
-                  placeholder='把从 X 复制下来的 HTML 粘贴到这里，例如包含 "public-DraftEditor-content" 的整段源码。'
+                  placeholder='把要导入的 HTML 粘贴到这里，例如正文容器、文章详情 DOM，或包含 "public-DraftEditor-content" 的完整源码。'
                   disabled={isImportingXHtml}
                 />
                 <div className="rounded-[10px] border border-border bg-background/72 px-3 py-2 text-xs leading-6 text-muted-foreground">
@@ -595,7 +469,7 @@ export function AdminDealArticleForm({
       : null;
 
   return (
-    <form ref={formRef} action={formAction} encType="multipart/form-data" className="grid gap-5">
+    <form ref={formRef} action={formAction} className="grid gap-5">
       <div className="grid gap-2">
         <label htmlFor="sourceUrl" className="text-sm font-medium text-foreground">
           来源链接
@@ -620,7 +494,7 @@ export function AdminDealArticleForm({
             className="rounded-[8px] px-4"
           >
             <FileTextIcon />
-            导入 X HTML
+            导入 HTML
           </Button>
         </div>
         {sourceFetchMessage ? (
@@ -632,23 +506,25 @@ export function AdminDealArticleForm({
 
       {importXHtmlModal}
 
+      <input type="hidden" name="sourcePlatform" value={sourcePlatform} />
+
       <div className="grid items-start gap-5 xl:grid-cols-[minmax(0,1fr)_500px]">
         <div className="grid gap-4">
           <div className="grid gap-3 md:grid-cols-2">
             <div className="grid gap-2">
-              <label htmlFor="sourcePlatform" className="text-sm font-medium text-foreground">
-                来源平台
+              <label htmlFor="difficulty" className="text-sm font-medium text-foreground">
+                难度
               </label>
               <select
-                id="sourcePlatform"
-                name="sourcePlatform"
+                id="difficulty"
+                name="difficulty"
                 className="admin-form-select"
-                value={sourcePlatform}
-                onChange={(event) => setSourcePlatform(event.target.value as DealArticleSourcePlatform)}
+                value={difficulty}
+                onChange={(event) => setDifficulty(event.target.value as DifficultyLevel)}
               >
-                <option value="x">X</option>
-                <option value="linux_do">Linux.do</option>
-                <option value="other">其他</option>
+                <option value="easy">简单</option>
+                <option value="medium">中等</option>
+                <option value="advanced">较难</option>
               </select>
             </div>
 
@@ -668,8 +544,6 @@ export function AdminDealArticleForm({
               </select>
             </div>
           </div>
-
-          <div className="text-xs text-muted-foreground">当前会根据来源链接自动识别来源平台，也可以手动调整。</div>
 
           <div className="grid gap-2">
             <label className="text-sm font-medium text-foreground">标签管理</label>
@@ -800,13 +674,9 @@ export function AdminDealArticleForm({
           {article ? (
             <label className="flex items-start gap-3 rounded-[8px] border border-border bg-background/72 px-4 py-3 text-sm text-muted-foreground">
               <input type="checkbox" name="resetCoverImage" value="true" className="mt-0.5 size-4 rounded border-border" />
-              <span>保存时恢复默认封面图。如果同时上传了新图片，会优先使用新图片。</span>
+              <span>恢复为默认封面图</span>
             </label>
           ) : null}
-
-          <div className="rounded-[8px] border border-border bg-background/72 px-4 py-3 text-sm text-muted-foreground">
-            自动识别平台：{formatDealArticleSourcePlatform(sourcePlatform)}
-          </div>
         </div>
       </div>
 
@@ -814,85 +684,15 @@ export function AdminDealArticleForm({
         <label htmlFor="rawContent" className="text-sm font-medium text-foreground">
           文章详情（富文本）
         </label>
-        <div className="admin-rich-editor">
-          <div className="admin-rich-editor__toolbar">
-            <button type="button" className="admin-rich-editor__tool" onMouseDown={saveEditorSelection} onClick={() => applyEditorCommand("formatBlock")} title="正文段落">
-              <PilcrowIcon className="size-4" />
-            </button>
-            <button type="button" className="admin-rich-editor__tool" onMouseDown={saveEditorSelection} onClick={applyHeading} title="二级标题">
-              <Heading2Icon className="size-4" />
-            </button>
-            <button type="button" className="admin-rich-editor__tool" onMouseDown={saveEditorSelection} onClick={() => applyEditorCommand("bold")} title="加粗">
-              <BoldIcon className="size-4" />
-            </button>
-            <button type="button" className="admin-rich-editor__tool" onMouseDown={saveEditorSelection} onClick={() => applyEditorCommand("italic")} title="斜体">
-              <ItalicIcon className="size-4" />
-            </button>
-            <button type="button" className="admin-rich-editor__tool" onMouseDown={saveEditorSelection} onClick={() => applyEditorCommand("underline")} title="下划线">
-              <UnderlineIcon className="size-4" />
-            </button>
-            <button type="button" className="admin-rich-editor__tool" onMouseDown={saveEditorSelection} onClick={() => applyEditorCommand("insertUnorderedList")} title="无序列表">
-              <ListIcon className="size-4" />
-            </button>
-            <button type="button" className="admin-rich-editor__tool" onMouseDown={saveEditorSelection} onClick={() => applyEditorCommand("insertOrderedList")} title="有序列表">
-              <ListOrderedIcon className="size-4" />
-            </button>
-            <button type="button" className="admin-rich-editor__tool" onMouseDown={saveEditorSelection} onClick={applyBlockquote} title="引用">
-              <QuoteIcon className="size-4" />
-            </button>
-            <button type="button" className="admin-rich-editor__tool" onMouseDown={saveEditorSelection} onClick={insertLink} title="插入链接">
-              <LinkIcon className="size-4" />
-            </button>
-            <button type="button" className="admin-rich-editor__tool" onMouseDown={saveEditorSelection} onClick={openEditorImagePicker} title="上传并插入图片" disabled={isUploadingEditorImage}>
-              {isUploadingEditorImage ? <LoaderCircleIcon className="size-4 animate-spin" /> : <ImageIcon className="size-4" />}
-            </button>
-            <div className="admin-rich-editor__colors" aria-label="文字颜色">
-              {editorTextColors.map((color) => (
-                <button
-                  key={color.label}
-                  type="button"
-                  className="admin-rich-editor__color"
-                  title={`文字颜色：${color.label}`}
-                  onMouseDown={saveEditorSelection}
-                  onClick={() => applyTextColor(color.value)}
-                  style={{ ["--editor-color" as string]: color.value || "var(--foreground)" }}
-                >
-                  <span />
-                </button>
-              ))}
-            </div>
-            <input
-              ref={imageInputRef}
-              type="file"
-              accept="image/png,image/jpeg,image/webp,image/avif,image/svg+xml"
-              className="hidden"
-              onChange={(event) => handleEditorImageUpload(event.currentTarget.files?.[0])}
-            />
-          </div>
-          <div
-            ref={editorRef}
-            className="admin-rich-editor__content"
-            contentEditable
-            suppressContentEditableWarning
-            role="textbox"
-            aria-label="文章详情富文本编辑器"
-            onMouseUp={saveEditorSelection}
-            onKeyUp={saveEditorSelection}
-            onInput={(event) => {
-              const content = normalizeEditorHtml(event.currentTarget.innerHTML);
-              setRawContent(content);
-            }}
-            dangerouslySetInnerHTML={{
-              __html: rawContent || "<p></p>",
-            }}
-          />
-          <input type="hidden" id="rawContent" name="rawContent" value={rawContent} />
-        </div>
-        {editorMessage ? (
-          <div className="rounded-[8px] border border-border bg-background/72 px-3 py-2 text-xs leading-5 text-muted-foreground">
-            {editorMessage}
-          </div>
-        ) : null}
+        <AdminDealArticleWangEditor
+          value={editorHtml}
+          footerMessage={editorFooterMessage}
+          footerMeta={`${editorTextLength} 字`}
+          onChange={setEditorHtml}
+          onStatusChange={setEditorMessage}
+          onUploadingChange={setIsUploadingEditorImage}
+        />
+        <input type="hidden" id="rawContent" name="rawContent" value={submittedRawContent} />
         <FieldMessage message={state.fieldErrors?.rawContent} />
       </div>
 
@@ -914,8 +714,12 @@ export function AdminDealArticleForm({
       </div>
 
       <div className="flex flex-wrap gap-2">
-        <Button type="submit" disabled={pending || isUploadingCoverImage} className="rounded-[8px]">
-          {pending || isUploadingCoverImage ? pendingLabel : submitLabel}
+        <Button
+          type="submit"
+          disabled={pending || isUploadingCoverImage || isUploadingEditorImage}
+          className="rounded-[8px]"
+        >
+          {pending || isUploadingCoverImage || isUploadingEditorImage ? pendingLabel : submitLabel}
         </Button>
       </div>
     </form>

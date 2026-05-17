@@ -5,6 +5,7 @@ import { AppChrome } from "@/components/layout/app-chrome";
 import { ScrollToTopButton } from "@/components/shared/scroll-to-top-button";
 import { siteConfig } from "@/lib/site";
 
+import "@wangeditor-next/editor/dist/css/style.css";
 import "./globals.css";
 
 const inter = Inter({

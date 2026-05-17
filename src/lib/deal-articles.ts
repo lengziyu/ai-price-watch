@@ -1,4 +1,9 @@
-import type { DealArticle, DealArticleSourcePlatform, DealArticleStatus } from "@/types";
+import type {
+  DealArticle,
+  DealArticleSourcePlatform,
+  DealArticleStatus,
+  DifficultyLevel,
+} from "@/types";
 
 export const defaultDealArticleCoverImageUrl = "/default-deal-article-cover.svg";
 
@@ -52,6 +57,14 @@ export function formatDealArticleSourcePlatform(value: DealArticleSourcePlatform
     x: "X",
     linux_do: "Linux.do",
     other: "其他来源",
+  }[value];
+}
+
+export function formatDealArticleDifficulty(value: DifficultyLevel) {
+  return {
+    easy: "简单",
+    medium: "中等",
+    advanced: "较难",
   }[value];
 }
 

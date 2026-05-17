@@ -11,7 +11,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import {
   defaultDealArticleCoverImageUrl,
   extractPlainTextFromHtml,
-  formatDealArticleSourcePlatform,
+  formatDealArticleDifficulty,
   formatDealArticleStatus,
   isRichHtmlContent,
   parseDealArticleBlocks,
@@ -75,7 +75,7 @@ export default async function DealArticleDetailPage({ params }: PageProps) {
 
             <div className="flex flex-wrap gap-2">
               <Badge variant="secondary">{formatDealArticleStatus(article.status)}</Badge>
-              <Badge variant="outline">{formatDealArticleSourcePlatform(article.sourcePlatform)}</Badge>
+              <Badge variant="outline">{formatDealArticleDifficulty(article.difficulty)}</Badge>
             </div>
 
             <div className="space-y-3">

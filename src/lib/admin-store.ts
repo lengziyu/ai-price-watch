@@ -121,6 +121,7 @@ export type DealArticleInput = {
   coverImage?: File;
   uploadedCoverImageUrl?: string;
   resetCoverImage?: boolean;
+  difficulty: DealArticle["difficulty"];
   sourcePlatform: DealArticle["sourcePlatform"];
   sourceUrl?: string;
   status: DealArticle["status"];
@@ -377,6 +378,7 @@ export async function createDealArticle(input: DealArticleInput, actor: string) 
     coverImageUrl,
     viewCount: engagement.viewCount,
     likeCount: engagement.likeCount,
+    difficulty: input.difficulty,
     sourcePlatform,
     sourceUrl: input.sourceUrl,
     status: input.status,
@@ -438,6 +440,7 @@ export async function updateDealArticle(id: string, input: DealArticleInput, act
     body,
     rawContent: input.rawContent.trim(),
     coverImageUrl,
+    difficulty: input.difficulty,
     sourcePlatform,
     sourceUrl: input.sourceUrl,
     status: input.status,
@@ -626,6 +629,7 @@ function normalizeDealArticle(article: DealArticle): DealArticle {
     coverImageUrl: article.coverImageUrl || defaultDealArticleCoverImageUrl,
     viewCount: typeof article.viewCount === "number" ? article.viewCount : fallbackEngagement.viewCount,
     likeCount: typeof article.likeCount === "number" ? article.likeCount : fallbackEngagement.likeCount,
+    difficulty: article.difficulty || "medium",
   };
 }
 

@@ -107,6 +107,8 @@ export type DealArticleStatus = "not_started" | "in_progress" | "ended";
 
 export type DealArticleSourcePlatform = "x" | "linux_do" | "other";
 
+export type DifficultyLevel = "easy" | "medium" | "advanced";
+
 export type DealArticle = {
   id: string;
   slug: string;
@@ -117,6 +119,7 @@ export type DealArticle = {
   coverImageUrl: string;
   viewCount: number;
   likeCount: number;
+  difficulty: DifficultyLevel;
   sourcePlatform: DealArticleSourcePlatform;
   sourceUrl?: string;
   status: DealArticleStatus;
@@ -137,7 +140,7 @@ export type UseCase = {
   budgetTip: string;
   ctaHref: string;
   ctaLabel: string;
-  difficulty: "easy" | "medium" | "advanced";
+  difficulty: DifficultyLevel;
   estimatedCost: "free" | "low" | "medium" | "high";
 };
 

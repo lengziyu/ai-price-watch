@@ -35,19 +35,39 @@ type ParsedTag = {
   kind?: "paragraph" | "list" | "list-item" | "strong" | "em" | "link";
 };
 
-export async function importXArticleHtml(rawHtml: string): Promise<ImportedXHtmlResult> {
+export async function importArticleHtml(rawHtml: string): Promise<ImportedXHtmlResult> {
   const normalizedHtml = normalizeInputHtml(rawHtml);
-
-  if (!looksLikeXLongformHtml(normalizedHtml)) {
-    throw new Error("没有识别到可导入的 X 长文 HTML，请确认复制的是文章详情区域的完整 HTML。");
+  if (!/<[a-z][\s\S]*>/i.test(normalizedHtml)) {
+    throw new Error("没有识别到可导入的 HTML，请确认粘贴的是完整的 HTML 源码。");
   }
 
-  const parsedHtml = parseXLongformHtml(normalizedHtml);
-  if (!parsedHtml) {
-    throw new Error("HTML 已读取到，但没有解析出正文内容，请检查复制内容是否完整。");
+  if (looksLikeXLongformHtml(normalizedHtml)) {
+    const parsedHtml = parseXLongformHtml(normalizedHtml);
+    if (!parsedHtml) {
+      throw new Error("HTML 已读取到，但没有解析出正文内容，请检查复制内容是否完整。");
+    }
+
+    const localized = await localizeImportedImages(parsedHtml);
+    const normalizedBody = buildDealArticleBody(localized.html) || localized.html.trim();
+    const normalizedText = extractPlainTextFromHtml(normalizedBody);
+
+    if (!normalizedText) {
+      throw new Error("解析结果为空，请换一份更完整的 HTML 再试。");
+    }
+
+    return {
+      sourcePlatform: "x",
+      title: inferDealArticleTitle("", normalizedBody),
+      summary: inferDealArticleSummary("", normalizedBody),
+      rawContent: normalizedBody,
+      suggestedCoverImageUrl: localized.firstImageUrl,
+      imageCount: localized.imageCount,
+      skippedImageCount: localized.skippedImageCount,
+    };
   }
 
-  const localized = await localizeImportedImages(parsedHtml);
+  const genericHtml = extractGenericHtmlContent(normalizedHtml);
+  const localized = await localizeImportedImages(genericHtml);
   const normalizedBody = buildDealArticleBody(localized.html) || localized.html.trim();
   const normalizedText = extractPlainTextFromHtml(normalizedBody);
 
@@ -56,7 +76,7 @@ export async function importXArticleHtml(rawHtml: string): Promise<ImportedXHtml
   }
 
   return {
-    sourcePlatform: "x",
+    sourcePlatform: "other",
     title: inferDealArticleTitle("", normalizedBody),
     summary: inferDealArticleSummary("", normalizedBody),
     rawContent: normalizedBody,
@@ -79,6 +99,17 @@ function normalizeInputHtml(html: string) {
     .replace(/\r\n?/g, "\n")
     .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, "")
     .trim();
+}
+
+function extractGenericHtmlContent(html: string) {
+  const bodyMatch = html.match(/<body\b[^>]*>([\s\S]*?)<\/body>/i);
+  const withoutShell = (bodyMatch?.[1] ?? html)
+    .replace(/<!doctype[^>]*>/gi, "")
+    .replace(/<head\b[^>]*>[\s\S]*?<\/head>/gi, "")
+    .replace(/<\/?(html|body)\b[^>]*>/gi, "")
+    .trim();
+
+  return withoutShell;
 }
 
 function parseXLongformHtml(html: string) {

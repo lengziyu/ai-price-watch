@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { getAdminSession } from "@/lib/admin-auth";
-import { importXArticleHtml } from "@/lib/x-html-import";
+import { importArticleHtml } from "@/lib/x-html-import";
 
 export const runtime = "nodejs";
 
@@ -17,10 +17,10 @@ export async function POST(request: Request) {
     const html = String(payload?.html ?? "").trim();
 
     if (!html) {
-      return NextResponse.json({ error: "请先粘贴从 X 复制下来的 HTML。" }, { status: 400 });
+      return NextResponse.json({ error: "请先粘贴要导入的 HTML。" }, { status: 400 });
     }
 
-    const imported = await importXArticleHtml(html);
+    const imported = await importArticleHtml(html);
 
     return NextResponse.json({
       ...imported,
@@ -32,7 +32,7 @@ export async function POST(request: Request) {
   } catch (error) {
     return NextResponse.json(
       {
-        error: error instanceof Error ? error.message : "X HTML 解析失败，请稍后重试。",
+        error: error instanceof Error ? error.message : "HTML 解析失败，请稍后重试。",
       },
       { status: 500 },
     );

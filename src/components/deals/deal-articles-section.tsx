@@ -10,7 +10,7 @@ import { AnimeReveal } from "@/components/shared/anime-reveal";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import {
-  formatDealArticleSourcePlatform,
+  formatDealArticleDifficulty,
   formatDealArticleStatus,
   getDealArticleStatusCounts,
 } from "@/lib/deal-articles";
@@ -120,7 +120,7 @@ export function DealArticlesSection({ articles }: DealArticlesSectionProps) {
                           variant="outline"
                           className="rounded-full border-white/40 bg-background/88 px-3 py-1 text-[11px] shadow-sm backdrop-blur-sm"
                         >
-                          {formatDealArticleSourcePlatform(article.sourcePlatform)}
+                          {formatDealArticleDifficulty(article.difficulty)}
                         </Badge>
                       </div>
                     </div>

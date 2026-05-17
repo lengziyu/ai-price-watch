@@ -15,7 +15,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { formatDealArticleSourcePlatform, formatDealArticleStatus } from "@/lib/deal-articles";
+import { formatDealArticleDifficulty, formatDealArticleStatus } from "@/lib/deal-articles";
 import { getDealArticles } from "@/lib/admin-store";
 import { formatDate } from "@/lib/format";
 
@@ -44,7 +44,7 @@ export default async function AdminArticlesPage() {
       <Card className="surface-card motion-surface motion-surface--blue rounded-[10px] border-border">
         <CardHeader className="px-5 py-4">
           <CardTitle>文章列表</CardTitle>
-          <CardDescription>默认按发布时间倒序排列，封面、状态、来源和摘要都放在同一张表里。</CardDescription>
+          <CardDescription>默认按发布时间倒序排列，封面、状态、难度和摘要都放在同一张表里。</CardDescription>
         </CardHeader>
         <CardContent className="px-5 pb-5">
           {articles.length ? (
@@ -55,7 +55,7 @@ export default async function AdminArticlesPage() {
                     <TableHead className="w-[132px]">封面</TableHead>
                     <TableHead>标题</TableHead>
                     <TableHead>状态</TableHead>
-                    <TableHead>来源</TableHead>
+                    <TableHead>难度</TableHead>
                     <TableHead>发布时间</TableHead>
                     <TableHead>更新时间</TableHead>
                     <TableHead className="min-w-[280px]">摘要</TableHead>
@@ -89,7 +89,7 @@ export default async function AdminArticlesPage() {
                       <TableCell>
                         <Badge variant="secondary">{formatDealArticleStatus(article.status)}</Badge>
                       </TableCell>
-                      <TableCell>{formatDealArticleSourcePlatform(article.sourcePlatform)}</TableCell>
+                      <TableCell>{formatDealArticleDifficulty(article.difficulty)}</TableCell>
                       <TableCell>{formatDate(article.publishedAt)}</TableCell>
                       <TableCell>{formatDate(article.updatedAt)}</TableCell>
                       <TableCell className="max-w-[360px] whitespace-normal text-muted-foreground">
@@ -121,7 +121,7 @@ export default async function AdminArticlesPage() {
             </div>
           ) : (
             <div className="admin-pane text-sm text-muted-foreground">
-              还没有文章。先新建一篇，把 X 或 Linux.do 的原文贴进来。
+              还没有文章。先新建一篇，把来源链接或 HTML 正文贴进来。
             </div>
           )}
         </CardContent>

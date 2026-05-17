@@ -1921,6 +1921,26 @@
   }
 
   .admin-rich-editor {
+    --w-e-textarea-bg-color: transparent;
+    --w-e-textarea-color: var(--foreground);
+    --w-e-textarea-border-color: color-mix(in oklch, var(--border) 86%, transparent);
+    --w-e-textarea-slight-border-color: color-mix(in oklch, var(--border) 76%, transparent);
+    --w-e-textarea-slight-color: color-mix(in oklch, var(--muted-foreground) 80%, transparent);
+    --w-e-textarea-slight-bg-color: color-mix(in oklch, var(--muted) 82%, transparent);
+    --w-e-textarea-selected-border-color: color-mix(in oklch, var(--primary) 38%, white);
+    --w-e-textarea-handler-bg-color: var(--primary);
+    --w-e-toolbar-color: color-mix(in oklch, var(--foreground) 92%, transparent);
+    --w-e-toolbar-bg-color: color-mix(in oklch, var(--background) 94%, black 6%);
+    --w-e-toolbar-active-color: var(--foreground);
+    --w-e-toolbar-active-bg-color: color-mix(in oklch, var(--primary) 18%, var(--background));
+    --w-e-toolbar-disabled-color: color-mix(in oklch, var(--muted-foreground) 70%, transparent);
+    --w-e-toolbar-border-color: color-mix(in oklch, var(--border) 82%, transparent);
+    --w-e-modal-button-bg-color: color-mix(in oklch, var(--background) 94%, white);
+    --w-e-modal-button-border-color: color-mix(in oklch, var(--border) 86%, transparent);
+    display: flex;
+    min-height: 38rem;
+    max-height: min(72vh, 64rem);
+    flex-direction: column;
     overflow: visible;
     border: 1px solid var(--border);
     border-radius: 0.5rem;
@@ -1928,16 +1948,11 @@
   }
 
   .admin-rich-editor__toolbar {
-    position: sticky;
-    top: var(--admin-editor-toolbar-top);
-    z-index: 45;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.35rem;
+    position: relative;
+    z-index: 1;
+    flex: 0 0 auto;
     border-bottom: 1px solid var(--border);
     border-radius: 0.5rem 0.5rem 0 0;
-    padding: 0.5rem;
     background: color-mix(in oklch, var(--background) 88%, var(--muted));
     backdrop-filter: blur(18px) saturate(1.12);
     box-shadow:
@@ -1945,114 +1960,150 @@
       0 14px 30px rgba(2, 44, 34, 0.08);
   }
 
-  .admin-rich-editor__tool {
-    display: inline-flex;
-    height: 2rem;
-    width: 2rem;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--border);
+  .admin-rich-editor__toolbar-inner {
+    border: none !important;
+  }
+
+  .admin-rich-editor__toolbar .w-e-bar {
+    padding: 0.35rem 0.45rem;
+  }
+
+  .admin-rich-editor__toolbar .w-e-toolbar {
+    border: none !important;
+    background: transparent;
+  }
+
+  .admin-rich-editor__toolbar .w-e-bar-divider {
+    margin: 0 0.25rem;
+  }
+
+  .admin-rich-editor__toolbar .w-e-bar-item {
+    height: 2.3rem;
+  }
+
+  .admin-rich-editor__toolbar .w-e-bar-item button {
+    min-width: 2rem;
     border-radius: 0.5rem;
-    background: var(--background);
+  }
+
+  .admin-rich-editor__toolbar .w-e-bar-item button:hover,
+  .admin-rich-editor__toolbar .w-e-bar-item .active {
+    background: color-mix(in oklch, var(--primary) 18%, var(--background));
+  }
+
+  .admin-rich-editor__toolbar .w-e-select-list,
+  .admin-rich-editor__toolbar .w-e-drop-panel,
+  .admin-rich-editor__toolbar .w-e-modal,
+  .admin-rich-editor__toolbar .w-e-bar-item-group .w-e-bar-item-menus-container {
+    z-index: 60;
+  }
+
+  .admin-rich-editor .w-e-hover-bar {
+    border-color: color-mix(in oklch, var(--border) 84%, transparent);
+    background: color-mix(in oklch, var(--background) 96%, black 8%) !important;
+    border-radius: 0.9rem;
+    box-shadow:
+      0 18px 42px rgba(0, 0, 0, 0.26),
+      0 0 0 1px color-mix(in oklch, var(--border) 82%, transparent);
+    backdrop-filter: blur(18px) saturate(1.15);
+  }
+
+  .admin-rich-editor .w-e-hover-bar .w-e-bar {
+    border-radius: 0.9rem;
+    background: transparent !important;
+    padding: 0.35rem 0.45rem;
+  }
+
+  .admin-rich-editor .w-e-hover-bar .w-e-bar-item button {
+    background: transparent !important;
+    color: var(--foreground) !important;
+    border-radius: 0.55rem;
+  }
+
+  .admin-rich-editor .w-e-hover-bar .w-e-bar-item button svg,
+  .admin-rich-editor .w-e-hover-bar .w-e-bar-item button .title {
+    fill: currentColor !important;
+    color: inherit !important;
+  }
+
+  .admin-rich-editor .w-e-hover-bar .w-e-bar-item button:hover,
+  .admin-rich-editor .w-e-hover-bar .w-e-bar-item .active {
+    background: color-mix(in oklch, var(--primary) 18%, var(--background)) !important;
+    color: var(--foreground) !important;
+  }
+
+  .admin-rich-editor .w-e-drop-panel,
+  .admin-rich-editor .w-e-select-list,
+  .admin-rich-editor .w-e-modal,
+  .admin-rich-editor .w-e-bar-item-group .w-e-bar-item-menus-container {
+    background: color-mix(in oklch, var(--background) 97%, black 6%) !important;
+    color: var(--foreground) !important;
+    border-color: color-mix(in oklch, var(--border) 84%, transparent);
+    box-shadow:
+      0 20px 48px rgba(0, 0, 0, 0.24),
+      0 0 0 1px color-mix(in oklch, var(--border) 82%, transparent);
+    backdrop-filter: blur(18px) saturate(1.12);
+  }
+
+  .admin-rich-editor .w-e-select-list ul li,
+  .admin-rich-editor .w-e-drop-panel,
+  .admin-rich-editor .w-e-modal,
+  .admin-rich-editor .w-e-bar-item-group .w-e-bar-item-menus-container,
+  .admin-rich-editor .w-e-panel-content-color,
+  .admin-rich-editor .w-e-panel-content-table {
+    color: var(--foreground) !important;
+  }
+
+  .admin-rich-editor .w-e-menu-tooltip-v5::before,
+  .admin-rich-editor .w-e-menu-tooltip-v5::after {
+    display: none !important;
+  }
+
+  .admin-rich-editor__content-shell {
+    min-height: 0;
+    flex: 1 1 auto;
+    overflow: hidden;
+    background:
+      linear-gradient(
+        180deg,
+        color-mix(in oklch, var(--background) 98%, white),
+        color-mix(in oklch, var(--background) 92%, var(--muted))
+      );
+  }
+
+  .admin-rich-editor__editor {
+    height: 100%;
+  }
+
+  .admin-rich-editor__content-shell [data-w-e-textarea="true"] {
+    height: 100%;
+  }
+
+  .admin-rich-editor__content-shell .w-e-text-container {
+    background: transparent;
     color: var(--foreground);
-    transition:
-      border-color 180ms ease,
-      background-color 180ms ease,
-      color 180ms ease;
   }
 
-  .admin-rich-editor__tool:hover {
-    border-color: color-mix(in oklch, var(--primary) 35%, var(--border));
-    background: color-mix(in oklch, var(--primary) 10%, var(--background));
-    color: var(--primary);
+  .admin-rich-editor__content-shell .w-e-scroll {
+    padding: 0.2rem 0;
+    overflow-y: auto;
   }
 
-  .admin-rich-editor__tool:disabled {
-    cursor: progress;
-    opacity: 0.65;
-  }
-
-  .admin-rich-editor__colors {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.28rem;
-    margin-left: 0.15rem;
-    border-left: 1px solid var(--border);
-    padding-left: 0.45rem;
-  }
-
-  .admin-rich-editor__color {
-    display: inline-flex;
-    height: 2rem;
-    width: 2rem;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--border);
-    border-radius: 0.5rem;
-    background: var(--background);
-    transition:
-      border-color 180ms ease,
-      background-color 180ms ease;
-  }
-
-  .admin-rich-editor__color:hover {
-    border-color: color-mix(in oklch, var(--primary) 35%, var(--border));
-    background: color-mix(in oklch, var(--primary) 8%, var(--background));
-  }
-
-  .admin-rich-editor__color span {
-    display: block;
-    height: 0.82rem;
-    width: 0.82rem;
-    border: 1px solid color-mix(in oklch, var(--foreground) 12%, transparent);
-    border-radius: 999px;
-    background: var(--editor-color);
-  }
-
-  .admin-rich-editor__content {
-    min-height: 22rem;
-    border-radius: 0 0 0.5rem 0.5rem;
+  .admin-rich-editor__content-shell [data-slate-editor] {
+    min-height: 100%;
     padding: 0.9rem 1rem;
-    outline: none;
     font-size: 0.94rem;
     line-height: 1.72;
     color: var(--foreground);
-    white-space: normal;
-    word-break: break-word;
   }
 
-  .admin-rich-editor__content p {
-    margin: 0.7rem 0;
+  .admin-rich-editor__content-shell .w-e-text-placeholder {
+    left: 1rem;
+    top: 1rem;
   }
 
-  .admin-rich-editor__content h2 {
-    margin: 0.95rem 0 0.55rem;
-    font-size: 1.12rem;
-    font-weight: 700;
-    color: var(--foreground);
-  }
-
-  .admin-rich-editor__content ul,
-  .admin-rich-editor__content ol {
-    margin: 0.7rem 0;
-    padding-left: 1.2rem;
-  }
-
-  .admin-rich-editor__content blockquote {
-    margin: 0.75rem 0;
-    border-left: 3px solid color-mix(in oklch, var(--primary) 30%, transparent);
-    padding-left: 0.8rem;
-    color: var(--muted-foreground);
-  }
-
-  .admin-rich-editor__content a {
-    color: var(--primary);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-
-  .admin-rich-editor__content img {
-    display: block;
+  .admin-rich-editor__content-shell .w-e-text-container [data-slate-editor] img {
+    display: block !important;
     max-width: 100%;
     height: auto;
     margin: 0.95rem auto;
@@ -2060,7 +2111,51 @@
     border-radius: 0.625rem;
   }
 
-  .admin-rich-editor__content:focus-visible {
+  .admin-rich-editor__footer {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-top: 1px solid var(--border);
+    padding: 0.65rem 1rem;
+    background: color-mix(in oklch, var(--background) 90%, var(--muted));
+    color: var(--muted-foreground);
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+
+  .admin-rich-editor__content-shell [data-slate-editor] p {
+    margin: 0.7rem 0;
+  }
+
+  .admin-rich-editor__content-shell [data-slate-editor] h2 {
+    margin: 0.95rem 0 0.55rem;
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: var(--foreground);
+  }
+
+  .admin-rich-editor__content-shell [data-slate-editor] ul,
+  .admin-rich-editor__content-shell [data-slate-editor] ol {
+    margin: 0.7rem 0;
+    padding-left: 1.2rem;
+  }
+
+  .admin-rich-editor__content-shell [data-slate-editor] blockquote {
+    margin: 0.75rem 0;
+    border-left: 3px solid color-mix(in oklch, var(--primary) 30%, transparent);
+    padding-left: 0.8rem;
+    color: var(--muted-foreground);
+  }
+
+  .admin-rich-editor__content-shell [data-slate-editor] a {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .admin-rich-editor__content-shell [data-slate-editor]:focus-visible {
     box-shadow: inset 0 0 0 2px color-mix(in oklch, var(--ring) 36%, transparent);
   }
 
@@ -2081,6 +2176,18 @@
   }
 
   .dark .admin-rich-editor {
+    --w-e-textarea-color: #f5f7f6;
+    --w-e-textarea-slight-color: rgba(226, 232, 240, 0.62);
+    --w-e-textarea-slight-bg-color: rgba(18, 22, 20, 0.82);
+    --w-e-textarea-selected-border-color: rgba(0, 188, 125, 0.38);
+    --w-e-toolbar-color: rgba(236, 243, 239, 0.94);
+    --w-e-toolbar-bg-color: rgba(14, 16, 15, 0.96);
+    --w-e-toolbar-active-color: #f5f7f6;
+    --w-e-toolbar-active-bg-color: rgba(0, 188, 125, 0.22);
+    --w-e-toolbar-disabled-color: rgba(141, 149, 144, 0.76);
+    --w-e-toolbar-border-color: rgba(255, 255, 255, 0.08);
+    --w-e-modal-button-bg-color: rgba(10, 12, 11, 0.94);
+    --w-e-modal-button-border-color: rgba(255, 255, 255, 0.12);
     background: rgba(8, 10, 9, 0.88);
   }
 
@@ -2088,8 +2195,34 @@
     background: rgba(14, 16, 15, 0.88);
   }
 
-  .dark .admin-rich-editor__tool {
-    background: rgba(12, 13, 12, 0.9);
+  .dark .admin-rich-editor__content-shell {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(10, 12, 11, 0.98),
+        rgba(12, 15, 14, 0.92)
+      );
+  }
+
+  .dark .admin-rich-editor__footer {
+    background: rgba(14, 16, 15, 0.88);
+  }
+
+  .dark .admin-rich-editor__toolbar .w-e-toolbar,
+  .dark .admin-rich-editor__toolbar .w-e-bar {
+    background: transparent;
+  }
+
+  .dark .admin-rich-editor .w-e-hover-bar,
+  .dark .admin-rich-editor .w-e-drop-panel,
+  .dark .admin-rich-editor .w-e-select-list,
+  .dark .admin-rich-editor .w-e-modal,
+  .dark .admin-rich-editor .w-e-bar-item-group .w-e-bar-item-menus-container {
+    background: rgba(10, 12, 11, 0.96) !important;
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow:
+      0 24px 52px rgba(0, 0, 0, 0.42),
+      0 0 0 1px rgba(255, 255, 255, 0.08);
   }
 
   .deal-article-rich {
