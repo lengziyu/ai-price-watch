@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Inter_Tight } from "next/font/google";
+import Script from "next/script";
 
 import { AppChrome } from "@/components/layout/app-chrome";
 import { ScrollToTopButton } from "@/components/shared/scroll-to-top-button";
@@ -85,6 +86,11 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className="min-h-full bg-background text-foreground">
+        <Script
+          src="https://cloud.umami.is/script.js"
+          data-website-id="49c7452e-cd73-484d-a9c5-1e22b84e1b7e"
+          strategy="afterInteractive"
+        />
         <div className="relative flex min-h-full flex-col">
           <AppChrome>{children}</AppChrome>
           <ScrollToTopButton />

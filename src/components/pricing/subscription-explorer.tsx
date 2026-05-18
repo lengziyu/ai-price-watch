@@ -831,9 +831,9 @@ export function SubscriptionExplorer({
         <AnimeReveal
           key={`subscription-compare-${activePreset.key}-${targetCurrency}`}
           trigger="mount"
-          className="motion-surface motion-surface--green mt-3.5 overflow-hidden rounded-[24px] border border-border p-2 sm:mt-5 sm:p-2.5"
+          className="motion-surface motion-surface--green mt-3.5 overflow-hidden rounded-[18px] border border-border p-2 sm:mt-5 sm:rounded-[20px] sm:p-2.5"
         >
-          <div className="relative grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 sm:grid-cols-[1fr_1fr] sm:gap-0">
+          <div className="relative grid grid-cols-2 items-center gap-2 py-3 sm:gap-0 sm:py-0">
             <CompareEdge
               region={cheapest}
               align="left"
@@ -842,8 +842,8 @@ export function SubscriptionExplorer({
               pulseKey={fxTick}
             />
 
-            <div className="pointer-events-none z-[1] flex justify-center sm:absolute sm:inset-x-0 sm:top-1/2 sm:-translate-y-1/2">
-              <div className="relative isolate flex w-full max-w-[108px] flex-col items-center justify-center py-1 text-center sm:max-w-[192px] sm:py-1.5">
+            <div className="pointer-events-none absolute inset-x-0 top-1/2 z-[1] flex -translate-y-1/2 justify-center">
+              <div className="relative isolate flex w-full max-w-[108px] flex-col items-center justify-center py-0.5 text-center sm:max-w-[192px] sm:py-1.5">
                 <div aria-hidden="true" className={styles.savingsLoaderBackdrop}>
                   <div className={styles.loader}>
                     <svg viewBox="0 0 100 100">
@@ -869,7 +869,7 @@ export function SubscriptionExplorer({
                   </div>
                 </div>
                 <div
-                  className="relative z-[1] text-[1rem] font-semibold tracking-[-0.025em] text-orange-500 sm:text-[1.52rem]"
+                  className="relative z-[1] text-[0.98rem] font-semibold tracking-[-0.025em] text-orange-500 sm:text-[1.52rem]"
                   style={{ WebkitTextStroke: "1px rgba(255, 255, 255, 0.95)" }}
                 >
                   <LivePriceTick pulseKey={fxTick}>{liveSavingsPercent}%</LivePriceTick>
@@ -1284,7 +1284,7 @@ function CompareEdge({
   return (
     <div
       className={cn(
-        "relative flex min-w-0 min-h-[112px] items-center gap-2 overflow-hidden rounded-[22px] border px-3 py-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] sm:min-h-[136px] sm:gap-3 sm:px-5 sm:py-3",
+        "relative flex min-w-0 min-h-[112px] items-center gap-2 overflow-hidden rounded-[16px] border px-3 py-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] sm:min-h-[136px] sm:gap-3 sm:rounded-[18px] sm:px-5 sm:py-3",
         align === "left" &&
           "justify-start border-emerald-200/70 bg-[linear-gradient(135deg,rgba(236,255,247,0.98),rgba(222,249,236,0.9))] text-left sm:[clip-path:polygon(0_0,100%_0,86%_100%,0_100%)] dark:border-emerald-500/22 dark:bg-[linear-gradient(135deg,rgba(6,78,59,0.42),rgba(5,46,34,0.68))]",
         align === "right" &&

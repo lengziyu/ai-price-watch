@@ -1,9 +1,9 @@
 .savingsLoaderBackdrop {
   position: absolute;
   inset: 50% auto auto 50%;
-  opacity: 0.62;
+  opacity: 0.54;
   pointer-events: none;
-  transform: translate(-50%, -50%) scale(0.86);
+  transform: translate(-50%, -50%) scale(0.72);
 }
 
 .loader {
@@ -155,6 +155,7 @@
 
 @media (min-width: 640px) {
   .savingsLoaderBackdrop {
+    opacity: 0.62;
     transform: translate(-50%, -50%) scale(1);
   }
 }
