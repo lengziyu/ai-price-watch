@@ -4,7 +4,7 @@ import { ArrowRightIcon, DatabaseZapIcon } from "lucide-react";
 import { BrandLogo } from "@/components/layout/brand-logo";
 import { AnimeReveal } from "@/components/shared/anime-reveal";
 import { buttonVariants } from "@/components/ui/button";
-import { primaryNav, siteConfig, trustBullets } from "@/lib/site";
+import { siblingProjects, siteConfig, trustBullets } from "@/lib/site";
 
 export function SiteFooter() {
   return (
@@ -18,16 +18,35 @@ export function SiteFooter() {
             </div>
           </div>
           <Link
-            href="/about"
+            href="https://envra.lengziyu.cn"
+            target="_blank"
+            rel="noreferrer"
             className={buttonVariants({
               variant: "outline",
               size: "sm",
               className: "h-8 shrink-0 px-3 text-[12px]",
             })}
           >
-            数据原则
+            其他项目
           </Link>
         </div>
+
+        <AnimeReveal className="mt-3 flex flex-col gap-3 sm:hidden">
+          <div className="text-sm font-semibold">其他项目</div>
+          <div className="grid grid-cols-2 gap-2">
+            {siblingProjects.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-[12px] border border-border bg-background px-3 py-2 text-[12px] text-muted-foreground transition-colors hover:border-primary/25 hover:bg-primary/7 hover:text-foreground"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </AnimeReveal>
 
         <AnimeReveal className="motion-surface motion-surface--green mb-6 hidden overflow-hidden rounded-[12px] border border-border px-4 py-4 sm:block sm:px-5">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -72,23 +91,19 @@ export function SiteFooter() {
           </div>
 
           <div className="flex flex-col gap-3">
-            <div className="text-sm font-semibold">导航</div>
+            <div className="text-sm font-semibold">其他项目</div>
             <div className="flex flex-wrap gap-2">
-              {primaryNav.map((item) => (
+              {siblingProjects.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
+                  target="_blank"
+                  rel="noreferrer"
                   className="rounded-full border border-border bg-background px-3 py-1.5 text-[12px] text-muted-foreground transition-colors hover:border-primary/25 hover:bg-primary/7 hover:text-foreground"
                 >
                   {item.label}
                 </Link>
               ))}
-              <Link
-                href="/about"
-                className="rounded-full border border-border bg-background px-3 py-1.5 text-[12px] text-muted-foreground transition-colors hover:border-primary/25 hover:bg-primary/7 hover:text-foreground"
-              >
-                关于
-              </Link>
             </div>
           </div>
 

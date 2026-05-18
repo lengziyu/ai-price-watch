@@ -47,3 +47,22 @@ export const trustBullets = [
   "每条数据都带最近复核时间，方便判断信息时效。",
   "价格可能随时间变化，请以官方页面为准。",
 ];
+
+export const siblingProjects = [
+  {
+    href: "https://envra.lengziyu.cn",
+    label: "ENVRA 前端工具",
+  },
+  {
+    href: "https://nav.lengziyu.cn",
+    label: "AI 前沿导航",
+  },
+  {
+    href: "https://cv.lengziyu.cn",
+    label: "在线简历生成",
+  },
+  {
+    href: "https://zj.lengziyu.cn",
+    label: "宗迹",
+  },
+];
