@@ -870,11 +870,11 @@ export function SubscriptionExplorer({
                 </div>
                 <div
                   className="relative z-[1] text-[0.98rem] font-semibold tracking-[-0.025em] text-orange-500 sm:text-[1.52rem]"
-                  style={{ WebkitTextStroke: "1px rgba(255, 255, 255, 0.95)" }}
+                  style={{ WebkitTextStroke: "1px rgba(0, 0, 0, 0.25)" }}
                 >
                   <LivePriceTick pulseKey={fxTick}>{liveSavingsPercent}%</LivePriceTick>
                 </div>
-                <div className="relative z-[1] text-[10px] text-white sm:text-xs">
+                <div className="relative z-[1] text-[10px] text-red sm:text-xs">
                   差价{" "}
                   <LivePriceTick pulseKey={fxTick}>
                     {formatCnyAsTargetMoney(liveSavingsValue, targetCurrency, liveCnyRates)}
