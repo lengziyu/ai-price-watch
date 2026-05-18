@@ -8,6 +8,7 @@ import { ArrowLeftIcon, ArrowUpRightIcon } from "lucide-react";
 import { DealArticleEngagement } from "@/components/deals/deal-article-engagement";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { HeroMesh } from "@/components/shared/hero-mesh";
 import {
   defaultDealArticleCoverImageUrl,
   extractPlainTextFromHtml,
@@ -62,7 +63,8 @@ export default async function DealArticleDetailPage({ params }: PageProps) {
 
   return (
     <div className="pb-8 sm:pb-16">
-      <section className="hero-stage hero-grid hero-aura -mt-[80px] w-full bg-background pt-[86px] sm:-mt-[104px] sm:pt-[116px]">
+      <section className="hero-stage hero-mesh-stage hero-aura -mt-[80px] w-full bg-background pt-[86px] sm:-mt-[104px] sm:pt-[116px]">
+        <HeroMesh />
         <div className="app-shell py-2.5 sm:py-4 lg:py-6">
           <div className="mx-auto flex max-w-4xl flex-col gap-4">
             <Link

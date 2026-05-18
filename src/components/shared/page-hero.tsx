@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
 
 import { AnimeReveal } from "@/components/shared/anime-reveal";
+import { HeroMesh } from "@/components/shared/hero-mesh";
 import { buttonVariants } from "@/components/ui/button";
 
 type Action = {
@@ -34,12 +35,13 @@ export function PageHero({
   return (
     <section
       className={[
-        "hero-stage hero-grid hero-aura w-full bg-background",
+        "hero-stage hero-mesh-stage hero-aura w-full bg-background",
         compact
           ? "-mt-[72px] pt-[78px] sm:-mt-[94px] sm:pt-[102px]"
           : "-mt-[80px] pt-[86px] sm:-mt-[104px] sm:pt-[116px]",
       ].join(" ")}
     >
+      <HeroMesh />
       <div className={["app-shell", compact ? "py-1 sm:py-2.5 lg:py-3.5" : "py-2.5 sm:py-4 lg:py-6"].join(" ")}>
         <div
           className={[
@@ -74,10 +76,11 @@ export function PageHero({
                     href={primaryAction.href}
                     className={buttonVariants({
                       size: "lg",
-                      className: "min-w-0 px-3 text-[13px] sm:px-6 sm:text-sm",
+                      className:
+                        "hero-gradient-button min-w-0 px-3 text-[13px] sm:px-6 sm:text-sm",
                     })}
                   >
-                    {primaryAction.label}
+                    <span className="hero-gradient-text">{primaryAction.label}</span>
                     {primaryAction.icon ?? <ArrowRightIcon data-icon="inline-end" />}
                   </Link>
                 ) : null}
@@ -88,10 +91,11 @@ export function PageHero({
                     className={buttonVariants({
                       variant: secondaryAction.variant ?? "outline",
                       size: "lg",
-                      className: "min-w-0 px-3 text-[13px] sm:px-6 sm:text-sm",
+                      className:
+                        "hero-gradient-button min-w-0 px-3 text-[13px] sm:px-6 sm:text-sm",
                     })}
                   >
-                    {secondaryAction.label}
+                    <span className="hero-gradient-text">{secondaryAction.label}</span>
                     {secondaryAction.icon ?? <ArrowRightIcon data-icon="inline-end" />}
                   </Link>
                 ) : null}

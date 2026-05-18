@@ -3,6 +3,7 @@
 import {
   startTransition,
   useEffect,
+  useId,
   useMemo,
   useRef,
   useState,
@@ -35,6 +36,7 @@ import {
 } from "@/components/ui/select";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useSegmentedIndicator } from "@/components/ui/use-segmented-indicator";
+import styles from "./subscription-explorer-effect.module.css";
 
 type Props = {
   plans: SubscriptionPlan[];
@@ -313,6 +315,11 @@ export function SubscriptionExplorer({
     rates: {},
     source: "snapshot",
   });
+  const savingsMaskIdSeed = useId();
+  const savingsMaskId = `subscription-savings-mask-${savingsMaskIdSeed.replace(
+    /[^a-zA-Z0-9_-]/g,
+    "",
+  )}`;
   const stickyTabsEnabled = !embedded && !disableStickyTabs;
   const {
     stickyRef,
@@ -836,12 +843,38 @@ export function SubscriptionExplorer({
             />
 
             <div className="pointer-events-none z-[1] flex justify-center sm:absolute sm:inset-x-0 sm:top-1/2 sm:-translate-y-1/2">
-              <div className="flex w-full max-w-[108px] flex-col items-center rounded-[999px] border border-orange-200/60 bg-white/92 px-2 py-2 text-center shadow-[0_20px_44px_rgba(251,146,60,0.18)] backdrop-blur-xl dark:border-orange-300/18 dark:bg-[rgba(15,15,15,0.9)] sm:max-w-[192px] sm:px-4 sm:py-3">
-                <div className="text-[11px] font-medium text-orange-500 sm:text-xs">比高价地区低</div>
-                <div className="mt-0.5 text-[1rem] font-semibold tracking-[-0.025em] text-orange-500 sm:text-[1.52rem]">
+              <div className="relative isolate flex w-full max-w-[108px] flex-col items-center justify-center py-1 text-center sm:max-w-[192px] sm:py-1.5">
+                <div aria-hidden="true" className={styles.savingsLoaderBackdrop}>
+                  <div className={styles.loader}>
+                    <svg viewBox="0 0 100 100">
+                      <defs>
+                        <mask id={savingsMaskId}>
+                          <polygon points="0,0 100,0 100,100 0,100" fill="black" />
+                          <polygon points="25,25 75,25 50,75" fill="white" />
+                          <polygon points="50,25 75,75 25,75" fill="white" />
+                          <polygon points="35,35 65,35 50,65" fill="white" />
+                          <polygon points="35,35 65,35 50,65" fill="white" />
+                          <polygon points="35,35 65,35 50,65" fill="white" />
+                          <polygon points="35,35 65,35 50,65" fill="white" />
+                        </mask>
+                      </defs>
+                    </svg>
+                    <div
+                      className={styles.loaderBox}
+                      style={{
+                        mask: `url(#${savingsMaskId})`,
+                        WebkitMask: `url(#${savingsMaskId})`,
+                      }}
+                    />
+                  </div>
+                </div>
+                <div
+                  className="relative z-[1] text-[1rem] font-semibold tracking-[-0.025em] text-orange-500 sm:text-[1.52rem]"
+                  style={{ WebkitTextStroke: "1px rgba(255, 255, 255, 0.95)" }}
+                >
                   <LivePriceTick pulseKey={fxTick}>{liveSavingsPercent}%</LivePriceTick>
                 </div>
-                <div className="text-[10px] text-muted-foreground sm:text-xs">
+                <div className="relative z-[1] text-[10px] text-white sm:text-xs">
                   差价{" "}
                   <LivePriceTick pulseKey={fxTick}>
                     {formatCnyAsTargetMoney(liveSavingsValue, targetCurrency, liveCnyRates)}

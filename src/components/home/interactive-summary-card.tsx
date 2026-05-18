@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CrownIcon, FileTextIcon, LibraryBigIcon, SparklesIcon } from "lucide-react";
 
 type SummaryIconKey = "vendors" | "useCases" | "articles" | "tools";
@@ -18,23 +18,74 @@ export function InteractiveSummaryCard({
   detail,
   iconKey,
 }: InteractiveSummaryCardProps) {
+  const parsedValue = useMemo(() => parseAnimatedValue(value), [value]);
+  const [displayValue, setDisplayValue] = useState(() =>
+    parsedValue ? formatAnimatedValue(0, parsedValue) : value,
+  );
   const cardRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
-  const rafRef = useRef<number | null>(null);
+  const tiltRafRef = useRef<number | null>(null);
+  const countRafRef = useRef<number | null>(null);
+  const hasPlayedCountRef = useRef(false);
+
+  const stopCountAnimation = useCallback(() => {
+    if (countRafRef.current) {
+      cancelAnimationFrame(countRafRef.current);
+      countRafRef.current = null;
+    }
+  }, []);
+
+  const startCountAnimation = useCallback(() => {
+    if (!parsedValue || hasPlayedCountRef.current) {
+      return;
+    }
+
+    hasPlayedCountRef.current = true;
+    stopCountAnimation();
+
+    if (typeof window !== "undefined") {
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      if (prefersReducedMotion.matches) {
+        setDisplayValue(value);
+        return;
+      }
+    }
+
+    const durationMs = 1100;
+    const startAt = performance.now();
+    const target = parsedValue.numeric;
+
+    const tick = (now: number) => {
+      const progress = Math.min(1, (now - startAt) / durationMs);
+      const eased = 1 - (1 - progress) ** 3;
+      const current = target * eased;
+      setDisplayValue(formatAnimatedValue(current, parsedValue));
+
+      if (progress < 1) {
+        countRafRef.current = requestAnimationFrame(tick);
+      } else {
+        countRafRef.current = null;
+        setDisplayValue(value);
+      }
+    };
+
+    countRafRef.current = requestAnimationFrame(tick);
+  }, [parsedValue, stopCountAnimation, value]);
 
   useEffect(
     () => () => {
-      if (rafRef.current) {
-        cancelAnimationFrame(rafRef.current);
+      if (tiltRafRef.current) {
+        cancelAnimationFrame(tiltRafRef.current);
       }
+      stopCountAnimation();
     },
-    [],
+    [stopCountAnimation],
   );
 
   const resetCard = useCallback(() => {
-    if (rafRef.current) {
-      cancelAnimationFrame(rafRef.current);
-      rafRef.current = null;
+    if (tiltRafRef.current) {
+      cancelAnimationFrame(tiltRafRef.current);
+      tiltRafRef.current = null;
     }
 
     const card = cardRef.current;
@@ -58,11 +109,11 @@ export function InteractiveSummaryCard({
   }, []);
 
   const updateCard = useCallback((clientX: number, clientY: number) => {
-    if (rafRef.current) {
-      cancelAnimationFrame(rafRef.current);
+    if (tiltRafRef.current) {
+      cancelAnimationFrame(tiltRafRef.current);
     }
 
-    rafRef.current = requestAnimationFrame(() => {
+    tiltRafRef.current = requestAnimationFrame(() => {
       const card = cardRef.current;
       const frame = frameRef.current;
 
@@ -105,6 +156,32 @@ export function InteractiveSummaryCard({
     });
   }, []);
 
+  useEffect(() => {
+    const node = cardRef.current;
+
+    if (!node) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const firstEntry = entries[0];
+        if (firstEntry?.isIntersecting) {
+          startCountAnimation();
+        }
+      },
+      {
+        threshold: 0.35,
+      },
+    );
+
+    observer.observe(node);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [startCountAnimation]);
+
   const icon = renderSummaryIcon(iconKey);
 
   return (
@@ -137,7 +214,7 @@ export function InteractiveSummaryCard({
           <div className="text-[12px] font-medium text-muted-foreground">{label}</div>
           <div className="mt-2 flex items-center justify-between gap-3">
             <div className="text-[1.72rem] font-semibold tracking-[-0.05em] text-foreground">
-              {value}
+              {displayValue}
             </div>
             <span className="inline-flex h-9 w-9 items-center justify-center rounded-[6px] border border-border/75 bg-background/88 text-primary shadow-[inset_0_1px_0_rgba(255,255,255,0.6)]">
               {icon}
@@ -165,4 +242,47 @@ function renderSummaryIcon(iconKey: SummaryIconKey) {
     default:
       return <CrownIcon className="size-4" />;
   }
+}
+
+type ParsedAnimatedValue = {
+  prefix: string;
+  suffix: string;
+  numeric: number;
+  decimals: number;
+};
+
+function parseAnimatedValue(rawValue: string): ParsedAnimatedValue | null {
+  const matched = rawValue.trim().match(/^([^0-9+\-]*)([+\-]?\d[\d,]*(?:\.\d+)?)(.*)$/);
+
+  if (!matched) {
+    return null;
+  }
+
+  const [, prefix, numberPart, suffix] = matched;
+  const normalized = numberPart.replaceAll(",", "");
+  const numeric = Number(normalized);
+
+  if (!Number.isFinite(numeric)) {
+    return null;
+  }
+
+  const decimalPart = normalized.split(".")[1];
+  return {
+    prefix,
+    suffix,
+    numeric,
+    decimals: decimalPart ? decimalPart.length : 0,
+  };
+}
+
+function formatAnimatedValue(value: number, parsed: ParsedAnimatedValue): string {
+  if (parsed.decimals > 0) {
+    const fixedValue = Number(value.toFixed(parsed.decimals));
+    return `${parsed.prefix}${fixedValue.toLocaleString(undefined, {
+      minimumFractionDigits: parsed.decimals,
+      maximumFractionDigits: parsed.decimals,
+    })}${parsed.suffix}`;
+  }
+
+  return `${parsed.prefix}${Math.round(value).toLocaleString()}${parsed.suffix}`;
 }

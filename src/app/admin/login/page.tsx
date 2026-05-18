@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 
 import { AdminLoginForm } from "@/components/admin/admin-login-form";
 import { BrandLogo } from "@/components/layout/brand-logo";
+import { HeroMesh } from "@/components/shared/hero-mesh";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrambleText } from "@/components/shared/scramble-text";
@@ -17,7 +18,9 @@ export default async function AdminLoginPage() {
 
   return (
     <div className="admin-shell relative flex min-h-screen items-center overflow-hidden bg-background px-4 py-6 text-foreground sm:py-8">
-      <div className="hero-grid hero-grid-fade pointer-events-none absolute inset-x-0 top-0 h-[38vh] min-h-[18rem] opacity-70 lg:h-[46vh]" />
+      <div className="hero-mesh-shell hero-grid-fade pointer-events-none absolute inset-x-0 top-0 h-[38vh] min-h-[18rem] opacity-70 lg:h-[46vh]">
+        <HeroMesh className="opacity-90" />
+      </div>
       <div className="admin-login-grid">
         <div className="space-y-3.5">
           <BrandLogo />

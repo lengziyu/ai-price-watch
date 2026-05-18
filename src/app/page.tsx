@@ -6,6 +6,7 @@ import { subscriptionPlans } from "@/data/subscriptions";
 import { buttonVariants } from "@/components/ui/button";
 import { SubscriptionExplorer } from "@/components/pricing/subscription-explorer";
 import { AnimeReveal } from "@/components/shared/anime-reveal";
+import { HeroMesh } from "@/components/shared/hero-mesh";
 import { ScrambleText } from "@/components/shared/scramble-text";
 import { HeroShowcase } from "@/components/shared/hero-showcase";
 import { getDealArticles } from "@/lib/admin-store";
@@ -15,7 +16,8 @@ export default async function HomePage() {
 
   return (
     <div className="pb-8 sm:pb-16">
-      <section className="hero-stage hero-grid hero-aura -mt-[84px] w-full bg-background pt-[96px] sm:-mt-[104px] sm:pt-[120px]">
+      <section className="hero-stage hero-mesh-stage hero-aura -mt-[84px] w-full bg-background pt-[96px] sm:-mt-[104px] sm:pt-[120px]">
+        <HeroMesh />
         <div className="app-shell py-4 sm:py-6 lg:py-9">
           <div className="grid items-center gap-4 sm:gap-6 lg:grid-cols-[1fr_0.95fr]">
             <AnimeReveal
@@ -58,10 +60,11 @@ export default async function HomePage() {
                   href="/pricing/subscriptions"
                   className={buttonVariants({
                     size: "lg",
-                    className: "min-w-0 px-3 text-[13px] sm:px-6 sm:text-sm",
+                    className:
+                      "hero-gradient-button min-w-0 px-3 text-[13px] sm:px-6 sm:text-sm",
                   })}
                 >
-                  开始对比
+                  <span className="hero-gradient-text">开始对比</span>
                   <ArrowRightIcon data-icon="inline-end" />
                 </Link>
                 <Link
@@ -69,10 +72,11 @@ export default async function HomePage() {
                   className={buttonVariants({
                     variant: "outline",
                     size: "lg",
-                    className: "min-w-0 px-3 text-[13px] sm:px-6 sm:text-sm",
+                    className:
+                      "hero-gradient-button min-w-0 px-3 text-[13px] sm:px-6 sm:text-sm",
                   })}
                 >
-                  查看优惠活动
+                  <span className="hero-gradient-text">查看优惠活动</span>
                   <GiftIcon data-icon="inline-end" />
                 </Link>
               </div>
