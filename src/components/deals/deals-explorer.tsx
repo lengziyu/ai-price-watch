@@ -58,7 +58,7 @@ export function DealsExplorer({ deals }: Props) {
               </CardDescription>
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-3">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
               <DealFilter
                 label="状态"
                 value={status}
@@ -85,7 +85,7 @@ export function DealsExplorer({ deals }: Props) {
       <AnimeReveal
         selector=":scope > *"
         stagger={70}
-        className="grid gap-2.5 sm:grid-cols-3"
+        className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-2.5"
       >
         <MetaStat
           label="活动总数"
@@ -246,7 +246,7 @@ function MetaStat({
       size="sm"
       className="surface-card rounded-[12px] border-border"
     >
-      <CardContent className="grid gap-1.5 px-4 py-3.5">
+      <CardContent className="grid gap-1 px-3.5 py-3 sm:gap-1.5 sm:px-4 sm:py-3.5">
         <div className="text-[11px] text-muted-foreground">
           {label}
         </div>
@@ -273,8 +273,8 @@ function DealFilter({
   items: string[];
 }) {
   return (
-    <div className="flex flex-col gap-2">
-      <span className="text-[10px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
+    <div className="min-w-0 flex flex-col gap-1.5 sm:gap-2">
+      <span className="text-[9px] font-medium uppercase tracking-[0.1em] text-muted-foreground sm:text-[10px] sm:tracking-[0.12em]">
         {label}
       </span>
       <Select
@@ -285,8 +285,8 @@ function DealFilter({
           }
         }}
       >
-        <SelectTrigger className="h-9 w-full rounded-[10px]">
-          <span className="truncate">{renderDealFilterLabel(value)}</span>
+        <SelectTrigger className="h-9 w-full rounded-[10px] px-2 text-[12px] sm:px-3 sm:text-sm">
+          <span className="truncate text-center">{renderDealFilterLabel(value)}</span>
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>

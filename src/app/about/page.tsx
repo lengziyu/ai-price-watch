@@ -33,7 +33,7 @@ export default function AboutPage() {
             <div>
               <ScrambleText text="关于雷价通" />
             </div>
-            <div className="inline-flex items-baseline gap-2">
+            <div className="inline-flex flex-wrap items-baseline gap-x-2 gap-y-1">
               <ScrambleText text="把影响选择成本的信息" />
               <ScrambleText text="摆清楚" className="gradient-title" />
             </div>

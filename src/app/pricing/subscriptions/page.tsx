@@ -23,7 +23,7 @@ export default function SubscriptionPricingPage() {
             <div>
               <ScrambleText text="AI 订阅会员" />
             </div>
-            <div className="inline-flex items-baseline gap-2">
+            <div className="inline-flex flex-wrap items-baseline gap-x-2 gap-y-1">
               <ScrambleText text="全球价格" />
               <ScrambleText text="一站对比" className="gradient-title" />
             </div>

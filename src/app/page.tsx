@@ -18,12 +18,12 @@ export default async function HomePage() {
     <div className="pb-8 sm:pb-16">
       <section className="hero-stage hero-mesh-stage hero-aura -mt-[84px] w-full bg-background pt-[96px] sm:-mt-[104px] sm:pt-[120px]">
         <HeroMesh />
-        <div className="app-shell py-4 sm:py-6 lg:py-9">
+        <div className="app-shell py-6 sm:py-8 lg:py-11">
           <div className="grid items-center gap-4 sm:gap-6 lg:grid-cols-[1fr_0.95fr]">
             <AnimeReveal
               selector=":scope > *"
               stagger={90}
-              className="flex flex-col gap-4.5 sm:gap-5"
+              className="flex flex-col gap-6.5 sm:gap-7.5"
             >
               <div className="inline-flex w-fit items-center gap-2.5 rounded-full border border-border bg-background/75 px-3 py-1.5 text-[11px] text-muted-foreground backdrop-blur-sm">
                 <span className="size-2 rounded-full bg-primary" />
@@ -36,11 +36,11 @@ export default async function HomePage() {
                 <span>优惠文章</span>
               </div>
 
-              <div className="max-w-[680px] text-[1.74rem] font-semibold leading-[0.97] tracking-[-0.038em] text-foreground sm:text-[2.58rem] lg:text-[3.28rem]">
+              <div className="text-[2.4rem] font-semibold leading-[0.91] tracking-[-0.046em] text-foreground [&>div+div]:mt-2.5 sm:max-w-[700px] sm:text-[2.76rem] sm:[&>div+div]:mt-3.5 lg:text-[3.2rem]">
                 <div>
                   <ScrambleText text="AI 会员价格" />
                 </div>
-                <div className="inline-flex items-baseline gap-2">
+                <div className="inline-flex flex-wrap items-baseline gap-x-2 gap-y-1">
                   <ScrambleText text="额度场景优惠" />
                   <ScrambleText
                     text="首页先看"
@@ -49,7 +49,7 @@ export default async function HomePage() {
                 </div>
               </div>
 
-              <p className="max-w-[580px] text-[12.5px] leading-[1.7] text-muted-foreground sm:text-[14px] sm:leading-[1.58]">
+              <p className="text-[13.5px] leading-[1.88] text-muted-foreground sm:max-w-[620px] sm:text-[14px] sm:leading-[1.7]">
                 首页集中看会员价格、额度、常用入口和最新活动，先完成第一轮筛选。
                 <br />
                 再进入你关心的厂商、套餐、工具页面，继续看详细对比。

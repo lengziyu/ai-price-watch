@@ -236,7 +236,7 @@ export function TokenPriceExplorer({ prices }: Props) {
         {filterControls}
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-2 gap-2.5 sm:gap-4 xl:grid-cols-4">
         <MetricCard
           label="当前模型数"
           value={String(filteredPrices.length)}
@@ -411,12 +411,12 @@ function MetricCard({
   detail: string;
 }) {
   return (
-    <div className="surface-card motion-surface motion-surface--cyan rounded-[12px] px-4 py-3.5 sm:px-5 sm:py-4">
-      <div className="text-[12px] text-muted-foreground sm:text-sm">{label}</div>
-      <div className="mt-1.5 text-xl font-semibold tracking-[-0.025em] text-foreground sm:mt-2 sm:text-3xl">
+    <div className="surface-card motion-surface motion-surface--cyan rounded-[12px] px-3.5 py-3 sm:px-5 sm:py-4">
+      <div className="text-[11px] text-muted-foreground sm:text-sm">{label}</div>
+      <div className="mt-1 text-[1.02rem] font-semibold tracking-[-0.03em] text-foreground sm:mt-2 sm:text-3xl">
         {value}
       </div>
-      <div className="mt-1 text-[12px] leading-5 text-muted-foreground sm:text-sm">{detail}</div>
+      <div className="mt-1 text-[11px] leading-5 text-muted-foreground sm:text-sm">{detail}</div>
     </div>
   );
 }

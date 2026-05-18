@@ -42,17 +42,17 @@ export function PageHero({
       ].join(" ")}
     >
       <HeroMesh />
-      <div className={["app-shell", compact ? "py-1 sm:py-2.5 lg:py-3.5" : "py-2.5 sm:py-4 lg:py-6"].join(" ")}>
+      <div className={["app-shell", compact ? "py-3.5 sm:py-5 lg:py-6" : "py-5 sm:py-7 lg:py-9"].join(" ")}>
         <div
           className={[
             "grid items-center lg:grid-cols-[1fr_0.92fr]",
-            compact ? "gap-2.5 sm:gap-3.5 lg:gap-4" : "gap-3.5 sm:gap-4 lg:gap-5",
+            compact ? "gap-4.5 sm:gap-5.5 lg:gap-6" : "gap-5.5 sm:gap-6.5 lg:gap-7",
           ].join(" ")}
         >
           <AnimeReveal
             selector=":scope > *"
             stagger={90}
-            className="flex flex-col gap-4 sm:gap-5"
+            className="flex flex-col gap-6 sm:gap-7"
           >
             {note ? (
               <div className="inline-flex w-fit items-center gap-2.5 rounded-full border border-border bg-background/75 px-3 py-1.5 text-[11px] text-muted-foreground backdrop-blur-sm">
@@ -61,11 +61,11 @@ export function PageHero({
               </div>
             ) : null}
 
-            <div className="max-w-[700px] text-[1.52rem] font-semibold leading-[1.02] tracking-[-0.035em] text-foreground sm:text-[2.12rem] lg:text-[2.56rem]">
+            <div className="text-[2.2rem] font-semibold leading-[0.94] tracking-[-0.043em] text-foreground [&>div+div]:mt-2.5 sm:max-w-[720px] sm:text-[2.38rem] sm:[&>div+div]:mt-3.5 lg:text-[2.8rem]">
               {title}
             </div>
 
-            <div className="max-w-[600px] text-[12.5px] leading-6 text-muted-foreground sm:text-[13.5px] sm:leading-[1.58]">
+            <div className="text-[13.5px] leading-[1.82] text-muted-foreground sm:max-w-[640px] sm:text-[14px] sm:leading-[1.68]">
               {description}
             </div>
 

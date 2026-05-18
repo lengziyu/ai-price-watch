@@ -33,8 +33,8 @@ export default async function MembershipRatesPage({
             <div>
               <ScrambleText text="会员速率" />
             </div>
-            <div className="inline-flex items-baseline gap-2">
-              <ScrambleText text="多厂商口径 +" />
+            <div className="inline-flex flex-wrap items-baseline gap-x-2 gap-y-1">
+              <ScrambleText text="多厂商口径" />
               <ScrambleText text="真实使用体感" className="gradient-title" />
             </div>
           </>

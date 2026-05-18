@@ -28,7 +28,7 @@ export default async function DealsPage() {
             <div>
               <ScrambleText text="AI 优惠活动" />
             </div>
-            <div className="inline-flex items-baseline gap-2">
+            <div className="inline-flex flex-wrap items-baseline gap-x-2 gap-y-1">
               <ScrambleText text="正规渠道" />
               <ScrambleText text="一页看全" className="gradient-title" />
             </div>
