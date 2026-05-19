@@ -152,7 +152,9 @@ export type SourceReview = {
 
 export type SourceReviewInput = Omit<SourceReview, "id" | "actor" | "reviewedAt">;
 
-async function normalizeDealArticleInput(input: DealArticleInput) {
+async function normalizeDealArticleInput(
+  input: DealArticleInput,
+): Promise<DealArticleInput> {
   const rawContent = input.rawContent.trim();
 
   if (!rawContent || !looksLikeXLongformHtml(rawContent)) {
