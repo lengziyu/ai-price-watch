@@ -12,6 +12,7 @@ import {
   inferDealArticleSummary,
   inferDealArticleTitle,
 } from "@/lib/deal-articles";
+import { importArticleHtml, looksLikeXLongformHtml } from "@/lib/x-html-import";
 import type { AIDeal, DealArticle } from "@/types";
 
 const legacyAdminDataDir = path.join(process.cwd(), "data", "admin");
@@ -150,6 +151,30 @@ export type SourceReview = {
 };
 
 export type SourceReviewInput = Omit<SourceReview, "id" | "actor" | "reviewedAt">;
+
+async function normalizeDealArticleInput(input: DealArticleInput) {
+  const rawContent = input.rawContent.trim();
+
+  if (!rawContent || !looksLikeXLongformHtml(rawContent)) {
+    return {
+      ...input,
+      rawContent,
+    };
+  }
+
+  const imported = await importArticleHtml(rawContent);
+
+  return {
+    ...input,
+    rawContent: imported.rawContent,
+    title: input.title.trim() || imported.title,
+    summary: input.summary.trim() || imported.summary,
+    sourcePlatform: input.sourceUrl
+      ? detectDealArticleSourcePlatform(input.sourceUrl)
+      : imported.sourcePlatform,
+    uploadedCoverImageUrl: input.uploadedCoverImageUrl || imported.suggestedCoverImageUrl,
+  };
+}
 
 function resolveAdminDataDir() {
   const configuredDir = process.env.ADMIN_DATA_DIR?.trim();
@@ -345,13 +370,14 @@ export async function createManualDeal(input: ManualDealInput, actor: string) {
 }
 
 export async function createDealArticle(input: DealArticleInput, actor: string) {
+  const normalizedInput = await normalizeDealArticleInput(input);
   const articles = await getDealArticles();
-  const title = inferDealArticleTitle(input.title, input.rawContent);
-  const body = buildDealArticleBody(input.rawContent, title) || input.rawContent.trim();
-  const summary = inferDealArticleSummary(input.summary, body);
-  const sourcePlatform = input.sourceUrl
-    ? detectDealArticleSourcePlatform(input.sourceUrl)
-    : input.sourcePlatform;
+  const title = inferDealArticleTitle(normalizedInput.title, normalizedInput.rawContent);
+  const body = buildDealArticleBody(normalizedInput.rawContent, title) || normalizedInput.rawContent;
+  const summary = inferDealArticleSummary(normalizedInput.summary, body);
+  const sourcePlatform = normalizedInput.sourceUrl
+    ? detectDealArticleSourcePlatform(normalizedInput.sourceUrl)
+    : normalizedInput.sourcePlatform;
   const slugBase = createDealArticleSlug(title);
   const takenSlugs = new Set(articles.map((article) => article.slug));
   let slug = slugBase;
@@ -364,9 +390,12 @@ export async function createDealArticle(input: DealArticleInput, actor: string) 
 
   const now = new Date().toISOString();
   const id = `deal-article-${randomUUID()}`;
-  const coverImageUrl = await saveDealArticleCoverImage(input.coverImage, input.uploadedCoverImageUrl);
+  const coverImageUrl = await saveDealArticleCoverImage(
+    normalizedInput.coverImage,
+    normalizedInput.uploadedCoverImageUrl,
+  );
   const engagement = createInitialDealArticleEngagement(
-    `${id}:${title}:${input.sourceUrl ?? ""}:${now}`,
+    `${id}:${title}:${normalizedInput.sourceUrl ?? ""}:${now}`,
   );
   const nextArticle: DealArticle = {
     id,
@@ -374,15 +403,15 @@ export async function createDealArticle(input: DealArticleInput, actor: string) 
     title,
     summary,
     body,
-    rawContent: input.rawContent.trim(),
+    rawContent: normalizedInput.rawContent,
     coverImageUrl,
     viewCount: engagement.viewCount,
     likeCount: engagement.likeCount,
-    difficulty: input.difficulty,
+    difficulty: normalizedInput.difficulty,
     sourcePlatform,
-    sourceUrl: input.sourceUrl,
-    status: input.status,
-    tags: input.tags,
+    sourceUrl: normalizedInput.sourceUrl,
+    status: normalizedInput.status,
+    tags: normalizedInput.tags,
     publishedAt: now,
     updatedAt: now,
   };
@@ -400,6 +429,7 @@ export async function createDealArticle(input: DealArticleInput, actor: string) 
 }
 
 export async function updateDealArticle(id: string, input: DealArticleInput, actor: string) {
+  const normalizedInput = await normalizeDealArticleInput(input);
   const articles = await getDealArticles();
   const currentArticle = articles.find((article) => article.id === id);
 
@@ -407,12 +437,12 @@ export async function updateDealArticle(id: string, input: DealArticleInput, act
     throw new Error("没有找到要编辑的文章。");
   }
 
-  const title = inferDealArticleTitle(input.title, input.rawContent);
-  const body = buildDealArticleBody(input.rawContent, title) || input.rawContent.trim();
-  const summary = inferDealArticleSummary(input.summary, body);
-  const sourcePlatform = input.sourceUrl
-    ? detectDealArticleSourcePlatform(input.sourceUrl)
-    : input.sourcePlatform;
+  const title = inferDealArticleTitle(normalizedInput.title, normalizedInput.rawContent);
+  const body = buildDealArticleBody(normalizedInput.rawContent, title) || normalizedInput.rawContent;
+  const summary = inferDealArticleSummary(normalizedInput.summary, body);
+  const sourcePlatform = normalizedInput.sourceUrl
+    ? detectDealArticleSourcePlatform(normalizedInput.sourceUrl)
+    : normalizedInput.sourcePlatform;
   const nextSlugBase = createDealArticleSlug(title);
   const takenSlugs = new Set(
     articles.filter((article) => article.id !== id).map((article) => article.slug),
@@ -427,9 +457,9 @@ export async function updateDealArticle(id: string, input: DealArticleInput, act
 
   const coverImageUrl = await resolveUpdatedDealArticleCoverImageUrl(
     currentArticle.coverImageUrl,
-    input.coverImage,
-    input.uploadedCoverImageUrl,
-    input.resetCoverImage,
+    normalizedInput.coverImage,
+    normalizedInput.uploadedCoverImageUrl,
+    normalizedInput.resetCoverImage,
   );
 
   const nextArticle: DealArticle = {
@@ -438,13 +468,13 @@ export async function updateDealArticle(id: string, input: DealArticleInput, act
     title,
     summary,
     body,
-    rawContent: input.rawContent.trim(),
+    rawContent: normalizedInput.rawContent,
     coverImageUrl,
-    difficulty: input.difficulty,
+    difficulty: normalizedInput.difficulty,
     sourcePlatform,
-    sourceUrl: input.sourceUrl,
-    status: input.status,
-    tags: input.tags,
+    sourceUrl: normalizedInput.sourceUrl,
+    status: normalizedInput.status,
+    tags: normalizedInput.tags,
     updatedAt: new Date().toISOString(),
   };
 

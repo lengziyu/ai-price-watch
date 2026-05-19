@@ -86,7 +86,7 @@ export async function importArticleHtml(rawHtml: string): Promise<ImportedXHtmlR
   };
 }
 
-function looksLikeXLongformHtml(html: string) {
+export function looksLikeXLongformHtml(html: string) {
   return (
     html.includes("longformRichTextComponent") ||
     html.includes("public-DraftEditor-content") ||
