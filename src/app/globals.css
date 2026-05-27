@@ -2482,6 +2482,10 @@
     font-size: 0.875em;
   }
 
+  .dark .deal-article-rich [style*="color"] {
+    color: #fff !important;
+  }
+
   .dark .admin-side-card,
   .dark .admin-preview-card,
   .dark .admin-job-row,
