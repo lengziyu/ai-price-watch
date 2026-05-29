@@ -50,6 +50,10 @@ export const trustBullets = [
 
 export const siblingProjects = [
   {
+    href: "https://niuma.lengziyu.cn",
+    label: "牛马百宝箱",
+  },
+  {
     href: "https://envra.lengziyu.cn",
     label: "ENVRA 前端工具",
   },
