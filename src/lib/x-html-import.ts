@@ -12,7 +12,12 @@ import {
   inferDealArticleTitle,
 } from "@/lib/deal-articles";
 
-const bodyImageUploadDir = path.join(process.cwd(), "data", "uploads", "deal-article-body");
+const bodyImageUploadDir = path.join(
+  /*turbopackIgnore: true*/ process.cwd(),
+  "data",
+  "uploads",
+  "deal-article-body",
+);
 const remoteImageHeaders = {
   "user-agent":
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",

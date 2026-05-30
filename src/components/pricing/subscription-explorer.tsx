@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   startTransition,
   useEffect,
@@ -23,8 +24,8 @@ import { subscriptionRegionPrices } from "@/data/subscription-regions";
 import { formatBillingCycle, formatDate, fxReference } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import type { SubscriptionPlan, SubscriptionRegionPrice } from "@/types";
-import { AnimatedSectionTitle } from "@/components/shared/animated-section-title";
 import { AnimeReveal } from "@/components/shared/anime-reveal";
+import { AnimatedSectionTitle } from "@/components/shared/animated-section-title";
 import { useStickyTabs } from "@/components/shared/use-sticky-tabs";
 import {
   Select,
@@ -34,7 +35,6 @@ import {
   SelectLabel,
   SelectTrigger,
 } from "@/components/ui/select";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useSegmentedIndicator } from "@/components/ui/use-segmented-indicator";
 import styles from "./subscription-explorer-effect.module.css";
 
@@ -43,6 +43,8 @@ type Props = {
   embedded?: boolean;
   maxRows?: number;
   disableStickyTabs?: boolean;
+  initialViewMode?: ViewMode;
+  persistViewInUrl?: boolean;
 };
 
 type Preset = {
@@ -275,8 +277,15 @@ const targetCurrencies = [
   { code: "INR", label: "印度卢比", flagCode: "IN", cnyRate: 0.087, locale: "en-IN" },
 ] as const;
 
+const subscriptionViewModes = [
+  { value: "subscription", label: "订阅" },
+  { value: "best", label: "最值得" },
+  { value: "region", label: "地区" },
+] as const satisfies ReadonlyArray<{ value: ViewMode; label: string }>;
+
 type TargetCurrencyCode = (typeof targetCurrencies)[number]["code"];
-type ViewMode = "subscription" | "region";
+type ViewMode = "subscription" | "region" | "best";
+type BestValueMode = "lowest" | "value";
 type FxFeed = {
   fetchedAt?: string;
   rates: Partial<Record<TargetCurrencyCode, number>>;
@@ -289,18 +298,44 @@ const fxFetchIntervalMs = 30_000;
 const defaultRowsPerTab = 20;
 const rowHoverLockMs = 520;
 const rowHoverUnlockDistancePx = 24;
+const curatedBestValueProductOrder: Record<string, number> = {
+  "OpenAI::ChatGPT": 0,
+  "Anthropic::Claude": 1,
+  "GitHub::GitHub": 2,
+  "Google::Gemini": 3,
+  "Quora::Poe": 4,
+  "Windsurf::Windsurf": 5,
+};
+const curatedBestValueWinnerPlan: Record<string, string> = {
+  "OpenAI::ChatGPT": "chatgpt-plus",
+  "Anthropic::Claude": "claude-pro",
+  "GitHub::GitHub": "github-copilot-pro",
+  "Google::Gemini": "gemini-ai-plus",
+  "Quora::Poe": "poe-starter",
+  "Windsurf::Windsurf": "windsurf-pro",
+};
+const curatedBestValueRunnerUpPlan: Record<string, string> = {
+  "OpenAI::ChatGPT": "chatgpt-pro-5x",
+};
+const curatedBestValueWinnerRegion: Record<string, string> = {
+  "chatgpt-plus": "TR",
+  "claude-pro": "NG",
+};
 
 export function SubscriptionExplorer({
   plans,
   embedded = false,
   maxRows,
   disableStickyTabs = false,
+  initialViewMode = "subscription",
+  persistViewInUrl = false,
 }: Props) {
   const isCompact = embedded;
   const [activeProviderKey, setActiveProviderKey] = useState(providerPresets[0].key);
   const [activePresetKey, setActivePresetKey] = useState(productPresets[0].key);
   const [targetCurrency, setTargetCurrency] = useState<TargetCurrencyCode>("CNY");
-  const [viewMode, setViewMode] = useState<ViewMode>("subscription");
+  const [viewMode, setViewMode] = useState<ViewMode>(initialViewMode);
+  const [bestValueMode, setBestValueMode] = useState<BestValueMode>("value");
   const [providerOpen, setProviderOpen] = useState(false);
   const [currencyOpen, setCurrencyOpen] = useState(false);
   const [expandedRegionId, setExpandedRegionId] = useState<string | null>(null);
@@ -330,6 +365,7 @@ export function SubscriptionExplorer({
   } = useStickyTabs("subscriptions", {
     enabled: stickyTabsEnabled,
   });
+
   const { segmentedRef: presetTabsRef, indicatorRef: presetIndicatorRef } =
     useSegmentedIndicator<HTMLDivElement>();
   const targetRowsPerTab = maxRows ?? defaultRowsPerTab;
@@ -403,6 +439,14 @@ export function SubscriptionExplorer({
     () => buildLiveCnyRates(fxFeed.rates),
     [fxFeed.rates],
   );
+  const bestValueSummaries = useMemo(
+    () => buildBestValueSummaries(plans, liveCnyRates, bestValueMode),
+    [plans, liveCnyRates, bestValueMode],
+  );
+  const visibleBestValueSummaries =
+    typeof maxRows === "number"
+      ? bestValueSummaries.slice(0, maxRows)
+      : bestValueSummaries;
   const rankedRegions = useMemo(
     () =>
       [...currentRegions].sort(
@@ -551,6 +595,11 @@ export function SubscriptionExplorer({
     return () => window.clearInterval(interval);
   }, []);
 
+  const viewHrefFor = (nextMode: ViewMode) =>
+    nextMode === "subscription"
+      ? "/pricing/subscriptions#subscriptions-board"
+      : `/pricing/subscriptions?view=${nextMode}#subscriptions-board`;
+
   return (
     <section
       ref={(node) => {
@@ -573,13 +622,13 @@ export function SubscriptionExplorer({
         )}
       >
         <div className="min-w-0">
-          <div className="mono-kicker text-[12px] uppercase text-muted-foreground">
-            pricing by region
+          <div className="flex flex-col gap-2">
+            <div className="mono-kicker text-[12px] uppercase text-muted-foreground">
+              global subscription pricing
+            </div>
+            <AnimatedSectionTitle>会员订阅比价</AnimatedSectionTitle>
           </div>
-          <AnimatedSectionTitle className="mt-2.5">
-            会员订阅比价
-          </AnimatedSectionTitle>
-          <p className="mt-1.5 text-[13px] text-muted-foreground sm:text-sm">
+          <p className="mt-2 text-[13px] text-muted-foreground sm:text-sm">
             选择币种与地区，查看各套餐价格对比
           </p>
         </div>
@@ -609,87 +658,122 @@ export function SubscriptionExplorer({
           "sm:grid-cols-[auto_1fr_auto] sm:items-center",
         )}
       >
-        <div className="w-fit">
-          <Tabs
-            value={viewMode}
-            onValueChange={(nextValue) => {
-              resetRowHoverState();
-              startTransition(() => setViewMode(nextValue as ViewMode));
-            }}
-          >
-            <TabsList variant="accent" className="w-full max-w-full sm:w-fit">
-              <TabsTrigger value="subscription" className="min-w-[120px]">
-                订阅
-              </TabsTrigger>
-              <TabsTrigger value="region" className="min-w-[120px]">
-                地区
-              </TabsTrigger>
-            </TabsList>
-          </Tabs>
+        <div
+          role="group"
+          aria-label="订阅视图切换"
+          className="segmented-shell inline-flex w-full max-w-full gap-1 text-muted-foreground sm:w-fit"
+        >
+          {subscriptionViewModes.map((item) => {
+            const isActive = viewMode === item.value;
+            const controlClassName = cn(
+              "relative z-[1] inline-flex min-h-9 min-w-[120px] flex-1 items-center justify-center gap-1.5 rounded-[14px] border border-transparent px-3.5 py-1.5 text-[13px] font-semibold whitespace-nowrap text-foreground/62 transition-[color,transform,box-shadow,background-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:text-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1 focus-visible:outline-ring dark:text-muted-foreground dark:hover:text-foreground",
+              isActive
+                ? "bg-primary text-primary-foreground shadow-[0_12px_30px_rgba(0,188,125,0.24),inset_0_1px_0_rgba(255,255,255,0.14)]"
+                : "hover:bg-background hover:shadow-[0_8px_18px_rgba(15,23,42,0.08)]",
+            );
+
+            if (persistViewInUrl) {
+              return (
+                <Link
+                  key={item.value}
+                  href={viewHrefFor(item.value)}
+                  aria-pressed={isActive}
+                  data-active={isActive ? "true" : undefined}
+                  onClick={() => {
+                    resetRowHoverState();
+                    setViewMode(item.value);
+                  }}
+                  className={controlClassName}
+                >
+                  {item.label}
+                </Link>
+              );
+            }
+
+            return (
+              <button
+                key={item.value}
+                type="button"
+                aria-pressed={isActive}
+                data-active={isActive ? "true" : undefined}
+                onClick={() => {
+                  resetRowHoverState();
+                  setViewMode(item.value);
+                }}
+                className={controlClassName}
+              >
+                {item.label}
+              </button>
+            );
+          })}
         </div>
 
         <div className="hidden sm:block" />
 
         <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] gap-2 sm:flex sm:flex-row sm:items-center sm:justify-self-end">
-          <Select
-            value={activeProvider.key}
-            open={providerOpen}
-            onOpenChange={(nextOpen) => {
-              if (nextOpen) {
-                resetRowHoverState();
-              }
-              setProviderOpen(nextOpen);
-            }}
-            onValueChange={handleProviderChange}
-          >
-            <SelectTrigger
-              className={cn(
-                "w-full min-w-0 rounded-full border-primary/20 bg-card px-3 sm:w-[172px] sm:px-4",
-                isCompact ? "min-h-10" : "min-h-11",
-              )}
+          {viewMode !== "best" ? (
+            <Select
+              value={activeProvider.key}
+              open={providerOpen}
+              onOpenChange={(nextOpen) => {
+                if (nextOpen) {
+                  resetRowHoverState();
+                }
+                setProviderOpen(nextOpen);
+              }}
+              onValueChange={handleProviderChange}
             >
-              <div className="flex min-w-0 items-center gap-2">
-                {activeProviderLogo ? (
-                  <Image
-                    src={activeProviderLogo}
-                    alt={`${activeProvider.label} logo`}
-                    width={18}
-                    height={18}
-                    className="rounded-[4px] object-contain"
-                  />
-                ) : null}
-                <span className="truncate font-semibold text-foreground">{activeProvider.label}</span>
-              </div>
-            </SelectTrigger>
-            <SelectContent
-              align="end"
-              alignItemWithTrigger={false}
-              className="min-w-[220px] rounded-[12px] bg-popover/94 p-1 shadow-[0_22px_80px_rgba(0,0,0,0.14)] backdrop-blur-2xl"
-            >
-              <SelectGroup>
-                <SelectLabel>厂商</SelectLabel>
-                {providerPresets.map((item) => {
-                  const logoPath = logoForProvider(item.provider);
+              <SelectTrigger
+                className={cn(
+                  "w-full min-w-0 rounded-full border-primary/20 bg-card px-3 sm:w-[172px] sm:px-4",
+                  isCompact ? "min-h-10" : "min-h-11",
+                )}
+              >
+                <div className="flex min-w-0 items-center gap-2">
+                  {activeProviderLogo ? (
+                    <Image
+                      src={activeProviderLogo}
+                      alt={`${activeProvider.label} logo`}
+                      width={18}
+                      height={18}
+                      className="rounded-[4px] object-contain"
+                    />
+                  ) : null}
+                  <span className="truncate font-semibold text-foreground">{activeProvider.label}</span>
+                </div>
+              </SelectTrigger>
+              <SelectContent
+                align="end"
+                alignItemWithTrigger={false}
+                className="min-w-[220px] rounded-[12px] bg-popover/94 p-1 shadow-[0_22px_80px_rgba(0,0,0,0.14)] backdrop-blur-2xl"
+              >
+                <SelectGroup>
+                  <SelectLabel>厂商</SelectLabel>
+                  {providerPresets.map((item) => {
+                    const logoPath = logoForProvider(item.provider);
 
-                  return (
-                    <SelectItem key={item.key} value={item.key}>
-                      {logoPath ? (
-                        <Image
-                          src={logoPath}
-                          alt={`${item.label} logo`}
-                          width={18}
-                          height={18}
-                          className="rounded-[4px] object-contain"
-                        />
-                      ) : null}
-                      <span className="font-medium">{item.label}</span>
-                      <span className="text-muted-foreground">· {item.provider}</span>
-                    </SelectItem>
-                  );
-                })}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+                    return (
+                      <SelectItem key={item.key} value={item.key}>
+                        {logoPath ? (
+                          <Image
+                            src={logoPath}
+                            alt={`${item.label} logo`}
+                            width={18}
+                            height={18}
+                            className="rounded-[4px] object-contain"
+                          />
+                        ) : null}
+                        <span className="font-medium">{item.label}</span>
+                        <span className="text-muted-foreground">· {item.provider}</span>
+                      </SelectItem>
+                    );
+                  })}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          ) : (
+            <div className="hidden sm:block sm:w-[172px]" />
+          )}
 
           <Select
             value={targetCurrency}
@@ -1042,6 +1126,71 @@ export function SubscriptionExplorer({
         </AnimeReveal>
       ) : null}
 
+      {viewMode === "best" ? (
+        <AnimeReveal
+          key={`best-view-${targetCurrency}-${bestValueMode}`}
+          trigger="mount"
+          selector=":scope > *"
+          stagger={60}
+          className="mt-3.5 grid gap-3 sm:mt-5"
+        >
+          <div className="flex flex-col gap-3 rounded-[18px] border border-border bg-card/92 p-3.5 shadow-[0_14px_40px_rgba(15,23,42,0.05)] sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                best value board
+              </div>
+              <div className="mt-1 text-[14px] font-semibold text-foreground">
+                {bestValueMode === "lowest" ? "按绝对最低价排序" : "按性价比排序"}
+              </div>
+            </div>
+            <div className="inline-flex w-fit rounded-full border border-border bg-background/86 p-1">
+              <button
+                type="button"
+                onClick={() => setBestValueMode("lowest")}
+                className={cn(
+                  "rounded-full px-3 py-1.5 text-[12px] font-semibold transition-colors",
+                  bestValueMode === "lowest"
+                    ? "bg-primary text-white shadow-[0_8px_18px_rgba(0,188,125,0.22)]"
+                    : "text-muted-foreground hover:text-foreground",
+                )}
+              >
+                绝对最低价
+              </button>
+              <button
+                type="button"
+                onClick={() => setBestValueMode("value")}
+                className={cn(
+                  "rounded-full px-3 py-1.5 text-[12px] font-semibold transition-colors",
+                  bestValueMode === "value"
+                    ? "bg-primary text-white shadow-[0_8px_18px_rgba(0,188,125,0.22)]"
+                    : "text-muted-foreground hover:text-foreground",
+                )}
+              >
+                性价比
+              </button>
+            </div>
+          </div>
+
+          <div className="grid gap-3 lg:grid-cols-2">
+            {visibleBestValueSummaries.map((summary, index) => (
+              <BestValueCard
+                key={summary.key}
+                rank={index + 1}
+                summary={summary}
+                targetCurrency={targetCurrency}
+                liveCnyRates={liveCnyRates}
+                pulseKey={fxTick}
+              />
+            ))}
+            {visibleBestValueSummaries.length === 0 ? (
+              <div className="rounded-[12px] border border-dashed border-border bg-card px-4 py-8 text-center text-[13px] text-muted-foreground lg:col-span-2">
+                暂时还没有足够的订阅价格数据来计算“最值得”。
+              </div>
+            ) : null}
+          </div>
+        </AnimeReveal>
+      ) : null}
+
       <div className={cn("mt-4 text-[11px] leading-6 text-muted-foreground sm:text-xs", embedded && "mt-3")}>
         目标货币：{selectedCurrency.label}（{selectedCurrency.code}）。当前优先读取 Frankfurter 参考汇率，失败时回落到静态快照；几秒级 tick 用于展示汇率波动感，真实结算价格仍请以官方页面为准。
       </div>
@@ -1284,7 +1433,7 @@ function CompareEdge({
   return (
     <div
       className={cn(
-        "relative flex min-w-0 min-h-[112px] items-center gap-2 overflow-hidden rounded-[16px] border px-3 py-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] sm:min-h-[136px] sm:gap-3 sm:rounded-[18px] sm:px-5 sm:py-3",
+        "relative flex min-w-0 min-h-[112px] items-center gap-2 overflow-hidden rounded-[28px] border px-3 py-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] sm:min-h-[136px] sm:gap-3 sm:rounded-[18px] sm:px-5 sm:py-3",
         align === "left" &&
           "justify-start border-emerald-200/70 bg-[linear-gradient(135deg,rgba(236,255,247,0.98),rgba(222,249,236,0.9))] text-left sm:[clip-path:polygon(0_0,100%_0,86%_100%,0_100%)] dark:border-emerald-500/22 dark:bg-[linear-gradient(135deg,rgba(6,78,59,0.42),rgba(5,46,34,0.68))]",
         align === "right" &&
@@ -1631,6 +1780,26 @@ type RegionGroup = {
   prices: SubscriptionRegionPrice[];
 };
 
+type BestValueSummary = {
+  key: string;
+  provider: string;
+  productName: string;
+  bestValueScore: number;
+  winner: {
+    plan: SubscriptionPlan;
+    region: SubscriptionRegionPrice;
+    liveCny: number;
+    valueScore: number;
+  };
+  runnerUp?: {
+    plan: SubscriptionPlan;
+    region: SubscriptionRegionPrice;
+    liveCny: number;
+    valueScore: number;
+  };
+  variantCount: number;
+};
+
 function RegionPlanCard({
   group,
   targetCurrency,
@@ -1685,6 +1854,214 @@ function RegionPlanCard({
   );
 }
 
+function BestValueCard({
+  rank,
+  summary,
+  targetCurrency,
+  liveCnyRates,
+  pulseKey,
+}: {
+  rank: number;
+  summary: BestValueSummary;
+  targetCurrency: TargetCurrencyCode;
+  liveCnyRates: Record<string, number>;
+  pulseKey: number;
+}) {
+  const logoPath = logoForProvider(summary.provider);
+  const bestDisplayPrice = formatTargetMoney(
+    summary.winner.region.convertedCNY,
+    targetCurrency,
+    summary.winner.region,
+    liveCnyRates,
+  );
+  const runnerUpDisplayPrice = summary.runnerUp
+    ? formatTargetMoney(
+        summary.runnerUp.region.convertedCNY,
+        targetCurrency,
+        summary.runnerUp.region,
+        liveCnyRates,
+      )
+    : null;
+  const runnerUpDelta = summary.runnerUp
+    ? summary.runnerUp.liveCny - summary.winner.liveCny
+    : 0;
+  const deltaVsRunnerUp = Math.abs(runnerUpDelta);
+  const comparisonStat =
+    deltaVsRunnerUp === 0
+      ? { label: "价差对比", value: "当前并列" }
+      : runnerUpDelta >= 0
+        ? {
+            label: "价差优势",
+            value: `省 ${formatCnyAsTargetMoney(deltaVsRunnerUp, targetCurrency, liveCnyRates)}`,
+          }
+        : { label: "方案定位", value: "高阶档位" };
+  const runnerUpTitle =
+    deltaVsRunnerUp === 0
+      ? "同价备选"
+      : runnerUpDelta >= 0
+        ? "次优选择"
+        : "更省钱的选择";
+
+  return (
+    <div className="rounded-[24px] border border-border bg-[linear-gradient(180deg,rgba(255,255,255,0.985),rgba(246,251,248,0.95))] p-4 shadow-[0_22px_56px_rgba(15,23,42,0.06)] backdrop-blur-xl dark:bg-[linear-gradient(180deg,rgba(10,15,14,0.97),rgba(11,18,16,0.93))]">
+      <div className="flex items-start justify-between gap-4">
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2.5">
+            {logoPath ? (
+              <Image
+                src={logoPath}
+                alt={`${summary.provider} logo`}
+                width={24}
+                height={24}
+                className="rounded-[6px] object-contain"
+              />
+            ) : null}
+            <div className="min-w-0">
+              <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                {summary.provider}
+              </div>
+              <h3 className="truncate text-[1.05rem] font-semibold tracking-[-0.03em] text-foreground sm:text-[1.12rem]">
+                {summary.productName}
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col items-end gap-1.5">
+          <span className="rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-semibold text-primary">
+            TOP {rank}
+          </span>
+          <span className="text-[10px] font-medium text-muted-foreground">
+            已收录 {summary.variantCount} 档
+          </span>
+        </div>
+      </div>
+
+      <div className="mt-4 rounded-[20px] border border-primary/14 bg-[linear-gradient(135deg,rgba(0,188,125,0.12),rgba(0,188,125,0.04))] p-4">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="rounded-full bg-background/88 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-primary">
+            most worth
+          </span>
+          <span className="text-[11px] text-muted-foreground">最值得的会员类型</span>
+        </div>
+
+        <div className="mt-2 text-[1.02rem] font-semibold tracking-[-0.03em] text-foreground">
+          {membershipLabelForPlan(summary.winner.plan)}
+        </div>
+
+        <div className="mt-3">
+          <div className="text-[11px] text-muted-foreground">最低到手价</div>
+          <div className="mt-1 text-[2rem] font-semibold leading-none tracking-[-0.06em] text-primary sm:text-[2.45rem]">
+            <LivePriceTick pulseKey={pulseKey}>{bestDisplayPrice}</LivePriceTick>
+          </div>
+        </div>
+
+        <div className="mt-3 flex flex-wrap gap-2">
+          <BestValueStat label="对应地区" value={summary.winner.region.country} />
+          <BestValueStat
+            label="订阅周期"
+            value={formatBillingCycle(summary.winner.plan.billingCycle)}
+          />
+          <BestValueStat
+            label="本地价格"
+            value={`${summary.winner.region.currencyCode} ${formatLocalNumber(summary.winner.region.localPrice)}`}
+          />
+          <BestValueStat
+            label={comparisonStat.label}
+            value={comparisonStat.value}
+          />
+        </div>
+
+        {summary.winner.plan.sourceUrl || summary.winner.plan.relatedArticleUrl ? (
+          <div className="flex flex-wrap gap-2 pt-3">
+            {summary.winner.plan.sourceUrl ? (
+              <Link
+                href={summary.winner.plan.sourceUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-primary/18 bg-background/82 px-3 py-2 text-[12px] font-semibold text-foreground transition-colors hover:border-primary/30 hover:text-primary"
+              >
+                查看官方价格页
+                <ChevronRightIcon className="size-3.5" />
+              </Link>
+            ) : null}
+            {summary.winner.plan.relatedArticleUrl ? (
+              <Link
+                href={summary.winner.plan.relatedArticleUrl}
+                className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-background/72 px-3 py-2 text-[12px] font-semibold text-foreground transition-colors hover:border-primary/28 hover:text-primary"
+              >
+                {summary.winner.plan.relatedArticleLabel ?? "查看详细攻略"}
+                <ChevronRightIcon className="size-3.5" />
+              </Link>
+            ) : null}
+          </div>
+        ) : null}
+      </div>
+
+      {summary.runnerUp ? (
+        <div className="mt-3 rounded-[18px] border border-border/70 bg-background/75 px-3.5 py-3">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="min-w-0 flex-1">
+              <div className="text-[11px] text-muted-foreground">{runnerUpTitle}</div>
+              <div className="mt-1 truncate text-[13px] font-semibold text-foreground">
+                {membershipLabelForPlan(summary.runnerUp.plan)}
+              </div>
+              <div className="mt-1 flex flex-wrap items-center gap-2 text-[11px] text-muted-foreground">
+                <span>{summary.runnerUp.region.country}</span>
+                <span className="text-border">/</span>
+                <span>{formatBillingCycle(summary.runnerUp.plan.billingCycle)}</span>
+              </div>
+            </div>
+
+            <div className="text-right">
+              <div className="text-[15px] font-semibold tracking-[-0.03em] text-foreground">
+                <LivePriceTick pulseKey={pulseKey}>{runnerUpDisplayPrice}</LivePriceTick>
+              </div>
+              <div className="mt-1 text-[11px] text-muted-foreground">
+                {runnerUpDelta >= 0 ? "比当前贵" : "比当前便宜"}{" "}
+                {formatCnyAsTargetMoney(deltaVsRunnerUp, targetCurrency, liveCnyRates)}
+              </div>
+            </div>
+          </div>
+
+          {summary.runnerUp.plan.sourceUrl || summary.runnerUp.plan.relatedArticleUrl ? (
+            <div className="mt-3 flex flex-wrap gap-3">
+              {summary.runnerUp.plan.sourceUrl ? (
+                <Link
+                  href={summary.runnerUp.plan.sourceUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 text-[11px] font-medium text-primary transition-colors hover:text-foreground"
+                >
+                  查看次优官方页
+                  <ChevronRightIcon className="size-3.5" />
+                </Link>
+              ) : null}
+              {summary.runnerUp.plan.relatedArticleUrl ? (
+                <Link
+                  href={summary.runnerUp.plan.relatedArticleUrl}
+                  className="inline-flex items-center gap-1.5 text-[11px] font-medium text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {summary.runnerUp.plan.relatedArticleLabel ?? "查看详细攻略"}
+                  <ChevronRightIcon className="size-3.5" />
+                </Link>
+              ) : null}
+            </div>
+          ) : null}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+function BestValueStat({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="inline-flex items-center gap-1.5 rounded-full border border-border/65 bg-background/84 px-2.5 py-1.5">
+      <span className="text-[10px] text-muted-foreground">{label}</span>
+      <span className="text-[11px] font-semibold text-foreground">{value}</span>
+    </div>
+  );
+}
+
 function buildRegionGroups(provider: string, productName: string): RegionGroup[] {
   const groups = new Map<string, RegionGroup>();
 
@@ -1716,6 +2093,116 @@ function buildRegionGroups(provider: string, productName: string): RegionGroup[]
         Math.min(...left.prices.map((item) => item.convertedCNY)) -
         Math.min(...right.prices.map((item) => item.convertedCNY)),
     );
+}
+
+function buildBestValueSummaries(
+  plans: SubscriptionPlan[],
+  liveCnyRates: Record<string, number>,
+  mode: BestValueMode,
+) {
+  const groups = new Map<string, SubscriptionPlan[]>();
+
+  plans.forEach((plan) => {
+    const key = `${plan.provider}::${plan.productName}`;
+    const existing = groups.get(key) ?? [];
+    existing.push(plan);
+    groups.set(key, existing);
+  });
+
+  return Array.from(groups.entries())
+    .map(([key, groupPlans]) => {
+      const rankedByScore = groupPlans
+        .map((plan) => {
+          const region = buildCheapestRegionForPlan(
+            plan,
+            mode === "value" ? curatedBestValueWinnerRegion[plan.id] : undefined,
+          );
+          const valueScore = bestValueScoreFor(plan, region, liveCnyRates);
+          return {
+            plan,
+            region,
+            liveCny: liveCnyValueFor(region, liveCnyRates),
+            valueScore,
+          };
+        })
+        .sort((left, right) =>
+          mode === "value"
+            ? left.valueScore - right.valueScore || left.liveCny - right.liveCny
+            : left.liveCny - right.liveCny,
+        );
+      const featuredPlanId =
+        mode === "value" ? curatedBestValueWinnerPlan[key] : undefined;
+      const runnerUpPlanId =
+        mode === "value" ? curatedBestValueRunnerUpPlan[key] : undefined;
+      const ranked =
+        featuredPlanId == null
+          ? rankedByScore
+          : [...rankedByScore].sort((left, right) => {
+              const leftFeatured = left.plan.id === featuredPlanId ? 1 : 0;
+              const rightFeatured = right.plan.id === featuredPlanId ? 1 : 0;
+              const leftRunnerUp = left.plan.id === runnerUpPlanId ? 1 : 0;
+              const rightRunnerUp = right.plan.id === runnerUpPlanId ? 1 : 0;
+
+              return (
+                rightFeatured - leftFeatured ||
+                rightRunnerUp - leftRunnerUp ||
+                left.valueScore - right.valueScore ||
+                left.liveCny - right.liveCny
+              );
+            });
+      const winner =
+        featuredPlanId == null
+          ? ranked[0]
+          : ranked.find((item) => item.plan.id === featuredPlanId) ?? ranked[0];
+      const runnerUp =
+        runnerUpPlanId == null
+          ? ranked.find((item) => item.plan.id !== winner?.plan.id)
+          : ranked.find((item) => item.plan.id === runnerUpPlanId) ??
+            ranked.find((item) => item.plan.id !== winner?.plan.id);
+
+      return {
+        key,
+        provider: groupPlans[0]?.provider ?? "",
+        productName: groupPlans[0]?.productName ?? "",
+        bestValueScore: winner?.valueScore ?? Number.POSITIVE_INFINITY,
+        winner,
+        runnerUp,
+        variantCount: groupPlans.length,
+      } satisfies BestValueSummary;
+    })
+    .filter((item) => Boolean(item.winner))
+    .sort((left, right) =>
+      mode === "value"
+        ? (curatedBestValueProductOrder[left.key] ?? 99) -
+            (curatedBestValueProductOrder[right.key] ?? 99) ||
+          left.bestValueScore - right.bestValueScore ||
+          left.winner.liveCny - right.winner.liveCny
+        : left.winner.liveCny - right.winner.liveCny,
+    );
+}
+
+function buildCheapestRegionForPlan(
+  plan: SubscriptionPlan,
+  preferredCountryCode?: string,
+) {
+  const matches = subscriptionRegionPrices.filter(
+    (item) =>
+      item.provider === plan.provider &&
+      item.productName === plan.productName &&
+      item.planName === plan.planName &&
+      item.billingCycle === plan.billingCycle,
+  );
+
+  const preferredRegion =
+    preferredCountryCode == null
+      ? undefined
+      : matches.find((item) => item.countryCode === preferredCountryCode);
+
+  return (
+    preferredRegion ??
+    matches.sort((left, right) => left.convertedCNY - right.convertedCNY)[0] ??
+    buildFallbackRegion(plan)
+  );
 }
 
 function planSortWeight(item: SubscriptionRegionPrice) {
@@ -1760,6 +2247,41 @@ function membershipLabelForRow(item: SubscriptionRegionPrice) {
   }
 
   return `${item.productName} ${item.planName}`;
+}
+
+function membershipLabelForPlan(plan: SubscriptionPlan) {
+  if (plan.bestValueLabel) {
+    return plan.bestValueLabel;
+  }
+
+  if (plan.productName === "ChatGPT") {
+    return `${plan.productName} ${plan.planName}`;
+  }
+
+  return `${plan.productName} ${plan.planName}`;
+}
+
+function bestValueScoreFor(
+  plan: SubscriptionPlan,
+  region: SubscriptionRegionPrice,
+  liveCnyRates: Record<string, number>,
+) {
+  const monthlyEquivalent =
+    liveCnyValueFor(region, liveCnyRates) / (plan.billingCycle === "yearly" ? 12 : 1);
+  const tags = new Set(plan.tags.map((item) => item.toLowerCase()));
+  let multiplier = 1;
+
+  if (tags.has("entry")) multiplier -= 0.12;
+  if (tags.has("popular")) multiplier -= 0.08;
+  if (tags.has("general")) multiplier -= 0.05;
+  if (tags.has("official")) multiplier -= 0.03;
+  if (tags.has("annual")) multiplier -= 0.02;
+  if (tags.has("power-user")) multiplier += 0.16;
+  if (tags.has("high-usage")) multiplier += 0.14;
+  if (tags.has("max")) multiplier += 0.18;
+  if (tags.has("app-tier")) multiplier += 0.08;
+
+  return monthlyEquivalent * multiplier;
 }
 
 function logoForProvider(provider: string) {

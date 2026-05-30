@@ -13,7 +13,20 @@ export const metadata: Metadata = {
     "对比 ChatGPT、Claude、Gemini、Cursor、Windsurf 等 AI 产品订阅价格与更新信息。",
 };
 
-export default function SubscriptionPricingPage() {
+const allowedViews = ["subscription", "best", "region"] as const;
+type SubscriptionPageView = (typeof allowedViews)[number];
+const allowedViewSet = new Set<SubscriptionPageView>(allowedViews);
+
+export default async function SubscriptionPricingPage(
+  props: PageProps<"/pricing/subscriptions">,
+) {
+  const searchParams = await props.searchParams;
+  const requestedView = searchParams.view;
+  const initialViewMode: SubscriptionPageView =
+    typeof requestedView === "string" && allowedViewSet.has(requestedView as SubscriptionPageView)
+      ? (requestedView as SubscriptionPageView)
+      : "subscription";
+
   return (
     <div className="pb-8 sm:pb-16">
       <PageHero
@@ -48,8 +61,16 @@ export default function SubscriptionPricingPage() {
         rightSlot={<PageShowcase variant="subscriptions" />}
       />
 
-      <div id="subscriptions-board" className="mt-4 sm:mt-8">
-        <SubscriptionExplorer plans={subscriptionPlans} />
+      <div
+        id="subscriptions-board"
+        className="mt-4 scroll-mt-24 sm:mt-8 sm:scroll-mt-32"
+      >
+        <SubscriptionExplorer
+          key={initialViewMode}
+          plans={subscriptionPlans}
+          initialViewMode={initialViewMode}
+          persistViewInUrl
+        />
       </div>
     </div>
   );

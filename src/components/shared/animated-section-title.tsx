@@ -1,4 +1,5 @@
 import type { ElementType } from "react";
+import { SparklesIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -18,15 +19,24 @@ export function AnimatedSectionTitle({
   return (
     <Component
       className={cn("animated-section-title", className)}
-      data-text={children}
       aria-label={children}
     >
-      <span className="actual-text" aria-hidden="true">
-        {children}
+      <span className="animated-section-title__copy" aria-hidden="true">
+        <span className="animated-section-title__baseline">{children}</span>
+        <span className="animated-section-title__glow">{children}</span>
       </span>
-      <span className="hover-text" aria-hidden="true">
-        {children}
-      </span>
+      <SparklesIcon
+        aria-hidden="true"
+        className="animated-section-title__spark animated-section-title__spark--one"
+      />
+      <SparklesIcon
+        aria-hidden="true"
+        className="animated-section-title__spark animated-section-title__spark--two"
+      />
+      <SparklesIcon
+        aria-hidden="true"
+        className="animated-section-title__spark animated-section-title__spark--three"
+      />
     </Component>
   );
 }

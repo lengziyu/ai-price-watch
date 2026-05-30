@@ -7,7 +7,12 @@ import { getAdminSession } from "@/lib/admin-auth";
 
 export const runtime = "nodejs";
 
-const uploadDir = path.join(process.cwd(), "data", "uploads", "deal-articles");
+const uploadDir = path.join(
+  /*turbopackIgnore: true*/ process.cwd(),
+  "data",
+  "uploads",
+  "deal-articles",
+);
 
 export async function POST(request: Request) {
   const session = await getAdminSession();

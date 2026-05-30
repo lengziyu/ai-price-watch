@@ -30,11 +30,14 @@ export type SubscriptionPlan = {
   productName: string;
   provider: string;
   planName: string;
+  bestValueLabel?: string;
   officialPriceUSD?: number;
   priceCNY?: number;
   billingCycle: BillingCycle;
   region?: string;
   sourceUrl?: string;
+  relatedArticleUrl?: string;
+  relatedArticleLabel?: string;
   note?: string;
   evidence?: EvidenceMeta;
   tags: string[];

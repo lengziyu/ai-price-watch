@@ -15,13 +15,23 @@ import {
 import { importArticleHtml, looksLikeXLongformHtml } from "@/lib/x-html-import";
 import type { AIDeal, DealArticle } from "@/types";
 
-const legacyAdminDataDir = path.join(process.cwd(), "data", "admin");
-const defaultRuntimeAdminDataDir = path.join(process.cwd(), ".runtime", "admin-data");
+const legacyAdminDataDir = path.join(/*turbopackIgnore: true*/ process.cwd(), "data", "admin");
+const defaultRuntimeAdminDataDir = path.join(/*turbopackIgnore: true*/ process.cwd(), ".runtime", "admin-data");
 const adminDataDir = resolveAdminDataDir();
-const publicDir = path.join(process.cwd(), "public");
-const uploadedDealArticleCoverDir = path.join(process.cwd(), "data", "uploads", "deal-articles");
+const publicDir = path.join(/*turbopackIgnore: true*/ process.cwd(), "public");
+const uploadedDealArticleCoverDir = path.join(
+  /*turbopackIgnore: true*/ process.cwd(),
+  "data",
+  "uploads",
+  "deal-articles",
+);
 const legacyPublicDealArticleCoverDir = path.join(publicDir, "uploads", "deal-articles");
-const crawlDataFile = path.join(process.cwd(), "data", "crawl", "price-snapshot.json");
+const crawlDataFile = path.join(
+  /*turbopackIgnore: true*/ process.cwd(),
+  "data",
+  "crawl",
+  "price-snapshot.json",
+);
 const manualDealsFile = path.join(adminDataDir, "manual-deals.json");
 const dealArticlesFile = path.join(adminDataDir, "deal-articles.json");
 const membershipRateReviewsFile = path.join(adminDataDir, "membership-rate-reviews.json");
@@ -35,6 +45,7 @@ const legacyMembershipRateReviewsFile = path.join(
 );
 const legacySourceReviewsFile = path.join(legacyAdminDataDir, "source-reviews.json");
 const legacyOperationLogsFile = path.join(legacyAdminDataDir, "operation-logs.json");
+const jsonFileMutationQueues = new Map<string, Promise<void>>();
 
 export type CrawlSnapshotResult = {
   id: string;
@@ -186,7 +197,7 @@ function resolveAdminDataDir() {
 
   return path.isAbsolute(configuredDir)
     ? configuredDir
-    : path.join(process.cwd(), configuredDir);
+    : path.join(/*turbopackIgnore: true*/ process.cwd(), configuredDir);
 }
 
 async function ensureAdminDataDir() {
@@ -243,6 +254,49 @@ async function tryLoadJsonWithAutoMigration<T>(
 async function writeJsonFile<T>(filePath: string, value: T) {
   await ensureAdminDataDir();
   await writeFile(filePath, `${JSON.stringify(value, null, 2)}\n`, "utf8");
+}
+
+// Serialize read-modify-write cycles per file so concurrent requests do not clobber each other.
+async function withSerializedJsonMutation<T>(
+  filePath: string,
+  mutate: () => Promise<T>,
+): Promise<T> {
+  const previous = jsonFileMutationQueues.get(filePath) ?? Promise.resolve();
+  let release!: () => void;
+  const current = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  const next = previous.catch(() => undefined).then(() => current);
+  jsonFileMutationQueues.set(filePath, next);
+
+  await previous.catch(() => undefined);
+
+  try {
+    return await mutate();
+  } finally {
+    release();
+    if (jsonFileMutationQueues.get(filePath) === next) {
+      jsonFileMutationQueues.delete(filePath);
+    }
+  }
+}
+
+async function mutateJsonFileWithResult<T, TResult>(
+  filePath: string,
+  legacyFilePath: string,
+  fallback: T,
+  mutate: (currentValue: T) => Promise<{ nextValue: T; result: TResult }> | { nextValue: T; result: TResult },
+): Promise<TResult> {
+  return withSerializedJsonMutation(filePath, async () => {
+    const currentValue = await tryLoadJsonWithAutoMigration<T>(
+      filePath,
+      legacyFilePath,
+      fallback,
+    );
+    const { nextValue, result } = await mutate(currentValue);
+    await writeJsonFile(filePath, nextValue);
+    return result;
+  });
 }
 
 export async function getManualDeals() {
@@ -329,37 +383,55 @@ export async function getCrawlSnapshot() {
 
 export async function appendOperationLog(
   input: Omit<AdminOperationLog, "id" | "createdAt">,
-) {
-  const logs = await getOperationLogs();
-  const nextEntry: AdminOperationLog = {
-    id: randomUUID(),
-    createdAt: new Date().toISOString(),
-    ...input,
-  };
+): Promise<AdminOperationLog> {
+  return mutateJsonFileWithResult(
+    operationLogsFile,
+    legacyOperationLogsFile,
+    [],
+    (logs: AdminOperationLog[]) => {
+      const nextEntry: AdminOperationLog = {
+        id: randomUUID(),
+        createdAt: new Date().toISOString(),
+        ...input,
+      };
 
-  await writeJsonFile(operationLogsFile, [nextEntry, ...logs].slice(0, 300));
-  return nextEntry;
+      return {
+        nextValue: [nextEntry, ...logs].slice(0, 300),
+        result: nextEntry,
+      };
+    },
+  );
 }
 
-export async function createManualDeal(input: ManualDealInput, actor: string) {
-  const deals = await getManualDeals();
-  const nextDeal: AIDeal = {
-    id: `manual-${randomUUID()}`,
-    title: input.title,
-    provider: input.provider,
-    summary: input.summary,
-    dealType: input.dealType,
-    value: input.value,
-    deadline: input.deadline,
-    sourceUrl: input.sourceUrl,
-    howToGet: input.howToGet,
-    suitableFor: input.suitableFor,
-    riskLevel: input.riskLevel,
-    status: input.status,
-    updatedAt: new Date().toISOString(),
-  };
+export async function createManualDeal(input: ManualDealInput, actor: string): Promise<AIDeal> {
+  const nextDeal = await mutateJsonFileWithResult(
+    manualDealsFile,
+    legacyManualDealsFile,
+    [],
+    (deals: AIDeal[]) => {
+      const nextDeal: AIDeal = {
+        id: `manual-${randomUUID()}`,
+        title: input.title,
+        provider: input.provider,
+        summary: input.summary,
+        dealType: input.dealType,
+        value: input.value,
+        deadline: input.deadline,
+        sourceUrl: input.sourceUrl,
+        howToGet: input.howToGet,
+        suitableFor: input.suitableFor,
+        riskLevel: input.riskLevel,
+        status: input.status,
+        updatedAt: new Date().toISOString(),
+      };
 
-  await writeJsonFile(manualDealsFile, [nextDeal, ...deals]);
+      return {
+        nextValue: [nextDeal, ...deals],
+        result: nextDeal,
+      };
+    },
+  );
+
   await appendOperationLog({
     actor,
     type: "manual_deal_create",
@@ -371,54 +443,68 @@ export async function createManualDeal(input: ManualDealInput, actor: string) {
   return nextDeal;
 }
 
-export async function createDealArticle(input: DealArticleInput, actor: string) {
+export async function createDealArticle(
+  input: DealArticleInput,
+  actor: string,
+): Promise<DealArticle> {
   const normalizedInput = await normalizeDealArticleInput(input);
-  const articles = await getDealArticles();
   const title = inferDealArticleTitle(normalizedInput.title, normalizedInput.rawContent);
   const body = buildDealArticleBody(normalizedInput.rawContent, title) || normalizedInput.rawContent;
   const summary = inferDealArticleSummary(normalizedInput.summary, body);
   const sourcePlatform = normalizedInput.sourceUrl
     ? detectDealArticleSourcePlatform(normalizedInput.sourceUrl)
     : normalizedInput.sourcePlatform;
-  const slugBase = createDealArticleSlug(title);
-  const takenSlugs = new Set(articles.map((article) => article.slug));
-  let slug = slugBase;
-  let suffix = 2;
-
-  while (takenSlugs.has(slug)) {
-    slug = `${slugBase}-${suffix}`;
-    suffix += 1;
-  }
-
-  const now = new Date().toISOString();
-  const id = `deal-article-${randomUUID()}`;
   const coverImageUrl = await saveDealArticleCoverImage(
     normalizedInput.coverImage,
     normalizedInput.uploadedCoverImageUrl,
   );
-  const engagement = createInitialDealArticleEngagement(
-    `${id}:${title}:${normalizedInput.sourceUrl ?? ""}:${now}`,
-  );
-  const nextArticle: DealArticle = {
-    id,
-    slug,
-    title,
-    summary,
-    body,
-    rawContent: normalizedInput.rawContent,
-    coverImageUrl,
-    viewCount: engagement.viewCount,
-    likeCount: engagement.likeCount,
-    difficulty: normalizedInput.difficulty,
-    sourcePlatform,
-    sourceUrl: normalizedInput.sourceUrl,
-    status: normalizedInput.status,
-    tags: normalizedInput.tags,
-    publishedAt: now,
-    updatedAt: now,
-  };
+  const nextArticle = await mutateJsonFileWithResult(
+    dealArticlesFile,
+    legacyDealArticlesFile,
+    [],
+    (articles: DealArticle[]) => {
+      const slugBase = createDealArticleSlug(title);
+      const takenSlugs = new Set(articles.map((article) => article.slug));
+      let slug = slugBase;
+      let suffix = 2;
 
-  await writeJsonFile(dealArticlesFile, [nextArticle, ...articles]);
+      while (takenSlugs.has(slug)) {
+        slug = `${slugBase}-${suffix}`;
+        suffix += 1;
+      }
+
+      const now = new Date().toISOString();
+      const id = `deal-article-${randomUUID()}`;
+      const engagement = createInitialDealArticleEngagement(
+        `${id}:${title}:${normalizedInput.sourceUrl ?? ""}:${now}`,
+      );
+
+      const nextArticle: DealArticle = {
+        id,
+        slug,
+        title,
+        summary,
+        body,
+        rawContent: normalizedInput.rawContent,
+        coverImageUrl,
+        viewCount: engagement.viewCount,
+        likeCount: engagement.likeCount,
+        difficulty: normalizedInput.difficulty,
+        sourcePlatform,
+        sourceUrl: normalizedInput.sourceUrl,
+        status: normalizedInput.status,
+        tags: normalizedInput.tags,
+        publishedAt: now,
+        updatedAt: now,
+      };
+
+      return {
+        nextValue: [nextArticle, ...articles],
+        result: nextArticle,
+      };
+    },
+  );
+
   await appendOperationLog({
     actor,
     type: "deal_article_publish",
@@ -430,60 +516,71 @@ export async function createDealArticle(input: DealArticleInput, actor: string) 
   return nextArticle;
 }
 
-export async function updateDealArticle(id: string, input: DealArticleInput, actor: string) {
+export async function updateDealArticle(
+  id: string,
+  input: DealArticleInput,
+  actor: string,
+): Promise<DealArticle> {
   const normalizedInput = await normalizeDealArticleInput(input);
-  const articles = await getDealArticles();
-  const currentArticle = articles.find((article) => article.id === id);
-
-  if (!currentArticle) {
-    throw new Error("没有找到要编辑的文章。");
-  }
-
   const title = inferDealArticleTitle(normalizedInput.title, normalizedInput.rawContent);
   const body = buildDealArticleBody(normalizedInput.rawContent, title) || normalizedInput.rawContent;
   const summary = inferDealArticleSummary(normalizedInput.summary, body);
   const sourcePlatform = normalizedInput.sourceUrl
     ? detectDealArticleSourcePlatform(normalizedInput.sourceUrl)
     : normalizedInput.sourcePlatform;
-  const nextSlugBase = createDealArticleSlug(title);
-  const takenSlugs = new Set(
-    articles.filter((article) => article.id !== id).map((article) => article.slug),
-  );
-  let slug = nextSlugBase;
-  let suffix = 2;
-
-  while (takenSlugs.has(slug)) {
-    slug = `${nextSlugBase}-${suffix}`;
-    suffix += 1;
-  }
-
-  const coverImageUrl = await resolveUpdatedDealArticleCoverImageUrl(
-    currentArticle.coverImageUrl,
-    normalizedInput.coverImage,
-    normalizedInput.uploadedCoverImageUrl,
-    normalizedInput.resetCoverImage,
-  );
-
-  const nextArticle: DealArticle = {
-    ...currentArticle,
-    slug,
-    title,
-    summary,
-    body,
-    rawContent: normalizedInput.rawContent,
-    coverImageUrl,
-    difficulty: normalizedInput.difficulty,
-    sourcePlatform,
-    sourceUrl: normalizedInput.sourceUrl,
-    status: normalizedInput.status,
-    tags: normalizedInput.tags,
-    updatedAt: new Date().toISOString(),
-  };
-
-  await writeJsonFile(
+  const nextArticle = await mutateJsonFileWithResult(
     dealArticlesFile,
-    articles.map((article) => (article.id === id ? nextArticle : article)),
+    legacyDealArticlesFile,
+    [],
+    async (articles: DealArticle[]) => {
+      const currentArticle = articles.find((article) => article.id === id);
+
+      if (!currentArticle) {
+        throw new Error("没有找到要编辑的文章。");
+      }
+
+      const nextSlugBase = createDealArticleSlug(title);
+      const takenSlugs = new Set(
+        articles.filter((article) => article.id !== id).map((article) => article.slug),
+      );
+      let slug = nextSlugBase;
+      let suffix = 2;
+
+      while (takenSlugs.has(slug)) {
+        slug = `${nextSlugBase}-${suffix}`;
+        suffix += 1;
+      }
+
+      const coverImageUrl = await resolveUpdatedDealArticleCoverImageUrl(
+        currentArticle.coverImageUrl,
+        normalizedInput.coverImage,
+        normalizedInput.uploadedCoverImageUrl,
+        normalizedInput.resetCoverImage,
+      );
+
+      const nextArticle: DealArticle = {
+        ...currentArticle,
+        slug,
+        title,
+        summary,
+        body,
+        rawContent: normalizedInput.rawContent,
+        coverImageUrl,
+        difficulty: normalizedInput.difficulty,
+        sourcePlatform,
+        sourceUrl: normalizedInput.sourceUrl,
+        status: normalizedInput.status,
+        tags: normalizedInput.tags,
+        updatedAt: new Date().toISOString(),
+      };
+
+      return {
+        nextValue: articles.map((article) => (article.id === id ? nextArticle : article)),
+        result: nextArticle,
+      };
+    },
   );
+
   await appendOperationLog({
     actor,
     type: "deal_article_update",
@@ -504,51 +601,62 @@ export async function updateDealArticleEngagement(
     viewIncrement?: number;
     likeIncrement?: number;
   },
-) {
-  const articles = await getDealArticles();
-  const currentArticle = articles.find((article) => article.id === id);
-
-  if (!currentArticle) {
-    throw new Error("没有找到要更新互动数据的文章。");
-  }
-
-  const nextArticle: DealArticle = {
-    ...currentArticle,
-    viewCount: Math.max(0, currentArticle.viewCount + Math.max(0, viewIncrement)),
-    likeCount: Math.max(0, currentArticle.likeCount + Math.max(0, likeIncrement)),
-    updatedAt: new Date().toISOString(),
-  };
-
-  await writeJsonFile(
+): Promise<DealArticle> {
+  return mutateJsonFileWithResult(
     dealArticlesFile,
-    articles.map((article) => (article.id === id ? nextArticle : article)),
-  );
+    legacyDealArticlesFile,
+    [],
+    (articles: DealArticle[]) => {
+      const currentArticle = articles.find((article) => article.id === id);
 
-  return nextArticle;
+      if (!currentArticle) {
+        throw new Error("没有找到要更新互动数据的文章。");
+      }
+
+      const nextArticle: DealArticle = {
+        ...currentArticle,
+        viewCount: Math.max(0, currentArticle.viewCount + Math.max(0, viewIncrement)),
+        likeCount: Math.max(0, currentArticle.likeCount + Math.max(0, likeIncrement)),
+        updatedAt: new Date().toISOString(),
+      };
+
+      return {
+        nextValue: articles.map((article) => (article.id === id ? nextArticle : article)),
+        result: nextArticle,
+      };
+    },
+  );
 }
 
-export async function deleteDealArticle(id: string, actor: string) {
-  const articles = await getDealArticles();
-  const currentArticle = articles.find((article) => article.id === id);
-
-  if (!currentArticle) {
-    throw new Error("没有找到要删除的文章。");
-  }
-
-  await deleteUploadedDealArticleCoverIfNeeded(currentArticle.coverImageUrl);
-  await writeJsonFile(
+export async function deleteDealArticle(id: string, actor: string): Promise<DealArticle> {
+  const deletedArticle = await mutateJsonFileWithResult(
     dealArticlesFile,
-    articles.filter((article) => article.id !== id),
+    legacyDealArticlesFile,
+    [],
+    async (articles: DealArticle[]) => {
+      const currentArticle = articles.find((article) => article.id === id);
+
+      if (!currentArticle) {
+        throw new Error("没有找到要删除的文章。");
+      }
+
+      await deleteUploadedDealArticleCoverIfNeeded(currentArticle.coverImageUrl);
+      return {
+        nextValue: articles.filter((article) => article.id !== id),
+        result: currentArticle,
+      };
+    },
   );
+
   await appendOperationLog({
     actor,
     type: "deal_article_delete",
     status: "success",
-    message: `删除优惠文章：${currentArticle.title}`,
-    detail: `${currentArticle.sourcePlatform} · ${currentArticle.status}`,
+    message: `删除优惠文章：${deletedArticle.title}`,
+    detail: `${deletedArticle.sourcePlatform} · ${deletedArticle.status}`,
   });
 
-  return currentArticle;
+  return deletedArticle;
 }
 
 async function saveDealArticleCoverImage(file?: File, uploadedCoverImageUrl?: string) {
@@ -680,16 +788,26 @@ function createInitialDealArticleEngagement(seed: string) {
 export async function createMembershipRateReview(
   input: MembershipRateReviewInput,
   actor: string,
-) {
-  const reviews = await getMembershipRateReviews();
-  const nextReview: MembershipRateReview = {
-    id: `membership-review-${randomUUID()}`,
-    reviewedAt: new Date().toISOString(),
-    actor,
-    ...input,
-  };
+): Promise<MembershipRateReview> {
+  const nextReview = await mutateJsonFileWithResult(
+    membershipRateReviewsFile,
+    legacyMembershipRateReviewsFile,
+    [],
+    (reviews: MembershipRateReview[]) => {
+      const nextReview: MembershipRateReview = {
+        id: `membership-review-${randomUUID()}`,
+        reviewedAt: new Date().toISOString(),
+        actor,
+        ...input,
+      };
 
-  await writeJsonFile(membershipRateReviewsFile, [nextReview, ...reviews].slice(0, 500));
+      return {
+        nextValue: [nextReview, ...reviews].slice(0, 500),
+        result: nextReview,
+      };
+    },
+  );
+
   await appendOperationLog({
     actor,
     type: "membership_rate_review_create",
@@ -701,16 +819,29 @@ export async function createMembershipRateReview(
   return nextReview;
 }
 
-export async function createSourceReview(input: SourceReviewInput, actor: string) {
-  const reviews = await getSourceReviews();
-  const nextReview: SourceReview = {
-    id: `source-review-${randomUUID()}`,
-    reviewedAt: new Date().toISOString(),
-    actor,
-    ...input,
-  };
+export async function createSourceReview(
+  input: SourceReviewInput,
+  actor: string,
+): Promise<SourceReview> {
+  const nextReview = await mutateJsonFileWithResult(
+    sourceReviewsFile,
+    legacySourceReviewsFile,
+    [],
+    (reviews: SourceReview[]) => {
+      const nextReview: SourceReview = {
+        id: `source-review-${randomUUID()}`,
+        reviewedAt: new Date().toISOString(),
+        actor,
+        ...input,
+      };
 
-  await writeJsonFile(sourceReviewsFile, [nextReview, ...reviews].slice(0, 700));
+      return {
+        nextValue: [nextReview, ...reviews].slice(0, 700),
+        result: nextReview,
+      };
+    },
+  );
+
   await appendOperationLog({
     actor,
     type: "source_review_create",

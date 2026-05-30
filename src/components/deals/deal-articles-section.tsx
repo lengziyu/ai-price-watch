@@ -7,6 +7,7 @@ import Link from "next/link";
 import { DealArticleEngagement } from "@/components/deals/deal-article-engagement";
 import { AnimeHoverCard } from "@/components/shared/anime-hover-card";
 import { AnimeReveal } from "@/components/shared/anime-reveal";
+import { SpotlightCard } from "@/components/shared/spotlight-card";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import {
@@ -91,86 +92,88 @@ export function DealArticlesSection({ articles }: DealArticlesSectionProps) {
           {filteredArticles.map((article) => {
             return (
               <AnimeHoverCard key={article.id} className="group/card h-full" lift={5} scale={1.012}>
-                <Card
-                  size="sm"
-                  className="relative h-full !gap-0 rounded-[6px] border border-border/85 bg-white/82 !py-0 shadow-[0_8px_18px_rgba(25,42,74,0.08)] backdrop-blur-md transition-[box-shadow,border-color] duration-200 group-hover/card:border-primary/28 group-hover/card:shadow-[0_16px_26px_color-mix(in_srgb,var(--primary)_18%,transparent)] dark:border-white/12 dark:bg-[rgba(17,27,44,0.82)] dark:group-hover/card:border-primary/34"
-                >
-                  <Link
-                    href={`/deals/articles/${article.slug}`}
-                    aria-label={`查看文章：${article.title}`}
-                    className="absolute inset-0 z-10 rounded-[6px]"
-                  />
-                  <div className="relative z-20 pointer-events-none">
-                    <div className="relative aspect-[16/9] overflow-hidden rounded-t-[6px] border-b border-border/70">
-                      <Image
-                        src={article.coverImageUrl}
-                        alt={`${article.title} 封面图`}
-                        fill
-                        className="scale-[1.02] object-cover transition-transform duration-300 group-hover/card:scale-[1.06]"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                      />
-                      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(22,18,18,0.06),rgba(56,34,24,0.12)_42%,rgba(22,14,12,0.44)_100%)]" />
-                      <div className="absolute left-3 top-3 flex items-center gap-2">
-                        <Badge className={cn("h-auto rounded-full px-3 py-1 text-[12px] font-semibold shadow-sm", statusToneClass(article.status))}>
-                          {formatDealArticleStatus(article.status)}
-                        </Badge>
-                      </div>
-                      <div className="absolute right-3 top-3">
-                        <Badge
-                          variant="outline"
-                          className="rounded-full border-white/40 bg-background/88 px-3 py-1 text-[11px] shadow-sm backdrop-blur-sm"
-                        >
-                          {formatDealArticleDifficulty(article.difficulty)}
-                        </Badge>
-                      </div>
-                    </div>
-                    <CardHeader className="gap-1 px-4 pb-1 pt-2">
-                      <div className="min-w-0 w-full transition-transform duration-200 group-hover/card:-translate-y-1">
-                        <div className="block w-full truncate overflow-hidden whitespace-nowrap py-[10px] text-[20px] font-semibold leading-tight tracking-[-0.03em] text-foreground">
-                          {article.title}
-                        </div>
-                        <CardDescription
-                          className={cn(
-                            "mt-1 line-clamp-2 h-[3rem] overflow-hidden text-[12px] leading-6 text-foreground/72 sm:text-[13px]",
-                          )}
-                        >
-                          {buildCompactSummary(article.summary)}
-                        </CardDescription>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="flex flex-col gap-2.5 px-4 pb-2.5">
-                      <div className="flex flex-wrap gap-2">
-                        {article.tags.slice(0, 4).map((tag, index) => (
-                          <Badge
-                            key={`${tag}-${index}`}
-                            className={cn("h-auto rounded-full px-3 py-1 text-[11px] font-medium shadow-sm", tagToneClass())}
-                          >
-                            {tag}
-                          </Badge>
-                        ))}
-                        {article.tags.length === 0 ? (
-                          <Badge variant="outline" className="rounded-full px-3 py-1 text-[11px]">
-                            待补标签
-                          </Badge>
-                        ) : null}
-                      </div>
-
-                      <div className="flex flex-wrap items-center justify-between gap-2.5 border-t border-border/70 pt-3">
-                        <span className="inline-flex min-h-8 items-center text-[12px] text-muted-foreground">
-                          {formatDateTime(article.publishedAt)}
-                        </span>
-                        <DealArticleEngagement
-                          articleId={article.id}
-                          initialViewCount={article.viewCount}
-                          initialLikeCount={article.likeCount}
-                          recordView={false}
-                          variant="compact"
-                          className="pointer-events-auto relative z-30 justify-end"
+                <SpotlightCard className="h-full rounded-[6px]" contentClassName="rounded-[6px]">
+                  <Card
+                    size="sm"
+                    className="relative h-full !gap-0 rounded-[6px] border border-black/10 bg-transparent !py-0 shadow-[0_8px_18px_rgba(25,42,74,0.08)] transition-[box-shadow,border-color] duration-200 group-hover/card:border-primary/20 group-hover/card:shadow-[0_16px_28px_color-mix(in_srgb,var(--primary)_18%,transparent)] dark:border-white/10 dark:group-hover/card:border-primary/30"
+                  >
+                    <Link
+                      href={`/deals/articles/${article.slug}`}
+                      aria-label={`查看文章：${article.title}`}
+                      className="absolute inset-0 z-10 rounded-[6px]"
+                    />
+                    <div className="pointer-events-none relative z-20">
+                      <div className="relative aspect-[16/9] overflow-hidden rounded-t-[6px] border-b border-border/70">
+                        <Image
+                          src={article.coverImageUrl}
+                          alt={`${article.title} 封面图`}
+                          fill
+                          className="scale-[1.02] object-cover transition-transform duration-300 group-hover/card:scale-[1.06]"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                         />
+                        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(22,18,18,0.06),rgba(56,34,24,0.12)_42%,rgba(22,14,12,0.44)_100%)]" />
+                        <div className="absolute left-3 top-3 flex items-center gap-2">
+                          <Badge className={cn("h-auto rounded-full px-3 py-1 text-[12px] font-semibold shadow-sm", statusToneClass(article.status))}>
+                            {formatDealArticleStatus(article.status)}
+                          </Badge>
+                        </div>
+                        <div className="absolute right-3 top-3">
+                          <Badge
+                            variant="outline"
+                            className="rounded-full border-white/40 bg-background/88 px-3 py-1 text-[11px] shadow-sm backdrop-blur-sm"
+                          >
+                            {formatDealArticleDifficulty(article.difficulty)}
+                          </Badge>
+                        </div>
                       </div>
-                    </CardContent>
-                  </div>
-                </Card>
+                      <CardHeader className="gap-1 px-4 pb-1 pt-2">
+                        <div className="min-w-0 w-full transition-transform duration-200 group-hover/card:-translate-y-1">
+                          <div className="block w-full truncate overflow-hidden whitespace-nowrap py-[10px] text-[20px] font-semibold leading-tight tracking-[-0.03em] text-foreground">
+                            {article.title}
+                          </div>
+                          <CardDescription
+                            className={cn(
+                              "mt-1 line-clamp-2 h-[3rem] overflow-hidden text-[12px] leading-6 text-foreground/72 sm:text-[13px]",
+                            )}
+                          >
+                            {buildCompactSummary(article.summary)}
+                          </CardDescription>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="flex flex-col gap-2.5 px-4 pb-2.5">
+                        <div className="flex flex-wrap gap-2">
+                          {article.tags.slice(0, 4).map((tag, index) => (
+                            <Badge
+                              key={`${tag}-${index}`}
+                              className={cn("h-auto rounded-full px-3 py-1 text-[11px] font-medium shadow-sm", tagToneClass())}
+                            >
+                              {tag}
+                            </Badge>
+                          ))}
+                          {article.tags.length === 0 ? (
+                            <Badge variant="outline" className="rounded-full px-3 py-1 text-[11px]">
+                              待补标签
+                            </Badge>
+                          ) : null}
+                        </div>
+
+                        <div className="flex flex-wrap items-center justify-between gap-2.5 border-t border-border/70 pt-3">
+                          <span className="inline-flex min-h-8 items-center text-[12px] text-muted-foreground">
+                            {formatDateTime(article.publishedAt)}
+                          </span>
+                          <DealArticleEngagement
+                            articleId={article.id}
+                            initialViewCount={article.viewCount}
+                            initialLikeCount={article.likeCount}
+                            recordView={false}
+                            variant="compact"
+                            className="pointer-events-auto relative z-30 justify-end"
+                          />
+                        </div>
+                      </CardContent>
+                    </div>
+                  </Card>
+                </SpotlightCard>
               </AnimeHoverCard>
             );
           })}

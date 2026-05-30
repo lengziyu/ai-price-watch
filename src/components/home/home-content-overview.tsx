@@ -14,6 +14,7 @@ import { DealArticleEngagement } from "@/components/deals/deal-article-engagemen
 import { InteractiveSummaryCard } from "@/components/home/interactive-summary-card";
 import { AnimeHoverCard } from "@/components/shared/anime-hover-card";
 import { AnimeReveal } from "@/components/shared/anime-reveal";
+import { SpotlightCard } from "@/components/shared/spotlight-card";
 import { Badge } from "@/components/ui/badge";
 import { membershipVendorBoards } from "@/data/membership-rates";
 import { toolsDirectory } from "@/data/tools";
@@ -196,63 +197,65 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
                   lift={5}
                   scale={1.012}
                 >
-                  <article className="relative h-full w-full min-w-0 overflow-hidden rounded-[6px] border border-border/85 bg-white/82 shadow-[0_8px_18px_rgba(25,42,74,0.08)] backdrop-blur-md transition-[box-shadow,border-color] duration-200 group-hover:border-primary/28 group-hover:shadow-[0_16px_26px_color-mix(in_srgb,var(--primary)_18%,transparent)] dark:border-white/12 dark:bg-[rgba(17,27,44,0.82)] dark:group-hover:border-primary/34">
-                    <Link
-                      href={`/deals/articles/${article.slug}`}
-                      aria-label={`查看文章：${article.title}`}
-                      className="absolute inset-0 z-10 rounded-[6px]"
-                    />
-                    <div className="pointer-events-none relative z-20">
-                      <div className="relative aspect-[16/9] overflow-hidden rounded-t-[6px] border-b border-border/70">
-                        <Image
-                          src={article.coverImageUrl}
-                          alt={`${article.title} 封面图`}
-                          fill
-                          className="scale-[1.02] object-cover transition-transform duration-300 group-hover:scale-[1.06]"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                        />
-                        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(22,18,18,0.06),rgba(56,34,24,0.12)_42%,rgba(22,14,12,0.44)_100%)]" />
-                        <div className="absolute left-3 top-3 flex items-center gap-2">
-                          <Badge className={dealStatusClass(article.status)}>
-                            {formatDealArticleStatus(article.status)}
-                          </Badge>
-                        </div>
-                      </div>
-                      <div className="px-4 pb-2.5 pt-2">
-                        <div className="min-w-0 transition-transform duration-200 group-hover:-translate-y-1">
-                          <div className="truncate py-[10px] text-[18px] font-semibold leading-tight tracking-[-0.03em] text-foreground sm:text-[20px]">
-                            {article.title}
-                          </div>
-                          <p className="mt-1 line-clamp-2 h-[3rem] overflow-hidden break-words text-[12px] leading-6 text-foreground/72 sm:text-[13px]">
-                            {article.summary}
-                          </p>
-                        </div>
-                        <div className="mt-2.5 flex flex-wrap gap-2">
-                          {article.tags.slice(0, 3).map((tag, index) => (
-                            <Badge
-                              key={`${tag}-${index}`}
-                              className="h-auto rounded-full border-primary/28 bg-primary/10 px-3 py-1 text-[11px] font-medium text-primary shadow-sm dark:border-primary/32 dark:bg-primary/16 dark:text-primary"
-                            >
-                              {tag}
-                            </Badge>
-                          ))}
-                        </div>
-                        <div className="mt-3 flex flex-wrap items-center justify-between gap-2.5 border-t border-border/70 pt-3">
-                          <span className="inline-flex min-h-8 items-center text-[12px] text-muted-foreground">
-                            {formatDateTime(article.publishedAt)}
-                          </span>
-                          <DealArticleEngagement
-                            articleId={article.id}
-                            initialViewCount={article.viewCount}
-                            initialLikeCount={article.likeCount}
-                            recordView={false}
-                            variant="compact"
-                            className="pointer-events-auto relative z-30 justify-end"
+                  <SpotlightCard className="h-full rounded-[6px]" contentClassName="rounded-[6px]">
+                    <article className="relative h-full w-full min-w-0 overflow-hidden rounded-[6px] border border-black/10 bg-transparent shadow-[0_8px_18px_rgba(25,42,74,0.08)] transition-[box-shadow,border-color] duration-200 group-hover:border-primary/20 group-hover:shadow-[0_16px_28px_color-mix(in_srgb,var(--primary)_18%,transparent)] dark:border-white/10 dark:group-hover:border-primary/30">
+                      <Link
+                        href={`/deals/articles/${article.slug}`}
+                        aria-label={`查看文章：${article.title}`}
+                        className="absolute inset-0 z-10 rounded-[6px]"
+                      />
+                      <div className="pointer-events-none relative z-20">
+                        <div className="relative aspect-[16/9] overflow-hidden rounded-t-[6px] border-b border-border/70">
+                          <Image
+                            src={article.coverImageUrl}
+                            alt={`${article.title} 封面图`}
+                            fill
+                            className="scale-[1.02] object-cover transition-transform duration-300 group-hover:scale-[1.06]"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                           />
+                          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(22,18,18,0.06),rgba(56,34,24,0.12)_42%,rgba(22,14,12,0.44)_100%)]" />
+                          <div className="absolute left-3 top-3 flex items-center gap-2">
+                            <Badge className={dealStatusClass(article.status)}>
+                              {formatDealArticleStatus(article.status)}
+                            </Badge>
+                          </div>
+                        </div>
+                        <div className="px-4 pb-2.5 pt-2">
+                          <div className="min-w-0 transition-transform duration-200 group-hover:-translate-y-1">
+                            <div className="truncate py-[10px] text-[18px] font-semibold leading-tight tracking-[-0.03em] text-foreground sm:text-[20px]">
+                              {article.title}
+                            </div>
+                            <p className="mt-1 line-clamp-2 h-[3rem] overflow-hidden break-words text-[12px] leading-6 text-foreground/72 sm:text-[13px]">
+                              {article.summary}
+                            </p>
+                          </div>
+                          <div className="mt-2.5 flex flex-wrap gap-2">
+                            {article.tags.slice(0, 3).map((tag, index) => (
+                              <Badge
+                                key={`${tag}-${index}`}
+                                className="h-auto rounded-full border-primary/28 bg-primary/10 px-3 py-1 text-[11px] font-medium text-primary shadow-sm dark:border-primary/32 dark:bg-primary/16 dark:text-primary"
+                              >
+                                {tag}
+                              </Badge>
+                            ))}
+                          </div>
+                          <div className="mt-3 flex flex-wrap items-center justify-between gap-2.5 border-t border-border/70 pt-3">
+                            <span className="inline-flex min-h-8 items-center text-[12px] text-muted-foreground">
+                              {formatDateTime(article.publishedAt)}
+                            </span>
+                            <DealArticleEngagement
+                              articleId={article.id}
+                              initialViewCount={article.viewCount}
+                              initialLikeCount={article.likeCount}
+                              recordView={false}
+                              variant="compact"
+                              className="pointer-events-auto relative z-30 justify-end"
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </article>
+                    </article>
+                  </SpotlightCard>
                 </AnimeHoverCard>
               ))}
             </AnimeReveal>
