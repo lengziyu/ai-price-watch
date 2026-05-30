@@ -5,10 +5,18 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { MenuIcon } from "lucide-react";
 
-import { primaryNav, siteConfig } from "@/lib/site";
+import { siteConfig } from "@/lib/site";
+import {
+  addLocalePrefix,
+  defaultLocale,
+  getLocaleFromPathname,
+  removeLocalePrefix,
+} from "@/lib/i18n";
+import { getPrimaryNav, getUICopy } from "@/lib/ui-copy";
 import { cn } from "@/lib/utils";
 import { BrandLogo } from "@/components/layout/brand-logo";
 import { GlowingSearch } from "@/components/layout/glowing-search";
+import { LanguageSwitcher } from "@/components/layout/language-switcher";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { stickyTabsEvent } from "@/components/shared/use-sticky-tabs";
 import {
@@ -31,6 +39,10 @@ function navBadgeClassName(badge: string) {
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const currentLocale = getLocaleFromPathname(pathname) ?? defaultLocale;
+  const contentPathname = removeLocalePrefix(pathname);
+  const uiCopy = getUICopy(currentLocale);
+  const primaryNav = getPrimaryNav(currentLocale);
   const headerRef = useRef<HTMLElement>(null);
   const [headerHeight, setHeaderHeight] = useState(88);
   const [headerHideProgress, setHeaderHideProgress] = useState(0);
@@ -103,7 +115,7 @@ export function SiteHeader() {
     >
       <div className="app-shell py-4">
         <div className="nav-glass flex items-center justify-between rounded-full px-4 py-2.5">
-          <Link href="/" className="min-w-0">
+          <Link href={addLocalePrefix("/", currentLocale)} className="min-w-0">
             <BrandLogo />
           </Link>
 
@@ -111,13 +123,13 @@ export function SiteHeader() {
             {primaryNav.map((item) => {
               const active =
                 item.href === "/"
-                  ? pathname === item.href
-                  : pathname.startsWith(item.href);
+                  ? contentPathname === item.href
+                  : contentPathname.startsWith(item.href);
 
               return (
                 <Link
                   key={item.href}
-                  href={item.href}
+                  href={addLocalePrefix(item.href, currentLocale)}
                   className={cn(
                     "relative text-[13px] font-medium text-muted-foreground transition-colors hover:text-foreground",
                     active && "text-foreground",
@@ -126,7 +138,7 @@ export function SiteHeader() {
                   {item.label}
                   {item.badge ? (
                     <span className={cn("absolute -right-4 -top-3", navBadgeClassName(item.badge))}>
-                      {item.badge}
+                      {uiCopy.header.badgeText[item.badge as "hot" | "new"] ?? item.badge}
                     </span>
                   ) : null}
                   <span
@@ -143,6 +155,8 @@ export function SiteHeader() {
           <div className="hidden items-center gap-3 lg:flex">
             <GlowingSearch />
 
+            <LanguageSwitcher compact />
+
             <div className="flex items-center rounded-full border border-border bg-background/58 p-1 backdrop-blur-xl">
               <ThemeToggle compact />
             </div>
@@ -150,7 +164,7 @@ export function SiteHeader() {
 
           <Sheet>
             <SheetTrigger
-              aria-label="打开导航"
+              aria-label={uiCopy.header.openNavAriaLabel}
               className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-background/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.56)] backdrop-blur-xl lg:hidden"
             >
               <MenuIcon />
@@ -161,12 +175,15 @@ export function SiteHeader() {
             >
               <SheetHeader>
                 <SheetTitle>{siteConfig.name}</SheetTitle>
-                <SheetDescription>统一按绿色浅色视觉系统浏览站内页面。</SheetDescription>
+                <SheetDescription>{uiCopy.header.sheetDescription}</SheetDescription>
               </SheetHeader>
               <div className="mt-4 px-4">
                 <div className="rounded-[18px] border border-border/80 bg-background/72 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.64),0_16px_38px_rgba(2,44,34,0.06)] backdrop-blur-xl">
                   <GlowingSearch className="search-glow--sheet w-full" />
                 </div>
+              </div>
+              <div className="mt-3 px-4">
+                <LanguageSwitcher />
               </div>
               <div className="mt-3 px-4">
                 <div className="inline-flex rounded-full border border-border/80 bg-background/72 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.64)] backdrop-blur-xl">
@@ -177,13 +194,13 @@ export function SiteHeader() {
                 {primaryNav.map((item) => {
                   const active =
                     item.href === "/"
-                      ? pathname === item.href
-                      : pathname.startsWith(item.href);
+                      ? contentPathname === item.href
+                      : contentPathname.startsWith(item.href);
 
                   return (
                     <Link
                       key={item.href}
-                      href={item.href}
+                      href={addLocalePrefix(item.href, currentLocale)}
                       className={cn(
                         "motion-surface rounded-xl border border-transparent px-4 py-3 text-sm text-muted-foreground transition-colors hover:border-primary/20 hover:bg-primary/7 hover:text-foreground",
                       active && "border-primary/25 bg-primary/10 text-primary",
@@ -193,7 +210,7 @@ export function SiteHeader() {
                         {item.label}
                         {item.badge ? (
                           <span className={navBadgeClassName(item.badge)}>
-                            {item.badge}
+                            {uiCopy.header.badgeText[item.badge as "hot" | "new"] ?? item.badge}
                           </span>
                         ) : null}
                       </span>

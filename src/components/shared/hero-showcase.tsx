@@ -8,13 +8,16 @@ import {
   SparklesIcon,
 } from "lucide-react";
 
+import type { SiteLocale } from "@/lib/i18n";
+
 const codeLines = [
   "const plan = watch('ChatGPT Plus')",
   "compare.region('TR', 'US')",
   "notify.whenSaving('> 50%')",
 ];
 
-export function HeroShowcase() {
+export function HeroShowcase({ locale = "zh-CN" }: { locale?: SiteLocale }) {
+  const isEnglish = locale === "en";
   return (
     <div className="rspress-hero-visual">
       <div className="rspress-code-panel rspress-hero-layer" aria-hidden="true">
@@ -51,12 +54,12 @@ export function HeroShowcase() {
 
       <div className="rspress-mini-card rspress-mini-card--left rspress-hero-layer">
         <BadgePercentIcon className="size-4 text-primary" />
-        <span>省 59%</span>
+        <span>{isEnglish ? "Save 59%" : "省 59%"}</span>
       </div>
 
       <div className="rspress-mini-card rspress-mini-card--right rspress-hero-layer">
         <GaugeIcon className="size-4 text-primary" />
-        <span>5h 额度</span>
+        <span>{isEnglish ? "5h quota" : "5h 额度"}</span>
       </div>
 
       <div className="rspress-command rspress-hero-layer">

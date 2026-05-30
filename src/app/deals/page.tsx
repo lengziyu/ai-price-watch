@@ -9,45 +9,55 @@ import { cn } from "@/lib/utils";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { aiDeals } from "@/data/deals";
 import { getDealArticles } from "@/lib/admin-store";
+import { localizeDealArticles } from "@/lib/deal-article-localization";
+import { addLocalePrefix } from "@/lib/i18n";
+import { getRequestLocale } from "@/lib/request-locale";
+import { getUICopy } from "@/lib/ui-copy";
 
-export const metadata: Metadata = {
-  title: "AI 优惠活动",
-  description:
-    "收录 AI 工具的免费额度、学生权益、试用入口与正规优惠活动。",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getRequestLocale();
+  const uiCopy = getUICopy(locale);
+  return {
+    title: uiCopy.dealsPage.metadataTitle,
+    description: uiCopy.dealsPage.metadataDescription,
+  };
+}
 
 export default async function DealsPage() {
+  const locale = await getRequestLocale();
+  const uiCopy = getUICopy(locale);
   const articles = await getDealArticles();
+  const localizedArticles = localizeDealArticles(articles, locale);
 
   return (
     <div className="pb-8 sm:pb-16">
       <PageHero
-        note="官方活动 · 免费额度 · 学生权益"
+        note={uiCopy.dealsPage.heroNote}
         title={
           <>
             <div>
-              <ScrambleText text="AI 优惠活动" />
+              <ScrambleText text={uiCopy.dealsPage.heroTitleLine1} />
             </div>
             <div className="inline-flex flex-wrap items-baseline gap-x-2 gap-y-1">
-              <ScrambleText text="正规渠道" />
-              <ScrambleText text="一页看全" className="gradient-title" />
+              <ScrambleText text={uiCopy.dealsPage.heroTitleLine2Left} />
+              <ScrambleText text={uiCopy.dealsPage.heroTitleLine2Right} className="gradient-title" />
             </div>
           </>
         }
         description={
           <>
-            优先收录官方免费层、教育权益、地区价格差异与新用户福利，
+            {uiCopy.dealsPage.heroDescriptionLine1}
             <br />
-            不引导灰产代充，只保留可公开验证的入口。
+            {uiCopy.dealsPage.heroDescriptionLine2}
           </>
         }
         primaryAction={{
           href: "#content-switcher",
-          label: "查看文章",
+          label: uiCopy.dealsPage.viewArticles,
         }}
         secondaryAction={{
-          href: "/tools",
-          label: "浏览工具导航",
+          href: addLocalePrefix("/tools", locale),
+          label: uiCopy.dealsPage.browseTools,
         }}
         rightSlot={<PageShowcase variant="deals" />}
       />
@@ -57,17 +67,17 @@ export default async function DealsPage() {
           <div className={cn("page-tabs-sticky__surface p-0 sm:p-1.5")}>
             <TabsList variant="accent" className="w-full max-w-full sm:w-fit">
               <TabsTrigger value="articles" className="min-w-[116px]">
-                优惠文章
+                {uiCopy.dealsPage.tabArticles}
               </TabsTrigger>
               <TabsTrigger value="deals" className="min-w-[116px]">
-                免费优惠
+                {uiCopy.dealsPage.tabDeals}
               </TabsTrigger>
             </TabsList>
           </div>
         </div>
 
         <TabsContent value="articles">
-          <DealArticlesSection articles={articles} />
+          <DealArticlesSection articles={localizedArticles} locale={locale} />
         </TabsContent>
 
         <TabsContent value="deals">

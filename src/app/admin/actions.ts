@@ -12,6 +12,7 @@ import {
   requireAdminAuth,
   verifyAdminCredentials,
 } from "@/lib/admin-auth";
+import { getDealArticleSlugForLocale } from "@/lib/deal-article-localization";
 import {
   appendOperationLog,
   createDealArticle,
@@ -27,6 +28,7 @@ import {
   type SourceReviewInput,
   updateDealArticle,
 } from "@/lib/admin-store";
+import { addLocalePrefix, supportedLocales } from "@/lib/i18n";
 import { membershipVendorBoards } from "@/data/membership-rates";
 
 const execFileAsync = promisify(execFile);
@@ -157,6 +159,10 @@ export async function createDealArticleAction(
     title: String(formData.get("title") ?? "").trim(),
     summary: String(formData.get("summary") ?? "").trim(),
     rawContent: String(formData.get("rawContent") ?? "").trim(),
+    titleEn: String(formData.get("titleEn") ?? "").trim() || undefined,
+    summaryEn: String(formData.get("summaryEn") ?? "").trim() || undefined,
+    rawContentEn: String(formData.get("rawContentEn") ?? "").trim() || undefined,
+    slugEn: String(formData.get("slugEn") ?? "").trim() || undefined,
     coverImage: formData.get("coverImage") instanceof File ? (formData.get("coverImage") as File) : undefined,
     uploadedCoverImageUrl: String(formData.get("uploadedCoverImageUrl") ?? "").trim() || undefined,
     resetCoverImage: String(formData.get("resetCoverImage") ?? "") === "true",
@@ -199,7 +205,10 @@ export async function createDealArticleAction(
   revalidatePath("/admin/logs");
   revalidatePath("/");
   revalidatePath("/deals");
-  revalidatePath(`/deals/articles/${created.slug}`);
+  for (const locale of supportedLocales) {
+    const slug = getDealArticleSlugForLocale(created, locale);
+    revalidatePath(addLocalePrefix(`/deals/articles/${slug}`, locale));
+  }
   redirect("/admin/articles");
 }
 
@@ -223,6 +232,10 @@ export async function updateDealArticleAction(
     title: String(formData.get("title") ?? "").trim(),
     summary: String(formData.get("summary") ?? "").trim(),
     rawContent: String(formData.get("rawContent") ?? "").trim(),
+    titleEn: String(formData.get("titleEn") ?? "").trim() || undefined,
+    summaryEn: String(formData.get("summaryEn") ?? "").trim() || undefined,
+    rawContentEn: String(formData.get("rawContentEn") ?? "").trim() || undefined,
+    slugEn: String(formData.get("slugEn") ?? "").trim() || undefined,
     coverImage: formData.get("coverImage") instanceof File ? (formData.get("coverImage") as File) : undefined,
     uploadedCoverImageUrl: String(formData.get("uploadedCoverImageUrl") ?? "").trim() || undefined,
     resetCoverImage: String(formData.get("resetCoverImage") ?? "") === "true",
@@ -266,8 +279,20 @@ export async function updateDealArticleAction(
   revalidatePath("/admin/logs");
   revalidatePath("/");
   revalidatePath("/deals");
-  revalidatePath(`/deals/articles/${currentArticle.slug}`);
-  revalidatePath(`/deals/articles/${updated.slug}`);
+  for (const locale of supportedLocales) {
+    revalidatePath(
+      addLocalePrefix(
+        `/deals/articles/${getDealArticleSlugForLocale(currentArticle, locale)}`,
+        locale,
+      ),
+    );
+    revalidatePath(
+      addLocalePrefix(
+        `/deals/articles/${getDealArticleSlugForLocale(updated, locale)}`,
+        locale,
+      ),
+    );
+  }
   redirect("/admin/articles");
 }
 
@@ -283,7 +308,14 @@ export async function deleteDealArticleAction(articleId: string) {
   revalidatePath("/");
   revalidatePath("/deals");
   if (currentArticle) {
-    revalidatePath(`/deals/articles/${currentArticle.slug}`);
+    for (const locale of supportedLocales) {
+      revalidatePath(
+        addLocalePrefix(
+          `/deals/articles/${getDealArticleSlugForLocale(currentArticle, locale)}`,
+          locale,
+        ),
+      );
+    }
   }
 }
 

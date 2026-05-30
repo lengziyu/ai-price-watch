@@ -112,13 +112,20 @@ export type DealArticleSourcePlatform = "x" | "linux_do" | "other";
 
 export type DifficultyLevel = "easy" | "medium" | "advanced";
 
+export type LocalizedDealArticleText = Partial<Record<"zh-CN" | "en", string>>;
+
 export type DealArticle = {
   id: string;
   slug: string;
+  slugByLocale?: LocalizedDealArticleText;
   title: string;
+  titleByLocale?: LocalizedDealArticleText;
   summary: string;
+  summaryByLocale?: LocalizedDealArticleText;
   body: string;
+  bodyByLocale?: LocalizedDealArticleText;
   rawContent: string;
+  rawContentByLocale?: LocalizedDealArticleText;
   coverImageUrl: string;
   viewCount: number;
   likeCount: number;

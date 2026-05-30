@@ -1,14 +1,19 @@
 "use client";
 
 import { startTransition, useDeferredValue, useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ArrowUpRightIcon, SearchIcon } from "lucide-react";
 
-import { siteSearchEntries } from "@/data/site-search";
+import { getSiteSearchEntries } from "@/data/site-search";
+import { addLocalePrefix, defaultLocale, getLocaleFromPathname } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 export function GlowingSearch({ className }: { className?: string }) {
   const router = useRouter();
+  const pathname = usePathname();
+  const locale = getLocaleFromPathname(pathname) ?? defaultLocale;
+  const isEnglish = locale === "en";
+  const siteSearchEntries = getSiteSearchEntries(locale);
   const rootRef = useRef<HTMLLabelElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState("");
@@ -67,7 +72,7 @@ export function GlowingSearch({ className }: { className?: string }) {
     setQuery("");
     setActiveIndex(0);
     startTransition(() => {
-      router.push(href);
+      router.push(addLocalePrefix(href, locale));
     });
   };
 
@@ -75,7 +80,7 @@ export function GlowingSearch({ className }: { className?: string }) {
     <label
       ref={rootRef}
       className={cn("search-glow group/search", className)}
-      aria-label="搜索站内内容"
+      aria-label={isEnglish ? "Search the site" : "搜索站内内容"}
     >
       <span className="search-glow__halo" />
       <span className="search-glow__rim search-glow__rim--wide" />
@@ -87,7 +92,7 @@ export function GlowingSearch({ className }: { className?: string }) {
           ref={inputRef}
           className="search-glow__input"
           name="site-search"
-          placeholder="搜索页面、厂商、场景"
+          placeholder={isEnglish ? "Search pages or tools" : "搜索页面、厂商、场景"}
           type="search"
           value={query}
           onFocus={() => setOpen(true)}
@@ -130,9 +135,19 @@ export function GlowingSearch({ className }: { className?: string }) {
       </span>
 
       {open ? (
-        <span className="search-glow__panel" role="listbox" aria-label="搜索结果">
+        <span
+          className="search-glow__panel"
+          role="listbox"
+          aria-label={isEnglish ? "Search results" : "搜索结果"}
+        >
           <span className="search-glow__panel-title">
-            {keyword ? `找到 ${results.length} 个结果` : "快捷入口"}
+            {keyword
+              ? isEnglish
+                ? `${results.length} results`
+                : `找到 ${results.length} 个结果`
+              : isEnglish
+                ? "Quick Links"
+                : "快捷入口"}
           </span>
           {results.length ? (
             results.map((item, index) => (
@@ -158,7 +173,9 @@ export function GlowingSearch({ className }: { className?: string }) {
             ))
           ) : (
             <span className="search-glow__empty">
-              没找到匹配项，试试搜索 Token、Claude、Copilot、学习研究。
+              {isEnglish
+                ? "No match yet. Try Tokens, Claude, Copilot, or Research."
+                : "没找到匹配项，试试搜索 Token、Claude、Copilot、学习研究。"}
             </span>
           )}
         </span>

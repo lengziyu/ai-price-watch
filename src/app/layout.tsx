@@ -4,7 +4,9 @@ import Script from "next/script";
 
 import { AppChrome } from "@/components/layout/app-chrome";
 import { ScrollToTopButton } from "@/components/shared/scroll-to-top-button";
+import { getRequestLocale } from "@/lib/request-locale";
 import { siteConfig } from "@/lib/site";
+import { getUICopy } from "@/lib/ui-copy";
 
 import "@wangeditor-next/editor/dist/css/style.css";
 import "./globals.css";
@@ -19,48 +21,43 @@ const interTight = Inter_Tight({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://price.lengziyu.cn"),
-  title: {
-    default: "雷价通 - AI 会员订阅、Token 成本与优惠速率追踪",
-    template: `%s | ${siteConfig.name}`,
-  },
-  description:
-    "雷价通提供 ChatGPT、Claude、Gemini、DeepSeek 等大模型订阅价格、API Token 价格、会员速率、免费额度和 AI 优惠活动对比，帮助你低成本使用 AI。",
-  keywords: [
-    "AI比价",
-    "大模型价格",
-    "ChatGPT价格",
-    "Claude价格",
-    "Gemini价格",
-    "Token价格",
-    "AI羊毛",
-    "AI优惠",
-    "AI工具推荐",
-  ],
-  applicationName: siteConfig.name,
-  icons: {
-    icon: [
-      {
-        url: "/leijiatong-logo.svg",
-        type: "image/svg+xml",
-      },
-    ],
-  },
-  openGraph: {
-    title: "雷价通",
-    description: siteConfig.description,
-    siteName: siteConfig.name,
-    locale: "zh_CN",
-    type: "website",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getRequestLocale();
+  const uiCopy = getUICopy(locale);
 
-export default function RootLayout({
+  return {
+    metadataBase: new URL("https://price.lengziyu.cn"),
+    title: {
+      default: uiCopy.layout.metadataTitleDefault,
+      template: uiCopy.layout.metadataTitleTemplate,
+    },
+    description: uiCopy.layout.metadataDescription,
+    keywords: [...uiCopy.layout.metadataKeywords],
+    applicationName: locale === "en" ? siteConfig.englishName : siteConfig.name,
+    icons: {
+      icon: [
+        {
+          url: "/leijiatong-logo.svg",
+          type: "image/svg+xml",
+        },
+      ],
+    },
+    openGraph: {
+      title: locale === "en" ? siteConfig.englishName : siteConfig.name,
+      description: locale === "en" ? siteConfig.descriptionEn : siteConfig.description,
+      siteName: locale === "en" ? siteConfig.englishName : siteConfig.name,
+      locale: uiCopy.layout.openGraphLocale,
+      type: "website",
+    },
+  };
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getRequestLocale();
   const themeInitScript = `
     (() => {
       try {
@@ -78,7 +75,7 @@ export default function RootLayout({
 
   return (
     <html
-      lang="zh-CN"
+      lang={locale}
       className={`${inter.variable} ${interTight.variable} h-full antialiased`}
       suppressHydrationWarning
     >

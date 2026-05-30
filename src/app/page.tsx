@@ -10,9 +10,16 @@ import { HeroMesh } from "@/components/shared/hero-mesh";
 import { ScrambleText } from "@/components/shared/scramble-text";
 import { HeroShowcase } from "@/components/shared/hero-showcase";
 import { getDealArticles } from "@/lib/admin-store";
+import { localizeDealArticles } from "@/lib/deal-article-localization";
+import { addLocalePrefix } from "@/lib/i18n";
+import { getRequestLocale } from "@/lib/request-locale";
+import { getUICopy } from "@/lib/ui-copy";
 
 export default async function HomePage() {
+  const locale = await getRequestLocale();
+  const uiCopy = getUICopy(locale);
   const articles = await getDealArticles();
+  const localizedArticles = localizeDealArticles(articles, locale);
 
   return (
     <div className="pb-8 sm:pb-16">
@@ -27,48 +34,48 @@ export default async function HomePage() {
             >
               <div className="inline-flex w-fit items-center gap-2.5 rounded-full border border-border bg-background/75 px-3 py-1.5 text-[11px] text-muted-foreground backdrop-blur-sm">
                 <span className="size-2 rounded-full bg-primary" />
-                <span>实时更新</span>
+                <span>{uiCopy.home.heroPills[0]}</span>
                 <span>·</span>
-                <span>会员速率</span>
+                <span>{uiCopy.home.heroPills[1]}</span>
                 <span>·</span>
-                <span>场景推荐</span>
+                <span>{uiCopy.home.heroPills[2]}</span>
                 <span>·</span>
-                <span>优惠文章</span>
+                <span>{uiCopy.home.heroPills[3]}</span>
               </div>
 
               <div className="text-[2.4rem] font-semibold leading-[0.91] tracking-[-0.046em] text-foreground [&>div+div]:mt-2.5 sm:max-w-[700px] sm:text-[2.76rem] sm:[&>div+div]:mt-3.5 lg:text-[3.2rem]">
                 <div>
-                  <ScrambleText text="AI 会员价格" />
+                  <ScrambleText text={uiCopy.home.heroTitleLine1} />
                 </div>
                 <div className="inline-flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                  <ScrambleText text="额度场景优惠" />
+                  <ScrambleText text={uiCopy.home.heroTitleLine2Left} />
                   <ScrambleText
-                    text="首页先看"
+                    text={uiCopy.home.heroTitleLine2Right}
                     className="gradient-title"
                   />
                 </div>
               </div>
 
               <p className="text-[13.5px] leading-[1.88] text-muted-foreground sm:max-w-[620px] sm:text-[14px] sm:leading-[1.7]">
-                首页集中看会员价格、额度、常用入口和最新活动，先完成第一轮筛选。
+                {uiCopy.home.heroDescriptionLine1}
                 <br />
-                再进入你关心的厂商、套餐、工具页面，继续看详细对比。
+                {uiCopy.home.heroDescriptionLine2}
               </p>
 
               <div className="grid grid-cols-2 gap-2.5 sm:flex sm:flex-row sm:gap-3">
                 <Link
-                  href="/pricing/subscriptions"
+                  href={addLocalePrefix("/pricing/subscriptions", locale)}
                   className={buttonVariants({
                     size: "lg",
                     className:
                       "hero-gradient-button min-w-0 px-3 text-[13px] sm:px-6 sm:text-sm",
                   })}
                 >
-                  <span className="hero-gradient-text">开始对比</span>
+                  <span className="hero-gradient-text">{uiCopy.home.compareButton}</span>
                   <ArrowRightIcon data-icon="inline-end" />
                 </Link>
                 <Link
-                  href="/deals"
+                  href={addLocalePrefix("/deals", locale)}
                   className={buttonVariants({
                     variant: "outline",
                     size: "lg",
@@ -76,20 +83,20 @@ export default async function HomePage() {
                       "hero-gradient-button min-w-0 px-3 text-[13px] sm:px-6 sm:text-sm",
                   })}
                 >
-                  <span className="hero-gradient-text">查看优惠活动</span>
+                  <span className="hero-gradient-text">{uiCopy.home.dealsButton}</span>
                   <GiftIcon data-icon="inline-end" />
                 </Link>
               </div>
             </AnimeReveal>
 
             <AnimeReveal className="hidden lg:block" distance={30} delay={160}>
-              <HeroShowcase />
+              <HeroShowcase locale={locale} />
             </AnimeReveal>
           </div>
         </div>
       </section>
 
-      <HomeContentOverview articles={articles} />
+      <HomeContentOverview articles={localizedArticles} locale={locale} />
 
       <section className="app-shell mt-4 sm:mt-8">
         <SubscriptionExplorer
@@ -100,7 +107,7 @@ export default async function HomePage() {
         />
         <div className="mt-4 flex justify-center sm:mt-5">
           <Link
-            href="/pricing/subscriptions"
+            href={addLocalePrefix("/pricing/subscriptions", locale)}
             className={buttonVariants({
               variant: "outline",
               size: "lg",
@@ -108,7 +115,7 @@ export default async function HomePage() {
                 "min-w-[220px] rounded-[12px] border-primary/18 bg-primary/[0.04] px-6 text-primary hover:bg-primary/[0.08]",
             })}
           >
-            查看完整会员订阅比价
+            {locale === "en" ? "View Full Subscription Comparison" : "查看完整会员订阅比价"}
             <ArrowRightIcon data-icon="inline-end" />
           </Link>
         </div>

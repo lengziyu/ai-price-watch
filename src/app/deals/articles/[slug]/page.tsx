@@ -18,7 +18,14 @@ import {
   parseDealArticleBlocks,
   sanitizeDealArticleHtml,
 } from "@/lib/deal-articles";
+import {
+  getDealArticleAllSlugs,
+  localizeDealArticle,
+} from "@/lib/deal-article-localization";
 import { formatDateTime } from "@/lib/format";
+import { addLocalePrefix } from "@/lib/i18n";
+import { getRequestLocale } from "@/lib/request-locale";
+import { getUICopy } from "@/lib/ui-copy";
 import { getDealArticleBySlug, getDealArticles } from "@/lib/admin-store";
 
 type PageProps = {
@@ -29,37 +36,46 @@ type PageProps = {
 
 export async function generateStaticParams() {
   const articles = await getDealArticles();
-  return articles.map((article) => ({ slug: article.slug }));
+  return articles.flatMap((article) =>
+    getDealArticleAllSlugs(article).map((slug) => ({ slug })),
+  );
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const locale = await getRequestLocale();
+  const uiCopy = getUICopy(locale);
   const { slug } = await params;
-  const article = await getDealArticleBySlug(slug);
+  const article = await getDealArticleBySlug(slug, locale);
 
   if (!article) {
     return {
-      title: "文章未找到",
+      title: uiCopy.articleDetail.notFoundTitle,
     };
   }
 
+  const localizedArticle = localizeDealArticle(article, locale);
+
   return {
-    title: article.title,
-    description: article.summary,
+    title: localizedArticle.title,
+    description: localizedArticle.summary,
   };
 }
 
 export default async function DealArticleDetailPage({ params }: PageProps) {
+  const locale = await getRequestLocale();
+  const uiCopy = getUICopy(locale);
   const { slug } = await params;
-  const article = await getDealArticleBySlug(slug);
+  const article = await getDealArticleBySlug(slug, locale);
 
   if (!article) {
     notFound();
   }
 
-  const blocks = parseDealArticleBlocks(article.body);
-  const usesDefaultCover = article.coverImageUrl === defaultDealArticleCoverImageUrl;
-  const hasRichBody = isRichHtmlContent(article.body);
-  const richBodyHtml = hasRichBody ? sanitizeDealArticleHtml(article.body) : "";
+  const localizedArticle = localizeDealArticle(article, locale);
+  const blocks = parseDealArticleBlocks(localizedArticle.body);
+  const usesDefaultCover = localizedArticle.coverImageUrl === defaultDealArticleCoverImageUrl;
+  const hasRichBody = isRichHtmlContent(localizedArticle.body);
+  const richBodyHtml = hasRichBody ? sanitizeDealArticleHtml(localizedArticle.body) : "";
 
   return (
     <div className="pb-8 sm:pb-16">
@@ -68,24 +84,24 @@ export default async function DealArticleDetailPage({ params }: PageProps) {
         <div className="app-shell py-2.5 sm:py-4 lg:py-6">
           <div className="mx-auto flex max-w-4xl flex-col gap-4">
             <Link
-              href="/deals#deal-articles"
+              href={`${addLocalePrefix("/deals", locale)}#deal-articles`}
               className="inline-flex w-fit items-center gap-2 rounded-full border border-primary/18 bg-[linear-gradient(135deg,rgba(255,255,255,0.94),rgba(240,253,248,0.92))] px-4 py-2 text-[14px] font-semibold text-foreground shadow-[0_10px_30px_rgba(16,24,40,0.06)] transition hover:border-primary/30 hover:bg-primary/6 hover:text-primary dark:bg-[linear-gradient(135deg,rgba(18,24,28,0.9),rgba(10,18,18,0.82))]"
             >
               <ArrowLeftIcon className="size-4" />
-              返回文章列表
+              {uiCopy.articleDetail.backToList}
             </Link>
 
             <div className="flex flex-wrap gap-2">
-              <Badge variant="secondary">{formatDealArticleStatus(article.status)}</Badge>
-              <Badge variant="outline">{formatDealArticleDifficulty(article.difficulty)}</Badge>
+              <Badge variant="secondary">{formatDealArticleStatus(article.status, locale)}</Badge>
+              <Badge variant="outline">{formatDealArticleDifficulty(article.difficulty, locale)}</Badge>
             </div>
 
             <div className="space-y-3">
               <h1 className="max-w-3xl text-[1.8rem] font-semibold leading-tight tracking-[-0.035em] text-foreground sm:text-[2.4rem]">
-                {article.title}
+                {localizedArticle.title}
               </h1>
               <p className="max-w-3xl text-[14px] leading-7 text-muted-foreground sm:text-[15px]">
-                {buildDetailSummary(article.summary)}
+                {buildDetailSummary(localizedArticle.summary)}
               </p>
             </div>
 
@@ -107,13 +123,14 @@ export default async function DealArticleDetailPage({ params }: PageProps) {
                     target="_blank"
                     className="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1 text-[12px] font-medium text-foreground transition hover:border-primary/30 hover:text-primary"
                   >
-                    查看原始来源
+                    {uiCopy.articleDetail.sourceLink}
                     <ArrowUpRightIcon className="size-3.5" />
                   </Link>
                 ) : null}
               </div>
               <Badge variant="outline" className="text-[12px] text-muted-foreground">
-                发布于 {formatDateTime(article.publishedAt)}
+                {uiCopy.articleDetail.publishedAtPrefix}
+                {formatDateTime(article.publishedAt, locale)}
               </Badge>
             </div>
           </div>
@@ -125,8 +142,8 @@ export default async function DealArticleDetailPage({ params }: PageProps) {
           {!usesDefaultCover ? (
             <div className="relative aspect-[16/9] overflow-hidden rounded-t-[16px] border-b border-border/70">
               <Image
-                src={article.coverImageUrl}
-                alt={`${article.title} 封面图`}
+                src={localizedArticle.coverImageUrl}
+                alt={`${localizedArticle.title} 封面图`}
                 fill
                 priority
                 className="object-cover"

@@ -14,37 +14,46 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { addLocalePrefix } from "@/lib/i18n";
+import { getRequestLocale } from "@/lib/request-locale";
+import { getUICopy } from "@/lib/ui-copy";
 
-export const metadata: Metadata = {
-  title: "AI 工具导航",
-  description: "按使用场景快速浏览常见 AI 工具与产品定位。",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getRequestLocale();
+  const uiCopy = getUICopy(locale);
+  return {
+    title: uiCopy.toolsPage.metadataTitle,
+    description: uiCopy.toolsPage.metadataDescription,
+  };
+}
 
-export default function ToolsPage() {
+export default async function ToolsPage() {
+  const locale = await getRequestLocale();
+  const uiCopy = getUICopy(locale);
   return (
     <div className="pb-8 sm:pb-16">
       <PageHero
-        note="场景分类 · 轻导航 · 快速选型"
+        note={uiCopy.toolsPage.heroNote}
         title={
           <>
             <div>
-              <ScrambleText text="AI 工具导航" />
+              <ScrambleText text={uiCopy.toolsPage.heroTitleLine1} />
             </div>
             <div className="inline-flex flex-wrap items-baseline gap-x-2 gap-y-1">
-              <ScrambleText text="先找方向" />
-              <ScrambleText text="再做选择" className="gradient-title" />
+              <ScrambleText text={uiCopy.toolsPage.heroTitleLine2Left} />
+              <ScrambleText text={uiCopy.toolsPage.heroTitleLine2Right} className="gradient-title" />
             </div>
           </>
         }
         description={
           <>
-            这里只做轻量导航，不喧宾夺主，帮助你先找到适合自己的工具轨道，
+            {uiCopy.toolsPage.heroDescriptionLine1}
             <br />
-            再回到订阅与 Token 页做具体价格比较。
+            {uiCopy.toolsPage.heroDescriptionLine2}
           </>
         }
-        primaryAction={{ href: "/pricing/subscriptions", label: "去看订阅比价" }}
-        secondaryAction={{ href: "/pricing/tokens", label: "去看 Token 价格" }}
+        primaryAction={{ href: addLocalePrefix("/pricing/subscriptions", locale), label: uiCopy.toolsPage.primaryAction }}
+        secondaryAction={{ href: addLocalePrefix("/pricing/tokens", locale), label: uiCopy.toolsPage.secondaryAction }}
         rightSlot={<PageShowcase variant="tools" />}
       />
 
@@ -77,7 +86,7 @@ export default function ToolsPage() {
                   target="_blank"
                   className="inline-flex items-center gap-1 text-sm font-medium text-foreground"
                 >
-                  访问官网
+                  {uiCopy.toolsPage.visitWebsite}
                   <ArrowUpRightIcon className="size-3.5" />
                 </Link>
               </CardContent>

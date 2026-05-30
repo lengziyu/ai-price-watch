@@ -12,6 +12,11 @@ import {
   inferDealArticleSummary,
   inferDealArticleTitle,
 } from "@/lib/deal-articles";
+import {
+  getDealArticleAllSlugs,
+  getDealArticleSlugForLocale,
+} from "@/lib/deal-article-localization";
+import { defaultLocale, isSupportedLocale, type SiteLocale } from "@/lib/i18n";
 import { importArticleHtml, looksLikeXLongformHtml } from "@/lib/x-html-import";
 import type { AIDeal, DealArticle } from "@/types";
 
@@ -130,6 +135,10 @@ export type DealArticleInput = {
   title: string;
   summary: string;
   rawContent: string;
+  titleEn?: string;
+  summaryEn?: string;
+  rawContentEn?: string;
+  slugEn?: string;
   coverImage?: File;
   uploadedCoverImageUrl?: string;
   resetCoverImage?: boolean;
@@ -172,6 +181,10 @@ async function normalizeDealArticleInput(
     return {
       ...input,
       rawContent,
+      titleEn: input.titleEn?.trim(),
+      summaryEn: input.summaryEn?.trim(),
+      rawContentEn: input.rawContentEn?.trim(),
+      slugEn: input.slugEn?.trim(),
     };
   }
 
@@ -186,6 +199,10 @@ async function normalizeDealArticleInput(
       ? detectDealArticleSourcePlatform(input.sourceUrl)
       : imported.sourcePlatform,
     uploadedCoverImageUrl: input.uploadedCoverImageUrl || imported.suggestedCoverImageUrl,
+    titleEn: input.titleEn?.trim(),
+    summaryEn: input.summaryEn?.trim(),
+    rawContentEn: input.rawContentEn?.trim(),
+    slugEn: input.slugEn?.trim(),
   };
 }
 
@@ -335,9 +352,16 @@ export async function getDealArticleTagOptions() {
   return [...tags].sort((left, right) => left.localeCompare(right, "zh-CN"));
 }
 
-export async function getDealArticleBySlug(slug: string) {
+export async function getDealArticleBySlug(slug: string, locale: SiteLocale = defaultLocale) {
   const articles = await getDealArticles();
-  return articles.find((article) => article.slug === slug);
+  return articles.find((article) => {
+    const allSlugs = getDealArticleAllSlugs(article);
+    if (allSlugs.includes(slug)) {
+      return true;
+    }
+
+    return getDealArticleSlugForLocale(article, locale) === slug;
+  });
 }
 
 export async function getDealArticleById(id: string) {
@@ -451,6 +475,14 @@ export async function createDealArticle(
   const title = inferDealArticleTitle(normalizedInput.title, normalizedInput.rawContent);
   const body = buildDealArticleBody(normalizedInput.rawContent, title) || normalizedInput.rawContent;
   const summary = inferDealArticleSummary(normalizedInput.summary, body);
+  const rawContentEn = normalizedInput.rawContentEn?.trim() ?? "";
+  const titleEn =
+    normalizedInput.titleEn?.trim() || (rawContentEn ? inferDealArticleTitle("", rawContentEn) : "");
+  const bodyEn = rawContentEn
+    ? buildDealArticleBody(rawContentEn, titleEn) || rawContentEn
+    : "";
+  const summaryEn =
+    normalizedInput.summaryEn?.trim() || (bodyEn ? inferDealArticleSummary("", bodyEn) : "");
   const sourcePlatform = normalizedInput.sourceUrl
     ? detectDealArticleSourcePlatform(normalizedInput.sourceUrl)
     : normalizedInput.sourcePlatform;
@@ -463,15 +495,14 @@ export async function createDealArticle(
     legacyDealArticlesFile,
     [],
     (articles: DealArticle[]) => {
-      const slugBase = createDealArticleSlug(title);
-      const takenSlugs = new Set(articles.map((article) => article.slug));
-      let slug = slugBase;
-      let suffix = 2;
-
-      while (takenSlugs.has(slug)) {
-        slug = `${slugBase}-${suffix}`;
-        suffix += 1;
-      }
+      const takenSlugs = new Set(
+        articles.flatMap((article) => getDealArticleAllSlugs(article)),
+      );
+      const slug = buildUniqueSlug(createDealArticleSlug(title), takenSlugs);
+      const requestedSlugEn = normalizeOptionalSlug(normalizedInput.slugEn);
+      const generatedSlugEn = titleEn ? createDealArticleSlug(titleEn) : "";
+      const candidateSlugEn = requestedSlugEn || generatedSlugEn;
+      const slugEn = candidateSlugEn ? buildUniqueSlug(candidateSlugEn, takenSlugs) : "";
 
       const now = new Date().toISOString();
       const id = `deal-article-${randomUUID()}`;
@@ -482,10 +513,30 @@ export async function createDealArticle(
       const nextArticle: DealArticle = {
         id,
         slug,
+        slugByLocale: {
+          [defaultLocale]: slug,
+          ...(slugEn ? { en: slugEn } : {}),
+        },
         title,
+        titleByLocale: {
+          [defaultLocale]: title,
+          ...(titleEn ? { en: titleEn } : {}),
+        },
         summary,
+        summaryByLocale: {
+          [defaultLocale]: summary,
+          ...(summaryEn ? { en: summaryEn } : {}),
+        },
         body,
+        bodyByLocale: {
+          [defaultLocale]: body,
+          ...(bodyEn ? { en: bodyEn } : {}),
+        },
         rawContent: normalizedInput.rawContent,
+        rawContentByLocale: {
+          [defaultLocale]: normalizedInput.rawContent,
+          ...(rawContentEn ? { en: rawContentEn } : {}),
+        },
         coverImageUrl,
         viewCount: engagement.viewCount,
         likeCount: engagement.likeCount,
@@ -525,6 +576,14 @@ export async function updateDealArticle(
   const title = inferDealArticleTitle(normalizedInput.title, normalizedInput.rawContent);
   const body = buildDealArticleBody(normalizedInput.rawContent, title) || normalizedInput.rawContent;
   const summary = inferDealArticleSummary(normalizedInput.summary, body);
+  const rawContentEn = normalizedInput.rawContentEn?.trim() ?? "";
+  const titleEn =
+    normalizedInput.titleEn?.trim() || (rawContentEn ? inferDealArticleTitle("", rawContentEn) : "");
+  const bodyEn = rawContentEn
+    ? buildDealArticleBody(rawContentEn, titleEn) || rawContentEn
+    : "";
+  const summaryEn =
+    normalizedInput.summaryEn?.trim() || (bodyEn ? inferDealArticleSummary("", bodyEn) : "");
   const sourcePlatform = normalizedInput.sourceUrl
     ? detectDealArticleSourcePlatform(normalizedInput.sourceUrl)
     : normalizedInput.sourcePlatform;
@@ -541,15 +600,16 @@ export async function updateDealArticle(
 
       const nextSlugBase = createDealArticleSlug(title);
       const takenSlugs = new Set(
-        articles.filter((article) => article.id !== id).map((article) => article.slug),
+        articles
+          .filter((article) => article.id !== id)
+          .flatMap((article) => getDealArticleAllSlugs(article)),
       );
-      let slug = nextSlugBase;
-      let suffix = 2;
-
-      while (takenSlugs.has(slug)) {
-        slug = `${nextSlugBase}-${suffix}`;
-        suffix += 1;
-      }
+      const slug = buildUniqueSlug(nextSlugBase, takenSlugs);
+      const requestedSlugEn = normalizeOptionalSlug(normalizedInput.slugEn);
+      const existingSlugEn = currentArticle.slugByLocale?.en?.trim() ?? "";
+      const generatedSlugEn = titleEn ? createDealArticleSlug(titleEn) : "";
+      const candidateSlugEn = requestedSlugEn || generatedSlugEn || existingSlugEn;
+      const slugEn = candidateSlugEn ? buildUniqueSlug(candidateSlugEn, takenSlugs) : "";
 
       const coverImageUrl = await resolveUpdatedDealArticleCoverImageUrl(
         currentArticle.coverImageUrl,
@@ -561,10 +621,35 @@ export async function updateDealArticle(
       const nextArticle: DealArticle = {
         ...currentArticle,
         slug,
+        slugByLocale: {
+          ...(currentArticle.slugByLocale ?? {}),
+          [defaultLocale]: slug,
+          ...(slugEn ? { en: slugEn } : {}),
+        },
         title,
+        titleByLocale: {
+          ...(currentArticle.titleByLocale ?? {}),
+          [defaultLocale]: title,
+          ...(titleEn ? { en: titleEn } : {}),
+        },
         summary,
+        summaryByLocale: {
+          ...(currentArticle.summaryByLocale ?? {}),
+          [defaultLocale]: summary,
+          ...(summaryEn ? { en: summaryEn } : {}),
+        },
         body,
+        bodyByLocale: {
+          ...(currentArticle.bodyByLocale ?? {}),
+          [defaultLocale]: body,
+          ...(bodyEn ? { en: bodyEn } : {}),
+        },
         rawContent: normalizedInput.rawContent,
+        rawContentByLocale: {
+          ...(currentArticle.rawContentByLocale ?? {}),
+          [defaultLocale]: normalizedInput.rawContent,
+          ...(rawContentEn ? { en: rawContentEn } : {}),
+        },
         coverImageUrl,
         difficulty: normalizedInput.difficulty,
         sourcePlatform,
@@ -761,16 +846,106 @@ async function deleteFileIfExists(filePath: string) {
 }
 
 function normalizeDealArticle(article: DealArticle): DealArticle {
+  const normalizedSlugByLocale = normalizeLocalizedArticleText(
+    article.slugByLocale,
+    article.slug,
+    true,
+  );
+  const normalizedTitleByLocale = normalizeLocalizedArticleText(
+    article.titleByLocale,
+    article.title,
+  );
+  const normalizedSummaryByLocale = normalizeLocalizedArticleText(
+    article.summaryByLocale,
+    article.summary,
+  );
+  const normalizedBodyByLocale = normalizeLocalizedArticleText(
+    article.bodyByLocale,
+    article.body,
+  );
+  const normalizedRawContentByLocale = normalizeLocalizedArticleText(
+    article.rawContentByLocale,
+    article.rawContent,
+  );
+
   const seed = `${article.id}:${article.slug}:${article.title}:${article.sourceUrl ?? ""}`;
   const fallbackEngagement = createInitialDealArticleEngagement(seed);
 
   return {
     ...article,
+    slug: normalizedSlugByLocale[defaultLocale] ?? article.slug,
+    slugByLocale: normalizedSlugByLocale,
+    title: normalizedTitleByLocale[defaultLocale] ?? article.title,
+    titleByLocale: normalizedTitleByLocale,
+    summary: normalizedSummaryByLocale[defaultLocale] ?? article.summary,
+    summaryByLocale: normalizedSummaryByLocale,
+    body: normalizedBodyByLocale[defaultLocale] ?? article.body,
+    bodyByLocale: normalizedBodyByLocale,
+    rawContent: normalizedRawContentByLocale[defaultLocale] ?? article.rawContent,
+    rawContentByLocale: normalizedRawContentByLocale,
     coverImageUrl: article.coverImageUrl || defaultDealArticleCoverImageUrl,
     viewCount: typeof article.viewCount === "number" ? article.viewCount : fallbackEngagement.viewCount,
     likeCount: typeof article.likeCount === "number" ? article.likeCount : fallbackEngagement.likeCount,
     difficulty: article.difficulty || "medium",
   };
+}
+
+function normalizeLocalizedArticleText(
+  localizedValue: Record<string, string> | undefined,
+  fallbackValue: string | undefined,
+  keepSlugShape = false,
+) {
+  const normalized: Partial<Record<SiteLocale, string>> = {};
+
+  for (const [locale, value] of Object.entries(localizedValue ?? {})) {
+    if (!isSupportedLocale(locale)) {
+      continue;
+    }
+
+    const trimmed = value.trim();
+    if (!trimmed) {
+      continue;
+    }
+
+    normalized[locale] = keepSlugShape ? trimmed.replace(/\s+/g, "-") : trimmed;
+  }
+
+  const fallback = fallbackValue?.trim();
+  if (fallback && !normalized[defaultLocale]) {
+    normalized[defaultLocale] = keepSlugShape ? fallback.replace(/\s+/g, "-") : fallback;
+  }
+
+  return normalized;
+}
+
+function buildUniqueSlug(baseSlug: string, takenSlugs: Set<string>) {
+  const fallback = normalizeOptionalSlug(baseSlug) || "article";
+  let slug = fallback;
+  let suffix = 2;
+
+  while (takenSlugs.has(slug)) {
+    slug = `${fallback}-${suffix}`;
+    suffix += 1;
+  }
+
+  takenSlugs.add(slug);
+  return slug;
+}
+
+function normalizeOptionalSlug(value?: string) {
+  if (!value) {
+    return "";
+  }
+
+  const normalized = value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, " ")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+  return normalized;
 }
 
 function createInitialDealArticleEngagement(seed: string) {

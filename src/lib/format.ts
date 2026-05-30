@@ -1,4 +1,5 @@
 const USD_TO_CNY_RATE = 6.83;
+type SupportedLocale = "zh-CN" | "en";
 
 export function formatMoney(
   value: number,
@@ -11,16 +12,18 @@ export function formatMoney(
   }).format(value);
 }
 
-export function formatDate(value: string) {
-  return new Intl.DateTimeFormat("zh-CN", {
+export function formatDate(value: string, locale: SupportedLocale = "zh-CN") {
+  const resolvedLocale = locale === "en" ? "en-US" : "zh-CN";
+  return new Intl.DateTimeFormat(resolvedLocale, {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
   }).format(new Date(value));
 }
 
-export function formatDateTime(value: string) {
-  const parts = new Intl.DateTimeFormat("zh-CN", {
+export function formatDateTime(value: string, locale: SupportedLocale = "zh-CN") {
+  const resolvedLocale = locale === "en" ? "en-US" : "zh-CN";
+  const parts = new Intl.DateTimeFormat(resolvedLocale, {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
@@ -48,7 +51,14 @@ export function formatBadgeLabel(value: string) {
   return value.replaceAll("_", " ");
 }
 
-export function formatBillingCycle(value: "monthly" | "yearly") {
+export function formatBillingCycle(
+  value: "monthly" | "yearly",
+  locale: SupportedLocale = "zh-CN",
+) {
+  if (locale === "en") {
+    return value === "monthly" ? "Monthly" : "Yearly";
+  }
+
   return value === "monthly" ? "月付" : "年付";
 }
 
@@ -68,7 +78,18 @@ export function formatDealStatus(value: "active" | "expired" | "unknown") {
   }[value];
 }
 
-export function formatDealArticleStatus(value: "not_started" | "in_progress" | "ended") {
+export function formatDealArticleStatus(
+  value: "not_started" | "in_progress" | "ended",
+  locale: SupportedLocale = "zh-CN",
+) {
+  if (locale === "en") {
+    return {
+      not_started: "Not Started",
+      in_progress: "In Progress",
+      ended: "Ended",
+    }[value];
+  }
+
   return {
     not_started: "未开始",
     in_progress: "进行中",
@@ -76,7 +97,18 @@ export function formatDealArticleStatus(value: "not_started" | "in_progress" | "
   }[value];
 }
 
-export function formatDifficulty(value: "easy" | "medium" | "advanced") {
+export function formatDifficulty(
+  value: "easy" | "medium" | "advanced",
+  locale: SupportedLocale = "zh-CN",
+) {
+  if (locale === "en") {
+    return {
+      easy: "Easy",
+      medium: "Medium",
+      advanced: "Advanced",
+    }[value];
+  }
+
   return {
     easy: "容易上手",
     medium: "中等",

@@ -4,11 +4,18 @@ import { PageHero } from "@/components/shared/page-hero";
 import { PageShowcase } from "@/components/shared/page-showcase";
 import { ScrambleText } from "@/components/shared/scramble-text";
 import { UseCasesBoard } from "@/components/use-cases/use-cases-board";
+import { addLocalePrefix } from "@/lib/i18n";
+import { getRequestLocale } from "@/lib/request-locale";
+import { getUICopy } from "@/lib/ui-copy";
 
-export const metadata: Metadata = {
-  title: "AI 使用场景推荐",
-  description: "按开发、写作、学习、研究、自动化和创意任务查看推荐工具与模型组合。",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getRequestLocale();
+  const uiCopy = getUICopy(locale);
+  return {
+    title: uiCopy.useCasesPage.metadataTitle,
+    description: uiCopy.useCasesPage.metadataDescription,
+  };
+}
 
 type UseCasesPageProps = {
   searchParams?: Promise<{
@@ -17,38 +24,41 @@ type UseCasesPageProps = {
 };
 
 export default async function UseCasesPage({ searchParams }: UseCasesPageProps) {
+  const locale = await getRequestLocale();
+  const uiCopy = getUICopy(locale);
   const params = (await searchParams) ?? {};
 
   return (
     <div className="pb-8 sm:pb-16">
       <PageHero
-        note="写作 · 编程 · 学习 · 办公"
+        note={uiCopy.useCasesPage.heroNote}
         title={
           <>
             <div>
-              <ScrambleText text="AI 使用场景" />
+              <ScrambleText text={uiCopy.useCasesPage.heroTitleLine1} />
             </div>
             <div className="inline-flex flex-wrap items-baseline gap-x-2 gap-y-1">
-              <ScrambleText text="按任务选择" />
-              <ScrambleText text="更省预算" className="gradient-title" />
+              <ScrambleText text={uiCopy.useCasesPage.heroTitleLine2Left} />
+              <ScrambleText text={uiCopy.useCasesPage.heroTitleLine2Right} className="gradient-title" />
             </div>
           </>
         }
         description={
           <>
-            不只告诉你“能做什么”，也告诉你“该把预算放在哪”。
+            {uiCopy.useCasesPage.heroDescriptionLine1}
             <br />
-            先按任务类型切换，再回到订阅和 Token 页面做更细的成本决策。
+            {uiCopy.useCasesPage.heroDescriptionLine2}
           </>
         }
-        primaryAction={{ href: "#use-cases-board", label: "查看场景分类" }}
-        secondaryAction={{ href: "/pricing/subscriptions", label: "去看订阅页" }}
+        primaryAction={{ href: "#use-cases-board", label: uiCopy.useCasesPage.primaryAction }}
+        secondaryAction={{ href: addLocalePrefix("/pricing/subscriptions", locale), label: uiCopy.useCasesPage.secondaryAction }}
         rightSlot={<PageShowcase variant="use-cases" />}
       />
 
       <UseCasesBoard
         key={params.group ?? "all"}
         defaultGroup={params.group}
+        locale={locale}
       />
     </div>
   );

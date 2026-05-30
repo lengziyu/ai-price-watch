@@ -14,18 +14,23 @@ import { useStickyTabs } from "@/components/shared/use-sticky-tabs";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useCaseGroups, useCases } from "@/data/use-cases";
 import { formatCostBand, formatDifficulty } from "@/lib/format";
+import { addLocalePrefix, type SiteLocale } from "@/lib/i18n";
+import { getUICopy } from "@/lib/ui-copy";
 import { cn } from "@/lib/utils";
 import { AnimatedSectionTitle } from "@/components/shared/animated-section-title";
 
 type UseCasesBoardProps = {
   defaultGroup?: string;
+  locale?: SiteLocale;
 };
 
 const cardTones = ["tone-green", "tone-blue", "tone-cyan", "tone-amber"];
 
-export function UseCasesBoard({ defaultGroup }: UseCasesBoardProps) {
+export function UseCasesBoard({ defaultGroup, locale = "zh-CN" }: UseCasesBoardProps) {
   const router = useRouter();
   const pathname = usePathname();
+  const uiCopy = getUICopy(locale);
+  const isEnglish = locale === "en";
   const initialGroup = useCaseGroups.some((item) => item.id === defaultGroup)
     ? defaultGroup!
     : "all";
@@ -78,17 +83,17 @@ export function UseCasesBoard({ defaultGroup }: UseCasesBoardProps) {
           <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
             <div>
               <div className="mono-kicker text-[12px] uppercase text-muted-foreground">
-                use case tabs
+                {uiCopy.useCasesPage.boardKicker}
               </div>
               <AnimatedSectionTitle className="mt-2.5">
-                场景分类总览
+                {uiCopy.useCasesPage.boardTitle}
               </AnimatedSectionTitle>
               <p className="mt-1.5 max-w-3xl text-[13px] leading-6 text-muted-foreground sm:text-sm">
-                {currentGroup.summary}
+                {getLocalizedGroupSummary(currentGroup.id, currentGroup.summary, locale)}
               </p>
             </div>
             <div className="rounded-[12px] border border-transparent bg-transparent px-0 py-0 text-[12px] leading-6 text-muted-foreground sm:border-border sm:bg-background/76 sm:px-3 sm:py-2">
-              当前分类共 {visibleCases.length} 个场景，覆盖工具选择、预算提醒和落地入口。
+              {uiCopy.useCasesPage.boardCountPrefix} {visibleCases.length} {uiCopy.useCasesPage.boardCountSuffix}
             </div>
           </div>
 
@@ -109,7 +114,7 @@ export function UseCasesBoard({ defaultGroup }: UseCasesBoardProps) {
                       value={group.id}
                       className="h-9 flex-none px-4"
                     >
-                      {group.label}
+                      {uiCopy.useCasesPage.groupLabelMap[group.id]}
                     </TabsTrigger>
                   ))}
                 </TabsList>
@@ -143,7 +148,7 @@ export function UseCasesBoard({ defaultGroup }: UseCasesBoardProps) {
                               variant="outline"
                               className="use-case-meta-badge use-case-meta-badge--difficulty"
                             >
-                              {formatDifficulty(item.difficulty)}
+                              {formatDifficulty(item.difficulty, locale)}
                             </Badge>
                             <Badge
                               variant="outline"
@@ -155,10 +160,10 @@ export function UseCasesBoard({ defaultGroup }: UseCasesBoardProps) {
                         </div>
 
                         <Link
-                          href={item.ctaHref}
+                          href={localizeInternalHref(item.ctaHref, locale)}
                           className="use-case-cta inline-flex w-fit items-center gap-1 rounded-full px-3 py-1.5 text-[12px] font-medium"
                         >
-                          {item.ctaLabel}
+                          {isEnglish ? translateUseCaseCtaLabel(item.ctaLabel) : item.ctaLabel}
                           <ArrowRightIcon className="size-3.5" />
                         </Link>
                       </div>
@@ -170,12 +175,12 @@ export function UseCasesBoard({ defaultGroup }: UseCasesBoardProps) {
                   </CardHeader>
 
                   <CardContent className="grid gap-3 px-4 pb-4 sm:px-5 sm:pb-5">
-                    <InfoBlock label="适合任务" items={item.bestFor} tone="task" />
-                    <InfoBlock label="推荐工具" items={item.recommendedTools} tone="tool" />
-                    <InfoBlock label="优先模型" items={item.recommendedModels} tone="model" />
+                    <InfoBlock label={uiCopy.useCasesPage.infoLabels.bestFor} items={item.bestFor} tone="task" />
+                    <InfoBlock label={uiCopy.useCasesPage.infoLabels.tools} items={item.recommendedTools} tone="tool" />
+                    <InfoBlock label={uiCopy.useCasesPage.infoLabels.models} items={item.recommendedModels} tone="model" />
                     <div className="grid gap-3 md:grid-cols-2">
-                      <InfoCard title="推荐工作流" detail={item.workflow} />
-                      <InfoCard title="预算提醒" detail={item.budgetTip} />
+                      <InfoCard title={uiCopy.useCasesPage.infoLabels.workflow} detail={item.workflow} />
+                      <InfoCard title={uiCopy.useCasesPage.infoLabels.budgetTip} detail={item.budgetTip} />
                     </div>
                   </CardContent>
                 </Card>
@@ -186,6 +191,55 @@ export function UseCasesBoard({ defaultGroup }: UseCasesBoardProps) {
       </div>
     </section>
   );
+}
+
+function getLocalizedGroupSummary(groupId: string, fallback: string, locale: SiteLocale) {
+  if (locale !== "en") {
+    return fallback;
+  }
+
+  const map: Record<string, string> = {
+    all: "Start from the full map, then decide where your primary budget should go.",
+    dev: "Great for coding, debugging, repo reading, code review, and agent workflows.",
+    work: "Focused on writing, slides, email, meeting notes, and daily information workflows.",
+    research: "Suitable for research, interview prep, long-form understanding, and knowledge capture.",
+    automation: "Best for batch processing, spreadsheet scripts, SOP design, and workflow acceleration.",
+    creative: "For images, video, brand assets, scripts, and multimodal expression.",
+  };
+
+  return map[groupId] ?? fallback;
+}
+
+function translateUseCaseCtaLabel(label: string) {
+  const map: Record<string, string> = {
+    "看会员速率": "View Membership Rates",
+    "看 Token 成本": "View Token Costs",
+    "看订阅组合": "View Subscription Mix",
+    "看工具导航": "Browse Tool Directory",
+    "看低成本入口": "View Low-cost Entries",
+    "看学习向订阅": "View Study-focused Plans",
+    "看研究向厂商": "View Research Vendors",
+    "看便宜模型": "View Low-cost Models",
+    "看低成本输入价": "View Low Input Cost",
+    "看优惠活动": "View Deals",
+    "看创意场景": "View Creative Cases",
+    "看运营工具": "View Ops Tools",
+  };
+
+  return map[label] ?? label;
+}
+
+function localizeInternalHref(href: string, locale: SiteLocale) {
+  if (!href.startsWith("/")) {
+    return href;
+  }
+
+  const [pathname, hashPart] = href.split("#", 2);
+  const [basePath, searchPart] = pathname.split("?", 2);
+  const localizedPath = addLocalePrefix(basePath || "/", locale);
+  const withQuery = searchPart ? `${localizedPath}?${searchPart}` : localizedPath;
+
+  return hashPart ? `${withQuery}#${hashPart}` : withQuery;
 }
 
 function InfoBlock({

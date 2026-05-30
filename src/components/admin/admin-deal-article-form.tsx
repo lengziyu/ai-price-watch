@@ -152,6 +152,9 @@ export function AdminDealArticleForm({
   const [difficulty, setDifficulty] = useState<DifficultyLevel>(article?.difficulty ?? "medium");
   const [title, setTitle] = useState(article?.title ?? "");
   const [summary, setSummary] = useState(article?.summary ?? "");
+  const [titleEn, setTitleEn] = useState(article?.titleByLocale?.en ?? "");
+  const [summaryEn, setSummaryEn] = useState(article?.summaryByLocale?.en ?? "");
+  const [slugEn, setSlugEn] = useState(article?.slugByLocale?.en ?? "");
   const initialRawContent = article?.rawContent ?? "";
   const initialEditorValue = useMemo(() => {
     if (!initialRawContent.trim()) {
@@ -163,6 +166,7 @@ export function AdminDealArticleForm({
       : convertPlainTextToEditorHtml(initialRawContent);
   }, [initialRawContent]);
   const [editorHtml, setEditorHtml] = useState(initialEditorValue);
+  const [rawContentEn, setRawContentEn] = useState(article?.rawContentByLocale?.en ?? "");
   const [tags, setTags] = useState<string[]>(article?.tags ?? []);
   const [tagInput, setTagInput] = useState("");
   const [isFetchingSource, setIsFetchingSource] = useState(false);
@@ -630,6 +634,56 @@ export function AdminDealArticleForm({
               placeholder="可选。不填时会自动取重排后的第一段作为摘要。"
             />
           </div>
+
+          <div className="rounded-[8px] border border-border bg-background/56 p-3">
+            <div className="mb-2 text-sm font-medium text-foreground">英文版本（可选）</div>
+            <div className="grid gap-3">
+              <div className="grid gap-2">
+                <label htmlFor="titleEn" className="text-sm font-medium text-foreground">
+                  英文标题
+                </label>
+                <Input
+                  id="titleEn"
+                  name="titleEn"
+                  value={titleEn}
+                  onChange={(event) => setTitleEn(event.target.value)}
+                  className="rounded-[8px]"
+                  placeholder="例如: Free $20 Kiro Pro Trial"
+                />
+              </div>
+
+              <div className="grid gap-2">
+                <label htmlFor="summaryEn" className="text-sm font-medium text-foreground">
+                  英文摘要
+                </label>
+                <Textarea
+                  id="summaryEn"
+                  name="summaryEn"
+                  value={summaryEn}
+                  onChange={(event) => setSummaryEn(event.target.value)}
+                  className="min-h-20 rounded-[8px]"
+                  placeholder="Optional English summary."
+                />
+              </div>
+
+              <div className="grid gap-2">
+                <label htmlFor="slugEn" className="text-sm font-medium text-foreground">
+                  英文 slug（可选）
+                </label>
+                <Input
+                  id="slugEn"
+                  name="slugEn"
+                  value={slugEn}
+                  onChange={(event) => setSlugEn(event.target.value)}
+                  className="rounded-[8px]"
+                  placeholder="free-20-kiro-pro"
+                />
+                <div className="text-xs text-muted-foreground">
+                  仅支持英文、数字和连字符；留空将根据英文标题自动生成。
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="grid gap-4">
@@ -694,6 +748,23 @@ export function AdminDealArticleForm({
         />
         <input type="hidden" id="rawContent" name="rawContent" value={submittedRawContent} />
         <FieldMessage message={state.fieldErrors?.rawContent} />
+      </div>
+
+      <div className="grid gap-2">
+        <label htmlFor="rawContentEn" className="text-sm font-medium text-foreground">
+          英文正文（可选）
+        </label>
+        <Textarea
+          id="rawContentEn"
+          name="rawContentEn"
+          value={rawContentEn}
+          onChange={(event) => setRawContentEn(event.target.value)}
+          className="min-h-52 rounded-[8px]"
+          placeholder="Paste or write English article body here. Supports plain text or sanitized HTML."
+        />
+        <div className="text-xs leading-6 text-muted-foreground">
+          为空时前台英文页面会自动回退中文正文；填写后会优先展示英文内容。
+        </div>
       </div>
 
       {state.message ? (

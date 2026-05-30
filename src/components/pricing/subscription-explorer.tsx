@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   startTransition,
   useEffect,
@@ -22,6 +23,7 @@ import {
 
 import { subscriptionRegionPrices } from "@/data/subscription-regions";
 import { formatBillingCycle, formatDate, fxReference } from "@/lib/format";
+import { defaultLocale, getLocaleFromPathname, type SiteLocale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import type { SubscriptionPlan, SubscriptionRegionPrice } from "@/types";
 import { AnimeReveal } from "@/components/shared/anime-reveal";
@@ -255,33 +257,29 @@ const providerLogoMap = {
 } as const;
 
 const targetCurrencies = [
-  { code: "CNY", label: "人民币", flagCode: "CN", cnyRate: 1, locale: "zh-CN" },
-  { code: "USD", label: "美元", flagCode: "US", cnyRate: 7.25, locale: "en-US" },
-  { code: "HKD", label: "港元", flagCode: "HK", cnyRate: 0.93, locale: "zh-HK" },
-  { code: "TWD", label: "新台币", flagCode: "TW", cnyRate: 0.22, locale: "zh-TW" },
-  { code: "SGD", label: "新加坡元", flagCode: "SG", cnyRate: 5.36, locale: "en-SG" },
-  { code: "AUD", label: "澳大利亚元", flagCode: "AU", cnyRate: 4.71, locale: "en-AU" },
-  { code: "CAD", label: "加拿大元", flagCode: "CA", cnyRate: 5.29, locale: "en-CA" },
-  { code: "BRL", label: "巴西雷亚尔", flagCode: "BR", cnyRate: 1.38, locale: "pt-BR" },
-  { code: "EUR", label: "欧元", flagCode: "EU", cnyRate: 7.84, locale: "de-DE" },
-  { code: "GBP", label: "英镑", flagCode: "GB", cnyRate: 9.18, locale: "en-GB" },
-  { code: "JPY", label: "日元", flagCode: "JP", cnyRate: 0.047, locale: "ja-JP" },
-  { code: "KRW", label: "韩元", flagCode: "KR", cnyRate: 0.0053, locale: "ko-KR" },
-  { code: "MXN", label: "墨西哥比索", flagCode: "MX", cnyRate: 0.395, locale: "es-MX" },
-  { code: "VND", label: "越南盾", flagCode: "VN", cnyRate: 0.00028, locale: "vi-VN" },
-  { code: "TRY", label: "土耳其里拉", flagCode: "TR", cnyRate: 0.224, locale: "tr-TR" },
-  { code: "PHP", label: "菲律宾比索", flagCode: "PH", cnyRate: 0.126, locale: "en-PH" },
-  { code: "PKR", label: "巴基斯坦卢比", flagCode: "PK", cnyRate: 0.026, locale: "en-PK" },
-  { code: "NGN", label: "尼日利亚奈拉", flagCode: "NG", cnyRate: 0.0049, locale: "en-NG" },
-  { code: "EGP", label: "埃及镑", flagCode: "EG", cnyRate: 0.145, locale: "ar-EG" },
-  { code: "INR", label: "印度卢比", flagCode: "IN", cnyRate: 0.087, locale: "en-IN" },
+  { code: "CNY", flagCode: "CN", cnyRate: 1, locale: "zh-CN" },
+  { code: "USD", flagCode: "US", cnyRate: 7.25, locale: "en-US" },
+  { code: "HKD", flagCode: "HK", cnyRate: 0.93, locale: "zh-HK" },
+  { code: "TWD", flagCode: "TW", cnyRate: 0.22, locale: "zh-TW" },
+  { code: "SGD", flagCode: "SG", cnyRate: 5.36, locale: "en-SG" },
+  { code: "AUD", flagCode: "AU", cnyRate: 4.71, locale: "en-AU" },
+  { code: "CAD", flagCode: "CA", cnyRate: 5.29, locale: "en-CA" },
+  { code: "BRL", flagCode: "BR", cnyRate: 1.38, locale: "pt-BR" },
+  { code: "EUR", flagCode: "EU", cnyRate: 7.84, locale: "de-DE" },
+  { code: "GBP", flagCode: "GB", cnyRate: 9.18, locale: "en-GB" },
+  { code: "JPY", flagCode: "JP", cnyRate: 0.047, locale: "ja-JP" },
+  { code: "KRW", flagCode: "KR", cnyRate: 0.0053, locale: "ko-KR" },
+  { code: "MXN", flagCode: "MX", cnyRate: 0.395, locale: "es-MX" },
+  { code: "VND", flagCode: "VN", cnyRate: 0.00028, locale: "vi-VN" },
+  { code: "TRY", flagCode: "TR", cnyRate: 0.224, locale: "tr-TR" },
+  { code: "PHP", flagCode: "PH", cnyRate: 0.126, locale: "en-PH" },
+  { code: "PKR", flagCode: "PK", cnyRate: 0.026, locale: "en-PK" },
+  { code: "NGN", flagCode: "NG", cnyRate: 0.0049, locale: "en-NG" },
+  { code: "EGP", flagCode: "EG", cnyRate: 0.145, locale: "ar-EG" },
+  { code: "INR", flagCode: "IN", cnyRate: 0.087, locale: "en-IN" },
 ] as const;
 
-const subscriptionViewModes = [
-  { value: "subscription", label: "订阅" },
-  { value: "best", label: "最值得" },
-  { value: "region", label: "地区" },
-] as const satisfies ReadonlyArray<{ value: ViewMode; label: string }>;
+const subscriptionViewModes = ["subscription", "best", "region"] as const;
 
 type TargetCurrencyCode = (typeof targetCurrencies)[number]["code"];
 type ViewMode = "subscription" | "region" | "best";
@@ -322,6 +320,60 @@ const curatedBestValueWinnerRegion: Record<string, string> = {
   "claude-pro": "NG",
 };
 
+const currencyLabels: Record<
+  TargetCurrencyCode,
+  Record<SiteLocale, string>
+> = {
+  CNY: { "zh-CN": "人民币", en: "Chinese Yuan" },
+  USD: { "zh-CN": "美元", en: "US Dollar" },
+  HKD: { "zh-CN": "港元", en: "Hong Kong Dollar" },
+  TWD: { "zh-CN": "新台币", en: "Taiwan Dollar" },
+  SGD: { "zh-CN": "新加坡元", en: "Singapore Dollar" },
+  AUD: { "zh-CN": "澳大利亚元", en: "Australian Dollar" },
+  CAD: { "zh-CN": "加拿大元", en: "Canadian Dollar" },
+  BRL: { "zh-CN": "巴西雷亚尔", en: "Brazilian Real" },
+  EUR: { "zh-CN": "欧元", en: "Euro" },
+  GBP: { "zh-CN": "英镑", en: "British Pound" },
+  JPY: { "zh-CN": "日元", en: "Japanese Yen" },
+  KRW: { "zh-CN": "韩元", en: "South Korean Won" },
+  MXN: { "zh-CN": "墨西哥比索", en: "Mexican Peso" },
+  VND: { "zh-CN": "越南盾", en: "Vietnamese Dong" },
+  TRY: { "zh-CN": "土耳其里拉", en: "Turkish Lira" },
+  PHP: { "zh-CN": "菲律宾比索", en: "Philippine Peso" },
+  PKR: { "zh-CN": "巴基斯坦卢比", en: "Pakistani Rupee" },
+  NGN: { "zh-CN": "尼日利亚奈拉", en: "Nigerian Naira" },
+  EGP: { "zh-CN": "埃及镑", en: "Egyptian Pound" },
+  INR: { "zh-CN": "印度卢比", en: "Indian Rupee" },
+};
+
+function viewModeLabel(mode: ViewMode, locale: SiteLocale) {
+  if (locale === "en") {
+    return {
+      subscription: "Plans",
+      best: "Best Value",
+      region: "Regions",
+    }[mode];
+  }
+
+  return {
+    subscription: "订阅",
+    best: "最值得",
+    region: "地区",
+  }[mode];
+}
+
+function currencyLabel(code: TargetCurrencyCode, locale: SiteLocale) {
+  return currencyLabels[code][locale];
+}
+
+function billingCycleBadge(cycle: "monthly" | "yearly", locale: SiteLocale) {
+  if (locale === "en") {
+    return cycle === "monthly" ? "Mo" : "Yr";
+  }
+
+  return cycle === "monthly" ? "月" : "年";
+}
+
 export function SubscriptionExplorer({
   plans,
   embedded = false,
@@ -330,6 +382,9 @@ export function SubscriptionExplorer({
   initialViewMode = "subscription",
   persistViewInUrl = false,
 }: Props) {
+  const pathname = usePathname();
+  const locale = getLocaleFromPathname(pathname) ?? defaultLocale;
+  const isEnglish = locale === "en";
   const isCompact = embedded;
   const [activeProviderKey, setActiveProviderKey] = useState(providerPresets[0].key);
   const [activePresetKey, setActivePresetKey] = useState(productPresets[0].key);
@@ -418,12 +473,12 @@ export function SubscriptionExplorer({
   };
 
   const currentPlan = useMemo<SubscriptionPlan>(
-    () => resolvePlanForPreset(activePreset, plans),
-    [activePreset, plans],
+    () => resolvePlanForPreset(activePreset, plans, locale),
+    [activePreset, locale, plans],
   );
   const currentProviderPlans = useMemo(
-    () => filteredPresets.map((item) => resolvePlanForPreset(item, plans)),
-    [filteredPresets, plans],
+    () => filteredPresets.map((item) => resolvePlanForPreset(item, plans, locale)),
+    [filteredPresets, locale, plans],
   );
 
   const currentRegions = useMemo(
@@ -432,16 +487,17 @@ export function SubscriptionExplorer({
         preset: activePreset,
         plan: currentPlan,
         targetCount: targetRowsPerTab,
+        locale,
       }),
-    [activePreset, currentPlan, targetRowsPerTab],
+    [activePreset, currentPlan, locale, targetRowsPerTab],
   );
   const liveCnyRates = useMemo(
     () => buildLiveCnyRates(fxFeed.rates),
     [fxFeed.rates],
   );
   const bestValueSummaries = useMemo(
-    () => buildBestValueSummaries(plans, liveCnyRates, bestValueMode),
-    [plans, liveCnyRates, bestValueMode],
+    () => buildBestValueSummaries(plans, liveCnyRates, bestValueMode, locale),
+    [plans, liveCnyRates, bestValueMode, locale],
   );
   const visibleBestValueSummaries =
     typeof maxRows === "number"
@@ -459,7 +515,7 @@ export function SubscriptionExplorer({
   const referenceRegion = rankedRegions.at(-1);
   const updatedAt = currentRegions[0]?.updatedAt ?? currentPlan?.updatedAt;
 
-  const description = planSummaryFor(currentPlan);
+  const description = planSummaryFor(currentPlan, locale);
   const visibleRegions = rankedRegions;
   const regionGroups = useMemo(
     () => buildRegionGroups(activePreset.provider, activePreset.productName),
@@ -477,10 +533,11 @@ export function SubscriptionExplorer({
             activePreset,
             activePlan: currentPlan,
             providerPlans: currentProviderPlans,
+            locale,
           }),
         ]),
       ),
-    [activePreset, currentPlan, currentProviderPlans, visibleRegions],
+    [activePreset, currentPlan, currentProviderPlans, locale, visibleRegions],
   );
   const selectedCurrency = currencyFor(targetCurrency);
   const liveCheapestCny = cheapest ? liveCnyValueFor(cheapest, liveCnyRates) : 0;
@@ -495,7 +552,7 @@ export function SubscriptionExplorer({
   const fxDeltaPercent =
     trackedBaseRate > 0 ? ((trackedLiveRate - trackedBaseRate) / trackedBaseRate) * 100 : 0;
   const fxTrend = fxDeltaPercent >= 0 ? "up" : "down";
-  const fxSourceLabel = fxFeed.source === "frankfurter" ? "Frankfurter" : "快照";
+  const fxSourceLabel = fxFeed.source === "frankfurter" ? "Frankfurter" : isEnglish ? "Snapshot" : "快照";
   const activeProviderLogo = logoForProvider(activeProvider.provider);
   const currentPlanProviderLogo = logoForProvider(currentPlan.provider);
   const handleProviderChange = (nextValue: string | null) => {
@@ -626,17 +683,23 @@ export function SubscriptionExplorer({
             <div className="mono-kicker text-[12px] uppercase text-muted-foreground">
               global subscription pricing
             </div>
-            <AnimatedSectionTitle>会员订阅比价</AnimatedSectionTitle>
+            <AnimatedSectionTitle>
+              {isEnglish ? "Subscription Pricing" : "会员订阅比价"}
+            </AnimatedSectionTitle>
           </div>
           <p className="mt-2 text-[13px] text-muted-foreground sm:text-sm">
-            选择币种与地区，查看各套餐价格对比
+            {isEnglish
+              ? "Switch currency and region to compare plans faster."
+              : "选择币种与地区，查看各套餐价格对比"}
           </p>
         </div>
         <div className="order-2 flex flex-col items-center gap-1.5 text-center lg:order-2 lg:justify-self-end lg:items-end lg:text-right">
           <div className="inline-flex w-fit max-w-full flex-wrap items-center justify-center gap-2 rounded-full border border-primary/18 bg-primary/[0.065] px-3 py-1.5 text-[11px] font-medium text-primary">
             <span className="live-fx-dot size-2 rounded-full bg-primary" />
-            <span>实时汇率 tick</span>
-            <span className="text-muted-foreground">源 {fxSourceLabel}</span>
+            <span>{isEnglish ? "Live FX tick" : "实时汇率 tick"}</span>
+            <span className="text-muted-foreground">
+              {isEnglish ? "Source" : "源"} {fxSourceLabel}
+            </span>
             <span className="text-foreground">
               {trackedCurrency}/CNY {fxDeltaPercent >= 0 ? "+" : ""}
               {fxDeltaPercent.toFixed(2)}%
@@ -646,7 +709,9 @@ export function SubscriptionExplorer({
             ) : (
               <TrendingDownIcon className="size-3.5" />
             )}
-            <span className="text-muted-foreground">{nextFxRefresh}s 后刷新</span>
+            <span className="text-muted-foreground">
+              {isEnglish ? `Refresh in ${nextFxRefresh}s` : `${nextFxRefresh}s 后刷新`}
+            </span>
           </div>
         </div>
       </AnimeReveal>
@@ -660,11 +725,11 @@ export function SubscriptionExplorer({
       >
         <div
           role="group"
-          aria-label="订阅视图切换"
+          aria-label={isEnglish ? "Subscription view switcher" : "订阅视图切换"}
           className="segmented-shell inline-flex w-full max-w-full gap-1 text-muted-foreground sm:w-fit"
         >
           {subscriptionViewModes.map((item) => {
-            const isActive = viewMode === item.value;
+            const isActive = viewMode === item;
             const controlClassName = cn(
               "relative z-[1] inline-flex min-h-9 min-w-[120px] flex-1 items-center justify-center gap-1.5 rounded-[14px] border border-transparent px-3.5 py-1.5 text-[13px] font-semibold whitespace-nowrap text-foreground/62 transition-[color,transform,box-shadow,background-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:text-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1 focus-visible:outline-ring dark:text-muted-foreground dark:hover:text-foreground",
               isActive
@@ -675,34 +740,34 @@ export function SubscriptionExplorer({
             if (persistViewInUrl) {
               return (
                 <Link
-                  key={item.value}
-                  href={viewHrefFor(item.value)}
+                  key={item}
+                  href={viewHrefFor(item)}
                   aria-pressed={isActive}
                   data-active={isActive ? "true" : undefined}
                   onClick={() => {
                     resetRowHoverState();
-                    setViewMode(item.value);
+                    setViewMode(item);
                   }}
                   className={controlClassName}
                 >
-                  {item.label}
+                  {viewModeLabel(item, locale)}
                 </Link>
               );
             }
 
             return (
               <button
-                key={item.value}
+                key={item}
                 type="button"
                 aria-pressed={isActive}
                 data-active={isActive ? "true" : undefined}
                 onClick={() => {
                   resetRowHoverState();
-                  setViewMode(item.value);
+                  setViewMode(item);
                 }}
                 className={controlClassName}
               >
-                {item.label}
+                {viewModeLabel(item, locale)}
               </button>
             );
           })}
@@ -748,7 +813,7 @@ export function SubscriptionExplorer({
                 className="min-w-[220px] rounded-[12px] bg-popover/94 p-1 shadow-[0_22px_80px_rgba(0,0,0,0.14)] backdrop-blur-2xl"
               >
                 <SelectGroup>
-                  <SelectLabel>厂商</SelectLabel>
+                  <SelectLabel>{isEnglish ? "Vendor" : "厂商"}</SelectLabel>
                   {providerPresets.map((item) => {
                     const logoPath = logoForProvider(item.provider);
 
@@ -801,7 +866,7 @@ export function SubscriptionExplorer({
               <div className="flex min-w-0 items-center gap-3">
                 <CountryFlag countryCode={selectedCurrency.flagCode} className="h-4 w-5" />
                 <span className="truncate font-semibold text-foreground">
-                  {selectedCurrency.label}
+                  {currencyLabel(selectedCurrency.code, locale)}
                 </span>
                 <span className="hidden truncate text-muted-foreground sm:inline">
                   ({selectedCurrency.code})
@@ -815,7 +880,7 @@ export function SubscriptionExplorer({
             >
               <SelectGroup className="p-0">
                 <SelectLabel className="px-3 pb-2 pt-2 text-sm font-medium text-foreground">
-                  目标货币
+                  {isEnglish ? "Target Currency" : "目标货币"}
                 </SelectLabel>
                 {targetCurrencies.map((item) => (
                   <SelectItem
@@ -824,8 +889,12 @@ export function SubscriptionExplorer({
                     className="rounded-[16px] px-3 py-3 text-[15px]"
                   >
                     <CountryFlag countryCode={item.flagCode} className="h-4 w-5" />
-                    <span className="font-semibold text-foreground">{item.label}</span>
-                    <span className="text-muted-foreground">（{item.code}）</span>
+                    <span className="font-semibold text-foreground">
+                      {currencyLabel(item.code, locale)}
+                    </span>
+                    <span className="text-muted-foreground">
+                      {isEnglish ? `(${item.code})` : `（${item.code}）`}
+                    </span>
                   </SelectItem>
                 ))}
               </SelectGroup>
@@ -834,7 +903,7 @@ export function SubscriptionExplorer({
 
           <button
             type="button"
-            aria-label="切换目标货币"
+            aria-label={isEnglish ? "Switch target currency" : "切换目标货币"}
             onClick={() => {
               resetRowHoverState();
               const currentIndex = targetCurrencies.findIndex(
@@ -899,10 +968,10 @@ export function SubscriptionExplorer({
                             isActive ? "bg-white/15 text-white" : "bg-primary/10 text-primary",
                           )}
                         >
-                          {preset.badge}
-                        </span>
-                      ) : null}
-                    </button>
+                      {billingCycleBadge(preset.billingCycle, locale)}
+                    </span>
+                  ) : null}
+                </button>
                   );
                 })}
               </div>
@@ -921,6 +990,7 @@ export function SubscriptionExplorer({
             <CompareEdge
               region={cheapest}
               align="left"
+              locale={locale}
               targetCurrency={targetCurrency}
               liveCnyRates={liveCnyRates}
               pulseKey={fxTick}
@@ -959,7 +1029,7 @@ export function SubscriptionExplorer({
                   <LivePriceTick pulseKey={fxTick}>{liveSavingsPercent}%</LivePriceTick>
                 </div>
                 <div className="relative z-[1] text-[10px] text-red sm:text-xs">
-                  差价{" "}
+                  {isEnglish ? "Gap " : "差价 "}
                   <LivePriceTick pulseKey={fxTick}>
                     {formatCnyAsTargetMoney(liveSavingsValue, targetCurrency, liveCnyRates)}
                   </LivePriceTick>
@@ -970,6 +1040,7 @@ export function SubscriptionExplorer({
             <CompareEdge
               region={referenceRegion}
               align="right"
+              locale={locale}
               targetCurrency={targetCurrency}
               liveCnyRates={liveCnyRates}
               pulseKey={fxTick}
@@ -1003,14 +1074,14 @@ export function SubscriptionExplorer({
                   {currentPlan.productName} {currentPlan.planName}
                 </h3>
                 <span className="rounded-[10px] bg-primary/10 px-2.5 py-1 text-[10px] font-semibold text-primary">
-                  {formatBillingCycle(currentPlan.billingCycle)}
+                  {formatBillingCycle(currentPlan.billingCycle, locale)}
                 </span>
                 {!embedded ? (
                   <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/[0.07] px-2.5 py-1 text-[10px] font-semibold text-primary">
                     <span className="live-fx-dot size-1.5 rounded-full bg-primary" />
-                    实时校验
+                    {isEnglish ? "Live Check" : "实时校验"}
                     <span className="text-muted-foreground">
-                      {updatedAt ? formatDate(updatedAt) : "持续更新"}
+                      {updatedAt ? formatDate(updatedAt, locale) : isEnglish ? "Maintained" : "持续更新"}
                     </span>
                   </span>
                 ) : null}
@@ -1025,17 +1096,17 @@ export function SubscriptionExplorer({
               className="inline-flex h-9 w-fit items-center gap-2 rounded-full bg-primary/10 px-3.5 text-sm font-semibold text-primary transition-colors hover:bg-primary/15"
             >
               <StarIcon className="size-4 fill-current" />
-              收藏
+              {isEnglish ? "Save" : "收藏"}
             </button>
           </div>
 
           <div className="mt-3.5 hidden items-center rounded-[10px] border border-border/50 bg-muted/22 px-3 py-2 text-[12px] font-semibold text-muted-foreground sm:grid sm:grid-cols-[72px_minmax(0,1fr)_136px_72px_132px_106px] sm:gap-3 sm:mt-4">
-            <span className="text-center">排名</span>
-            <span>地区</span>
-            <span className="text-right">原价</span>
-            <span className="text-center">单位</span>
+            <span className="text-center">{isEnglish ? "Rank" : "排名"}</span>
+            <span>{isEnglish ? "Region" : "地区"}</span>
+            <span className="text-right">{isEnglish ? "Local Price" : "原价"}</span>
+            <span className="text-center">{isEnglish ? "Unit" : "单位"}</span>
             <span className="text-right">CNY</span>
-            <span className="text-right">状态</span>
+            <span className="text-right">{isEnglish ? "Status" : "状态"}</span>
           </div>
 
           <div className="mt-2.5 flex flex-col gap-2.5">
@@ -1085,6 +1156,7 @@ export function SubscriptionExplorer({
                     liveReferenceCny > 0 &&
                     liveCnyValueFor(item, liveCnyRates) >= notRecommendedThresholdCny
                   }
+                  locale={locale}
                   targetCurrency={targetCurrency}
                   liveCnyRates={liveCnyRates}
                   pulseKey={fxTick}
@@ -1095,7 +1167,9 @@ export function SubscriptionExplorer({
 
           {visibleRegions.length < currentRegions.length ? (
             <div className="mt-3 rounded-[10px] border border-dashed border-border bg-background/70 px-3 py-2 text-[11px] leading-5 text-muted-foreground sm:text-xs">
-              首页仅预览前 {visibleRegions.length} 个地区，完整列表和更多套餐可以进入会员订阅页继续查看。
+              {isEnglish
+                ? `Home preview shows ${visibleRegions.length} regions. Open the full subscriptions page for the complete list and more plans.`
+                : `首页仅预览前 ${visibleRegions.length} 个地区，完整列表和更多套餐可以进入会员订阅页继续查看。`}
             </div>
           ) : null}
         </AnimeReveal>
@@ -1113,6 +1187,7 @@ export function SubscriptionExplorer({
             <RegionPlanCard
               key={group.countryCode}
               group={group}
+              locale={locale}
               targetCurrency={targetCurrency}
               liveCnyRates={liveCnyRates}
               pulseKey={fxTick}
@@ -1120,7 +1195,7 @@ export function SubscriptionExplorer({
           ))}
           {visibleRegionGroups.length === 0 ? (
             <div className="rounded-[12px] border border-dashed border-border bg-card px-4 py-8 text-center text-[13px] text-muted-foreground lg:col-span-3">
-              当前产品地区价格暂未收录。
+              {isEnglish ? "Regional pricing is not tracked for this product yet." : "当前产品地区价格暂未收录。"}
             </div>
           ) : null}
         </AnimeReveal>
@@ -1140,7 +1215,13 @@ export function SubscriptionExplorer({
                 best value board
               </div>
               <div className="mt-1 text-[14px] font-semibold text-foreground">
-                {bestValueMode === "lowest" ? "按绝对最低价排序" : "按性价比排序"}
+                {bestValueMode === "lowest"
+                  ? isEnglish
+                    ? "Sorted by lowest price"
+                    : "按绝对最低价排序"
+                  : isEnglish
+                    ? "Sorted by best value"
+                    : "按性价比排序"}
               </div>
             </div>
             <div className="inline-flex w-fit rounded-full border border-border bg-background/86 p-1">
@@ -1154,7 +1235,7 @@ export function SubscriptionExplorer({
                     : "text-muted-foreground hover:text-foreground",
                 )}
               >
-                绝对最低价
+                {isEnglish ? "Lowest Price" : "绝对最低价"}
               </button>
               <button
                 type="button"
@@ -1166,7 +1247,7 @@ export function SubscriptionExplorer({
                     : "text-muted-foreground hover:text-foreground",
                 )}
               >
-                性价比
+                {isEnglish ? "Best Value" : "性价比"}
               </button>
             </div>
           </div>
@@ -1177,6 +1258,7 @@ export function SubscriptionExplorer({
                 key={summary.key}
                 rank={index + 1}
                 summary={summary}
+                locale={locale}
                 targetCurrency={targetCurrency}
                 liveCnyRates={liveCnyRates}
                 pulseKey={fxTick}
@@ -1184,7 +1266,9 @@ export function SubscriptionExplorer({
             ))}
             {visibleBestValueSummaries.length === 0 ? (
               <div className="rounded-[12px] border border-dashed border-border bg-card px-4 py-8 text-center text-[13px] text-muted-foreground lg:col-span-2">
-                暂时还没有足够的订阅价格数据来计算“最值得”。
+                {isEnglish
+                  ? 'There is not enough plan pricing data yet to rank "Best Value".'
+                  : "暂时还没有足够的订阅价格数据来计算“最值得”。"}
               </div>
             ) : null}
           </div>
@@ -1192,31 +1276,40 @@ export function SubscriptionExplorer({
       ) : null}
 
       <div className={cn("mt-4 text-[11px] leading-6 text-muted-foreground sm:text-xs", embedded && "mt-3")}>
-        目标货币：{selectedCurrency.label}（{selectedCurrency.code}）。当前优先读取 Frankfurter 参考汇率，失败时回落到静态快照；几秒级 tick 用于展示汇率波动感，真实结算价格仍请以官方页面为准。
+        {isEnglish
+          ? `Target currency: ${currencyLabel(selectedCurrency.code, locale)} (${selectedCurrency.code}). We use Frankfurter rates first and fall back to a static snapshot if needed. The short tick is for FX movement only. Final billing still depends on the official page.`
+          : `目标货币：${currencyLabel(selectedCurrency.code, locale)}（${selectedCurrency.code}）。当前优先读取 Frankfurter 参考汇率，失败时回落到静态快照；几秒级 tick 用于展示汇率波动感，真实结算价格仍请以官方页面为准。`}
       </div>
     </section>
   );
 }
 
-function buildFallbackRegion(plan: SubscriptionPlan): SubscriptionRegionPrice {
+function buildFallbackRegion(
+  plan: SubscriptionPlan,
+  locale: SiteLocale = defaultLocale,
+): SubscriptionRegionPrice {
   return {
     id: `${plan.id}-us`,
     provider: plan.provider,
     productName: plan.productName,
     planName: plan.planName,
     billingCycle: plan.billingCycle,
-    country: "美国",
+    country: locale === "en" ? "United States" : "美国",
     countryCode: "US",
     currencyCode: "USD",
     localPrice: plan.officialPriceUSD ?? 20,
     convertedCNY:
       plan.priceCNY ?? Math.round((plan.officialPriceUSD ?? 20) * fxReference.rate),
-    sourceLabel: "官方定价",
+    sourceLabel: locale === "en" ? "Official Pricing" : "官方定价",
     updatedAt: plan.updatedAt,
   };
 }
 
-function resolvePlanForPreset(preset: Preset | undefined, plans: SubscriptionPlan[]) {
+function resolvePlanForPreset(
+  preset: Preset | undefined,
+  plans: SubscriptionPlan[],
+  locale: SiteLocale = defaultLocale,
+) {
   if (!preset) {
     return {
       id: "fallback-plan",
@@ -1227,7 +1320,10 @@ function resolvePlanForPreset(preset: Preset | undefined, plans: SubscriptionPla
       priceCNY: 137,
       billingCycle: "monthly" as const,
       region: "US reference",
-      note: "该档位当前按公开价格整理展示，地区明细会持续补齐。",
+      note:
+        locale === "en"
+          ? "This tier is maintained from public pricing data while regional coverage is still expanding."
+          : "该档位当前按公开价格整理展示，地区明细会持续补齐。",
       tags: ["seed"],
       updatedAt: "2026-05-11",
     } satisfies SubscriptionPlan;
@@ -1249,7 +1345,10 @@ function resolvePlanForPreset(preset: Preset | undefined, plans: SubscriptionPla
       priceCNY: 137,
       billingCycle: preset.billingCycle,
       region: "US reference",
-      note: "该档位当前按公开价格整理展示，地区明细会持续补齐。",
+      note:
+        locale === "en"
+          ? "This tier is maintained from public pricing data while regional coverage is still expanding."
+          : "该档位当前按公开价格整理展示，地区明细会持续补齐。",
       tags: ["seed"],
       updatedAt: "2026-05-11",
     }
@@ -1261,11 +1360,13 @@ function buildProviderCountryDetails({
   activePreset,
   activePlan,
   providerPlans,
+  locale,
 }: {
   countryTemplate: SubscriptionRegionPrice;
   activePreset: Preset;
   activePlan: SubscriptionPlan;
   providerPlans: SubscriptionPlan[];
+  locale: SiteLocale;
 }) {
   const activeUsReference =
     subscriptionRegionPrices.find(
@@ -1275,7 +1376,7 @@ function buildProviderCountryDetails({
         item.planName === activePreset.planName &&
         item.billingCycle === activePreset.billingCycle &&
         item.countryCode === "US",
-    ) ?? buildFallbackRegion(activePlan);
+    ) ?? buildFallbackRegion(activePlan, locale);
   const countryFactor =
     activeUsReference.convertedCNY > 0
       ? countryTemplate.convertedCNY / activeUsReference.convertedCNY
@@ -1311,7 +1412,7 @@ function buildProviderCountryDetails({
         currencyCode: countryTemplate.currencyCode,
         localPrice: Number((convertedCNY / localRate).toFixed(2)),
         convertedCNY,
-        sourceLabel: "按当前地区汇率估算",
+        sourceLabel: locale === "en" ? "Estimated by regional FX ratio" : "按当前地区汇率估算",
         updatedAt: plan.updatedAt,
       } satisfies SubscriptionRegionPrice;
     })
@@ -1322,10 +1423,12 @@ function buildComparableRegions({
   preset,
   plan,
   targetCount,
+  locale,
 }: {
   preset: Preset;
   plan: SubscriptionPlan;
   targetCount: number;
+  locale: SiteLocale;
 }) {
   const safeCount = Math.max(1, targetCount);
   const matched = subscriptionRegionPrices
@@ -1367,7 +1470,7 @@ function buildComparableRegions({
   const templates =
     templateByCountry.size > 0
       ? Array.from(templateByCountry.values()).slice(0, safeCount)
-      : [buildFallbackRegion(plan)];
+      : [buildFallbackRegion(plan, locale)];
   const existingByCountry = new Map(matched.map((item) => [item.countryCode, item]));
   const usTemplate = templates.find((item) => item.countryCode === "US") ?? templates[0];
   const usCny = plan.priceCNY ?? Math.round((plan.officialPriceUSD ?? 20) * fxReference.rate);
@@ -1396,7 +1499,7 @@ function buildComparableRegions({
       currencyCode: template.currencyCode,
       localPrice,
       convertedCNY,
-      sourceLabel: "汇率换算估算",
+      sourceLabel: locale === "en" ? "Estimated by FX conversion" : "汇率换算估算",
       updatedAt: plan.updatedAt,
     } satisfies SubscriptionRegionPrice;
   });
@@ -1407,6 +1510,7 @@ function buildComparableRegions({
 function CompareEdge({
   region,
   align,
+  locale,
   targetCurrency,
   liveCnyRates,
   pulseKey,
@@ -1419,10 +1523,12 @@ function CompareEdge({
     convertedCNY: number;
   };
   align: "left" | "right";
+  locale: SiteLocale;
   targetCurrency: TargetCurrencyCode;
   liveCnyRates: Record<string, number>;
   pulseKey: number;
 }) {
+  const regionName = displayRegionName(region.countryCode, region.country, locale);
   const displayPrice = formatTargetMoney(
     region.convertedCNY,
     targetCurrency,
@@ -1452,7 +1558,7 @@ function CompareEdge({
               : "text-orange-900/60 dark:text-orange-100/70",
           )}
         >
-          {region.country}
+          {regionName}
         </div>
         <div
           className={cn(
@@ -1494,6 +1600,7 @@ function PriceRow({
   onClosePinned,
   highlighted,
   notRecommended,
+  locale,
   targetCurrency,
   liveCnyRates,
   pulseKey,
@@ -1511,15 +1618,19 @@ function PriceRow({
   onClosePinned: () => void;
   highlighted: boolean;
   notRecommended: boolean;
+  locale: SiteLocale;
   targetCurrency: TargetCurrencyCode;
   liveCnyRates: Record<string, number>;
   pulseKey: number;
 }) {
+  const regionName = displayRegionName(region.countryCode, region.country, locale);
   const finalPrice = formatTargetMoney(region.convertedCNY, targetCurrency, region, liveCnyRates);
   const sortedDetailRows = [...detailRows].sort(
     (left, right) => liveCnyValueFor(left, liveCnyRates) - liveCnyValueFor(right, liveCnyRates),
   );
-  const hasEstimatedRows = sortedDetailRows.some((item) => item.sourceLabel.includes("估算"));
+  const hasEstimatedRows = sortedDetailRows.some((item) =>
+    locale === "en" ? item.sourceLabel.toLowerCase().includes("estimate") : item.sourceLabel.includes("估算"),
+  );
   const desktopOpen = popoverEnabled && sortedDetailRows.length > 0 && (isHovered || isPinned);
   const mobileOpen = popoverEnabled && sortedDetailRows.length > 0 && isPinned;
 
@@ -1580,7 +1691,7 @@ function PriceRow({
         <div className="flex items-center gap-4">
           <CountryFlag countryCode={region.countryCode} className="h-[22px] w-[30px] sm:h-[24px] sm:w-8" />
           <div>
-            <div className="text-[13px] font-semibold sm:text-sm">{region.country}</div>
+            <div className="text-[13px] font-semibold sm:text-sm">{regionName}</div>
           </div>
         </div>
 
@@ -1611,11 +1722,11 @@ function PriceRow({
         <div className="flex items-center justify-end gap-1.5">
           {highlighted ? (
             <span className="rounded-full bg-primary px-2.5 py-1 text-[11px] font-semibold text-white">
-              推荐
+              {locale === "en" ? "Top Pick" : "推荐"}
             </span>
           ) : notRecommended ? (
             <span className="rounded-full border border-rose-300/70 bg-rose-50/80 px-2.5 py-1 text-[11px] font-semibold text-rose-600 dark:border-rose-400/30 dark:bg-rose-500/10 dark:text-rose-200">
-              不推荐
+              {locale === "en" ? "Skip" : "不推荐"}
             </span>
           ) : null}
           <ChevronRightIcon
@@ -1640,6 +1751,7 @@ function PriceRow({
               region={region}
               sortedDetailRows={sortedDetailRows}
               hasEstimatedRows={hasEstimatedRows}
+              locale={locale}
               targetCurrency={targetCurrency}
               liveCnyRates={liveCnyRates}
               pulseKey={pulseKey}
@@ -1659,6 +1771,7 @@ function PriceRow({
             region={region}
             sortedDetailRows={sortedDetailRows}
             hasEstimatedRows={hasEstimatedRows}
+            locale={locale}
             targetCurrency={targetCurrency}
             liveCnyRates={liveCnyRates}
             pulseKey={pulseKey}
@@ -1673,6 +1786,7 @@ function MembershipPricePopover({
   region,
   sortedDetailRows,
   hasEstimatedRows,
+  locale,
   targetCurrency,
   liveCnyRates,
   pulseKey,
@@ -1681,11 +1795,13 @@ function MembershipPricePopover({
   region: SubscriptionRegionPrice;
   sortedDetailRows: SubscriptionRegionPrice[];
   hasEstimatedRows: boolean;
+  locale: SiteLocale;
   targetCurrency: TargetCurrencyCode;
   liveCnyRates: Record<string, number>;
   pulseKey: number;
   compact?: boolean;
 }) {
+  const regionName = displayRegionName(region.countryCode, region.country, locale);
   return (
     <div
       className={cn(
@@ -1708,20 +1824,22 @@ function MembershipPricePopover({
                 compact ? "text-[0.98rem]" : "text-[1.02rem]",
               )}
             >
-              {region.country}
+              {regionName}
             </div>
             <div className="text-[11px] text-muted-foreground">
-              当前厂商下全部会员价格，按 {targetCurrency} 实时换算排序
+              {locale === "en"
+                ? `All plan prices for this vendor, sorted by live ${targetCurrency} conversion`
+                : `当前厂商下全部会员价格，按 ${targetCurrency} 实时换算排序`}
             </div>
           </div>
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <span className="rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-semibold text-primary">
-            {sortedDetailRows.length} 个档位
+            {locale === "en" ? `${sortedDetailRows.length} tiers` : `${sortedDetailRows.length} 个档位`}
           </span>
           {hasEstimatedRows ? (
             <span className="rounded-full bg-amber-400/12 px-2.5 py-1 text-[10px] font-semibold text-amber-700 dark:text-amber-200">
-              含估算价格
+              {locale === "en" ? "Includes estimates" : "含估算价格"}
             </span>
           ) : null}
         </div>
@@ -1745,7 +1863,7 @@ function MembershipPricePopover({
                   {membershipLabelForRow(item)}
                 </div>
                 <span className="rounded-full bg-sky-50 px-2 py-0.5 text-[10px] font-semibold text-sky-700 dark:bg-sky-500/12 dark:text-sky-200">
-                  {formatBillingCycle(item.billingCycle)}
+                  {formatBillingCycle(item.billingCycle, locale)}
                 </span>
               </div>
               <div className="mt-1 text-[11px] text-muted-foreground">
@@ -1764,7 +1882,7 @@ function MembershipPricePopover({
                 </LivePriceTick>
               </div>
               <div className="mt-1 text-[10px] text-muted-foreground">
-                {formatDate(item.updatedAt)}
+                {formatDate(item.updatedAt, locale)}
               </div>
             </div>
           </div>
@@ -1802,26 +1920,29 @@ type BestValueSummary = {
 
 function RegionPlanCard({
   group,
+  locale,
   targetCurrency,
   liveCnyRates,
   pulseKey,
 }: {
   group: RegionGroup;
+  locale: SiteLocale;
   targetCurrency: TargetCurrencyCode;
   liveCnyRates: Record<string, number>;
   pulseKey: number;
 }) {
+  const regionName = displayRegionName(group.countryCode, group.country, locale);
   return (
     <div className="rounded-[12px] border border-border bg-card p-3.5 shadow-[0_12px_44px_rgba(0,0,0,0.04)]">
       <div className="mb-3 flex items-center justify-between gap-3">
         <div className="flex min-w-0 items-center gap-3">
           <CountryFlag countryCode={group.countryCode} className="h-6 w-8" />
           <h3 className="truncate text-[1.05rem] font-semibold tracking-[-0.025em]">
-            {group.country}
+            {regionName}
           </h3>
         </div>
         <span className="rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-semibold text-primary">
-          {group.prices.length} 个价格
+          {locale === "en" ? `${group.prices.length} prices` : `${group.prices.length} 个价格`}
         </span>
       </div>
 
@@ -1836,7 +1957,7 @@ function RegionPlanCard({
           >
             <div className="min-w-0">
               <div className="truncate text-[13px] font-medium text-foreground sm:text-sm">
-                {item.productName} {item.planName} - {formatBillingCycle(item.billingCycle)}
+                {item.productName} {item.planName} - {formatBillingCycle(item.billingCycle, locale)}
               </div>
               <div className="mt-0.5 text-[11px] text-muted-foreground">
                 {item.currencyCode} {formatLocalNumber(item.localPrice)}
@@ -1857,17 +1978,31 @@ function RegionPlanCard({
 function BestValueCard({
   rank,
   summary,
+  locale,
   targetCurrency,
   liveCnyRates,
   pulseKey,
 }: {
   rank: number;
   summary: BestValueSummary;
+  locale: SiteLocale;
   targetCurrency: TargetCurrencyCode;
   liveCnyRates: Record<string, number>;
   pulseKey: number;
 }) {
   const logoPath = logoForProvider(summary.provider);
+  const winnerRegionName = displayRegionName(
+    summary.winner.region.countryCode,
+    summary.winner.region.country,
+    locale,
+  );
+  const runnerUpRegionName = summary.runnerUp
+    ? displayRegionName(
+        summary.runnerUp.region.countryCode,
+        summary.runnerUp.region.country,
+        locale,
+      )
+    : null;
   const bestDisplayPrice = formatTargetMoney(
     summary.winner.region.convertedCNY,
     targetCurrency,
@@ -1888,19 +2023,34 @@ function BestValueCard({
   const deltaVsRunnerUp = Math.abs(runnerUpDelta);
   const comparisonStat =
     deltaVsRunnerUp === 0
-      ? { label: "价差对比", value: "当前并列" }
+      ? {
+          label: locale === "en" ? "Price Gap" : "价差对比",
+          value: locale === "en" ? "Currently tied" : "当前并列",
+        }
       : runnerUpDelta >= 0
         ? {
-            label: "价差优势",
-            value: `省 ${formatCnyAsTargetMoney(deltaVsRunnerUp, targetCurrency, liveCnyRates)}`,
+            label: locale === "en" ? "Savings Edge" : "价差优势",
+            value:
+              locale === "en"
+                ? `Save ${formatCnyAsTargetMoney(deltaVsRunnerUp, targetCurrency, liveCnyRates)}`
+                : `省 ${formatCnyAsTargetMoney(deltaVsRunnerUp, targetCurrency, liveCnyRates)}`,
           }
-        : { label: "方案定位", value: "高阶档位" };
+        : {
+            label: locale === "en" ? "Plan Role" : "方案定位",
+            value: locale === "en" ? "Higher-tier pick" : "高阶档位",
+          };
   const runnerUpTitle =
     deltaVsRunnerUp === 0
-      ? "同价备选"
+      ? locale === "en"
+        ? "Same-price alternative"
+        : "同价备选"
       : runnerUpDelta >= 0
-        ? "次优选择"
-        : "更省钱的选择";
+        ? locale === "en"
+          ? "Runner-up option"
+          : "次优选择"
+        : locale === "en"
+          ? "Cheaper alternative"
+          : "更省钱的选择";
 
   return (
     <div className="rounded-[24px] border border-border bg-[linear-gradient(180deg,rgba(255,255,255,0.985),rgba(246,251,248,0.95))] p-4 shadow-[0_22px_56px_rgba(15,23,42,0.06)] backdrop-blur-xl dark:bg-[linear-gradient(180deg,rgba(10,15,14,0.97),rgba(11,18,16,0.93))]">
@@ -1931,7 +2081,9 @@ function BestValueCard({
             TOP {rank}
           </span>
           <span className="text-[10px] font-medium text-muted-foreground">
-            已收录 {summary.variantCount} 档
+            {locale === "en"
+              ? `${summary.variantCount} tiers tracked`
+              : `已收录 ${summary.variantCount} 档`}
           </span>
         </div>
       </div>
@@ -1941,7 +2093,9 @@ function BestValueCard({
           <span className="rounded-full bg-background/88 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-primary">
             most worth
           </span>
-          <span className="text-[11px] text-muted-foreground">最值得的会员类型</span>
+          <span className="text-[11px] text-muted-foreground">
+            {locale === "en" ? "Best value plan type" : "最值得的会员类型"}
+          </span>
         </div>
 
         <div className="mt-2 text-[1.02rem] font-semibold tracking-[-0.03em] text-foreground">
@@ -1949,20 +2103,25 @@ function BestValueCard({
         </div>
 
         <div className="mt-3">
-          <div className="text-[11px] text-muted-foreground">最低到手价</div>
+          <div className="text-[11px] text-muted-foreground">
+            {locale === "en" ? "Best landed price" : "最低到手价"}
+          </div>
           <div className="mt-1 text-[2rem] font-semibold leading-none tracking-[-0.06em] text-primary sm:text-[2.45rem]">
             <LivePriceTick pulseKey={pulseKey}>{bestDisplayPrice}</LivePriceTick>
           </div>
         </div>
 
         <div className="mt-3 flex flex-wrap gap-2">
-          <BestValueStat label="对应地区" value={summary.winner.region.country} />
           <BestValueStat
-            label="订阅周期"
-            value={formatBillingCycle(summary.winner.plan.billingCycle)}
+            label={locale === "en" ? "Region" : "对应地区"}
+            value={winnerRegionName}
           />
           <BestValueStat
-            label="本地价格"
+            label={locale === "en" ? "Billing" : "订阅周期"}
+            value={formatBillingCycle(summary.winner.plan.billingCycle, locale)}
+          />
+          <BestValueStat
+            label={locale === "en" ? "Local Price" : "本地价格"}
             value={`${summary.winner.region.currencyCode} ${formatLocalNumber(summary.winner.region.localPrice)}`}
           />
           <BestValueStat
@@ -1980,7 +2139,7 @@ function BestValueCard({
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-primary/18 bg-background/82 px-3 py-2 text-[12px] font-semibold text-foreground transition-colors hover:border-primary/30 hover:text-primary"
               >
-                查看官方价格页
+                {locale === "en" ? "Official Pricing" : "查看官方价格页"}
                 <ChevronRightIcon className="size-3.5" />
               </Link>
             ) : null}
@@ -1989,7 +2148,9 @@ function BestValueCard({
                 href={summary.winner.plan.relatedArticleUrl}
                 className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-background/72 px-3 py-2 text-[12px] font-semibold text-foreground transition-colors hover:border-primary/28 hover:text-primary"
               >
-                {summary.winner.plan.relatedArticleLabel ?? "查看详细攻略"}
+                {locale === "en"
+                  ? "Read Full Guide"
+                  : (summary.winner.plan.relatedArticleLabel ?? "查看详细攻略")}
                 <ChevronRightIcon className="size-3.5" />
               </Link>
             ) : null}
@@ -2006,9 +2167,9 @@ function BestValueCard({
                 {membershipLabelForPlan(summary.runnerUp.plan)}
               </div>
               <div className="mt-1 flex flex-wrap items-center gap-2 text-[11px] text-muted-foreground">
-                <span>{summary.runnerUp.region.country}</span>
+                <span>{runnerUpRegionName}</span>
                 <span className="text-border">/</span>
-                <span>{formatBillingCycle(summary.runnerUp.plan.billingCycle)}</span>
+                <span>{formatBillingCycle(summary.runnerUp.plan.billingCycle, locale)}</span>
               </div>
             </div>
 
@@ -2017,7 +2178,13 @@ function BestValueCard({
                 <LivePriceTick pulseKey={pulseKey}>{runnerUpDisplayPrice}</LivePriceTick>
               </div>
               <div className="mt-1 text-[11px] text-muted-foreground">
-                {runnerUpDelta >= 0 ? "比当前贵" : "比当前便宜"}{" "}
+                {runnerUpDelta >= 0
+                  ? locale === "en"
+                    ? "Higher than winner by"
+                    : "比当前贵"
+                  : locale === "en"
+                    ? "Lower than winner by"
+                    : "比当前便宜"}{" "}
                 {formatCnyAsTargetMoney(deltaVsRunnerUp, targetCurrency, liveCnyRates)}
               </div>
             </div>
@@ -2032,7 +2199,7 @@ function BestValueCard({
                   rel="noreferrer"
                   className="inline-flex items-center gap-1.5 text-[11px] font-medium text-primary transition-colors hover:text-foreground"
                 >
-                  查看次优官方页
+                  {locale === "en" ? "Runner-up Official Page" : "查看次优官方页"}
                   <ChevronRightIcon className="size-3.5" />
                 </Link>
               ) : null}
@@ -2041,7 +2208,9 @@ function BestValueCard({
                   href={summary.runnerUp.plan.relatedArticleUrl}
                   className="inline-flex items-center gap-1.5 text-[11px] font-medium text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  {summary.runnerUp.plan.relatedArticleLabel ?? "查看详细攻略"}
+                  {locale === "en"
+                    ? "Read Full Guide"
+                    : (summary.runnerUp.plan.relatedArticleLabel ?? "查看详细攻略")}
                   <ChevronRightIcon className="size-3.5" />
                 </Link>
               ) : null}
@@ -2099,6 +2268,7 @@ function buildBestValueSummaries(
   plans: SubscriptionPlan[],
   liveCnyRates: Record<string, number>,
   mode: BestValueMode,
+  locale: SiteLocale = defaultLocale,
 ) {
   const groups = new Map<string, SubscriptionPlan[]>();
 
@@ -2116,6 +2286,7 @@ function buildBestValueSummaries(
           const region = buildCheapestRegionForPlan(
             plan,
             mode === "value" ? curatedBestValueWinnerRegion[plan.id] : undefined,
+            locale,
           );
           const valueScore = bestValueScoreFor(plan, region, liveCnyRates);
           return {
@@ -2184,6 +2355,7 @@ function buildBestValueSummaries(
 function buildCheapestRegionForPlan(
   plan: SubscriptionPlan,
   preferredCountryCode?: string,
+  locale: SiteLocale = defaultLocale,
 ) {
   const matches = subscriptionRegionPrices.filter(
     (item) =>
@@ -2201,7 +2373,7 @@ function buildCheapestRegionForPlan(
   return (
     preferredRegion ??
     matches.sort((left, right) => left.convertedCNY - right.convertedCNY)[0] ??
-    buildFallbackRegion(plan)
+    buildFallbackRegion(plan, locale)
   );
 }
 
@@ -2416,6 +2588,29 @@ function formatLocalNumber(value: number) {
   }).format(value);
 }
 
+function displayRegionName(
+  countryCode: string,
+  fallback: string,
+  locale: SiteLocale = defaultLocale,
+) {
+  if (locale !== "en") {
+    return fallback;
+  }
+
+  if (countryCode === "TW") {
+    return "Taiwan";
+  }
+
+  try {
+    return (
+      new Intl.DisplayNames(["en"], { type: "region" }).of(countryCode) ??
+      fallback
+    );
+  } catch {
+    return fallback;
+  }
+}
+
 function CountryFlag({ countryCode, className }: { countryCode: string; className?: string }) {
   if (countryCode === "TW") {
     return (
@@ -2481,8 +2676,49 @@ function symbolFor(currencyCode: string) {
   );
 }
 
-function planSummaryFor(plan: SubscriptionPlan) {
+function planSummaryFor(
+  plan: SubscriptionPlan,
+  locale: SiteLocale = defaultLocale,
+) {
   const key = `${plan.productName}-${plan.planName}-${plan.billingCycle}`.toLowerCase();
+
+  if (locale === "en") {
+    return (
+      {
+        "chatgpt-plus-monthly": "Best for everyday chat, writing, light analysis, and image generation.",
+        "chatgpt-go-monthly": "A lighter entry tier for tighter budgets that still want smoother daily usage.",
+        "chatgpt-pro 5x-monthly":
+          "Built for higher-frequency users who need more headroom and steadier peak-hour access.",
+        "chatgpt-pro 20x-monthly":
+          "Designed for the heaviest workflows with parallel tasks, long chats, and dense daily usage.",
+        "chatgpt-plus-yearly": "Useful for long-term subscribers who want an easier annual cost comparison by region.",
+        "claude-pro-monthly":
+          "Claude's main personal plan for writing, synthesis, knowledge work, and lighter coding.",
+        "claude-max 5x-monthly":
+          "A better fit for heavier Claude usage, especially longer chats and bigger document work.",
+        "claude-max 20x-monthly":
+          "For the most intensive Claude workloads, including long context and frequent deep reasoning.",
+        "claude-pro-yearly":
+          "Good for steady long-term Claude usage when annual billing helps reduce renewal overhead.",
+        "gemini-google ai plus (200gb)-monthly":
+          "A lighter Gemini + Google One entry tier for casual everyday use.",
+        "gemini-google ai plus (200gb)-yearly":
+          "A lower-cost annual option for steady but lighter Gemini usage.",
+        "gemini-google ai pro (5 tb)-monthly":
+          "A stronger Gemini tier for heavier model use plus broader Google ecosystem benefits.",
+        "gemini-google ai pro (5 tb)-yearly":
+          "A better fit for year-round heavy Gemini usage and annual budgeting.",
+        "github-github pro-monthly":
+          "More about developer account upgrades and platform-level benefits than coding assistance alone.",
+        "github-copilot pro-monthly":
+          "The core personal Copilot tier for everyday coding assistance and medium-intensity workflows.",
+        "github-copilot pro+-monthly":
+          "A better match for heavier advanced-model usage and more persistent agent workflows.",
+        "github-copilot max-monthly":
+          "The highest-intensity Copilot option for multi-repo work, long sessions, and heavier reviews.",
+      }[key] ?? "Maintained with public pricing and review records."
+    );
+  }
 
   return (
     {

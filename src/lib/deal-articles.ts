@@ -4,6 +4,7 @@ import type {
   DealArticleStatus,
   DifficultyLevel,
 } from "@/types";
+import type { SiteLocale } from "@/lib/i18n";
 
 export const defaultDealArticleCoverImageUrl = "/default-deal-article-cover.svg";
 
@@ -44,7 +45,15 @@ export type DealArticleBlock =
   | { type: "paragraph"; text: string }
   | { type: "list"; items: string[] };
 
-export function formatDealArticleStatus(value: DealArticleStatus) {
+export function formatDealArticleStatus(value: DealArticleStatus, locale: SiteLocale = "zh-CN") {
+  if (locale === "en") {
+    return {
+      not_started: "Not Started",
+      in_progress: "In Progress",
+      ended: "Ended",
+    }[value];
+  }
+
   return {
     not_started: "未开始",
     in_progress: "进行中",
@@ -60,7 +69,15 @@ export function formatDealArticleSourcePlatform(value: DealArticleSourcePlatform
   }[value];
 }
 
-export function formatDealArticleDifficulty(value: DifficultyLevel) {
+export function formatDealArticleDifficulty(value: DifficultyLevel, locale: SiteLocale = "zh-CN") {
+  if (locale === "en") {
+    return {
+      easy: "Easy",
+      medium: "Medium",
+      advanced: "Advanced",
+    }[value];
+  }
+
   return {
     easy: "简单",
     medium: "中等",

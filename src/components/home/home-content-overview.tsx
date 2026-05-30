@@ -19,15 +19,51 @@ import { Badge } from "@/components/ui/badge";
 import { membershipVendorBoards } from "@/data/membership-rates";
 import { toolsDirectory } from "@/data/tools";
 import { useCases } from "@/data/use-cases";
+import { getDealArticleSlugForLocale } from "@/lib/deal-article-localization";
 import { formatDate, formatDateTime, formatDealArticleStatus } from "@/lib/format";
+import { addLocalePrefix, defaultLocale, type SiteLocale } from "@/lib/i18n";
+import { getUICopy } from "@/lib/ui-copy";
 import type { DealArticle } from "@/types";
 
 type HomeContentOverviewProps = {
   articles: DealArticle[];
+  locale?: SiteLocale;
 };
 
 const featuredVendorIds = ["openai", "anthropic", "google", "cursor"] as const;
-export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
+const featuredVendorCardCopy = {
+  openai: {
+    en: {
+      primary: "From ChatGPT Free to Pro, with the clearest public quota notes.",
+      secondary: "Go and Plus fit daily use; Pro tiers suit heavier Codex and long-session work.",
+    },
+  },
+  anthropic: {
+    en: {
+      primary: "Claude pricing stays simple: Pro for regular work, Max for heavier throughput.",
+      secondary: "Best fit when long chats, writing, and document-heavy work matter most.",
+    },
+  },
+  google: {
+    en: {
+      primary: "Gemini bundles model access with Google storage, research, and workspace perks.",
+      secondary: "Plus is light-entry; Pro is the main tier for deeper research and coding add-ons.",
+    },
+  },
+  cursor: {
+    en: {
+      primary: "Cursor pricing is really about agent usage, IDE workflow depth, and team controls.",
+      secondary: "Pro fits solo coding; team tiers add shared context, governance, and billing.",
+    },
+  },
+} as const;
+
+export function HomeContentOverview({
+  articles,
+  locale = defaultLocale,
+}: HomeContentOverviewProps) {
+  const isEnglish = locale === "en";
+  const uiCopy = getUICopy(locale);
   const featuredVendors = membershipVendorBoards.filter((item) =>
     featuredVendorIds.includes(item.id as (typeof featuredVendorIds)[number]),
   );
@@ -37,29 +73,33 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
 
   const summaryCards = [
     {
-      label: "会员厂商",
+      label: isEnglish ? "Vendors" : "会员厂商",
       value: String(membershipVendorBoards.length),
-      detail: "价格、额度、社区观察",
+      detail: isEnglish ? "Pricing, quotas, signal" : "价格、额度、社区观察",
       iconKey: "vendors" as const,
     },
     {
-      label: "使用场景",
+      label: isEnglish ? "Use Cases" : "使用场景",
       value: String(useCases.length),
-      detail: "开发、办公、研究、自动化",
+      detail: isEnglish ? "Coding, work, research" : "开发、办公、研究、自动化",
       iconKey: "useCases" as const,
     },
     {
-      label: "优惠文章",
+      label: isEnglish ? "Deal Posts" : "优惠文章",
       value: String(articles.length),
       detail: latestArticle
-        ? `最近更新 ${formatDate(latestArticle.publishedAt)}`
-        : "持续更新中",
+        ? isEnglish
+          ? `Updated ${formatDate(latestArticle.publishedAt, locale)}`
+          : `最近更新 ${formatDate(latestArticle.publishedAt, locale)}`
+        : isEnglish
+          ? "Continuously maintained"
+          : "持续更新中",
       iconKey: "articles" as const,
     },
     {
-      label: "工具导航",
+      label: isEnglish ? "Tools" : "工具导航",
       value: String(toolsDirectory.length),
-      detail: `${totalTagCount} 个标签关键词`,
+      detail: isEnglish ? `${totalTagCount} tag keywords` : `${totalTagCount} 个标签关键词`,
       iconKey: "tools" as const,
     },
   ];
@@ -89,37 +129,53 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
           <div className="grid gap-4 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-center">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-primary/16 bg-primary/8 px-3 py-1 text-[11px] font-medium text-primary dark:border-primary/24 dark:bg-primary/14">
-                热门入口
+                {isEnglish ? "Popular Entry Points" : "热门入口"}
               </div>
               <h2 className="mt-3 text-[1.55rem] font-semibold leading-[1.08] tracking-[-0.04em] text-foreground sm:text-[2rem]">
-                先从热门会员和最新活动入手，再继续挑适合你的工具
+                {isEnglish
+                  ? "Start with top memberships and latest offers, then drill into the right tools"
+                  : "先从热门会员和最新活动入手，再继续挑适合你的工具"}
               </h2>
               <p className="mt-3 max-w-[64ch] text-[13px] leading-6 text-muted-foreground sm:text-[14px]">
-                先用首页完成第一轮筛选：看热门会员厂商、查看最新优惠文章，再按使用场景或工具类型继续深入。
+                {isEnglish
+                  ? "Use the homepage for a first-pass filter: check top membership vendors, skim latest deal articles, then continue by use case or tool type."
+                  : "先用首页完成第一轮筛选：看热门会员厂商、查看最新优惠文章，再按使用场景或工具类型继续深入。"}
               </p>
             </div>
 
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
               <FeatureIntroTile
                 icon={<CrownIcon className="size-4" />}
-                title="会员速率"
-                detail="先看额度、官方价格和社区体感，再决定值不值得深挖。"
-                href="/membership-rates"
-                hrefLabel="看速率"
+                title={isEnglish ? "Membership Rates" : "会员速率"}
+                detail={
+                  isEnglish
+                    ? "Check credits, official pricing, and community signal before going deeper."
+                    : "先看额度、官方价格和社区体感，再决定值不值得深挖。"
+                }
+                href={addLocalePrefix("/membership-rates", locale)}
+                hrefLabel={isEnglish ? "View Rates" : "看速率"}
               />
               <FeatureIntroTile
                 icon={<CompassIcon className="size-4" />}
-                title="场景速配"
-                detail="按编码、写作、研究这类真实任务反推工具和订阅组合。"
-                href="/use-cases"
-                hrefLabel="看场景"
+                title={isEnglish ? "Use-case Match" : "场景速配"}
+                detail={
+                  isEnglish
+                    ? "Work backwards from real tasks like coding, writing, and research."
+                    : "按编码、写作、研究这类真实任务反推工具和订阅组合。"
+                }
+                href={addLocalePrefix("/use-cases", locale)}
+                hrefLabel={isEnglish ? "View Cases" : "看场景"}
               />
               <FeatureIntroTile
                 icon={<Layers3Icon className="size-4" />}
-                title="工具入口"
-                detail="整理常用 AI 工具的定位、定价方式和官方入口，方便快速判断先看哪一类。"
-                href="/tools"
-                hrefLabel="看工具"
+                title={isEnglish ? "Tool Directory" : "工具入口"}
+                detail={
+                  isEnglish
+                    ? "A quick map of major AI tools, pricing modes, and official entry points."
+                    : "整理常用 AI 工具的定位、定价方式和官方入口，方便快速判断先看哪一类。"
+                }
+                href={addLocalePrefix("/tools", locale)}
+                hrefLabel={isEnglish ? "View Tools" : "看工具"}
                 className="col-span-2 sm:col-span-1"
                 hideOnMobile
               />
@@ -131,10 +187,14 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
       <section className="app-shell mt-4 sm:mt-8">
         <Panel
           icon={<CrownIcon className="size-4" />}
-          title="会员厂商速览"
-          href="/membership-rates"
-          hrefLabel="全部厂商"
-          description="首页先保留最常看的四个会员厂商，快速扫一眼月费、层级差异和体感说明。"
+          title={isEnglish ? "Membership Vendors at a Glance" : "会员厂商速览"}
+          href={addLocalePrefix("/membership-rates", locale)}
+          hrefLabel={isEnglish ? "All Vendors" : "全部厂商"}
+          description={
+            isEnglish
+              ? "A quick snapshot of four popular membership vendors with monthly pricing, tier differences, and usage signals."
+              : "首页先保留最常看的四个会员厂商，快速扫一眼月费、层级差异和体感说明。"
+          }
         >
           <AnimeReveal
             selector=":scope > *"
@@ -144,7 +204,7 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
             {featuredVendors.map((vendor) => (
               <AnimeHoverCard key={vendor.id} className="group h-full">
                 <Link
-                  href={`/membership-rates?vendor=${vendor.id}`}
+                  href={`${addLocalePrefix("/membership-rates", locale)}?vendor=${vendor.id}`}
                   className="block h-full rounded-[6px] border border-border/75 bg-background/84 px-4 py-4 transition-[border-color,box-shadow] group-hover:border-primary/28 group-hover:shadow-[0_18px_34px_color-mix(in_srgb,var(--primary)_12%,transparent)]"
                 >
                   <div className="flex items-start justify-between gap-3">
@@ -162,11 +222,24 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
                     <ArrowUpRightIcon className="size-4 shrink-0 text-muted-foreground transition group-hover:text-primary" />
                   </div>
                   <p className="mt-3 line-clamp-2 text-[12px] leading-5 text-muted-foreground">
-                    {vendor.plans[0]?.detail ?? vendor.officialRate}
+                    {isEnglish
+                      ? featuredVendorCardCopy[vendor.id as keyof typeof featuredVendorCardCopy]?.en
+                          ?.primary ??
+                        vendor.plans[0]?.detail ??
+                        vendor.officialRate
+                      : vendor.plans[0]?.detail ?? vendor.officialRate}
                   </p>
                   <div className="mt-3 rounded-[6px] border border-border/70 bg-background/88 px-3 py-2 text-[11px] text-foreground/78">
                     <p className="line-clamp-2 leading-5">
-                      {vendor.plans[1]?.name ?? "次级层级"} · {vendor.plans[1]?.detail ?? vendor.communityRate}
+                      {isEnglish
+                        ? featuredVendorCardCopy[vendor.id as keyof typeof featuredVendorCardCopy]?.en
+                            ?.secondary ??
+                          `${vendor.plans[1]?.name ?? "Next Tier"} · ${
+                            vendor.plans[1]?.detail ?? vendor.communityRate
+                          }`
+                        : `${vendor.plans[1]?.name ?? "次级层级"} · ${
+                            vendor.plans[1]?.detail ?? vendor.communityRate
+                          }`}
                     </p>
                   </div>
                 </Link>
@@ -179,10 +252,14 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
       <section className="app-shell mt-4 sm:mt-8">
         <Panel
           icon={<GiftIcon className="size-4" />}
-          title="最新优惠文章"
-          href="/deals#deal-articles"
-          hrefLabel="全部文章"
-          description="这里展示最近更新的 3 篇 AI 优惠文章，方便快速浏览和进入详情。"
+          title={isEnglish ? "Latest Deal Articles" : "最新优惠文章"}
+          href={`${addLocalePrefix("/deals", locale)}#deal-articles`}
+          hrefLabel={isEnglish ? "All Articles" : "全部文章"}
+          description={
+            isEnglish
+              ? "Shows the 3 most recent AI deal articles for quick scanning and detail reading."
+              : "这里展示最近更新的 3 篇 AI 优惠文章，方便快速浏览和进入详情。"
+          }
         >
           {latestArticles.length ? (
             <AnimeReveal
@@ -200,15 +277,22 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
                   <SpotlightCard className="h-full rounded-[6px]" contentClassName="rounded-[6px]">
                     <article className="relative h-full w-full min-w-0 overflow-hidden rounded-[6px] border border-black/10 bg-transparent shadow-[0_8px_18px_rgba(25,42,74,0.08)] transition-[box-shadow,border-color] duration-200 group-hover:border-primary/20 group-hover:shadow-[0_16px_28px_color-mix(in_srgb,var(--primary)_18%,transparent)] dark:border-white/10 dark:group-hover:border-primary/30">
                       <Link
-                        href={`/deals/articles/${article.slug}`}
-                        aria-label={`查看文章：${article.title}`}
+                        href={addLocalePrefix(
+                          `/deals/articles/${getDealArticleSlugForLocale(article, locale)}`,
+                          locale,
+                        )}
+                        aria-label={`${uiCopy.dealArticlesSection.previewAriaPrefix}${article.title}`}
                         className="absolute inset-0 z-10 rounded-[6px]"
                       />
                       <div className="pointer-events-none relative z-20">
                         <div className="relative aspect-[16/9] overflow-hidden rounded-t-[6px] border-b border-border/70">
                           <Image
                             src={article.coverImageUrl}
-                            alt={`${article.title} 封面图`}
+                            alt={
+                              isEnglish
+                                ? `${article.title} cover`
+                                : `${article.title} 封面图`
+                            }
                             fill
                             className="scale-[1.02] object-cover transition-transform duration-300 group-hover:scale-[1.06]"
                             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
@@ -216,7 +300,7 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
                           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(22,18,18,0.06),rgba(56,34,24,0.12)_42%,rgba(22,14,12,0.44)_100%)]" />
                           <div className="absolute left-3 top-3 flex items-center gap-2">
                             <Badge className={dealStatusClass(article.status)}>
-                              {formatDealArticleStatus(article.status)}
+                              {formatDealArticleStatus(article.status, locale)}
                             </Badge>
                           </div>
                         </div>
@@ -241,7 +325,7 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
                           </div>
                           <div className="mt-3 flex flex-wrap items-center justify-between gap-2.5 border-t border-border/70 pt-3">
                             <span className="inline-flex min-h-8 items-center text-[12px] text-muted-foreground">
-                              {formatDateTime(article.publishedAt)}
+                              {formatDateTime(article.publishedAt, locale)}
                             </span>
                             <DealArticleEngagement
                               articleId={article.id}
@@ -261,7 +345,9 @@ export function HomeContentOverview({ articles }: HomeContentOverviewProps) {
             </AnimeReveal>
           ) : (
             <div className="rounded-[16px] border border-dashed border-border px-4 py-5 text-[13px] text-muted-foreground">
-              当前还没有发布文章，有新内容时会自动显示在这里。
+              {isEnglish
+                ? "No articles published yet. New entries will appear here automatically."
+                : "当前还没有发布文章，有新内容时会自动显示在这里。"}
             </div>
           )}
         </Panel>

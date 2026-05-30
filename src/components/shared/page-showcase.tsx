@@ -15,6 +15,8 @@ import {
   TicketsIcon,
 } from "lucide-react";
 
+import type { SiteLocale } from "@/lib/i18n";
+
 type ShowcaseVariant =
   | "subscriptions"
   | "tokens"
@@ -190,8 +192,41 @@ const showcaseMap: Record<ShowcaseVariant, ShowcaseConfig> = {
   },
 };
 
-export function PageShowcase({ variant }: { variant: ShowcaseVariant }) {
-  const config = showcaseMap[variant];
+function localizeShowcaseConfig(
+  variant: ShowcaseVariant,
+  locale: SiteLocale,
+  config: ShowcaseConfig,
+) {
+  if (locale !== "en") {
+    return config;
+  }
+
+  if (variant === "subscriptions") {
+    return {
+      ...config,
+      title: "Region / FX / Billing",
+      rows: [
+        { label: "ChatGPT Plus", value: "TR ¥76.11" },
+        { label: "Claude Pro", value: "US $20" },
+        { label: "Gemini AI Pro", value: "1Y student" },
+      ],
+      focusLabel: "Max Gap",
+      leftChip: { ...config.leftChip, label: "8+ regions" },
+      rightChip: { ...config.rightChip, label: "FX-normalized" },
+    };
+  }
+
+  return config;
+}
+
+export function PageShowcase({
+  variant,
+  locale = "zh-CN",
+}: {
+  variant: ShowcaseVariant;
+  locale?: SiteLocale;
+}) {
+  const config = localizeShowcaseConfig(variant, locale, showcaseMap[variant]);
   const FocusIcon = config.focusIcon;
   const LeftIcon = config.leftChip.icon;
   const RightIcon = config.rightChip.icon;

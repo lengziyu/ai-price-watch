@@ -10,20 +10,28 @@ import { AnimeReveal } from "@/components/shared/anime-reveal";
 import { SpotlightCard } from "@/components/shared/spotlight-card";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
+import { getDealArticleSlugForLocale } from "@/lib/deal-article-localization";
 import {
   formatDealArticleDifficulty,
   formatDealArticleStatus,
   getDealArticleStatusCounts,
 } from "@/lib/deal-articles";
 import { formatDateTime } from "@/lib/format";
+import { addLocalePrefix, defaultLocale, type SiteLocale } from "@/lib/i18n";
+import { getUICopy } from "@/lib/ui-copy";
 import { cn } from "@/lib/utils";
 import type { DealArticle, DealArticleStatus } from "@/types";
 
 type DealArticlesSectionProps = {
   articles: DealArticle[];
+  locale?: SiteLocale;
 };
 
-export function DealArticlesSection({ articles }: DealArticlesSectionProps) {
+export function DealArticlesSection({
+  articles,
+  locale = defaultLocale,
+}: DealArticlesSectionProps) {
+  const uiCopy = getUICopy(locale);
   const statusCounts = getDealArticleStatusCounts(articles);
   const topTags = getTopTags(articles, 6);
   const [activeStatus, setActiveStatus] = useState<"all" | DealArticleStatus>("all");
@@ -50,12 +58,12 @@ export function DealArticlesSection({ articles }: DealArticlesSectionProps) {
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5">
                 <InlineFilterGroup
-                  label="状态"
+                  label={uiCopy.dealArticlesSection.filterStatus}
                   options={[
-                    { value: "all", label: "全部", tone: "all" },
-                    { value: "not_started", label: "未开始", tone: "not_started" },
-                    { value: "in_progress", label: "进行中", tone: "in_progress" },
-                    { value: "ended", label: "已结束", tone: "ended" },
+                    { value: "all", label: uiCopy.dealArticlesSection.all, tone: "all" },
+                    { value: "not_started", label: uiCopy.dealArticlesSection.notStarted, tone: "not_started" },
+                    { value: "in_progress", label: uiCopy.dealArticlesSection.inProgress, tone: "in_progress" },
+                    { value: "ended", label: uiCopy.dealArticlesSection.ended, tone: "ended" },
                   ]}
                   activeValue={activeStatus}
                   onChange={(value) => setActiveStatus(value as "all" | DealArticleStatus)}
@@ -63,9 +71,9 @@ export function DealArticlesSection({ articles }: DealArticlesSectionProps) {
 
                 {topTags.length > 0 ? (
                   <InlineFilterGroup
-                    label="标签"
+                    label={uiCopy.dealArticlesSection.filterTag}
                     options={[
-                      { value: "all", label: "全部", tone: "all" },
+                      { value: "all", label: uiCopy.dealArticlesSection.all, tone: "all" },
                       ...topTags.map((tag) => ({ value: tag, label: tag, tone: "tag" as const })),
                     ]}
                     activeValue={activeTag}
@@ -76,8 +84,8 @@ export function DealArticlesSection({ articles }: DealArticlesSectionProps) {
             </div>
 
             <div className="flex shrink-0 items-center gap-1.5 self-start xl:self-center">
-              <HeaderStat label="总数" value={String(statusCounts.total)} />
-              <HeaderStat label="进行中" value={String(statusCounts.inProgress)} />
+              <HeaderStat label={uiCopy.dealArticlesSection.statTotal} value={String(statusCounts.total)} />
+              <HeaderStat label={uiCopy.dealArticlesSection.statInProgress} value={String(statusCounts.inProgress)} />
             </div>
           </div>
         </CardHeader>
@@ -98,8 +106,11 @@ export function DealArticlesSection({ articles }: DealArticlesSectionProps) {
                     className="relative h-full !gap-0 rounded-[6px] border border-black/10 bg-transparent !py-0 shadow-[0_8px_18px_rgba(25,42,74,0.08)] transition-[box-shadow,border-color] duration-200 group-hover/card:border-primary/20 group-hover/card:shadow-[0_16px_28px_color-mix(in_srgb,var(--primary)_18%,transparent)] dark:border-white/10 dark:group-hover/card:border-primary/30"
                   >
                     <Link
-                      href={`/deals/articles/${article.slug}`}
-                      aria-label={`查看文章：${article.title}`}
+                      href={addLocalePrefix(
+                        `/deals/articles/${getDealArticleSlugForLocale(article, locale)}`,
+                        locale,
+                      )}
+                      aria-label={`${uiCopy.dealArticlesSection.previewAriaPrefix}${article.title}`}
                       className="absolute inset-0 z-10 rounded-[6px]"
                     />
                     <div className="pointer-events-none relative z-20">
@@ -114,7 +125,7 @@ export function DealArticlesSection({ articles }: DealArticlesSectionProps) {
                         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(22,18,18,0.06),rgba(56,34,24,0.12)_42%,rgba(22,14,12,0.44)_100%)]" />
                         <div className="absolute left-3 top-3 flex items-center gap-2">
                           <Badge className={cn("h-auto rounded-full px-3 py-1 text-[12px] font-semibold shadow-sm", statusToneClass(article.status))}>
-                            {formatDealArticleStatus(article.status)}
+                            {formatDealArticleStatus(article.status, locale)}
                           </Badge>
                         </div>
                         <div className="absolute right-3 top-3">
@@ -122,7 +133,7 @@ export function DealArticlesSection({ articles }: DealArticlesSectionProps) {
                             variant="outline"
                             className="rounded-full border-white/40 bg-background/88 px-3 py-1 text-[11px] shadow-sm backdrop-blur-sm"
                           >
-                            {formatDealArticleDifficulty(article.difficulty)}
+                            {formatDealArticleDifficulty(article.difficulty, locale)}
                           </Badge>
                         </div>
                       </div>
@@ -152,14 +163,14 @@ export function DealArticlesSection({ articles }: DealArticlesSectionProps) {
                           ))}
                           {article.tags.length === 0 ? (
                             <Badge variant="outline" className="rounded-full px-3 py-1 text-[11px]">
-                              待补标签
+                              {uiCopy.dealArticlesSection.pendingTag}
                             </Badge>
                           ) : null}
                         </div>
 
                         <div className="flex flex-wrap items-center justify-between gap-2.5 border-t border-border/70 pt-3">
                           <span className="inline-flex min-h-8 items-center text-[12px] text-muted-foreground">
-                            {formatDateTime(article.publishedAt)}
+                            {formatDateTime(article.publishedAt, locale)}
                           </span>
                           <DealArticleEngagement
                             articleId={article.id}
@@ -181,7 +192,7 @@ export function DealArticlesSection({ articles }: DealArticlesSectionProps) {
       ) : (
         <Card size="sm" className="rounded-[12px] border border-border bg-card">
           <CardContent className="px-4 py-4 text-[13px] text-muted-foreground">
-            当前筛选条件下还没有文章，换个状态或标签试试看。
+            {uiCopy.dealArticlesSection.emptyTip}
           </CardContent>
         </Card>
       )}

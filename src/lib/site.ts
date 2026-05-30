@@ -1,3 +1,4 @@
+import type { SiteLocale } from "@/lib/i18n";
 import type { NavItem } from "@/types";
 
 export const siteConfig = {
@@ -6,6 +7,8 @@ export const siteConfig = {
   domain: "price.lengziyu.cn",
   description:
     "追踪大模型价格、会员订阅差价、API Token 成本、会员速率与 AI 优惠活动。",
+  descriptionEn:
+    "Track model pricing, subscription differences, token costs, membership rates, and AI deals in one place.",
   subtitle:
     "Compare AI subscriptions, token prices, free credits and AI deals.",
 };
@@ -48,25 +51,47 @@ export const trustBullets = [
   "价格可能随时间变化，请以官方页面为准。",
 ];
 
-export const siblingProjects = [
+const siblingProjects = [
   {
     href: "https://niuma.lengziyu.cn",
-    label: "牛马百宝箱",
+    label: {
+      "zh-CN": "牛马百宝箱",
+      en: "Workbox",
+    },
   },
   {
     href: "https://envra.lengziyu.cn",
-    label: "ENVRA 前端工具",
+    label: {
+      "zh-CN": "ENVRA 前端工具",
+      en: "ENVRA Frontend Tools",
+    },
   },
   {
     href: "https://nav.lengziyu.cn",
-    label: "AI 前沿导航",
+    label: {
+      "zh-CN": "AI 前沿导航",
+      en: "AI Frontier Nav",
+    },
   },
   {
     href: "https://cv.lengziyu.cn",
-    label: "在线简历生成",
+    label: {
+      "zh-CN": "在线简历生成",
+      en: "Resume Builder",
+    },
   },
   {
     href: "https://zj.lengziyu.cn",
-    label: "宗迹",
+    label: {
+      "zh-CN": "宗迹",
+      en: "Zongji",
+    },
   },
 ];
+
+export function getSiblingProjects(locale: SiteLocale) {
+  return siblingProjects.map((item) => ({
+    href: item.href,
+    label: item.label[locale],
+  }));
+}

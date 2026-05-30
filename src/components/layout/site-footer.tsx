@@ -1,12 +1,26 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowRightIcon, DatabaseZapIcon } from "lucide-react";
 
 import { BrandLogo } from "@/components/layout/brand-logo";
 import { AnimeReveal } from "@/components/shared/anime-reveal";
 import { buttonVariants } from "@/components/ui/button";
-import { siblingProjects, siteConfig, trustBullets } from "@/lib/site";
+import {
+  addLocalePrefix,
+  defaultLocale,
+  getLocaleFromPathname,
+} from "@/lib/i18n";
+import { getSiblingProjects, siteConfig } from "@/lib/site";
+import { getUICopy } from "@/lib/ui-copy";
 
 export function SiteFooter() {
+  const pathname = usePathname();
+  const locale = getLocaleFromPathname(pathname) ?? defaultLocale;
+  const uiCopy = getUICopy(locale);
+  const siblingProjects = getSiblingProjects(locale);
+
   return (
     <footer className="mt-8 border-t border-border bg-background/96 sm:mt-12">
       <div className="app-shell py-5 sm:py-10">
@@ -27,12 +41,12 @@ export function SiteFooter() {
               className: "h-8 shrink-0 px-3 text-[12px]",
             })}
           >
-            其他项目
+            {uiCopy.footer.siblingProjectsTitle}
           </Link>
         </div>
 
         <AnimeReveal className="mt-3 flex flex-col gap-3 sm:hidden">
-          <div className="text-sm font-semibold">其他项目</div>
+          <div className="text-sm font-semibold">{uiCopy.footer.siblingProjectsTitle}</div>
           <div className="grid grid-cols-2 gap-2">
             {siblingProjects.map((item) => (
               <Link
@@ -55,21 +69,21 @@ export function SiteFooter() {
                 <DatabaseZapIcon className="size-4" />
               </div>
               <div>
-                <div className="text-sm font-semibold">公开价格持续维护</div>
+                <div className="text-sm font-semibold">{uiCopy.footer.maintenanceTitle}</div>
                 <p className="mt-1 max-w-2xl text-[12px] leading-6 text-muted-foreground sm:text-[13px]">
-                  当前以公开来源、价格整理和复核时间为基础，帮助你快速判断不同方案的成本差异。
+                  {uiCopy.footer.maintenanceDescription}
                 </p>
               </div>
             </div>
             <Link
-              href="/about"
+              href={addLocalePrefix("/about", locale)}
               className={buttonVariants({
                 variant: "outline",
                 size: "sm",
                 className: "w-fit shrink-0",
               })}
             >
-              查看数据原则
+              {uiCopy.footer.principlesLinkLabel}
               <ArrowRightIcon data-icon="inline-end" />
             </Link>
           </div>
@@ -83,7 +97,7 @@ export function SiteFooter() {
           <div className="flex flex-col gap-3">
             <BrandLogo />
             <p className="max-w-md text-sm leading-6 text-muted-foreground">
-              {siteConfig.description} 当前以公开来源和复核记录为基础，持续维护关键价格与活动信息。
+              {locale === "en" ? siteConfig.descriptionEn : siteConfig.description} {uiCopy.footer.brandDescriptionSuffix}
             </p>
             <div className="text-[11px] text-muted-foreground">
               {siteConfig.englishName} · {siteConfig.domain}
@@ -91,7 +105,7 @@ export function SiteFooter() {
           </div>
 
           <div className="flex flex-col gap-3">
-            <div className="text-sm font-semibold">其他项目</div>
+            <div className="text-sm font-semibold">{uiCopy.footer.siblingProjectsTitle}</div>
             <div className="flex flex-wrap gap-2">
               {siblingProjects.map((item) => (
                 <Link
@@ -108,9 +122,9 @@ export function SiteFooter() {
           </div>
 
           <div className="flex flex-col gap-3">
-            <div className="text-sm font-semibold">数据原则</div>
+            <div className="text-sm font-semibold">{uiCopy.footer.trustPrinciplesTitle}</div>
             <div className="flex flex-col gap-2 text-[12px] leading-6 text-muted-foreground sm:text-[13px]">
-              {trustBullets.map((item) => (
+              {uiCopy.footer.trustBullets.map((item) => (
                 <p key={item}>{item}</p>
               ))}
             </div>

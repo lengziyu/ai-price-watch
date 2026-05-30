@@ -1,6 +1,8 @@
 import { revalidatePath } from "next/cache";
 
+import { getDealArticleSlugForLocale } from "@/lib/deal-article-localization";
 import { getDealArticleById, updateDealArticleEngagement } from "@/lib/admin-store";
+import { addLocalePrefix, supportedLocales } from "@/lib/i18n";
 
 type RequestBody = {
   type?: "view" | "like";
@@ -37,8 +39,12 @@ export async function POST(request: Request, context: RouteContext) {
     likeIncrement: payload.type === "like" ? 1 : 0,
   });
 
-  revalidatePath("/deals");
-  revalidatePath(`/deals/articles/${article.slug}`);
+  for (const locale of supportedLocales) {
+    revalidatePath(addLocalePrefix("/deals", locale));
+    revalidatePath(
+      addLocalePrefix(`/deals/articles/${getDealArticleSlugForLocale(article, locale)}`, locale),
+    );
+  }
 
   return Response.json({
     viewCount: nextArticle.viewCount,
