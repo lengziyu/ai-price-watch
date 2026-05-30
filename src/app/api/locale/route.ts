@@ -10,7 +10,7 @@ import {
 const cookieMaxAgeSeconds = 60 * 60 * 24 * 365;
 
 function normalizeRedirectTarget(value: string | null) {
-  if (!value || !value.startsWith("/")) {
+  if (!value || !value.startsWith("/") || value.startsWith("//")) {
     return `/${defaultLocale}`;
   }
 
@@ -25,7 +25,12 @@ export function GET(request: NextRequest) {
     localeParam && isSupportedLocale(localeParam) ? localeParam : defaultLocale;
   const redirectTarget = normalizeRedirectTarget(redirectParam);
 
-  const response = NextResponse.redirect(new URL(redirectTarget, request.url));
+  const response = new NextResponse(null, {
+    status: 307,
+    headers: {
+      Location: redirectTarget,
+    },
+  });
   response.cookies.set(localeCookieName, locale, {
     maxAge: cookieMaxAgeSeconds,
     path: "/",
