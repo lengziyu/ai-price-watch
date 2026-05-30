@@ -29,27 +29,32 @@ import {
 } from "@/components/ui/table";
 import {
   businessCreditRows,
-  communityObservations,
-  communitySnapshots,
-  membershipPlans,
-  membershipQuotaRows,
   membershipRateSources,
-  membershipVendorBoards,
 } from "@/data/membership-rates";
 import { AnimeHoverCard } from "@/components/shared/anime-hover-card";
 import { AnimeReveal } from "@/components/shared/anime-reveal";
 import { useStickyTabs } from "@/components/shared/use-sticky-tabs";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useSegmentedIndicator } from "@/components/ui/use-segmented-indicator";
+import { formatDate } from "@/lib/format";
+import type { SiteLocale } from "@/lib/i18n";
+import {
+  getLocalizedCommunityObservations,
+  getLocalizedCommunitySnapshots,
+  getLocalizedMembershipPlans,
+  getLocalizedMembershipQuotaRows,
+  getLocalizedMembershipVendorBoards,
+} from "@/lib/membership-rate-localization";
 import { cn } from "@/lib/utils";
 import { AnimatedSectionTitle } from "@/components/shared/animated-section-title";
 
 type MembershipRatesExplorerProps = {
   defaultVendor?: string;
   defaultOpenAITab?: string;
+  locale?: SiteLocale;
 };
 
-type MembershipVendorBoard = (typeof membershipVendorBoards)[number];
+type MembershipVendorBoard = ReturnType<typeof getLocalizedMembershipVendorBoards>[number];
 type PricePlan = {
   name: string;
   price?: string;
@@ -66,7 +71,10 @@ type PricePlan = {
 export function MembershipRatesExplorer({
   defaultVendor = "openai",
   defaultOpenAITab = "consumer",
+  locale = "zh-CN",
 }: MembershipRatesExplorerProps) {
+  const isEnglish = locale === "en";
+  const membershipVendorBoards = getLocalizedMembershipVendorBoards(locale);
   const initialVendor = membershipVendorBoards.some(
     (item) => item.id === defaultVendor,
   )
@@ -123,10 +131,12 @@ export function MembershipRatesExplorer({
               vendor rate board
             </div>
             <AnimatedSectionTitle className="mt-2.5">
-              会员速率总览
+              {isEnglish ? "Membership Rates Overview" : "会员速率总览"}
             </AnimatedSectionTitle>
             <p className="mt-1.5 text-[13px] leading-6 text-muted-foreground sm:text-sm">
-              按官方页面整理价格、权益和额度口径；社区观察只作为使用体感参考。
+              {isEnglish
+                ? "Pricing, benefits, and quota framing are organized from official pages. Community notes are for workload feel only."
+                : "按官方页面整理价格、权益和额度口径；社区观察只作为使用体感参考。"}
             </p>
           </div>
 
@@ -139,7 +149,7 @@ export function MembershipRatesExplorer({
               <div className="rate-tabs-shell">
                 <button
                   type="button"
-                  aria-label="向左滚动厂商"
+                  aria-label={isEnglish ? "Scroll vendors left" : "向左滚动厂商"}
                   onClick={() => scrollVendorTabs(-260)}
                   className="rate-tabs-arrow"
                 >
@@ -191,7 +201,7 @@ export function MembershipRatesExplorer({
                 </div>
                 <button
                   type="button"
-                  aria-label="向右滚动厂商"
+                  aria-label={isEnglish ? "Scroll vendors right" : "向右滚动厂商"}
                   onClick={() => scrollVendorTabs(260)}
                   className="rate-tabs-arrow"
                 >
@@ -209,10 +219,11 @@ export function MembershipRatesExplorer({
             className="flex flex-col gap-4"
           >
             {activeVendor === "openai" ? (
-              <OpenAIBoard defaultTab={defaultOpenAITab} />
+              <OpenAIBoard defaultTab={defaultOpenAITab} locale={locale} />
             ) : (
               <VendorBoard
                 vendor={membershipVendorBoards.find((item) => item.id === activeVendor)!}
+                locale={locale}
               />
             )}
           </AnimeReveal>
@@ -260,11 +271,24 @@ function VendorLogo({ id, active }: { id: string; active: boolean }) {
   );
 }
 
-function PricePlanCard({ plan, badge }: { plan: PricePlan; badge?: string }) {
+function PricePlanCard({
+  plan,
+  badge,
+  locale,
+}: {
+  plan: PricePlan;
+  badge?: string;
+  locale: SiteLocale;
+}) {
+  const isEnglish = locale === "en";
   const description = plan.summary ?? plan.detail;
   const price = plan.priceLabel ?? plan.price ?? "";
   const cnyEstimate =
-    typeof plan.cnyEstimate === "number" ? `约 ¥${plan.cnyEstimate} / 月` : null;
+    typeof plan.cnyEstimate === "number"
+      ? isEnglish
+        ? `Approx. ¥${plan.cnyEstimate} / mo`
+        : `约 ¥${plan.cnyEstimate} / 月`
+      : null;
 
   return (
     <AnimeHoverCard className="h-full" lift={4} scale={1.008}>
@@ -286,7 +310,7 @@ function PricePlanCard({ plan, badge }: { plan: PricePlan; badge?: string }) {
               {price}
             </div>
             <div className="membership-price-sub text-[10px] text-muted-foreground">
-              {cnyEstimate ?? "以官方页面为准"}
+              {cnyEstimate ?? (isEnglish ? "Official page prevails" : "以官方页面为准")}
             </div>
           </div>
           {description ? (
@@ -304,7 +328,8 @@ function PricePlanCard({ plan, badge }: { plan: PricePlan; badge?: string }) {
           ) : null}
           {plan.updatedAt ? (
             <div className="text-[10px] text-muted-foreground">
-              复核时间：{plan.updatedAt}
+              {isEnglish ? "Reviewed: " : "复核时间："}
+              {formatDate(plan.updatedAt, locale)}
             </div>
           ) : null}
         </CardContent>
@@ -330,7 +355,18 @@ function PlanFeatureList({ features }: { features?: readonly string[] }) {
   );
 }
 
-function OpenAIBoard({ defaultTab }: { defaultTab: string }) {
+function OpenAIBoard({
+  defaultTab,
+  locale,
+}: {
+  defaultTab: string;
+  locale: SiteLocale;
+}) {
+  const isEnglish = locale === "en";
+  const membershipPlans = getLocalizedMembershipPlans(locale);
+  const membershipQuotaRows = getLocalizedMembershipQuotaRows(locale);
+  const communityObservations = getLocalizedCommunityObservations(locale);
+  const communitySnapshots = getLocalizedCommunitySnapshots(locale);
   const [activeTab, setActiveTab] = useState(
     defaultTab === "business" ? "business" : "consumer",
   );
@@ -339,27 +375,37 @@ function OpenAIBoard({ defaultTab }: { defaultTab: string }) {
     <div className="flex flex-col gap-4">
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         {membershipPlans.map((plan) => (
-          <PricePlanCard key={plan.id} plan={plan} badge={plan.audience} />
+          <PricePlanCard
+            key={plan.id}
+            plan={plan}
+            badge={plan.audience}
+            locale={locale}
+          />
         ))}
       </div>
 
       <div className="flex flex-wrap items-center gap-2 px-1 text-[12px] text-primary">
-        <span className="font-semibold text-primary">官方来源：</span>
+        <span className="font-semibold text-primary">
+          {isEnglish ? "Official Sources:" : "官方来源："}
+        </span>
         <SourceLink href={membershipRateSources.officialCodexPricing} label="Codex Pricing" />
         <span className="text-primary/70">|</span>
         <SourceLink href={membershipRateSources.chatgptPricing} label="ChatGPT Pricing" />
         <span className="text-primary/70">|</span>
-        <SourceLink href={membershipRateSources.helpArticle} label="Codex 帮助中心" />
+        <SourceLink
+          href={membershipRateSources.helpArticle}
+          label={isEnglish ? "Codex Help Center" : "Codex 帮助中心"}
+        />
       </div>
 
       <div className="flex flex-col gap-4">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList variant="accent" className="w-full max-w-full sm:w-fit">
             <TabsTrigger value="consumer" className="min-w-[116px]">
-              个人会员
+              {isEnglish ? "Personal" : "个人会员"}
             </TabsTrigger>
             <TabsTrigger value="business" className="min-w-[116px]">
-              Business / 企业
+              {isEnglish ? "Business / Enterprise" : "Business / 企业"}
             </TabsTrigger>
           </TabsList>
         </Tabs>
@@ -375,23 +421,35 @@ function OpenAIBoard({ defaultTab }: { defaultTab: string }) {
             <div className="overflow-hidden rounded-[10px] border border-border bg-card">
               <div className="flex flex-col gap-2 border-b border-border px-4 py-4 sm:px-5">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h3 className="text-[1rem] font-semibold">个人会员额度</h3>
-                  <Badge variant="outline">OpenAI 官方区间</Badge>
-                  <Badge variant="secondary">社区实测体感</Badge>
+                  <h3 className="text-[1rem] font-semibold">
+                    {isEnglish ? "Personal Tier Matrix" : "个人会员额度"}
+                  </h3>
+                  <Badge variant="outline">
+                    {isEnglish ? "OpenAI Official Range" : "OpenAI 官方区间"}
+                  </Badge>
+                  <Badge variant="secondary">
+                    {isEnglish ? "Community Signal" : "社区实测体感"}
+                  </Badge>
                 </div>
                 <p className="text-[12px] leading-6 text-muted-foreground sm:text-[13px]">
-                  官方表格主要描述的是区间，不是单次精确次数。右侧的社区体感更适合判断重任务时会不会提前见底。
+                  {isEnglish
+                    ? "The official table is a range, not an exact task count. Community notes help more when judging whether heavy tasks will burn out early."
+                    : "官方表格主要描述的是区间，不是单次精确次数。右侧的社区体感更适合判断重任务时会不会提前见底。"}
                 </p>
               </div>
               <Table>
                 <TableHeader>
                   <TableRow className="hover:bg-transparent">
-                    <TableHead className="pl-4 sm:pl-5">任务类型</TableHead>
-                    <TableHead>周期</TableHead>
+                    <TableHead className="pl-4 sm:pl-5">
+                      {isEnglish ? "Task Type" : "任务类型"}
+                    </TableHead>
+                    <TableHead>{isEnglish ? "Window" : "周期"}</TableHead>
                     <TableHead>Plus</TableHead>
                     <TableHead>$100</TableHead>
                     <TableHead>$200</TableHead>
-                    <TableHead className="pr-4 text-left sm:pr-5">社区体感</TableHead>
+                    <TableHead className="pr-4 text-left sm:pr-5">
+                      {isEnglish ? "Community Signal" : "社区体感"}
+                    </TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -422,7 +480,7 @@ function OpenAIBoard({ defaultTab }: { defaultTab: string }) {
                   >
                     <CardHeader className="gap-2 px-4 py-4">
                       <Badge variant="outline" className="w-fit">
-                        社区观察
+                        {isEnglish ? "Community Note" : "社区观察"}
                       </Badge>
                       <CardTitle className="text-[0.96rem]">{item.title}</CardTitle>
                     </CardHeader>
@@ -449,7 +507,8 @@ function OpenAIBoard({ defaultTab }: { defaultTab: string }) {
                         <div className="space-y-1.5">
                           <CardTitle className="text-[0.95rem] leading-6">{item.title}</CardTitle>
                           <CardDescription className="text-[10px]">
-                            社区公开样本 · {item.date}
+                            {isEnglish ? "Public sample" : "社区公开样本"} ·{" "}
+                            {formatDate(item.date, locale)}
                           </CardDescription>
                         </div>
                       </div>
@@ -463,7 +522,7 @@ function OpenAIBoard({ defaultTab }: { defaultTab: string }) {
                         target="_blank"
                         className="inline-flex items-center gap-1 text-[12px] font-medium text-foreground hover:text-primary"
                       >
-                        查看原始讨论
+                        {isEnglish ? "View Source Thread" : "查看原始讨论"}
                         <ArrowUpRightIcon className="size-3.5" />
                       </Link>
                     </CardContent>
@@ -484,16 +543,30 @@ function OpenAIBoard({ defaultTab }: { defaultTab: string }) {
           >
             <Card className="rounded-[10px] border border-border bg-card shadow-none">
               <CardHeader className="gap-3 px-5 py-5">
-                <CardTitle>Business / Enterprise 口径</CardTitle>
+                <CardTitle>
+                  {isEnglish ? "Business / Enterprise Framing" : "Business / Enterprise 口径"}
+                </CardTitle>
                 <CardDescription className="text-[13px] leading-6">
-                  OpenAI 官方把这部分写成 credits per 1M tokens。它更适合做团队预算、批量任务和内部计费换算。
+                  {isEnglish
+                    ? "OpenAI frames this section as credits per 1M tokens, which is more useful for team budgeting, batch workloads, and internal chargeback math."
+                    : "OpenAI 官方把这部分写成 credits per 1M tokens。它更适合做团队预算、批量任务和内部计费换算。"}
                 </CardDescription>
               </CardHeader>
               <CardContent className="flex flex-col gap-3 px-5 pb-5 text-[13px] leading-6 text-muted-foreground">
-                <p>Business 与新 Enterprise 客户可以按 credits 方式扩容，计费口径更接近 API / 团队配额思路，而不是单纯的个人会员窗口。</p>
-                <p>Fast mode 会更快消耗 credits。做高频批处理、长上下文云任务或多模型并行时，建议先按官方表里的中位水平估预算。</p>
+                <p>
+                  {isEnglish
+                    ? "Business and newer Enterprise customers can scale with credits, so the framing is closer to API or team-quota budgeting than to a simple personal window."
+                    : "Business 与新 Enterprise 客户可以按 credits 方式扩容，计费口径更接近 API / 团队配额思路，而不是单纯的个人会员窗口。"}
+                </p>
+                <p>
+                  {isEnglish
+                    ? "Fast mode burns credits faster. For batch work, long-context cloud tasks, or multi-model parallelism, budgeting around the midpoint of the official table is safer."
+                    : "Fast mode 会更快消耗 credits。做高频批处理、长上下文云任务或多模型并行时，建议先按官方表里的中位水平估预算。"}
+                </p>
                 <div className="rounded-[10px] border border-border bg-background/70 px-3 py-3">
-                  Business 的座席价格请以官方 ChatGPT pricing 页面为准；本页优先收录 OpenAI 已公开写出的 Codex 使用口径。
+                  {isEnglish
+                    ? "Use the official ChatGPT pricing page for Business seat pricing. This page prioritizes the Codex usage framing that OpenAI has made public."
+                    : "Business 的座席价格请以官方 ChatGPT pricing 页面为准；本页优先收录 OpenAI 已公开写出的 Codex 使用口径。"}
                 </div>
               </CardContent>
             </Card>
@@ -505,7 +578,9 @@ function OpenAIBoard({ defaultTab }: { defaultTab: string }) {
               <Table>
                 <TableHeader>
                   <TableRow className="hover:bg-transparent">
-                    <TableHead className="pl-4 sm:pl-5">模型</TableHead>
+                    <TableHead className="pl-4 sm:pl-5">
+                      {isEnglish ? "Model" : "模型"}
+                    </TableHead>
                     <TableHead>Input</TableHead>
                     <TableHead>Cached input</TableHead>
                     <TableHead className="pr-4 sm:pr-5">Output</TableHead>
@@ -530,7 +605,14 @@ function OpenAIBoard({ defaultTab }: { defaultTab: string }) {
   );
 }
 
-function VendorBoard({ vendor }: { vendor: MembershipVendorBoard }) {
+function VendorBoard({
+  vendor,
+  locale,
+}: {
+  vendor: MembershipVendorBoard;
+  locale: SiteLocale;
+}) {
+  const isEnglish = locale === "en";
   const quotaRows = "quotaRows" in vendor ? vendor.quotaRows : undefined;
 
   return (
@@ -541,35 +623,51 @@ function VendorBoard({ vendor }: { vendor: MembershipVendorBoard }) {
             key={`${vendor.id}-${plan.name}`}
             plan={plan}
             badge={vendor.label}
+            locale={locale}
           />
         ))}
       </div>
 
       <div className="flex flex-wrap items-center gap-2 px-1 text-[12px] text-primary">
-        <span className="font-semibold text-primary">官方来源：</span>
-        <SourceLink href={vendor.officialSource} label={`${vendor.label} 官方页面`} />
+        <span className="font-semibold text-primary">
+          {isEnglish ? "Official Source:" : "官方来源："}
+        </span>
+        <SourceLink
+          href={vendor.officialSource}
+          label={isEnglish ? `${vendor.label} Official Page` : `${vendor.label} 官方页面`}
+        />
       </div>
 
       {quotaRows?.length ? (
         <div className="overflow-hidden rounded-[10px] border border-border bg-card">
           <div className="flex flex-col gap-2 border-b border-border px-4 py-4 sm:px-5">
             <div className="flex flex-wrap items-center gap-2">
-              <h3 className="text-[1rem] font-semibold">{vendor.label} 额度矩阵</h3>
-              <Badge variant="outline">官方口径 + 社区体感</Badge>
+              <h3 className="text-[1rem] font-semibold">
+                {vendor.label} {isEnglish ? "Tier Matrix" : "额度矩阵"}
+              </h3>
+              <Badge variant="outline">
+                {isEnglish ? "Official Framing + Community Signal" : "官方口径 + 社区体感"}
+              </Badge>
             </div>
             <p className="text-[12px] leading-6 text-muted-foreground sm:text-[13px]">
-              按公开文档整理关键口径；无法公开精确次数的厂商用等级和社区体感补充。
+              {isEnglish
+                ? "Built from public docs first. When exact counts are not public, tier descriptions and community signal fill the gap."
+                : "按公开文档整理关键口径；无法公开精确次数的厂商用等级和社区体感补充。"}
             </p>
           </div>
           <Table>
             <TableHeader>
               <TableRow className="hover:bg-transparent">
-                <TableHead className="pl-4 sm:pl-5">任务类型</TableHead>
-                <TableHead>周期</TableHead>
-                <TableHead>入门档</TableHead>
-                <TableHead>中档</TableHead>
-                <TableHead>高档</TableHead>
-                <TableHead className="pr-4 text-left sm:pr-5">社区体感</TableHead>
+                <TableHead className="pl-4 sm:pl-5">
+                  {isEnglish ? "Dimension" : "任务类型"}
+                </TableHead>
+                <TableHead>{isEnglish ? "Window" : "周期"}</TableHead>
+                <TableHead>{isEnglish ? "Entry" : "入门档"}</TableHead>
+                <TableHead>{isEnglish ? "Mid" : "中档"}</TableHead>
+                <TableHead>{isEnglish ? "High" : "高档"}</TableHead>
+                <TableHead className="pr-4 text-left sm:pr-5">
+                  {isEnglish ? "Community Signal" : "社区体感"}
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -606,7 +704,7 @@ function VendorBoard({ vendor }: { vendor: MembershipVendorBoard }) {
             >
               <CardHeader className="gap-2 px-4 py-4">
                 <Badge variant="outline" className="w-fit">
-                  社区观察
+                  {isEnglish ? "Community Note" : "社区观察"}
                 </Badge>
                 <CardDescription className="text-[12px] leading-6 sm:text-[13px]">
                   {item}

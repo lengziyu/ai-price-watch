@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 import {
   addLocalePrefix,
@@ -22,7 +22,6 @@ const localeLabel: Record<SiteLocale, string> = {
 };
 
 export function LanguageSwitcher({ compact = false }: LanguageSwitcherProps) {
-  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -41,8 +40,9 @@ export function LanguageSwitcher({ compact = false }: LanguageSwitcherProps) {
 
     const nextPath = addLocalePrefix(basePathname, nextLocale);
     const nextHref = queryString ? `${nextPath}?${queryString}` : nextPath;
+    const redirectHref = `/api/locale?locale=${encodeURIComponent(nextLocale)}&redirect=${encodeURIComponent(nextHref)}`;
 
-    router.push(nextHref);
+    window.location.assign(redirectHref);
   };
 
   return (

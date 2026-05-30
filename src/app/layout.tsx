@@ -48,6 +48,20 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: locale === "en" ? siteConfig.englishName : siteConfig.name,
       locale: uiCopy.layout.openGraphLocale,
       type: "website",
+      images: [
+        {
+          url: "/fengmian.png",
+          width: 1693,
+          height: 929,
+          alt: locale === "en" ? siteConfig.englishName : siteConfig.name,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: locale === "en" ? siteConfig.englishName : siteConfig.name,
+      description: locale === "en" ? siteConfig.descriptionEn : siteConfig.description,
+      images: ["/fengmian.png"],
     },
   };
 }

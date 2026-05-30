@@ -216,6 +216,21 @@ function localizeShowcaseConfig(
     };
   }
 
+  if (variant === "rates") {
+    return {
+      ...config,
+      title: "Cross-vendor rate board",
+      rows: [
+        { label: "OpenAI", value: "5h / weekly" },
+        { label: "Claude", value: "usage tiers" },
+        { label: "Cursor", value: "agent quota" },
+      ],
+      focusLabel: "Vendors",
+      leftChip: { ...config.leftChip, label: "Official framing" },
+      rightChip: { ...config.rightChip, label: "Community signal" },
+    };
+  }
+
   return config;
 }
 
