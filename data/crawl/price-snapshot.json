@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-02T16:56:49.801Z",
+  "generatedAt": "2026-06-03T17:20:15.262Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,74 +12,16 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-06-02T16:56:43.257Z",
-      "title": "ChatGPT 套餐 | 免费版、Go、Plus、Pro、Business 和 Enterprise",
+      "fetchedAt": "2026-06-03T17:20:08.539Z",
+      "title": "Just a moment...",
       "description": "",
       "status": 200,
-      "byteLength": 24659,
+      "byteLength": 312,
       "fetchMode": "jina_markdown",
       "extraction": {
-        "confidence": "review",
-        "priceSignals": [
-          {
-            "value": "$0",
-            "context": "T # 定价 查看我们的个人、Business 和 Enterprise 套餐定价 ### 免费版 日常任务的智能解决方案 US$0 /月 [获取免费版](http://chatgpt.com/zh-Hans-CN/) * 有限的 GPT-5.5 Instan"
-          },
-          {
-            "value": "$8",
-            "context": "nai.com/en/collections/3943089-billing) ### Go 借助更高的使用权限，畅聊不停 US$8 /月 [获取 Go](https://chatgpt.com/zh-Hans-CN/explore/go) 免费套餐中的全部内"
-          },
-          {
-            "value": "$20",
-            "context": "/help.openai.com/en/articles/20001047) ### Plus 以更先进的智能完成更多工作 US$20 /月 [获取 Plus](http://chatgpt.com/zh-Hans-CN/?ifpazk=ioaj&default"
-          },
-          {
-            "value": "$100",
-            "context": "ttps://help.openai.com/articles/11909943) ### Pro 大幅提升工作效率 起价 US$100 /月 [获取 Pro 版本](http://chatgpt.com/zh-Hans-CN/?ifpazk=1k0d2&defa"
-          },
-          {
-            "value": "$25",
-            "context": "及其他隐私法规的合规要求提供支持。符合 CSA STAR 和 SOC 2 Type 2 标准 *2 位及以上用户，按年计费。US$25 每位用户每月（按月计费）。无限制使用需遵守防滥用规范。[了解更多⁠](https://help.openai.com/en/a"
-          }
-        ],
-        "planSignals": [
-          {
-            "value": "Plus",
-            "context": "Title: ChatGPT 套餐 | 免费版、Go、Plus、Pro、Business 和 Enterprise URL Source: http://chatgpt.com/zh-Han"
-          },
-          {
-            "value": "Pro",
-            "context": "Title: ChatGPT 套餐 | 免费版、Go、Plus、Pro、Business 和 Enterprise URL Source: http://chatgpt.com/zh-Hans-CN"
-          },
-          {
-            "value": "Business",
-            "context": "Title: ChatGPT 套餐 | 免费版、Go、Plus、Pro、Business 和 Enterprise URL Source: http://chatgpt.com/zh-Hans-CN/pricing/"
-          },
-          {
-            "value": "Enterprise",
-            "context": "Title: ChatGPT 套餐 | 免费版、Go、Plus、Pro、Business 和 Enterprise URL Source: http://chatgpt.com/zh-Hans-CN/pricing/ Markdown Con"
-          },
-          {
-            "value": "agent",
-            "context": "/overview/) * 功能 * [智能体](http://chatgpt.com/zh-Hans-CN/features/agent/) * [应用](http://chatgpt.com/zh-Hans-CN/features/apps/) * [Atlas"
-          },
-          {
-            "value": "Codex",
-            "context": "* [适用于大学生](http://chatgpt.com/zh-Hans-CN/college-students/) * [Codex](http://chatgpt.com/zh-Hans-CN/codex/) * [概览](http://chatgpt.co"
-          },
-          {
-            "value": "free",
-            "context": "h-Hans-CN/pricing/) * [免费版](http://chatgpt.com/zh-Hans-CN/plans/free/) * [Go](http://chatgpt.com/zh-Hans-CN/plans/go/) * [Plus](http"
-          },
-          {
-            "value": "education",
-            "context": "ss/enterprise/) * [高等教育](http://chatgpt.com/zh-Hans-CN/business/education/) * [K–12 教师](http://chatgpt.com/zh-Hans-CN/plans/k12-teachers/"
-          },
-          {
-            "value": "team",
-            "context": "x 为初创企业和成长型业务提供安全的协作工作空间 US$20 每用户每月 [开始使用](https://chatgpt.com/team-sign-up) 包含内容： * ChatGPT Plus 和 Business Codex 套餐中的所有内容 * 不限次数进"
-          }
-        ]
+        "confidence": "low",
+        "priceSignals": [],
+        "planSignals": []
       }
     },
     {
@@ -91,11 +33,11 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-06-02T16:56:43.295Z",
+      "fetchedAt": "2026-06-03T17:20:08.577Z",
       "title": "Pricing – Codex | OpenAI Developers",
       "description": "Codex is included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
-      "byteLength": 341651,
+      "byteLength": 576863,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -174,43 +116,15 @@
           },
           {
             "value": "31.25 credits",
-            "context": "0 credits 50 credits 750 credits GPT-Image-2 (text) 125 credits 31.25 credits 250 credits Fast mode consumes credits at a higher rate for sup"
+            "context": "0 credits 50 credits 750 credits GPT-Image-2 (text) 125 credits 31.25 credits 250 credits GPT-5.5 usage averages 5-45 credits per message. Fa"
           },
           {
             "value": "250 credits",
-            "context": "redits 750 credits GPT-Image-2 (text) 125 credits 31.25 credits 250 credits Fast mode consumes credits at a higher rate for supported model"
+            "context": "redits 750 credits GPT-Image-2 (text) 125 credits 31.25 credits 250 credits GPT-5.5 usage averages 5-45 credits per message. Fast mode cons"
           },
           {
-            "value": "1 message",
-            "context": "Edu Unit GPT-5.5 GPT-5.4 GPT-5.3-Codex GPT-5.4-mini Local Tasks 1 message ~14 credits ~7 credits ~5 credits ~2 credits Cloud Tasks 1 mess"
-          },
-          {
-            "value": "14 credits",
-            "context": "T-5.5 GPT-5.4 GPT-5.3-Codex GPT-5.4-mini Local Tasks 1 message ~14 credits ~7 credits ~5 credits ~2 credits Cloud Tasks 1 message Not avai"
-          },
-          {
-            "value": "7 credits",
-            "context": "4 GPT-5.3-Codex GPT-5.4-mini Local Tasks 1 message ~14 credits ~7 credits ~5 credits ~2 credits Cloud Tasks 1 message Not available Not a"
-          },
-          {
-            "value": "5 credits",
-            "context": "odex GPT-5.4-mini Local Tasks 1 message ~14 credits ~7 credits ~5 credits ~2 credits Cloud Tasks 1 message Not available Not available ~2"
-          },
-          {
-            "value": "2 credits",
-            "context": "4-mini Local Tasks 1 message ~14 credits ~7 credits ~5 credits ~2 credits Cloud Tasks 1 message Not available Not available ~25 credits N"
-          },
-          {
-            "value": "25 credits",
-            "context": "s ~2 credits Cloud Tasks 1 message Not available Not available ~25 credits Not available Code Review 1 pull request Not available Not avai"
-          },
-          {
-            "value": "6 credits",
-            "context": "its Not available Image generation 1 image (1024px × 1024px) ~5-6 credits Image generation 1 image (1024px × 1536px) ~7-8 credits Fast mo"
-          },
-          {
-            "value": "8 credits",
-            "context": "4px) ~5-6 credits Image generation 1 image (1024px × 1536px) ~7-8 credits Fast mode consumes credits at a higher rate for supported model"
+            "value": "45 credits",
+            "context": "125 credits 31.25 credits 250 credits GPT-5.5 usage averages 5-45 credits per message. Fast mode consumes credits at a higher rate for su"
           }
         ],
         "planSignals": [
@@ -245,6 +159,10 @@
           {
             "value": "team",
             "context": "s and: Assign standard or usage-based Codex seats based on your team’s needs. Learn more Larger virtual machines to run cloud tasks"
+          },
+          {
+            "value": "Education",
+            "context": "Feature ChatGPT Plus ChatGPT Pro ChatGPT Business Enterprise / Education API Key Access and surfaces Codex web — Codex app for local tas"
           }
         ]
       }
@@ -258,11 +176,11 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-06-02T16:56:43.296Z",
+      "fetchedAt": "2026-06-03T17:20:08.579Z",
       "title": "Plans & Pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
-      "byteLength": 1333129,
+      "byteLength": 1336073,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -286,6 +204,10 @@
           {
             "value": "$100",
             "context": "laude for Microsoft Outlook Max Get the most out of Claude From $100 Per month Try Claude Try Claude Try Claude Everything in Pro, p"
+          },
+          {
+            "value": "$1,000",
+            "context": "end controls Model training Opt-out Opt-out Opt-out Opt-out Get $1,000 in Claude Code and Claude Cowork credits for every seat that ac"
           },
           {
             "value": "$25",
@@ -417,11 +339,11 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-06-02T16:56:43.298Z",
+      "fetchedAt": "2026-06-03T17:20:08.580Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more",
       "description": "Get access to the best of Google AI including Gemini 3.1 Pro, video generation with Veo 3.1, Deep Research, and much more.",
       "status": 200,
-      "byteLength": 245766,
+      "byteLength": 245667,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -492,36 +414,56 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-06-02T16:56:43.299Z",
+      "fetchedAt": "2026-06-03T17:20:08.581Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
-      "byteLength": 293869,
+      "byteLength": 289427,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
         "priceSignals": [
           {
-            "value": "$20",
-            "context": "下载 定价 按月 按年 Hobby 免费 包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ 有限的 Tab 补全 下载 个人 $20 / mo. Pro Pro+ Ultra Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ 访问前沿模型 ✓ MCP、技"
+            "value": "$0",
+            "context": "↗ 招聘 产品 → 企业 定价 资源 → 登录 联系 联系销售 下载 定价 个人 团队版与企业 Hobby 探索 Cursor $0 / mo. 所有人均可免费使用 试用 Cursor 包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ 有限的 Tab 补全 P"
           },
           {
-            "value": "$40",
-            "context": "智能体更高额度 ✓ 访问前沿模型 ✓ MCP、技能和钩子 ✓ 云端智能体 ✓ 按用量计费的 Bugbot 获取 Pro 团队版 $40 / user / mo. 标准版 高级版 包含个人的全部功能，另加： ✓ 集中式团队计费与管理 ✓ 适用于内部规则、技能和插件"
+            "value": "$16",
+            "context": "用 试用 Cursor 包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ 有限的 Tab 补全 Pro 适合每周进行智能体会话 $16 / mo. 按年付费。若按月付费则为 $20。 获取 Pro Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ 访问前沿"
+          },
+          {
+            "value": "$20",
+            "context": "✓ 有限的智能体请求 ✓ 有限的 Tab 补全 Pro 适合每周进行智能体会话 $16 / mo. 按年付费。若按月付费则为 $20。 获取 Pro Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ 访问前沿模型 ✓ MCP、技能和钩子 ✓ 云端智能体和"
+          },
+          {
+            "value": "$48",
+            "context": "访问前沿模型 ✓ MCP、技能和钩子 ✓ 云端智能体和自动化 ✓ 按用量计费的 Bugbot Pro+ 适合每天进行智能体会话 $48 / mo. 按年付费。若按月付费则为 $60。 获取 Pro+ Pro 的所有功能，另加： ✓ Pro 版智能体限额的 3 倍"
+          },
+          {
+            "value": "$60",
+            "context": "智能体和自动化 ✓ 按用量计费的 Bugbot Pro+ 适合每天进行智能体会话 $48 / mo. 按年付费。若按月付费则为 $60。 获取 Pro+ Pro 的所有功能，另加： ✓ Pro 版智能体限额的 3 倍 Ultra 适合智能体重度用户 $160 /"
+          },
+          {
+            "value": "$160",
+            "context": "则为 $60。 获取 Pro+ Pro 的所有功能，另加： ✓ Pro 版智能体限额的 3 倍 Ultra 适合智能体重度用户 $160 / mo. 按年付费。若按月付费则为 $200。 获取 Ultra Pro 的所有功能，另加： ✓ 智能体限额为 Pro 套餐"
+          },
+          {
+            "value": "$200",
+            "context": "能，另加： ✓ Pro 版智能体限额的 3 倍 Ultra 适合智能体重度用户 $160 / mo. 按年付费。若按月付费则为 $200。 获取 Ultra Pro 的所有功能，另加： ✓ 智能体限额为 Pro 套餐的 20 倍 ✓ 优先使用新功能 深受打造世界一"
           }
         ],
         "planSignals": [
           {
             "value": "Hobby",
-            "context": "g 文档 社区 帮助 ↗ 工作坊 论坛 ↗ 招聘 产品 → 企业 定价 资源 → 登录 联系 联系销售 下载 定价 按月 按年 Hobby 免费 包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ 有限的 Tab 补全 下载 个人 $20 / mo. Pro Pro+"
+            "context": "社区 帮助 ↗ 工作坊 论坛 ↗ 招聘 产品 → 企业 定价 资源 → 登录 联系 联系销售 下载 定价 个人 团队版与企业 Hobby 探索 Cursor $0 / mo. 所有人均可免费使用 试用 Cursor 包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓"
           },
           {
             "value": "Pro",
-            "context": "按年 Hobby 免费 包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ 有限的 Tab 补全 下载 个人 $20 / mo. Pro Pro+ Ultra Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ 访问前沿模型 ✓ MCP、技能和钩子 ✓ 云端智"
+            "context": "0 / mo. 所有人均可免费使用 试用 Cursor 包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ 有限的 Tab 补全 Pro 适合每周进行智能体会话 $16 / mo. 按年付费。若按月付费则为 $20。 获取 Pro Hobby 的所有功能，另加："
           },
           {
             "value": "Ultra",
-            "context": "免费 包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ 有限的 Tab 补全 下载 个人 $20 / mo. Pro Pro+ Ultra Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ 访问前沿模型 ✓ MCP、技能和钩子 ✓ 云端智能体 ✓ 按用量计费的"
+            "context": "/ mo. 按年付费。若按月付费则为 $60。 获取 Pro+ Pro 的所有功能，另加： ✓ Pro 版智能体限额的 3 倍 Ultra 适合智能体重度用户 $160 / mo. 按年付费。若按月付费则为 $200。 获取 Ultra Pro 的所有功能，另加："
           }
         ]
       }
@@ -535,7 +477,7 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-06-02T16:56:43.300Z",
+      "fetchedAt": "2026-06-03T17:20:08.583Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
@@ -602,11 +544,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-06-02T16:56:43.301Z",
+      "fetchedAt": "2026-06-03T17:20:08.583Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "GitHub Copilot works alongside you directly in your editor, suggesting whole lines or entire functions for you.",
       "status": 200,
-      "byteLength": 1256890,
+      "byteLength": 1256075,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -737,11 +679,11 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-06-02T16:56:43.302Z",
+      "fetchedAt": "2026-06-03T17:20:08.584Z",
       "title": "Models and pricing for GitHub Copilot - GitHub Docs",
       "description": "See per-token pricing for the models available in GitHub Copilot and reference rates for additional usage across plans.",
       "status": 200,
-      "byteLength": 532779,
+      "byteLength": 546506,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -882,11 +824,11 @@
           },
           {
             "value": "agent",
-            "context": "Completions Code suggestions Code referencing Chat Agents Cloud agent About cloud agent Agent management Custom agents Access managem"
+            "context": "Completions Code suggestions Code referencing Chat Agents Cloud agent About cloud agent Agent management Custom agents About automati"
           },
           {
             "value": "Codex",
-            "context": "app Code review Copilot Memory Hooks Third-party agents OpenAI Codex Anthropic Claude Agent skills Enterprise management Spark Copil"
+            "context": "opilot Memory Hooks Third-party coding agents Agent apps OpenAI Codex Anthropic Claude Agent skills Enterprise management Cloud and l"
           },
           {
             "value": "premium",
@@ -916,136 +858,19 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-06-02T16:56:43.303Z",
-      "title": "About X Premium",
+      "fetchedAt": "2026-06-03T17:20:08.585Z",
+      "title": "Just a moment...",
       "description": "",
       "status": 200,
-      "byteLength": 36344,
+      "byteLength": 505,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
-        "priceSignals": [
-          {
-            "value": "$3",
-            "context": "m#tbfeatures). Subscribe now with localized pricing starting at $3/month or $32/year (plus any tax, e.g. VAT, and your payment met"
-          },
-          {
-            "value": "$32",
-            "context": "). Subscribe now with localized pricing starting at $3/month or $32/year (plus any tax, e.g. VAT, and your payment method fees) on"
-          },
-          {
-            "value": "$8",
-            "context": "or $32/year on web (or your local pricing) * Premium: Starts at $8/month or $84/year on web (or your local pricing) * Premium+: St"
-          },
-          {
-            "value": "$84",
-            "context": "on web (or your local pricing) * Premium: Starts at $8/month or $84/year on web (or your local pricing) * Premium+: Starts at $40/m"
-          },
-          {
-            "value": "$40",
-            "context": "r $84/year on web (or your local pricing) * Premium+: Starts at $40/month or $395/year on web (or your local pricing) If Premium is"
-          },
-          {
-            "value": "$395",
-            "context": "web (or your local pricing) * Premium+: Starts at $40/month or $395/year on web (or your local pricing) If Premium is available for"
-          },
-          {
-            "value": "3.00 USD",
-            "context": "| | --- | --- | --- | --- | --- | --- | --- | | United States | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | |"
-          },
-          {
-            "value": "32.00 USD",
-            "context": "-- | --- | --- | --- | --- | --- | | United States | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United King"
-          },
-          {
-            "value": "8.00 USD",
-            "context": "-- | --- | --- | --- | | United States | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00"
-          },
-          {
-            "value": "84.00 USD",
-            "context": "--- | --- | | United States | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00"
-          },
-          {
-            "value": "40.00 USD",
-            "context": "| United States | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 G"
-          },
-          {
-            "value": "395.00 USD",
-            "context": "tes | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GB"
-          },
-          {
-            "value": "3.00 GBP",
-            "context": "0 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | |"
-          },
-          {
-            "value": "32.00 GBP",
-            "context": "00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | | Canada | 3."
-          },
-          {
-            "value": "8.00 GBP",
-            "context": "00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | | Canada | 3.75 CAD | 40"
-          },
-          {
-            "value": "84.00 GBP",
-            "context": "5.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | | Canada | 3.75 CAD | 40.00 CAD | 10"
-          },
-          {
-            "value": "31.00 GBP",
-            "context": "United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | | Canada | 3.75 CAD | 40.00 CAD | 10.00 CAD | 10"
-          },
-          {
-            "value": "313.00 GBP",
-            "context": "dom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | | Canada | 3.75 CAD | 40.00 CAD | 10.00 CAD | 105.00 CAD | 56"
-          },
-          {
-            "value": "3.00 EUR",
-            "context": "30.00 SAR | 315.00 SAR | 150.00 SAR | 1,479.00 SAR | | France | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | |"
-          },
-          {
-            "value": "32.00 EUR",
-            "context": "315.00 SAR | 150.00 SAR | 1,479.00 SAR | | France | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | | Germany | 3"
-          },
-          {
-            "value": "8.00 EUR",
-            "context": "| 150.00 SAR | 1,479.00 SAR | | France | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | | Germany | 3.00 EUR | 3"
-          },
-          {
-            "value": "84.00 EUR",
-            "context": "R | 1,479.00 SAR | | France | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | | Germany | 3.00 EUR | 32.00 EUR | 8"
-          },
-          {
-            "value": "38.00 EUR",
-            "context": "SAR | | France | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | | Germany | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84"
-          },
-          {
-            "value": "377.00 EUR",
-            "context": "nce | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | | Germany | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38."
-          },
-          {
-            "value": "46.00 EUR",
-            "context": "EUR | | Belgium | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 46.00 EUR | 377.00 EUR | | Sweden | 31.13 SEK | 331.43 SEK | 83.00 SEK |"
-          }
-        ],
+        "priceSignals": [],
         "planSignals": [
           {
-            "value": "Premium",
-            "context": "Title: About X Premium URL Source: http://help.x.com/en/using-x/x-premium Markdown Con"
-          },
-          {
-            "value": "plus",
-            "context": "om app icons, and more. **Premium:**Includes all Basic features plus a checkmark, reduced ads, access to apply for creator revenue s"
-          },
-          {
-            "value": "Business",
-            "context": "tional variations to the standard version of X Premium: Premium Business and Premium Organizations, which are services for businesses, g"
-          },
-          {
-            "value": "free",
-            "context": "emium+ Tier:**Subscribers to the Premium+ tier will enjoy an ad-free experience across most areas of X, including the For You timeli"
-          },
-          {
-            "value": "Pro",
-            "context": "oving the service. **Only for Premium+ Tier :** * **Access to X Pro:**View multiple configurable timelines simultaneously which can"
+            "value": "premium",
+            "context": "le: Just a moment... URL Source: http://help.x.com/en/using-x/x-premium Warning: Target URL returned error 403: Forbidden Warning: This"
           }
         ]
       }
@@ -1059,7 +884,7 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-06-02T16:56:43.305Z",
+      "fetchedAt": "2026-06-03T17:20:08.587Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -1089,7 +914,7 @@
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
       "ok": true,
-      "fetchedAt": "2026-06-02T16:56:43.305Z",
+      "fetchedAt": "2026-06-03T17:20:08.588Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -1110,7 +935,7 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": true,
-      "fetchedAt": "2026-06-02T16:56:43.306Z",
+      "fetchedAt": "2026-06-03T17:20:08.589Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -1136,33 +961,16 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": true,
-      "fetchedAt": "2026-06-02T16:56:43.307Z",
-      "title": "Using the Connector for Slack",
+      "fetchedAt": "2026-06-03T17:20:08.589Z",
+      "title": "Just a moment...",
       "description": "",
       "status": 200,
-      "byteLength": 6234,
+      "byteLength": 282,
       "fetchMode": "jina_markdown",
       "extraction": {
-        "confidence": "review",
+        "confidence": "low",
         "priceSignals": [],
-        "planSignals": [
-          {
-            "value": "team",
-            "context": "ew feature for Perplexity users that integrates Slack with your team’s workflows by searching and synthesizing insights from convers"
-          },
-          {
-            "value": "enterprise",
-            "context": "es in one place. It integrates Slack directly with Perplexity’s enterprise productivity features, enables streamlined collaboration, and s"
-          },
-          {
-            "value": "Pro",
-            "context": "r for Slack? The Connector for Slack is available to Perplexity Pro, Perplexity Max, Enterprise Pro and Enterprise Max users. Our p"
-          },
-          {
-            "value": "Max",
-            "context": "Connector for Slack is available to Perplexity Pro, Perplexity Max, Enterprise Pro and Enterprise Max users. Our plans start at: O"
-          }
-        ]
+        "planSignals": []
       }
     }
   ]
