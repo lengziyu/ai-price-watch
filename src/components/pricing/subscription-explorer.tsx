@@ -258,25 +258,25 @@ const providerLogoMap = {
 
 const targetCurrencies = [
   { code: "CNY", flagCode: "CN", cnyRate: 1, locale: "zh-CN" },
-  { code: "USD", flagCode: "US", cnyRate: 7.25, locale: "en-US" },
-  { code: "HKD", flagCode: "HK", cnyRate: 0.93, locale: "zh-HK" },
-  { code: "TWD", flagCode: "TW", cnyRate: 0.22, locale: "zh-TW" },
-  { code: "SGD", flagCode: "SG", cnyRate: 5.36, locale: "en-SG" },
-  { code: "AUD", flagCode: "AU", cnyRate: 4.71, locale: "en-AU" },
-  { code: "CAD", flagCode: "CA", cnyRate: 5.29, locale: "en-CA" },
-  { code: "BRL", flagCode: "BR", cnyRate: 1.38, locale: "pt-BR" },
-  { code: "EUR", flagCode: "EU", cnyRate: 7.84, locale: "de-DE" },
-  { code: "GBP", flagCode: "GB", cnyRate: 9.18, locale: "en-GB" },
-  { code: "JPY", flagCode: "JP", cnyRate: 0.047, locale: "ja-JP" },
-  { code: "KRW", flagCode: "KR", cnyRate: 0.0053, locale: "ko-KR" },
-  { code: "MXN", flagCode: "MX", cnyRate: 0.395, locale: "es-MX" },
-  { code: "VND", flagCode: "VN", cnyRate: 0.00028, locale: "vi-VN" },
-  { code: "TRY", flagCode: "TR", cnyRate: 0.224, locale: "tr-TR" },
-  { code: "PHP", flagCode: "PH", cnyRate: 0.126, locale: "en-PH" },
-  { code: "PKR", flagCode: "PK", cnyRate: 0.026, locale: "en-PK" },
-  { code: "NGN", flagCode: "NG", cnyRate: 0.0049, locale: "en-NG" },
-  { code: "EGP", flagCode: "EG", cnyRate: 0.145, locale: "ar-EG" },
-  { code: "INR", flagCode: "IN", cnyRate: 0.087, locale: "en-IN" },
+  { code: "USD", flagCode: "US", cnyRate: 6.77369, locale: "en-US" },
+  { code: "HKD", flagCode: "HK", cnyRate: 0.863483, locale: "zh-HK" },
+  { code: "TWD", flagCode: "TW", cnyRate: 0.214147, locale: "zh-TW" },
+  { code: "SGD", flagCode: "SG", cnyRate: 5.26205, locale: "en-SG" },
+  { code: "AUD", flagCode: "AU", cnyRate: 4.74406, locale: "en-AU" },
+  { code: "CAD", flagCode: "CA", cnyRate: 4.84778, locale: "en-CA" },
+  { code: "BRL", flagCode: "BR", cnyRate: 1.31285, locale: "pt-BR" },
+  { code: "EUR", flagCode: "EU", cnyRate: 7.82411, locale: "de-DE" },
+  { code: "GBP", flagCode: "GB", cnyRate: 9.06618, locale: "en-GB" },
+  { code: "JPY", flagCode: "JP", cnyRate: 0.0421941, locale: "ja-JP" },
+  { code: "KRW", flagCode: "KR", cnyRate: 0.00443262, locale: "ko-KR" },
+  { code: "MXN", flagCode: "MX", cnyRate: 0.38956, locale: "es-MX" },
+  { code: "VND", flagCode: "VN", cnyRate: 0.00025838, locale: "vi-VN" },
+  { code: "TRY", flagCode: "TR", cnyRate: 0.146733, locale: "tr-TR" },
+  { code: "PHP", flagCode: "PH", cnyRate: 0.110459, locale: "en-PH" },
+  { code: "PKR", flagCode: "PK", cnyRate: 0.0242612, locale: "en-PK" },
+  { code: "NGN", flagCode: "NG", cnyRate: 0.0049729, locale: "en-NG" },
+  { code: "EGP", flagCode: "EG", cnyRate: 0.130344, locale: "ar-EG" },
+  { code: "INR", flagCode: "IN", cnyRate: 0.070811, locale: "en-IN" },
 ] as const;
 
 const subscriptionViewModes = ["subscription", "best", "region"] as const;
@@ -316,7 +316,7 @@ const curatedBestValueRunnerUpPlan: Record<string, string> = {
   "OpenAI::ChatGPT": "chatgpt-pro-5x",
 };
 const curatedBestValueWinnerRegion: Record<string, string> = {
-  "chatgpt-plus": "TR",
+  "chatgpt-plus": "PH",
   "claude-pro": "NG",
 };
 

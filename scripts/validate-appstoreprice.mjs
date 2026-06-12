@@ -101,7 +101,7 @@ function normalizePlanKey(name, duration) {
 }
 
 function parseEmbeddedPlans(html) {
-  const planRegex = /\{\\"id\\":\d+,\\"subscriptionId\\":\\"([^\\"]+)\\",\\"name\\":\\"([^\\"]+)\\",\\"nameZh\\":\\"([^\\"]+)\\",\\"type\\":\\"subscription\\",\\"duration\\":\\"([^\\"]+)\\",\\"source\\":\\"[^\\"]+\\",\\"prices\\":\[(.*?)\]\}/gs;
+  const planRegex = /\{\\"id\\":\d+,\\"subscriptionId\\":\\"([^\\"]+)\\",\\"name\\":\\"([^\\"]+)\\",\\"nameZh\\":\\"([^\\"]+)\\".*?\\"type\\":\\"subscription\\",\\"duration\\":\\"([^\\"]+)\\",\\"source\\":\\"[^\\"]+\\",\\"prices\\":\[(.*?)\]\}/gs;
   const priceRegex = /\{\\"region\\":\\"([^\\"]+)\\",\\"regionName\\":\\"([^\\"]+)\\",\\"currency\\":\\"([^\\"]+)\\",\\"price\\":([0-9.]+),\\"priceUsd\\":([0-9.]+),\\"priceCny\\":([0-9.]+)\}/g;
 
   const plans = [];

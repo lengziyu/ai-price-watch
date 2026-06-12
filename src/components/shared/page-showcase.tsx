@@ -54,12 +54,12 @@ const showcaseMap: Record<ShowcaseVariant, ShowcaseConfig> = {
     eyebrow: "global subscription board",
     title: "地区 / 币种 / 周期",
     rows: [
-      { label: "ChatGPT Plus", value: "TR ¥76.11" },
+      { label: "ChatGPT Plus", value: "PH ¥110.49" },
       { label: "Claude Pro", value: "US $20" },
       { label: "Gemini AI Pro", value: "学生 1 年" },
     ],
     focusLabel: "最大价差",
-    focusValue: "59%",
+    focusValue: "42%",
     focusIcon: CrownIcon,
     leftChip: { icon: Globe2Icon, label: "8+ 地区" },
     rightChip: { icon: BadgePercentIcon, label: "汇率折算" },
@@ -206,7 +206,7 @@ function localizeShowcaseConfig(
       ...config,
       title: "Region / FX / Billing",
       rows: [
-        { label: "ChatGPT Plus", value: "TR ¥76.11" },
+        { label: "ChatGPT Plus", value: "PH ¥110.49" },
         { label: "Claude Pro", value: "US $20" },
         { label: "Gemini AI Pro", value: "1Y student" },
       ],

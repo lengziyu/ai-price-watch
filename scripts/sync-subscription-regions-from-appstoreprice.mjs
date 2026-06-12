@@ -3,7 +3,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 
 const LOCAL_FILE = "src/data/subscription-regions.ts";
-const REVIEWED_AT = "2026-05-15";
+const REVIEWED_AT = new Date().toISOString().slice(0, 10);
 
 const COUNTRY_NAME_OVERRIDES = {
   TW: "台湾（中国）",
@@ -169,7 +169,7 @@ function parseArgs(argv) {
 }
 
 function parsePlansFromHtml(html) {
-  const planRegex = /\{\\"id\\":\d+,\\"subscriptionId\\":\\"([^\\"]+)\\",\\"name\\":\\"([^\\"]+)\\",\\"nameZh\\":\\"([^\\"]+)\\",\\"type\\":\\"subscription\\",\\"duration\\":\\"([^\\"]+)\\",\\"source\\":\\"([^\\"]+)\\",\\"prices\\":\[(.*?)\]\}/gs;
+  const planRegex = /\{\\"id\\":\d+,\\"subscriptionId\\":\\"([^\\"]+)\\",\\"name\\":\\"([^\\"]+)\\",\\"nameZh\\":\\"([^\\"]+)\\".*?\\"type\\":\\"subscription\\",\\"duration\\":\\"([^\\"]+)\\",\\"source\\":\\"([^\\"]+)\\",\\"prices\\":\[(.*?)\]\}/gs;
   const priceRegex = /\{\\"region\\":\\"([^\\"]+)\\",\\"regionName\\":\\"([^\\"]+)\\",\\"currency\\":\\"([^\\"]+)\\",\\"price\\":([0-9.]+),\\"priceUsd\\":([0-9.]+),\\"priceCny\\":([0-9.]+)\}/g;
 
   const plans = [];

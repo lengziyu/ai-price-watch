@@ -12,8 +12,8 @@ import type { SiteLocale } from "@/lib/i18n";
 
 const codeLines = [
   "const plan = watch('ChatGPT Plus')",
-  "compare.region('TR', 'US')",
-  "notify.whenSaving('> 50%')",
+  "compare.region('PH', 'US')",
+  "notify.whenSaving('> 40%')",
 ];
 
 export function HeroShowcase({ locale = "zh-CN" }: { locale?: SiteLocale }) {
@@ -54,7 +54,7 @@ export function HeroShowcase({ locale = "zh-CN" }: { locale?: SiteLocale }) {
 
       <div className="rspress-mini-card rspress-mini-card--left rspress-hero-layer">
         <BadgePercentIcon className="size-4 text-primary" />
-        <span>{isEnglish ? "Save 59%" : "省 59%"}</span>
+        <span>{isEnglish ? "Save 42%" : "省 42%"}</span>
       </div>
 
       <div className="rspress-mini-card rspress-mini-card--right rspress-hero-layer">
@@ -71,7 +71,7 @@ export function HeroShowcase({ locale = "zh-CN" }: { locale?: SiteLocale }) {
           <span className="text-[12px] text-muted-foreground">team</span>
         </div>
         <div className="px-3 py-3 font-mono text-[12px]">
-          <span className="text-primary">¥76.11</span>
+          <span className="text-primary">¥110.49</span>
           <span className="text-muted-foreground"> / month best region</span>
         </div>
       </div>

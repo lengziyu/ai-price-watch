@@ -1,0 +1,107 @@
+{
+  "generatedAt": "2026-06-02T14:41:47.646Z",
+  "provider": "Edge TTS",
+  "voice": "zh-CN-YunyangNeural",
+  "rate": "+0%",
+  "bgm": "audio/bgm/tech-light-groove.wav",
+  "sfx": [
+    "audio/sfx/whoosh.wav",
+    "audio/sfx/card-pop.wav",
+    "audio/sfx/number-highlight.wav",
+    "audio/sfx/button-click.wav",
+    "audio/sfx/page-switch.wav",
+    "audio/sfx/card-zoom.wav"
+  ],
+  "voiceover": [
+    {
+      "id": "01-membership",
+      "startMs": 200,
+      "caption": "开 AI 会员前，",
+      "spoken": "开 AI 会员前，",
+      "file": "audio/voiceover/01-membership.wav",
+      "durationMs": 1030,
+      "endMs": 1230
+    },
+    {
+      "id": "02-confused",
+      "startMs": 1600,
+      "caption": "你也被价格搞晕过吗？",
+      "spoken": "你也被价格搞晕过吗？",
+      "file": "audio/voiceover/02-confused.wav",
+      "durationMs": 1225,
+      "endMs": 2825
+    },
+    {
+      "id": "03-products",
+      "startMs": 3400,
+      "caption": "ChatGPT、Claude、Cursor，各地区价格差别不小。",
+      "spoken": "不同工具、不同地区，差价真不小。",
+      "file": "audio/voiceover/03-products.wav",
+      "durationMs": 2589,
+      "endMs": 5989
+    },
+    {
+      "id": "04-website",
+      "startMs": 6200,
+      "caption": "所以，我做了一个网站：price.lengziyu.cn",
+      "spoken": "所以，我做了雷价通。",
+      "file": "audio/voiceover/04-website.wav",
+      "durationMs": 1399,
+      "endMs": 7599
+    },
+    {
+      "id": "05-compare",
+      "startMs": 7900,
+      "caption": "先看会员订阅价格对比。",
+      "spoken": "先看会员价格对比。",
+      "file": "audio/voiceover/05-compare.wav",
+      "durationMs": 1343,
+      "endMs": 9243
+    },
+    {
+      "id": "06-one-screen",
+      "startMs": 9800,
+      "caption": "地区价格、人民币换算、套餐差价，一屏看懂。",
+      "spoken": "地区价格、人民币换算、套餐差价，一屏看懂。",
+      "file": "audio/voiceover/06-one-screen.wav",
+      "durationMs": 3437,
+      "endMs": 13237
+    },
+    {
+      "id": "07-deals",
+      "startMs": 14300,
+      "caption": "还有 AI 优惠和白嫖攻略。",
+      "spoken": "还有 AI 优惠攻略。",
+      "file": "audio/voiceover/07-deals.wav",
+      "durationMs": 1365,
+      "endMs": 15665
+    },
+    {
+      "id": "08-discover",
+      "startMs": 16300,
+      "caption": "Gemini、Claude、Cursor 等热门优惠，都能在这里找到。",
+      "spoken": "热门优惠，都能在这里找到。",
+      "file": "audio/voiceover/08-discover.wav",
+      "durationMs": 1735,
+      "endMs": 18035
+    },
+    {
+      "id": "09-detail",
+      "startMs": 20900,
+      "caption": "点开卡片，攻略步骤直接查看。",
+      "spoken": "点开卡片，直接看步骤。",
+      "file": "audio/voiceover/09-detail.wav",
+      "durationMs": 1727,
+      "endMs": 22627
+    },
+    {
+      "id": "10-check",
+      "startMs": 25100,
+      "caption": "下次开会员前，先查一下。",
+      "spoken": "下次开会员前，先查一下。",
+      "file": "audio/voiceover/10-check.wav",
+      "durationMs": 1872,
+      "endMs": 26972
+    }
+  ]
+}
