@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
       bodySizeLimit: "8mb",
     },
   },
+  images: {
+    remotePatterns: [new URL("https://flagcdn.com/**")],
+  },
 };
 
 export default nextConfig;

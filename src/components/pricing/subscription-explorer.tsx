@@ -2636,9 +2636,12 @@ function CountryFlag({ countryCode, className }: { countryCode: string; classNam
       )}
     >
       <span aria-hidden>{countryCode}</span>
-      <img
+      <Image
         src={`https://flagcdn.com/${assetCode}.svg`}
         alt={`${countryCode} flag`}
+        width={24}
+        height={18}
+        unoptimized
         loading="lazy"
         className="absolute inset-0 h-full w-full object-cover"
         onError={(event) => {
