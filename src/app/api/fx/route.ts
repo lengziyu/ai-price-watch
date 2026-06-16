@@ -13,7 +13,7 @@ const fallbackCnyRates: Record<string, number> = {
   KRW: 0.00443262,
   MXN: 0.38956,
   VND: 0.00025838,
-  TRY: 0.146733,
+  TRY: 0.14615,
   PHP: 0.110459,
   PKR: 0.0242612,
   NGN: 0.0049729,

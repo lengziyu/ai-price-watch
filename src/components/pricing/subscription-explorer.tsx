@@ -271,7 +271,7 @@ const targetCurrencies = [
   { code: "KRW", flagCode: "KR", cnyRate: 0.00443262, locale: "ko-KR" },
   { code: "MXN", flagCode: "MX", cnyRate: 0.38956, locale: "es-MX" },
   { code: "VND", flagCode: "VN", cnyRate: 0.00025838, locale: "vi-VN" },
-  { code: "TRY", flagCode: "TR", cnyRate: 0.146733, locale: "tr-TR" },
+  { code: "TRY", flagCode: "TR", cnyRate: 0.14615, locale: "tr-TR" },
   { code: "PHP", flagCode: "PH", cnyRate: 0.110459, locale: "en-PH" },
   { code: "PKR", flagCode: "PK", cnyRate: 0.0242612, locale: "en-PK" },
   { code: "NGN", flagCode: "NG", cnyRate: 0.0049729, locale: "en-NG" },
