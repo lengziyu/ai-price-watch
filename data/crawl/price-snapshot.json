@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-17T16:07:20.197Z",
+  "generatedAt": "2026-06-18T15:54:25.914Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,16 +12,53 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-06-17T16:07:13.946Z",
-      "title": "Just a moment...",
+      "fetchedAt": "2026-06-18T15:54:20.502Z",
+      "title": "ChatGPT 套餐 | 免费版、Go、Plus、Pro、Business 和 Enterprise",
       "description": "",
       "status": 200,
-      "byteLength": 327,
+      "byteLength": 24498,
       "fetchMode": "jina_markdown",
       "extraction": {
-        "confidence": "low",
+        "confidence": "review",
         "priceSignals": [],
-        "planSignals": []
+        "planSignals": [
+          {
+            "value": "Plus",
+            "context": "Title: ChatGPT 套餐 | 免费版、Go、Plus、Pro、Business 和 Enterprise URL Source: http://chatgpt.com/zh-Han"
+          },
+          {
+            "value": "Pro",
+            "context": "Title: ChatGPT 套餐 | 免费版、Go、Plus、Pro、Business 和 Enterprise URL Source: http://chatgpt.com/zh-Hans-CN"
+          },
+          {
+            "value": "Business",
+            "context": "Title: ChatGPT 套餐 | 免费版、Go、Plus、Pro、Business 和 Enterprise URL Source: http://chatgpt.com/zh-Hans-CN/pricing/"
+          },
+          {
+            "value": "Enterprise",
+            "context": "Title: ChatGPT 套餐 | 免费版、Go、Plus、Pro、Business 和 Enterprise URL Source: http://chatgpt.com/zh-Hans-CN/pricing/ Markdown Con"
+          },
+          {
+            "value": "agent",
+            "context": "/overview/) * 功能 * [智能体](http://chatgpt.com/zh-Hans-CN/features/agent/) * [应用](http://chatgpt.com/zh-Hans-CN/features/apps/) * [Atlas"
+          },
+          {
+            "value": "Codex",
+            "context": "* [适用于大学生](http://chatgpt.com/zh-Hans-CN/college-students/) * [Codex](http://chatgpt.com/zh-Hans-CN/codex/) * [概览](http://chatgpt.co"
+          },
+          {
+            "value": "free",
+            "context": "h-Hans-CN/pricing/) * [免费版](http://chatgpt.com/zh-Hans-CN/plans/free/) * [Go](http://chatgpt.com/zh-Hans-CN/plans/go/) * [Plus](http"
+          },
+          {
+            "value": "education",
+            "context": "ss/enterprise/) * [高等教育](http://chatgpt.com/zh-Hans-CN/business/education/) * [K–12 教师](http://chatgpt.com/zh-Hans-CN/plans/k12-teachers/"
+          },
+          {
+            "value": "team",
+            "context": "司打造的安全工作空间，集成了公司上下文信息与团队协作工具 /每用户每月* [开始使用](https://chatgpt.com/team-sign-up) 包含内容： * 通过桌面端和移动端应用随时使用 ChatGPT 和 Codex * 用于聊天、编程、分析和工"
+          }
+        ]
       }
     },
     {
@@ -33,11 +70,11 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-06-17T16:07:13.986Z",
+      "fetchedAt": "2026-06-18T15:54:20.539Z",
       "title": "Pricing – Codex | OpenAI Developers",
       "description": "Codex is included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
-      "byteLength": 595212,
+      "byteLength": 595459,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -164,11 +201,11 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-06-17T16:07:13.988Z",
+      "fetchedAt": "2026-06-18T15:54:20.541Z",
       "title": "Plans & Pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
-      "byteLength": 1336672,
+      "byteLength": 1336954,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -339,7 +376,7 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-06-17T16:07:13.989Z",
+      "fetchedAt": "2026-06-18T15:54:20.542Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more",
       "description": "Get access to the best of Google AI including Gemini 3.1 Pro, video generation with Veo 3.1, Deep Research, and much more.",
       "status": 200,
@@ -414,11 +451,11 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-06-17T16:07:13.990Z",
+      "fetchedAt": "2026-06-18T15:54:20.543Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
-      "byteLength": 306728,
+      "byteLength": 306910,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -457,7 +494,7 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-06-17T16:07:13.992Z",
+      "fetchedAt": "2026-06-18T15:54:20.544Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
@@ -524,11 +561,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-06-17T16:07:13.992Z",
+      "fetchedAt": "2026-06-18T15:54:20.545Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "GitHub Copilot works alongside you directly in your editor, suggesting whole lines or entire functions for you.",
       "status": 200,
-      "byteLength": 1238082,
+      "byteLength": 1240169,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -539,7 +576,7 @@
           },
           {
             "value": "$ 10",
-            "context": "arn more Pro For everyday coding with agents in GitHub Copilot. $ 10 USD per user / month New plan sign-ups are temporarily paused a"
+            "context": "arn more Pro For everyday coding with agents in GitHub Copilot. $ 10 USD per user / month Get started We&#x27;re gradually enabling"
           },
           {
             "value": "$15",
@@ -547,7 +584,7 @@
           },
           {
             "value": "$ 39",
-            "context": "for Pro Pro+ For more complex development with premium models. $ 39 USD per user / month New plan sign-ups are temporarily paused a"
+            "context": "for Pro Pro+ For more complex development with premium models. $ 39 USD per user / month Get started We&#x27;re gradually enabling"
           },
           {
             "value": "$70",
@@ -555,7 +592,7 @@
           },
           {
             "value": "$ 100",
-            "context": "For sustained, high-volume agent workflows with GitHub Copilot. $ 100 USD per user / month New plan sign-ups are temporarily paused a"
+            "context": "For sustained, high-volume agent workflows with GitHub Copilot. $ 100 USD per user / month Get started We&#x27;re gradually enabling"
           },
           {
             "value": "$200",
@@ -563,19 +600,19 @@
           },
           {
             "value": "$0",
-            "context": "r Management Studio Zed Zed Compare features Pricing plans Free $0 Get started Pro $10 per month Learn more Pro+ $39 per month Upg"
+            "context": "r Management Studio Zed Zed Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month Ge"
           },
           {
             "value": "$10",
-            "context": "Zed Zed Compare features Pricing plans Free $0 Get started Pro $10 per month Learn more Pro+ $39 per month Upgrade now Max $100 pe"
+            "context": "Zed Zed Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month Get started Max $100 p"
           },
           {
             "value": "$39",
-            "context": "ing plans Free $0 Get started Pro $10 per month Learn more Pro+ $39 per month Upgrade now Max $100 per month Upgrade now GitHub AI"
+            "context": "ng plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month Get started Max $100 per month Get started GitHub AI"
           },
           {
             "value": "$100",
-            "context": "Pro $10 per month Learn more Pro+ $39 per month Upgrade now Max $100 per month Upgrade now GitHub AI Credits GitHub AI Credits Total"
+            "context": "ro $10 per month Get started Pro+ $39 per month Get started Max $100 per month Get started GitHub AI Credits GitHub AI Credits Total"
           },
           {
             "value": "$5",
@@ -625,7 +662,7 @@
           },
           {
             "value": "agent",
-            "context": "ur patience. Learn more Everything in Free and: Access to Cloud agent and code review Unlimited code completion and next edit suggest"
+            "context": "please check back soon. Everything in Free and: Access to Cloud agent and code review Unlimited code completion and next edit suggest"
           },
           {
             "value": "Codex",
@@ -659,11 +696,11 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-06-17T16:07:13.993Z",
+      "fetchedAt": "2026-06-18T15:54:20.546Z",
       "title": "Models and pricing for GitHub Copilot - GitHub Docs",
       "description": "See per-token pricing for the models available in GitHub Copilot and reference rates for additional usage across plans.",
       "status": 200,
-      "byteLength": 547253,
+      "byteLength": 547287,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -838,11 +875,11 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-06-17T16:07:13.994Z",
+      "fetchedAt": "2026-06-18T15:54:20.547Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
-      "byteLength": 505,
+      "byteLength": 274,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -864,7 +901,7 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-06-17T16:07:13.996Z",
+      "fetchedAt": "2026-06-18T15:54:20.549Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -894,7 +931,7 @@
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
       "ok": true,
-      "fetchedAt": "2026-06-17T16:07:13.997Z",
+      "fetchedAt": "2026-06-18T15:54:20.549Z",
       "title": "Perplexity Pro Perks",
       "description": "",
       "status": 200,
@@ -957,19 +994,35 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": true,
-      "fetchedAt": "2026-06-17T16:07:13.998Z",
-      "title": "Just a moment...",
+      "fetchedAt": "2026-06-18T15:54:20.550Z",
+      "title": "Enterprise Pricing and Billing: Frequently Asked Questions",
       "description": "",
       "status": 200,
-      "byteLength": 603,
+      "byteLength": 7186,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
         "priceSignals": [],
         "planSignals": [
           {
-            "value": "enterprise",
-            "context": "urce: http://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions Warning: Target"
+            "value": "Enterprise",
+            "context": "Title: Enterprise Pricing and Billing: Frequently Asked Questions URL Source: htt"
+          },
+          {
+            "value": "team",
+            "context": "cing is per seat (user), and you’re only billed for your active team members, so it’s straightforward to scale as your team grows or"
+          },
+          {
+            "value": "Pro",
+            "context": "Are there higher usage limits for Enterprise plans? Enterprise Pro offers extended usage limits compared to Perplexity Pro. Enterp"
+          },
+          {
+            "value": "Max",
+            "context": "rs extended usage limits compared to Perplexity Pro. Enterprise Max goes further, providing the highest access levels for Research"
+          },
+          {
+            "value": "Education",
+            "context": "the current billing period from the day the change was made. ## Education & Non-profit ### **Do you offer educational or non-profit disco"
           }
         ]
       }
@@ -983,11 +1036,11 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": true,
-      "fetchedAt": "2026-06-17T16:07:13.999Z",
+      "fetchedAt": "2026-06-18T15:54:20.551Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
-      "byteLength": 575,
+      "byteLength": 196,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "low",
