@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-19T15:44:05.708Z",
+  "generatedAt": "2026-06-20T14:33:33.765Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,11 +12,11 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-06-19T15:44:00.100Z",
+      "fetchedAt": "2026-06-20T14:33:28.666Z",
       "title": "ChatGPT 套餐 | 免费版、Go、Plus、Pro、Business 和 Enterprise",
       "description": "",
       "status": 200,
-      "byteLength": 10079,
+      "byteLength": 24507,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -39,8 +39,24 @@
             "context": "Title: ChatGPT 套餐 | 免费版、Go、Plus、Pro、Business 和 Enterprise URL Source: http://chatgpt.com/zh-Hans-CN/pricing/ Markdown Con"
           },
           {
+            "value": "agent",
+            "context": "/overview/) * 功能 * [智能体](http://chatgpt.com/zh-Hans-CN/features/agent/) * [应用](http://chatgpt.com/zh-Hans-CN/features/apps/) * [Atlas"
+          },
+          {
             "value": "Codex",
-            "context": "stant 使用权限 * 消息和上传的数量受限 * 图像生成受限，速度较慢 * 有限使用深度研究 * 记忆与上下文支持受限 * Codex 的有限使用 ### Go 借助更高的使用权限，畅聊不停 免费套餐中的全部内容，以及： * 更多 GPT-5.5 Instant"
+            "context": "* [适用于大学生](http://chatgpt.com/zh-Hans-CN/college-students/) * [Codex](http://chatgpt.com/zh-Hans-CN/codex/) * [概览](http://chatgpt.co"
+          },
+          {
+            "value": "free",
+            "context": "h-Hans-CN/pricing/) * [免费版](http://chatgpt.com/zh-Hans-CN/plans/free/) * [Go](http://chatgpt.com/zh-Hans-CN/plans/go/) * [Plus](http"
+          },
+          {
+            "value": "education",
+            "context": "ss/enterprise/) * [高等教育](http://chatgpt.com/zh-Hans-CN/business/education/) * [K–12 教师](http://chatgpt.com/zh-Hans-CN/plans/k12-teachers/"
+          },
+          {
+            "value": "team",
+            "context": "司打造的安全工作空间，集成了公司上下文信息与团队协作工具 /每用户每月* [开始使用](https://chatgpt.com/team-sign-up) 包含内容： * 通过桌面端和移动端应用随时使用 ChatGPT 和 Codex * 用于聊天、编程、分析和工"
           }
         ]
       }
@@ -54,7 +70,7 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-06-19T15:44:00.137Z",
+      "fetchedAt": "2026-06-20T14:33:28.708Z",
       "title": "Pricing – Codex | OpenAI Developers",
       "description": "Codex is included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
@@ -185,7 +201,7 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-06-19T15:44:00.138Z",
+      "fetchedAt": "2026-06-20T14:33:28.710Z",
       "title": "Plans & Pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
@@ -360,7 +376,7 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-06-19T15:44:00.140Z",
+      "fetchedAt": "2026-06-20T14:33:28.712Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more",
       "description": "Get access to the best of Google AI including Gemini 3.1 Pro, video generation with Veo 3.1, Deep Research, and much more.",
       "status": 200,
@@ -435,11 +451,11 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-06-19T15:44:00.141Z",
+      "fetchedAt": "2026-06-20T14:33:28.713Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
-      "byteLength": 306870,
+      "byteLength": 306692,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -478,7 +494,7 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-06-19T15:44:00.143Z",
+      "fetchedAt": "2026-06-20T14:33:28.714Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
@@ -545,11 +561,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-06-19T15:44:00.144Z",
+      "fetchedAt": "2026-06-20T14:33:28.715Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "GitHub Copilot works alongside you directly in your editor, suggesting whole lines or entire functions for you.",
       "status": 200,
-      "byteLength": 1239964,
+      "byteLength": 1240138,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -680,7 +696,7 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-06-19T15:44:00.145Z",
+      "fetchedAt": "2026-06-20T14:33:28.716Z",
       "title": "Models and pricing for GitHub Copilot - GitHub Docs",
       "description": "See per-token pricing for the models available in GitHub Copilot and reference rates for additional usage across plans.",
       "status": 200,
@@ -859,11 +875,11 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-06-19T15:44:00.146Z",
+      "fetchedAt": "2026-06-20T14:33:28.717Z",
       "title": "About X Premium",
       "description": "",
       "status": 200,
-      "byteLength": 36344,
+      "byteLength": 36288,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -1002,7 +1018,7 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-06-19T15:44:00.147Z",
+      "fetchedAt": "2026-06-20T14:33:28.718Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -1032,16 +1048,54 @@
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
       "ok": true,
-      "fetchedAt": "2026-06-19T15:44:00.148Z",
-      "title": "Just a moment...",
+      "fetchedAt": "2026-06-20T14:33:28.719Z",
+      "title": "Perplexity Pro Perks",
       "description": "",
       "status": 200,
-      "byteLength": 472,
+      "byteLength": 56093,
       "fetchMode": "jina_markdown",
       "extraction": {
-        "confidence": "low",
-        "priceSignals": [],
-        "planSignals": []
+        "confidence": "review",
+        "priceSignals": [
+          {
+            "value": "$275",
+            "context": "sercontent.com/images/kM8esgT2igCBxfSTeFxCZFKe94.png) Get up to $275 off services on Thumbtack ![Image 2](https://framerusercontent."
+          },
+          {
+            "value": "$1,000",
+            "context": "ages/CCz9la4h090iwgoNwu7paiIUs.png?width=2880&height=536) Get a $1,000 credit at closing when you buy or refinance a home with Chase *"
+          },
+          {
+            "value": "$700",
+            "context": "ercontent.com/images/oxcz8LjhVf2BzckMeSJfc4LjF0w.png) Get up to $700 off on Ezra cancer screening ![Image 29](https://framerusercont"
+          },
+          {
+            "value": "$25",
+            "context": "://framerusercontent.com/images/Wp5L0lvvluUITLU2jOpCUky7II.png) $25 off on Perplexity merch * ![Image 31](https://framerusercontent"
+          },
+          {
+            "value": "$400",
+            "context": "UAkEwre4KPeqvtvOL1eozH5qg.png?width=1920&height=1080) Get up to $400 off on Eight Sleep Pod * ![Image 33](https://framerusercontent."
+          },
+          {
+            "value": "$50",
+            "context": "E.png?scale-down-to=512&width=680&height=1020) Get an exclusive $50 off Galaxy Watch8 Series or Watch Ultra * ![Image 35](https://f"
+          }
+        ],
+        "planSignals": [
+          {
+            "value": "Pro",
+            "context": "Title: Perplexity Pro Perks URL Source: http://www.perplexity.ai/properks/ Markdown C"
+          },
+          {
+            "value": "free",
+            "context": "0&height=800) Get up to 30% off base rates on car rentals and a free car class upgrade ![Image 4](https://framerusercontent.com/imag"
+          },
+          {
+            "value": "Ultra",
+            "context": "ht=1020) Get an exclusive $50 off Galaxy Watch8 Series or Watch Ultra * ![Image 35](https://framerusercontent.com/images/xEbkPMvWN4MQ"
+          }
+        ]
       }
     },
     {
@@ -1053,7 +1107,7 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": true,
-      "fetchedAt": "2026-06-19T15:44:00.149Z",
+      "fetchedAt": "2026-06-20T14:33:28.720Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -1079,7 +1133,7 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": true,
-      "fetchedAt": "2026-06-19T15:44:00.150Z",
+      "fetchedAt": "2026-06-20T14:33:28.721Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
