@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-23T14:35:09.789Z",
+  "generatedAt": "2026-07-24T14:14:52.673Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,7 +12,7 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-07-23T14:35:03.164Z",
+      "fetchedAt": "2026-07-24T14:14:48.316Z",
       "title": "ChatGPT 套餐 | 免费版、Go、Plus、Pro、Business 和 Enterprise",
       "description": "",
       "status": 200,
@@ -54,11 +54,11 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-07-23T14:35:03.200Z",
+      "fetchedAt": "2026-07-24T14:14:48.353Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
-      "byteLength": 643183,
+      "byteLength": 651397,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -80,8 +80,16 @@
             "context": "us plan Pro Choose 5x or 20x higher rate limits than Plus. From $100 /month Get Pro Everything in Plus and: Access to GPT-5.3-Codex-"
           },
           {
+            "value": "$200",
+            "context": "20x more Codex usage than Plus* Unlimited ChatGPT Voice on the $200/month tier; tasks still draw from your Codex usage budget Other"
+          },
+          {
             "value": "$25",
             "context": "atures as part of the Business plan *2+ users, billed annually. $25 per user per month when billed monthly. Enterprise & Edu Unlock"
+          },
+          {
+            "value": "6 credits",
+            "context": "sed or pay-as-you-go billing, Desktop voice costs approximately 6 credits per minute. ChatGPT Voice in Desktop is not available via API K"
           },
           {
             "value": "125 credits",
@@ -209,7 +217,7 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-07-23T14:35:03.202Z",
+      "fetchedAt": "2026-07-24T14:14:48.355Z",
       "title": "Plans & Pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
@@ -384,7 +392,7 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-07-23T14:35:03.203Z",
+      "fetchedAt": "2026-07-24T14:14:48.357Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more",
       "description": "Get access to the best of Google AI including Gemini 3.1 Pro, video generation with Veo 3.1, Deep Research, and much more.",
       "status": 200,
@@ -463,7 +471,7 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-07-23T14:35:03.204Z",
+      "fetchedAt": "2026-07-24T14:14:48.358Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
@@ -506,7 +514,7 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-07-23T14:35:03.205Z",
+      "fetchedAt": "2026-07-24T14:14:48.359Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
@@ -573,11 +581,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-07-23T14:35:03.206Z",
+      "fetchedAt": "2026-07-24T14:14:48.360Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "GitHub Copilot works alongside you directly in your editor, suggesting whole lines or entire functions for you.",
       "status": 200,
-      "byteLength": 1251230,
+      "byteLength": 1250893,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -708,7 +716,7 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-07-23T14:35:03.207Z",
+      "fetchedAt": "2026-07-24T14:14:48.361Z",
       "title": "Models and pricing for GitHub Copilot - GitHub Docs",
       "description": "See per-token pricing for the models available in GitHub Copilot and reference rates for additional usage across plans.",
       "status": 200,
@@ -887,7 +895,7 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-07-23T14:35:03.208Z",
+      "fetchedAt": "2026-07-24T14:14:48.362Z",
       "title": "About X Premium",
       "description": "",
       "status": 200,
@@ -1030,11 +1038,11 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-07-23T14:35:03.209Z",
+      "fetchedAt": "2026-07-24T14:14:48.364Z",
       "title": "X Premium+ Price Adjustment",
       "description": "",
       "status": 200,
-      "byteLength": 14927,
+      "byteLength": 15272,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -1164,6 +1172,10 @@
           {
             "value": "free",
             "context": "usage limits and early access to new features. * Completely ad-free: Enjoy a seamless, interruption-free X experience with Premium+"
+          },
+          {
+            "value": "business",
+            "context": "you with a better, safer and faster service and to support our business. Some cookies are necessary to use our services, improve our se"
           }
         ]
       }
@@ -1177,19 +1189,15 @@
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
       "ok": true,
-      "fetchedAt": "2026-07-23T14:35:03.210Z",
+      "fetchedAt": "2026-07-24T14:14:48.365Z",
       "title": "Perplexity Pro Perks",
       "description": "",
       "status": 200,
-      "byteLength": 12954,
+      "byteLength": 56093,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
         "priceSignals": [
-          {
-            "value": "$20",
-            "context": "Perks for Pro Members ### Unlock thousands in savings for just $20/month * ![Image 1](https://framerusercontent.com/images/kM8esgT"
-          },
           {
             "value": "$275",
             "context": "sercontent.com/images/kM8esgT2igCBxfSTeFxCZFKe94.png) Get up to $275 off services on Thumbtack ![Image 2](https://framerusercontent."
@@ -1240,11 +1248,11 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": true,
-      "fetchedAt": "2026-07-23T14:35:03.211Z",
+      "fetchedAt": "2026-07-24T14:14:48.365Z",
       "title": "Enterprise Pricing and Billing: Frequently Asked Questions",
       "description": "",
       "status": 200,
-      "byteLength": 7201,
+      "byteLength": 7193,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -1282,11 +1290,11 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": true,
-      "fetchedAt": "2026-07-23T14:35:03.212Z",
+      "fetchedAt": "2026-07-24T14:14:48.366Z",
       "title": "Using the Connector for Slack",
       "description": "",
       "status": 200,
-      "byteLength": 6228,
+      "byteLength": 6236,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
