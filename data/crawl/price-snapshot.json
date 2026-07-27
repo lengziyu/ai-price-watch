@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-26T13:59:49.655Z",
+  "generatedAt": "2026-07-27T15:16:07.535Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,7 +12,7 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-07-26T13:59:44.801Z",
+      "fetchedAt": "2026-07-27T15:16:02.737Z",
       "title": "ChatGPT 套餐 | 免费版、Go、Plus、Pro、Business 和 Enterprise",
       "description": "",
       "status": 200,
@@ -54,7 +54,7 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-07-26T13:59:44.830Z",
+      "fetchedAt": "2026-07-27T15:16:02.794Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
@@ -217,7 +217,7 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-07-26T13:59:44.831Z",
+      "fetchedAt": "2026-07-27T15:16:02.797Z",
       "title": "Plans & Pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
@@ -392,7 +392,7 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-07-26T13:59:44.832Z",
+      "fetchedAt": "2026-07-27T15:16:02.798Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more",
       "description": "Get access to the best of Google AI including Gemini 3.1 Pro, video generation with Veo 3.1, Deep Research, and much more.",
       "status": 200,
@@ -445,11 +445,11 @@
           },
           {
             "value": "agent",
-            "context": "ies, and more. Jules 5 Higher limits to our asynchronous coding agent for software developers Google Antigravity Entry rate limits to"
+            "context": "ies, and more. Jules 9 Higher limits to our asynchronous coding agent for software developers Google Antigravity Entry rate limits to"
           },
           {
             "value": "Premium",
-            "context": "ids, and more Access Gemini directly in Google apps Google Home Premium (Standard plan) 6 30 days of event history and Gemini features"
+            "context": "ids, and more Access Gemini directly in Google apps Google Home Premium (Standard plan) 5 30 days of event history and Gemini features"
           },
           {
             "value": "business",
@@ -471,11 +471,11 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-07-26T13:59:44.833Z",
+      "fetchedAt": "2026-07-27T15:16:02.800Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
-      "byteLength": 327844,
+      "byteLength": 332465,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -492,7 +492,7 @@
         "planSignals": [
           {
             "value": "Hobby",
-            "context": "g 文档 社区 帮助 ↗ 工作坊 论坛 ↗ 招聘 产品 → 企业 定价 资源 → 登录 联系 联系销售 下载 定价 按月 按年 Hobby 适合爱折腾的人 免费 包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 试用 Cursor 个人"
+            "context": "社区 帮助 ↗ 工作坊 论坛 ↗ 招聘 模型 → 产品 → 企业 定价 资源 → 登录 联系 联系销售 下载 定价 按月 按年 Hobby 适合爱折腾的人 免费 包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 试用 Cursor 个人"
           },
           {
             "value": "Pro",
@@ -514,38 +514,38 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-07-26T13:59:44.834Z",
+      "fetchedAt": "2026-07-27T15:16:02.801Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
-      "byteLength": 19990,
+      "byteLength": 19857,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
         "priceSignals": [
           {
             "value": "0.02元",
-            "context": "（Beta） 支持 支持 FIM 补全（Beta） 仅非思考模式支持 仅非思考模式支持 价格 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (2) 2500 5"
+            "context": "（Beta） 支持 支持 FIM 补全（Beta） 仅非思考模式支持 仅非思考模式支持 价格 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (1) 2500 5"
           },
           {
             "value": "0.025元",
-            "context": "支持 支持 FIM 补全（Beta） 仅非思考模式支持 仅非思考模式支持 价格 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (2) 2500 500 (1)"
+            "context": "支持 支持 FIM 补全（Beta） 仅非思考模式支持 仅非思考模式支持 价格 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (1) 2500 500 (1)"
           },
           {
             "value": "1元",
-            "context": "式支持 仅非思考模式支持 价格 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (2) 2500 500 (1) deepseek-chat 与 deeps"
+            "context": "式支持 仅非思考模式支持 价格 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (1) 2500 500 (1) 更多并发限制细节，请参考 限速与隔离 扣费"
           },
           {
             "value": "3元",
-            "context": "仅非思考模式支持 价格 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (2) 2500 500 (1) deepseek-chat 与 deepseek"
+            "context": "仅非思考模式支持 价格 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (1) 2500 500 (1) 更多并发限制细节，请参考 限速与隔离 扣费规则"
           },
           {
             "value": "2元",
-            "context": "万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (2) 2500 500 (1) deepseek-chat 与 deepseek-reasoner 两个模型"
+            "context": "万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (1) 2500 500 (1) 更多并发限制细节，请参考 限速与隔离 扣费规则 ​ 扣减费用 = token"
           },
           {
             "value": "6元",
-            "context": "kens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (2) 2500 500 (1) deepseek-chat 与 deepseek-reasoner 两个模型名\u0000\u0000"
+            "context": "kens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (1) 2500 500 (1) 更多并发限制细节，请参考 限速与隔离 扣费规则 ​ 扣减费用 = token 消耗"
           }
         ],
         "planSignals": [
@@ -559,15 +559,11 @@
           },
           {
             "value": "flash",
-            "context": "个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。 模型细节 ​ 模型 deepseek-v4-flash (1) deepseek-v4-pro BASE URL (OpenAI 格式) https://api.deepseek.c"
+            "context": "个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。 模型细节 ​ 模型 deepseek-v4-flash deepseek-v4-pro BASE URL (OpenAI 格式) https://api.deepseek.com B"
           },
           {
             "value": "pro",
-            "context": "输出的总 token 数进行计量计费。 模型细节 ​ 模型 deepseek-v4-flash (1) deepseek-v4-pro BASE URL (OpenAI 格式) https://api.deepseek.com BASE URL (Anthrop"
-          },
-          {
-            "value": "reasoner",
-            "context": "百万tokens输出 2元 6元 并发限制 (2) 2500 500 (1) deepseek-chat 与 deepseek-reasoner 两个模型名\u0000\u0000将于北京时间 2026/07/24 23:59 弃用。出于兼容考虑，二者分别对应 deepseek-v4-fla"
+            "context": "型输入和输出的总 token 数进行计量计费。 模型细节 ​ 模型 deepseek-v4-flash deepseek-v4-pro BASE URL (OpenAI 格式) https://api.deepseek.com BASE URL (Anthrop"
           }
         ]
       }
@@ -581,11 +577,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-07-26T13:59:44.835Z",
+      "fetchedAt": "2026-07-27T15:16:02.803Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "GitHub Copilot works alongside you directly in your editor, suggesting whole lines or entire functions for you.",
       "status": 200,
-      "byteLength": 1256458,
+      "byteLength": 1268126,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -716,7 +712,7 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-07-26T13:59:44.835Z",
+      "fetchedAt": "2026-07-27T15:16:02.804Z",
       "title": "Models and pricing for GitHub Copilot - GitHub Docs",
       "description": "See per-token pricing for the models available in GitHub Copilot and reference rates for additional usage across plans.",
       "status": 200,
@@ -895,11 +891,11 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-07-26T13:59:44.836Z",
+      "fetchedAt": "2026-07-27T15:16:02.805Z",
       "title": "About X Premium",
       "description": "",
       "status": 200,
-      "byteLength": 36335,
+      "byteLength": 36276,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -1008,7 +1004,7 @@
         "planSignals": [
           {
             "value": "Premium",
-            "context": "Title: About X Premium URL Source: http://help.x.com/en/using-x/x-premium Published Ti"
+            "context": "Title: About X Premium URL Source: http://help.x.com/en/using-x/x-premium Markdown Con"
           },
           {
             "value": "plus",
@@ -1038,11 +1034,11 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-07-26T13:59:44.838Z",
+      "fetchedAt": "2026-07-27T15:16:02.808Z",
       "title": "X Premium+ Price Adjustment",
       "description": "",
       "status": 200,
-      "byteLength": 14927,
+      "byteLength": 15272,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -1172,6 +1168,10 @@
           {
             "value": "free",
             "context": "usage limits and early access to new features. * Completely ad-free: Enjoy a seamless, interruption-free X experience with Premium+"
+          },
+          {
+            "value": "business",
+            "context": "you with a better, safer and faster service and to support our business. Some cookies are necessary to use our services, improve our se"
           }
         ]
       }
@@ -1185,11 +1185,11 @@
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
       "ok": true,
-      "fetchedAt": "2026-07-26T13:59:44.838Z",
+      "fetchedAt": "2026-07-27T15:16:02.809Z",
       "title": "Perplexity Pro Perks",
       "description": "",
       "status": 200,
-      "byteLength": 13001,
+      "byteLength": 12954,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -1226,7 +1226,7 @@
         "planSignals": [
           {
             "value": "Pro",
-            "context": "Title: Perplexity Pro Perks URL Source: http://www.perplexity.ai/properks/ Published"
+            "context": "Title: Perplexity Pro Perks URL Source: http://www.perplexity.ai/properks/ Markdown C"
           },
           {
             "value": "free",
@@ -1248,11 +1248,11 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": true,
-      "fetchedAt": "2026-07-26T13:59:44.839Z",
+      "fetchedAt": "2026-07-27T15:16:02.809Z",
       "title": "Enterprise Pricing and Billing: Frequently Asked Questions",
       "description": "",
       "status": 200,
-      "byteLength": 7193,
+      "byteLength": 7201,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -1290,11 +1290,11 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": true,
-      "fetchedAt": "2026-07-26T13:59:44.839Z",
+      "fetchedAt": "2026-07-27T15:16:02.810Z",
       "title": "Using the Connector for Slack",
       "description": "",
       "status": 200,
-      "byteLength": 6236,
+      "byteLength": 6228,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
