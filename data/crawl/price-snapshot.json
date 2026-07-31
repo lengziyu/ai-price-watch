@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-30T14:34:38.077Z",
+  "generatedAt": "2026-07-31T14:37:57.570Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,11 +12,11 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-07-30T14:34:26.525Z",
+      "fetchedAt": "2026-07-31T14:37:52.612Z",
       "title": "ChatGPT 套餐 | 免费版、Go、Plus、Pro、Business 和 Enterprise",
       "description": "",
       "status": 200,
-      "byteLength": 10499,
+      "byteLength": 10490,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -40,7 +40,7 @@
           },
           {
             "value": "Codex",
-            "context": "stant 使用权限 * 消息和上传的数量受限 * 图像生成受限，速度较慢 * 有限使用深度研究 * 记忆与上下文支持受限 * Codex 的有限使用 * 桌面端 ChatGPT Work（有限使用） ### Go 借助更高的使用权限，畅聊不停 免费套餐中的全部内容"
+            "context": "stant 使用权限 * 消息和上传的数量受限 * 图像生成受限，速度较慢 * 有限使用深度研究 * 记忆与上下文支持受限 * Codex 的有限使用 * 桌面端 ChatGPT Work（有限使用） ### Go 最适合长对话 免费套餐中的全部内容，以及： * 更"
           }
         ]
       }
@@ -54,11 +54,11 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-07-30T14:34:26.561Z",
+      "fetchedAt": "2026-07-31T14:37:52.649Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
-      "byteLength": 657308,
+      "byteLength": 658511,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -93,43 +93,39 @@
           },
           {
             "value": "125 credits",
-            "context": "kens Input Tokens Cached input tokens Output Tokens GPT-5.6 Sol 125 credits 12.5 credits 750 credits GPT-5.6 Terra 62.5 credits 6.25 credit"
+            "context": "kens Input Tokens Cached input tokens Output Tokens GPT-5.6 Sol 125 credits 12.5 credits 750 credits GPT-5.6 Terra 50 credits 5 credits 300"
           },
           {
             "value": "12.5 credits",
-            "context": "okens Cached input tokens Output Tokens GPT-5.6 Sol 125 credits 12.5 credits 750 credits GPT-5.6 Terra 62.5 credits 6.25 credits 375 credits"
+            "context": "okens Cached input tokens Output Tokens GPT-5.6 Sol 125 credits 12.5 credits 750 credits GPT-5.6 Terra 50 credits 5 credits 300 credits GPT-"
           },
           {
             "value": "750 credits",
-            "context": "input tokens Output Tokens GPT-5.6 Sol 125 credits 12.5 credits 750 credits GPT-5.6 Terra 62.5 credits 6.25 credits 375 credits GPT-5.6 Lun"
+            "context": "input tokens Output Tokens GPT-5.6 Sol 125 credits 12.5 credits 750 credits GPT-5.6 Terra 50 credits 5 credits 300 credits GPT-5.6 Luna 5 c"
           },
           {
-            "value": "62.5 credits",
-            "context": "GPT-5.6 Sol 125 credits 12.5 credits 750 credits GPT-5.6 Terra 62.5 credits 6.25 credits 375 credits GPT-5.6 Luna 25 credits 2.5 credits 15"
+            "value": "50 credits",
+            "context": "GPT-5.6 Sol 125 credits 12.5 credits 750 credits GPT-5.6 Terra 50 credits 5 credits 300 credits GPT-5.6 Luna 5 credits 0.5 credits 30 cre"
           },
           {
-            "value": "6.25 credits",
-            "context": "125 credits 12.5 credits 750 credits GPT-5.6 Terra 62.5 credits 6.25 credits 375 credits GPT-5.6 Luna 25 credits 2.5 credits 150 credits GPT"
+            "value": "5 credits",
+            "context": "l 125 credits 12.5 credits 750 credits GPT-5.6 Terra 50 credits 5 credits 300 credits GPT-5.6 Luna 5 credits 0.5 credits 30 credits GPT-5"
           },
           {
-            "value": "375 credits",
-            "context": "2.5 credits 750 credits GPT-5.6 Terra 62.5 credits 6.25 credits 375 credits GPT-5.6 Luna 25 credits 2.5 credits 150 credits GPT-5.5 125 cre"
+            "value": "300 credits",
+            "context": "its 12.5 credits 750 credits GPT-5.6 Terra 50 credits 5 credits 300 credits GPT-5.6 Luna 5 credits 0.5 credits 30 credits GPT-5.5 125 credi"
           },
           {
-            "value": "25 credits",
-            "context": "PT-5.6 Terra 62.5 credits 6.25 credits 375 credits GPT-5.6 Luna 25 credits 2.5 credits 150 credits GPT-5.5 125 credits 12.50 credits 750 c"
+            "value": "0.5 credits",
+            "context": "6 Terra 50 credits 5 credits 300 credits GPT-5.6 Luna 5 credits 0.5 credits 30 credits GPT-5.5 125 credits 12.50 credits 750 credits GPT-5."
           },
           {
-            "value": "2.5 credits",
-            "context": "a 62.5 credits 6.25 credits 375 credits GPT-5.6 Luna 25 credits 2.5 credits 150 credits GPT-5.5 125 credits 12.50 credits 750 credits GPT-5"
-          },
-          {
-            "value": "150 credits",
-            "context": "ts 6.25 credits 375 credits GPT-5.6 Luna 25 credits 2.5 credits 150 credits GPT-5.5 125 credits 12.50 credits 750 credits GPT-5.4 62.50 cre"
+            "value": "30 credits",
+            "context": "redits 5 credits 300 credits GPT-5.6 Luna 5 credits 0.5 credits 30 credits GPT-5.5 125 credits 12.50 credits 750 credits GPT-5.4 62.50 cre"
           },
           {
             "value": "12.50 credits",
-            "context": "5.6 Luna 25 credits 2.5 credits 150 credits GPT-5.5 125 credits 12.50 credits 750 credits GPT-5.4 62.50 credits 6.250 credits 375 credits GPT"
+            "context": "T-5.6 Luna 5 credits 0.5 credits 30 credits GPT-5.5 125 credits 12.50 credits 750 credits GPT-5.4 62.50 credits 6.250 credits 375 credits GPT"
           },
           {
             "value": "62.50 credits",
@@ -138,6 +134,10 @@
           {
             "value": "6.250 credits",
             "context": "5.5 125 credits 12.50 credits 750 credits GPT-5.4 62.50 credits 6.250 credits 375 credits GPT-5.4 mini 18.75 credits 1.875 credits 113 credit"
+          },
+          {
+            "value": "375 credits",
+            "context": "s 12.50 credits 750 credits GPT-5.4 62.50 credits 6.250 credits 375 credits GPT-5.4 mini 18.75 credits 1.875 credits 113 credits GPT-5.3-Co"
           },
           {
             "value": "18.75 credits",
@@ -154,10 +154,6 @@
           {
             "value": "200 credits",
             "context": "redits GPT-5.3-Codex-Spark research preview GPT-Image-2 (image) 200 credits 50 credits 750 credits GPT-Image-2 (text) 125 credits 31.25 cre"
-          },
-          {
-            "value": "50 credits",
-            "context": ".3-Codex-Spark research preview GPT-Image-2 (image) 200 credits 50 credits 750 credits GPT-Image-2 (text) 125 credits 31.25 credits 250 cr"
           },
           {
             "value": "31.25 credits",
@@ -217,7 +213,7 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-07-30T14:34:26.563Z",
+      "fetchedAt": "2026-07-31T14:37:52.651Z",
       "title": "Plans & Pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
@@ -392,7 +388,7 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-07-30T14:34:26.565Z",
+      "fetchedAt": "2026-07-31T14:37:52.652Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more",
       "description": "Get access to the best of Google AI including Gemini 3.1 Pro, video generation with Veo 3.1, Deep Research, and much more.",
       "status": 200,
@@ -471,11 +467,11 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-07-30T14:34:26.566Z",
+      "fetchedAt": "2026-07-31T14:37:52.653Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
-      "byteLength": 336981,
+      "byteLength": 337159,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -514,38 +510,38 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-07-30T14:34:26.567Z",
+      "fetchedAt": "2026-07-31T14:37:52.655Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
-      "byteLength": 19857,
+      "byteLength": 20556,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
         "priceSignals": [
           {
             "value": "0.02元",
-            "context": "（Beta） 支持 支持 FIM 补全（Beta） 仅非思考模式支持 仅非思考模式支持 价格 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (1) 2500 5"
+            "context": "a） 支持 支持 FIM 补全（Beta） 仅非思考模式支持 仅非思考模式支持 价格 (2) 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (3) 2500 5"
           },
           {
             "value": "0.025元",
-            "context": "支持 支持 FIM 补全（Beta） 仅非思考模式支持 仅非思考模式支持 价格 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (1) 2500 500 (1)"
+            "context": "支持 FIM 补全（Beta） 仅非思考模式支持 仅非思考模式支持 价格 (2) 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (3) 2500 500 (1)"
           },
           {
             "value": "1元",
-            "context": "式支持 仅非思考模式支持 价格 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (1) 2500 500 (1) 更多并发限制细节，请参考 限速与隔离 扣费"
+            "context": "仅非思考模式支持 价格 (2) 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (3) 2500 500 (1) Responses API 目前仅支持 d"
           },
           {
             "value": "3元",
-            "context": "仅非思考模式支持 价格 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (1) 2500 500 (1) 更多并发限制细节，请参考 限速与隔离 扣费规则"
+            "context": "考模式支持 价格 (2) 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (3) 2500 500 (1) Responses API 目前仅支持 deep"
           },
           {
             "value": "2元",
-            "context": "万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (1) 2500 500 (1) 更多并发限制细节，请参考 限速与隔离 扣费规则 ​ 扣减费用 = token"
+            "context": "万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (3) 2500 500 (1) Responses API 目前仅支持 deepseek-v4-flash"
           },
           {
             "value": "6元",
-            "context": "kens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (1) 2500 500 (1) 更多并发限制细节，请参考 限速与隔离 扣费规则 ​ 扣减费用 = token 消耗"
+            "context": "kens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (3) 2500 500 (1) Responses API 目前仅支持 deepseek-v4-flash 模型，"
           }
         ],
         "planSignals": [
@@ -577,11 +573,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-07-30T14:34:26.568Z",
+      "fetchedAt": "2026-07-31T14:37:52.655Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "GitHub Copilot works alongside you directly in your editor, suggesting whole lines or entire functions for you.",
       "status": 200,
-      "byteLength": 1274699,
+      "byteLength": 1274471,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -712,11 +708,11 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-07-30T14:34:26.569Z",
+      "fetchedAt": "2026-07-31T14:37:52.656Z",
       "title": "Models and pricing for GitHub Copilot - GitHub Docs",
       "description": "See per-token pricing for the models available in GitHub Copilot and reference rates for additional usage across plans.",
       "status": 200,
-      "byteLength": 650718,
+      "byteLength": 651493,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -799,39 +795,39 @@
           },
           {
             "value": "$10.00",
-            "context": "272K $5.00 $0.50 $30.00 GPT-5.5 GA Powerful Long context > 272K $10.00 $1.00 $45.00 GPT-5.6 Luna GA Lightweight Default ≤ 200K $1.00 $"
+            "context": "272K $5.00 $0.50 $30.00 GPT-5.5 GA Powerful Long context > 272K $10.00 $1.00 $45.00 GPT-5.6 Luna GA Lightweight Default ≤ 200K $0.20 $"
           },
           {
             "value": "$1.00",
-            "context": ".00 $0.50 $30.00 GPT-5.5 GA Powerful Long context > 272K $10.00 $1.00 $45.00 GPT-5.6 Luna GA Lightweight Default ≤ 200K $1.00 $0.10 $"
+            "context": ".00 $0.50 $30.00 GPT-5.5 GA Powerful Long context > 272K $10.00 $1.00 $45.00 GPT-5.6 Luna GA Lightweight Default ≤ 200K $0.20 $0.02 $"
           },
           {
             "value": "$45.00",
-            "context": ".50 $30.00 GPT-5.5 GA Powerful Long context > 272K $10.00 $1.00 $45.00 GPT-5.6 Luna GA Lightweight Default ≤ 200K $1.00 $0.10 $6.00 GP"
+            "context": ".50 $30.00 GPT-5.5 GA Powerful Long context > 272K $10.00 $1.00 $45.00 GPT-5.6 Luna GA Lightweight Default ≤ 200K $0.20 $0.02 $1.20 GP"
           },
           {
-            "value": "$0.10",
-            "context": "0 $1.00 $45.00 GPT-5.6 Luna GA Lightweight Default ≤ 200K $1.00 $0.10 $6.00 GPT-5.6 Luna GA Lightweight Long context > 200K $2.00 $0."
+            "value": "$1.20",
+            "context": "0 $45.00 GPT-5.6 Luna GA Lightweight Default ≤ 200K $0.20 $0.02 $1.20 GPT-5.6 Luna GA Lightweight Long context > 200K $0.40 $0.04 $1."
           },
           {
-            "value": "$6.00",
-            "context": "0 $45.00 GPT-5.6 Luna GA Lightweight Default ≤ 200K $1.00 $0.10 $6.00 GPT-5.6 Luna GA Lightweight Long context > 200K $2.00 $0.20 $9."
+            "value": "$0.40",
+            "context": ".20 $0.02 $1.20 GPT-5.6 Luna GA Lightweight Long context > 200K $0.40 $0.04 $1.80 GPT-5.6 Sol GA Powerful Default ≤ 272K $5.00 $0.50"
           },
           {
-            "value": "$9.00",
-            "context": ".00 GPT-5.6 Luna GA Lightweight Long context > 200K $2.00 $0.20 $9.00 GPT-5.6 Sol GA Powerful Default ≤ 272K $5.00 $0.50 $30.00 GPT-5"
+            "value": "$0.04",
+            "context": ".02 $1.20 GPT-5.6 Luna GA Lightweight Long context > 200K $0.40 $0.04 $1.80 GPT-5.6 Sol GA Powerful Default ≤ 272K $5.00 $0.50 $30.00"
           },
           {
-            "value": "$3.00",
-            "context": "Versatile $1.00 $0.10 $1.25 $5.00 Claude Sonnet 4 GA Versatile $3.00 $0.30 $3.75 $15.00 Claude Sonnet 4.5 GA Versatile $3.00 $0.30 $"
+            "value": "$1.80",
+            "context": ".20 GPT-5.6 Luna GA Lightweight Long context > 200K $0.40 $0.04 $1.80 GPT-5.6 Sol GA Powerful Default ≤ 272K $5.00 $0.50 $30.00 GPT-5"
           },
           {
-            "value": "$0.30",
-            "context": "tile $1.00 $0.10 $1.25 $5.00 Claude Sonnet 4 GA Versatile $3.00 $0.30 $3.75 $15.00 Claude Sonnet 4.5 GA Versatile $3.00 $0.30 $3.75 $"
+            "value": "$12.00",
+            "context": "00 $45.00 GPT-5.6 Terra GA Versatile Default ≤ 272K $2.00 $0.20 $12.00 GPT-5.6 Terra GA Versatile Long context > 272K $4.00 $0.40 $18."
           },
           {
-            "value": "$3.75",
-            "context": "1.00 $0.10 $1.25 $5.00 Claude Sonnet 4 GA Versatile $3.00 $0.30 $3.75 $15.00 Claude Sonnet 4.5 GA Versatile $3.00 $0.30 $3.75 $15.00"
+            "value": "$4.00",
+            "context": ".00 $0.20 $12.00 GPT-5.6 Terra GA Versatile Long context > 272K $4.00 $0.40 $18.00 Anthropic Anthropic models include a cache write c"
           }
         ],
         "planSignals": [
@@ -891,7 +887,7 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-07-30T14:34:26.570Z",
+      "fetchedAt": "2026-07-31T14:37:52.657Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -917,7 +913,7 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-07-30T14:34:26.572Z",
+      "fetchedAt": "2026-07-31T14:37:52.659Z",
       "title": "X Premium+ Price Adjustment",
       "description": "",
       "status": 200,
@@ -1064,19 +1060,15 @@
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
       "ok": true,
-      "fetchedAt": "2026-07-30T14:34:26.572Z",
+      "fetchedAt": "2026-07-31T14:37:52.660Z",
       "title": "Perplexity Pro Perks",
       "description": "",
       "status": 200,
-      "byteLength": 13001,
+      "byteLength": 56093,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
         "priceSignals": [
-          {
-            "value": "$20",
-            "context": "Perks for Pro Members ### Unlock thousands in savings for just $20/month * ![Image 1](https://framerusercontent.com/images/kM8esgT"
-          },
           {
             "value": "$275",
             "context": "sercontent.com/images/kM8esgT2igCBxfSTeFxCZFKe94.png) Get up to $275 off services on Thumbtack ![Image 2](https://framerusercontent."
@@ -1105,7 +1097,7 @@
         "planSignals": [
           {
             "value": "Pro",
-            "context": "Title: Perplexity Pro Perks URL Source: http://www.perplexity.ai/properks/ Published"
+            "context": "Title: Perplexity Pro Perks URL Source: http://www.perplexity.ai/properks/ Markdown C"
           },
           {
             "value": "free",
@@ -1127,11 +1119,11 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": true,
-      "fetchedAt": "2026-07-30T14:34:26.573Z",
+      "fetchedAt": "2026-07-31T14:37:52.661Z",
       "title": "Enterprise Pricing and Billing: Frequently Asked Questions",
       "description": "",
       "status": 200,
-      "byteLength": 7193,
+      "byteLength": 7201,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -1169,11 +1161,11 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": true,
-      "fetchedAt": "2026-07-30T14:34:26.574Z",
+      "fetchedAt": "2026-07-31T14:37:52.661Z",
       "title": "Using the Connector for Slack",
       "description": "",
       "status": 200,
-      "byteLength": 6236,
+      "byteLength": 6228,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
