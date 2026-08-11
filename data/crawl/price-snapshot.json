@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-10T13:46:46.911Z",
+  "generatedAt": "2026-08-11T13:45:02.655Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,7 +12,7 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-08-10T13:46:42.717Z",
+      "fetchedAt": "2026-08-11T13:44:44.611Z",
       "title": "ChatGPT 套餐 | 免费版、Go、Plus、Pro、Business 和 Enterprise",
       "description": "",
       "status": 200,
@@ -54,11 +54,11 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-08-10T13:46:42.760Z",
+      "fetchedAt": "2026-08-11T13:44:44.648Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
-      "byteLength": 660370,
+      "byteLength": 661439,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -93,27 +93,39 @@
           },
           {
             "value": "125 credits",
-            "context": "kens Input Tokens Cached input tokens Output Tokens GPT-5.6 Sol 125 credits 12.5 credits 750 credits GPT-5.6 Terra 50 credits 5 credits 300"
+            "context": "kens Input Tokens Cached input tokens Output Tokens GPT-5.6 Sol 125 credits 12.5 credits 750 credits Daybreak Blue 125 credits 12.5 credits"
           },
           {
             "value": "12.5 credits",
-            "context": "okens Cached input tokens Output Tokens GPT-5.6 Sol 125 credits 12.5 credits 750 credits GPT-5.6 Terra 50 credits 5 credits 300 credits GPT-"
+            "context": "okens Cached input tokens Output Tokens GPT-5.6 Sol 125 credits 12.5 credits 750 credits Daybreak Blue 125 credits 12.5 credits 750 credits"
           },
           {
             "value": "750 credits",
-            "context": "input tokens Output Tokens GPT-5.6 Sol 125 credits 12.5 credits 750 credits GPT-5.6 Terra 50 credits 5 credits 300 credits GPT-5.6 Luna 5 c"
+            "context": "input tokens Output Tokens GPT-5.6 Sol 125 credits 12.5 credits 750 credits Daybreak Blue 125 credits 12.5 credits 750 credits Daybreak Red"
+          },
+          {
+            "value": "312.5 credits",
+            "context": "Daybreak Blue 125 credits 12.5 credits 750 credits Daybreak Red 312.5 credits 31.25 credits 1875 credits GPT-5.6 Terra 50 credits 5 credits 3"
+          },
+          {
+            "value": "31.25 credits",
+            "context": "125 credits 12.5 credits 750 credits Daybreak Red 312.5 credits 31.25 credits 1875 credits GPT-5.6 Terra 50 credits 5 credits 300 credits GPT"
+          },
+          {
+            "value": "1875 credits",
+            "context": ".5 credits 750 credits Daybreak Red 312.5 credits 31.25 credits 1875 credits GPT-5.6 Terra 50 credits 5 credits 300 credits GPT-5.6 Luna 5 c"
           },
           {
             "value": "50 credits",
-            "context": "GPT-5.6 Sol 125 credits 12.5 credits 750 credits GPT-5.6 Terra 50 credits 5 credits 300 credits GPT-5.6 Luna 5 credits 0.5 credits 30 cre"
+            "context": "reak Red 312.5 credits 31.25 credits 1875 credits GPT-5.6 Terra 50 credits 5 credits 300 credits GPT-5.6 Luna 5 credits 0.5 credits 30 cre"
           },
           {
             "value": "5 credits",
-            "context": "l 125 credits 12.5 credits 750 credits GPT-5.6 Terra 50 credits 5 credits 300 credits GPT-5.6 Luna 5 credits 0.5 credits 30 credits GPT-5"
+            "context": "2.5 credits 31.25 credits 1875 credits GPT-5.6 Terra 50 credits 5 credits 300 credits GPT-5.6 Luna 5 credits 0.5 credits 30 credits GPT-5"
           },
           {
             "value": "300 credits",
-            "context": "its 12.5 credits 750 credits GPT-5.6 Terra 50 credits 5 credits 300 credits GPT-5.6 Luna 5 credits 0.5 credits 30 credits GPT-5.5 125 credi"
+            "context": "s 31.25 credits 1875 credits GPT-5.6 Terra 50 credits 5 credits 300 credits GPT-5.6 Luna 5 credits 0.5 credits 30 credits GPT-5.5 125 credi"
           },
           {
             "value": "0.5 credits",
@@ -154,10 +166,6 @@
           {
             "value": "200 credits",
             "context": "redits GPT-5.3-Codex-Spark research preview GPT-Image-2 (image) 200 credits 50 credits 750 credits GPT-Image-2 (text) 125 credits 31.25 cre"
-          },
-          {
-            "value": "31.25 credits",
-            "context": "0 credits 50 credits 750 credits GPT-Image-2 (text) 125 credits 31.25 credits 250 credits GPT-5.6 usage averages 5-40 credits per message. Fa"
           },
           {
             "value": "250 credits",
@@ -213,11 +221,11 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-08-10T13:46:42.762Z",
+      "fetchedAt": "2026-08-11T13:44:44.650Z",
       "title": "Plans & Pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
-      "byteLength": 1530710,
+      "byteLength": 1530223,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -284,31 +292,15 @@
           },
           {
             "value": "$ 2",
-            "context": "ok Sonnet 5 High-performance model for coding and agents Input* $ 2 / MTok Output* $ 10 / MTok Prompt caching Write* $ 2.50 / MTok"
+            "context": "Tok Sonnet 5 High-performance model for coding and agents Input $ 2 / MTok Output $ 10 / MTok Prompt caching Write $ 2.50 / MTok Re"
           },
           {
             "value": "$ 2.50",
-            "context": "nts Input* $ 2 / MTok Output* $ 10 / MTok Prompt caching Write* $ 2.50 / MTok Read* $ 0.20 / MTok *Introductory pricing of $2/$10 per"
+            "context": "agents Input $ 2 / MTok Output $ 10 / MTok Prompt caching Write $ 2.50 / MTok Read $ 0.20 / MTok Haiku 4.5 Fastest, most cost-efficien"
           },
           {
             "value": "$ 0.20",
-            "context": "k Output* $ 10 / MTok Prompt caching Write* $ 2.50 / MTok Read* $ 0.20 / MTok *Introductory pricing of $2/$10 per million input/output"
-          },
-          {
-            "value": "$2",
-            "context": "ite* $ 2.50 / MTok Read* $ 0.20 / MTok *Introductory pricing of $2/$10 per million input/output tokens through August 31, 2026; $3"
-          },
-          {
-            "value": "$10",
-            "context": "* $ 2.50 / MTok Read* $ 0.20 / MTok *Introductory pricing of $2/$10 per million input/output tokens through August 31, 2026; $3/$15"
-          },
-          {
-            "value": "$3",
-            "context": "$2/$10 per million input/output tokens through August 31, 2026; $3/$15 standard pricing thereafter. Haiku 4.5 Fastest, most cost-e"
-          },
-          {
-            "value": "$15",
-            "context": "$10 per million input/output tokens through August 31, 2026; $3/$15 standard pricing thereafter. Haiku 4.5 Fastest, most cost-effic"
+            "context": "MTok Output $ 10 / MTok Prompt caching Write $ 2.50 / MTok Read $ 0.20 / MTok Haiku 4.5 Fastest, most cost-efficient model Input $ 1 /"
           },
           {
             "value": "$ 1.25",
@@ -323,6 +315,10 @@
             "context": "th a suite of composable APIs. Standard token rates apply. Cost $0.08 per session-hour for active runtime Web search Give Claude acce"
           },
           {
+            "value": "$10",
+            "context": "lude input and output tokens required to process requests. Cost $10 / 1K searches ‍ Code execution Run Python code in a sandboxed e"
+          },
+          {
             "value": "$0.05",
             "context": "50 free hours of usage daily per organization. Additional hours $0.05 per hour per container ‍ Service tiers Balance availability, pe"
           },
@@ -333,6 +329,18 @@
           {
             "value": "$ 15",
             "context": "Learn more Batch processing Sonnet 4.6 Input $ 3 / MTok Output $ 15 / MTok Prompt caching Write $ 3.75 / MTok Read $ 0.30 / MTok Op"
+          },
+          {
+            "value": "$ 3.75",
+            "context": "et 4.6 Input $ 3 / MTok Output $ 15 / MTok Prompt caching Write $ 3.75 / MTok Read $ 0.30 / MTok Opus 4.7 Input $ 5 / MTok Output $ 25"
+          },
+          {
+            "value": "$ 0.30",
+            "context": "MTok Output $ 15 / MTok Prompt caching Write $ 3.75 / MTok Read $ 0.30 / MTok Opus 4.7 Input $ 5 / MTok Output $ 25 / MTok Prompt cach"
+          },
+          {
+            "value": "$ 75",
+            "context": ".25 / MTok Read $ 0.50 / MTok Opus 4.1 Input $ 15 / MTok Output $ 75 / MTok Prompt caching Write $ 18.75 / MTok Read $ 1.50 / MTok P"
           }
         ],
         "planSignals": [
@@ -388,7 +396,7 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-08-10T13:46:42.764Z",
+      "fetchedAt": "2026-08-11T13:44:44.651Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more",
       "description": "Get access to the best of Google AI including Gemini 3.1 Pro, video generation with Veo 3.1, Deep Research, and much more.",
       "status": 200,
@@ -467,7 +475,7 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-08-10T13:46:42.765Z",
+      "fetchedAt": "2026-08-11T13:44:44.652Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
@@ -509,60 +517,9 @@
       "surface": "membership-rates",
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
-      "ok": true,
-      "fetchedAt": "2026-08-10T13:46:42.766Z",
-      "title": "模型 & 价格 | DeepSeek API Docs",
-      "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
-      "status": 200,
-      "byteLength": 20511,
-      "fetchMode": "direct_html",
-      "extraction": {
-        "confidence": "review",
-        "priceSignals": [
-          {
-            "value": "0.02元",
-            "context": "a） 支持 支持 FIM 补全（Beta） 仅非思考模式支持 仅非思考模式支持 价格 (2) 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (3) 2500 5"
-          },
-          {
-            "value": "0.025元",
-            "context": "支持 FIM 补全（Beta） 仅非思考模式支持 仅非思考模式支持 价格 (2) 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (3) 2500 500 (1)"
-          },
-          {
-            "value": "1元",
-            "context": "仅非思考模式支持 价格 (2) 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (3) 2500 500 (1) Responses API 目前仅支持 d"
-          },
-          {
-            "value": "3元",
-            "context": "考模式支持 价格 (2) 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (3) 2500 500 (1) Responses API 目前仅支持 deep"
-          },
-          {
-            "value": "2元",
-            "context": "万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (3) 2500 500 (1) Responses API 目前仅支持 deepseek-v4-flash"
-          },
-          {
-            "value": "6元",
-            "context": "kens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (3) 2500 500 (1) Responses API 目前仅支持 deepseek-v4-flash 模型，"
-          }
-        ],
-        "planSignals": [
-          {
-            "value": "DeepSeek",
-            "context": "模型 & 价格 | DeepSeek API Docs 跳到主要内容 DeepSeek API 文档 中文（中国） English 中文（中国） DeepSeek"
-          },
-          {
-            "value": "Agent",
-            "context": "DeepSeek Platform 快速开始 首次调用 API 模型 & 价格 Token 用量计算 限速与隔离 错误码 接入 Agent 工具 API 指南 思考模式 多轮对话 对话前缀续写（Beta） FIM 补全（Beta） JSON Output Tool"
-          },
-          {
-            "value": "flash",
-            "context": "个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。 模型细节 ​ 模型 deepseek-v4-flash deepseek-v4-pro BASE URL (OpenAI 格式) https://api.deepseek.com B"
-          },
-          {
-            "value": "pro",
-            "context": "型输入和输出的总 token 数进行计量计费。 模型细节 ​ 模型 deepseek-v4-flash deepseek-v4-pro BASE URL (OpenAI 格式) https://api.deepseek.com BASE URL (Anthrop"
-          }
-        ]
-      }
+      "ok": false,
+      "fetchedAt": "2026-08-11T13:44:44.654Z",
+      "error": "This operation was aborted"
     },
     {
       "id": "github-copilot-plans",
@@ -573,11 +530,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-08-10T13:46:42.767Z",
+      "fetchedAt": "2026-08-11T13:44:44.654Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "GitHub Copilot works alongside you directly in your editor, suggesting whole lines or entire functions for you.",
       "status": 200,
-      "byteLength": 1245476,
+      "byteLength": 1245739,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -708,7 +665,7 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-08-10T13:46:42.768Z",
+      "fetchedAt": "2026-08-11T13:44:44.655Z",
       "title": "Models and pricing for GitHub Copilot - GitHub Docs",
       "description": "See per-token pricing for the models available in GitHub Copilot and reference rates for additional usage across plans.",
       "status": 200,
@@ -887,11 +844,11 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-08-10T13:46:42.769Z",
+      "fetchedAt": "2026-08-11T13:44:44.656Z",
       "title": "About X Premium",
       "description": "",
       "status": 200,
-      "byteLength": 36302,
+      "byteLength": 36313,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -1030,23 +987,140 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-08-10T13:46:42.771Z",
-      "title": "Just a moment...",
+      "fetchedAt": "2026-08-11T13:44:44.658Z",
+      "title": "X Premium+ Price Adjustment",
       "description": "",
       "status": 200,
-      "byteLength": 282,
+      "byteLength": 14927,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
-        "priceSignals": [],
+        "priceSignals": [
+          {
+            "value": "$3.00",
+            "context": "| | --- | --- | --- | --- | --- | --- | --- | | United States | $3.00 | $32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom"
+          },
+          {
+            "value": "$32.00",
+            "context": "| --- | --- | --- | --- | --- | --- | | United States | $3.00 | $32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00"
+          },
+          {
+            "value": "$8.00",
+            "context": "-- | --- | --- | --- | --- | | United States | $3.00 | $32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00"
+          },
+          {
+            "value": "$84.00",
+            "context": "| --- | --- | --- | | United States | $3.00 | $32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00"
+          },
+          {
+            "value": "$40.00",
+            "context": "--- | --- | | United States | $3.00 | $32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00"
+          },
+          {
+            "value": "$395.00",
+            "context": "| | United States | $3.00 | $32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 |"
+          },
+          {
+            "value": "£3.00",
+            "context": "$32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75"
+          },
+          {
+            "value": "£32.00",
+            "context": "$8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00"
+          },
+          {
+            "value": "£8.00",
+            "context": "$84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.0"
+          },
+          {
+            "value": "£84.00",
+            "context": "$40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105."
+          },
+          {
+            "value": "£31.00",
+            "context": "$395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56."
+          },
+          {
+            "value": "£313.00",
+            "context": "| | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56.00 | $560."
+          },
+          {
+            "value": "$3.75",
+            "context": "£3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia |"
+          },
+          {
+            "value": "$10.00",
+            "context": "£8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $"
+          },
+          {
+            "value": "$105.00",
+            "context": "84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $1"
+          },
+          {
+            "value": "$56.00",
+            "context": "1.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $"
+          },
+          {
+            "value": "$560.00",
+            "context": "13.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $6"
+          },
+          {
+            "value": "$4.88",
+            "context": "| $40.00 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $621.00 | | New Zealand"
+          },
+          {
+            "value": "$51.43",
+            "context": "0 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $621.00 | | New Zealand | $4.88 |"
+          },
+          {
+            "value": "$13.00",
+            "context": "0 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $621.00 | | New Zealand | $4.88 | $51.43 |"
+          },
+          {
+            "value": "$135.00",
+            "context": "00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $621.00 | | New Zealand | $4.88 | $51.43 | $13.00 |"
+          },
+          {
+            "value": "$62.00",
+            "context": "0 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $621.00 | | New Zealand | $4.88 | $51.43 | $13.00 | $135.00 |"
+          },
+          {
+            "value": "$621.00",
+            "context": "00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $621.00 | | New Zealand | $4.88 | $51.43 | $13.00 | $135.00 | $70.00 |"
+          },
+          {
+            "value": "$70.00",
+            "context": "| $621.00 | | New Zealand | $4.88 | $51.43 | $13.00 | $135.00 | $70.00 | $691.00 | | Japan | ¥368 | ¥3,916 | ¥980 | ¥10,280 | ¥6,080.0"
+          },
+          {
+            "value": "$691.00",
+            "context": "| | New Zealand | $4.88 | $51.43 | $13.00 | $135.00 | $70.00 | $691.00 | | Japan | ¥368 | ¥3,916 | ¥980 | ¥10,280 | ¥6,080.00 | ¥60,04"
+          },
+          {
+            "value": "¥368",
+            "context": "4.88 | $51.43 | $13.00 | $135.00 | $70.00 | $691.00 | | Japan | ¥368 | ¥3,916 | ¥980 | ¥10,280 | ¥6,080.00 | ¥60,040.00 | | Brazil |"
+          },
+          {
+            "value": "¥3,916",
+            "context": "$51.43 | $13.00 | $135.00 | $70.00 | $691.00 | | Japan | ¥368 | ¥3,916 | ¥980 | ¥10,280 | ¥6,080.00 | ¥60,040.00 | | Brazil | R$15.75"
+          },
+          {
+            "value": "¥980",
+            "context": "$13.00 | $135.00 | $70.00 | $691.00 | | Japan | ¥368 | ¥3,916 | ¥980 | ¥10,280 | ¥6,080.00 | ¥60,040.00 | | Brazil | R$15.75 | R$167"
+          }
+        ],
         "planSignals": [
           {
-            "value": "premium",
-            "context": "Title: Just a moment... URL Source: http://help.x.com/en/premium-plus-price-update Warning: Target URL returned error 403: Forbi"
+            "value": "Premium",
+            "context": "Title: X Premium+ Price Adjustment URL Source: http://help.x.com/en/premium-plus"
           },
           {
             "value": "plus",
-            "context": "itle: Just a moment... URL Source: http://help.x.com/en/premium-plus-price-update Warning: Target URL returned error 403: Forbidden"
+            "context": "mium+ Price Adjustment URL Source: http://help.x.com/en/premium-plus-price-update Markdown Content: We’re updating the X Premium+ su"
+          },
+          {
+            "value": "free",
+            "context": "usage limits and early access to new features. * Completely ad-free: Enjoy a seamless, interruption-free X experience with Premium+"
           }
         ]
       }
@@ -1060,7 +1134,7 @@
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
       "ok": true,
-      "fetchedAt": "2026-08-10T13:46:42.772Z",
+      "fetchedAt": "2026-08-11T13:44:44.659Z",
       "title": "Perplexity Pro Perks",
       "description": "",
       "status": 200,
@@ -1123,7 +1197,7 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": true,
-      "fetchedAt": "2026-08-10T13:46:42.773Z",
+      "fetchedAt": "2026-08-11T13:44:44.660Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -1149,7 +1223,7 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": true,
-      "fetchedAt": "2026-08-10T13:46:42.774Z",
+      "fetchedAt": "2026-08-11T13:44:44.660Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
