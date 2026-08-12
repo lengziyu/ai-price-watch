@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-11T13:45:02.655Z",
+  "generatedAt": "2026-08-12T13:50:29.285Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,7 +12,7 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-08-11T13:44:44.611Z",
+      "fetchedAt": "2026-08-12T13:50:24.603Z",
       "title": "ChatGPT 套餐 | 免费版、Go、Plus、Pro、Business 和 Enterprise",
       "description": "",
       "status": 200,
@@ -54,7 +54,7 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-08-11T13:44:44.648Z",
+      "fetchedAt": "2026-08-12T13:50:24.645Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
@@ -221,11 +221,11 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-08-11T13:44:44.650Z",
+      "fetchedAt": "2026-08-12T13:50:24.647Z",
       "title": "Plans & Pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
-      "byteLength": 1530223,
+      "byteLength": 1530237,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -396,7 +396,7 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-08-11T13:44:44.651Z",
+      "fetchedAt": "2026-08-12T13:50:24.649Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more",
       "description": "Get access to the best of Google AI including Gemini 3.1 Pro, video generation with Veo 3.1, Deep Research, and much more.",
       "status": 200,
@@ -475,11 +475,11 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-08-11T13:44:44.652Z",
+      "fetchedAt": "2026-08-12T13:50:24.650Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
-      "byteLength": 337584,
+      "byteLength": 341592,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -517,9 +517,60 @@
       "surface": "membership-rates",
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
-      "ok": false,
-      "fetchedAt": "2026-08-11T13:44:44.654Z",
-      "error": "This operation was aborted"
+      "ok": true,
+      "fetchedAt": "2026-08-12T13:50:24.651Z",
+      "title": "模型 & 价格 | DeepSeek API Docs",
+      "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
+      "status": 200,
+      "byteLength": 20511,
+      "fetchMode": "direct_html",
+      "extraction": {
+        "confidence": "review",
+        "priceSignals": [
+          {
+            "value": "0.02元",
+            "context": "a） 支持 支持 FIM 补全（Beta） 仅非思考模式支持 仅非思考模式支持 价格 (2) 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (3) 2500 5"
+          },
+          {
+            "value": "0.025元",
+            "context": "支持 FIM 补全（Beta） 仅非思考模式支持 仅非思考模式支持 价格 (2) 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (3) 2500 500 (1)"
+          },
+          {
+            "value": "1元",
+            "context": "仅非思考模式支持 价格 (2) 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (3) 2500 500 (1) Responses API 目前仅支持 d"
+          },
+          {
+            "value": "3元",
+            "context": "考模式支持 价格 (2) 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (3) 2500 500 (1) Responses API 目前仅支持 deep"
+          },
+          {
+            "value": "2元",
+            "context": "万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (3) 2500 500 (1) Responses API 目前仅支持 deepseek-v4-flash"
+          },
+          {
+            "value": "6元",
+            "context": "kens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (3) 2500 500 (1) Responses API 目前仅支持 deepseek-v4-flash 模型，"
+          }
+        ],
+        "planSignals": [
+          {
+            "value": "DeepSeek",
+            "context": "模型 & 价格 | DeepSeek API Docs 跳到主要内容 DeepSeek API 文档 中文（中国） English 中文（中国） DeepSeek"
+          },
+          {
+            "value": "Agent",
+            "context": "DeepSeek Platform 快速开始 首次调用 API 模型 & 价格 Token 用量计算 限速与隔离 错误码 接入 Agent 工具 API 指南 思考模式 多轮对话 对话前缀续写（Beta） FIM 补全（Beta） JSON Output Tool"
+          },
+          {
+            "value": "flash",
+            "context": "个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。 模型细节 ​ 模型 deepseek-v4-flash deepseek-v4-pro BASE URL (OpenAI 格式) https://api.deepseek.com B"
+          },
+          {
+            "value": "pro",
+            "context": "型输入和输出的总 token 数进行计量计费。 模型细节 ​ 模型 deepseek-v4-flash deepseek-v4-pro BASE URL (OpenAI 格式) https://api.deepseek.com BASE URL (Anthrop"
+          }
+        ]
+      }
     },
     {
       "id": "github-copilot-plans",
@@ -530,11 +581,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-08-11T13:44:44.654Z",
+      "fetchedAt": "2026-08-12T13:50:24.652Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "GitHub Copilot works alongside you directly in your editor, suggesting whole lines or entire functions for you.",
       "status": 200,
-      "byteLength": 1245739,
+      "byteLength": 1251367,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -643,7 +694,7 @@
           },
           {
             "value": "Flash",
-            "context": "GPT-5.6 Luna Google Gemini 3.1 Pro (Preview) Google Gemini 3.5 Flash Google Gemini 3.6 Flash xAI Grok 4.5 Raptor mini (Preview) Kimi"
+            "context": "OpenAI GPT-5.6 Terra OpenAI GPT-5.6 Luna Microsoft MAI-Code-1.1-Flash Google Gemini 3.1 Pro (Preview) Google Gemini 3.5 Flash Google"
           },
           {
             "value": "team",
@@ -665,11 +716,11 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-08-11T13:44:44.655Z",
+      "fetchedAt": "2026-08-12T13:50:24.653Z",
       "title": "Models and pricing for GitHub Copilot - GitHub Docs",
       "description": "See per-token pricing for the models available in GitHub Copilot and reference rates for additional usage across plans.",
       "status": 200,
-      "byteLength": 662067,
+      "byteLength": 663564,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -844,7 +895,7 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-08-11T13:44:44.656Z",
+      "fetchedAt": "2026-08-12T13:50:24.654Z",
       "title": "About X Premium",
       "description": "",
       "status": 200,
@@ -987,11 +1038,11 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-08-11T13:44:44.658Z",
+      "fetchedAt": "2026-08-12T13:50:24.656Z",
       "title": "X Premium+ Price Adjustment",
       "description": "",
       "status": 200,
-      "byteLength": 14927,
+      "byteLength": 15272,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -1121,6 +1172,10 @@
           {
             "value": "free",
             "context": "usage limits and early access to new features. * Completely ad-free: Enjoy a seamless, interruption-free X experience with Premium+"
+          },
+          {
+            "value": "business",
+            "context": "you with a better, safer and faster service and to support our business. Some cookies are necessary to use our services, improve our se"
           }
         ]
       }
@@ -1134,11 +1189,11 @@
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
       "ok": true,
-      "fetchedAt": "2026-08-11T13:44:44.659Z",
+      "fetchedAt": "2026-08-12T13:50:24.657Z",
       "title": "Perplexity Pro Perks",
       "description": "",
       "status": 200,
-      "byteLength": 13001,
+      "byteLength": 12954,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -1175,7 +1230,7 @@
         "planSignals": [
           {
             "value": "Pro",
-            "context": "Title: Perplexity Pro Perks URL Source: http://www.perplexity.ai/properks/ Published"
+            "context": "Title: Perplexity Pro Perks URL Source: http://www.perplexity.ai/properks/ Markdown C"
           },
           {
             "value": "free",
@@ -1197,19 +1252,35 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": true,
-      "fetchedAt": "2026-08-11T13:44:44.660Z",
-      "title": "Just a moment...",
+      "fetchedAt": "2026-08-12T13:50:24.658Z",
+      "title": "Enterprise Pricing and Billing: Frequently Asked Questions",
       "description": "",
       "status": 200,
-      "byteLength": 351,
+      "byteLength": 7193,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
         "priceSignals": [],
         "planSignals": [
           {
-            "value": "enterprise",
-            "context": "urce: http://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions Warning: Target"
+            "value": "Enterprise",
+            "context": "Title: Enterprise Pricing and Billing: Frequently Asked Questions URL Source: htt"
+          },
+          {
+            "value": "team",
+            "context": "cing is per seat (user), and you’re only billed for your active team members, so it’s straightforward to scale as your team grows or"
+          },
+          {
+            "value": "Pro",
+            "context": "Are there higher usage limits for Enterprise plans? Enterprise Pro offers extended usage limits compared to Perplexity Pro. Enterp"
+          },
+          {
+            "value": "Max",
+            "context": "rs extended usage limits compared to Perplexity Pro. Enterprise Max goes further, providing the highest access levels for Research"
+          },
+          {
+            "value": "Education",
+            "context": "the current billing period from the day the change was made. ## Education & Non-profit ### **Do you offer educational or non-profit disco"
           }
         ]
       }
@@ -1223,7 +1294,7 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": true,
-      "fetchedAt": "2026-08-11T13:44:44.660Z",
+      "fetchedAt": "2026-08-12T13:50:24.658Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
