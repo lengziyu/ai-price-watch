@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-13T13:50:18.787Z",
+  "generatedAt": "2026-08-14T13:45:52.997Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,7 +12,7 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-08-13T13:50:14.738Z",
+      "fetchedAt": "2026-08-14T13:45:48.636Z",
       "title": "ChatGPT 套餐 | 免费版、Go、Plus、Pro、Business 和 Enterprise",
       "description": "",
       "status": 200,
@@ -54,11 +54,11 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-08-13T13:50:14.775Z",
+      "fetchedAt": "2026-08-14T13:45:48.665Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
-      "byteLength": 662075,
+      "byteLength": 663744,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -221,11 +221,11 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-08-13T13:50:14.777Z",
+      "fetchedAt": "2026-08-14T13:45:48.666Z",
       "title": "Plans & Pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
-      "byteLength": 1530229,
+      "byteLength": 1530228,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -396,7 +396,7 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-08-13T13:50:14.778Z",
+      "fetchedAt": "2026-08-14T13:45:48.667Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more",
       "description": "Get access to the best of Google AI including Gemini 3.1 Pro, video generation with Veo 3.1, Deep Research, and much more.",
       "status": 200,
@@ -475,7 +475,7 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-08-13T13:50:14.779Z",
+      "fetchedAt": "2026-08-14T13:45:48.668Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
@@ -518,22 +518,22 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-08-13T13:50:14.780Z",
+      "fetchedAt": "2026-08-14T13:45:48.669Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
-      "byteLength": 20926,
+      "byteLength": 20988,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
         "priceSignals": [
           {
             "value": "0.02元",
-            "context": "a） 支持 支持 FIM 补全（Beta） 仅非思考模式支持 仅非思考模式支持 价格 (1) 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (2) 2500 5"
+            "context": "支持 支持 FIM 补全（Beta） 仅非思考\u0000\u0000模式支持 仅非思考模式支持 价格 (1) 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (2) 2500 5"
           },
           {
             "value": "0.025元",
-            "context": "支持 FIM 补全（Beta） 仅非思考模式支持 仅非思考模式支持 价格 (1) 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (2) 2500 500 (1)"
+            "context": "FIM 补全（Beta） 仅非思考\u0000\u0000模式支持 仅非思考模式支持 价格 (1) 百万tokens输入（缓存命中） 0.02元 0.025元 百万tokens输入（缓存未命中） 1元 3元 百万tokens输出 2元 6元 并发限制 (2) 2500 500 (1)"
           },
           {
             "value": "1元",
@@ -621,11 +621,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-08-13T13:50:14.781Z",
+      "fetchedAt": "2026-08-14T13:45:48.670Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "GitHub Copilot works alongside you directly in your editor, suggesting whole lines or entire functions for you.",
       "status": 200,
-      "byteLength": 1246467,
+      "byteLength": 1254273,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -706,7 +706,7 @@
           },
           {
             "value": "Premium",
-            "context": "rity features Copilot for Business Enterprise-grade AI features Premium Support Enterprise-grade 24/7 support Pricing Type / to search"
+            "context": "rity features Copilot for Business Enterprise-grade AI features Premium Support Enterprise-grade 24/7 support Pricing Search / Sign in"
           },
           {
             "value": "Free",
@@ -756,11 +756,11 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-08-13T13:50:14.782Z",
+      "fetchedAt": "2026-08-14T13:45:48.670Z",
       "title": "Models and pricing for GitHub Copilot - GitHub Docs",
       "description": "See per-token pricing for the models available in GitHub Copilot and reference rates for additional usage across plans.",
       "status": 200,
-      "byteLength": 664364,
+      "byteLength": 668182,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -935,11 +935,11 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-08-13T13:50:14.783Z",
+      "fetchedAt": "2026-08-14T13:45:48.671Z",
       "title": "About X Premium",
       "description": "",
       "status": 200,
-      "byteLength": 36313,
+      "byteLength": 36302,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -1078,11 +1078,11 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-08-13T13:50:14.785Z",
+      "fetchedAt": "2026-08-14T13:45:48.673Z",
       "title": "X Premium+ Price Adjustment",
       "description": "",
       "status": 200,
-      "byteLength": 14927,
+      "byteLength": 15272,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -1212,6 +1212,10 @@
           {
             "value": "free",
             "context": "usage limits and early access to new features. * Completely ad-free: Enjoy a seamless, interruption-free X experience with Premium+"
+          },
+          {
+            "value": "business",
+            "context": "you with a better, safer and faster service and to support our business. Some cookies are necessary to use our services, improve our se"
           }
         ]
       }
@@ -1224,9 +1228,60 @@
       "surface": "membership-rates",
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
-      "ok": false,
-      "fetchedAt": "2026-08-13T13:50:14.786Z",
-      "error": "HTTP 403 Forbidden"
+      "ok": true,
+      "fetchedAt": "2026-08-14T13:45:48.673Z",
+      "title": "Perplexity Pro Perks",
+      "description": "",
+      "status": 200,
+      "byteLength": 12954,
+      "fetchMode": "jina_markdown",
+      "extraction": {
+        "confidence": "review",
+        "priceSignals": [
+          {
+            "value": "$20",
+            "context": "Perks for Pro Members ### Unlock thousands in savings for just $20/month * ![Image 1](https://framerusercontent.com/images/kM8esgT"
+          },
+          {
+            "value": "$275",
+            "context": "sercontent.com/images/kM8esgT2igCBxfSTeFxCZFKe94.png) Get up to $275 off services on Thumbtack ![Image 2](https://framerusercontent."
+          },
+          {
+            "value": "$1,000",
+            "context": "ages/CCz9la4h090iwgoNwu7paiIUs.png?width=2880&height=536) Get a $1,000 credit at closing when you buy or refinance a home with Chase *"
+          },
+          {
+            "value": "$700",
+            "context": "ercontent.com/images/oxcz8LjhVf2BzckMeSJfc4LjF0w.png) Get up to $700 off on Ezra cancer screening ![Image 29](https://framerusercont"
+          },
+          {
+            "value": "$25",
+            "context": "://framerusercontent.com/images/Wp5L0lvvluUITLU2jOpCUky7II.png) $25 off on Perplexity merch * ![Image 31](https://framerusercontent"
+          },
+          {
+            "value": "$400",
+            "context": "UAkEwre4KPeqvtvOL1eozH5qg.png?width=1920&height=1080) Get up to $400 off on Eight Sleep Pod * ![Image 33](https://framerusercontent."
+          },
+          {
+            "value": "$50",
+            "context": "E.png?scale-down-to=512&width=680&height=1020) Get an exclusive $50 off Galaxy Watch8 Series or Watch Ultra * ![Image 35](https://f"
+          }
+        ],
+        "planSignals": [
+          {
+            "value": "Pro",
+            "context": "Title: Perplexity Pro Perks URL Source: http://www.perplexity.ai/properks/ Markdown C"
+          },
+          {
+            "value": "free",
+            "context": "0&height=800) Get up to 30% off base rates on car rentals and a free car class upgrade ![Image 4](https://framerusercontent.com/imag"
+          },
+          {
+            "value": "Ultra",
+            "context": "ht=1020) Get an exclusive $50 off Galaxy Watch8 Series or Watch Ultra * ![Image 35](https://framerusercontent.com/images/xEbkPMvWN4MQ"
+          }
+        ]
+      }
     },
     {
       "id": "perplexity-enterprise-pricing",
@@ -1236,9 +1291,39 @@
       "surface": "membership-rates",
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
-      "ok": false,
-      "fetchedAt": "2026-08-13T13:50:14.786Z",
-      "error": "HTTP 403 Forbidden"
+      "ok": true,
+      "fetchedAt": "2026-08-14T13:45:48.674Z",
+      "title": "Enterprise Pricing and Billing: Frequently Asked Questions",
+      "description": "",
+      "status": 200,
+      "byteLength": 7201,
+      "fetchMode": "jina_markdown",
+      "extraction": {
+        "confidence": "review",
+        "priceSignals": [],
+        "planSignals": [
+          {
+            "value": "Enterprise",
+            "context": "Title: Enterprise Pricing and Billing: Frequently Asked Questions URL Source: htt"
+          },
+          {
+            "value": "team",
+            "context": "cing is per seat (user), and you’re only billed for your active team members, so it’s straightforward to scale as your team grows or"
+          },
+          {
+            "value": "Pro",
+            "context": "Are there higher usage limits for Enterprise plans? Enterprise Pro offers extended usage limits compared to Perplexity Pro. Enterp"
+          },
+          {
+            "value": "Max",
+            "context": "rs extended usage limits compared to Perplexity Pro. Enterprise Max goes further, providing the highest access levels for Research"
+          },
+          {
+            "value": "Education",
+            "context": "the current billing period from the day the change was made. ## Education & Non-profit ### **Do you offer educational or non-profit disco"
+          }
+        ]
+      }
     },
     {
       "id": "perplexity-connectors",
@@ -1248,9 +1333,18 @@
       "surface": "membership-rates",
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
-      "ok": false,
-      "fetchedAt": "2026-08-13T13:50:14.787Z",
-      "error": "HTTP 403 Forbidden"
+      "ok": true,
+      "fetchedAt": "2026-08-14T13:45:48.674Z",
+      "title": "Just a moment...",
+      "description": "",
+      "status": 200,
+      "byteLength": 323,
+      "fetchMode": "jina_markdown",
+      "extraction": {
+        "confidence": "low",
+        "priceSignals": [],
+        "planSignals": []
+      }
     }
   ]
 }
