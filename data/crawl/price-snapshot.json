@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T13:11:35.288Z",
+  "generatedAt": "2026-08-20T13:13:30.314Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,11 +12,11 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-08-19T13:11:32.520Z",
+      "fetchedAt": "2026-08-20T13:13:25.067Z",
       "title": "ChatGPT 套餐 | 免费版、Go、Plus、Pro、Business 和 Enterprise",
       "description": "",
       "status": 200,
-      "byteLength": 10362,
+      "byteLength": 10361,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -40,7 +40,7 @@
           },
           {
             "value": "Codex",
-            "context": "带上传功能的消息数量受限 * 图像生成受限，速度较慢 * 语音聊天数量受限 * 有限使用深度研究 * 记忆与上下文支持受限 * Codex 的有限使用 * 桌面端 ChatGPT Work（有限使用） ### Go 扩展访问权限 免费套餐中的全部内容，以及： * 包"
+            "context": "带上传功能的消息数量受限 * 图像生成受限，速度较慢 * 语音聊天数量受限 * 有限使用深度研究 * 记忆与上下文支持受限 * Codex 的有限使用 * 桌面端 ChatGPT Work（有限使用） ### Go 最适合长对话 免费套餐中的全部内容，以及： * 包"
           }
         ]
       }
@@ -54,11 +54,11 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-08-19T13:11:32.568Z",
+      "fetchedAt": "2026-08-20T13:13:25.103Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
-      "byteLength": 664677,
+      "byteLength": 664662,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -221,11 +221,11 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-08-19T13:11:32.569Z",
+      "fetchedAt": "2026-08-20T13:13:25.105Z",
       "title": "Plans & Pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
-      "byteLength": 1524338,
+      "byteLength": 1532817,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -396,7 +396,7 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-08-19T13:11:32.572Z",
+      "fetchedAt": "2026-08-20T13:13:25.106Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more",
       "description": "Get access to the best of Google AI including Gemini 3.1 Pro, video generation with Veo 3.1, Deep Research, and much more.",
       "status": 200,
@@ -449,11 +449,11 @@
           },
           {
             "value": "agent",
-            "context": "ies, and more. Jules 9 Higher limits to our asynchronous coding agent for software developers Google Antigravity Entry rate limits to"
+            "context": "ies, and more. Jules 5 Higher limits to our asynchronous coding agent for software developers Google Antigravity Entry rate limits to"
           },
           {
             "value": "Premium",
-            "context": "ids, and more Access Gemini directly in Google apps Google Home Premium (Standard plan) 5 30 days of event history and Gemini features"
+            "context": "ids, and more Access Gemini directly in Google apps Google Home Premium (Standard plan) 6 30 days of event history and Gemini features"
           },
           {
             "value": "business",
@@ -475,7 +475,7 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-08-19T13:11:32.574Z",
+      "fetchedAt": "2026-08-20T13:13:25.108Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
@@ -518,7 +518,7 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-08-19T13:11:32.575Z",
+      "fetchedAt": "2026-08-20T13:13:25.109Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
@@ -597,11 +597,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-08-19T13:11:32.576Z",
+      "fetchedAt": "2026-08-20T13:13:25.110Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "GitHub Copilot works alongside you directly in your editor, suggesting whole lines or entire functions for you.",
       "status": 200,
-      "byteLength": 1260034,
+      "byteLength": 1259988,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -732,11 +732,11 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-08-19T13:11:32.577Z",
+      "fetchedAt": "2026-08-20T13:13:25.111Z",
       "title": "Models and pricing for GitHub Copilot - GitHub Docs",
       "description": "See per-token pricing for the models available in GitHub Copilot and reference rates for additional usage across plans.",
       "status": 200,
-      "byteLength": 672546,
+      "byteLength": 672532,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -881,7 +881,7 @@
           },
           {
             "value": "Codex",
-            "context": "se plugin standards Third-party coding agents Agent apps OpenAI Codex Anthropic Claude Agent skills Enterprise management Cloud and l"
+            "context": "se plugin standards Third-party coding agents Agent apps OpenAI Codex Anthropic Claude Agent skills Enterprise management OpenTelemet"
           },
           {
             "value": "Business",
@@ -911,7 +911,7 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-08-19T13:11:32.578Z",
+      "fetchedAt": "2026-08-20T13:13:25.112Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -937,11 +937,11 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-08-19T13:11:32.581Z",
+      "fetchedAt": "2026-08-20T13:13:25.114Z",
       "title": "X Premium+ Price Adjustment",
       "description": "",
       "status": 200,
-      "byteLength": 14927,
+      "byteLength": 15272,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -1071,6 +1071,10 @@
           {
             "value": "free",
             "context": "usage limits and early access to new features. * Completely ad-free: Enjoy a seamless, interruption-free X experience with Premium+"
+          },
+          {
+            "value": "business",
+            "context": "you with a better, safer and faster service and to support our business. Some cookies are necessary to use our services, improve our se"
           }
         ]
       }
@@ -1083,9 +1087,60 @@
       "surface": "membership-rates",
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
-      "ok": false,
-      "fetchedAt": "2026-08-19T13:11:32.582Z",
-      "error": "HTTP 403 Forbidden"
+      "ok": true,
+      "fetchedAt": "2026-08-20T13:13:25.115Z",
+      "title": "Perplexity Pro Perks",
+      "description": "",
+      "status": 200,
+      "byteLength": 12954,
+      "fetchMode": "jina_markdown",
+      "extraction": {
+        "confidence": "review",
+        "priceSignals": [
+          {
+            "value": "$20",
+            "context": "Perks for Pro Members ### Unlock thousands in savings for just $20/month * ![Image 1](https://framerusercontent.com/images/kM8esgT"
+          },
+          {
+            "value": "$275",
+            "context": "sercontent.com/images/kM8esgT2igCBxfSTeFxCZFKe94.png) Get up to $275 off services on Thumbtack ![Image 2](https://framerusercontent."
+          },
+          {
+            "value": "$1,000",
+            "context": "ages/CCz9la4h090iwgoNwu7paiIUs.png?width=2880&height=536) Get a $1,000 credit at closing when you buy or refinance a home with Chase *"
+          },
+          {
+            "value": "$700",
+            "context": "ercontent.com/images/oxcz8LjhVf2BzckMeSJfc4LjF0w.png) Get up to $700 off on Ezra cancer screening ![Image 29](https://framerusercont"
+          },
+          {
+            "value": "$25",
+            "context": "://framerusercontent.com/images/Wp5L0lvvluUITLU2jOpCUky7II.png) $25 off on Perplexity merch * ![Image 31](https://framerusercontent"
+          },
+          {
+            "value": "$400",
+            "context": "UAkEwre4KPeqvtvOL1eozH5qg.png?width=1920&height=1080) Get up to $400 off on Eight Sleep Pod * ![Image 33](https://framerusercontent."
+          },
+          {
+            "value": "$50",
+            "context": "E.png?scale-down-to=512&width=680&height=1020) Get an exclusive $50 off Galaxy Watch8 Series or Watch Ultra * ![Image 35](https://f"
+          }
+        ],
+        "planSignals": [
+          {
+            "value": "Pro",
+            "context": "Title: Perplexity Pro Perks URL Source: http://www.perplexity.ai/properks/ Markdown C"
+          },
+          {
+            "value": "free",
+            "context": "0&height=800) Get up to 30% off base rates on car rentals and a free car class upgrade ![Image 4](https://framerusercontent.com/imag"
+          },
+          {
+            "value": "Ultra",
+            "context": "ht=1020) Get an exclusive $50 off Galaxy Watch8 Series or Watch Ultra * ![Image 35](https://framerusercontent.com/images/xEbkPMvWN4MQ"
+          }
+        ]
+      }
     },
     {
       "id": "perplexity-enterprise-pricing",
@@ -1095,9 +1150,39 @@
       "surface": "membership-rates",
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
-      "ok": false,
-      "fetchedAt": "2026-08-19T13:11:32.583Z",
-      "error": "HTTP 403 Forbidden"
+      "ok": true,
+      "fetchedAt": "2026-08-20T13:13:25.116Z",
+      "title": "Enterprise Pricing and Billing: Frequently Asked Questions",
+      "description": "",
+      "status": 200,
+      "byteLength": 7193,
+      "fetchMode": "jina_markdown",
+      "extraction": {
+        "confidence": "review",
+        "priceSignals": [],
+        "planSignals": [
+          {
+            "value": "Enterprise",
+            "context": "Title: Enterprise Pricing and Billing: Frequently Asked Questions URL Source: htt"
+          },
+          {
+            "value": "team",
+            "context": "cing is per seat (user), and you’re only billed for your active team members, so it’s straightforward to scale as your team grows or"
+          },
+          {
+            "value": "Pro",
+            "context": "Are there higher usage limits for Enterprise plans? Enterprise Pro offers extended usage limits compared to Perplexity Pro. Enterp"
+          },
+          {
+            "value": "Max",
+            "context": "rs extended usage limits compared to Perplexity Pro. Enterprise Max goes further, providing the highest access levels for Research"
+          },
+          {
+            "value": "Education",
+            "context": "the current billing period from the day the change was made. ## Education & Non-profit ### **Do you offer educational or non-profit disco"
+          }
+        ]
+      }
     },
     {
       "id": "perplexity-connectors",
@@ -1107,9 +1192,18 @@
       "surface": "membership-rates",
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
-      "ok": false,
-      "fetchedAt": "2026-08-19T13:11:32.584Z",
-      "error": "HTTP 403 Forbidden"
+      "ok": true,
+      "fetchedAt": "2026-08-20T13:13:25.116Z",
+      "title": "Just a moment...",
+      "description": "",
+      "status": 200,
+      "byteLength": 323,
+      "fetchMode": "jina_markdown",
+      "extraction": {
+        "confidence": "low",
+        "priceSignals": [],
+        "planSignals": []
+      }
     }
   ]
 }
