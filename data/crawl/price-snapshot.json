@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-26T13:18:12.493Z",
+  "generatedAt": "2026-08-27T22:18:12.684Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,11 +12,11 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-08-26T13:18:09.351Z",
+      "fetchedAt": "2026-08-27T22:18:07.328Z",
       "title": "定价 | ChatGPT",
       "description": "",
       "status": 200,
-      "byteLength": 10324,
+      "byteLength": 10323,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -32,15 +32,15 @@
           },
           {
             "value": "Codex",
-            "context": "带上传功能的消息数量受限 * 图像生成受限，速度较慢 * 语音聊天数量受限 * 有限使用深度研究 * 记忆与上下文支持受限 * Codex 的有限使用 * 桌面端 ChatGPT Work（有限使用） ### Go 扩展访问权限 免费套餐中的全部内容，以及： * 包"
+            "context": "带上传功能的消息数量受限 * 图像生成受限，速度较慢 * 语音聊天数量受限 * 有限使用深度研究 * 记忆与上下文支持受限 * Codex 的有限使用 * 桌面端 ChatGPT Work（有限使用） ### Go 最适合长对话 免费套餐中的全部内容，以及： * 包"
           },
           {
             "value": "Plus",
-            "context": "及： * 包含工具调用的消息数量更多 * 更高的上传额度 * 更高的图片生成额度 * 语音聊天数量更多 * 更长的记忆 ### Plus 以更先进的智能完成更多工作 Go 中的全部内容，以及： * GPT-5.6 的高级推理模型 * 更高的消息与上传配额 * 更复"
+            "context": "及： * 包含工具调用的消息数量更多 * 更高的上传额度 * 更高的图片生成额度 * 语音聊天数量更多 * 更长的记忆 ### Plus 最适合进阶工作与高效办公 Go 中的全部内容，以及： * GPT-5.6 的高级推理模型 * 更高的消息与上传配额 * 更复杂"
           },
           {
             "value": "Pro",
-            "context": "更高的 Codex 使用量 * 桌面端、网页端和移动端 ChatGPT Work（更高使用权限） * 抢先体验新功能 ### Pro 大幅提升工作效率 Plus 中的全部内容，以及： * 5 倍或 20 倍的使用配额 * GPT-5.6 Sol Pro 专业推"
+            "context": "更高的 Codex 使用量 * 桌面端、网页端和移动端 ChatGPT Work（更高使用权限） * 抢先体验新功能 ### Pro 最适合研究和编程 Plus 中的全部内容，以及： * 5 倍或 20 倍的使用配额 * GPT-5.6 Sol Pro 专业推"
           }
         ]
       }
@@ -54,11 +54,11 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-08-26T13:18:09.390Z",
+      "fetchedAt": "2026-08-27T22:18:07.366Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
-      "byteLength": 649757,
+      "byteLength": 650441,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -221,7 +221,7 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-08-26T13:18:09.392Z",
+      "fetchedAt": "2026-08-27T22:18:07.368Z",
       "title": "Plans & Pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
@@ -396,11 +396,11 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-08-26T13:18:09.393Z",
+      "fetchedAt": "2026-08-27T22:18:07.369Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more",
       "description": "Get access to the best of Google AI including Gemini 3.1 Pro, video generation with Veo 3.1, Deep Research, and much more.",
       "status": 200,
-      "byteLength": 249582,
+      "byteLength": 250374,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -475,11 +475,11 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-08-26T13:18:09.394Z",
+      "fetchedAt": "2026-08-27T22:18:07.370Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
-      "byteLength": 343343,
+      "byteLength": 344176,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -490,7 +490,7 @@
           },
           {
             "value": "$40",
-            "context": "t 用量上限 ✓ MCP、技能和钩子 ✓ 云端智能体 ✓ 按用量计费的 Bugbot ✓ 优先使用新功能 获取 Pro 团队版 $40 / user / mo. 标准版 高级版 包含个人的全部功能，另加： ✓ 集中式团队计费与管理 ✓ 适用于内部规则、技能和插件"
+            "context": "用量上限最高 ✓ MCP、技能和钩子 ✓ 云端智能体 ✓ 按用量计费的 Bugbot ✓ 优先使用新功能 获取 Pro 团队版 $40 / user / mo. 标准版 高级版 包含个人的全部功能，另加： ✓ 集中式团队计费与管理 ✓ 适用于内部规则、技能和插件"
           }
         ],
         "planSignals": [
@@ -504,7 +504,7 @@
           },
           {
             "value": "Ultra",
-            "context": "包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 下载 个人 $20 / mo. Pro Pro+ Ultra Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ Grok 的充足使用额度 ✓ 访问前沿模型 ✓ MCP、技能和钩子 ✓"
+            "context": "包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 下载 个人 $20 / mo. Pro Pro+ Ultra Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ Grok 的充足使用额度 ✓ 访问前沿模型 ✓ Grok Bot 访问"
           }
         ]
       }
@@ -518,7 +518,7 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-08-26T13:18:09.395Z",
+      "fetchedAt": "2026-08-27T22:18:07.372Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
@@ -597,22 +597,50 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-08-26T13:18:09.396Z",
+      "fetchedAt": "2026-08-27T22:18:07.373Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "GitHub Copilot works alongside you directly in your editor, suggesting whole lines or entire functions for you.",
       "status": 200,
-      "byteLength": 1205547,
+      "byteLength": 1259399,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
         "priceSignals": [
           {
+            "value": "$ 0",
+            "context": "ls For businesses Free For getting started with GitHub Copilot. $ 0 USD Get started Open in VS Code What&#x27;s included: 2,000 com"
+          },
+          {
+            "value": "$ 10",
+            "context": "arn more Pro For everyday coding with agents in GitHub Copilot. $ 10 USD per user / month Get started Everything in Free and: Access"
+          },
+          {
+            "value": "$15",
+            "context": "ess to 3rd party agents (Claude Code and Codex) Model selection $15 monthly total credits for Pro Pro+ For more complex development"
+          },
+          {
+            "value": "$ 39",
+            "context": "for Pro Pro+ For more complex development with premium models. $ 39 USD per user / month Get started Everything in Pro and: Access"
+          },
+          {
+            "value": "$70",
+            "context": "m models, including Opus Audit logs 4x+ included usage than Pro $70 monthly total credits for Pro+ Max For sustained, high-volume a"
+          },
+          {
+            "value": "$ 100",
+            "context": "For sustained, high-volume agent workflows with GitHub Copilot. $ 100 USD per user / month Get started Everything in Pro+ and: Priori"
+          },
+          {
+            "value": "$200",
+            "context": "ccess to new models and features 2.9x+ included usage than Pro+ $200 monthly total credits for Max Best value GitHub Copilot is avai"
+          },
+          {
             "value": "$0",
-            "context": "s Tutorials Plans & Pricing Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month Ge"
+            "context": "r Management Studio Zed Zed Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month Ge"
           },
           {
             "value": "$10",
-            "context": "Pricing Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month Get started Max $100 p"
+            "context": "Zed Zed Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month Get started Max $100 p"
           },
           {
             "value": "$39",
@@ -621,22 +649,6 @@
           {
             "value": "$100",
             "context": "ro $10 per month Get started Pro+ $39 per month Get started Max $100 per month Get started GitHub AI Credits GitHub AI Credits Total"
-          },
-          {
-            "value": "$15",
-            "context": "ode. Learn more Free plan Limited chat and agent usage Pro plan $15 per month Pro+ plan $70 per month Max plan $200 per month Base"
-          },
-          {
-            "value": "$70",
-            "context": "n Limited chat and agent usage Pro plan $15 per month Pro+ plan $70 per month Max plan $200 per month Base credits Free plan Limite"
-          },
-          {
-            "value": "$200",
-            "context": "t usage Pro plan $15 per month Pro+ plan $70 per month Max plan $200 per month Base credits Free plan Limited chat and agent usage P"
-          },
-          {
-            "value": "$ 39",
-            "context": "n Limited chat and agent usage Pro plan $10 per month Pro+ plan $ 39 per month Max plan $100 per month Flex allotment Variable addit"
           },
           {
             "value": "$5",
@@ -674,23 +686,27 @@
           },
           {
             "value": "Free",
-            "context": "siness Tutorials Plans & Pricing Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month"
+            "context": "ith GitHub Copilot Pricing plans For individuals For businesses Free For getting started with GitHub Copilot. $ 0 USD Get started Op"
+          },
+          {
+            "value": "Student",
+            "context": "d required. Verified students have access to the GitHub Copilot Student plan. Learn more Pro For everyday coding with agents in GitHub"
           },
           {
             "value": "Pro",
-            "context": "ns & Pricing Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month Get started Max $1"
-          },
-          {
-            "value": "Max",
-            "context": "ed Pro $10 per month Get started Pro+ $39 per month Get started Max $100 per month Get started GitHub AI Credits GitHub AI Credits"
+            "context": "ents have access to the GitHub Copilot Student plan. Learn more Pro For everyday coding with agents in GitHub Copilot. $ 10 USD per"
           },
           {
             "value": "agent",
-            "context": "dits Credits used when interacting with Copilot features. Chat, agent mode, code review, Copilot cloud agent, Copilot CLI, and Copilo"
+            "context": "ser / month Get started Everything in Free and: Access to Cloud agent and code review Unlimited code completion and next edit suggest"
           },
           {
             "value": "Codex",
-            "context": "o third-party coding agents like Claude by Anthropic and OpenAI Codex (Preview) Free plan Not included Pro plan Not included Pro+ pla"
+            "context": "xt edit suggestions Access to 3rd party agents (Claude Code and Codex) Model selection $15 monthly total credits for Pro Pro+ For mor"
+          },
+          {
+            "value": "Max",
+            "context": "4x+ included usage than Pro $70 monthly total credits for Pro+ Max For sustained, high-volume agent workflows with GitHub Copilot."
           },
           {
             "value": "Flash",
@@ -699,10 +715,6 @@
           {
             "value": "team",
             "context": "Studio Zed Zed Need human help? Let’s define how to propel your team into a new era. Contact sales Frequently asked questions Genera"
-          },
-          {
-            "value": "student",
-            "context": "paid subscription, trial, or through an existing verified OSS, student, faculty, or MVP account may elect to use Free instead. What la"
           },
           {
             "value": "Education",
@@ -720,11 +732,11 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-08-26T13:18:09.397Z",
+      "fetchedAt": "2026-08-27T22:18:07.374Z",
       "title": "Models and pricing for GitHub Copilot - GitHub Docs",
       "description": "See per-token pricing for the models available in GitHub Copilot and reference rates for additional usage across plans.",
       "status": 200,
-      "byteLength": 678998,
+      "byteLength": 678962,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -899,19 +911,136 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-08-26T13:18:09.398Z",
-      "title": "Just a moment...",
+      "fetchedAt": "2026-08-27T22:18:07.375Z",
+      "title": "About X Premium",
       "description": "",
       "status": 200,
-      "byteLength": 274,
+      "byteLength": 36302,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
-        "priceSignals": [],
+        "priceSignals": [
+          {
+            "value": "$3",
+            "context": "m#tbfeatures). Subscribe now with localized pricing starting at $3/month or $32/year (plus any tax, e.g. VAT, and your payment met"
+          },
+          {
+            "value": "$32",
+            "context": "). Subscribe now with localized pricing starting at $3/month or $32/year (plus any tax, e.g. VAT, and your payment method fees) on"
+          },
+          {
+            "value": "$8",
+            "context": "or $32/year on web (or your local pricing) * Premium: Starts at $8/month or $84/year on web (or your local pricing) * Premium+: St"
+          },
+          {
+            "value": "$84",
+            "context": "on web (or your local pricing) * Premium: Starts at $8/month or $84/year on web (or your local pricing) * Premium+: Starts at $40/m"
+          },
+          {
+            "value": "$40",
+            "context": "r $84/year on web (or your local pricing) * Premium+: Starts at $40/month or $395/year on web (or your local pricing) If Premium is"
+          },
+          {
+            "value": "$395",
+            "context": "web (or your local pricing) * Premium+: Starts at $40/month or $395/year on web (or your local pricing) If Premium is available for"
+          },
+          {
+            "value": "3.00 USD",
+            "context": "| | --- | --- | --- | --- | --- | --- | --- | | United States | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | |"
+          },
+          {
+            "value": "32.00 USD",
+            "context": "-- | --- | --- | --- | --- | --- | | United States | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United King"
+          },
+          {
+            "value": "8.00 USD",
+            "context": "-- | --- | --- | --- | | United States | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00"
+          },
+          {
+            "value": "84.00 USD",
+            "context": "--- | --- | | United States | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00"
+          },
+          {
+            "value": "40.00 USD",
+            "context": "| United States | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 G"
+          },
+          {
+            "value": "395.00 USD",
+            "context": "tes | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GB"
+          },
+          {
+            "value": "3.00 GBP",
+            "context": "0 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | |"
+          },
+          {
+            "value": "32.00 GBP",
+            "context": "00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | | Canada | 3."
+          },
+          {
+            "value": "8.00 GBP",
+            "context": "00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | | Canada | 3.75 CAD | 40"
+          },
+          {
+            "value": "84.00 GBP",
+            "context": "5.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | | Canada | 3.75 CAD | 40.00 CAD | 10"
+          },
+          {
+            "value": "31.00 GBP",
+            "context": "United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | | Canada | 3.75 CAD | 40.00 CAD | 10.00 CAD | 10"
+          },
+          {
+            "value": "313.00 GBP",
+            "context": "dom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | | Canada | 3.75 CAD | 40.00 CAD | 10.00 CAD | 105.00 CAD | 56"
+          },
+          {
+            "value": "3.00 EUR",
+            "context": "30.00 SAR | 315.00 SAR | 150.00 SAR | 1,479.00 SAR | | France | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | |"
+          },
+          {
+            "value": "32.00 EUR",
+            "context": "315.00 SAR | 150.00 SAR | 1,479.00 SAR | | France | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | | Germany | 3"
+          },
+          {
+            "value": "8.00 EUR",
+            "context": "| 150.00 SAR | 1,479.00 SAR | | France | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | | Germany | 3.00 EUR | 3"
+          },
+          {
+            "value": "84.00 EUR",
+            "context": "R | 1,479.00 SAR | | France | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | | Germany | 3.00 EUR | 32.00 EUR | 8"
+          },
+          {
+            "value": "38.00 EUR",
+            "context": "SAR | | France | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | | Germany | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84"
+          },
+          {
+            "value": "377.00 EUR",
+            "context": "nce | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | | Germany | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38."
+          },
+          {
+            "value": "46.00 EUR",
+            "context": "EUR | | Belgium | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 46.00 EUR | 377.00 EUR | | Sweden | 31.13 SEK | 331.43 SEK | 83.00 SEK |"
+          }
+        ],
         "planSignals": [
           {
-            "value": "premium",
-            "context": "le: Just a moment... URL Source: http://help.x.com/en/using-x/x-premium Warning: Target URL returned error 403: Forbidden Warning: This"
+            "value": "Premium",
+            "context": "Title: About X Premium URL Source: http://help.x.com/en/using-x/x-premium Markdown Con"
+          },
+          {
+            "value": "plus",
+            "context": "om app icons, and more. **Premium:**Includes all Basic features plus a checkmark, reduced ads, access to apply for Original Content"
+          },
+          {
+            "value": "Business",
+            "context": "tional variations to the standard version of X Premium: Premium Business and Premium Organizations, which are services for businesses, g"
+          },
+          {
+            "value": "free",
+            "context": "emium+ Tier:**Subscribers to the Premium+ tier will enjoy an ad-free experience across most areas of X, including the For You timeli"
+          },
+          {
+            "value": "Pro",
+            "context": "oving the service. **Only for Premium+ Tier :** * **Access to X Pro:**View multiple configurable timelines simultaneously which can"
           }
         ]
       }
@@ -925,7 +1054,7 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-08-26T13:18:09.400Z",
+      "fetchedAt": "2026-08-27T22:18:07.377Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -955,7 +1084,7 @@
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
       "ok": false,
-      "fetchedAt": "2026-08-26T13:18:09.400Z",
+      "fetchedAt": "2026-08-27T22:18:07.377Z",
       "error": "HTTP 403 Forbidden"
     },
     {
@@ -967,7 +1096,7 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": false,
-      "fetchedAt": "2026-08-26T13:18:09.401Z",
+      "fetchedAt": "2026-08-27T22:18:07.378Z",
       "error": "HTTP 403 Forbidden"
     },
     {
@@ -979,7 +1108,7 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": false,
-      "fetchedAt": "2026-08-26T13:18:09.402Z",
+      "fetchedAt": "2026-08-27T22:18:07.379Z",
       "error": "HTTP 403 Forbidden"
     }
   ]
