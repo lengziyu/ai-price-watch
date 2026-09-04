@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-03T16:28:39.482Z",
+  "generatedAt": "2026-09-04T16:24:49.935Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,11 +12,11 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-09-03T16:28:34.737Z",
+      "fetchedAt": "2026-09-04T16:24:44.395Z",
       "title": "定价 | ChatGPT",
       "description": "",
       "status": 200,
-      "byteLength": 10326,
+      "byteLength": 10324,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -40,7 +40,7 @@
           },
           {
             "value": "Pro",
-            "context": "* 更高的 Codex 使用量 * 桌面端、网页端和移动端 ChatGPT 工作（更高使用权限） * 抢先体验新功能 ### Pro 最适合研究和编程 Plus 中的全部内容，以及： * 5 倍或 20 倍的使用限额 * GPT-5.6 Sol Pro 专业推"
+            "context": "* 更高的 Codex 使用量 * 桌面端、网页端和移动端 ChatGPT 工作（更高使用权限） * 抢先体验新功能 ### Pro 最适合研究和编程 Plus 中的全部内容，以及： * 5 倍或 20 倍的使用配额 * GPT-5.6 Sol Pro 专业推"
           }
         ]
       }
@@ -54,11 +54,11 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-09-03T16:28:34.777Z",
+      "fetchedAt": "2026-09-04T16:24:44.431Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
-      "byteLength": 653284,
+      "byteLength": 657342,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -92,16 +92,28 @@
             "context": "sed or pay-as-you-go billing, Desktop voice costs approximately 6 credits per minute. ChatGPT Voice in Desktop is not available via API K"
           },
           {
+            "value": "250 credits",
+            "context": "kens Input Tokens Cached input tokens Output Tokens GPT-6 Astra 250 credits 25 credits 1,250 credits GPT-5.6 Sol 100 credits 10 credits 500"
+          },
+          {
+            "value": "25 credits",
+            "context": "okens Cached input tokens Output Tokens GPT-6 Astra 250 credits 25 credits 1,250 credits GPT-5.6 Sol 100 credits 10 credits 500 credits Da"
+          },
+          {
+            "value": "1,250 credits",
+            "context": "d input tokens Output Tokens GPT-6 Astra 250 credits 25 credits 1,250 credits GPT-5.6 Sol 100 credits 10 credits 500 credits Daybreak Blue 10"
+          },
+          {
             "value": "100 credits",
-            "context": "kens Input Tokens Cached input tokens Output Tokens GPT-5.6 Sol 100 credits 10 credits 500 credits Daybreak Blue 100 credits 10 credits 500"
+            "context": "ns GPT-6 Astra 250 credits 25 credits 1,250 credits GPT-5.6 Sol 100 credits 10 credits 500 credits Daybreak Blue 100 credits 10 credits 500"
           },
           {
             "value": "10 credits",
-            "context": "okens Cached input tokens Output Tokens GPT-5.6 Sol 100 credits 10 credits 500 credits Daybreak Blue 100 credits 10 credits 500 credits Da"
+            "context": "ra 250 credits 25 credits 1,250 credits GPT-5.6 Sol 100 credits 10 credits 500 credits Daybreak Blue 100 credits 10 credits 500 credits Da"
           },
           {
             "value": "500 credits",
-            "context": "d input tokens Output Tokens GPT-5.6 Sol 100 credits 10 credits 500 credits Daybreak Blue 100 credits 10 credits 500 credits Daybreak Red 3"
+            "context": "its 25 credits 1,250 credits GPT-5.6 Sol 100 credits 10 credits 500 credits Daybreak Blue 100 credits 10 credits 500 credits Daybreak Red 3"
           },
           {
             "value": "312.5 credits",
@@ -162,18 +174,6 @@
           {
             "value": "18.75 credits",
             "context": "ts GPT-5.4 62.50 credits 6.250 credits 375 credits GPT-5.4 mini 18.75 credits 1.875 credits 113 credits GPT-5.3-Codex-Spark research preview"
-          },
-          {
-            "value": "1.875 credits",
-            "context": "50 credits 6.250 credits 375 credits GPT-5.4 mini 18.75 credits 1.875 credits 113 credits GPT-5.3-Codex-Spark research preview GPT-Image-2 (i"
-          },
-          {
-            "value": "113 credits",
-            "context": "50 credits 375 credits GPT-5.4 mini 18.75 credits 1.875 credits 113 credits GPT-5.3-Codex-Spark research preview GPT-Image-2 (image) 200 cr"
-          },
-          {
-            "value": "200 credits",
-            "context": "redits GPT-5.3-Codex-Spark research preview GPT-Image-2 (image) 200 credits 50 credits 750 credits GPT-Image-2 (text) 125 credits 31.25 cre"
           }
         ],
         "planSignals": [
@@ -183,7 +183,7 @@
           },
           {
             "value": "agent",
-            "context": "nversation state Background mode Streaming WebSocket mode Multi-agent Webhooks File inputs Compaction Counting tokens SDKs and CLI Op"
+            "context": "ackground mode Streaming WebSocket mode Mid-turn steering Multi-agent Webhooks File inputs Compaction Counting tokens SDKs and CLI Op"
           },
           {
             "value": "team",
@@ -225,18 +225,18 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-09-03T16:28:34.779Z",
+      "fetchedAt": "2026-09-04T16:24:44.433Z",
       "title": "Plans & Pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
-      "byteLength": 1491778,
+      "byteLength": 1143091,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
         "priceSignals": [
           {
             "value": "$0",
-            "context": "Pricing Individual Team & Enterprise API Active Free Try Claude $0 Free for everyone Try Claude Try Claude Try Claude Chat on web,"
+            "context": "rkdown Pricing Individual Team & Enterprise API Free Try Claude $0 Free for everyone Try Claude Chat on web, iOS, Android, and on"
           },
           {
             "value": "$17",
@@ -244,15 +244,15 @@
           },
           {
             "value": "$200",
-            "context": "productivity $17 Per month with annual subscription discount ( $200 billed up front). $20 if billed monthly. Try Claude Try Claude"
+            "context": "productivity $17 Per month with annual subscription discount ( $200 billed up front). $20 if billed monthly. Try Claude Everything"
           },
           {
             "value": "$20",
-            "context": "onth with annual subscription discount ( $200 billed up front). $20 if billed monthly. Try Claude Try Claude Try Claude Everything"
+            "context": "onth with annual subscription discount ( $200 billed up front). $20 if billed monthly. Try Claude Everything in Free, plus: More us"
           },
           {
             "value": "$100",
-            "context": "ls Claude for Microsoft 365 Max Get the most out of Claude From $100 Per month Try Claude Try Claude Try Claude Everything in Pro, p"
+            "context": "ls Claude for Microsoft 365 Max Get the most out of Claude From $100 Per month Try Claude Everything in Pro, plus: Choose 5x or 20x"
           },
           {
             "value": "$25",
@@ -263,88 +263,88 @@
             "context": "than standard seats* $100 Per seat / month if billed annually. $125 if billed monthly. Includes Claude Code and Claude Cowork Inclu"
           },
           {
-            "value": "$ 10",
-            "context": "5.1 Next generation intelligence for long-running agents Input $ 10 / MTok Output $ 50 / MTok Prompt caching Read $ 0.25 / MTok Wri"
+            "value": "$10",
+            "context": "5.1 Next generation intelligence for long-running agents Input $10 / MTok Output $50 / MTok Prompt caching Read $0.25 / MTok Write"
           },
           {
-            "value": "$ 50",
-            "context": "n intelligence for long-running agents Input $ 10 / MTok Output $ 50 / MTok Prompt caching Read $ 0.25 / MTok Write $ 12.50 / MTok O"
+            "value": "$50",
+            "context": "on intelligence for long-running agents Input $10 / MTok Output $50 / MTok Prompt caching Read $0.25 / MTok Write $12.50 / MTok Opu"
           },
           {
-            "value": "$ 0.25",
-            "context": "agents Input $ 10 / MTok Output $ 50 / MTok Prompt caching Read $ 0.25 / MTok Write $ 12.50 / MTok Opus 5 Ideal for complex agentic co"
+            "value": "$0.25",
+            "context": "g agents Input $10 / MTok Output $50 / MTok Prompt caching Read $0.25 / MTok Write $12.50 / MTok Opus 5 Ideal for complex agentic cod"
           },
           {
-            "value": "$ 12.50",
-            "context": "MTok Output $ 50 / MTok Prompt caching Read $ 0.25 / MTok Write $ 12.50 / MTok Opus 5 Ideal for complex agentic coding and enterprise w"
+            "value": "$12.50",
+            "context": "/ MTok Output $50 / MTok Prompt caching Read $0.25 / MTok Write $12.50 / MTok Opus 5 Ideal for complex agentic coding and enterprise w"
           },
           {
-            "value": "$ 5",
-            "context": "us 5 Ideal for complex agentic coding and enterprise work Input $ 5 / MTok Output $ 25 / MTok Prompt caching Read $ 0.50 / MTok Wri"
+            "value": "$5",
+            "context": "us 5 Ideal for complex agentic coding and enterprise work Input $5 / MTok Output $25 / MTok Prompt caching Read $0.50 / MTok Write"
           },
           {
-            "value": "$ 25",
-            "context": "plex agentic coding and enterprise work Input $ 5 / MTok Output $ 25 / MTok Prompt caching Read $ 0.50 / MTok Write $ 6.25 / MTok So"
+            "value": "$0.50",
+            "context": "rise work Input $5 / MTok Output $25 / MTok Prompt caching Read $0.50 / MTok Write $6.25 / MTok Sonnet 5 High-performance model for c"
           },
           {
-            "value": "$ 0.50",
-            "context": "se work Input $ 5 / MTok Output $ 25 / MTok Prompt caching Read $ 0.50 / MTok Write $ 6.25 / MTok Sonnet 5 High-performance model for"
+            "value": "$6.25",
+            "context": "/ MTok Output $25 / MTok Prompt caching Read $0.50 / MTok Write $6.25 / MTok Sonnet 5 High-performance model for coding and agents In"
           },
           {
-            "value": "$ 6.25",
-            "context": "MTok Output $ 25 / MTok Prompt caching Read $ 0.50 / MTok Write $ 6.25 / MTok Sonnet 5 High-performance model for coding and agents In"
+            "value": "$2",
+            "context": "Tok Sonnet 5 High-performance model for coding and agents Input $2 / MTok Output $10 / MTok Prompt caching Read $0.20 / MTok Write"
           },
           {
-            "value": "$ 2",
-            "context": "Tok Sonnet 5 High-performance model for coding and agents Input $ 2 / MTok Output $ 10 / MTok Prompt caching Read $ 0.20 / MTok Wri"
+            "value": "$0.20",
+            "context": "nd agents Input $2 / MTok Output $10 / MTok Prompt caching Read $0.20 / MTok Write $2.50 / MTok Haiku 4.5 Fastest, most cost-efficien"
           },
           {
-            "value": "$ 0.20",
-            "context": "agents Input $ 2 / MTok Output $ 10 / MTok Prompt caching Read $ 0.20 / MTok Write $ 2.50 / MTok Haiku 4.5 Fastest, most cost-efficie"
+            "value": "$2.50",
+            "context": "/ MTok Output $10 / MTok Prompt caching Read $0.20 / MTok Write $2.50 / MTok Haiku 4.5 Fastest, most cost-efficient model Input $1 /"
           },
           {
-            "value": "$ 2.50",
-            "context": "MTok Output $ 10 / MTok Prompt caching Read $ 0.20 / MTok Write $ 2.50 / MTok Haiku 4.5 Fastest, most cost-efficient model Input $ 1 /"
+            "value": "$1",
+            "context": "$2.50 / MTok Haiku 4.5 Fastest, most cost-efficient model Input $1 / MTok Output $5 / MTok Prompt caching Read $0.10 / MTok Write"
           },
           {
-            "value": "$ 1",
-            "context": "2.50 / MTok Haiku 4.5 Fastest, most cost-efficient model Input $ 1 / MTok Output $ 5 / MTok Prompt caching Read $ 0.10 / MTok Writ"
+            "value": "$0.10",
+            "context": "ient model Input $1 / MTok Output $5 / MTok Prompt caching Read $0.10 / MTok Write $1.25 / MTok For workloads that need to run in the"
           },
           {
-            "value": "$ 0.10",
-            "context": "nt model Input $ 1 / MTok Output $ 5 / MTok Prompt caching Read $ 0.10 / MTok Write $ 1.25 / MTok For workloads that need to run in th"
-          },
-          {
-            "value": "$ 1.25",
-            "context": "MTok Output $ 5 / MTok Prompt caching Read $ 0.10 / MTok Write $ 1.25 / MTok For workloads that need to run in the US, US-only infere"
+            "value": "$1.25",
+            "context": "/ MTok Output $5 / MTok Prompt caching Read $0.10 / MTok Write $1.25 / MTok For workloads that need to run in the US, US-only infere"
           },
           {
             "value": "$0.08",
             "context": "th a suite of composable APIs. Standard token rates apply. Cost $0.08 per session-hour for active runtime Web search Give Claude acce"
           },
           {
-            "value": "$10",
-            "context": "lude input and output tokens required to process requests. Cost $10 / 1K searches ‍ Code execution Run Python code in a sandboxed e"
-          },
-          {
             "value": "$0.05",
-            "context": "50 free hours of usage daily per organization. Additional hours $0.05 per hour per container ‍ Service tiers Balance availability, pe"
+            "context": "50 free hours of usage daily per organization. Additional hours $0.05 per hour per container Service tiers Balance availability, perf"
           },
           {
-            "value": "$ 3",
-            "context": "batch processing. Learn more Batch processing Sonnet 4.6 Input $ 3 / MTok Output $ 15 / MTok Prompt caching Read $ 0.30 / MTok Wri"
+            "value": "$3",
+            "context": "batch processing. Learn more Batch processing Sonnet 4.6 Input $3 / MTok Output $15 / MTok Prompt caching Read $0.30 / MTok Write"
           },
           {
-            "value": "$ 15",
-            "context": "Learn more Batch processing Sonnet 4.6 Input $ 3 / MTok Output $ 15 / MTok Prompt caching Read $ 0.30 / MTok Write $ 3.75 / MTok Op"
+            "value": "$15",
+            "context": ". Learn more Batch processing Sonnet 4.6 Input $3 / MTok Output $15 / MTok Prompt caching Read $0.30 / MTok Write $3.75 / MTok Opus"
           },
           {
-            "value": "$ 0.30",
-            "context": "net 4.6 Input $ 3 / MTok Output $ 15 / MTok Prompt caching Read $ 0.30 / MTok Write $ 3.75 / MTok Opus 4.7 Input $ 5 / MTok Output $ 2"
+            "value": "$0.30",
+            "context": "onnet 4.6 Input $3 / MTok Output $15 / MTok Prompt caching Read $0.30 / MTok Write $3.75 / MTok Opus 4.7 Input $5 / MTok Output $25 /"
           },
           {
-            "value": "$ 3.75",
-            "context": "MTok Output $ 15 / MTok Prompt caching Read $ 0.30 / MTok Write $ 3.75 / MTok Opus 4.7 Input $ 5 / MTok Output $ 25 / MTok Prompt cach"
+            "value": "$3.75",
+            "context": "/ MTok Output $15 / MTok Prompt caching Read $0.30 / MTok Write $3.75 / MTok Opus 4.7 Input $5 / MTok Output $25 / MTok Prompt cachin"
+          },
+          {
+            "value": "$75",
+            "context": "0.50 / MTok Write $6.25 / MTok Opus 4.1 Input $15 / MTok Output $75 / MTok Prompt caching Read $1.50 / MTok Write $18.75 / MTok Pro"
+          },
+          {
+            "value": "$1.50",
+            "context": "Opus 4.1 Input $15 / MTok Output $75 / MTok Prompt caching Read $1.50 / MTok Write $18.75 / MTok Prompt caching pricing reflects 5-mi"
           }
         ],
         "planSignals": [
@@ -357,16 +357,12 @@
             "context": "ustomer support Financial services Government Healthcare Higher education K-12 teachers Life sciences Nonprofits Pricing Overview API Res"
           },
           {
-            "value": "team",
-            "context": "age Copy as markdown Next Next Question 01 / 05 How big is your team? Under 50 people Startup or small business 50–500 people Growin"
-          },
-          {
-            "value": "business",
-            "context": "01 / 05 How big is your team? Under 50 people Startup or small business 50–500 people Growing company with several teams 500+ people La"
+            "value": "Team",
+            "context": "k questions about this page Copy as markdown Pricing Individual Team & Enterprise API Free Try Claude $0 Free for everyone Try Claud"
           },
           {
             "value": "Free",
-            "context": "tting the form. Pricing Individual Team & Enterprise API Active Free Try Claude $0 Free for everyone Try Claude Try Claude Try Claud"
+            "context": "page Copy as markdown Pricing Individual Team & Enterprise API Free Try Claude $0 Free for everyone Try Claude Chat on web, iOS, An"
           },
           {
             "value": "Pro",
@@ -374,11 +370,11 @@
           },
           {
             "value": "plus",
-            "context": "d monthly. Try Claude Try Claude Try Claude Everything in Free, plus: More usage* Includes Claude Code Includes Claude Cowork Includ"
+            "context": "p front). $20 if billed monthly. Try Claude Everything in Free, plus: More usage* Includes Claude Code Includes Claude Cowork Includ"
           },
           {
             "value": "Max",
-            "context": "arch Ability to use more Claude models Claude for Microsoft 365 Max Get the most out of Claude From $100 Per month Try Claude Try C"
+            "context": "arch Ability to use more Claude models Claude for Microsoft 365 Max Get the most out of Claude From $100 Per month Try Claude Every"
           },
           {
             "value": "Premium",
@@ -386,7 +382,11 @@
           },
           {
             "value": "Student",
-            "context": "students, faculty, and staff. Learn more Learn more Learn more Student and faculty access Comprehensive access for all university memb"
+            "context": "itution, including its students, faculty, and staff. Learn more Student and faculty access Comprehensive access for all university memb"
+          },
+          {
+            "value": "business",
+            "context": "er education K-12 teachers Legal Life sciences Nonprofits Small business Claude Platform Overview Developer docs Pricing Ecosystem Marke"
           }
         ]
       }
@@ -400,11 +400,11 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-09-03T16:28:34.780Z",
+      "fetchedAt": "2026-09-04T16:24:44.434Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more",
       "description": "Get access to the best of Google AI including Gemini 3.1 Pro, video generation with Veo 3.1, Deep Research, and much more.",
       "status": 200,
-      "byteLength": 295470,
+      "byteLength": 251307,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -428,14 +428,6 @@
           {
             "value": "$199.99",
             "context": "99.99 / month $99.99 / month: 5x higher usage limits vs. AI Pro $199.99 / month: 20x higher usage limits vs. AI Pro Get started Everyth"
-          },
-          {
-            "value": "$21",
-            "context": "or small businesses and teams. No IT setup needed. Starting at: $21 USD per seat per month Start a trial Gemini Enterprise app Your"
-          },
-          {
-            "value": "$30",
-            "context": "anizations that need enterprise-grade IT controls. Starting at: $30 USD per seat per month Contact sales Everything in Business edi"
           }
         ],
         "planSignals": [
@@ -448,12 +440,8 @@
             "context": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more Skip to main content For"
           },
           {
-            "value": "Business",
-            "context": "ore out of Gemini Choose a plan that is right for you. Personal Business Developer United States Free Get everyday help from Google AI t"
-          },
-          {
             "value": "Free",
-            "context": "hat is right for you. Personal Business Developer United States Free Get everyday help from Google AI to tackle tasks at work, schoo"
+            "context": "low to unlock Gemini Omni, Daily Brief, and more. United States Free Get everyday help from Google AI to tackle tasks at work, schoo"
           },
           {
             "value": "Flash",
@@ -472,8 +460,12 @@
             "context": "ids, and more Access Gemini directly in Google apps Google Home Premium (Standard plan) 5 30 days of event history and Gemini features"
           },
           {
+            "value": "business",
+            "context": "see full list of countries . Looking for AI solutions for your business or work account? Try Gemini Enterprise app Create Learn Work Co"
+          },
+          {
             "value": "Enterprise",
-            "context": "ofile picture to access the Settings menu. United States Gemini Enterprise Business edition For small businesses and teams. No IT setup ne"
+            "context": "for AI solutions for your business or work account? Try Gemini Enterprise app Create Learn Work Code Unlock your creative potential with"
           }
         ]
       }
@@ -487,11 +479,11 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-09-03T16:28:34.781Z",
+      "fetchedAt": "2026-09-04T16:24:44.435Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
-      "byteLength": 344099,
+      "byteLength": 345025,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -530,7 +522,7 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-09-03T16:28:34.782Z",
+      "fetchedAt": "2026-09-04T16:24:44.437Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
@@ -609,11 +601,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-09-03T16:28:34.783Z",
+      "fetchedAt": "2026-09-04T16:24:44.438Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "GitHub Copilot works alongside you directly in your editor, suggesting whole lines or entire functions for you.",
       "status": 200,
-      "byteLength": 1237776,
+      "byteLength": 1245391,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -744,11 +736,11 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-09-03T16:28:34.784Z",
+      "fetchedAt": "2026-09-04T16:24:44.439Z",
       "title": "Models and pricing for GitHub Copilot - GitHub Docs",
       "description": "See per-token pricing for the models available in GitHub Copilot and reference rates for additional usage across plans.",
       "status": 200,
-      "byteLength": 674754,
+      "byteLength": 675749,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -847,23 +839,23 @@
           },
           {
             "value": "$0.40",
-            "context": ".02 $0.25 $1.20 GPT-5.6 Luna GA Lightweight Long context > 200K $0.40 $0.04 $0.50 $1.80 GPT-5.6 Sol 1 GA Powerful Default ≤ 272K $2.0"
+            "context": ".02 $0.25 $1.20 GPT-5.6 Luna GA Lightweight Long context > 200K $0.40 $0.04 $0.50 $1.80 GPT-5.6 Sol GA Powerful Default ≤ 272K $4.00"
           },
           {
             "value": "$0.04",
-            "context": ".25 $1.20 GPT-5.6 Luna GA Lightweight Long context > 200K $0.40 $0.04 $0.50 $1.80 GPT-5.6 Sol 1 GA Powerful Default ≤ 272K $2.00 $0.2"
+            "context": ".25 $1.20 GPT-5.6 Luna GA Lightweight Long context > 200K $0.40 $0.04 $0.50 $1.80 GPT-5.6 Sol GA Powerful Default ≤ 272K $4.00 $0.40"
           },
           {
             "value": "$1.80",
-            "context": "T-5.6 Luna GA Lightweight Long context > 200K $0.40 $0.04 $0.50 $1.80 GPT-5.6 Sol 1 GA Powerful Default ≤ 272K $2.00 $0.20 $2.50 $10."
+            "context": "T-5.6 Luna GA Lightweight Long context > 200K $0.40 $0.04 $0.50 $1.80 GPT-5.6 Sol GA Powerful Default ≤ 272K $4.00 $0.40 $5.00 $20.00"
           },
           {
             "value": "$4.00",
-            "context": "0.20 $2.50 $10.00 GPT-5.6 Sol 1 GA Powerful Long context > 272K $4.00 $0.40 $5.00 $15.00 GPT-5.6 Terra GA Versatile Default ≤ 272K $2"
+            "context": "$0.40 $0.04 $0.50 $1.80 GPT-5.6 Sol GA Powerful Default ≤ 272K $4.00 $0.40 $5.00 $20.00 GPT-5.6 Sol GA Powerful Long context > 272K"
           },
           {
-            "value": "$12.00",
-            "context": ".00 GPT-5.6 Terra GA Versatile Default ≤ 272K $2.00 $0.20 $2.50 $12.00 GPT-5.6 Terra GA Versatile Long context > 272K $4.00 $0.40 $5.0"
+            "value": "$20.00",
+            "context": "$1.80 GPT-5.6 Sol GA Powerful Default ≤ 272K $4.00 $0.40 $5.00 $20.00 GPT-5.6 Sol GA Powerful Long context > 272K $8.00 $0.80 $10.00"
           }
         ],
         "planSignals": [
@@ -923,19 +915,136 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-09-03T16:28:34.785Z",
-      "title": "Just a moment...",
+      "fetchedAt": "2026-09-04T16:24:44.440Z",
+      "title": "About X Premium",
       "description": "",
       "status": 200,
-      "byteLength": 274,
+      "byteLength": 36629,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
-        "priceSignals": [],
+        "priceSignals": [
+          {
+            "value": "$3",
+            "context": "m#tbfeatures). Subscribe now with localized pricing starting at $3/month or $32/year (plus any tax, e.g. VAT, and your payment met"
+          },
+          {
+            "value": "$32",
+            "context": "). Subscribe now with localized pricing starting at $3/month or $32/year (plus any tax, e.g. VAT, and your payment method fees) on"
+          },
+          {
+            "value": "$8",
+            "context": "or $32/year on web (or your local pricing) * Premium: Starts at $8/month or $84/year on web (or your local pricing) * Premium+: St"
+          },
+          {
+            "value": "$84",
+            "context": "on web (or your local pricing) * Premium: Starts at $8/month or $84/year on web (or your local pricing) * Premium+: Starts at $40/m"
+          },
+          {
+            "value": "$40",
+            "context": "r $84/year on web (or your local pricing) * Premium+: Starts at $40/month or $395/year on web (or your local pricing) If Premium is"
+          },
+          {
+            "value": "$395",
+            "context": "web (or your local pricing) * Premium+: Starts at $40/month or $395/year on web (or your local pricing) If Premium is available for"
+          },
+          {
+            "value": "3.00 USD",
+            "context": "| | --- | --- | --- | --- | --- | --- | --- | | United States | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | |"
+          },
+          {
+            "value": "32.00 USD",
+            "context": "-- | --- | --- | --- | --- | --- | | United States | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United King"
+          },
+          {
+            "value": "8.00 USD",
+            "context": "-- | --- | --- | --- | | United States | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00"
+          },
+          {
+            "value": "84.00 USD",
+            "context": "--- | --- | | United States | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00"
+          },
+          {
+            "value": "40.00 USD",
+            "context": "| United States | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 G"
+          },
+          {
+            "value": "395.00 USD",
+            "context": "tes | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GB"
+          },
+          {
+            "value": "3.00 GBP",
+            "context": "0 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | |"
+          },
+          {
+            "value": "32.00 GBP",
+            "context": "00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | | Canada | 3."
+          },
+          {
+            "value": "8.00 GBP",
+            "context": "00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | | Canada | 3.75 CAD | 40"
+          },
+          {
+            "value": "84.00 GBP",
+            "context": "5.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | | Canada | 3.75 CAD | 40.00 CAD | 10"
+          },
+          {
+            "value": "31.00 GBP",
+            "context": "United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | | Canada | 3.75 CAD | 40.00 CAD | 10.00 CAD | 10"
+          },
+          {
+            "value": "313.00 GBP",
+            "context": "dom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | | Canada | 3.75 CAD | 40.00 CAD | 10.00 CAD | 105.00 CAD | 56"
+          },
+          {
+            "value": "3.00 EUR",
+            "context": "30.00 SAR | 315.00 SAR | 150.00 SAR | 1,479.00 SAR | | France | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | |"
+          },
+          {
+            "value": "32.00 EUR",
+            "context": "315.00 SAR | 150.00 SAR | 1,479.00 SAR | | France | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | | Germany | 3"
+          },
+          {
+            "value": "8.00 EUR",
+            "context": "| 150.00 SAR | 1,479.00 SAR | | France | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | | Germany | 3.00 EUR | 3"
+          },
+          {
+            "value": "84.00 EUR",
+            "context": "R | 1,479.00 SAR | | France | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | | Germany | 3.00 EUR | 32.00 EUR | 8"
+          },
+          {
+            "value": "38.00 EUR",
+            "context": "SAR | | France | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | | Germany | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84"
+          },
+          {
+            "value": "377.00 EUR",
+            "context": "nce | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | | Germany | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38."
+          },
+          {
+            "value": "46.00 EUR",
+            "context": "EUR | | Belgium | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 46.00 EUR | 377.00 EUR | | Sweden | 31.13 SEK | 331.43 SEK | 83.00 SEK |"
+          }
+        ],
         "planSignals": [
           {
-            "value": "premium",
-            "context": "le: Just a moment... URL Source: http://help.x.com/en/using-x/x-premium Warning: Target URL returned error 403: Forbidden Warning: This"
+            "value": "Premium",
+            "context": "Title: About X Premium URL Source: http://help.x.com/en/using-x/x-premium Published Ti"
+          },
+          {
+            "value": "plus",
+            "context": "om app icons, and more. **Premium:**Includes all Basic features plus a checkmark, reduced ads, access to apply for Original Content"
+          },
+          {
+            "value": "Business",
+            "context": "tional variations to the standard version of X Premium: Premium Business and Premium Organizations, which are services for businesses, g"
+          },
+          {
+            "value": "free",
+            "context": "emium+ Tier:**Subscribers to the Premium+ tier will enjoy an ad-free experience across most areas of X, including the For You timeli"
+          },
+          {
+            "value": "Pro",
+            "context": "ne for videos and images, voice mode, and more. * **Access to X Pro:**View multiple configurable timelines simultaneously which can"
           }
         ]
       }
@@ -949,11 +1058,11 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-09-03T16:28:34.787Z",
+      "fetchedAt": "2026-09-04T16:24:44.442Z",
       "title": "X Premium+ Price Adjustment",
       "description": "",
       "status": 200,
-      "byteLength": 15272,
+      "byteLength": 14927,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -1083,10 +1192,6 @@
           {
             "value": "free",
             "context": "usage limits and early access to new features. * Completely ad-free: Enjoy a seamless, interruption-free X experience with Premium+"
-          },
-          {
-            "value": "business",
-            "context": "you with a better, safer and faster service and to support our business. Some cookies are necessary to use our services, improve our se"
           }
         ]
       }
@@ -1099,9 +1204,60 @@
       "surface": "membership-rates",
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
-      "ok": false,
-      "fetchedAt": "2026-09-03T16:28:34.787Z",
-      "error": "HTTP 403 Forbidden"
+      "ok": true,
+      "fetchedAt": "2026-09-04T16:24:44.443Z",
+      "title": "Perplexity Pro Perks",
+      "description": "",
+      "status": 200,
+      "byteLength": 12954,
+      "fetchMode": "jina_markdown",
+      "extraction": {
+        "confidence": "review",
+        "priceSignals": [
+          {
+            "value": "$20",
+            "context": "Perks for Pro Members ### Unlock thousands in savings for just $20/month * ![Image 1](https://framerusercontent.com/images/kM8esgT"
+          },
+          {
+            "value": "$275",
+            "context": "sercontent.com/images/kM8esgT2igCBxfSTeFxCZFKe94.png) Get up to $275 off services on Thumbtack ![Image 2](https://framerusercontent."
+          },
+          {
+            "value": "$1,000",
+            "context": "ages/CCz9la4h090iwgoNwu7paiIUs.png?width=2880&height=536) Get a $1,000 credit at closing when you buy or refinance a home with Chase *"
+          },
+          {
+            "value": "$700",
+            "context": "ercontent.com/images/oxcz8LjhVf2BzckMeSJfc4LjF0w.png) Get up to $700 off on Ezra cancer screening ![Image 29](https://framerusercont"
+          },
+          {
+            "value": "$25",
+            "context": "://framerusercontent.com/images/Wp5L0lvvluUITLU2jOpCUky7II.png) $25 off on Perplexity merch * ![Image 31](https://framerusercontent"
+          },
+          {
+            "value": "$400",
+            "context": "UAkEwre4KPeqvtvOL1eozH5qg.png?width=1920&height=1080) Get up to $400 off on Eight Sleep Pod * ![Image 33](https://framerusercontent."
+          },
+          {
+            "value": "$50",
+            "context": "E.png?scale-down-to=512&width=680&height=1020) Get an exclusive $50 off Galaxy Watch8 Series or Watch Ultra * ![Image 35](https://f"
+          }
+        ],
+        "planSignals": [
+          {
+            "value": "Pro",
+            "context": "Title: Perplexity Pro Perks URL Source: http://www.perplexity.ai/properks/ Markdown C"
+          },
+          {
+            "value": "free",
+            "context": "0&height=800) Get up to 30% off base rates on car rentals and a free car class upgrade ![Image 4](https://framerusercontent.com/imag"
+          },
+          {
+            "value": "Ultra",
+            "context": "ht=1020) Get an exclusive $50 off Galaxy Watch8 Series or Watch Ultra * ![Image 35](https://framerusercontent.com/images/xEbkPMvWN4MQ"
+          }
+        ]
+      }
     },
     {
       "id": "perplexity-enterprise-pricing",
@@ -1111,9 +1267,23 @@
       "surface": "membership-rates",
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
-      "ok": false,
-      "fetchedAt": "2026-09-03T16:28:34.788Z",
-      "error": "HTTP 403 Forbidden"
+      "ok": true,
+      "fetchedAt": "2026-09-04T16:24:44.444Z",
+      "title": "Just a moment...",
+      "description": "",
+      "status": 200,
+      "byteLength": 351,
+      "fetchMode": "jina_markdown",
+      "extraction": {
+        "confidence": "review",
+        "priceSignals": [],
+        "planSignals": [
+          {
+            "value": "enterprise",
+            "context": "urce: http://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions Warning: Target"
+          }
+        ]
+      }
     },
     {
       "id": "perplexity-connectors",
@@ -1123,9 +1293,18 @@
       "surface": "membership-rates",
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
-      "ok": false,
-      "fetchedAt": "2026-09-03T16:28:34.789Z",
-      "error": "HTTP 403 Forbidden"
+      "ok": true,
+      "fetchedAt": "2026-09-04T16:24:44.444Z",
+      "title": "Just a moment...",
+      "description": "",
+      "status": 200,
+      "byteLength": 323,
+      "fetchMode": "jina_markdown",
+      "extraction": {
+        "confidence": "low",
+        "priceSignals": [],
+        "planSignals": []
+      }
     }
   ]
 }
