@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-06T15:30:35.950Z",
+  "generatedAt": "2026-09-07T17:45:53.139Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,7 +12,7 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-09-06T15:30:30.288Z",
+      "fetchedAt": "2026-09-07T17:45:50.037Z",
       "title": "定价 | ChatGPT",
       "description": "",
       "status": 200,
@@ -54,7 +54,7 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-09-06T15:30:30.334Z",
+      "fetchedAt": "2026-09-07T17:45:50.074Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
@@ -225,7 +225,7 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-09-06T15:30:30.336Z",
+      "fetchedAt": "2026-09-07T17:45:50.076Z",
       "title": "Plans & Pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
@@ -400,11 +400,11 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-09-06T15:30:30.338Z",
+      "fetchedAt": "2026-09-07T17:45:50.077Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more",
       "description": "Get access to the best of Google AI including Gemini 3.1 Pro, video generation with Veo 3.1, Deep Research, and much more.",
       "status": 200,
-      "byteLength": 295763,
+      "byteLength": 251307,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -428,14 +428,6 @@
           {
             "value": "$199.99",
             "context": "99.99 / month $99.99 / month: 5x higher usage limits vs. AI Pro $199.99 / month: 20x higher usage limits vs. AI Pro Get started Everyth"
-          },
-          {
-            "value": "$21",
-            "context": "or small businesses and teams. No IT setup needed. Starting at: $21 USD per seat per month Start a trial Gemini Enterprise app Your"
-          },
-          {
-            "value": "$30",
-            "context": "anizations that need enterprise-grade IT controls. Starting at: $30 USD per seat per month Contact sales Everything in Business edi"
           }
         ],
         "planSignals": [
@@ -448,12 +440,8 @@
             "context": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more Skip to main content For"
           },
           {
-            "value": "Business",
-            "context": "ore out of Gemini Choose a plan that is right for you. Personal Business Developer United States Free Get everyday help from Google AI t"
-          },
-          {
             "value": "Free",
-            "context": "hat is right for you. Personal Business Developer United States Free Get everyday help from Google AI to tackle tasks at work, schoo"
+            "context": "low to unlock Gemini Omni, Daily Brief, and more. United States Free Get everyday help from Google AI to tackle tasks at work, schoo"
           },
           {
             "value": "Flash",
@@ -472,8 +460,12 @@
             "context": "ids, and more Access Gemini directly in Google apps Google Home Premium (Standard plan) 5 30 days of event history and Gemini features"
           },
           {
+            "value": "business",
+            "context": "see full list of countries . Looking for AI solutions for your business or work account? Try Gemini Enterprise app Create Learn Work Co"
+          },
+          {
             "value": "Enterprise",
-            "context": "ofile picture to access the Settings menu. United States Gemini Enterprise Business edition For small businesses and teams. No IT setup ne"
+            "context": "for AI solutions for your business or work account? Try Gemini Enterprise app Create Learn Work Code Unlock your creative potential with"
           }
         ]
       }
@@ -487,11 +479,11 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-09-06T15:30:30.339Z",
+      "fetchedAt": "2026-09-07T17:45:50.078Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
-      "byteLength": 345288,
+      "byteLength": 345783,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -530,7 +522,7 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-09-06T15:30:30.340Z",
+      "fetchedAt": "2026-09-07T17:45:50.080Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
@@ -609,11 +601,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-09-06T15:30:30.341Z",
+      "fetchedAt": "2026-09-07T17:45:50.081Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "GitHub Copilot works alongside you directly in your editor, suggesting whole lines or entire functions for you.",
       "status": 200,
-      "byteLength": 1245213,
+      "byteLength": 1245120,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -744,11 +736,11 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-09-06T15:30:30.342Z",
+      "fetchedAt": "2026-09-07T17:45:50.082Z",
       "title": "Models and pricing for GitHub Copilot - GitHub Docs",
       "description": "See per-token pricing for the models available in GitHub Copilot and reference rates for additional usage across plans.",
       "status": 200,
-      "byteLength": 670542,
+      "byteLength": 677154,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -893,7 +885,7 @@
           },
           {
             "value": "Codex",
-            "context": "se plugin standards Third-party coding agents Agent apps OpenAI Codex Anthropic Claude Agent skills Enterprise management OpenTelemet"
+            "context": "emory Hooks Plugins Third-party coding agents Agent apps OpenAI Codex Anthropic Claude Agent skills Cloud and local sandboxes Copilot"
           },
           {
             "value": "Business",
@@ -923,7 +915,7 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-09-06T15:30:30.343Z",
+      "fetchedAt": "2026-09-07T17:45:50.082Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -949,7 +941,7 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-09-06T15:30:30.345Z",
+      "fetchedAt": "2026-09-07T17:45:50.084Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -979,11 +971,11 @@
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
       "ok": true,
-      "fetchedAt": "2026-09-06T15:30:30.345Z",
+      "fetchedAt": "2026-09-07T17:45:50.085Z",
       "title": "Perplexity Pro Perks",
       "description": "",
       "status": 200,
-      "byteLength": 12954,
+      "byteLength": 13001,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -1020,7 +1012,7 @@
         "planSignals": [
           {
             "value": "Pro",
-            "context": "Title: Perplexity Pro Perks URL Source: http://www.perplexity.ai/properks/ Markdown C"
+            "context": "Title: Perplexity Pro Perks URL Source: http://www.perplexity.ai/properks/ Published"
           },
           {
             "value": "free",
@@ -1042,7 +1034,7 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": true,
-      "fetchedAt": "2026-09-06T15:30:30.346Z",
+      "fetchedAt": "2026-09-07T17:45:50.086Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -1068,33 +1060,16 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": true,
-      "fetchedAt": "2026-09-06T15:30:30.347Z",
-      "title": "Using the Connector for Slack",
+      "fetchedAt": "2026-09-07T17:45:50.086Z",
+      "title": "Just a moment...",
       "description": "",
       "status": 200,
-      "byteLength": 6242,
+      "byteLength": 323,
       "fetchMode": "jina_markdown",
       "extraction": {
-        "confidence": "review",
+        "confidence": "low",
         "priceSignals": [],
-        "planSignals": [
-          {
-            "value": "team",
-            "context": "ew feature for Perplexity users that integrates Slack with your team’s workflows by searching and synthesizing insights from convers"
-          },
-          {
-            "value": "enterprise",
-            "context": "es in one place. It integrates Slack directly with Perplexity’s enterprise productivity features, enables streamlined collaboration, and s"
-          },
-          {
-            "value": "Pro",
-            "context": "r for Slack? The Connector for Slack is available to Perplexity Pro, Perplexity Max, Enterprise Pro and Enterprise Max users. Our p"
-          },
-          {
-            "value": "Max",
-            "context": "Connector for Slack is available to Perplexity Pro, Perplexity Max, Enterprise Pro and Enterprise Max users. Our plans start at: O"
-          }
-        ]
+        "planSignals": []
       }
     }
   ]
