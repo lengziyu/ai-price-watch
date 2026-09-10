@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T16:41:34.529Z",
+  "generatedAt": "2026-09-10T16:27:22.575Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,7 +12,7 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-09-09T16:41:28.979Z",
+      "fetchedAt": "2026-09-10T16:27:18.347Z",
       "title": "定价 | ChatGPT",
       "description": "",
       "status": 200,
@@ -32,15 +32,15 @@
           },
           {
             "value": "Codex",
-            "context": "传功能的消息数量受限 * 图像生成功能受限，速度较慢 * 语音聊天数量受限 * 深度研究功能受限 * 记忆与上下文支持受限 * Codex 使用权限有限 * 桌面端 ChatGPT 工作使用权限受限 ### Go 扩展访问权限 免费版中的全部内容，以及： * 包含工"
+            "context": "传功能的消息数量受限 * 图像生成功能受限，速度较慢 * 语音聊天数量受限 * 深度研究功能受限 * 记忆与上下文支持受限 * Codex 使用权限有限 * 桌面端 ChatGPT 工作使用权限受限 ### Go 最适合长对话 免费版中的全部内容，以及： * 包含工"
           },
           {
             "value": "Plus",
-            "context": "及： * 包含工具调用的消息数量更多 * 更高的上传额度 * 更高的图片生成额度 * 语音聊天数量更多 * 更长的记忆 ### Plus 利用高级智能完成更多工作 Go 中的全部内容，以及： * GPT-5.6 的高级推理模型 * 更高的消息与上传额度 * 更复杂"
+            "context": "及： * 包含工具调用的消息数量更多 * 更高的上传额度 * 更高的图片生成额度 * 语音聊天数量更多 * 更长的记忆 ### Plus 最适合进阶工作与高效办公 Go 中的全部内容，以及： * GPT-5.6 的高级推理模型 * 更高的消息与上传额度 * 更复杂"
           },
           {
             "value": "Pro",
-            "context": "* 更高的 Codex 使用量 * 桌面端、网页端和移动端 ChatGPT 工作（更高使用权限） * 抢先体验新功能 ### Pro 大幅提升工作效率 Plus 中的全部内容，以及： * 5 倍或 20 倍的使用配额 * 由 GPT-6 Astra 提供支持的"
+            "context": "* 更高的 Codex 使用量 * 桌面端、网页端和移动端 ChatGPT 工作（更高使用权限） * 抢先体验新功能 ### Pro 最适合研究和编程 Plus 中的全部内容，以及： * 5 倍或 20 倍的使用配额 * 由 GPT-6 Astra 提供支持的"
           }
         ]
       }
@@ -54,7 +54,7 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-09-09T16:41:29.007Z",
+      "fetchedAt": "2026-09-10T16:27:18.381Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
@@ -225,11 +225,11 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-09-09T16:41:29.008Z",
+      "fetchedAt": "2026-09-10T16:27:18.383Z",
       "title": "Plans & Pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
-      "byteLength": 1146558,
+      "byteLength": 1146739,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -400,11 +400,11 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-09-09T16:41:29.009Z",
+      "fetchedAt": "2026-09-10T16:27:18.384Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more",
       "description": "Get access to the best of Google AI including Gemini 3.1 Pro, video generation with Veo 3.1, Deep Research, and much more.",
       "status": 200,
-      "byteLength": 295763,
+      "byteLength": 295775,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -487,36 +487,40 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-09-09T16:41:29.010Z",
+      "fetchedAt": "2026-09-10T16:27:18.385Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
-      "byteLength": 341241,
+      "byteLength": 336825,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
         "priceSignals": [
           {
             "value": "$20",
-            "context": "包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 试用 Cursor 个人 适合想尝试智能体的人 $20 / mo. Pro Pro+ Ultra Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ Grok 的充足使用额度 ✓"
+            "context": "% Hobby 免费 包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 试用 Cursor Pro $20 / mo. Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ Grok 的充足使用额度 ✓ 访问前沿模型 ✓ Grok"
           },
           {
-            "value": "$40",
-            "context": "t 访问权限 ✓ MCP、技能和钩子 ✓ 云端智能体 ✓ 按用量计费的 Bugbot 获取 Pro 团队版 适合协作交付的团队 $40 / user / mo. 标准版 高级版 包含个人的全部功能，另加： ✓ 集中式团队计费与管理 ✓ 适用于内部规则、技能和插件"
+            "value": "$60",
+            "context": "✓ Grok Bot 访问权限 ✓ MCP、技能和钩子 ✓ 云端智能体 ✓ 按用量计费的 Bugbot 获取 Pro Pro+ $60 / mo. Pro 的所有功能，另加： ✓ Pro 版智能体限额的 3 倍 ✓ Grok 的充足使用额度 ✓ 访问前沿模型 ✓"
+          },
+          {
+            "value": "$200",
+            "context": "Grok Bot 用量上限 ✓ MCP、技能和钩子 ✓ 云端智能体 ✓ 按用量计费的 Bugbot 获取 Pro+ Ultra $200 / mo. Pro 的所有功能，另加： ✓ 智能体限额为 Pro 套餐的 20 倍 ✓ Grok 的充足使用额度 ✓ 访问前沿"
           }
         ],
         "planSignals": [
           {
             "value": "Hobby",
-            "context": "社区 帮助 ↗ 工作坊 论坛 ↗ 招聘 模型 → 产品 → 企业 定价 资源 → 登录 联系 联系销售 下载 定价 按月 按年 Hobby 适合爱折腾的人 免费 包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 试用 Cursor 个人"
+            "context": "模型 → 产品 → 企业 定价 资源 → 登录 联系 联系销售 下载 定价 个人 团队版和企业版 选择按年付费，节省 20% Hobby 免费 包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 试用 Cursor Pro $20 / m"
           },
           {
             "value": "Pro",
-            "context": "用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 试用 Cursor 个人 适合想尝试智能体的人 $20 / mo. Pro Pro+ Ultra Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ Grok 的充足使用额度 ✓ 访问前沿模型 ✓"
+            "context": "省 20% Hobby 免费 包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 试用 Cursor Pro $20 / mo. Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ Grok 的充足使用额度 ✓ 访问前沿模型 ✓ G"
           },
           {
             "value": "Ultra",
-            "context": "能体请求 ✓ Composer 访问权限 试用 Cursor 个人 适合想尝试智能体的人 $20 / mo. Pro Pro+ Ultra Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ Grok 的充足使用额度 ✓ 访问前沿模型 ✓ Grok Bot 访问"
+            "context": "✓ 更高的 Grok Bot 用量上限 ✓ MCP、技能和钩子 ✓ 云端智能体 ✓ 按用量计费的 Bugbot 获取 Pro+ Ultra $200 / mo. Pro 的所有功能，另加： ✓ 智能体限额为 Pro 套餐的 20 倍 ✓ Grok 的充足使用额度 ✓"
           }
         ]
       }
@@ -530,54 +534,62 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-09-09T16:41:29.011Z",
+      "fetchedAt": "2026-09-10T16:27:18.386Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
-      "byteLength": 21488,
+      "byteLength": 21582,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
         "priceSignals": [
           {
-            "value": "0.05元",
-            "context": "补全（Beta） 仅非思考模式支持 仅非思考模式支持 不支持 价格 (1)(2) 百万tokens输入 （缓存命中） 空闲时段 0.05元 0.15元 0.05元 高峰时段 0.10元 0.30元 0.10元 百万tokens输入 （缓存未命中） 空闲时段 1.5元"
+            "value": "0.02元",
+            "context": "ta） 仅非思考模式支持 仅非思考模式支持 图像理解 支持 不支持 价格 (3) 百万tokens输入 （缓存命中） 空闲时段 0.02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元"
           },
           {
             "value": "0.15元",
-            "context": "a） 仅非思考模式支持 仅非思考模式支持 不支持 价格 (1)(2) 百万tokens输入 （缓存命中） 空闲时段 0.05元 0.15元 0.05元 高峰时段 0.10元 0.30元 0.10元 百万tokens输入 （缓存未命中） 空闲时段 1.5元 4.5元"
+            "context": "思考模式支持 仅非思考模式支持 图像理解 支持 不支持 价格 (3) 百万tokens输入 （缓存命中） 空闲时段 0.02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百"
           },
           {
-            "value": "0.10元",
-            "context": "式支持 不支持 价格 (1)(2) 百万tokens输入 （缓存命中） 空闲时段 0.05元 0.15元 0.05元 高峰时段 0.10元 0.30元 0.10元 百万tokens输入 （缓存未命中） 空闲时段 1.5元 4.5元 1.5元 高峰时段 3.0元 9."
+            "value": "0.04元",
+            "context": "模式支持 图像理解 支持 不支持 价格 (3) 百万tokens输入 （缓存命中） 空闲时段 0.02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空"
           },
           {
             "value": "0.30元",
-            "context": "持 价格 (1)(2) 百万tokens输入 （缓存命中） 空闲时段 0.05元 0.15元 0.05元 高峰时段 0.10元 0.30元 0.10元 百万tokens输入 （缓存未命中） 空闲时段 1.5元 4.5元 1.5元 高峰时段 3.0元 9.0元 3.0"
+            "context": "像理解 支持 不支持 价格 (3) 百万tokens输入 （缓存命中） 空闲时段 0.02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元"
           },
           {
-            "value": "1.5元",
-            "context": ".05元 0.15元 0.05元 高峰时段 0.10元 0.30元 0.10元 百万tokens输入 （缓存未命中） 空闲时段 1.5元 4.5元 1.5元 高峰时段 3.0元 9.0元 3.0元 百万tokens输出 空闲时段 4.5元 13.5元 4.5元 高"
+            "value": "1元",
+            "context": "缓存命中） 空闲时段 0.02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 ("
           },
           {
             "value": "4.5元",
-            "context": "0.15元 0.05元 高峰时段 0.10元 0.30元 0.10元 百万tokens输入 （缓存未命中） 空闲时段 1.5元 4.5元 1.5元 高峰时段 3.0元 9.0元 3.0元 百万tokens输出 空闲时段 4.5元 13.5元 4.5元 高峰时段 9"
+            "context": "中） 空闲时段 0.02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (4) 25"
           },
           {
-            "value": "3.0元",
-            "context": "段 0.10元 0.30元 0.10元 百万tokens输入 （缓存未命中） 空闲时段 1.5元 4.5元 1.5元 高峰时段 3.0元 9.0元 3.0元 百万tokens输出 空闲时段 4.5元 13.5元 4.5元 高峰时段 9.0元 27.0元 9.0元"
+            "value": "2元",
+            "context": "02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (4) 2500 500 ("
           },
           {
             "value": "9.0元",
-            "context": "0元 0.30元 0.10元 百万tokens输入 （缓存未命中） 空闲时段 1.5元 4.5元 1.5元 高峰时段 3.0元 9.0元 3.0元 百万tokens输出 空闲时段 4.5元 13.5元 4.5元 高峰时段 9.0元 27.0元 9.0元 并发限制"
+            "context": "0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (4) 2500 500 (1) 模型"
+          },
+          {
+            "value": "4元",
+            "context": "0元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (4) 2500 500 (1) 模型名请使用 deepseek-flash"
           },
           {
             "value": "13.5元",
-            "context": "中） 空闲时段 1.5元 4.5元 1.5元 高峰时段 3.0元 9.0元 3.0元 百万tokens输出 空闲时段 4.5元 13.5元 4.5元 高峰时段 9.0元 27.0元 9.0元 并发限制 (3) 2500 500 2500 (1) 空闲时段价格为高峰时"
+            "context": "百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (4) 2500 500 (1) 模型名请使用 deepseek-flash 。旧模型名"
+          },
+          {
+            "value": "8元",
+            "context": "（缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (4) 2500 500 (1) 模型名请使用 deepseek-flash 。旧模型名 deepsee"
           },
           {
             "value": "27.0元",
-            "context": "元 高峰时段 3.0元 9.0元 3.0元 百万tokens输出 空闲时段 4.5元 13.5元 4.5元 高峰时段 9.0元 27.0元 9.0元 并发限制 (3) 2500 500 2500 (1) 空闲时段价格为高峰时段价格的一半。高峰时段为北京时间周一至周五"
+            "context": "未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (4) 2500 500 (1) 模型名请使用 deepseek-flash 。旧模型名 deepseek-v4-f"
           }
         ],
         "planSignals": [
@@ -591,11 +603,11 @@
           },
           {
             "value": "flash",
-            "context": "个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。 模型细节 ​ 模型 deepseek-v4-flash deepseek-v4-pro deepseek-v4-flash-vision-exp BASE URL (OpenAI 格"
+            "context": "词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。 模型细节 ​ 模型 deepseek-flash (1) deepseek-v4-pro (2) BASE URL (OpenAI 格式) https://api.deepse"
           },
           {
             "value": "pro",
-            "context": "型输入和输出的总 token 数进行计量计费。 模型细节 ​ 模型 deepseek-v4-flash deepseek-v4-pro deepseek-v4-flash-vision-exp BASE URL (OpenAI 格式) https://api.d"
+            "context": "输入和输出的总 token 数进行计量计费。 模型细节 ​ 模型 deepseek-flash (1) deepseek-v4-pro (2) BASE URL (OpenAI 格式) https://api.deepseek.com BASE URL (Ant"
           }
         ]
       }
@@ -609,11 +621,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-09-09T16:41:29.012Z",
+      "fetchedAt": "2026-09-10T16:27:18.387Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "GitHub Copilot works alongside you directly in your editor, suggesting whole lines or entire functions for you.",
       "status": 200,
-      "byteLength": 1250724,
+      "byteLength": 1250703,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -744,11 +756,11 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-09-09T16:41:29.013Z",
+      "fetchedAt": "2026-09-10T16:27:18.388Z",
       "title": "Models and pricing for GitHub Copilot - GitHub Docs",
       "description": "See per-token pricing for the models available in GitHub Copilot and reference rates for additional usage across plans.",
       "status": 200,
-      "byteLength": 677905,
+      "byteLength": 676594,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -923,7 +935,7 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-09-09T16:41:29.013Z",
+      "fetchedAt": "2026-09-10T16:27:18.388Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -949,7 +961,7 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-09-09T16:41:29.015Z",
+      "fetchedAt": "2026-09-10T16:27:18.390Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -979,11 +991,11 @@
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
       "ok": true,
-      "fetchedAt": "2026-09-09T16:41:29.016Z",
+      "fetchedAt": "2026-09-10T16:27:18.391Z",
       "title": "Perplexity Pro Perks",
       "description": "",
       "status": 200,
-      "byteLength": 13001,
+      "byteLength": 12954,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -1020,7 +1032,7 @@
         "planSignals": [
           {
             "value": "Pro",
-            "context": "Title: Perplexity Pro Perks URL Source: http://www.perplexity.ai/properks/ Published"
+            "context": "Title: Perplexity Pro Perks URL Source: http://www.perplexity.ai/properks/ Markdown C"
           },
           {
             "value": "free",
@@ -1042,7 +1054,7 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": true,
-      "fetchedAt": "2026-09-09T16:41:29.016Z",
+      "fetchedAt": "2026-09-10T16:27:18.392Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -1068,7 +1080,7 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": true,
-      "fetchedAt": "2026-09-09T16:41:29.017Z",
+      "fetchedAt": "2026-09-10T16:27:18.392Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
