@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-10T16:27:22.575Z",
+  "generatedAt": "2026-09-11T16:32:04.940Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,11 +12,11 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-09-10T16:27:18.347Z",
+      "fetchedAt": "2026-09-11T16:31:59.211Z",
       "title": "定价 | ChatGPT",
       "description": "",
       "status": 200,
-      "byteLength": 10450,
+      "byteLength": 10444,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -32,15 +32,15 @@
           },
           {
             "value": "Codex",
-            "context": "传功能的消息数量受限 * 图像生成功能受限，速度较慢 * 语音聊天数量受限 * 深度研究功能受限 * 记忆与上下文支持受限 * Codex 使用权限有限 * 桌面端 ChatGPT 工作使用权限受限 ### Go 最适合长对话 免费版中的全部内容，以及： * 包含工"
+            "context": "传功能的消息数量受限 * 图像生成功能受限，速度较慢 * 语音聊天数量受限 * 深度研究功能受限 * 记忆与上下文支持受限 * Codex 使用权限有限 * 桌面端 ChatGPT 工作使用权限受限 ### Go 扩展访问权限 免费版中的全部内容，以及： * 包含工"
           },
           {
             "value": "Plus",
-            "context": "及： * 包含工具调用的消息数量更多 * 更高的上传额度 * 更高的图片生成额度 * 语音聊天数量更多 * 更长的记忆 ### Plus 最适合进阶工作与高效办公 Go 中的全部内容，以及： * GPT-5.6 的高级推理模型 * 更高的消息与上传额度 * 更复杂"
+            "context": "及： * 包含工具调用的消息数量更多 * 更高的上传额度 * 更高的图片生成额度 * 语音聊天数量更多 * 更长的记忆 ### Plus 利用高级智能完成更多工作 Go 中的全部内容，以及： * GPT-5.6 的高级推理模型 * 更高的消息与上传额度 * 更复杂"
           },
           {
             "value": "Pro",
-            "context": "* 更高的 Codex 使用量 * 桌面端、网页端和移动端 ChatGPT 工作（更高使用权限） * 抢先体验新功能 ### Pro 最适合研究和编程 Plus 中的全部内容，以及： * 5 倍或 20 倍的使用配额 * 由 GPT-6 Astra 提供支持的"
+            "context": "* 更高的 Codex 使用量 * 桌面端、网页端和移动端 ChatGPT 工作（更高使用权限） * 抢先体验新功能 ### Pro 大幅提升工作效率 Plus 中的全部内容，以及： * 5 倍的使用额度 * 由 GPT-6 Astra 提供支持的专业推理 *"
           }
         ]
       }
@@ -54,11 +54,11 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-09-10T16:27:18.381Z",
+      "fetchedAt": "2026-09-11T16:31:59.248Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
-      "byteLength": 659500,
+      "byteLength": 669165,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -225,18 +225,18 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-09-10T16:27:18.383Z",
+      "fetchedAt": "2026-09-11T16:31:59.250Z",
       "title": "Plans & Pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
-      "byteLength": 1146739,
+      "byteLength": 1148144,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
         "priceSignals": [
           {
             "value": "$0",
-            "context": "rkdown Pricing Individual Team & Enterprise API Free Try Claude $0 Free for everyone Try Claude Chat on web, iOS, Android, and on"
+            "context": "dual Developer Team & Enterprise API Individual Free Try Claude $0 Free for everyone Try Claude Chat on web, iOS, Android, and on"
           },
           {
             "value": "$17",
@@ -358,11 +358,11 @@
           },
           {
             "value": "Team",
-            "context": "k questions about this page Copy as markdown Pricing Individual Team & Enterprise API Free Try Claude $0 Free for everyone Try Claud"
+            "context": "s about this page Copy as markdown Pricing Individual Developer Team & Enterprise API Individual Free Try Claude $0 Free for everyon"
           },
           {
             "value": "Free",
-            "context": "page Copy as markdown Pricing Individual Team & Enterprise API Free Try Claude $0 Free for everyone Try Claude Chat on web, iOS, An"
+            "context": "n Pricing Individual Developer Team & Enterprise API Individual Free Try Claude $0 Free for everyone Try Claude Chat on web, iOS, An"
           },
           {
             "value": "Pro",
@@ -400,11 +400,11 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-09-10T16:27:18.384Z",
+      "fetchedAt": "2026-09-11T16:31:59.251Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more",
       "description": "Get access to the best of Google AI including Gemini 3.1 Pro, video generation with Veo 3.1, Deep Research, and much more.",
       "status": 200,
-      "byteLength": 295775,
+      "byteLength": 297610,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -441,19 +441,19 @@
         "planSignals": [
           {
             "value": "Pro",
-            "context": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more Skip to main cont"
+            "context": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more College students"
           },
           {
             "value": "Ultra",
-            "context": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more Skip to main content For"
+            "context": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more College students get a fr"
+          },
+          {
+            "value": "free",
+            "context": "ra — get access to Gemini 3.1 Pro & more College students get a free Pro plan for one year. Learn more Close Skip to main content Fo"
           },
           {
             "value": "Business",
             "context": "ore out of Gemini Choose a plan that is right for you. Personal Business Developer United States Free Get everyday help from Google AI t"
-          },
-          {
-            "value": "Free",
-            "context": "hat is right for you. Personal Business Developer United States Free Get everyday help from Google AI to tackle tasks at work, schoo"
           },
           {
             "value": "Flash",
@@ -487,40 +487,36 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-09-10T16:27:18.385Z",
+      "fetchedAt": "2026-09-11T16:31:59.252Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
-      "byteLength": 336825,
+      "byteLength": 341351,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
         "priceSignals": [
           {
             "value": "$20",
-            "context": "% Hobby 免费 包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 试用 Cursor Pro $20 / mo. Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ Grok 的充足使用额度 ✓ 访问前沿模型 ✓ Grok"
+            "context": "包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 试用 Cursor 个人 适合想尝试智能体的人 $20 / mo. Pro Pro+ Ultra Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ Grok 的充足使用额度 ✓"
           },
           {
-            "value": "$60",
-            "context": "✓ Grok Bot 访问权限 ✓ MCP、技能和钩子 ✓ 云端智能体 ✓ 按用量计费的 Bugbot 获取 Pro Pro+ $60 / mo. Pro 的所有功能，另加： ✓ Pro 版智能体限额的 3 倍 ✓ Grok 的充足使用额度 ✓ 访问前沿模型 ✓"
-          },
-          {
-            "value": "$200",
-            "context": "Grok Bot 用量上限 ✓ MCP、技能和钩子 ✓ 云端智能体 ✓ 按用量计费的 Bugbot 获取 Pro+ Ultra $200 / mo. Pro 的所有功能，另加： ✓ 智能体限额为 Pro 套餐的 20 倍 ✓ Grok 的充足使用额度 ✓ 访问前沿"
+            "value": "$40",
+            "context": "t 访问权限 ✓ MCP、技能和钩子 ✓ 云端智能体 ✓ 按用量计费的 Bugbot 获取 Pro 团队版 适合协作交付的团队 $40 / user / mo. 标准版 高级版 包含个人的全部功能，另加： ✓ 集中式团队计费与管理 ✓ 适用于内部规则、技能和插件"
           }
         ],
         "planSignals": [
           {
             "value": "Hobby",
-            "context": "模型 → 产品 → 企业 定价 资源 → 登录 联系 联系销售 下载 定价 个人 团队版和企业版 选择按年付费，节省 20% Hobby 免费 包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 试用 Cursor Pro $20 / m"
+            "context": "社区 帮助 ↗ 工作坊 论坛 ↗ 招聘 模型 → 产品 → 企业 定价 资源 → 登录 联系 联系销售 下载 定价 按月 按年 Hobby 适合爱折腾的人 免费 包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 试用 Cursor 个人"
           },
           {
             "value": "Pro",
-            "context": "省 20% Hobby 免费 包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 试用 Cursor Pro $20 / mo. Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ Grok 的充足使用额度 ✓ 访问前沿模型 ✓ G"
+            "context": "用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 试用 Cursor 个人 适合想尝试智能体的人 $20 / mo. Pro Pro+ Ultra Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ Grok 的充足使用额度 ✓ 访问前沿模型 ✓"
           },
           {
             "value": "Ultra",
-            "context": "✓ 更高的 Grok Bot 用量上限 ✓ MCP、技能和钩子 ✓ 云端智能体 ✓ 按用量计费的 Bugbot 获取 Pro+ Ultra $200 / mo. Pro 的所有功能，另加： ✓ 智能体限额为 Pro 套餐的 20 倍 ✓ Grok 的充足使用额度 ✓"
+            "context": "能体请求 ✓ Composer 访问权限 试用 Cursor 个人 适合想尝试智能体的人 $20 / mo. Pro Pro+ Ultra Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ Grok 的充足使用额度 ✓ 访问前沿模型 ✓ Grok Bot 访问"
           }
         ]
       }
@@ -534,11 +530,11 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-09-10T16:27:18.386Z",
+      "fetchedAt": "2026-09-11T16:31:59.253Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
-      "byteLength": 21582,
+      "byteLength": 21493,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -621,11 +617,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-09-10T16:27:18.387Z",
+      "fetchedAt": "2026-09-11T16:31:59.254Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "GitHub Copilot works alongside you directly in your editor, suggesting whole lines or entire functions for you.",
       "status": 200,
-      "byteLength": 1250703,
+      "byteLength": 1250525,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -756,11 +752,11 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-09-10T16:27:18.388Z",
+      "fetchedAt": "2026-09-11T16:31:59.254Z",
       "title": "Models and pricing for GitHub Copilot - GitHub Docs",
       "description": "See per-token pricing for the models available in GitHub Copilot and reference rates for additional usage across plans.",
       "status": 200,
-      "byteLength": 676594,
+      "byteLength": 677637,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -905,7 +901,7 @@
           },
           {
             "value": "Codex",
-            "context": "emory Hooks Plugins Third-party coding agents Agent apps OpenAI Codex Anthropic Claude Agent skills Cloud and local sandboxes Copilot"
+            "context": "emory Hooks Plugins Third-party coding agents Agent apps OpenAI Codex Anthropic Claude Agent skills Cloud and local sandboxes Prompti"
           },
           {
             "value": "Business",
@@ -935,7 +931,7 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-09-10T16:27:18.388Z",
+      "fetchedAt": "2026-09-11T16:31:59.255Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -961,7 +957,7 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-09-10T16:27:18.390Z",
+      "fetchedAt": "2026-09-11T16:31:59.258Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -990,60 +986,9 @@
       "surface": "membership-rates",
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
-      "ok": true,
-      "fetchedAt": "2026-09-10T16:27:18.391Z",
-      "title": "Perplexity Pro Perks",
-      "description": "",
-      "status": 200,
-      "byteLength": 12954,
-      "fetchMode": "jina_markdown",
-      "extraction": {
-        "confidence": "review",
-        "priceSignals": [
-          {
-            "value": "$20",
-            "context": "Perks for Pro Members ### Unlock thousands in savings for just $20/month * ![Image 1](https://framerusercontent.com/images/kM8esgT"
-          },
-          {
-            "value": "$275",
-            "context": "sercontent.com/images/kM8esgT2igCBxfSTeFxCZFKe94.png) Get up to $275 off services on Thumbtack ![Image 2](https://framerusercontent."
-          },
-          {
-            "value": "$1,000",
-            "context": "ages/CCz9la4h090iwgoNwu7paiIUs.png?width=2880&height=536) Get a $1,000 credit at closing when you buy or refinance a home with Chase *"
-          },
-          {
-            "value": "$700",
-            "context": "ercontent.com/images/oxcz8LjhVf2BzckMeSJfc4LjF0w.png) Get up to $700 off on Ezra cancer screening ![Image 29](https://framerusercont"
-          },
-          {
-            "value": "$25",
-            "context": "://framerusercontent.com/images/Wp5L0lvvluUITLU2jOpCUky7II.png) $25 off on Perplexity merch * ![Image 31](https://framerusercontent"
-          },
-          {
-            "value": "$400",
-            "context": "UAkEwre4KPeqvtvOL1eozH5qg.png?width=1920&height=1080) Get up to $400 off on Eight Sleep Pod * ![Image 33](https://framerusercontent."
-          },
-          {
-            "value": "$50",
-            "context": "E.png?scale-down-to=512&width=680&height=1020) Get an exclusive $50 off Galaxy Watch8 Series or Watch Ultra * ![Image 35](https://f"
-          }
-        ],
-        "planSignals": [
-          {
-            "value": "Pro",
-            "context": "Title: Perplexity Pro Perks URL Source: http://www.perplexity.ai/properks/ Markdown C"
-          },
-          {
-            "value": "free",
-            "context": "0&height=800) Get up to 30% off base rates on car rentals and a free car class upgrade ![Image 4](https://framerusercontent.com/imag"
-          },
-          {
-            "value": "Ultra",
-            "context": "ht=1020) Get an exclusive $50 off Galaxy Watch8 Series or Watch Ultra * ![Image 35](https://framerusercontent.com/images/xEbkPMvWN4MQ"
-          }
-        ]
-      }
+      "ok": false,
+      "fetchedAt": "2026-09-11T16:31:59.259Z",
+      "error": "HTTP 403 Forbidden"
     },
     {
       "id": "perplexity-enterprise-pricing",
@@ -1053,23 +998,9 @@
       "surface": "membership-rates",
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
-      "ok": true,
-      "fetchedAt": "2026-09-10T16:27:18.392Z",
-      "title": "Just a moment...",
-      "description": "",
-      "status": 200,
-      "byteLength": 351,
-      "fetchMode": "jina_markdown",
-      "extraction": {
-        "confidence": "review",
-        "priceSignals": [],
-        "planSignals": [
-          {
-            "value": "enterprise",
-            "context": "urce: http://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions Warning: Target"
-          }
-        ]
-      }
+      "ok": false,
+      "fetchedAt": "2026-09-11T16:31:59.260Z",
+      "error": "HTTP 403 Forbidden"
     },
     {
       "id": "perplexity-connectors",
@@ -1079,18 +1010,9 @@
       "surface": "membership-rates",
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
-      "ok": true,
-      "fetchedAt": "2026-09-10T16:27:18.392Z",
-      "title": "Just a moment...",
-      "description": "",
-      "status": 200,
-      "byteLength": 323,
-      "fetchMode": "jina_markdown",
-      "extraction": {
-        "confidence": "low",
-        "priceSignals": [],
-        "planSignals": []
-      }
+      "ok": false,
+      "fetchedAt": "2026-09-11T16:31:59.260Z",
+      "error": "HTTP 403 Forbidden"
     }
   ]
 }
