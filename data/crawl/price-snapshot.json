@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-18T16:27:54.567Z",
+  "generatedAt": "2026-09-19T15:54:58.211Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,7 +12,7 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-09-18T16:27:50.573Z",
+      "fetchedAt": "2026-09-19T15:54:52.443Z",
       "title": "定价 | ChatGPT",
       "description": "",
       "status": 200,
@@ -54,11 +54,11 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-09-18T16:27:50.611Z",
+      "fetchedAt": "2026-09-19T15:54:52.467Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
-      "byteLength": 667455,
+      "byteLength": 667423,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -225,11 +225,11 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-09-18T16:27:50.613Z",
+      "fetchedAt": "2026-09-19T15:54:52.468Z",
       "title": "Plans & Pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
-      "byteLength": 1159597,
+      "byteLength": 1159172,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -240,7 +240,7 @@
           },
           {
             "value": "$17",
-            "context": "nect your apps and tools Create Artifacts Pro For everyday work $17 Per month with annual subscription discount ( $200 billed up fr"
+            "context": "ols Create Artifacts Pro Claude Code included For everyday work $17 Per month with annual subscription discount ( $200 billed up fr"
           },
           {
             "value": "$200",
@@ -252,7 +252,7 @@
           },
           {
             "value": "$100",
-            "context": "Microsoft 365 Max For people who work with Claude all day From $100 Per month Try Claude Everything in Pro, plus: Choose 5x or 20x"
+            "context": "aude Code included For people who work with Claude all day From $100 Per month Try Claude Everything in Pro, plus: Choose 5x or 20x"
           },
           {
             "value": "$25",
@@ -392,11 +392,11 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-09-18T16:27:50.614Z",
+      "fetchedAt": "2026-09-19T15:54:52.469Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more",
       "description": "Get access to the best of Google AI including Gemini 3.1 Pro, video generation with Veo 3.1, Deep Research, and much more.",
       "status": 200,
-      "byteLength": 252004,
+      "byteLength": 297621,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -420,6 +420,14 @@
           {
             "value": "$199.99",
             "context": "99.99 / month $99.99 / month: 5x higher usage limits vs. AI Pro $199.99 / month: 20x higher usage limits vs. AI Pro Get started Everyth"
+          },
+          {
+            "value": "$21",
+            "context": "or small businesses and teams. No IT setup needed. Starting at: $21 USD per seat per month Start a trial Gemini Enterprise app Your"
+          },
+          {
+            "value": "$30",
+            "context": "anizations that need enterprise-grade IT controls. Starting at: $30 USD per seat per month Contact sales Everything in Business edi"
           }
         ],
         "planSignals": [
@@ -436,6 +444,10 @@
             "context": "ra — get access to Gemini 3.1 Pro & more College students get a free Pro plan for one year. Learn more Close Skip to main content Fo"
           },
           {
+            "value": "Business",
+            "context": "ore out of Gemini Choose a plan that is right for you. Personal Business Developer United States Free Get everyday help from Google AI t"
+          },
+          {
             "value": "Flash",
             "context": "our personal, proactive and powerful AI Assistant Access to 3.6 Flash Varying access to 3.1 Pro Image generation and editing Deep Res"
           },
@@ -445,19 +457,15 @@
           },
           {
             "value": "agent",
-            "context": "ies, and more. Jules 9 Higher limits to our asynchronous coding agent for software developers Google Antigravity Entry rate limits to"
+            "context": "ies, and more. Jules 5 Higher limits to our asynchronous coding agent for software developers Google Antigravity Entry rate limits to"
           },
           {
             "value": "Premium",
-            "context": "ids, and more Access Gemini directly in Google apps Google Home Premium (Standard plan) 5 30 days of event history and Gemini features"
-          },
-          {
-            "value": "business",
-            "context": "see full list of countries . Looking for AI solutions for your business or work account? Try Gemini Enterprise app Create Learn Work Co"
+            "context": "ids, and more Access Gemini directly in Google apps Google Home Premium (Standard plan) 6 30 days of event history and Gemini features"
           },
           {
             "value": "Enterprise",
-            "context": "for AI solutions for your business or work account? Try Gemini Enterprise app Create Learn Work Code Unlock your creative potential with"
+            "context": "ofile picture to access the Settings menu. United States Gemini Enterprise Business edition For small businesses and teams. No IT setup ne"
           }
         ]
       }
@@ -471,7 +479,7 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-09-18T16:27:50.615Z",
+      "fetchedAt": "2026-09-19T15:54:52.470Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
@@ -518,30 +526,30 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-09-18T16:27:50.617Z",
+      "fetchedAt": "2026-09-19T15:54:52.471Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
-      "byteLength": 21493,
+      "byteLength": 21397,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
         "priceSignals": [
           {
             "value": "0.02元",
-            "context": "ta） 仅非思考模式支持 仅非思考模式支持 图像理解 支持 不支持 价格 (3) 百万tokens输入 （缓存命中） 空闲时段 0.02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元"
+            "context": "ta） 仅非思考模式支持 仅非思考模式支持 图像理解 支持 不支持 价格 (2) 百万tokens输入 （缓存命中） 空闲时段 0.02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元"
           },
           {
             "value": "0.15元",
-            "context": "思考模式支持 仅非思考模式支持 图像理解 支持 不支持 价格 (3) 百万tokens输入 （缓存命中） 空闲时段 0.02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百"
+            "context": "思考模式支持 仅非思考模式支持 图像理解 支持 不支持 价格 (2) 百万tokens输入 （缓存命中） 空闲时段 0.02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百"
           },
           {
             "value": "0.04元",
-            "context": "模式支持 图像理解 支持 不支持 价格 (3) 百万tokens输入 （缓存命中） 空闲时段 0.02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空"
+            "context": "模式支持 图像理解 支持 不支持 价格 (2) 百万tokens输入 （缓存命中） 空闲时段 0.02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空"
           },
           {
             "value": "0.30元",
-            "context": "像理解 支持 不支持 价格 (3) 百万tokens输入 （缓存命中） 空闲时段 0.02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元"
+            "context": "像理解 支持 不支持 价格 (2) 百万tokens输入 （缓存命中） 空闲时段 0.02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元"
           },
           {
             "value": "1元",
@@ -549,31 +557,31 @@
           },
           {
             "value": "4.5元",
-            "context": "中） 空闲时段 0.02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (4) 25"
+            "context": "中） 空闲时段 0.02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (3) 25"
           },
           {
             "value": "2元",
-            "context": "02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (4) 2500 500 ("
+            "context": "02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (3) 2500 500 ("
           },
           {
             "value": "9.0元",
-            "context": "0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (4) 2500 500 (1) 模型"
+            "context": "0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (3) 2500 500 (1) 模型"
           },
           {
             "value": "4元",
-            "context": "0元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (4) 2500 500 (1) 模型名请使用 deepseek-flash"
+            "context": "0元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (3) 2500 500 (1) 模型名请使用 deepseek-flash"
           },
           {
             "value": "13.5元",
-            "context": "百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (4) 2500 500 (1) 模型名请使用 deepseek-flash 。旧模型名"
+            "context": "百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (3) 2500 500 (1) 模型名请使用 deepseek-flash 。旧模型名"
           },
           {
             "value": "8元",
-            "context": "（缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (4) 2500 500 (1) 模型名请使用 deepseek-flash 。旧模型名 deepsee"
+            "context": "（缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (3) 2500 500 (1) 模型名请使用 deepseek-flash 。旧模型名 deepsee"
           },
           {
             "value": "27.0元",
-            "context": "未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (4) 2500 500 (1) 模型名请使用 deepseek-flash 。旧模型名 deepseek-v4-f"
+            "context": "未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (3) 2500 500 (1) 模型名请使用 deepseek-flash 。旧模型名 deepseek-v4-f"
           }
         ],
         "planSignals": [
@@ -587,11 +595,11 @@
           },
           {
             "value": "flash",
-            "context": "词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。 模型细节 ​ 模型 deepseek-flash (1) deepseek-v4-pro (2) BASE URL (OpenAI 格式) https://api.deepse"
+            "context": "词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。 模型细节 ​ 模型 deepseek-flash (1) deepseek-v4-pro BASE URL (OpenAI 格式) https://api.deepseek.c"
           },
           {
             "value": "pro",
-            "context": "输入和输出的总 token 数进行计量计费。 模型细节 ​ 模型 deepseek-flash (1) deepseek-v4-pro (2) BASE URL (OpenAI 格式) https://api.deepseek.com BASE URL (Ant"
+            "context": "输入和输出的总 token 数进行计量计费。 模型细节 ​ 模型 deepseek-flash (1) deepseek-v4-pro BASE URL (OpenAI 格式) https://api.deepseek.com BASE URL (Anthrop"
           }
         ]
       }
@@ -605,11 +613,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-09-18T16:27:50.618Z",
+      "fetchedAt": "2026-09-19T15:54:52.471Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "GitHub Copilot works alongside you directly in your editor, suggesting whole lines or entire functions for you.",
       "status": 200,
-      "byteLength": 1257168,
+      "byteLength": 1257959,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -740,11 +748,11 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-09-18T16:27:50.619Z",
+      "fetchedAt": "2026-09-19T15:54:52.472Z",
       "title": "Models and pricing for GitHub Copilot - GitHub Docs",
       "description": "See per-token pricing for the models available in GitHub Copilot and reference rates for additional usage across plans.",
       "status": 200,
-      "byteLength": 677365,
+      "byteLength": 677813,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -919,19 +927,136 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-09-18T16:27:50.620Z",
-      "title": "Just a moment...",
+      "fetchedAt": "2026-09-19T15:54:52.472Z",
+      "title": "About X Premium",
       "description": "",
       "status": 200,
-      "byteLength": 274,
+      "byteLength": 36573,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
-        "priceSignals": [],
+        "priceSignals": [
+          {
+            "value": "$3",
+            "context": "m#tbfeatures). Subscribe now with localized pricing starting at $3/month or $32/year (plus any tax, e.g. VAT, and your payment met"
+          },
+          {
+            "value": "$32",
+            "context": "). Subscribe now with localized pricing starting at $3/month or $32/year (plus any tax, e.g. VAT, and your payment method fees) on"
+          },
+          {
+            "value": "$8",
+            "context": "or $32/year on web (or your local pricing) * Premium: Starts at $8/month or $84/year on web (or your local pricing) * Premium+: St"
+          },
+          {
+            "value": "$84",
+            "context": "on web (or your local pricing) * Premium: Starts at $8/month or $84/year on web (or your local pricing) * Premium+: Starts at $40/m"
+          },
+          {
+            "value": "$40",
+            "context": "r $84/year on web (or your local pricing) * Premium+: Starts at $40/month or $395/year on web (or your local pricing) If Premium is"
+          },
+          {
+            "value": "$395",
+            "context": "web (or your local pricing) * Premium+: Starts at $40/month or $395/year on web (or your local pricing) If Premium is available for"
+          },
+          {
+            "value": "3.00 USD",
+            "context": "| | --- | --- | --- | --- | --- | --- | --- | | United States | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | |"
+          },
+          {
+            "value": "32.00 USD",
+            "context": "-- | --- | --- | --- | --- | --- | | United States | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United King"
+          },
+          {
+            "value": "8.00 USD",
+            "context": "-- | --- | --- | --- | | United States | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00"
+          },
+          {
+            "value": "84.00 USD",
+            "context": "--- | --- | | United States | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00"
+          },
+          {
+            "value": "40.00 USD",
+            "context": "| United States | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 G"
+          },
+          {
+            "value": "395.00 USD",
+            "context": "tes | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GB"
+          },
+          {
+            "value": "3.00 GBP",
+            "context": "0 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | |"
+          },
+          {
+            "value": "32.00 GBP",
+            "context": "00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | | Canada | 3."
+          },
+          {
+            "value": "8.00 GBP",
+            "context": "00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | | Canada | 3.75 CAD | 40"
+          },
+          {
+            "value": "84.00 GBP",
+            "context": "5.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | | Canada | 3.75 CAD | 40.00 CAD | 10"
+          },
+          {
+            "value": "31.00 GBP",
+            "context": "United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | | Canada | 3.75 CAD | 40.00 CAD | 10.00 CAD | 10"
+          },
+          {
+            "value": "313.00 GBP",
+            "context": "dom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | | Canada | 3.75 CAD | 40.00 CAD | 10.00 CAD | 105.00 CAD | 56"
+          },
+          {
+            "value": "3.00 EUR",
+            "context": "30.00 SAR | 315.00 SAR | 150.00 SAR | 1,479.00 SAR | | France | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | |"
+          },
+          {
+            "value": "32.00 EUR",
+            "context": "315.00 SAR | 150.00 SAR | 1,479.00 SAR | | France | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | | Germany | 3"
+          },
+          {
+            "value": "8.00 EUR",
+            "context": "| 150.00 SAR | 1,479.00 SAR | | France | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | | Germany | 3.00 EUR | 3"
+          },
+          {
+            "value": "84.00 EUR",
+            "context": "R | 1,479.00 SAR | | France | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | | Germany | 3.00 EUR | 32.00 EUR | 8"
+          },
+          {
+            "value": "38.00 EUR",
+            "context": "SAR | | France | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | | Germany | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84"
+          },
+          {
+            "value": "377.00 EUR",
+            "context": "nce | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | | Germany | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38."
+          },
+          {
+            "value": "46.00 EUR",
+            "context": "EUR | | Belgium | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 46.00 EUR | 377.00 EUR | | Sweden | 31.13 SEK | 331.43 SEK | 83.00 SEK |"
+          }
+        ],
         "planSignals": [
           {
-            "value": "premium",
-            "context": "le: Just a moment... URL Source: http://help.x.com/en/using-x/x-premium Warning: Target URL returned error 403: Forbidden Warning: This"
+            "value": "Premium",
+            "context": "Title: About X Premium URL Source: http://help.x.com/en/using-x/x-premium Markdown Con"
+          },
+          {
+            "value": "plus",
+            "context": "om app icons, and more. **Premium:**Includes all Basic features plus a checkmark, reduced ads, access to apply for Original Content"
+          },
+          {
+            "value": "Business",
+            "context": "tional variations to the standard version of X Premium: Premium Business and Premium Organizations, which are services for businesses, g"
+          },
+          {
+            "value": "free",
+            "context": "emium+ Tier:**Subscribers to the Premium+ tier will enjoy an ad-free experience across most areas of X, including the For You timeli"
+          },
+          {
+            "value": "Pro",
+            "context": "ne for videos and images, voice mode, and more. * **Access to X Pro:**View multiple configurable timelines simultaneously which can"
           }
         ]
       }
@@ -945,7 +1070,7 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-09-18T16:27:50.622Z",
+      "fetchedAt": "2026-09-19T15:54:52.473Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -975,7 +1100,7 @@
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
       "ok": true,
-      "fetchedAt": "2026-09-18T16:27:50.623Z",
+      "fetchedAt": "2026-09-19T15:54:52.474Z",
       "title": "Perplexity Pro Perks",
       "description": "",
       "status": 200,
@@ -1038,7 +1163,7 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": true,
-      "fetchedAt": "2026-09-18T16:27:50.623Z",
+      "fetchedAt": "2026-09-19T15:54:52.474Z",
       "title": "Enterprise Pricing and Billing: Frequently Asked Questions - Perplexity Help Center",
       "description": "",
       "status": 200,
@@ -1097,16 +1222,62 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": true,
-      "fetchedAt": "2026-09-18T16:27:50.624Z",
-      "title": "Just a moment...",
+      "fetchedAt": "2026-09-19T15:54:52.474Z",
+      "title": "Using the Connector for Slack - Perplexity Help Center",
       "description": "",
       "status": 200,
-      "byteLength": 323,
+      "byteLength": 10238,
       "fetchMode": "jina_markdown",
       "extraction": {
-        "confidence": "low",
-        "priceSignals": [],
-        "planSignals": []
+        "confidence": "review",
+        "priceSignals": [
+          {
+            "value": "$20",
+            "context": ".ai/help-center/en/articles/10352901-what-is-perplexity-pro):** $20/month or $200/year * **[Perplexity Max](http://www.perplexity.a"
+          },
+          {
+            "value": "$200",
+            "context": "er/en/articles/10352901-what-is-perplexity-pro):** $20/month or $200/year * **[Perplexity Max](http://www.perplexity.ai/help-center/"
+          },
+          {
+            "value": "$2,000",
+            "context": "lp-center/en/articles/11680686-perplexity-max):** $200/month or $2,000/year Or, for organizations: * **[Enterprise Pro](http://www.per"
+          },
+          {
+            "value": "$40",
+            "context": ".ai/help-center/en/articles/10352973-what-is-enterprise-pro):** $40/month or $400/year per seat * **[Enterprise Max](http://www.per"
+          },
+          {
+            "value": "$400",
+            "context": "er/en/articles/10352973-what-is-enterprise-pro):** $40/month or $400/year per seat * **[Enterprise Max](http://www.perplexity.ai/hel"
+          },
+          {
+            "value": "$325",
+            "context": ".ai/help-center/en/articles/12310544-what-is-enterprise-max):** $325/month or $3,250/year per seat [This article](http://www.perplex"
+          },
+          {
+            "value": "$3,250",
+            "context": "r/en/articles/12310544-what-is-enterprise-max):** $325/month or $3,250/year per seat [This article](http://www.perplexity.ai/help-cent"
+          }
+        ],
+        "planSignals": [
+          {
+            "value": "team",
+            "context": "ew feature for Perplexity users that integrates Slack with your team’s workflows by searching and synthesizing insights from convers"
+          },
+          {
+            "value": "enterprise",
+            "context": "es in one place. It integrates Slack directly with Perplexity’s enterprise productivity features, enables streamlined collaboration, and s"
+          },
+          {
+            "value": "Pro",
+            "context": "r for Slack? The Connector for Slack is available to Perplexity Pro, Perplexity Max, Enterprise Pro and Enterprise Max users. Our p"
+          },
+          {
+            "value": "Max",
+            "context": "Connector for Slack is available to Perplexity Pro, Perplexity Max, Enterprise Pro and Enterprise Max users. Our plans start at: *"
+          }
+        ]
       }
     }
   ]
