@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T18:13:26.567Z",
+  "generatedAt": "2026-09-22T17:00:07.107Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,7 +12,7 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-09-21T18:13:23.977Z",
+      "fetchedAt": "2026-09-22T17:00:01.302Z",
       "title": "定价 | ChatGPT",
       "description": "",
       "status": 200,
@@ -32,15 +32,15 @@
           },
           {
             "value": "Codex",
-            "context": "传功能的消息数量受限 * 图像生成功能受限，速度较慢 * 语音聊天数量受限 * 深度研究功能受限 * 记忆与上下文支持受限 * Codex 使用权限有限 * 桌面端 ChatGPT 工作使用权限受限 ### Go 扩展访问权限 免费版中的全部内容，以及： * 包含工"
+            "context": "传功能的消息数量受限 * 图像生成功能受限，速度较慢 * 语音聊天数量受限 * 深度研究功能受限 * 记忆与上下文支持受限 * Codex 使用权限有限 * 桌面端 ChatGPT 工作使用权限受限 ### Go 最适合长对话 免费版中的全部内容，以及： * 包含工"
           },
           {
             "value": "Plus",
-            "context": "及： * 包含工具调用的消息数量更多 * 更高的上传额度 * 更高的图片生成额度 * 语音聊天数量更多 * 更长的记忆 ### Plus 利用高级智能完成更多工作 Go 中的全部内容，以及： * GPT-5.6 的高级推理模型 * 更高的消息与上传额度 * 更复杂"
+            "context": "及： * 包含工具调用的消息数量更多 * 更高的上传额度 * 更高的图片生成额度 * 语音聊天数量更多 * 更长的记忆 ### Plus 最适合进阶工作与高效办公 Go 中的全部内容，以及： * GPT-5.6 的高级推理模型 * 更高的消息与上传额度 * 更复杂"
           },
           {
             "value": "Pro",
-            "context": "* 更高的 Codex 使用量 * 桌面端、网页端和移动端 ChatGPT 工作（更高使用权限） * 抢先体验新功能 ### Pro 大幅提升工作效率 Plus 中的全部内容，以及： * 5 倍的使用额度 * 由 GPT-6 Astra 提供支持的专业推理 *"
+            "context": "* 更高的 Codex 使用量 * 桌面端、网页端和移动端 ChatGPT 工作（更高使用权限） * 抢先体验新功能 ### Pro 最适合研究和编程 Plus 中的全部内容，以及： * 5 倍的使用额度 * 由 GPT-6 Astra 提供支持的专业推理 *"
           }
         ]
       }
@@ -54,11 +54,11 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-09-21T18:13:24.014Z",
+      "fetchedAt": "2026-09-22T17:00:01.345Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
-      "byteLength": 664667,
+      "byteLength": 664875,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -225,22 +225,22 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-09-21T18:13:24.016Z",
+      "fetchedAt": "2026-09-22T17:00:01.347Z",
       "title": "Plans & Pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
-      "byteLength": 1157360,
+      "byteLength": 1163278,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
         "priceSignals": [
           {
             "value": "$0",
-            "context": "dual Developer Team & Enterprise API Individual Free Try Claude $0 Free for everyone Try Claude Chat on web, desktop, and mobile S"
+            "context": "w tab) Pricing Individual Team & Enterprise API Free Try Claude $0 Free for everyone Try Claude Chat on web, desktop, and mobile S"
           },
           {
             "value": "$17",
-            "context": "ols Create Artifacts Pro Claude Code included For everyday work $17 Per month with annual subscription discount ( $200 billed up fr"
+            "context": "nect your apps and tools Create Artifacts Pro For everyday work $17 Per month with annual subscription discount ( $200 billed up fr"
           },
           {
             "value": "$200",
@@ -252,7 +252,7 @@
           },
           {
             "value": "$100",
-            "context": "aude Code included For people who work with Claude all day From $100 Per month Try Claude Everything in Pro, plus: Choose 5x or 20x"
+            "context": "Microsoft 365 Max For people who work with Claude all day From $100 Per month Try Claude Everything in Pro, plus: Choose 5x or 20x"
           },
           {
             "value": "$25",
@@ -263,56 +263,52 @@
             "context": "than standard seats* $100 Per seat / month if billed annually. $125 if billed monthly. Claude Code and Claude Cowork Claude Design,"
           },
           {
-            "value": "$10",
-            "context": "5.1 Next generation intelligence for long-running agents Input $10 / MTok Output $50 / MTok Prompt caching Read $0.25 / MTok Write"
-          },
-          {
-            "value": "$50",
-            "context": "on intelligence for long-running agents Input $10 / MTok Output $50 / MTok Prompt caching Read $0.25 / MTok Write $12.50 / MTok Opu"
-          },
-          {
             "value": "$0.25",
-            "context": "g agents Input $10 / MTok Output $50 / MTok Prompt caching Read $0.25 / MTok Write $12.50 / MTok Opus 5 Ideal for complex agentic cod"
+            "context": "ration intelligence for long-running agents Prompt caching Read $0.25 / MTok Write $12.50 / MTok Input $10 / MTok Output $50 / MTok O"
           },
           {
             "value": "$12.50",
-            "context": "/ MTok Output $50 / MTok Prompt caching Read $0.25 / MTok Write $12.50 / MTok Opus 5 Ideal for complex agentic coding and enterprise w"
+            "context": "for long-running agents Prompt caching Read $0.25 / MTok Write $12.50 / MTok Input $10 / MTok Output $50 / MTok Opus 5.5 Daily driver"
           },
           {
-            "value": "$5",
-            "context": "us 5 Ideal for complex agentic coding and enterprise work Input $5 / MTok Output $25 / MTok Prompt caching Read $0.50 / MTok Write"
+            "value": "$10",
+            "context": "ents Prompt caching Read $0.25 / MTok Write $12.50 / MTok Input $10 / MTok Output $50 / MTok Opus 5.5 Daily driver for agentic codi"
           },
           {
-            "value": "$0.50",
-            "context": "rise work Input $5 / MTok Output $25 / MTok Prompt caching Read $0.50 / MTok Write $6.25 / MTok Sonnet 5 High-performance model for c"
-          },
-          {
-            "value": "$6.25",
-            "context": "/ MTok Output $25 / MTok Prompt caching Read $0.50 / MTok Write $6.25 / MTok Sonnet 5 High-performance model for coding and agents In"
-          },
-          {
-            "value": "$2",
-            "context": "Tok Sonnet 5 High-performance model for coding and agents Input $2 / MTok Output $10 / MTok Prompt caching Read $0.20 / MTok Write"
+            "value": "$50",
+            "context": "g Read $0.25 / MTok Write $12.50 / MTok Input $10 / MTok Output $50 / MTok Opus 5.5 Daily driver for agentic coding and enterprise"
           },
           {
             "value": "$0.20",
-            "context": "nd agents Input $2 / MTok Output $10 / MTok Prompt caching Read $0.20 / MTok Write $2.50 / MTok Haiku 4.5 Fastest, most cost-efficien"
+            "context": "iver for agentic coding and enterprise work Prompt caching Read $0.20 / MTok Write $5 / MTok Input $4 / MTok Output $20 / MTok Sonnet"
+          },
+          {
+            "value": "$5",
+            "context": "ding and enterprise work Prompt caching Read $0.20 / MTok Write $5 / MTok Input $4 / MTok Output $20 / MTok Sonnet 5 High-performa"
+          },
+          {
+            "value": "$4",
+            "context": "ise work Prompt caching Read $0.20 / MTok Write $5 / MTok Input $4 / MTok Output $20 / MTok Sonnet 5 High-performance model for co"
           },
           {
             "value": "$2.50",
-            "context": "/ MTok Output $10 / MTok Prompt caching Read $0.20 / MTok Write $2.50 / MTok Haiku 4.5 Fastest, most cost-efficient model Input $1 /"
+            "context": "el for coding and agents Prompt caching Read $0.20 / MTok Write $2.50 / MTok Input $2 / MTok Output $10 / MTok Haiku 4.5 Fastest, mos"
           },
           {
-            "value": "$1",
-            "context": "$2.50 / MTok Haiku 4.5 Fastest, most cost-efficient model Input $1 / MTok Output $5 / MTok Prompt caching Read $0.10 / MTok Write"
+            "value": "$2",
+            "context": "gents Prompt caching Read $0.20 / MTok Write $2.50 / MTok Input $2 / MTok Output $10 / MTok Haiku 4.5 Fastest, most cost-efficient"
           },
           {
             "value": "$0.10",
-            "context": "ient model Input $1 / MTok Output $5 / MTok Prompt caching Read $0.10 / MTok Write $1.25 / MTok For workloads that need to run in the"
+            "context": "aiku 4.5 Fastest, most cost-efficient model Prompt caching Read $0.10 / MTok Write $1.25 / MTok Input $1 / MTok Output $5 / MTok For"
           },
           {
             "value": "$1.25",
-            "context": "/ MTok Output $5 / MTok Prompt caching Read $0.10 / MTok Write $1.25 / MTok For workloads that need to run in the US, US-only infere"
+            "context": "ost cost-efficient model Prompt caching Read $0.10 / MTok Write $1.25 / MTok Input $1 / MTok Output $5 / MTok For workloads that need"
+          },
+          {
+            "value": "$1",
+            "context": "model Prompt caching Read $0.10 / MTok Write $1.25 / MTok Input $1 / MTok Output $5 / MTok For workloads that need to run in the U"
           },
           {
             "value": "$0.08",
@@ -323,20 +319,28 @@
             "context": "50 free hours of usage daily per organization. Additional hours $0.05 per hour per container Service tiers Balance availability, perf"
           },
           {
-            "value": "$3",
-            "context": "batch processing. Learn more Batch processing Sonnet 4.6 Input $3 / MTok Output $15 / MTok Prompt caching Read $0.30 / MTok Write"
+            "value": "$0.50",
+            "context": "complex agentic coding and enterprise work Prompt caching Read $0.50 / MTok Write $6.25 / MTok Input $5 / MTok Output $25 / MTok Fab"
           },
           {
-            "value": "$15",
-            "context": ". Learn more Batch processing Sonnet 4.6 Input $3 / MTok Output $15 / MTok Prompt caching Read $0.30 / MTok Write $3.75 / MTok Opus"
+            "value": "$6.25",
+            "context": "ding and enterprise work Prompt caching Read $0.50 / MTok Write $6.25 / MTok Input $5 / MTok Output $25 / MTok Fable 5 Prompt caching"
           },
           {
             "value": "$0.30",
-            "context": "onnet 4.6 Input $3 / MTok Output $15 / MTok Prompt caching Read $0.30 / MTok Write $3.75 / MTok Opus 4.7 Input $5 / MTok Output $25 /"
+            "context": "nput $5 / MTok Output $25 / MTok Sonnet 4.6 Prompt caching Read $0.30 / MTok Write $3.75 / MTok Input $3 / MTok Output $15 / MTok Opu"
           },
           {
             "value": "$3.75",
-            "context": "/ MTok Output $15 / MTok Prompt caching Read $0.30 / MTok Write $3.75 / MTok Opus 4.7 Input $5 / MTok Output $25 / MTok Prompt cachin"
+            "context": "ut $25 / MTok Sonnet 4.6 Prompt caching Read $0.30 / MTok Write $3.75 / MTok Input $3 / MTok Output $15 / MTok Opus 4.7 Prompt cachin"
+          },
+          {
+            "value": "$3",
+            "context": "t 4.6 Prompt caching Read $0.30 / MTok Write $3.75 / MTok Input $3 / MTok Output $15 / MTok Opus 4.7 Prompt caching Read $0.50 / M"
+          },
+          {
+            "value": "$15",
+            "context": "ing Read $0.30 / MTok Write $3.75 / MTok Input $3 / MTok Output $15 / MTok Opus 4.7 Prompt caching Read $0.50 / MTok Write $6.25 /"
           }
         ],
         "planSignals": [
@@ -358,11 +362,11 @@
           },
           {
             "value": "Team",
-            "context": "ad what changed (opens in new tab) Pricing Individual Developer Team & Enterprise API Individual Free Try Claude $0 Free for everyon"
+            "context": "follow. Read what changed (opens in new tab) Pricing Individual Team & Enterprise API Free Try Claude $0 Free for everyone Try Claud"
           },
           {
             "value": "Free",
-            "context": ") Pricing Individual Developer Team & Enterprise API Individual Free Try Claude $0 Free for everyone Try Claude Chat on web, desktop"
+            "context": "ged (opens in new tab) Pricing Individual Team & Enterprise API Free Try Claude $0 Free for everyone Try Claude Chat on web, desktop"
           },
           {
             "value": "plus",
@@ -378,7 +382,7 @@
           },
           {
             "value": "business",
-            "context": "e Higher education K-12 teachers Life sciences Nonprofits Small business Programs Startups Scientists Developers Developer docs Communit"
+            "context": "e Higher education K-12 teachers Life sciences Nonprofits Small business Programs Startups Scientists Developers Developer docs Develope"
           }
         ]
       }
@@ -392,11 +396,11 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-09-21T18:13:24.018Z",
+      "fetchedAt": "2026-09-22T17:00:01.349Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more",
       "description": "Get access to the best of Google AI including Gemini 3.1 Pro, video generation with Veo 3.1, Deep Research, and much more.",
       "status": 200,
-      "byteLength": 252004,
+      "byteLength": 297621,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -420,6 +424,14 @@
           {
             "value": "$199.99",
             "context": "99.99 / month $99.99 / month: 5x higher usage limits vs. AI Pro $199.99 / month: 20x higher usage limits vs. AI Pro Get started Everyth"
+          },
+          {
+            "value": "$21",
+            "context": "or small businesses and teams. No IT setup needed. Starting at: $21 USD per seat per month Start a trial Gemini Enterprise app Your"
+          },
+          {
+            "value": "$30",
+            "context": "anizations that need enterprise-grade IT controls. Starting at: $30 USD per seat per month Contact sales Everything in Business edi"
           }
         ],
         "planSignals": [
@@ -434,6 +446,10 @@
           {
             "value": "free",
             "context": "ra — get access to Gemini 3.1 Pro & more College students get a free Pro plan for one year. Learn more Close Skip to main content Fo"
+          },
+          {
+            "value": "Business",
+            "context": "ore out of Gemini Choose a plan that is right for you. Personal Business Developer United States Free Get everyday help from Google AI t"
           },
           {
             "value": "Flash",
@@ -452,12 +468,8 @@
             "context": "ids, and more Access Gemini directly in Google apps Google Home Premium (Standard plan) 5 30 days of event history and Gemini features"
           },
           {
-            "value": "business",
-            "context": "see full list of countries . Looking for AI solutions for your business or work account? Try Gemini Enterprise app Create Learn Work Co"
-          },
-          {
             "value": "Enterprise",
-            "context": "for AI solutions for your business or work account? Try Gemini Enterprise app Create Learn Work Code Unlock your creative potential with"
+            "context": "ofile picture to access the Settings menu. United States Gemini Enterprise Business edition For small businesses and teams. No IT setup ne"
           }
         ]
       }
@@ -471,40 +483,36 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-09-21T18:13:24.019Z",
+      "fetchedAt": "2026-09-22T17:00:01.350Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
-      "byteLength": 337158,
+      "byteLength": 341670,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
         "priceSignals": [
           {
             "value": "$20",
-            "context": "% Hobby 免费 包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 试用 Cursor Pro $20 / mo. Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ Grok 的充足使用额度 ✓ 访问前沿模型 ✓ Grok"
+            "context": "包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 试用 Cursor 个人 适合想尝试智能体的人 $20 / mo. Pro Pro+ Ultra Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ Grok 的充足使用额度 ✓"
           },
           {
-            "value": "$60",
-            "context": "✓ Grok Bot 访问权限 ✓ MCP、技能和钩子 ✓ 云端智能体 ✓ 按用量计费的 Bugbot 获取 Pro Pro+ $60 / mo. Pro 的所有功能，另加： ✓ Pro 版智能体限额的 3 倍 ✓ Grok 的充足使用额度 ✓ 访问前沿模型 ✓"
-          },
-          {
-            "value": "$200",
-            "context": "Grok Bot 用量上限 ✓ MCP、技能和钩子 ✓ 云端智能体 ✓ 按用量计费的 Bugbot 获取 Pro+ Ultra $200 / mo. Pro 的所有功能，另加： ✓ 智能体限额为 Pro 套餐的 20 倍 ✓ Grok 的充足使用额度 ✓ 访问前沿"
+            "value": "$40",
+            "context": "t 访问权限 ✓ MCP、技能和钩子 ✓ 云端智能体 ✓ 按用量计费的 Bugbot 获取 Pro 团队版 适合协作交付的团队 $40 / user / mo. 标准版 高级版 包含个人的全部功能，另加： ✓ 集中式团队计费与管理 ✓ 适用于内部规则、技能和插件"
           }
         ],
         "planSignals": [
           {
             "value": "Hobby",
-            "context": "模型 → 产品 → 企业 定价 资源 → 登录 联系 联系销售 下载 定价 个人 团队版和企业版 选择按年付费，节省 20% Hobby 免费 包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 试用 Cursor Pro $20 / m"
+            "context": "社区 帮助 ↗ 工作坊 论坛 ↗ 招聘 模型 → 产品 → 企业 定价 资源 → 登录 联系 联系销售 下载 定价 按月 按年 Hobby 适合爱折腾的人 免费 包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 试用 Cursor 个人"
           },
           {
             "value": "Pro",
-            "context": "省 20% Hobby 免费 包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 试用 Cursor Pro $20 / mo. Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ Grok 的充足使用额度 ✓ 访问前沿模型 ✓ G"
+            "context": "用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 试用 Cursor 个人 适合想尝试智能体的人 $20 / mo. Pro Pro+ Ultra Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ Grok 的充足使用额度 ✓ 访问前沿模型 ✓"
           },
           {
             "value": "Ultra",
-            "context": "✓ 更高的 Grok Bot 用量上限 ✓ MCP、技能和钩子 ✓ 云端智能体 ✓ 按用量计费的 Bugbot 获取 Pro+ Ultra $200 / mo. Pro 的所有功能，另加： ✓ 智能体限额为 Pro 套餐的 20 倍 ✓ Grok 的充足使用额度 ✓"
+            "context": "能体请求 ✓ Composer 访问权限 试用 Cursor 个人 适合想尝试智能体的人 $20 / mo. Pro Pro+ Ultra Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ Grok 的充足使用额度 ✓ 访问前沿模型 ✓ Grok Bot 访问"
           }
         ]
       }
@@ -518,7 +526,7 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-09-21T18:13:24.020Z",
+      "fetchedAt": "2026-09-22T17:00:01.351Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
@@ -605,11 +613,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-09-21T18:13:24.021Z",
+      "fetchedAt": "2026-09-22T17:00:01.352Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "GitHub Copilot works alongside you directly in your editor, suggesting whole lines or entire functions for you.",
       "status": 200,
-      "byteLength": 1264383,
+      "byteLength": 1265444,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -740,11 +748,11 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-09-21T18:13:24.022Z",
+      "fetchedAt": "2026-09-22T17:00:01.353Z",
       "title": "Models and pricing for GitHub Copilot - GitHub Docs",
       "description": "See per-token pricing for the models available in GitHub Copilot and reference rates for additional usage across plans.",
       "status": 200,
-      "byteLength": 680912,
+      "byteLength": 665033,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -919,11 +927,11 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-09-21T18:13:24.023Z",
+      "fetchedAt": "2026-09-22T17:00:01.354Z",
       "title": "About X Premium",
       "description": "",
       "status": 200,
-      "byteLength": 36573,
+      "byteLength": 36584,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -1062,144 +1070,23 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-09-21T18:13:24.025Z",
-      "title": "X Premium+ Price Adjustment",
+      "fetchedAt": "2026-09-22T17:00:01.356Z",
+      "title": "Just a moment...",
       "description": "",
       "status": 200,
-      "byteLength": 15272,
+      "byteLength": 282,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
-        "priceSignals": [
-          {
-            "value": "$3.00",
-            "context": "| | --- | --- | --- | --- | --- | --- | --- | | United States | $3.00 | $32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom"
-          },
-          {
-            "value": "$32.00",
-            "context": "| --- | --- | --- | --- | --- | --- | | United States | $3.00 | $32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00"
-          },
-          {
-            "value": "$8.00",
-            "context": "-- | --- | --- | --- | --- | | United States | $3.00 | $32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00"
-          },
-          {
-            "value": "$84.00",
-            "context": "| --- | --- | --- | | United States | $3.00 | $32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00"
-          },
-          {
-            "value": "$40.00",
-            "context": "--- | --- | | United States | $3.00 | $32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00"
-          },
-          {
-            "value": "$395.00",
-            "context": "| | United States | $3.00 | $32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 |"
-          },
-          {
-            "value": "£3.00",
-            "context": "$32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75"
-          },
-          {
-            "value": "£32.00",
-            "context": "$8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00"
-          },
-          {
-            "value": "£8.00",
-            "context": "$84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.0"
-          },
-          {
-            "value": "£84.00",
-            "context": "$40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105."
-          },
-          {
-            "value": "£31.00",
-            "context": "$395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56."
-          },
-          {
-            "value": "£313.00",
-            "context": "| | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56.00 | $560."
-          },
-          {
-            "value": "$3.75",
-            "context": "£3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia |"
-          },
-          {
-            "value": "$10.00",
-            "context": "£8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $"
-          },
-          {
-            "value": "$105.00",
-            "context": "84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $1"
-          },
-          {
-            "value": "$56.00",
-            "context": "1.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $"
-          },
-          {
-            "value": "$560.00",
-            "context": "13.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $6"
-          },
-          {
-            "value": "$4.88",
-            "context": "| $40.00 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $621.00 | | New Zealand"
-          },
-          {
-            "value": "$51.43",
-            "context": "0 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $621.00 | | New Zealand | $4.88 |"
-          },
-          {
-            "value": "$13.00",
-            "context": "0 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $621.00 | | New Zealand | $4.88 | $51.43 |"
-          },
-          {
-            "value": "$135.00",
-            "context": "00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $621.00 | | New Zealand | $4.88 | $51.43 | $13.00 |"
-          },
-          {
-            "value": "$62.00",
-            "context": "0 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $621.00 | | New Zealand | $4.88 | $51.43 | $13.00 | $135.00 |"
-          },
-          {
-            "value": "$621.00",
-            "context": "00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $621.00 | | New Zealand | $4.88 | $51.43 | $13.00 | $135.00 | $70.00 |"
-          },
-          {
-            "value": "$70.00",
-            "context": "| $621.00 | | New Zealand | $4.88 | $51.43 | $13.00 | $135.00 | $70.00 | $691.00 | | Japan | ¥368 | ¥3,916 | ¥980 | ¥10,280 | ¥6,080.0"
-          },
-          {
-            "value": "$691.00",
-            "context": "| | New Zealand | $4.88 | $51.43 | $13.00 | $135.00 | $70.00 | $691.00 | | Japan | ¥368 | ¥3,916 | ¥980 | ¥10,280 | ¥6,080.00 | ¥60,04"
-          },
-          {
-            "value": "¥368",
-            "context": "4.88 | $51.43 | $13.00 | $135.00 | $70.00 | $691.00 | | Japan | ¥368 | ¥3,916 | ¥980 | ¥10,280 | ¥6,080.00 | ¥60,040.00 | | Brazil |"
-          },
-          {
-            "value": "¥3,916",
-            "context": "$51.43 | $13.00 | $135.00 | $70.00 | $691.00 | | Japan | ¥368 | ¥3,916 | ¥980 | ¥10,280 | ¥6,080.00 | ¥60,040.00 | | Brazil | R$15.75"
-          },
-          {
-            "value": "¥980",
-            "context": "$13.00 | $135.00 | $70.00 | $691.00 | | Japan | ¥368 | ¥3,916 | ¥980 | ¥10,280 | ¥6,080.00 | ¥60,040.00 | | Brazil | R$15.75 | R$167"
-          }
-        ],
+        "priceSignals": [],
         "planSignals": [
           {
-            "value": "Premium",
-            "context": "Title: X Premium+ Price Adjustment URL Source: http://help.x.com/en/premium-plus"
+            "value": "premium",
+            "context": "Title: Just a moment... URL Source: http://help.x.com/en/premium-plus-price-update Warning: Target URL returned error 403: Forbi"
           },
           {
             "value": "plus",
-            "context": "mium+ Price Adjustment URL Source: http://help.x.com/en/premium-plus-price-update Markdown Content: We’re updating the X Premium+ su"
-          },
-          {
-            "value": "free",
-            "context": "usage limits and early access to new features. * Completely ad-free: Enjoy a seamless, interruption-free X experience with Premium+"
-          },
-          {
-            "value": "business",
-            "context": "you with a better, safer and faster service and to support our business. Some cookies are necessary to use our services, improve our se"
+            "context": "itle: Just a moment... URL Source: http://help.x.com/en/premium-plus-price-update Warning: Target URL returned error 403: Forbidden"
           }
         ]
       }
@@ -1213,7 +1100,7 @@
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
       "ok": false,
-      "fetchedAt": "2026-09-21T18:13:24.026Z",
+      "fetchedAt": "2026-09-22T17:00:01.357Z",
       "error": "HTTP 403 Forbidden"
     },
     {
@@ -1225,7 +1112,7 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": false,
-      "fetchedAt": "2026-09-21T18:13:24.026Z",
+      "fetchedAt": "2026-09-22T17:00:01.357Z",
       "error": "HTTP 403 Forbidden"
     },
     {
@@ -1237,7 +1124,7 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": false,
-      "fetchedAt": "2026-09-21T18:13:24.027Z",
+      "fetchedAt": "2026-09-22T17:00:01.358Z",
       "error": "HTTP 403 Forbidden"
     }
   ]
