@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T17:06:43.206Z",
+  "generatedAt": "2026-09-24T17:15:12.435Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,7 +12,7 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-09-23T17:06:37.526Z",
+      "fetchedAt": "2026-09-24T17:15:07.027Z",
       "title": "定价 | ChatGPT",
       "description": "",
       "status": 200,
@@ -54,11 +54,11 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-09-23T17:06:37.559Z",
+      "fetchedAt": "2026-09-24T17:15:07.066Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
-      "byteLength": 668636,
+      "byteLength": 670842,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -225,11 +225,11 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-09-23T17:06:37.561Z",
+      "fetchedAt": "2026-09-24T17:15:07.068Z",
       "title": "Plans & Pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
-      "byteLength": 1162992,
+      "byteLength": 1170125,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -346,11 +346,11 @@
         "planSignals": [
           {
             "value": "Enterprise",
-            "context": "For developers Claude Academy Community Developer docs Console Enterprise Enterprise Overview Claude Code for Enterprise Claude Platform"
+            "context": "Claude Academy Community Developer blog Developer docs Console Enterprise Enterprise Overview Claude Code for Enterprise Claude Platform"
           },
           {
             "value": "education",
-            "context": "ales Industries Financial services Government Healthcare Higher education K-12 teachers Life sciences Nonprofits Customers Contact sales"
+            "context": "ales Industries Financial services Government Healthcare Higher education K-12 teachers Life sciences Nonprofits Browse marketplace Custo"
           },
           {
             "value": "Pro",
@@ -396,11 +396,11 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-09-23T17:06:37.562Z",
+      "fetchedAt": "2026-09-24T17:15:07.070Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more",
       "description": "Get access to the best of Google AI including Gemini 3.1 Pro, video generation with Veo 3.1, Deep Research, and much more.",
       "status": 200,
-      "byteLength": 297621,
+      "byteLength": 297801,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -483,40 +483,36 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-09-23T17:06:37.563Z",
+      "fetchedAt": "2026-09-24T17:15:07.071Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
-      "byteLength": 337144,
+      "byteLength": 341666,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
         "priceSignals": [
           {
             "value": "$20",
-            "context": "% Hobby 免费 包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 试用 Cursor Pro $20 / mo. Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ Grok 的充足使用额度 ✓ 访问前沿模型 ✓ Grok"
+            "context": "包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 试用 Cursor 个人 适合想尝试智能体的人 $20 / mo. Pro Pro+ Ultra Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ Grok 的充足使用额度 ✓"
           },
           {
-            "value": "$60",
-            "context": "✓ Grok Bot 访问权限 ✓ MCP、技能和钩子 ✓ 云端智能体 ✓ 按用量计费的 Bugbot 获取 Pro Pro+ $60 / mo. Pro 的所有功能，另加： ✓ Pro 版智能体限额的 3 倍 ✓ Grok 的充足使用额度 ✓ 访问前沿模型 ✓"
-          },
-          {
-            "value": "$200",
-            "context": "Grok Bot 用量上限 ✓ MCP、技能和钩子 ✓ 云端智能体 ✓ 按用量计费的 Bugbot 获取 Pro+ Ultra $200 / mo. Pro 的所有功能，另加： ✓ 智能体限额为 Pro 套餐的 20 倍 ✓ Grok 的充足使用额度 ✓ 访问前沿"
+            "value": "$40",
+            "context": "t 访问权限 ✓ MCP、技能和钩子 ✓ 云端智能体 ✓ 按用量计费的 Bugbot 获取 Pro 团队版 适合协作交付的团队 $40 / user / mo. 标准版 高级版 包含个人的全部功能，另加： ✓ 集中式团队计费与管理 ✓ 适用于内部规则、技能和插件"
           }
         ],
         "planSignals": [
           {
             "value": "Hobby",
-            "context": "模型 → 产品 → 企业 定价 资源 → 登录 联系 联系销售 下载 定价 个人 团队版和企业版 选择按年付费，节省 20% Hobby 免费 包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 试用 Cursor Pro $20 / m"
+            "context": "社区 帮助 ↗ 工作坊 论坛 ↗ 招聘 模型 → 产品 → 企业 定价 资源 → 登录 联系 联系销售 下载 定价 按月 按年 Hobby 适合爱折腾的人 免费 包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 试用 Cursor 个人"
           },
           {
             "value": "Pro",
-            "context": "省 20% Hobby 免费 包括： ✓ 无需信用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 试用 Cursor Pro $20 / mo. Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ Grok 的充足使用额度 ✓ 访问前沿模型 ✓ G"
+            "context": "用卡 ✓ 有限的智能体请求 ✓ Composer 访问权限 试用 Cursor 个人 适合想尝试智能体的人 $20 / mo. Pro Pro+ Ultra Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ Grok 的充足使用额度 ✓ 访问前沿模型 ✓"
           },
           {
             "value": "Ultra",
-            "context": "✓ 更高的 Grok Bot 用量上限 ✓ MCP、技能和钩子 ✓ 云端智能体 ✓ 按用量计费的 Bugbot 获取 Pro+ Ultra $200 / mo. Pro 的所有功能，另加： ✓ 智能体限额为 Pro 套餐的 20 倍 ✓ Grok 的充足使用额度 ✓"
+            "context": "能体请求 ✓ Composer 访问权限 试用 Cursor 个人 适合想尝试智能体的人 $20 / mo. Pro Pro+ Ultra Hobby 的所有功能，另加： ✓ 智能体更高额度 ✓ Grok 的充足使用额度 ✓ 访问前沿模型 ✓ Grok Bot 访问"
           }
         ]
       }
@@ -530,11 +526,11 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-09-23T17:06:37.564Z",
+      "fetchedAt": "2026-09-24T17:15:07.072Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
-      "byteLength": 21397,
+      "byteLength": 22232,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -591,11 +587,15 @@
         "planSignals": [
           {
             "value": "DeepSeek",
-            "context": "模型 & 价格 | DeepSeek API Docs 跳到主要内容 DeepSeek API 文档 中文（中国） English 中文（中国） DeepSeek"
+            "context": "模型 & 价格 | DeepSeek API Docs 跳到主要内容 DeepSeek API 文档 更多资源 实用集成 API 服务状态 常见问题 中文（中国）"
           },
           {
             "value": "Agent",
-            "context": "DeepSeek Platform 快速开始 首次调用 API 模型 & 价格 Token 用量计算 限速与隔离 错误码 接入 Agent 工具 API 指南 图像理解 思考模式 多轮对话 对话前缀续写（Beta） FIM 补全（Beta） JSON Output"
+            "context": "API 指南 API 文档 新闻 更新日志 首次调用 API 模型 & 价格 Token 用量计算 限速与隔离 错误码 接入 Agent 工具 DeepSeek Harness Claude Code Codex OpenCode OpenClaw Hermes"
+          },
+          {
+            "value": "Codex",
+            "context": "格 Token 用量计算 限速与隔离 错误码 接入 Agent 工具 DeepSeek Harness Claude Code Codex OpenCode OpenClaw Hermes Reasonix WorkBuddy/CodeBuddy Qoder 贡献你"
           },
           {
             "value": "flash",
@@ -617,50 +617,22 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-09-23T17:06:37.565Z",
+      "fetchedAt": "2026-09-24T17:15:07.073Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "GitHub Copilot works alongside you directly in your editor, suggesting whole lines or entire functions for you.",
       "status": 200,
-      "byteLength": 1282227,
+      "byteLength": 1252660,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
         "priceSignals": [
           {
-            "value": "$ 0",
-            "context": "ls For businesses Free For getting started with GitHub Copilot. $ 0 USD Get started Open in VS Code What&#x27;s included: 2,000 com"
-          },
-          {
-            "value": "$ 10",
-            "context": "arn more Pro For everyday coding with agents in GitHub Copilot. $ 10 USD per user / month Get started Everything in Free and: Access"
-          },
-          {
-            "value": "$15",
-            "context": "ess to 3rd party agents (Claude Code and Codex) Model selection $15 monthly total credits for Pro Pro+ For more complex development"
-          },
-          {
-            "value": "$ 39",
-            "context": "for Pro Pro+ For more complex development with premium models. $ 39 USD per user / month Get started Everything in Pro and: Access"
-          },
-          {
-            "value": "$70",
-            "context": "m models, including Opus Audit logs 4x+ included usage than Pro $70 monthly total credits for Pro+ Max For sustained, high-volume a"
-          },
-          {
-            "value": "$ 100",
-            "context": "For sustained, high-volume agent workflows with GitHub Copilot. $ 100 USD per user / month Get started Everything in Pro+ and: Priori"
-          },
-          {
-            "value": "$200",
-            "context": "ccess to new models and features 2.9x+ included usage than Pro+ $200 monthly total credits for Max Best value GitHub Copilot is avai"
-          },
-          {
             "value": "$0",
-            "context": "r Management Studio Zed Zed Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month Ge"
+            "context": "s Tutorials Plans & Pricing Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month Ge"
           },
           {
             "value": "$10",
-            "context": "Zed Zed Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month Get started Max $100 p"
+            "context": "Pricing Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month Get started Max $100 p"
           },
           {
             "value": "$39",
@@ -669,6 +641,22 @@
           {
             "value": "$100",
             "context": "ro $10 per month Get started Pro+ $39 per month Get started Max $100 per month Get started GitHub AI Credits GitHub AI Credits Total"
+          },
+          {
+            "value": "$15",
+            "context": "ode. Learn more Free plan Limited chat and agent usage Pro plan $15 per month Pro+ plan $70 per month Max plan $200 per month Base"
+          },
+          {
+            "value": "$70",
+            "context": "n Limited chat and agent usage Pro plan $15 per month Pro+ plan $70 per month Max plan $200 per month Base credits Free plan Limite"
+          },
+          {
+            "value": "$200",
+            "context": "t usage Pro plan $15 per month Pro+ plan $70 per month Max plan $200 per month Base credits Free plan Limited chat and agent usage P"
+          },
+          {
+            "value": "$ 39",
+            "context": "n Limited chat and agent usage Pro plan $10 per month Pro+ plan $ 39 per month Max plan $100 per month Flex allotment Variable addit"
           },
           {
             "value": "$5",
@@ -706,27 +694,23 @@
           },
           {
             "value": "Free",
-            "context": "ith GitHub Copilot Pricing plans For individuals For businesses Free For getting started with GitHub Copilot. $ 0 USD Get started Op"
-          },
-          {
-            "value": "Student",
-            "context": "d required. Verified students have access to the GitHub Copilot Student plan. Learn more Pro For everyday coding with agents in GitHub"
+            "context": "siness Tutorials Plans & Pricing Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month"
           },
           {
             "value": "Pro",
-            "context": "ents have access to the GitHub Copilot Student plan. Learn more Pro For everyday coding with agents in GitHub Copilot. $ 10 USD per"
-          },
-          {
-            "value": "agent",
-            "context": "ser / month Get started Everything in Free and: Access to Cloud agent and code review Unlimited code completion and next edit suggest"
-          },
-          {
-            "value": "Codex",
-            "context": "xt edit suggestions Access to 3rd party agents (Claude Code and Codex) Model selection $15 monthly total credits for Pro Pro+ For mor"
+            "context": "ns & Pricing Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month Get started Max $1"
           },
           {
             "value": "Max",
-            "context": "4x+ included usage than Pro $70 monthly total credits for Pro+ Max For sustained, high-volume agent workflows with GitHub Copilot."
+            "context": "ed Pro $10 per month Get started Pro+ $39 per month Get started Max $100 per month Get started GitHub AI Credits GitHub AI Credits"
+          },
+          {
+            "value": "agent",
+            "context": "dits Credits used when interacting with Copilot features. Chat, agent mode, code review, Copilot cloud agent, Copilot CLI, and Copilo"
+          },
+          {
+            "value": "Codex",
+            "context": "o third-party coding agents like Claude by Anthropic and OpenAI Codex (Preview) Free plan Not included Pro plan Not included Pro+ pla"
           },
           {
             "value": "Flash",
@@ -735,6 +719,10 @@
           {
             "value": "team",
             "context": "Studio Zed Zed Need human help? Let’s define how to propel your team into a new era. Contact sales Frequently asked questions Genera"
+          },
+          {
+            "value": "student",
+            "context": "paid subscription, trial, or through an existing verified OSS, student, faculty, or MVP account may elect to use Free instead. What la"
           },
           {
             "value": "Education",
@@ -752,11 +740,11 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-09-23T17:06:37.566Z",
+      "fetchedAt": "2026-09-24T17:15:07.074Z",
       "title": "Models and pricing for GitHub Copilot - GitHub Docs",
       "description": "See per-token pricing for the models available in GitHub Copilot and reference rates for additional usage across plans.",
       "status": 200,
-      "byteLength": 676218,
+      "byteLength": 676195,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -931,7 +919,7 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-09-23T17:06:37.567Z",
+      "fetchedAt": "2026-09-24T17:15:07.075Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -957,7 +945,7 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-09-23T17:06:37.569Z",
+      "fetchedAt": "2026-09-24T17:15:07.077Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -987,7 +975,7 @@
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
       "ok": true,
-      "fetchedAt": "2026-09-23T17:06:37.570Z",
+      "fetchedAt": "2026-09-24T17:15:07.078Z",
       "title": "Perplexity Pro Perks",
       "description": "",
       "status": 200,
@@ -1050,19 +1038,52 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": true,
-      "fetchedAt": "2026-09-23T17:06:37.571Z",
-      "title": "Just a moment...",
+      "fetchedAt": "2026-09-24T17:15:07.079Z",
+      "title": "Enterprise Pricing and Billing: Frequently Asked Questions - Perplexity Help Center",
       "description": "",
       "status": 200,
-      "byteLength": 553,
+      "byteLength": 7434,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
-        "priceSignals": [],
+        "priceSignals": [
+          {
+            "value": "$40",
+            "context": "er/en/articles/10352973-what-is-enterprise-pro):** Each seat is $40 per month or $400 per year (a discount of approximately 16.7% v"
+          },
+          {
+            "value": "$400",
+            "context": "352973-what-is-enterprise-pro):** Each seat is $40 per month or $400 per year (a discount of approximately 16.7% versus monthly subs"
+          },
+          {
+            "value": "$325",
+            "context": "er/en/articles/12310544-what-is-enterprise-max):** Each seat is $325 per month or $3,250 per year Discounts may be available for lar"
+          },
+          {
+            "value": "$3,250",
+            "context": "10544-what-is-enterprise-max):** Each seat is $325 per month or $3,250 per year Discounts may be available for larger teams (250+ memb"
+          }
+        ],
         "planSignals": [
           {
-            "value": "enterprise",
-            "context": "urce: http://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions Warning: This pa"
+            "value": "Enterprise",
+            "context": "Title: Enterprise Pricing and Billing: Frequently Asked Questions - Perplexity He"
+          },
+          {
+            "value": "Pro",
+            "context": "is per seat. Your organization purchases a number of Enterprise Pro and Enterprise Max seats on a monthly or yearly subscription an"
+          },
+          {
+            "value": "Max",
+            "context": "rganization purchases a number of Enterprise Pro and Enterprise Max seats on a monthly or yearly subscription and assigns them to p"
+          },
+          {
+            "value": "team",
+            "context": "tion and assigns them to people, so a seat can be moved between team members without buying a new one. We offer two pricing tiers: *"
+          },
+          {
+            "value": "Education",
+            "context": "or your next annual renewal depending on your subscription. ## Education & Non-profit ### **Do you offer educational or non-profit disco"
           }
         ]
       }
@@ -1076,42 +1097,42 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": true,
-      "fetchedAt": "2026-09-23T17:06:37.571Z",
+      "fetchedAt": "2026-09-24T17:15:07.080Z",
       "title": "Using the Connector for Slack - Perplexity Help Center",
       "description": "",
       "status": 200,
-      "byteLength": 10238,
+      "byteLength": 10248,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
         "priceSignals": [
           {
             "value": "$20",
-            "context": ".ai/help-center/en/articles/10352901-what-is-perplexity-pro):** $20/month or $200/year * **[Perplexity Max](http://www.perplexity.a"
+            "context": ".ai/help-center/en/articles/10352901-what-is-perplexity-pro):** $20/month or $200/year * **[Perplexity Max](https://www.perplexity."
           },
           {
             "value": "$200",
-            "context": "er/en/articles/10352901-what-is-perplexity-pro):** $20/month or $200/year * **[Perplexity Max](http://www.perplexity.ai/help-center/"
+            "context": "er/en/articles/10352901-what-is-perplexity-pro):** $20/month or $200/year * **[Perplexity Max](https://www.perplexity.ai/help-center"
           },
           {
             "value": "$2,000",
-            "context": "lp-center/en/articles/11680686-perplexity-max):** $200/month or $2,000/year Or, for organizations: * **[Enterprise Pro](http://www.per"
+            "context": "lp-center/en/articles/11680686-perplexity-max):** $200/month or $2,000/year Or, for organizations: * **[Enterprise Pro](https://www.pe"
           },
           {
             "value": "$40",
-            "context": ".ai/help-center/en/articles/10352973-what-is-enterprise-pro):** $40/month or $400/year per seat * **[Enterprise Max](http://www.per"
+            "context": ".ai/help-center/en/articles/10352973-what-is-enterprise-pro):** $40/month or $400/year per seat * **[Enterprise Max](https://www.pe"
           },
           {
             "value": "$400",
-            "context": "er/en/articles/10352973-what-is-enterprise-pro):** $40/month or $400/year per seat * **[Enterprise Max](http://www.perplexity.ai/hel"
+            "context": "er/en/articles/10352973-what-is-enterprise-pro):** $40/month or $400/year per seat * **[Enterprise Max](https://www.perplexity.ai/he"
           },
           {
             "value": "$325",
-            "context": ".ai/help-center/en/articles/12310544-what-is-enterprise-max):** $325/month or $3,250/year per seat [This article](http://www.perplex"
+            "context": ".ai/help-center/en/articles/12310544-what-is-enterprise-max):** $325/month or $3,250/year per seat [This article](https://www.perple"
           },
           {
             "value": "$3,250",
-            "context": "r/en/articles/12310544-what-is-enterprise-max):** $325/month or $3,250/year per seat [This article](http://www.perplexity.ai/help-cent"
+            "context": "r/en/articles/12310544-what-is-enterprise-max):** $325/month or $3,250/year per seat [This article](https://www.perplexity.ai/help-cen"
           }
         ],
         "planSignals": [
