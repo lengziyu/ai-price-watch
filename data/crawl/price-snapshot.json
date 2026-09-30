@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-29T18:06:38.424Z",
+  "generatedAt": "2026-09-30T18:01:05.852Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,11 +12,11 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-09-29T18:06:35.309Z",
+      "fetchedAt": "2026-09-30T18:01:01.355Z",
       "title": "定价 | ChatGPT",
       "description": "",
       "status": 200,
-      "byteLength": 10947,
+      "byteLength": 10948,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -32,15 +32,15 @@
           },
           {
             "value": "Codex",
-            "context": "聊天 * 带上传功能的消息数量受限 * 图像生成受限 * 语音聊天数量受限 * 有限使用深度研究 * 记忆与上下文支持受限 * Codex 的有限使用 * 桌面端 ChatGPT Work（有限使用） ### Go 最适合长对话 免费套餐中的全部内容，以及： * 包"
+            "context": "聊天 * 带上传功能的消息数量受限 * 图像生成受限 * 语音聊天数量受限 * 有限使用深度研究 * 记忆与上下文支持受限 * Codex 的有限使用 * 桌面端 ChatGPT Work（有限使用） ### Go 扩展访问权限 免费套餐中的全部内容，以及： * 包"
           },
           {
             "value": "Plus",
-            "context": "及： * 包含工具调用的消息数量更多 * 更高的上传额度 * 更高的图片生成额度 * 语音聊天数量更多 * 更长的记忆 ### Plus 最适合进阶工作与高效办公 Go 中的全部内容，以及： * 包括 GPT-6 在内的高级推理模型 * 更高的消息与上传配额 *"
+            "context": "及： * 包含工具调用的消息数量更多 * 更高的上传额度 * 更高的图片生成额度 * 语音聊天数量更多 * 更长的记忆 ### Plus 以更先进的智能完成更多工作 Go 中的全部内容，以及： * 包括 GPT-6 在内的高级推理模型 * 更高的消息与上传配额 *"
           },
           {
             "value": "Pro",
-            "context": "更高的 Codex 使用量 * 桌面端、网页端和移动端 ChatGPT Work（更高使用权限） * 抢先体验新功能 ### Pro 最适合研究和编程 Plus 中的全部内容，以及： * 3 档用量供你选择 * 由 GPT-6 Astra 提供支持的专业推理"
+            "context": "更高的 Codex 使用量 * 桌面端、网页端和移动端 ChatGPT Work（更高使用权限） * 抢先体验新功能 ### Pro 大幅提升工作效率 Plus 中的全部内容，以及： * 3 档用量供你选择 * 由 GPT-6 Astra 提供支持的专业推理"
           }
         ]
       }
@@ -54,11 +54,11 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-09-29T18:06:35.340Z",
+      "fetchedAt": "2026-09-30T18:01:01.393Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
-      "byteLength": 689534,
+      "byteLength": 689945,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -225,18 +225,18 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-09-29T18:06:35.342Z",
+      "fetchedAt": "2026-09-30T18:01:01.395Z",
       "title": "Plans & Pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
-      "byteLength": 1184624,
+      "byteLength": 1183065,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
         "priceSignals": [
           {
             "value": "$0",
-            "context": "dual Developer Team & Enterprise API Individual Free Try Claude $0 Free for everyone Try Claude Chat on web, desktop, and mobile S"
+            "context": "w tab) Pricing Individual Team & Enterprise API Free Try Claude $0 Free for everyone Try Claude Chat on web, desktop, and mobile S"
           },
           {
             "value": "$17",
@@ -362,11 +362,11 @@
           },
           {
             "value": "Team",
-            "context": "ad what changed (opens in new tab) Pricing Individual Developer Team & Enterprise API Individual Free Try Claude $0 Free for everyon"
+            "context": "follow. Read what changed (opens in new tab) Pricing Individual Team & Enterprise API Free Try Claude $0 Free for everyone Try Claud"
           },
           {
             "value": "Free",
-            "context": ") Pricing Individual Developer Team & Enterprise API Individual Free Try Claude $0 Free for everyone Try Claude Chat on web, desktop"
+            "context": "ged (opens in new tab) Pricing Individual Team & Enterprise API Free Try Claude $0 Free for everyone Try Claude Chat on web, desktop"
           },
           {
             "value": "plus",
@@ -396,11 +396,11 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-09-29T18:06:35.343Z",
+      "fetchedAt": "2026-09-30T18:01:01.397Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more",
       "description": "Get access to the best of Google AI including Gemini 3.1 Pro, video generation with Veo 3.1, Deep Research, and much more.",
       "status": 200,
-      "byteLength": 251998,
+      "byteLength": 297821,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -424,6 +424,14 @@
           {
             "value": "$199.99",
             "context": "99.99 / month $99.99 / month: 5x higher usage limits vs. AI Pro $199.99 / month: 20x higher usage limits vs. AI Pro Get started Everyth"
+          },
+          {
+            "value": "$21",
+            "context": "or small businesses and teams. No IT setup needed. Starting at: $21 USD per seat per month Start a trial Gemini Enterprise app Your"
+          },
+          {
+            "value": "$30",
+            "context": "anizations that need enterprise-grade IT controls. Starting at: $30 USD per seat per month Contact sales Everything in Business edi"
           }
         ],
         "planSignals": [
@@ -438,6 +446,10 @@
           {
             "value": "free",
             "context": "ra — get access to Gemini 3.1 Pro & more College students get a free Pro plan for one year. Learn more Close Skip to main content Fo"
+          },
+          {
+            "value": "Business",
+            "context": "ore out of Gemini Choose a plan that is right for you. Personal Business Developer United States Free Get everyday help from Google AI t"
           },
           {
             "value": "Flash",
@@ -456,12 +468,8 @@
             "context": "ids, and more Access Gemini directly in Google apps Google Home Premium (Standard plan) 5 30 days of event history and Gemini features"
           },
           {
-            "value": "business",
-            "context": "see full list of countries . Looking for AI solutions for your business or work account? Try Gemini Enterprise app Create Learn Work Co"
-          },
-          {
             "value": "Enterprise",
-            "context": "for AI solutions for your business or work account? Try Gemini Enterprise app Create Learn Work Code Unlock your creative potential with"
+            "context": "ofile picture to access the Settings menu. United States Gemini Enterprise Business edition For small businesses and teams. No IT setup ne"
           }
         ]
       }
@@ -475,11 +483,11 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-09-29T18:06:35.344Z",
+      "fetchedAt": "2026-09-30T18:01:01.398Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
-      "byteLength": 349959,
+      "byteLength": 349241,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -518,7 +526,7 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-09-29T18:06:35.345Z",
+      "fetchedAt": "2026-09-30T18:01:01.399Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
@@ -609,11 +617,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-09-29T18:06:35.346Z",
+      "fetchedAt": "2026-09-30T18:01:01.400Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "GitHub Copilot works alongside you directly in your editor, suggesting whole lines or entire functions for you.",
       "status": 200,
-      "byteLength": 1265318,
+      "byteLength": 1265327,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -732,11 +740,11 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-09-29T18:06:35.347Z",
+      "fetchedAt": "2026-09-30T18:01:01.401Z",
       "title": "Models and pricing for GitHub Copilot - GitHub Docs",
       "description": "See per-token pricing for the models available in GitHub Copilot and reference rates for additional usage across plans.",
       "status": 200,
-      "byteLength": 683300,
+      "byteLength": 682497,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -911,19 +919,19 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-09-29T18:06:35.347Z",
-      "title": "About X Premium",
+      "fetchedAt": "2026-09-30T18:01:01.402Z",
+      "title": "Just a moment...",
       "description": "",
       "status": 200,
-      "byteLength": 11454,
+      "byteLength": 274,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
         "priceSignals": [],
         "planSignals": [
           {
-            "value": "Premium",
-            "context": "Title: About X Premium URL Source: http://help.x.com/en/using-x/x-premium Markdown Con"
+            "value": "premium",
+            "context": "le: Just a moment... URL Source: http://help.x.com/en/using-x/x-premium Warning: Target URL returned error 403: Forbidden Warning: This"
           }
         ]
       }
@@ -937,7 +945,7 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-09-29T18:06:35.349Z",
+      "fetchedAt": "2026-09-30T18:01:01.404Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -967,7 +975,7 @@
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
       "ok": false,
-      "fetchedAt": "2026-09-29T18:06:35.350Z",
+      "fetchedAt": "2026-09-30T18:01:01.405Z",
       "error": "HTTP 403 Forbidden"
     },
     {
@@ -979,7 +987,7 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": false,
-      "fetchedAt": "2026-09-29T18:06:35.350Z",
+      "fetchedAt": "2026-09-30T18:01:01.405Z",
       "error": "HTTP 403 Forbidden"
     },
     {
@@ -991,7 +999,7 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": false,
-      "fetchedAt": "2026-09-29T18:06:35.351Z",
+      "fetchedAt": "2026-09-30T18:01:01.406Z",
       "error": "HTTP 403 Forbidden"
     }
   ]
