@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-01T18:26:42.801Z",
+  "generatedAt": "2026-10-02T17:53:47.252Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,11 +12,11 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-10-01T18:26:37.981Z",
+      "fetchedAt": "2026-10-02T17:53:42.346Z",
       "title": "定价 | ChatGPT",
       "description": "",
       "status": 200,
-      "byteLength": 10948,
+      "byteLength": 10947,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -32,15 +32,15 @@
           },
           {
             "value": "Codex",
-            "context": "聊天 * 带上传功能的消息数量受限 * 图像生成受限 * 语音聊天数量受限 * 有限使用深度研究 * 记忆与上下文支持受限 * Codex 的有限使用 * 桌面端 ChatGPT Work（有限使用） ### Go 扩展访问权限 免费套餐中的全部内容，以及： * 包"
+            "context": "聊天 * 带上传功能的消息数量受限 * 图像生成受限 * 语音聊天数量受限 * 有限使用深度研究 * 记忆与上下文支持受限 * Codex 的有限使用 * 桌面端 ChatGPT Work（有限使用） ### Go 最适合长对话 免费套餐中的全部内容，以及： * 包"
           },
           {
             "value": "Plus",
-            "context": "及： * 包含工具调用的消息数量更多 * 更高的上传额度 * 更高的图片生成额度 * 语音聊天数量更多 * 更长的记忆 ### Plus 以更先进的智能完成更多工作 Go 中的全部内容，以及： * 包括 GPT-6 在内的高级推理模型 * 更高的消息与上传配额 *"
+            "context": "及： * 包含工具调用的消息数量更多 * 更高的上传额度 * 更高的图片生成额度 * 语音聊天数量更多 * 更长的记忆 ### Plus 最适合进阶工作与高效办公 Go 中的全部内容，以及： * 包括 GPT-6 在内的高级推理模型 * 更高的消息与上传配额 *"
           },
           {
             "value": "Pro",
-            "context": "更高的 Codex 使用量 * 桌面端、网页端和移动端 ChatGPT Work（更高使用权限） * 抢先体验新功能 ### Pro 大幅提升工作效率 Plus 中的全部内容，以及： * 3 档用量供你选择 * 由 GPT-6 Astra 提供支持的专业推理"
+            "context": "更高的 Codex 使用量 * 桌面端、网页端和移动端 ChatGPT Work（更高使用权限） * 抢先体验新功能 ### Pro 最适合研究和编程 Plus 中的全部内容，以及： * 3 档用量供你选择 * 由 GPT-6 Astra 提供支持的专业推理"
           }
         ]
       }
@@ -54,11 +54,11 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-10-01T18:26:38.017Z",
+      "fetchedAt": "2026-10-02T17:53:42.383Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
-      "byteLength": 687715,
+      "byteLength": 693301,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -225,11 +225,11 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-10-01T18:26:38.019Z",
+      "fetchedAt": "2026-10-02T17:53:42.385Z",
       "title": "Plans & Pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
-      "byteLength": 1184911,
+      "byteLength": 1186350,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -382,7 +382,7 @@
           },
           {
             "value": "business",
-            "context": "e Higher education K-12 teachers Life sciences Nonprofits Small business Programs Startups Scientists Developers Developer docs Develope"
+            "context": "e Higher education K-12 teachers Life sciences Nonprofits Small business Programs Startups Scientists Frontier Academy Developers Develo"
           }
         ]
       }
@@ -396,7 +396,7 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-10-01T18:26:38.020Z",
+      "fetchedAt": "2026-10-02T17:53:42.386Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more",
       "description": "Get access to the best of Google AI including Gemini 3.1 Pro, video generation with Veo 3.1, Deep Research, and much more.",
       "status": 200,
@@ -475,7 +475,7 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-10-01T18:26:38.021Z",
+      "fetchedAt": "2026-10-02T17:53:42.387Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
@@ -518,7 +518,7 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-10-01T18:26:38.022Z",
+      "fetchedAt": "2026-10-02T17:53:42.388Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
@@ -609,11 +609,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-10-01T18:26:38.023Z",
+      "fetchedAt": "2026-10-02T17:53:42.389Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "GitHub Copilot works alongside you directly in your editor, suggesting whole lines or entire functions for you.",
       "status": 200,
-      "byteLength": 1265160,
+      "byteLength": 1265705,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -732,11 +732,11 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-10-01T18:26:38.024Z",
+      "fetchedAt": "2026-10-02T17:53:42.390Z",
       "title": "Models and pricing for GitHub Copilot - GitHub Docs",
       "description": "See per-token pricing for the models available in GitHub Copilot and reference rates for additional usage across plans.",
       "status": 200,
-      "byteLength": 682497,
+      "byteLength": 684735,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -869,7 +869,7 @@
           },
           {
             "value": "Codex",
-            "context": "emory Hooks Plugins Third-party coding agents Agent apps OpenAI Codex Anthropic Claude Agent skills Prompting Prompt engineering Resp"
+            "context": "flows Hooks Plugins Third-party coding agents Agent apps OpenAI Codex Anthropic Claude Agent skills Prompting Prompt engineering Resp"
           },
           {
             "value": "Business",
@@ -911,7 +911,7 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-10-01T18:26:38.025Z",
+      "fetchedAt": "2026-10-02T17:53:42.391Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -937,7 +937,7 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-10-01T18:26:38.027Z",
+      "fetchedAt": "2026-10-02T17:53:42.393Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -967,7 +967,7 @@
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
       "ok": true,
-      "fetchedAt": "2026-10-01T18:26:38.028Z",
+      "fetchedAt": "2026-10-02T17:53:42.394Z",
       "title": "Perplexity Pro Perks",
       "description": "",
       "status": 200,
@@ -1030,7 +1030,7 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": true,
-      "fetchedAt": "2026-10-01T18:26:38.029Z",
+      "fetchedAt": "2026-10-02T17:53:42.394Z",
       "title": "Enterprise Pricing and Billing: Frequently Asked Questions - Perplexity Help Center",
       "description": "",
       "status": 200,
@@ -1089,42 +1089,42 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": true,
-      "fetchedAt": "2026-10-01T18:26:38.029Z",
+      "fetchedAt": "2026-10-02T17:53:42.395Z",
       "title": "Using the Connector for Slack - Perplexity Help Center",
       "description": "",
       "status": 200,
-      "byteLength": 10248,
+      "byteLength": 10238,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
         "priceSignals": [
           {
             "value": "$20",
-            "context": ".ai/help-center/en/articles/10352901-what-is-perplexity-pro):** $20/month or $200/year * **[Perplexity Max](https://www.perplexity."
+            "context": ".ai/help-center/en/articles/10352901-what-is-perplexity-pro):** $20/month or $200/year * **[Perplexity Max](http://www.perplexity.a"
           },
           {
             "value": "$200",
-            "context": "er/en/articles/10352901-what-is-perplexity-pro):** $20/month or $200/year * **[Perplexity Max](https://www.perplexity.ai/help-center"
+            "context": "er/en/articles/10352901-what-is-perplexity-pro):** $20/month or $200/year * **[Perplexity Max](http://www.perplexity.ai/help-center/"
           },
           {
             "value": "$2,000",
-            "context": "lp-center/en/articles/11680686-perplexity-max):** $200/month or $2,000/year Or, for organizations: * **[Enterprise Pro](https://www.pe"
+            "context": "lp-center/en/articles/11680686-perplexity-max):** $200/month or $2,000/year Or, for organizations: * **[Enterprise Pro](http://www.per"
           },
           {
             "value": "$40",
-            "context": ".ai/help-center/en/articles/10352973-what-is-enterprise-pro):** $40/month or $400/year per seat * **[Enterprise Max](https://www.pe"
+            "context": ".ai/help-center/en/articles/10352973-what-is-enterprise-pro):** $40/month or $400/year per seat * **[Enterprise Max](http://www.per"
           },
           {
             "value": "$400",
-            "context": "er/en/articles/10352973-what-is-enterprise-pro):** $40/month or $400/year per seat * **[Enterprise Max](https://www.perplexity.ai/he"
+            "context": "er/en/articles/10352973-what-is-enterprise-pro):** $40/month or $400/year per seat * **[Enterprise Max](http://www.perplexity.ai/hel"
           },
           {
             "value": "$325",
-            "context": ".ai/help-center/en/articles/12310544-what-is-enterprise-max):** $325/month or $3,250/year per seat [This article](https://www.perple"
+            "context": ".ai/help-center/en/articles/12310544-what-is-enterprise-max):** $325/month or $3,250/year per seat [This article](http://www.perplex"
           },
           {
             "value": "$3,250",
-            "context": "r/en/articles/12310544-what-is-enterprise-max):** $325/month or $3,250/year per seat [This article](https://www.perplexity.ai/help-cen"
+            "context": "r/en/articles/12310544-what-is-enterprise-max):** $325/month or $3,250/year per seat [This article](http://www.perplexity.ai/help-cent"
           }
         ],
         "planSignals": [
