@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-10T17:22:04.652Z",
+  "generatedAt": "2026-10-11T17:42:12.866Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,7 +12,7 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-10-10T17:21:59.487Z",
+      "fetchedAt": "2026-10-11T17:42:10.373Z",
       "title": "定价 | ChatGPT",
       "description": "",
       "status": 200,
@@ -54,11 +54,11 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-10-10T17:21:59.525Z",
+      "fetchedAt": "2026-10-11T17:42:10.411Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
-      "byteLength": 699496,
+      "byteLength": 699495,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -179,7 +179,7 @@
         "planSignals": [
           {
             "value": "Codex",
-            "context": "powered by your user's ChatGPT plan Plugins Extend ChatGPT and Codex Workspace Agents Trigger published ChatGPT workspace agents Com"
+            "context": "s, parameters, and responses ChatGPT Plugins Extend ChatGPT and Codex Sign in with ChatGPT Apps powered by your user's ChatGPT plan C"
           },
           {
             "value": "agent",
@@ -225,18 +225,18 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-10-10T17:21:59.527Z",
+      "fetchedAt": "2026-10-11T17:42:10.413Z",
       "title": "Plans & pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
-      "byteLength": 1241721,
+      "byteLength": 1243147,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
         "priceSignals": [
           {
             "value": "$0",
-            "context": "w tab) Pricing Individual Team & Enterprise API Free Try Claude $0 Free for everyone Try Claude Chat on web, desktop, and mobile S"
+            "context": "dual Developer Team & Enterprise API Individual Free Try Claude $0 Free for everyone Try Claude Chat on web, desktop, and mobile S"
           },
           {
             "value": "$17",
@@ -366,11 +366,11 @@
           },
           {
             "value": "Team",
-            "context": "follow. Read what changed (opens in new tab) Pricing Individual Team & Enterprise API Free Try Claude $0 Free for everyone Try Claud"
+            "context": "ad what changed (opens in new tab) Pricing Individual Developer Team & Enterprise API Individual Free Try Claude $0 Free for everyon"
           },
           {
             "value": "Free",
-            "context": "ged (opens in new tab) Pricing Individual Team & Enterprise API Free Try Claude $0 Free for everyone Try Claude Chat on web, desktop"
+            "context": ") Pricing Individual Developer Team & Enterprise API Individual Free Try Claude $0 Free for everyone Try Claude Chat on web, desktop"
           },
           {
             "value": "plus",
@@ -400,7 +400,7 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-10-10T17:21:59.528Z",
+      "fetchedAt": "2026-10-11T17:42:10.414Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more",
       "description": "Get access to the best of Google AI including Gemini 3.1 Pro, video generation with Veo 3.1, Deep Research, and much more.",
       "status": 200,
@@ -487,11 +487,11 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-10-10T17:21:59.529Z",
+      "fetchedAt": "2026-10-11T17:42:10.415Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
-      "byteLength": 349241,
+      "byteLength": 349269,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -530,7 +530,7 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-10-10T17:21:59.531Z",
+      "fetchedAt": "2026-10-11T17:42:10.416Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
@@ -621,11 +621,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-10-10T17:21:59.532Z",
+      "fetchedAt": "2026-10-11T17:42:10.417Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "See plans and pricing for GitHub Copilot. Accelerate your software development with our AI coding agent and agentic tools.",
       "status": 200,
-      "byteLength": 1271346,
+      "byteLength": 1271337,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -744,7 +744,7 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-10-10T17:21:59.533Z",
+      "fetchedAt": "2026-10-11T17:42:10.417Z",
       "title": "Models and pricing for GitHub Copilot - GitHub Docs",
       "description": "See per-token pricing for the models available in GitHub Copilot and reference rates for additional usage across plans.",
       "status": 200,
@@ -923,7 +923,7 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-10-10T17:21:59.534Z",
+      "fetchedAt": "2026-10-11T17:42:10.418Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -949,7 +949,7 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-10-10T17:21:59.536Z",
+      "fetchedAt": "2026-10-11T17:42:10.420Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -978,9 +978,18 @@
       "surface": "membership-rates",
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
-      "ok": false,
-      "fetchedAt": "2026-10-10T17:21:59.537Z",
-      "error": "HTTP 403 Forbidden"
+      "ok": true,
+      "fetchedAt": "2026-10-11T17:42:10.421Z",
+      "title": "Just a moment...",
+      "description": "",
+      "status": 200,
+      "byteLength": 472,
+      "fetchMode": "jina_markdown",
+      "extraction": {
+        "confidence": "low",
+        "priceSignals": [],
+        "planSignals": []
+      }
     },
     {
       "id": "perplexity-enterprise-pricing",
@@ -990,9 +999,23 @@
       "surface": "membership-rates",
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
-      "ok": false,
-      "fetchedAt": "2026-10-10T17:21:59.538Z",
-      "error": "HTTP 403 Forbidden"
+      "ok": true,
+      "fetchedAt": "2026-10-11T17:42:10.422Z",
+      "title": "Just a moment...",
+      "description": "",
+      "status": 200,
+      "byteLength": 351,
+      "fetchMode": "jina_markdown",
+      "extraction": {
+        "confidence": "review",
+        "priceSignals": [],
+        "planSignals": [
+          {
+            "value": "enterprise",
+            "context": "urce: http://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions Warning: Target"
+          }
+        ]
+      }
     },
     {
       "id": "perplexity-connectors",
@@ -1002,9 +1025,18 @@
       "surface": "membership-rates",
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
-      "ok": false,
-      "fetchedAt": "2026-10-10T17:21:59.538Z",
-      "error": "HTTP 403 Forbidden"
+      "ok": true,
+      "fetchedAt": "2026-10-11T17:42:10.422Z",
+      "title": "Just a moment...",
+      "description": "",
+      "status": 200,
+      "byteLength": 323,
+      "fetchMode": "jina_markdown",
+      "extraction": {
+        "confidence": "low",
+        "priceSignals": [],
+        "planSignals": []
+      }
     }
   ]
 }
