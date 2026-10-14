@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-13T19:19:30.937Z",
+  "generatedAt": "2026-10-14T17:15:51.395Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,11 +12,11 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-10-13T19:19:29.199Z",
-      "title": "定价 | ChatGPT",
+      "fetchedAt": "2026-10-14T17:15:45.231Z",
+      "title": "套餐和价格 | ChatGPT",
       "description": "",
       "status": 200,
-      "byteLength": 11137,
+      "byteLength": 11085,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -54,11 +54,11 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-10-13T19:19:29.237Z",
+      "fetchedAt": "2026-10-14T17:15:45.268Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
-      "byteLength": 699628,
+      "byteLength": 700010,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -225,11 +225,11 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-10-13T19:19:29.239Z",
+      "fetchedAt": "2026-10-14T17:15:45.270Z",
       "title": "Plans & pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
-      "byteLength": 1242844,
+      "byteLength": 1244531,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -400,11 +400,11 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-10-13T19:19:29.240Z",
+      "fetchedAt": "2026-10-14T17:15:45.271Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 3.1 Pro & more",
       "description": "Get access to the best of Google AI including Gemini 3.1 Pro, video generation with Veo 3.1, Deep Research, and much more.",
       "status": 200,
-      "byteLength": 308985,
+      "byteLength": 309038,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -457,7 +457,7 @@
           },
           {
             "value": "Flash",
-            "context": "our personal, proactive and powerful AI Assistant Access to 3.5 Flash-Lite Image generation and editing Deep Research Gemini Live Can"
+            "context": "our personal, proactive and powerful AI Assistant Access to our Flash-Lite model Image generation and editing Deep Research Gemini Li"
           },
           {
             "value": "Plus",
@@ -487,11 +487,11 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-10-13T19:19:29.241Z",
+      "fetchedAt": "2026-10-14T17:15:45.272Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
-      "byteLength": 429849,
+      "byteLength": 441953,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -502,7 +502,7 @@
           },
           {
             "value": "$8",
-            "context": "开始使用 开始使用： 有限 AI 用量 AI 功能 智能体请求次数有限 聊天请求次数有限 功能 ✓ 发布、回复和关注 Plus $8 /月 获取 Plus 我们的入门规划： 共享 所有产品共享的 AI 用量池 AI 功能 Cursor Grok 聊天、语音、I"
+            "context": "开始使用 开始使用： 有限 AI 用量 AI 功能 智能体请求次数有限 聊天请求次数有限 功能 ✓ 发布、回复和关注 Plus $8 /月 获取 Plus 我们的入门规划： 共享 AI 共享用量池 AI 功能 Cursor Grok 聊天、语音、Imagine"
           },
           {
             "value": "$30",
@@ -520,7 +520,7 @@
         "planSignals": [
           {
             "value": "Plus",
-            "context": "0 /月 开始使用 开始使用： 有限 AI 用量 AI 功能 智能体请求次数有限 聊天请求次数有限 功能 ✓ 发布、回复和关注 Plus $8 /月 获取 Plus 我们的入门规划： 共享 所有产品共享的 AI 用量池 AI 功能 Cursor Grok 聊天、语"
+            "context": "0 /月 开始使用 开始使用： 有限 AI 用量 AI 功能 智能体请求次数有限 聊天请求次数有限 功能 ✓ 发布、回复和关注 Plus $8 /月 获取 Plus 我们的入门规划： 共享 AI 共享用量池 AI 功能 Cursor Grok 聊天、语音、Imag"
           },
           {
             "value": "Ultra",
@@ -538,7 +538,7 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-10-13T19:19:29.243Z",
+      "fetchedAt": "2026-10-14T17:15:45.273Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
@@ -629,11 +629,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-10-13T19:19:29.244Z",
+      "fetchedAt": "2026-10-14T17:15:45.274Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "See plans and pricing for GitHub Copilot. Accelerate your software development with our AI coding agent and agentic tools.",
       "status": 200,
-      "byteLength": 1251707,
+      "byteLength": 1257516,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -752,11 +752,11 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-10-13T19:19:29.245Z",
+      "fetchedAt": "2026-10-14T17:15:45.275Z",
       "title": "Models and pricing for GitHub Copilot - GitHub Docs",
       "description": "See per-token pricing for the models available in GitHub Copilot and reference rates for additional usage across plans.",
       "status": 200,
-      "byteLength": 689022,
+      "byteLength": 689258,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -931,7 +931,7 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-10-13T19:19:29.246Z",
+      "fetchedAt": "2026-10-14T17:15:45.276Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -957,7 +957,7 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-10-13T19:19:29.248Z",
+      "fetchedAt": "2026-10-14T17:15:45.278Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -986,9 +986,84 @@
       "surface": "membership-rates",
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
-      "ok": false,
-      "fetchedAt": "2026-10-13T19:19:29.249Z",
-      "error": "HTTP 403 Forbidden"
+      "ok": true,
+      "fetchedAt": "2026-10-14T17:15:45.279Z",
+      "title": "Perplexity Pro",
+      "description": "",
+      "status": 200,
+      "byteLength": 12072,
+      "fetchMode": "jina_markdown",
+      "extraction": {
+        "confidence": "review",
+        "priceSignals": [
+          {
+            "value": "$40",
+            "context": "arch, premium data, and the top AI models. ## Choose your plan +$40 free Computer credits LIMITED TIME Popular Advanced answers and"
+          },
+          {
+            "value": "$17",
+            "context": "credits LIMITED TIME Popular Advanced answers and top AI models $17 /month when billed annually Everything in Free and: * Expanded"
+          },
+          {
+            "value": "$450",
+            "context": "reate polished documents & apps * More usage limits and memory +$450 free Computer credits LIMITED TIME Unlimited usage and top perf"
+          },
+          {
+            "value": "$167",
+            "context": "mputer credits LIMITED TIME Unlimited usage and top performance $167 /month when billed annually Everything in Pro and: * Maximum Co"
+          },
+          {
+            "value": "$18.7",
+            "context": "in 2025? AI-native infrastructure leads 2025 SaaS funding with $18.7B raised across 340 deals, a 72% YoY increase. ![Image 8](https:"
+          },
+          {
+            "value": "$28",
+            "context": "l SaaS for healthcare and fintech saw median deal sizes rise to $28M, up from $19M in 2024. ![Image 10](https://www.perplexity.ai/s"
+          },
+          {
+            "value": "$19",
+            "context": "lthcare and fintech saw median deal sizes rise to $28M, up from $19M in 2024. ![Image 10](https://www.perplexity.ai/static/images/d"
+          },
+          {
+            "value": "$9.2",
+            "context": "/statista-avatar.svg)Statista Developer tooling ranked third at $9.2B in total funding. crunchbase Late-stage valuations in AI SaaS"
+          },
+          {
+            "value": "$10",
+            "context": "hree closest competitors' latest earnings. Which DTC brands hit $10M+ revenue in their first year? What's Shopify's market share vs"
+          },
+          {
+            "value": "$400",
+            "context": "ulate an attic? What's the best robot vacuum for pet hair under $400? Should I pay off my student loans or invest the extra? What do"
+          }
+        ],
+        "planSignals": [
+          {
+            "value": "Pro",
+            "context": "Title: Perplexity Pro URL Source: http://www.perplexity.ai/properks/ Warning: Target"
+          },
+          {
+            "value": "premium",
+            "context": "wer your deep work with Perplexity Computer, reliable research, premium data, and the top AI models. ## Choose your plan +$40 free Comp"
+          },
+          {
+            "value": "free",
+            "context": ", premium data, and the top AI models. ## Choose your plan +$40 free Computer credits LIMITED TIME Popular Advanced answers and top"
+          },
+          {
+            "value": "Flash",
+            "context": "ature-bg-2.jpg) GPT-6.1 Sol OpenAI's versatile model Gemini 3.8 Flash Google's latest model Claude Sonnet 5.5 Anthropic's fast model"
+          },
+          {
+            "value": "business",
+            "context": "ings? What are the steps I need to take in order to start a new business How do I save on my taxes What's the most cost-effective way to"
+          },
+          {
+            "value": "student",
+            "context": "best robot vacuum for pet hair under $400? Should I pay off my student loans or invest the extra? What does the research say about mag"
+          }
+        ]
+      }
     },
     {
       "id": "perplexity-enterprise-pricing",
@@ -999,11 +1074,11 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": true,
-      "fetchedAt": "2026-10-13T19:19:29.250Z",
+      "fetchedAt": "2026-10-14T17:15:45.279Z",
       "title": "Enterprise Pricing and Billing: Frequently Asked Questions - Perplexity Help Center",
       "description": "Get answers to the most common Pricing and Billing questions for our Enterprise plan",
       "status": 200,
-      "byteLength": 624142,
+      "byteLength": 624156,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -1062,11 +1137,11 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": true,
-      "fetchedAt": "2026-10-13T19:19:29.251Z",
+      "fetchedAt": "2026-10-14T17:15:45.280Z",
       "title": "Using the Connector for Slack - Perplexity Help Center",
       "description": "Leverage Slack information for seamless collaboration and rich insights directly in Perplexity.",
       "status": 200,
-      "byteLength": 631137,
+      "byteLength": 631194,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
