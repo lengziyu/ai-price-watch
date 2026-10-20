@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19T18:44:14.465Z",
+  "generatedAt": "2026-10-20T17:13:24.841Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,11 +12,11 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-10-19T18:44:09.396Z",
+      "fetchedAt": "2026-10-20T17:13:22.323Z",
       "title": "套餐和价格 | ChatGPT",
       "description": "",
       "status": 200,
-      "byteLength": 10780,
+      "byteLength": 10734,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -24,23 +24,23 @@
         "planSignals": [
           {
             "value": "Business",
-            "context": "com/zh-Hans-CN/pricing/ Markdown Content: ChatGPT ## 定价 查看我们的个人、Business 和 Enterprise 套餐定价 ### For life sciences research, explore the R"
+            "context": "com/zh-Hans-CN/pricing/ Markdown Content: ChatGPT ## 定价 查看我们的个人、Business 和 Enterprise 套餐定价 ### 开展生命科学研究？了解 Rosalind 学术计划。 ### 免费版 日常任务的智"
           },
           {
             "value": "Enterprise",
-            "context": "-CN/pricing/ Markdown Content: ChatGPT ## 定价 查看我们的个人、Business 和 Enterprise 套餐定价 ### For life sciences research, explore the Rosalind Acade"
+            "context": "-CN/pricing/ Markdown Content: ChatGPT ## 定价 查看我们的个人、Business 和 Enterprise 套餐定价 ### 开展生命科学研究？了解 Rosalind 学术计划。 ### 免费版 日常任务的智能解决方案 * GPT-6"
           },
           {
             "value": "Codex",
-            "context": "不限 * 带上传功能的消息数量受限 * 图像生成受限 * 语音聊天数量受限 * 有限使用深度研究 * 记忆与上下文支持受限 * Codex 的有限使用 * 桌面端 ChatGPT Work（有限使用） ### Go 扩展访问权限 免费套餐中的全部内容，以及： * 包"
+            "context": "不限 * 带上传功能的消息数量受限 * 图像生成受限 * 语音聊天数量受限 * 有限使用深度研究 * 记忆与上下文支持受限 * Codex 的有限使用 * 桌面端“ChatGPT 工作”（有限使用） ### Go 最适合长对话 免费套餐中的全部内容，以及： * 包含"
           },
           {
             "value": "Plus",
-            "context": "及： * 包含工具调用的消息数量更多 * 更高的上传额度 * 更高的图片生成额度 * 语音聊天数量更多 * 更长的记忆 ### Plus 以更先进的智能完成更多工作 Go 中的全部内容，以及： * 包括 GPT-6 在内的高级推理模型 * 更高的消息与上传配额 *"
+            "context": "及： * 包含工具调用的消息数量更多 * 更高的上传额度 * 更高的图片生成额度 * 语音聊天数量更多 * 更长的记忆 ### Plus 最适合进阶工作与高效办公 Go 中的全部内容，以及： * 包括 GPT-6 在内的高级推理模型 * 更高的消息与上传配额 *"
           },
           {
             "value": "Pro",
-            "context": "更高的 Codex 使用量 * 桌面端、网页端和移动端 ChatGPT Work（更高使用权限） * 抢先体验新功能 ### Pro 大幅提升工作效率 Plus 中的全部内容，以及： * 3 档用量供你选择 * 由 GPT-6 Astra 提供支持的专业推理"
+            "context": "* 更高的 Codex 使用量 * 桌面端、网页端和移动端“ChatGPT 工作”（更高使用权限） * 抢先体验新功能 ### Pro 最适合研究和编程 Plus 中的全部内容，以及： * 3 档用量供你选择 * 由 GPT-6 Astra 提供支持的专业推理"
           }
         ]
       }
@@ -54,11 +54,11 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-10-19T18:44:09.433Z",
+      "fetchedAt": "2026-10-20T17:13:22.356Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
-      "byteLength": 707205,
+      "byteLength": 711082,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -225,11 +225,11 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-10-19T18:44:09.435Z",
+      "fetchedAt": "2026-10-20T17:13:22.358Z",
       "title": "Plans & pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
-      "byteLength": 1244217,
+      "byteLength": 1244594,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -240,7 +240,7 @@
           },
           {
             "value": "$17",
-            "context": "ate Artifacts Claude Design, Slides, Docs Pro For everyday work $17 Per month with annual subscription discount ( $200 billed up fr"
+            "context": "Design, Slides, Docs Pro Claude Code included For everyday work $17 Per month with annual subscription discount ( $200 billed up fr"
           },
           {
             "value": "$200",
@@ -252,7 +252,7 @@
           },
           {
             "value": "$100",
-            "context": "Microsoft 365 Max For people who work with Claude all day From $100 Per month Try Claude Everything in Pro, plus: Choose 5x or 20x"
+            "context": "aude Code included For people who work with Claude all day From $100 Per month Try Claude Everything in Pro, plus: Choose 5x or 20x"
           },
           {
             "value": "$25",
@@ -400,11 +400,11 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-10-19T18:44:09.436Z",
+      "fetchedAt": "2026-10-20T17:13:22.359Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 4 Argon & more",
-      "description": "Get access to the best of Google AI including Gemini 4 Argon, video generation with Veo 3.1, Deep Research, and much more.",
+      "description": "Get access to the best of Google AI including Gemini 4 Argon, video generation, Deep Research, and much more. Choose the right plan for you.",
       "status": 200,
-      "byteLength": 309038,
+      "byteLength": 309104,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -487,11 +487,11 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-10-19T18:44:09.437Z",
+      "fetchedAt": "2026-10-20T17:13:22.360Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
-      "byteLength": 437763,
+      "byteLength": 438951,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -538,7 +538,7 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-10-19T18:44:09.439Z",
+      "fetchedAt": "2026-10-20T17:13:22.361Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
@@ -637,11 +637,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-10-19T18:44:09.439Z",
+      "fetchedAt": "2026-10-20T17:13:22.361Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "See plans and pricing for GitHub Copilot. Accelerate your software development with our AI coding agent and agentic tools.",
       "status": 200,
-      "byteLength": 1256470,
+      "byteLength": 1233924,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -725,8 +725,8 @@
             "context": "ed Pro $10 per month Get started Pro+ $39 per month Get started Max $100 per month Get started GitHub AI Credits GitHub AI Credits"
           },
           {
-            "value": "agent",
-            "context": "dits Credits used when interacting with Copilot features. Chat, agent mode, code review, Copilot cloud agent, Copilot CLI, and Copilo"
+            "value": "Agent",
+            "context": "AI Credits Credits used when interacting with Copilot features. Agent mode, code review, Copilot in the cloud, Copilot CLI, and Copil"
           },
           {
             "value": "Codex",
@@ -734,7 +734,7 @@
           },
           {
             "value": "Flash",
-            "context": "Luna OpenAI GPT-6 Sol OpenAI GPT-6.1 Sol Microsoft MAI-Code-1.1-Flash Google Gemini 3.5 Flash Google Gemini 3.6 Flash Google Gemini 3"
+            "context": "Luna OpenAI GPT-6 Sol OpenAI GPT-6.1 Sol Microsoft MAI-Code-1.1-Flash Google Gemini 3.7 Flash Google Gemini 3.8 Flash Google Gemini 4"
           },
           {
             "value": "team",
@@ -760,11 +760,11 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-10-19T18:44:09.440Z",
+      "fetchedAt": "2026-10-20T17:13:22.362Z",
       "title": "GitHub Copilot 的模型和定价 - GitHub 文档",
       "description": "查看 GitHub Copilot 中可用模型的按词元定价方式以及各种计划的超额用量的参考价格。",
       "status": 200,
-      "byteLength": 657833,
+      "byteLength": 640028,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -774,92 +774,36 @@
             "context": "存令牌（模型重用或存储上下文）。 每个令牌都基于所使用的模型定价，总价格转换为 AI credits1 AI credit = $0.01 USD。 交互的成本取决于两个事项：模型和使用的令牌数。 如何跟踪和计费Copilot的使用情况取决于您的计划类型： 个人计划"
           },
           {
-            "value": "$0.25",
-            "context": "t 缓存输入 缓存写入 输出 GPT-5 mini GA Lightweight Default Not applicable $0.25 $0.025 Not applicable $2.00 GPT-5.3-Codex GA Powerful Default N"
-          },
-          {
-            "value": "$0.025",
-            "context": "缓存写入 输出 GPT-5 mini GA Lightweight Default Not applicable $0.25 $0.025 Not applicable $2.00 GPT-5.3-Codex GA Powerful Default Not appl"
-          },
-          {
-            "value": "$2.00",
-            "context": "Lightweight Default Not applicable $0.25 $0.025 Not applicable $2.00 GPT-5.3-Codex GA Powerful Default Not applicable $1.75 $0.175 N"
-          },
-          {
             "value": "$1.75",
-            "context": "plicable $2.00 GPT-5.3-Codex GA Powerful Default Not applicable $1.75 $0.175 Not applicable $14.00 GPT-5.4 GA Versatile Default ≤ 272"
+            "context": "t 缓存输入 缓存写入 输出 GPT-5.3-Codex GA Powerful Default Not applicable $1.75 $0.175 Not applicable $14.00 GPT-5.4 nano GA Lightweight Defaul"
           },
           {
             "value": "$0.175",
-            "context": "le $2.00 GPT-5.3-Codex GA Powerful Default Not applicable $1.75 $0.175 Not applicable $14.00 GPT-5.4 GA Versatile Default ≤ 272K $2.50"
+            "context": "缓存写入 输出 GPT-5.3-Codex GA Powerful Default Not applicable $1.75 $0.175 Not applicable $14.00 GPT-5.4 nano GA Lightweight Default Not a"
           },
           {
             "value": "$14.00",
-            "context": "GA Powerful Default Not applicable $1.75 $0.175 Not applicable $14.00 GPT-5.4 GA Versatile Default ≤ 272K $2.50 $0.25 Not applicable"
-          },
-          {
-            "value": "$2.50",
-            "context": "0.175 Not applicable $14.00 GPT-5.4 GA Versatile Default ≤ 272K $2.50 $0.25 Not applicable $15.00 GPT-5.4 GA Versatile Long context >"
-          },
-          {
-            "value": "$15.00",
-            "context": "GPT-5.4 GA Versatile Default ≤ 272K $2.50 $0.25 Not applicable $15.00 GPT-5.4 GA Versatile Long context > 272K $5.00 $0.50 Not applic"
-          },
-          {
-            "value": "$5.00",
-            "context": "Not applicable $15.00 GPT-5.4 GA Versatile Long context > 272K $5.00 $0.50 Not applicable $22.50 GPT-5.4 mini GA Lightweight Default"
-          },
-          {
-            "value": "$0.50",
-            "context": "pplicable $15.00 GPT-5.4 GA Versatile Long context > 272K $5.00 $0.50 Not applicable $22.50 GPT-5.4 mini GA Lightweight Default Not a"
-          },
-          {
-            "value": "$22.50",
-            "context": "5.4 GA Versatile Long context > 272K $5.00 $0.50 Not applicable $22.50 GPT-5.4 mini GA Lightweight Default Not applicable $0.75 $0.075"
-          },
-          {
-            "value": "$0.75",
-            "context": "cable $22.50 GPT-5.4 mini GA Lightweight Default Not applicable $0.75 $0.075 Not applicable $4.50 GPT-5.4 nano GA Lightweight Default"
-          },
-          {
-            "value": "$0.075",
-            "context": "$22.50 GPT-5.4 mini GA Lightweight Default Not applicable $0.75 $0.075 Not applicable $4.50 GPT-5.4 nano GA Lightweight Default Not ap"
-          },
-          {
-            "value": "$4.50",
-            "context": "Lightweight Default Not applicable $0.75 $0.075 Not applicable $4.50 GPT-5.4 nano GA Lightweight Default Not applicable $0.20 $0.02"
+            "context": "GA Powerful Default Not applicable $1.75 $0.175 Not applicable $14.00 GPT-5.4 nano GA Lightweight Default Not applicable $0.20 $0.02"
           },
           {
             "value": "$0.20",
-            "context": "icable $4.50 GPT-5.4 nano GA Lightweight Default Not applicable $0.20 $0.02 Not applicable $1.25 GPT-5.5 GA Powerful Default ≤ 272K $"
+            "context": "cable $14.00 GPT-5.4 nano GA Lightweight Default Not applicable $0.20 $0.02 Not applicable $1.25 GPT-5.6 Luna GA Lightweight Default"
           },
           {
             "value": "$0.02",
-            "context": "$4.50 GPT-5.4 nano GA Lightweight Default Not applicable $0.20 $0.02 Not applicable $1.25 GPT-5.5 GA Powerful Default ≤ 272K $5.00 $"
+            "context": "$14.00 GPT-5.4 nano GA Lightweight Default Not applicable $0.20 $0.02 Not applicable $1.25 GPT-5.6 Luna GA Lightweight Default ≤ 200K"
           },
           {
             "value": "$1.25",
-            "context": "A Lightweight Default Not applicable $0.20 $0.02 Not applicable $1.25 GPT-5.5 GA Powerful Default ≤ 272K $5.00 $0.50 Not applicable $"
+            "context": "A Lightweight Default Not applicable $0.20 $0.02 Not applicable $1.25 GPT-5.6 Luna GA Lightweight Default ≤ 200K $0.20 $0.02 $0.25 $1"
           },
           {
-            "value": "$30.00",
-            "context": "5 GPT-5.5 GA Powerful Default ≤ 272K $5.00 $0.50 Not applicable $30.00 GPT-5.5 GA Powerful Long context > 272K $10.00 $1.00 Not applic"
-          },
-          {
-            "value": "$10.00",
-            "context": "0 Not applicable $30.00 GPT-5.5 GA Powerful Long context > 272K $10.00 $1.00 Not applicable $45.00 GPT-5.6 Luna GA Lightweight Default"
-          },
-          {
-            "value": "$1.00",
-            "context": "pplicable $30.00 GPT-5.5 GA Powerful Long context > 272K $10.00 $1.00 Not applicable $45.00 GPT-5.6 Luna GA Lightweight Default ≤ 200"
-          },
-          {
-            "value": "$45.00",
-            "context": "5.5 GA Powerful Long context > 272K $10.00 $1.00 Not applicable $45.00 GPT-5.6 Luna GA Lightweight Default ≤ 200K $0.20 $0.02 $0.25 $1"
+            "value": "$0.25",
+            "context": "le $1.25 GPT-5.6 Luna GA Lightweight Default ≤ 200K $0.20 $0.02 $0.25 $1.20 GPT-5.6 Luna GA Lightweight Long context > 200K $0.40 $0."
           },
           {
             "value": "$1.20",
-            "context": "00 GPT-5.6 Luna GA Lightweight Default ≤ 200K $0.20 $0.02 $0.25 $1.20 GPT-5.6 Luna GA Lightweight Long context > 200K $0.40 $0.04 $0."
+            "context": "25 GPT-5.6 Luna GA Lightweight Default ≤ 200K $0.20 $0.02 $0.25 $1.20 GPT-5.6 Luna GA Lightweight Long context > 200K $0.40 $0.04 $0."
           },
           {
             "value": "$0.40",
@@ -870,6 +814,10 @@
             "context": ".25 $1.20 GPT-5.6 Luna GA Lightweight Long context > 200K $0.40 $0.04 $0.50 $1.80 GPT-5.6 Sol GA Powerful Default ≤ 272K $4.00 $0.40"
           },
           {
+            "value": "$0.50",
+            "context": ".20 GPT-5.6 Luna GA Lightweight Long context > 200K $0.40 $0.04 $0.50 $1.80 GPT-5.6 Sol GA Powerful Default ≤ 272K $4.00 $0.40 $5.00"
+          },
+          {
             "value": "$1.80",
             "context": "T-5.6 Luna GA Lightweight Long context > 200K $0.40 $0.04 $0.50 $1.80 GPT-5.6 Sol GA Powerful Default ≤ 272K $4.00 $0.40 $5.00 $20.00"
           },
@@ -878,8 +826,60 @@
             "context": "$0.40 $0.04 $0.50 $1.80 GPT-5.6 Sol GA Powerful Default ≤ 272K $4.00 $0.40 $5.00 $20.00 GPT-5.6 Sol GA Powerful Long context > 272K"
           },
           {
+            "value": "$5.00",
+            "context": "$0.50 $1.80 GPT-5.6 Sol GA Powerful Default ≤ 272K $4.00 $0.40 $5.00 $20.00 GPT-5.6 Sol GA Powerful Long context > 272K $8.00 $0.80"
+          },
+          {
             "value": "$20.00",
             "context": "$1.80 GPT-5.6 Sol GA Powerful Default ≤ 272K $4.00 $0.40 $5.00 $20.00 GPT-5.6 Sol GA Powerful Long context > 272K $8.00 $0.80 $10.00"
+          },
+          {
+            "value": "$8.00",
+            "context": "$0.40 $5.00 $20.00 GPT-5.6 Sol GA Powerful Long context > 272K $8.00 $0.80 $10.00 $30.00 GPT-5.6 Terra GA Versatile Default ≤ 272K $"
+          },
+          {
+            "value": "$0.80",
+            "context": "$5.00 $20.00 GPT-5.6 Sol GA Powerful Long context > 272K $8.00 $0.80 $10.00 $30.00 GPT-5.6 Terra GA Versatile Default ≤ 272K $2.00 $"
+          },
+          {
+            "value": "$10.00",
+            "context": "$20.00 GPT-5.6 Sol GA Powerful Long context > 272K $8.00 $0.80 $10.00 $30.00 GPT-5.6 Terra GA Versatile Default ≤ 272K $2.00 $0.20 $2"
+          },
+          {
+            "value": "$30.00",
+            "context": "GPT-5.6 Sol GA Powerful Long context > 272K $8.00 $0.80 $10.00 $30.00 GPT-5.6 Terra GA Versatile Default ≤ 272K $2.00 $0.20 $2.50 $12"
+          },
+          {
+            "value": "$2.00",
+            "context": "0 $0.80 $10.00 $30.00 GPT-5.6 Terra GA Versatile Default ≤ 272K $2.00 $0.20 $2.50 $12.00 GPT-5.6 Terra GA Versatile Long context > 27"
+          },
+          {
+            "value": "$2.50",
+            "context": "00 $30.00 GPT-5.6 Terra GA Versatile Default ≤ 272K $2.00 $0.20 $2.50 $12.00 GPT-5.6 Terra GA Versatile Long context > 272K $4.00 $0."
+          },
+          {
+            "value": "$12.00",
+            "context": ".00 GPT-5.6 Terra GA Versatile Default ≤ 272K $2.00 $0.20 $2.50 $12.00 GPT-5.6 Terra GA Versatile Long context > 272K $4.00 $0.40 $5.0"
+          },
+          {
+            "value": "$18.00",
+            "context": "PT-5.6 Terra GA Versatile Long context > 272K $4.00 $0.40 $5.00 $18.00 GPT-6 Astra GA Powerful Default ≤ 272K $10.00 $1.00 $12.50 $50."
+          },
+          {
+            "value": "$1.00",
+            "context": "0.40 $5.00 $18.00 GPT-6 Astra GA Powerful Default ≤ 272K $10.00 $1.00 $12.50 $50.00 GPT-6 Astra GA Powerful Long context > 272K $20.0"
+          },
+          {
+            "value": "$12.50",
+            "context": "5.00 $18.00 GPT-6 Astra GA Powerful Default ≤ 272K $10.00 $1.00 $12.50 $50.00 GPT-6 Astra GA Powerful Long context > 272K $20.00 $2.00"
+          },
+          {
+            "value": "$50.00",
+            "context": "8.00 GPT-6 Astra GA Powerful Default ≤ 272K $10.00 $1.00 $12.50 $50.00 GPT-6 Astra GA Powerful Long context > 272K $20.00 $2.00 $25.00"
+          },
+          {
+            "value": "$25.00",
+            "context": "$50.00 GPT-6 Astra GA Powerful Long context > 272K $20.00 $2.00 $25.00 $75.00 GPT-6 Luna GA Lightweight Default ≤ 272K $0.10 $0.01 $0."
           }
         ],
         "planSignals": [
@@ -888,8 +888,8 @@
             "context": "GitHub Copilot 的模型和定价 - GitHub 文档 Skip to main content Skip to content GitHub"
           },
           {
-            "value": "agent",
-            "context": "pilot 命令行界面（CLI） Copilot 在 GitHub.com 上 IDE 中的Copilot 智能体 Cloud agent 自定义代理 MCP 和 cloud agent Copilot CLI 比较 CLI 功能 自定义代理 LSP 服务器 CLI"
+            "value": "Agent",
+            "context": "g Spaces Copilot Memory Customizations Comparing customizations Agent skills Custom agents MCP Hooks Extensions Plugins LSP servers 模"
           },
           {
             "value": "Enterprise",
@@ -913,11 +913,11 @@
           },
           {
             "value": "Codex",
-            "context": "efault Not applicable $0.25 $0.025 Not applicable $2.00 GPT-5.3-Codex GA Powerful Default Not applicable $1.75 $0.175 Not applicable"
+            "context": "AI 模型没有缓存写入成本。 型号 版本状态 类别 层 阈值（输入令牌） Input 缓存输入 缓存写入 输出 GPT-5.3-Codex GA Powerful Default Not applicable $1.75 $0.175 Not applicable"
           },
           {
             "value": "Flash",
-            "context": "opilot中支持的 AI 模型 型号 版本状态 类别 层 阈值（输入令牌） Input 缓存输入 输出 Gemini 3.7 Flash 1 GA Versatile Default Not applicable $0.75 $0.075 $3.75 Gemini"
+            "context": "opilot中支持的 AI 模型 型号 版本状态 类别 层 阈值（输入令牌） Input 缓存输入 输出 Gemini 3.8 Flash 1 GA Versatile Default Not applicable $0.75 $0.075 $3.75 Gemini"
           }
         ]
       }
@@ -931,7 +931,7 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-10-19T18:44:09.441Z",
+      "fetchedAt": "2026-10-20T17:13:22.363Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -957,23 +957,140 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-10-19T18:44:09.443Z",
-      "title": "Just a moment...",
+      "fetchedAt": "2026-10-20T17:13:22.364Z",
+      "title": "X Premium+ Price Adjustment",
       "description": "",
       "status": 200,
-      "byteLength": 282,
+      "byteLength": 14992,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
-        "priceSignals": [],
+        "priceSignals": [
+          {
+            "value": "$3.00",
+            "context": "| | --- | --- | --- | --- | --- | --- | --- | | United States | $3.00 | $32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom"
+          },
+          {
+            "value": "$32.00",
+            "context": "| --- | --- | --- | --- | --- | --- | | United States | $3.00 | $32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00"
+          },
+          {
+            "value": "$8.00",
+            "context": "-- | --- | --- | --- | --- | | United States | $3.00 | $32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00"
+          },
+          {
+            "value": "$84.00",
+            "context": "| --- | --- | --- | | United States | $3.00 | $32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00"
+          },
+          {
+            "value": "$40.00",
+            "context": "--- | --- | | United States | $3.00 | $32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00"
+          },
+          {
+            "value": "$395.00",
+            "context": "| | United States | $3.00 | $32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 |"
+          },
+          {
+            "value": "£3.00",
+            "context": "$32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75"
+          },
+          {
+            "value": "£32.00",
+            "context": "$8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00"
+          },
+          {
+            "value": "£8.00",
+            "context": "$84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.0"
+          },
+          {
+            "value": "£84.00",
+            "context": "$40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105."
+          },
+          {
+            "value": "£31.00",
+            "context": "$395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56."
+          },
+          {
+            "value": "£313.00",
+            "context": "| | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56.00 | $560."
+          },
+          {
+            "value": "$3.75",
+            "context": "£3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia |"
+          },
+          {
+            "value": "$10.00",
+            "context": "£8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $"
+          },
+          {
+            "value": "$105.00",
+            "context": "84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $1"
+          },
+          {
+            "value": "$56.00",
+            "context": "1.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $"
+          },
+          {
+            "value": "$560.00",
+            "context": "13.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $6"
+          },
+          {
+            "value": "$4.88",
+            "context": "| $40.00 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $621.00 | | New Zealand"
+          },
+          {
+            "value": "$51.43",
+            "context": "0 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $621.00 | | New Zealand | $4.88 |"
+          },
+          {
+            "value": "$13.00",
+            "context": "0 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $621.00 | | New Zealand | $4.88 | $51.43 |"
+          },
+          {
+            "value": "$135.00",
+            "context": "00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $621.00 | | New Zealand | $4.88 | $51.43 | $13.00 |"
+          },
+          {
+            "value": "$62.00",
+            "context": "0 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $621.00 | | New Zealand | $4.88 | $51.43 | $13.00 | $135.00 |"
+          },
+          {
+            "value": "$621.00",
+            "context": "00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $621.00 | | New Zealand | $4.88 | $51.43 | $13.00 | $135.00 | $70.00 |"
+          },
+          {
+            "value": "$70.00",
+            "context": "| $621.00 | | New Zealand | $4.88 | $51.43 | $13.00 | $135.00 | $70.00 | $691.00 | | Japan | ¥368 | ¥3,916 | ¥980 | ¥10,280 | ¥6,080.0"
+          },
+          {
+            "value": "$691.00",
+            "context": "| | New Zealand | $4.88 | $51.43 | $13.00 | $135.00 | $70.00 | $691.00 | | Japan | ¥368 | ¥3,916 | ¥980 | ¥10,280 | ¥6,080.00 | ¥60,04"
+          },
+          {
+            "value": "¥368",
+            "context": "4.88 | $51.43 | $13.00 | $135.00 | $70.00 | $691.00 | | Japan | ¥368 | ¥3,916 | ¥980 | ¥10,280 | ¥6,080.00 | ¥60,040.00 | | Brazil |"
+          },
+          {
+            "value": "¥3,916",
+            "context": "$51.43 | $13.00 | $135.00 | $70.00 | $691.00 | | Japan | ¥368 | ¥3,916 | ¥980 | ¥10,280 | ¥6,080.00 | ¥60,040.00 | | Brazil | R$15.75"
+          },
+          {
+            "value": "¥980",
+            "context": "$13.00 | $135.00 | $70.00 | $691.00 | | Japan | ¥368 | ¥3,916 | ¥980 | ¥10,280 | ¥6,080.00 | ¥60,040.00 | | Brazil | R$15.75 | R$167"
+          }
+        ],
         "planSignals": [
           {
-            "value": "premium",
-            "context": "Title: Just a moment... URL Source: http://help.x.com/en/premium-plus-price-update Warning: Target URL returned error 403: Forbi"
+            "value": "Premium",
+            "context": "Title: X Premium+ Price Adjustment URL Source: http://help.x.com/en/premium-plus"
           },
           {
             "value": "plus",
-            "context": "itle: Just a moment... URL Source: http://help.x.com/en/premium-plus-price-update Warning: Target URL returned error 403: Forbidden"
+            "context": "mium+ Price Adjustment URL Source: http://help.x.com/en/premium-plus-price-update Markdown Content: 1. [Help Center](https://help.x."
+          },
+          {
+            "value": "free",
+            "context": "usage limits and early access to new features. * Completely ad-free: Enjoy a seamless, interruption-free X experience with Premium+"
           }
         ]
       }
@@ -987,7 +1104,7 @@
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
       "ok": false,
-      "fetchedAt": "2026-10-19T18:44:09.444Z",
+      "fetchedAt": "2026-10-20T17:13:22.365Z",
       "error": "HTTP 403 Forbidden"
     },
     {
@@ -999,11 +1116,11 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": true,
-      "fetchedAt": "2026-10-19T18:44:09.444Z",
+      "fetchedAt": "2026-10-20T17:13:22.365Z",
       "title": "Enterprise Pricing and Billing: Frequently Asked Questions - Perplexity Help Center",
       "description": "Get answers to the most common Pricing and Billing questions for our Enterprise plan",
       "status": 200,
-      "byteLength": 578943,
+      "byteLength": 585066,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -1062,11 +1179,11 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": true,
-      "fetchedAt": "2026-10-19T18:44:09.445Z",
+      "fetchedAt": "2026-10-20T17:13:22.366Z",
       "title": "Using the Connector for Slack - Perplexity Help Center",
       "description": "Leverage Slack information for seamless collaboration and rich insights directly in Perplexity.",
       "status": 200,
-      "byteLength": 586322,
+      "byteLength": 586476,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
