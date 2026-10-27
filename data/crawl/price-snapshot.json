@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-26T18:42:16.550Z",
+  "generatedAt": "2026-10-27T18:02:40.143Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,7 +12,7 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-10-26T18:42:12.042Z",
+      "fetchedAt": "2026-10-27T18:02:38.401Z",
       "title": "套餐和价格 | ChatGPT",
       "description": "",
       "status": 200,
@@ -54,11 +54,11 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-10-26T18:42:12.065Z",
+      "fetchedAt": "2026-10-27T18:02:38.438Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
-      "byteLength": 718134,
+      "byteLength": 717156,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -225,18 +225,18 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-10-26T18:42:12.066Z",
+      "fetchedAt": "2026-10-27T18:02:38.440Z",
       "title": "Plans & pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
-      "byteLength": 1246420,
+      "byteLength": 1245070,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
         "priceSignals": [
           {
             "value": "$0",
-            "context": "dual Developer Team & Enterprise API Individual Free Try Claude $0 Free for everyone Try Claude Chat on web, desktop, and mobile S"
+            "context": "w tab) Pricing Individual Team & Enterprise API Free Try Claude $0 Free for everyone Try Claude Chat on web, desktop, and mobile S"
           },
           {
             "value": "$17",
@@ -366,11 +366,11 @@
           },
           {
             "value": "Team",
-            "context": "ad what changed (opens in new tab) Pricing Individual Developer Team & Enterprise API Individual Free Try Claude $0 Free for everyon"
+            "context": "follow. Read what changed (opens in new tab) Pricing Individual Team & Enterprise API Free Try Claude $0 Free for everyone Try Claud"
           },
           {
             "value": "Free",
-            "context": ") Pricing Individual Developer Team & Enterprise API Individual Free Try Claude $0 Free for everyone Try Claude Chat on web, desktop"
+            "context": "ged (opens in new tab) Pricing Individual Team & Enterprise API Free Try Claude $0 Free for everyone Try Claude Chat on web, desktop"
           },
           {
             "value": "plus",
@@ -400,7 +400,7 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-10-26T18:42:12.067Z",
+      "fetchedAt": "2026-10-27T18:02:38.442Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 4 Argon & more",
       "description": "Get access to the best of Google AI including Gemini 4 Argon, video generation, Deep Research, and much more. Choose the right plan for you.",
       "status": 200,
@@ -487,7 +487,7 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-10-26T18:42:12.067Z",
+      "fetchedAt": "2026-10-27T18:02:38.443Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
@@ -538,7 +538,7 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-10-26T18:42:12.068Z",
+      "fetchedAt": "2026-10-27T18:02:38.444Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
@@ -637,11 +637,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-10-26T18:42:12.068Z",
+      "fetchedAt": "2026-10-27T18:02:38.445Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "See plans and pricing for GitHub Copilot. Accelerate your software development with our AI coding agent and agentic tools.",
       "status": 200,
-      "byteLength": 1030779,
+      "byteLength": 1040505,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -734,7 +734,7 @@
           },
           {
             "value": "Flash",
-            "context": "Luna OpenAI GPT-6 Sol OpenAI GPT-6.1 Sol Microsoft MAI-Code-1.1-Flash Google Gemini 3.7 Flash Google Gemini 3.8 Flash Google Gemini 4"
+            "context": "OpenAI GPT-6.1 Sol OpenAI GPT-6.1 Terra Microsoft MAI-Code-1.1-Flash Google Gemini 3.7 Flash Google Gemini 3.8 Flash Google Gemini 4"
           },
           {
             "value": "team",
@@ -756,11 +756,11 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-10-26T18:42:12.069Z",
+      "fetchedAt": "2026-10-27T18:02:38.446Z",
       "title": "GitHub Copilot 的模型和定价 - GitHub 文档",
       "description": "查看 GitHub Copilot 中可用模型的按词元定价方式以及各种计划的超额用量的参考价格。",
       "status": 200,
-      "byteLength": 640953,
+      "byteLength": 645250,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -927,7 +927,7 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-10-26T18:42:12.069Z",
+      "fetchedAt": "2026-10-27T18:02:38.447Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -953,7 +953,7 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-10-26T18:42:12.070Z",
+      "fetchedAt": "2026-10-27T18:02:38.449Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -983,7 +983,7 @@
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
       "ok": false,
-      "fetchedAt": "2026-10-26T18:42:12.071Z",
+      "fetchedAt": "2026-10-27T18:02:38.450Z",
       "error": "HTTP 403 Forbidden"
     },
     {
@@ -995,11 +995,11 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": true,
-      "fetchedAt": "2026-10-26T18:42:12.072Z",
+      "fetchedAt": "2026-10-27T18:02:38.450Z",
       "title": "Enterprise Pricing and Billing: Frequently Asked Questions - Perplexity Help Center",
       "description": "Get answers to the most common Pricing and Billing questions for our Enterprise plan",
       "status": 200,
-      "byteLength": 548969,
+      "byteLength": 553676,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -1058,11 +1058,11 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": true,
-      "fetchedAt": "2026-10-26T18:42:12.072Z",
+      "fetchedAt": "2026-10-27T18:02:38.451Z",
       "title": "Using the Connector for Slack - Perplexity Help Center",
       "description": "Leverage Slack information for seamless collaboration and rich insights directly in Perplexity.",
       "status": 200,
-      "byteLength": 572728,
+      "byteLength": 577433,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
