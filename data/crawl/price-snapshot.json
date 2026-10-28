@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-27T18:02:40.143Z",
+  "generatedAt": "2026-10-28T18:21:55.438Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,7 +12,7 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-10-27T18:02:38.401Z",
+      "fetchedAt": "2026-10-28T18:21:50.659Z",
       "title": "套餐和价格 | ChatGPT",
       "description": "",
       "status": 200,
@@ -54,11 +54,11 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-10-27T18:02:38.438Z",
+      "fetchedAt": "2026-10-28T18:21:50.698Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
-      "byteLength": 717156,
+      "byteLength": 718085,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -225,7 +225,7 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-10-27T18:02:38.440Z",
+      "fetchedAt": "2026-10-28T18:21:50.701Z",
       "title": "Plans & pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
@@ -400,7 +400,7 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-10-27T18:02:38.442Z",
+      "fetchedAt": "2026-10-28T18:21:50.702Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 4 Argon & more",
       "description": "Get access to the best of Google AI including Gemini 4 Argon, video generation, Deep Research, and much more. Choose the right plan for you.",
       "status": 200,
@@ -487,11 +487,11 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-10-27T18:02:38.443Z",
+      "fetchedAt": "2026-10-28T18:21:50.704Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
-      "byteLength": 441207,
+      "byteLength": 429618,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -538,7 +538,7 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-10-27T18:02:38.444Z",
+      "fetchedAt": "2026-10-28T18:21:50.705Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
@@ -637,22 +637,22 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-10-27T18:02:38.445Z",
+      "fetchedAt": "2026-10-28T18:21:50.706Z",
       "title": "GitHub Copilot · Plans & pricing · GitHub",
       "description": "See plans and pricing for GitHub Copilot. Accelerate your software development with our AI coding agent and agentic tools.",
       "status": 200,
-      "byteLength": 1040505,
+      "byteLength": 981549,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
         "priceSignals": [
           {
             "value": "$0",
-            "context": "orials Plans & Pricing More Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month Ge"
+            "context": "Dismiss alert {{ message }} Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month Ge"
           },
           {
             "value": "$10",
-            "context": "ing More Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month Get started Max $100 p"
+            "context": "ssage }} Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month Get started Max $100 p"
           },
           {
             "value": "$39",
@@ -698,35 +698,39 @@
         "planSignals": [
           {
             "value": "Copilot",
-            "context": "GitHub Copilot · Plans & pricing · GitHub Skip to content GitHub Universe 2026"
-          },
-          {
-            "value": "Business",
-            "context": "ORE BY TYPE Customer stories Events & webinars Ebooks & reports Business insights GitHub Skills SUPPORT & SERVICES Documentation Custome"
+            "context": "GitHub Copilot · Plans & pricing · GitHub Skip to content GitHub Enterprise no"
           },
           {
             "value": "Enterprise",
-            "context": "Stars Archive Program REPOSITORIES Topics Trending Collections Enterprise ENTERPRISE SOLUTIONS Enterprise platform AI-powered developer p"
+            "context": "itHub Copilot · Plans & pricing · GitHub Skip to content GitHub Enterprise now includes access to GitHub Copilot. Learn more Navigation Me"
+          },
+          {
+            "value": "agent",
+            "context": "itory hosting, code review, and collaboration Copilot AI coding agent for tasks, projects and automated work Build & Ship Actions CI/"
+          },
+          {
+            "value": "Team",
+            "context": "Hub products, all in one place. Businesses By Stage Enterprises Team Startups Nonprofits By Industry Healthcare Financial services M"
+          },
+          {
+            "value": "Business",
+            "context": "See all industries Evaluate GitHub Why GitHub Customer Stories Business insights Trust Center Add-ons GitHub Advanced Security Enterpri"
           },
           {
             "value": "Premium",
-            "context": "rity features Copilot for Business Enterprise-grade AI features Premium Support Enterprise-grade 24/7 support Pricing Search / Sign in"
+            "context": "code security Copilot for business Enterprise-grade AI features Premium Support Enterprise-grade 24/7 support Resources Learn & Connect"
           },
           {
             "value": "Free",
-            "context": "s Tutorials Plans & Pricing More Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month"
+            "context": "ion. Dismiss alert {{ message }} Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month"
           },
           {
             "value": "Pro",
-            "context": "Pricing More Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month Get started Max $1"
+            "context": "{ message }} Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month Get started Max $1"
           },
           {
             "value": "Max",
             "context": "ed Pro $10 per month Get started Pro+ $39 per month Get started Max $100 per month Get started GitHub AI Credits GitHub AI Credits"
-          },
-          {
-            "value": "Agent",
-            "context": "AI Credits Credits used when interacting with Copilot features. Agent mode, code review, Copilot in the cloud, Copilot CLI, and Copil"
           },
           {
             "value": "Codex",
@@ -737,12 +741,8 @@
             "context": "OpenAI GPT-6.1 Sol OpenAI GPT-6.1 Terra Microsoft MAI-Code-1.1-Flash Google Gemini 3.7 Flash Google Gemini 3.8 Flash Google Gemini 4"
           },
           {
-            "value": "team",
-            "context": "Studio Zed Zed Need human help? Let’s define how to propel your team into a new era. Contact sales Frequently asked questions Genera"
-          },
-          {
             "value": "Education",
-            "context": "sources Roadmap Compare GitHub Ecosystem Developer API Partners Education GitHub CLI GitHub Desktop GitHub Mobile GitHub Marketplace MCP"
+            "context": "es Roadmap Compare GitHub All Features Developers Developer API Education GitHub CLI GitHub Desktop GitHub Mobile Integrations MCP Regist"
           }
         ]
       }
@@ -756,11 +756,11 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-10-27T18:02:38.446Z",
+      "fetchedAt": "2026-10-28T18:21:50.707Z",
       "title": "GitHub Copilot 的模型和定价 - GitHub 文档",
       "description": "查看 GitHub Copilot 中可用模型的按词元定价方式以及各种计划的超额用量的参考价格。",
       "status": 200,
-      "byteLength": 645250,
+      "byteLength": 657241,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -885,7 +885,7 @@
           },
           {
             "value": "Enterprise",
-            "context": "opilot使用情况指标 安全、治理和网络设置 内容排除 会话数据 云端和本地沙盒 了解本地沙盒机制 风险和缓解措施 网络设置 Enterprise 策略 默认可用性 FedRAMP 模型 新功能和模型 代理管理 MCP 管理 插件标准 OpenTelemetry 云代理访问"
+            "context": "中的 Copilot Copilot CLI 快速入门 Copilot 应用快速入门 Copilot SDK 快速入门 规划 Enterprise and Copilot billing 最佳做法 企业 AI 治理 概念 Copilot 界面 GitHub Copilot"
           },
           {
             "value": "Business",
@@ -893,7 +893,7 @@
           },
           {
             "value": "agent",
-            "context": "Copilot 自定义 Copilot 概述 添加自定义说明 添加个人说明 添加存储库说明 添加组织说明 自定义 cloud agent 创建自定义代理 添加代理技能 使用挂钩 自定义代理环境 配置机密和变量 测试自定义代理 自定义防火墙 配置 MCP 服务器 S"
+            "context": "Copilot 自定义 Copilot 概述 添加自定义说明 添加个人说明 添加存储库说明 添加组织说明 自定义 cloud agent Personalize cloud sessions 创建自定义代理 添加代理技能 使用挂钩 自定义代理环境 Create a"
           },
           {
             "value": "Free",
@@ -927,7 +927,7 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-10-27T18:02:38.447Z",
+      "fetchedAt": "2026-10-28T18:21:50.708Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -953,7 +953,7 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-10-27T18:02:38.449Z",
+      "fetchedAt": "2026-10-28T18:21:50.710Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -982,9 +982,18 @@
       "surface": "membership-rates",
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
-      "ok": false,
-      "fetchedAt": "2026-10-27T18:02:38.450Z",
-      "error": "HTTP 403 Forbidden"
+      "ok": true,
+      "fetchedAt": "2026-10-28T18:21:50.710Z",
+      "title": "Just a moment...",
+      "description": "",
+      "status": 200,
+      "byteLength": 472,
+      "fetchMode": "jina_markdown",
+      "extraction": {
+        "confidence": "low",
+        "priceSignals": [],
+        "planSignals": []
+      }
     },
     {
       "id": "perplexity-enterprise-pricing",
@@ -995,11 +1004,11 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": true,
-      "fetchedAt": "2026-10-27T18:02:38.450Z",
+      "fetchedAt": "2026-10-28T18:21:50.711Z",
       "title": "Enterprise Pricing and Billing: Frequently Asked Questions - Perplexity Help Center",
       "description": "Get answers to the most common Pricing and Billing questions for our Enterprise plan",
       "status": 200,
-      "byteLength": 553676,
+      "byteLength": 553776,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -1058,11 +1067,11 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": true,
-      "fetchedAt": "2026-10-27T18:02:38.451Z",
+      "fetchedAt": "2026-10-28T18:21:50.712Z",
       "title": "Using the Connector for Slack - Perplexity Help Center",
       "description": "Leverage Slack information for seamless collaboration and rich insights directly in Perplexity.",
       "status": 200,
-      "byteLength": 577433,
+      "byteLength": 577533,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
