@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-30T18:01:53.261Z",
+  "generatedAt": "2026-10-31T17:16:30.598Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,7 +12,7 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-10-30T18:01:49.462Z",
+      "fetchedAt": "2026-10-31T17:16:27.584Z",
       "title": "套餐和价格 | ChatGPT",
       "description": "",
       "status": 200,
@@ -54,11 +54,11 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-10-30T18:01:49.487Z",
+      "fetchedAt": "2026-10-31T17:16:27.623Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
-      "byteLength": 718329,
+      "byteLength": 719357,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -225,11 +225,11 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-10-30T18:01:49.488Z",
+      "fetchedAt": "2026-10-31T17:16:27.625Z",
       "title": "Plans & pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Ultra, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
-      "byteLength": 1322881,
+      "byteLength": 1323262,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -240,7 +240,7 @@
           },
           {
             "value": "$17",
-            "context": "Design, Slides, Docs Pro Claude Code included For everyday work $17 Per month with annual subscription discount ( $200 billed up fr"
+            "context": "ate Artifacts Claude Design, Slides, Docs Pro For everyday work $17 Per month with annual subscription discount ( $200 billed up fr"
           },
           {
             "value": "$200",
@@ -252,7 +252,7 @@
           },
           {
             "value": "$100",
-            "context": "ome and Microsoft 365 Max Claude Code included For all-day work $100 Per month Try Claude Everything in Pro, plus: 5x Pro usage ever"
+            "context": "models Claude in Chrome and Microsoft 365 Max For all-day work $100 Per month Try Claude Everything in Pro, plus: 5x Pro usage ever"
           },
           {
             "value": "$25",
@@ -366,7 +366,7 @@
           },
           {
             "value": "Pro",
-            "context": "our apps and tools Create Artifacts Claude Design, Slides, Docs Pro Claude Code included For everyday work $17 Per month with annua"
+            "context": "our apps and tools Create Artifacts Claude Design, Slides, Docs Pro For everyday work $17 Per month with annual subscription discou"
           },
           {
             "value": "plus",
@@ -374,11 +374,11 @@
           },
           {
             "value": "Max",
-            "context": "Projects More Claude models Claude in Chrome and Microsoft 365 Max Claude Code included For all-day work $100 Per month Try Claude"
+            "context": "Projects More Claude models Claude in Chrome and Microsoft 365 Max For all-day work $100 Per month Try Claude Everything in Pro, p"
           },
           {
             "value": "Ultra",
-            "context": "advanced Claude features Priority access at high traffic times Ultra Claude Code included For your longest tasks $200 Per month Try"
+            "context": "advanced Claude features Priority access at high traffic times Ultra For your longest tasks $200 Per month Try Claude Everything in"
           },
           {
             "value": "Premium",
@@ -404,7 +404,7 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-10-30T18:01:49.489Z",
+      "fetchedAt": "2026-10-31T17:16:27.626Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 4 Argon & more",
       "description": "Get access to the best of Google AI including Gemini 4 Argon, video generation, Deep Research, and much more. Choose the right plan for you.",
       "status": 200,
@@ -491,11 +491,11 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-10-30T18:01:49.490Z",
+      "fetchedAt": "2026-10-31T17:16:27.627Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
-      "byteLength": 429584,
+      "byteLength": 429638,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -542,7 +542,7 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-10-30T18:01:49.491Z",
+      "fetchedAt": "2026-10-31T17:16:27.629Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
@@ -641,11 +641,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-10-30T18:01:49.491Z",
+      "fetchedAt": "2026-10-31T17:16:27.630Z",
       "title": "GitHub Copilot · Plans & pricing for every developer & team · GitHub · GitHub",
       "description": "See plans and pricing for GitHub Copilot. Accelerate your software development with our AI coding agent and agentic tools.",
       "status": 200,
-      "byteLength": 981680,
+      "byteLength": 981655,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -760,7 +760,7 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-10-30T18:01:49.492Z",
+      "fetchedAt": "2026-10-31T17:16:27.631Z",
       "title": "GitHub Copilot 的模型和定价 - GitHub 文档",
       "description": "查看 GitHub Copilot 中可用模型的按词元定价方式以及各种计划的超额用量的参考价格。",
       "status": 200,
@@ -931,7 +931,7 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-10-30T18:01:49.492Z",
+      "fetchedAt": "2026-10-31T17:16:27.632Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -957,7 +957,7 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-10-30T18:01:49.493Z",
+      "fetchedAt": "2026-10-31T17:16:27.634Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -986,9 +986,18 @@
       "surface": "membership-rates",
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
-      "ok": false,
-      "fetchedAt": "2026-10-30T18:01:49.494Z",
-      "error": "HTTP 403 Forbidden"
+      "ok": true,
+      "fetchedAt": "2026-10-31T17:16:27.635Z",
+      "title": "Just a moment...",
+      "description": "",
+      "status": 200,
+      "byteLength": 520,
+      "fetchMode": "jina_markdown",
+      "extraction": {
+        "confidence": "low",
+        "priceSignals": [],
+        "planSignals": []
+      }
     },
     {
       "id": "perplexity-enterprise-pricing",
@@ -999,11 +1008,11 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": true,
-      "fetchedAt": "2026-10-30T18:01:49.494Z",
+      "fetchedAt": "2026-10-31T17:16:27.635Z",
       "title": "Enterprise Pricing and Billing: Frequently Asked Questions - Perplexity Help Center",
       "description": "Get answers to the most common Pricing and Billing questions for our Enterprise plan",
       "status": 200,
-      "byteLength": 224253,
+      "byteLength": 224543,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -1078,11 +1087,11 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": true,
-      "fetchedAt": "2026-10-30T18:01:49.495Z",
+      "fetchedAt": "2026-10-31T17:16:27.636Z",
       "title": "Using the Connector for Slack - Perplexity Help Center",
       "description": "Leverage Slack information for seamless collaboration and rich insights directly in Perplexity.",
       "status": 200,
-      "byteLength": 248284,
+      "byteLength": 248574,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
