@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-01T17:57:22.803Z",
+  "generatedAt": "2026-11-02T21:44:34.631Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,7 +12,7 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-11-01T17:57:17.937Z",
+      "fetchedAt": "2026-11-02T21:44:31.478Z",
       "title": "套餐和价格 | ChatGPT",
       "description": "",
       "status": 200,
@@ -54,11 +54,11 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-11-01T17:57:17.973Z",
+      "fetchedAt": "2026-11-02T21:44:31.515Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
-      "byteLength": 719357,
+      "byteLength": 719789,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -225,22 +225,22 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-11-01T17:57:17.975Z",
+      "fetchedAt": "2026-11-02T21:44:31.517Z",
       "title": "Plans & pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Ultra, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
-      "byteLength": 1324406,
+      "byteLength": 1323262,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
         "priceSignals": [
           {
             "value": "$0",
-            "context": "dual Developer Team & Enterprise API Individual Free Try Claude $0 Free for everyone Try Claude Limited usage every 5 hours and ev"
+            "context": "rkdown Pricing Individual Team & Enterprise API Free Try Claude $0 Free for everyone Try Claude Limited usage every 5 hours and ev"
           },
           {
             "value": "$17",
-            "context": "Design, Slides, Docs Pro Claude Code included For everyday work $17 Per month with annual subscription discount ( $200 billed up fr"
+            "context": "ate Artifacts Claude Design, Slides, Docs Pro For everyday work $17 Per month with annual subscription discount ( $200 billed up fr"
           },
           {
             "value": "$200",
@@ -252,7 +252,7 @@
           },
           {
             "value": "$100",
-            "context": "ome and Microsoft 365 Max Claude Code included For all-day work $100 Per month Try Claude Everything in Pro, plus: 5x Pro usage ever"
+            "context": "models Claude in Chrome and Microsoft 365 Max For all-day work $100 Per month Try Claude Everything in Pro, plus: 5x Pro usage ever"
           },
           {
             "value": "$25",
@@ -358,15 +358,15 @@
           },
           {
             "value": "Team",
-            "context": "s about this page Copy as markdown Pricing Individual Developer Team & Enterprise API Individual Free Try Claude $0 Free for everyon"
+            "context": "k questions about this page Copy as markdown Pricing Individual Team & Enterprise API Free Try Claude $0 Free for everyone Try Claud"
           },
           {
             "value": "Free",
-            "context": "n Pricing Individual Developer Team & Enterprise API Individual Free Try Claude $0 Free for everyone Try Claude Limited usage every"
+            "context": "page Copy as markdown Pricing Individual Team & Enterprise API Free Try Claude $0 Free for everyone Try Claude Limited usage every"
           },
           {
             "value": "Pro",
-            "context": "our apps and tools Create Artifacts Claude Design, Slides, Docs Pro Claude Code included For everyday work $17 Per month with annua"
+            "context": "our apps and tools Create Artifacts Claude Design, Slides, Docs Pro For everyday work $17 Per month with annual subscription discou"
           },
           {
             "value": "plus",
@@ -374,11 +374,11 @@
           },
           {
             "value": "Max",
-            "context": "Projects More Claude models Claude in Chrome and Microsoft 365 Max Claude Code included For all-day work $100 Per month Try Claude"
+            "context": "Projects More Claude models Claude in Chrome and Microsoft 365 Max For all-day work $100 Per month Try Claude Everything in Pro, p"
           },
           {
             "value": "Ultra",
-            "context": "advanced Claude features Priority access at high traffic times Ultra Claude Code included For your longest tasks $200 Per month Try"
+            "context": "advanced Claude features Priority access at high traffic times Ultra For your longest tasks $200 Per month Try Claude Everything in"
           },
           {
             "value": "Premium",
@@ -404,7 +404,7 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-11-01T17:57:17.976Z",
+      "fetchedAt": "2026-11-02T21:44:31.518Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 4 Argon & more",
       "description": "Get access to the best of Google AI including Gemini 4 Argon, video generation, Deep Research, and much more. Choose the right plan for you.",
       "status": 200,
@@ -491,7 +491,7 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-11-01T17:57:17.977Z",
+      "fetchedAt": "2026-11-02T21:44:31.519Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
@@ -542,7 +542,7 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-11-01T17:57:17.979Z",
+      "fetchedAt": "2026-11-02T21:44:31.521Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
@@ -641,22 +641,50 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-11-01T17:57:17.980Z",
+      "fetchedAt": "2026-11-02T21:44:31.522Z",
       "title": "GitHub Copilot · Plans & pricing for every developer & team · GitHub · GitHub",
       "description": "See plans and pricing for GitHub Copilot. Accelerate your software development with our AI coding agent and agentic tools.",
       "status": 200,
-      "byteLength": 981649,
+      "byteLength": 1011797,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
         "priceSignals": [
           {
+            "value": "$ 0",
+            "context": "ls For businesses Free For getting started with GitHub Copilot. $ 0 USD Get started Open in VS Code What&#x27;s included: 2,000 com"
+          },
+          {
+            "value": "$ 10",
+            "context": "arn more Pro For everyday coding with agents in GitHub Copilot. $ 10 USD per user / month Get started Everything in Free and: Access"
+          },
+          {
+            "value": "$15",
+            "context": "ess to 3rd party agents (Claude Code and Codex) Model selection $15 monthly total credits for Pro Pro+ For more complex development"
+          },
+          {
+            "value": "$ 39",
+            "context": "for Pro Pro+ For more complex development with premium models. $ 39 USD per user / month Get started Everything in Pro and: Access"
+          },
+          {
+            "value": "$70",
+            "context": "m models, including Opus Audit logs 4x+ included usage than Pro $70 monthly total credits for Pro+ Max For sustained, high-volume a"
+          },
+          {
+            "value": "$ 100",
+            "context": "For sustained, high-volume agent workflows with GitHub Copilot. $ 100 USD per user / month Get started Everything in Pro+ and: Priori"
+          },
+          {
+            "value": "$200",
+            "context": "ccess to new models and features 2.9x+ included usage than Pro+ $200 monthly total credits for Max Best value GitHub Copilot is avai"
+          },
+          {
             "value": "$0",
-            "context": "Dismiss alert {{ message }} Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month Ge"
+            "context": "r Management Studio Zed Zed Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month Ge"
           },
           {
             "value": "$10",
-            "context": "ssage }} Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month Get started Max $100 p"
+            "context": "Zed Zed Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month Get started Max $100 p"
           },
           {
             "value": "$39",
@@ -665,22 +693,6 @@
           {
             "value": "$100",
             "context": "ro $10 per month Get started Pro+ $39 per month Get started Max $100 per month Get started GitHub AI Credits GitHub AI Credits Total"
-          },
-          {
-            "value": "$15",
-            "context": "ode. Learn more Free plan Limited chat and agent usage Pro plan $15 per month Pro+ plan $70 per month Max plan $200 per month Base"
-          },
-          {
-            "value": "$70",
-            "context": "n Limited chat and agent usage Pro plan $15 per month Pro+ plan $70 per month Max plan $200 per month Base credits Free plan Limite"
-          },
-          {
-            "value": "$200",
-            "context": "t usage Pro plan $15 per month Pro+ plan $70 per month Max plan $200 per month Base credits Free plan Limited chat and agent usage P"
-          },
-          {
-            "value": "$ 39",
-            "context": "n Limited chat and agent usage Pro plan $10 per month Pro+ plan $ 39 per month Max plan $100 per month Flex allotment Variable addit"
           },
           {
             "value": "$5",
@@ -726,19 +738,23 @@
           },
           {
             "value": "Free",
-            "context": "ion. Dismiss alert {{ message }} Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month"
+            "context": "ith GitHub Copilot Pricing plans For individuals For businesses Free For getting started with GitHub Copilot. $ 0 USD Get started Op"
+          },
+          {
+            "value": "Student",
+            "context": "d required. Verified students have access to the GitHub Copilot Student plan. Learn more Pro For everyday coding with agents in GitHub"
           },
           {
             "value": "Pro",
-            "context": "{ message }} Compare features Pricing plans Free $0 Get started Pro $10 per month Get started Pro+ $39 per month Get started Max $1"
-          },
-          {
-            "value": "Max",
-            "context": "ed Pro $10 per month Get started Pro+ $39 per month Get started Max $100 per month Get started GitHub AI Credits GitHub AI Credits"
+            "context": "ents have access to the GitHub Copilot Student plan. Learn more Pro For everyday coding with agents in GitHub Copilot. $ 10 USD per"
           },
           {
             "value": "Codex",
-            "context": "o third-party coding agents like Claude by Anthropic and OpenAI Codex (Preview) Free plan Not included Pro plan Not included Pro+ pla"
+            "context": "xt edit suggestions Access to 3rd party agents (Claude Code and Codex) Model selection $15 monthly total credits for Pro Pro+ For mor"
+          },
+          {
+            "value": "Max",
+            "context": "4x+ included usage than Pro $70 monthly total credits for Pro+ Max For sustained, high-volume agent workflows with GitHub Copilot."
           },
           {
             "value": "Flash",
@@ -760,11 +776,11 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-11-01T17:57:17.981Z",
+      "fetchedAt": "2026-11-02T21:44:31.522Z",
       "title": "GitHub Copilot 的模型和定价 - GitHub 文档",
       "description": "查看 GitHub Copilot 中可用模型的按词元定价方式以及各种计划的超额用量的参考价格。",
       "status": 200,
-      "byteLength": 667519,
+      "byteLength": 667501,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -931,7 +947,7 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-11-01T17:57:17.982Z",
+      "fetchedAt": "2026-11-02T21:44:31.524Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -957,7 +973,7 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-11-01T17:57:17.983Z",
+      "fetchedAt": "2026-11-02T21:44:31.526Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -986,18 +1002,9 @@
       "surface": "membership-rates",
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
-      "ok": true,
-      "fetchedAt": "2026-11-01T17:57:17.984Z",
-      "title": "Just a moment...",
-      "description": "",
-      "status": 200,
-      "byteLength": 520,
-      "fetchMode": "jina_markdown",
-      "extraction": {
-        "confidence": "low",
-        "priceSignals": [],
-        "planSignals": []
-      }
+      "ok": false,
+      "fetchedAt": "2026-11-02T21:44:31.526Z",
+      "error": "HTTP 403 Forbidden"
     },
     {
       "id": "perplexity-enterprise-pricing",
@@ -1008,11 +1015,11 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": true,
-      "fetchedAt": "2026-11-01T17:57:17.985Z",
+      "fetchedAt": "2026-11-02T21:44:31.527Z",
       "title": "Enterprise Pricing and Billing: Frequently Asked Questions - Perplexity Help Center",
       "description": "Get answers to the most common Pricing and Billing questions for our Enterprise plan",
       "status": 200,
-      "byteLength": 228962,
+      "byteLength": 229052,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -1087,11 +1094,11 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": true,
-      "fetchedAt": "2026-11-01T17:57:17.985Z",
+      "fetchedAt": "2026-11-02T21:44:31.528Z",
       "title": "Using the Connector for Slack - Perplexity Help Center",
       "description": "Leverage Slack information for seamless collaboration and rich insights directly in Perplexity.",
       "status": 200,
-      "byteLength": 248718,
+      "byteLength": 248808,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
