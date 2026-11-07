@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-06T19:28:15.523Z",
+  "generatedAt": "2026-11-07T17:46:16.034Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,11 +12,11 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-11-06T19:28:10.399Z",
+      "fetchedAt": "2026-11-07T17:46:12.371Z",
       "title": "套餐和价格 | ChatGPT",
       "description": "比较 ChatGPT Plus、Pro、Business 和 Enterprise 套餐及价格，了解月付和年付选项。",
       "status": 200,
-      "byteLength": 1242581,
+      "byteLength": 1245948,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -54,11 +54,11 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-11-06T19:28:10.437Z",
+      "fetchedAt": "2026-11-07T17:46:12.408Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
-      "byteLength": 724354,
+      "byteLength": 724730,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -225,18 +225,18 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-11-06T19:28:10.439Z",
+      "fetchedAt": "2026-11-07T17:46:12.409Z",
       "title": "Plans & pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Ultra, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
-      "byteLength": 1324387,
+      "byteLength": 1322961,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
         "priceSignals": [
           {
             "value": "$0",
-            "context": "dual Developer Team & Enterprise API Individual Free Try Claude $0 Free for everyone Try Claude Limited usage every 5 hours and ev"
+            "context": "rkdown Pricing Individual Team & Enterprise API Free Try Claude $0 Free for everyone Try Claude Limited usage every 5 hours and ev"
           },
           {
             "value": "$17",
@@ -358,11 +358,11 @@
           },
           {
             "value": "Team",
-            "context": "s about this page Copy as markdown Pricing Individual Developer Team & Enterprise API Individual Free Try Claude $0 Free for everyon"
+            "context": "k questions about this page Copy as markdown Pricing Individual Team & Enterprise API Free Try Claude $0 Free for everyone Try Claud"
           },
           {
             "value": "Free",
-            "context": "n Pricing Individual Developer Team & Enterprise API Individual Free Try Claude $0 Free for everyone Try Claude Limited usage every"
+            "context": "page Copy as markdown Pricing Individual Team & Enterprise API Free Try Claude $0 Free for everyone Try Claude Limited usage every"
           },
           {
             "value": "Pro",
@@ -404,7 +404,7 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-11-06T19:28:10.440Z",
+      "fetchedAt": "2026-11-07T17:46:12.411Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 4 Argon & more",
       "description": "Get access to the best of Google AI including Gemini 4 Argon, video generation, Deep Research, and much more. Choose the right plan for you.",
       "status": 200,
@@ -491,11 +491,11 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-11-06T19:28:10.441Z",
+      "fetchedAt": "2026-11-07T17:46:12.412Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
-      "byteLength": 429143,
+      "byteLength": 429672,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -542,7 +542,7 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-11-06T19:28:10.442Z",
+      "fetchedAt": "2026-11-07T17:46:12.413Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
@@ -641,11 +641,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-11-06T19:28:10.443Z",
+      "fetchedAt": "2026-11-07T17:46:12.414Z",
       "title": "GitHub Copilot · Plans & pricing for every developer & team · GitHub · GitHub",
       "description": "See plans and pricing for GitHub Copilot. Accelerate your software development with our AI coding agent and agentic tools.",
       "status": 200,
-      "byteLength": 1005843,
+      "byteLength": 1005343,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -776,7 +776,7 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-11-06T19:28:10.444Z",
+      "fetchedAt": "2026-11-07T17:46:12.414Z",
       "title": "GitHub Copilot 的模型和定价 - GitHub 文档",
       "description": "查看 GitHub Copilot 中可用模型的按词元定价方式以及各种计划的超额用量的参考价格。",
       "status": 200,
@@ -947,96 +947,19 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-11-06T19:28:10.445Z",
-      "title": "About X Premium",
+      "fetchedAt": "2026-11-07T17:46:12.415Z",
+      "title": "Just a moment...",
       "description": "",
       "status": 200,
-      "byteLength": 25397,
+      "byteLength": 326,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
-        "priceSignals": [
-          {
-            "value": "3.00 USD",
-            "context": "| | --- | --- | --- | --- | --- | --- | --- | | United States | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | |"
-          },
-          {
-            "value": "32.00 USD",
-            "context": "-- | --- | --- | --- | --- | --- | | United States | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United King"
-          },
-          {
-            "value": "8.00 USD",
-            "context": "-- | --- | --- | --- | | United States | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00"
-          },
-          {
-            "value": "84.00 USD",
-            "context": "--- | --- | | United States | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00"
-          },
-          {
-            "value": "40.00 USD",
-            "context": "| United States | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 G"
-          },
-          {
-            "value": "395.00 USD",
-            "context": "tes | 3.00 USD | 32.00 USD | 8.00 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GB"
-          },
-          {
-            "value": "3.00 GBP",
-            "context": "0 USD | 84.00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | |"
-          },
-          {
-            "value": "32.00 GBP",
-            "context": "00 USD | 40.00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | | Canada | 3."
-          },
-          {
-            "value": "8.00 GBP",
-            "context": "00 USD | 395.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | | Canada | 3.75 CAD | 40"
-          },
-          {
-            "value": "84.00 GBP",
-            "context": "5.00 USD | | United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | | Canada | 3.75 CAD | 40.00 CAD | 10"
-          },
-          {
-            "value": "31.00 GBP",
-            "context": "United Kingdom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | | Canada | 3.75 CAD | 40.00 CAD | 10.00 CAD | 10"
-          },
-          {
-            "value": "313.00 GBP",
-            "context": "dom | 3.00 GBP | 32.00 GBP | 8.00 GBP | 84.00 GBP | 31.00 GBP | 313.00 GBP | | Canada | 3.75 CAD | 40.00 CAD | 10.00 CAD | 105.00 CAD | 56"
-          },
-          {
-            "value": "3.00 EUR",
-            "context": "30.00 SAR | 315.00 SAR | 150.00 SAR | 1,479.00 SAR | | France | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | |"
-          },
-          {
-            "value": "32.00 EUR",
-            "context": "315.00 SAR | 150.00 SAR | 1,479.00 SAR | | France | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | | Germany | 3"
-          },
-          {
-            "value": "8.00 EUR",
-            "context": "| 150.00 SAR | 1,479.00 SAR | | France | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | | Germany | 3.00 EUR | 3"
-          },
-          {
-            "value": "84.00 EUR",
-            "context": "R | 1,479.00 SAR | | France | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | | Germany | 3.00 EUR | 32.00 EUR | 8"
-          },
-          {
-            "value": "38.00 EUR",
-            "context": "SAR | | France | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | | Germany | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84"
-          },
-          {
-            "value": "377.00 EUR",
-            "context": "nce | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38.00 EUR | 377.00 EUR | | Germany | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 38."
-          },
-          {
-            "value": "46.00 EUR",
-            "context": "EUR | | Belgium | 3.00 EUR | 32.00 EUR | 8.00 EUR | 84.00 EUR | 46.00 EUR | 377.00 EUR | | Sweden | 31.13 SEK | 331.43 SEK | 83.00 SEK |"
-          }
-        ],
+        "priceSignals": [],
         "planSignals": [
           {
-            "value": "Premium",
-            "context": "Title: About X Premium URL Source: http://help.x.com/en/using-x/x-premium Final URL: h"
+            "value": "premium",
+            "context": "le: Just a moment... URL Source: http://help.x.com/en/using-x/x-premium Final URL: https://help.x.com/en/using-x/x-premium Warning: Tar"
           }
         ]
       }
@@ -1050,140 +973,23 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-11-06T19:28:10.447Z",
-      "title": "X Premium+ Price Adjustment",
+      "fetchedAt": "2026-11-07T17:46:12.417Z",
+      "title": "Just a moment...",
       "description": "",
       "status": 200,
-      "byteLength": 15195,
+      "byteLength": 523,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
-        "priceSignals": [
-          {
-            "value": "$3.00",
-            "context": "| | --- | --- | --- | --- | --- | --- | --- | | United States | $3.00 | $32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom"
-          },
-          {
-            "value": "$32.00",
-            "context": "| --- | --- | --- | --- | --- | --- | | United States | $3.00 | $32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00"
-          },
-          {
-            "value": "$8.00",
-            "context": "-- | --- | --- | --- | --- | | United States | $3.00 | $32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00"
-          },
-          {
-            "value": "$84.00",
-            "context": "| --- | --- | --- | | United States | $3.00 | $32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00"
-          },
-          {
-            "value": "$40.00",
-            "context": "--- | --- | | United States | $3.00 | $32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00"
-          },
-          {
-            "value": "$395.00",
-            "context": "| | United States | $3.00 | $32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 |"
-          },
-          {
-            "value": "£3.00",
-            "context": "$32.00 | $8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75"
-          },
-          {
-            "value": "£32.00",
-            "context": "$8.00 | $84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00"
-          },
-          {
-            "value": "£8.00",
-            "context": "$84.00 | $40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.0"
-          },
-          {
-            "value": "£84.00",
-            "context": "$40.00 | $395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105."
-          },
-          {
-            "value": "£31.00",
-            "context": "$395.00 | | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56."
-          },
-          {
-            "value": "£313.00",
-            "context": "| | United Kingdom | £3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56.00 | $560."
-          },
-          {
-            "value": "$3.75",
-            "context": "£3.00 | £32.00 | £8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia |"
-          },
-          {
-            "value": "$10.00",
-            "context": "£8.00 | £84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $"
-          },
-          {
-            "value": "$105.00",
-            "context": "84.00 | £31.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $1"
-          },
-          {
-            "value": "$56.00",
-            "context": "1.00 | £313.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $"
-          },
-          {
-            "value": "$560.00",
-            "context": "13.00 | | Canada | $3.75 | $40.00 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $6"
-          },
-          {
-            "value": "$4.88",
-            "context": "| $40.00 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $621.00 | | New Zealand"
-          },
-          {
-            "value": "$51.43",
-            "context": "0 | $10.00 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $621.00 | | New Zealand | $4.88 |"
-          },
-          {
-            "value": "$13.00",
-            "context": "0 | $105.00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $621.00 | | New Zealand | $4.88 | $51.43 |"
-          },
-          {
-            "value": "$135.00",
-            "context": "00 | $56.00 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $621.00 | | New Zealand | $4.88 | $51.43 | $13.00 |"
-          },
-          {
-            "value": "$62.00",
-            "context": "0 | $560.00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $621.00 | | New Zealand | $4.88 | $51.43 | $13.00 | $135.00 |"
-          },
-          {
-            "value": "$621.00",
-            "context": "00 | | Australia | $4.88 | $51.43 | $13.00 | $135.00 | $62.00 | $621.00 | | New Zealand | $4.88 | $51.43 | $13.00 | $135.00 | $70.00 |"
-          },
-          {
-            "value": "$70.00",
-            "context": "| $621.00 | | New Zealand | $4.88 | $51.43 | $13.00 | $135.00 | $70.00 | $691.00 | | Japan | ¥368 | ¥3,916 | ¥980 | ¥10,280 | ¥6,080.0"
-          },
-          {
-            "value": "$691.00",
-            "context": "| | New Zealand | $4.88 | $51.43 | $13.00 | $135.00 | $70.00 | $691.00 | | Japan | ¥368 | ¥3,916 | ¥980 | ¥10,280 | ¥6,080.00 | ¥60,04"
-          },
-          {
-            "value": "¥368",
-            "context": "4.88 | $51.43 | $13.00 | $135.00 | $70.00 | $691.00 | | Japan | ¥368 | ¥3,916 | ¥980 | ¥10,280 | ¥6,080.00 | ¥60,040.00 | | Brazil |"
-          },
-          {
-            "value": "¥3,916",
-            "context": "$51.43 | $13.00 | $135.00 | $70.00 | $691.00 | | Japan | ¥368 | ¥3,916 | ¥980 | ¥10,280 | ¥6,080.00 | ¥60,040.00 | | Brazil | R$15.75"
-          },
-          {
-            "value": "¥980",
-            "context": "$13.00 | $135.00 | $70.00 | $691.00 | | Japan | ¥368 | ¥3,916 | ¥980 | ¥10,280 | ¥6,080.00 | ¥60,040.00 | | Brazil | R$15.75 | R$167"
-          }
-        ],
+        "priceSignals": [],
         "planSignals": [
           {
-            "value": "Premium",
-            "context": "Title: X Premium+ Price Adjustment URL Source: http://help.x.com/en/premium-plus"
+            "value": "premium",
+            "context": "Title: Just a moment... URL Source: http://help.x.com/en/premium-plus-price-update Final URL: https://help.x.com/en/premium-plus"
           },
           {
             "value": "plus",
-            "context": "mium+ Price Adjustment URL Source: http://help.x.com/en/premium-plus-price-update Final URL: https://help.x.com/en/premium-plus-pric"
-          },
-          {
-            "value": "free",
-            "context": "get higher usage limits and early access to new features. * Ad-free timelines: As a Premium+ subscriber, you’ll see fewer ads than"
+            "context": "itle: Just a moment... URL Source: http://help.x.com/en/premium-plus-price-update Final URL: https://help.x.com/en/premium-plus-pric"
           }
         ]
       }
@@ -1197,11 +1003,11 @@
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
       "ok": true,
-      "fetchedAt": "2026-11-06T19:28:10.447Z",
+      "fetchedAt": "2026-11-07T17:46:12.418Z",
       "title": "Perplexity Pro",
       "description": "",
       "status": 200,
-      "byteLength": 12190,
+      "byteLength": 12121,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -1284,11 +1090,11 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": true,
-      "fetchedAt": "2026-11-06T19:28:10.448Z",
+      "fetchedAt": "2026-11-07T17:46:12.419Z",
       "title": "Enterprise pricing and billing: Frequently asked questions - Perplexity Help Center",
       "description": "Answers to common questions about Enterprise Pro and Enterprise Max pricing, invoices, and seat billing.",
       "status": 200,
-      "byteLength": 243750,
+      "byteLength": 243884,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -1367,11 +1173,11 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": true,
-      "fetchedAt": "2026-11-06T19:28:10.449Z",
+      "fetchedAt": "2026-11-07T17:46:12.419Z",
       "title": "Using the Connector for Slack - Perplexity Help Center",
       "description": "Leverage Slack information for seamless collaboration and rich insights directly in Perplexity.",
       "status": 200,
-      "byteLength": 251655,
+      "byteLength": 251789,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
