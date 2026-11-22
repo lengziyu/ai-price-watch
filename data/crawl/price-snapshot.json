@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-21T19:21:23.616Z",
+  "generatedAt": "2026-11-22T19:45:22.261Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,11 +12,11 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-11-21T19:21:18.529Z",
+      "fetchedAt": "2026-11-22T19:45:20.281Z",
       "title": "套餐和价格 | ChatGPT",
       "description": "比较 ChatGPT Plus、Pro、Business 和 Enterprise 套餐及价格，了解月付和年付选项。",
       "status": 200,
-      "byteLength": 1257788,
+      "byteLength": 1258696,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -54,11 +54,11 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-11-21T19:21:18.559Z",
+      "fetchedAt": "2026-11-22T19:45:20.306Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
-      "byteLength": 753524,
+      "byteLength": 753659,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -229,7 +229,7 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-11-21T19:21:18.561Z",
+      "fetchedAt": "2026-11-22T19:45:20.308Z",
       "title": "Plans & pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Ultra, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
@@ -408,11 +408,11 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-11-21T19:21:18.562Z",
+      "fetchedAt": "2026-11-22T19:45:20.309Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 4 Neon & more",
       "description": "Get access to the best of Google AI including Gemini 4 Neon, video generation, Deep Research, and much more. Choose the right plan for you.",
       "status": 200,
-      "byteLength": 309913,
+      "byteLength": 311059,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -461,15 +461,15 @@
           },
           {
             "value": "Free",
-            "context": "Tube , and offers . See how Google handles data . United States Free Get everyday help from Google AI to tackle tasks at work, schoo"
+            "context": "hat is right for you. Personal Business Developer United States Free Get everyday help from Google AI to tackle tasks at work, schoo"
           },
           {
             "value": "Plus",
-            "context": "s Gmail, Drive, and Photos Includes Gemini 4 Hydrogen Google AI Plus Get more access to new and powerful features to boost your prod"
+            "context": "s Gmail, Drive, and Photos Includes Gemini 4 Hydrogen Google AI Plus 1 Get more access to new and powerful features to boost your pr"
           },
           {
             "value": "Flash",
-            "context": "create cinematic scenes and stories with access to Gemini Omni Flash and custom tool creation. Google Search 3 More access to Nano B"
+            "context": "create cinematic scenes and stories with access to Gemini Omni Flash and custom tool creation. Google Search 4 More access to Nano B"
           },
           {
             "value": "agent",
@@ -495,11 +495,11 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-11-21T19:21:18.563Z",
+      "fetchedAt": "2026-11-22T19:45:20.310Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
-      "byteLength": 429699,
+      "byteLength": 429156,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -546,39 +546,108 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-11-21T19:21:18.564Z",
-      "title": "Your First API Call | DeepSeek API Docs",
-      "description": "The DeepSeek API uses an API format compatible with OpenAI/Anthropic. By modifying the configuration, you can use the OpenAI/Anthropic SDK or softwares compatible with the OpenAI/Anthropic API to access the DeepSeek API.",
+      "fetchedAt": "2026-11-22T19:45:20.311Z",
+      "title": "模型 & 价格 | DeepSeek API Docs",
+      "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
-      "byteLength": 51213,
+      "byteLength": 26963,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
-        "priceSignals": [],
+        "priceSignals": [
+          {
+            "value": "0.02元",
+            "context": "ta） 仅非思考模式支持 仅非思考模式支持 图像理解 支持 不支持 价格 (2) 百万tokens输入 （缓存命中） 空闲时段 0.02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元"
+          },
+          {
+            "value": "0.15元",
+            "context": "思考模式支持 仅非思考模式支持 图像理解 支持 不支持 价格 (2) 百万tokens输入 （缓存命中） 空闲时段 0.02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百"
+          },
+          {
+            "value": "0.04元",
+            "context": "模式支持 图像理解 支持 不支持 价格 (2) 百万tokens输入 （缓存命中） 空闲时段 0.02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空"
+          },
+          {
+            "value": "0.30元",
+            "context": "像理解 支持 不支持 价格 (2) 百万tokens输入 （缓存命中） 空闲时段 0.02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元"
+          },
+          {
+            "value": "1元",
+            "context": "缓存命中） 空闲时段 0.02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 ("
+          },
+          {
+            "value": "4.5元",
+            "context": "中） 空闲时段 0.02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (3) 25"
+          },
+          {
+            "value": "2元",
+            "context": "02元 0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (3) 2500 500 ("
+          },
+          {
+            "value": "9.0元",
+            "context": "0.15元 高峰时段 0.04元 0.30元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (3) 2500 500 (1) 模型"
+          },
+          {
+            "value": "4元",
+            "context": "0元 百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (3) 2500 500 (1) 模型名请使用 deepseek-flash"
+          },
+          {
+            "value": "13.5元",
+            "context": "百万tokens输入 （缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (3) 2500 500 (1) 模型名请使用 deepseek-flash 。旧模型名"
+          },
+          {
+            "value": "8元",
+            "context": "（缓存未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (3) 2500 500 (1) 模型名请使用 deepseek-flash 。旧模型名 deepsee"
+          },
+          {
+            "value": "27.0元",
+            "context": "未命中） 空闲时段 1元 4.5元 高峰时段 2元 9.0元 百万tokens输出 空闲时段 4元 13.5元 高峰时段 8元 27.0元 并发限制 (3) 2500 500 (1) 模型名请使用 deepseek-flash 。旧模型名 deepseek-v4-f"
+          },
+          {
+            "value": "1,000 次",
+            "context": "h API 价格 ​ Search 与 Fetch API 按次计费。 项目 计费单位 价格 Search API（文字） 每 1,000 次成功请求 5元 Fetch API 每 1,000 次成功请求 5元 计费规则见 网页搜索与抓取 。 自北京时间 2026 年"
+          },
+          {
+            "value": "5元",
+            "context": "earch 与 Fetch API 按次计费。 项目 计费单位 价格 Search API（文字） 每 1,000 次成功请求 5元 Fetch API 每 1,000 次成功请求 5元 计费规则见 网页搜索与抓取 。 自北京时间 2026 年 11 月 18"
+          },
+          {
+            "value": "1.5元",
+            "context": "_search 工具 。 文件解析与 OCR 价格 ​ 项目 计费单位 价格 文件解析 、 OCR API 每 1,000 页 1.5元 语音价格 ​ API 计费单位 刊例价 限时折扣价（5 折） 语音合成（TTS） 每 10,000 字符 3元 1.5元 语音"
+          },
+          {
+            "value": "3元",
+            "context": "000 页 1.5元 语音价格 ​ API 计费单位 刊例价 限时折扣价（5 折） 语音合成（TTS） 每 10,000 字符 3元 1.5元 语音识别（ASR） 每小时音频 0.78元 0.39元 扣费规则 ​ 模型调用费用 = token 消耗量 × 模型"
+          },
+          {
+            "value": "0.78元",
+            "context": "单位 刊例价 限时折扣价（5 折） 语音合成（TTS） 每 10,000 字符 3元 1.5元 语音识别（ASR） 每小时音频 0.78元 0.39元 扣费规则 ​ 模型调用费用 = token 消耗量 × 模型单价；Search API 与 Fetch API 按"
+          },
+          {
+            "value": "0.39元",
+            "context": "限时折扣价（5 折） 语音合成（TTS） 每 10,000 字符 3元 1.5元 语音识别（ASR） 每小时音频 0.78元 0.39元 扣费规则 ​ 模型调用费用 = token 消耗量 × 模型单价；Search API 与 Fetch API 按上表价格按次"
+          }
+        ],
         "planSignals": [
           {
             "value": "DeepSeek",
-            "context": "Your First API Call | DeepSeek API Docs Skip to main content The full suite of DeepSeek applic"
+            "context": "模型 & 价格 | DeepSeek API Docs 跳到主要内容 DeepSeek 全家桶应用 API 已发布：联网搜索、文件输入、阅读链接、模型安全、ASR、"
           },
           {
             "value": "Agent",
-            "context": "Pricing Token & Token Usage Rate Limit & Isolation Error Codes Agent Integrations DeepSeek Harness Claude Code Codex OpenCode OpenCl"
+            "context": "API 指南 API 文档 新闻 更新日志 首次调用 API 模型 & 价格 Token 用量计算 限速与隔离 错误码 接入 Agent 工具 DeepSeek Harness Claude Code Codex OpenCode OpenClaw Hermes"
           },
           {
             "value": "Codex",
-            "context": "ion Error Codes Agent Integrations DeepSeek Harness Claude Code Codex OpenCode OpenClaw Hermes Reasonix WorkBuddy/CodeBuddy Qoder Con"
+            "context": "格 Token 用量计算 限速与隔离 错误码 接入 Agent 工具 DeepSeek Harness Claude Code Codex OpenCode OpenClaw Hermes Reasonix WorkBuddy/CodeBuddy Qoder 贡献你"
           },
           {
             "value": "flash",
-            "context": "pseek.com/anthropic api_key apply for an API key model deepseek-flash (1) deepseek-v4-pro (1) Use deepseek-flash as the model name. I"
+            "context": "词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。 模型细节 ​ 模型 deepseek-flash (1) deepseek-v4-pro BASE URL (OpenAI 格式) https://api.deepseek.c"
           },
           {
             "value": "pro",
-            "context": "i_key apply for an API key model deepseek-flash (1) deepseek-v4-pro (1) Use deepseek-flash as the model name. It is now served by D"
-          },
-          {
-            "value": "Copilot",
-            "context": "ding assistant tools. If you use tools like Claude Code, GitHub Copilot, or OpenCode, you can use DeepSeek as the backend model directl"
+            "context": "输入和输出的总 token 数进行计量计费。 模型细节 ​ 模型 deepseek-flash (1) deepseek-v4-pro BASE URL (OpenAI 格式) https://api.deepseek.com BASE URL (Anthrop"
           }
         ]
       }
@@ -592,11 +661,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-11-21T19:21:18.564Z",
+      "fetchedAt": "2026-11-22T19:45:20.311Z",
       "title": "GitHub Copilot · Plans & pricing for every developer & team · GitHub · GitHub",
       "description": "See plans and pricing for GitHub Copilot. Accelerate your software development with our AI coding agent and agentic tools.",
       "status": 200,
-      "byteLength": 1063689,
+      "byteLength": 1063690,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -727,7 +796,7 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-11-21T19:21:18.565Z",
+      "fetchedAt": "2026-11-22T19:45:20.312Z",
       "title": "GitHub Copilot 的模型和定价 - GitHub 文档",
       "description": "查看 GitHub Copilot 中可用模型的按词元定价方式以及各种计划的超额用量的参考价格。",
       "status": 200,
@@ -898,7 +967,7 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-11-21T19:21:18.566Z",
+      "fetchedAt": "2026-11-22T19:45:20.312Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -924,7 +993,7 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-11-21T19:21:18.567Z",
+      "fetchedAt": "2026-11-22T19:45:20.313Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -953,80 +1022,9 @@
       "surface": "membership-rates",
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
-      "ok": true,
-      "fetchedAt": "2026-11-21T19:21:18.568Z",
-      "title": "Perplexity Pro",
-      "description": "",
-      "status": 200,
-      "byteLength": 11925,
-      "fetchMode": "jina_markdown",
-      "extraction": {
-        "confidence": "review",
-        "priceSignals": [
-          {
-            "value": "$40",
-            "context": "arch, premium data, and the top AI models. ## Choose your plan +$40 free Computer credits LIMITED TIME Popular Advanced answers and"
-          },
-          {
-            "value": "$17",
-            "context": "credits LIMITED TIME Popular Advanced answers and top AI models $17 /month when billed annually Everything in Free and: * Expanded"
-          },
-          {
-            "value": "$450",
-            "context": "reate polished documents & apps * More usage limits and memory +$450 free Computer credits LIMITED TIME Unlimited usage and top perf"
-          },
-          {
-            "value": "$167",
-            "context": "mputer credits LIMITED TIME Unlimited usage and top performance $167 /month when billed annually Everything in Pro and: * Maximum Co"
-          },
-          {
-            "value": "$18.7",
-            "context": "in 2025? AI-native infrastructure leads 2025 SaaS funding with $18.7B raised across 340 deals, a 72% YoY increase. ![Image 8](https:"
-          },
-          {
-            "value": "$28",
-            "context": "l SaaS for healthcare and fintech saw median deal sizes rise to $28M, up from $19M in 2024. ![Image 10](https://www.perplexity.ai/s"
-          },
-          {
-            "value": "$19",
-            "context": "lthcare and fintech saw median deal sizes rise to $28M, up from $19M in 2024. ![Image 10](https://www.perplexity.ai/static/images/d"
-          },
-          {
-            "value": "$9.2",
-            "context": "/statista-avatar.svg)Statista Developer tooling ranked third at $9.2B in total funding. crunchbase Late-stage valuations in AI SaaS"
-          },
-          {
-            "value": "$10",
-            "context": "hree closest competitors' latest earnings. Which DTC brands hit $10M+ revenue in their first year? What's Shopify's market share vs"
-          },
-          {
-            "value": "$400",
-            "context": "ulate an attic? What's the best robot vacuum for pet hair under $400? Should I pay off my student loans or invest the extra? What do"
-          }
-        ],
-        "planSignals": [
-          {
-            "value": "Pro",
-            "context": "Title: Perplexity Pro URL Source: http://www.perplexity.ai/properks/ Final URL: https"
-          },
-          {
-            "value": "premium",
-            "context": "wer your deep work with Perplexity Computer, reliable research, premium data, and the top AI models. ## Choose your plan +$40 free Comp"
-          },
-          {
-            "value": "free",
-            "context": ", premium data, and the top AI models. ## Choose your plan +$40 free Computer credits LIMITED TIME Popular Advanced answers and top"
-          },
-          {
-            "value": "business",
-            "context": "ings? What are the steps I need to take in order to start a new business How do I save on my taxes What's the most cost-effective way to"
-          },
-          {
-            "value": "student",
-            "context": "best robot vacuum for pet hair under $400? Should I pay off my student loans or invest the extra? What does the research say about mag"
-          }
-        ]
-      }
+      "ok": false,
+      "fetchedAt": "2026-11-22T19:45:20.314Z",
+      "error": "HTTP 403 Forbidden"
     },
     {
       "id": "perplexity-enterprise-pricing",
@@ -1037,11 +1035,11 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": true,
-      "fetchedAt": "2026-11-21T19:21:18.568Z",
+      "fetchedAt": "2026-11-22T19:45:20.315Z",
       "title": "Enterprise pricing and billing: Frequently asked questions - Perplexity Help Center",
       "description": "Answers to common questions about Enterprise Pro and Enterprise Max pricing, invoices, and seat billing.",
       "status": 200,
-      "byteLength": 221459,
+      "byteLength": 227726,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -1093,6 +1091,18 @@
             "context": "tion and assigns them to people, so a seat can be moved between team members without buying a new one. There are two pricing tiers:"
           },
           {
+            "value": "agent",
+            "context": ":false,\"feature_enabled\":true},\"impressionData\":false},{\"name\":\"agent-mintlify-slack\",\"enabled\":true,\"variant\":{\"name\":\"disabled\",\"en"
+          },
+          {
+            "value": "hobby",
+            "context": ":false,\"feature_enabled\":true},\"impressionData\":false},{\"name\":\"hobby-abuse-scan\",\"enabled\":true,\"variant\":{\"name\":\"disabled\",\"enable"
+          },
+          {
+            "value": "starter",
+            "context": ":false,\"feature_enabled\":true},\"impressionData\":false},{\"name\":\"starter-pricing\",\"enabled\":true,\"variant\":{\"name\":\"control\",\"enabled\":t"
+          },
+          {
             "value": "Business",
             "context": "ty-pro-airtel-promo\"},{\"title\":\"Perplexity and American Express Business Promotion\",\"href\":\"/help-center/en/articles/20261002-perplexity"
           },
@@ -1112,11 +1122,11 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": true,
-      "fetchedAt": "2026-11-21T19:21:18.569Z",
+      "fetchedAt": "2026-11-22T19:45:20.315Z",
       "title": "Using the Connector for Slack - Perplexity Help Center",
       "description": "Leverage Slack information for seamless collaboration and rich insights directly in Perplexity.",
       "status": 200,
-      "byteLength": 229962,
+      "byteLength": 229891,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -1181,7 +1191,7 @@
           },
           {
             "value": "starter",
-            "context": ":false,\"feature_enabled\":true},\"impressionData\":false},{\"name\":\"starter-pricing\",\"enabled\":true,\"variant\":{\"name\":\"treatment\",\"enabled\""
+            "context": ":false,\"feature_enabled\":true},\"impressionData\":false},{\"name\":\"starter-pricing\",\"enabled\":true,\"variant\":{\"name\":\"control\",\"enabled\":t"
           },
           {
             "value": "Education",
