@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-22T19:45:22.261Z",
+  "generatedAt": "2026-11-23T23:58:22.154Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,11 +12,11 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-11-22T19:45:20.281Z",
+      "fetchedAt": "2026-11-23T23:58:17.326Z",
       "title": "套餐和价格 | ChatGPT",
       "description": "比较 ChatGPT Plus、Pro、Business 和 Enterprise 套餐及价格，了解月付和年付选项。",
       "status": 200,
-      "byteLength": 1258696,
+      "byteLength": 1329696,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -41,6 +41,10 @@
           {
             "value": "Pro",
             "context": "销售团队 商家 AI 解决方案适用于 数据科学与分析 工程 财务 产品管理 销售与市场营销 定价 概览 免费版 Go Plus Pro Business Enterprise 版 高等教育 K–12 教师 下载 登录 免费注册 简介 功能 学习 Codex Bu"
+          },
+          {
+            "value": "Premium",
+            "context": "kspace by Nov 30 and get 2x included usage on your Standard and Premium seats through Dec 31. 开始使用 Limited-time offer: Get 2× usage Cre"
           }
         ]
       }
@@ -54,11 +58,11 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-11-22T19:45:20.306Z",
+      "fetchedAt": "2026-11-23T23:58:17.354Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
-      "byteLength": 753659,
+      "byteLength": 754031,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -229,11 +233,11 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-11-22T19:45:20.308Z",
+      "fetchedAt": "2026-11-23T23:58:17.356Z",
       "title": "Plans & pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Ultra, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
-      "byteLength": 1445728,
+      "byteLength": 1448317,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -358,7 +362,7 @@
           },
           {
             "value": "education",
-            "context": "ancial advisors Financial services Government Healthcare Higher education K-12 teachers Life sciences Nonprofits Browse marketplace Custo"
+            "context": "ancial advisors Financial services Government Healthcare Higher education K-12 teachers Life sciences Manufacturing Nonprofits Browse mar"
           },
           {
             "value": "Team",
@@ -394,7 +398,7 @@
           },
           {
             "value": "business",
-            "context": "e Higher education K-12 teachers Life sciences Nonprofits Small business Programs Campus Frontier Academy Scientists Startups Developers"
+            "context": "tion K-12 teachers Life sciences Manufacturing Nonprofits Small business Programs Campus Frontier Academy Scientists Startups Developers"
           }
         ]
       }
@@ -408,11 +412,11 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-11-22T19:45:20.309Z",
+      "fetchedAt": "2026-11-23T23:58:17.356Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 4 Neon & more",
       "description": "Get access to the best of Google AI including Gemini 4 Neon, video generation, Deep Research, and much more. Choose the right plan for you.",
       "status": 200,
-      "byteLength": 311059,
+      "byteLength": 309913,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -461,15 +465,15 @@
           },
           {
             "value": "Free",
-            "context": "hat is right for you. Personal Business Developer United States Free Get everyday help from Google AI to tackle tasks at work, schoo"
+            "context": "Tube , and offers . See how Google handles data . United States Free Get everyday help from Google AI to tackle tasks at work, schoo"
           },
           {
             "value": "Plus",
-            "context": "s Gmail, Drive, and Photos Includes Gemini 4 Hydrogen Google AI Plus 1 Get more access to new and powerful features to boost your pr"
+            "context": "s Gmail, Drive, and Photos Includes Gemini 4 Hydrogen Google AI Plus Get more access to new and powerful features to boost your prod"
           },
           {
             "value": "Flash",
-            "context": "create cinematic scenes and stories with access to Gemini Omni Flash and custom tool creation. Google Search 4 More access to Nano B"
+            "context": "create cinematic scenes and stories with access to Gemini Omni Flash and custom tool creation. Google Search 3 More access to Nano B"
           },
           {
             "value": "agent",
@@ -495,11 +499,11 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-11-22T19:45:20.310Z",
+      "fetchedAt": "2026-11-23T23:58:17.357Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
-      "byteLength": 429156,
+      "byteLength": 429651,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -546,11 +550,11 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-11-22T19:45:20.311Z",
+      "fetchedAt": "2026-11-23T23:58:17.359Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
-      "byteLength": 26963,
+      "byteLength": 27007,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -661,11 +665,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-11-22T19:45:20.311Z",
+      "fetchedAt": "2026-11-23T23:58:17.359Z",
       "title": "GitHub Copilot · Plans & pricing for every developer & team · GitHub · GitHub",
       "description": "See plans and pricing for GitHub Copilot. Accelerate your software development with our AI coding agent and agentic tools.",
       "status": 200,
-      "byteLength": 1063690,
+      "byteLength": 1063695,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -796,7 +800,7 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-11-22T19:45:20.312Z",
+      "fetchedAt": "2026-11-23T23:58:17.360Z",
       "title": "GitHub Copilot 的模型和定价 - GitHub 文档",
       "description": "查看 GitHub Copilot 中可用模型的按词元定价方式以及各种计划的超额用量的参考价格。",
       "status": 200,
@@ -967,7 +971,7 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-11-22T19:45:20.312Z",
+      "fetchedAt": "2026-11-23T23:58:17.361Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -993,11 +997,11 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-11-22T19:45:20.313Z",
+      "fetchedAt": "2026-11-23T23:58:17.362Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
-      "byteLength": 342,
+      "byteLength": 523,
       "fetchMode": "jina_markdown",
       "extraction": {
         "confidence": "review",
@@ -1022,9 +1026,72 @@
       "surface": "membership-rates",
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
-      "ok": false,
-      "fetchedAt": "2026-11-22T19:45:20.314Z",
-      "error": "HTTP 403 Forbidden"
+      "ok": true,
+      "fetchedAt": "2026-11-23T23:58:17.363Z",
+      "title": "Perplexity Pro",
+      "description": "",
+      "status": 200,
+      "byteLength": 11337,
+      "fetchMode": "jina_markdown",
+      "extraction": {
+        "confidence": "review",
+        "priceSignals": [
+          {
+            "value": "$17",
+            "context": "## Choose your plan Popular Advanced answers and top AI models $17 /month when billed annually Everything in Free and: Highest usa"
+          },
+          {
+            "value": "$167",
+            "context": "ually Everything in Free and: Highest usage and top performance $167 /month when billed annually Everything in Pro and: For personal"
+          },
+          {
+            "value": "$18.7",
+            "context": "in 2025? AI-native infrastructure leads 2025 SaaS funding with $18.7B raised across 340 deals, a 72% YoY increase. ![Image 8](https:"
+          },
+          {
+            "value": "$28",
+            "context": "l SaaS for healthcare and fintech saw median deal sizes rise to $28M, up from $19M in 2024. ![Image 10](https://www.perplexity.ai/s"
+          },
+          {
+            "value": "$19",
+            "context": "lthcare and fintech saw median deal sizes rise to $28M, up from $19M in 2024. ![Image 10](https://www.perplexity.ai/static/images/d"
+          },
+          {
+            "value": "$9.2",
+            "context": "/statista-avatar.svg)Statista Developer tooling ranked third at $9.2B in total funding. crunchbase Late-stage valuations in AI SaaS"
+          },
+          {
+            "value": "$10",
+            "context": "hree closest competitors' latest earnings. Which DTC brands hit $10M+ revenue in their first year? What's Shopify's market share vs"
+          },
+          {
+            "value": "$400",
+            "context": "ulate an attic? What's the best robot vacuum for pet hair under $400? Should I pay off my student loans or invest the extra? What do"
+          }
+        ],
+        "planSignals": [
+          {
+            "value": "Pro",
+            "context": "Title: Perplexity Pro URL Source: http://www.perplexity.ai/properks/ Final URL: https"
+          },
+          {
+            "value": "premium",
+            "context": "wer your deep work with Perplexity Computer, reliable research, premium data, and the top AI models. ## Choose your plan Popular Advanc"
+          },
+          {
+            "value": "Free",
+            "context": "and top AI models $17 /month when billed annually Everything in Free and: Highest usage and top performance $167 /month when billed"
+          },
+          {
+            "value": "business",
+            "context": "ings? What are the steps I need to take in order to start a new business How do I save on my taxes What's the most cost-effective way to"
+          },
+          {
+            "value": "student",
+            "context": "best robot vacuum for pet hair under $400? Should I pay off my student loans or invest the extra? What does the research say about mag"
+          }
+        ]
+      }
     },
     {
       "id": "perplexity-enterprise-pricing",
@@ -1035,11 +1102,11 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": true,
-      "fetchedAt": "2026-11-22T19:45:20.315Z",
+      "fetchedAt": "2026-11-23T23:58:17.364Z",
       "title": "Enterprise pricing and billing: Frequently asked questions - Perplexity Help Center",
       "description": "Answers to common questions about Enterprise Pro and Enterprise Max pricing, invoices, and seat billing.",
       "status": 200,
-      "byteLength": 227726,
+      "byteLength": 228023,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -1100,7 +1167,7 @@
           },
           {
             "value": "starter",
-            "context": ":false,\"feature_enabled\":true},\"impressionData\":false},{\"name\":\"starter-pricing\",\"enabled\":true,\"variant\":{\"name\":\"control\",\"enabled\":t"
+            "context": ":false,\"feature_enabled\":true},\"impressionData\":false},{\"name\":\"starter-pricing\",\"enabled\":true,\"variant\":{\"name\":\"treatment\",\"enabled\""
           },
           {
             "value": "Business",
@@ -1122,11 +1189,11 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": true,
-      "fetchedAt": "2026-11-22T19:45:20.315Z",
+      "fetchedAt": "2026-11-23T23:58:17.364Z",
       "title": "Using the Connector for Slack - Perplexity Help Center",
       "description": "Leverage Slack information for seamless collaboration and rich insights directly in Perplexity.",
       "status": 200,
-      "byteLength": 229891,
+      "byteLength": 230188,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -1191,7 +1258,7 @@
           },
           {
             "value": "starter",
-            "context": ":false,\"feature_enabled\":true},\"impressionData\":false},{\"name\":\"starter-pricing\",\"enabled\":true,\"variant\":{\"name\":\"control\",\"enabled\":t"
+            "context": ":false,\"feature_enabled\":true},\"impressionData\":false},{\"name\":\"starter-pricing\",\"enabled\":true,\"variant\":{\"name\":\"treatment\",\"enabled\""
           },
           {
             "value": "Education",
