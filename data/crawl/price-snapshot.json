@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-25T21:45:59.866Z",
+  "generatedAt": "2026-11-26T21:38:59.566Z",
   "crawlPolicy": "Fetches public HTML only, preserves source URLs, and records extraction confidence for manual review before publishing.",
   "targets": 13,
   "results": [
@@ -12,11 +12,11 @@
       "sourceLabel": "ChatGPT Pricing",
       "url": "https://chatgpt.com/zh-Hans-CN/pricing/",
       "ok": true,
-      "fetchedAt": "2026-11-25T21:45:55.552Z",
+      "fetchedAt": "2026-11-26T21:38:51.960Z",
       "title": "套餐和价格 | ChatGPT",
       "description": "比较 ChatGPT Plus、Pro、Business 和 Enterprise 套餐及价格，了解月付和年付选项。",
       "status": 200,
-      "byteLength": 1259109,
+      "byteLength": 1257251,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -54,11 +54,11 @@
       "sourceLabel": "Codex Pricing",
       "url": "https://developers.openai.com/codex/pricing?codex-usage-limits=business&codex-pricing-plans=business-enterprise",
       "ok": true,
-      "fetchedAt": "2026-11-25T21:45:55.591Z",
+      "fetchedAt": "2026-11-26T21:38:51.989Z",
       "title": "Pricing | ChatGPT Learn",
       "description": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan",
       "status": 200,
-      "byteLength": 754729,
+      "byteLength": 754744,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -229,7 +229,7 @@
       "sourceLabel": "Claude Pricing",
       "url": "https://claude.com/pricing",
       "ok": true,
-      "fetchedAt": "2026-11-25T21:45:55.593Z",
+      "fetchedAt": "2026-11-26T21:38:51.990Z",
       "title": "Plans & pricing | Claude by Anthropic",
       "description": "Choose the Claude plan that fits how you solve problems. Free, Pro, Max, Ultra, Team, and Enterprise tiers, plus API pricing for developers.",
       "status": 200,
@@ -408,7 +408,7 @@
       "sourceLabel": "Google AI Plans",
       "url": "https://gemini.google/us/subscriptions/?hl=en",
       "ok": true,
-      "fetchedAt": "2026-11-25T21:45:55.595Z",
+      "fetchedAt": "2026-11-26T21:38:51.991Z",
       "title": "Google AI Pro & Ultra — get access to Gemini 4 Neon & more",
       "description": "Get access to the best of Google AI including Gemini 4 Neon, video generation, Deep Research, and much more. Choose the right plan for you.",
       "status": 200,
@@ -495,11 +495,11 @@
       "sourceLabel": "Cursor Pricing",
       "url": "https://cursor.com/cn/pricing",
       "ok": true,
-      "fetchedAt": "2026-11-25T21:45:55.596Z",
+      "fetchedAt": "2026-11-26T21:38:51.992Z",
       "title": "Cursor · 定价",
       "description": "选择适合您的规划",
       "status": 200,
-      "byteLength": 429699,
+      "byteLength": 426847,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -546,7 +546,7 @@
       "sourceLabel": "DeepSeek API Pricing",
       "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
       "ok": true,
-      "fetchedAt": "2026-11-25T21:45:55.597Z",
+      "fetchedAt": "2026-11-26T21:38:51.993Z",
       "title": "模型 & 价格 | DeepSeek API Docs",
       "description": "下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。",
       "status": 200,
@@ -661,11 +661,11 @@
       "sourceLabel": "Copilot Plans",
       "url": "https://github.com/features/copilot/plans",
       "ok": true,
-      "fetchedAt": "2026-11-25T21:45:55.598Z",
+      "fetchedAt": "2026-11-26T21:38:51.994Z",
       "title": "GitHub Copilot · Plans & pricing for every developer & team · GitHub · GitHub",
       "description": "See plans and pricing for GitHub Copilot. Accelerate your software development with our AI coding agent and agentic tools.",
       "status": 200,
-      "byteLength": 1063494,
+      "byteLength": 1063619,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -796,11 +796,11 @@
       "sourceLabel": "Copilot Billing",
       "url": "https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing",
       "ok": true,
-      "fetchedAt": "2026-11-25T21:45:55.599Z",
+      "fetchedAt": "2026-11-26T21:38:51.994Z",
       "title": "GitHub Copilot 的模型和定价 - GitHub 文档",
       "description": "查看 GitHub Copilot 中可用模型的按词元定价方式以及各种计划的超额用量的参考价格。",
       "status": 200,
-      "byteLength": 695532,
+      "byteLength": 695524,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -967,7 +967,7 @@
       "sourceLabel": "X Premium Help",
       "url": "https://help.x.com/en/using-x/x-premium",
       "ok": true,
-      "fetchedAt": "2026-11-25T21:45:55.600Z",
+      "fetchedAt": "2026-11-26T21:38:51.995Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -993,7 +993,7 @@
       "sourceLabel": "Premium+ Pricing",
       "url": "https://help.x.com/en/premium-plus-price-update",
       "ok": true,
-      "fetchedAt": "2026-11-25T21:45:55.602Z",
+      "fetchedAt": "2026-11-26T21:38:51.996Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -1023,7 +1023,7 @@
       "sourceLabel": "Pro Perks",
       "url": "https://www.perplexity.ai/properks/",
       "ok": true,
-      "fetchedAt": "2026-11-25T21:45:55.603Z",
+      "fetchedAt": "2026-11-26T21:38:51.997Z",
       "title": "Just a moment...",
       "description": "",
       "status": 200,
@@ -1044,11 +1044,11 @@
       "sourceLabel": "Enterprise Pricing FAQ",
       "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
       "ok": true,
-      "fetchedAt": "2026-11-25T21:45:55.604Z",
+      "fetchedAt": "2026-11-26T21:38:51.998Z",
       "title": "Enterprise pricing and billing: Frequently asked questions - Perplexity Help Center",
       "description": "Answers to common questions about Enterprise Pro and Enterprise Max pricing, invoices, and seat billing.",
       "status": 200,
-      "byteLength": 227174,
+      "byteLength": 221511,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -1100,18 +1100,6 @@
             "context": "tion and assigns them to people, so a seat can be moved between team members without buying a new one. There are two pricing tiers:"
           },
           {
-            "value": "agent",
-            "context": ":false,\"feature_enabled\":true},\"impressionData\":false},{\"name\":\"agent-mintlify-slack\",\"enabled\":true,\"variant\":{\"name\":\"disabled\",\"en"
-          },
-          {
-            "value": "hobby",
-            "context": ":false,\"feature_enabled\":true},\"impressionData\":false},{\"name\":\"hobby-abuse-scan\",\"enabled\":true,\"variant\":{\"name\":\"disabled\",\"enable"
-          },
-          {
-            "value": "starter",
-            "context": ":false,\"feature_enabled\":true},\"impressionData\":false},{\"name\":\"starter-pricing\",\"enabled\":true,\"variant\":{\"name\":\"treatment\",\"enabled\""
-          },
-          {
             "value": "Business",
             "context": "ty-pro-airtel-promo\"},{\"title\":\"Perplexity and American Express Business Promotion\",\"href\":\"/help-center/en/articles/20261002-perplexity"
           },
@@ -1131,11 +1119,11 @@
       "sourceLabel": "Connectors Pricing",
       "url": "https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack",
       "ok": true,
-      "fetchedAt": "2026-11-25T21:45:55.604Z",
+      "fetchedAt": "2026-11-26T21:38:51.998Z",
       "title": "Using the Connector for Slack - Perplexity Help Center",
       "description": "Leverage Slack information for seamless collaboration and rich insights directly in Perplexity.",
       "status": 200,
-      "byteLength": 229339,
+      "byteLength": 229200,
       "fetchMode": "direct_html",
       "extraction": {
         "confidence": "review",
@@ -1200,7 +1188,7 @@
           },
           {
             "value": "starter",
-            "context": ":false,\"feature_enabled\":true},\"impressionData\":false},{\"name\":\"starter-pricing\",\"enabled\":true,\"variant\":{\"name\":\"treatment\",\"enabled\""
+            "context": ":false,\"feature_enabled\":true},\"impressionData\":false},{\"name\":\"starter-pricing\",\"enabled\":true,\"variant\":{\"name\":\"control\",\"enabled\":t"
           },
           {
             "value": "Education",
